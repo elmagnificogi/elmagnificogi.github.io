@@ -1,5 +1,5 @@
 # Site settings
-title: Hux Blog
+title: Elmagnifico's Blog
 SEOTitle: elmagnifico's blog
 header-img: img/home-bg.jpg
 email: elmagnificogg@gmail.com
@@ -12,11 +12,11 @@ baseurl: ""
 
 # SNS settings
 RSS: false
-weibo_username:     elmagnificoxl
-zhihu_username:     云浅雪
+weibo_username:     5329300217
+zhihu_username:     yun-qian-xue-82
 github_username:    elmagnificogi
-#twitter_username:  elmagnificotw
-facebook_username:  云浅雪
+twitter_username:   elmagnificotw
+facebook_username:  magnificofa.el
 
 
 
