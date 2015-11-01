@@ -1,0 +1,81 @@
+# Site settings
+title: Hux Blog
+SEOTitle: elmagnifico's blog
+header-img: img/home-bg.jpg
+email: elmagnificogg@gmail.com
+description: "关于后端与嵌入式、现实主义者 | elmagnifico， Back-end engineer & Embedded System Lover， Realist | 这里是elmagnifico的个人博客，君子之交淡如水。"
+keyword: " elmagnifico, elmagnifico's blog, elmagnificogi, 嵌入式, C, Python, C#, 后端, 四轴, Raspberry Pi, 树莓派, 大数据"
+url: "http://elmagnificogi.github.io"
+baseurl: ""
+
+
+
+# SNS settings
+RSS: false
+weibo_username:     elmagnificoxl
+zhihu_username:     云浅雪
+github_username:    elmagnificogi
+#twitter_username:  elmagnificotw
+facebook_username:  云浅雪
+
+
+
+# Build settings
+highlighter: pygments
+permalink: pretty
+paginate: 10
+exclude: ["less","node_modules","Gruntfile.js","package.json","README.md"]
+anchorjs: true                          # if you want to customize anchor. check out line:181 of `post.html`
+
+
+
+# Markdown settings
+# replace redcarpet to kramdown,
+# although redcarpet can auto highlight code, the lack of header-id make the catalog impossible, so I switch to kramdown
+# document: http://jekyllrb.com/docs/configuration/#kramdown
+markdown: kramdown
+kramdown:
+  input: GFM                            # use Github Flavored Markdown !important
+
+
+
+# Duoshuo settings
+duoshuo_username: elmagnificobd
+# Share component is depend on Comment so we can NOT use share only.
+duoshuo_share: true                     # set to false if you want to use Comment without Sharing
+
+
+
+
+# Analytics settings
+# Baidu Analytics
+#ba_track_id: 4cc1f2d8f3067386cc5cdb626a202900
+# Google Analytics
+#ga_track_id: 'UA-49627206-1'            # Format: UA-xxxxxx-xx
+#ga_domain: huangxuan.me
+
+
+
+# Sidebar settings
+sidebar: true                           # whether or not using Sidebar.
+sidebar-about-description: "人生就是这样，且行且过，君子之交淡如水"
+sidebar-avatar: /img/avatar-hux.jpg     # use absolute URL.
+
+
+
+# Featured Tags
+featured-tags: true                     # whether or not using Feature-Tags
+featured-condition-size: 1              # A tag will be featured if the size of it is more than this condition value
+
+
+
+# Friends
+friends: [
+    {
+        title: "等你成为我的朋友",
+        href: "http://等你成为我的朋友"
+    },{
+        title: "Wait for you",
+        href: "http://Wait for you"
+    }
+]
