@@ -145,9 +145,11 @@ tags:
 
 
 ## The end
+
 &emsp;&emsp;到这里就设置结束了，应该能正常使用Synergy，如果还有后续的话就是如何在windows下编译出来一个Synergy。
 总体来说Synergy还是不错的，但是本来双屏幕的被占用了一个屏幕，并且不能随意拖拽东西过去（应该改是不能跨平台吧，同平台应该是可以的），所以最后还是PieTTY|PuTTY会比较好一些，毕竟用linux系的要什么桌面啊。
 &emsp;&emsp;树莓派下也可以用使用带UI的Synergy和QuickSynergy，就是不能自动启动需要你手动，下面的博客有介绍的。
+
 ## Quote
 
 > http://www.shumeipai.net/thread-18993-1-1.html?_dsign=4330837c
