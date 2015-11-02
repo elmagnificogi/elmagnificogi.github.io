@@ -4,7 +4,7 @@ title:      "树莓派 & Synergy & 笔记本"
 subtitle:   "树莓派，Synergy"
 date:       2015-11-01
 author:     "elmagnifico"
-header-img: "img/Raspberrypi-head-bg.png.jpg"
+header-img: "img/Raspberrypi-head-bg.png"
 tags:
     - 树莓派
     - RaspberrryPi
