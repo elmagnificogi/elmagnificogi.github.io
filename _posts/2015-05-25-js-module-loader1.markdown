@@ -7,7 +7,8 @@ author:     "elmagnifico"
 header-img: "img/post-bg-js-module.jpg"
 tags:
     - 树莓派
-    - JavaScript
+    - RaspberrryPi
+    - Synergy
 ---
 
 
