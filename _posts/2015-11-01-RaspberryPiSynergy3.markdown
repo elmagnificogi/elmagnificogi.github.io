@@ -1,4 +1,4 @@
-﻿---
+---
 layout:     post
 title:      "树莓派 & Synergy & 笔记本"
 subtitle:   "树莓派，Synergy"
@@ -12,6 +12,7 @@ tags:
 ---
 
 ## RaspberryPi & Synergy
+
 
 1. 从上面的github下源码到树莓派中去
 
