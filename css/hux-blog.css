@@ -224,6 +224,7 @@ pre,
     -webkit-transform: scaleX(0);
     -webkit-transform-origin: top right;
     -webkit-transition: all 0.25s cubic-bezier(0.23, 1, 0.32, 1);
+	color: black;
   }
   #huxblog_navbar a {
     font-size: 13px;
