@@ -310,7 +310,7 @@ pre,
   }
   .navbar-custom .navbar-brand:hover,
   .navbar-custom .navbar-brand:focus {
-    color: rgba(0, 0, 0, 0.8);
+    color: rgba(0, 131, 161, 0.8);
   }
   .navbar-custom .nav li a {
     color: black;
@@ -318,7 +318,7 @@ pre,
   }
   .navbar-custom .nav li a:hover,
   .navbar-custom .nav li a:focus {
-    color: rgba(0, 0, 0, 0.8);
+    color: rgba(0, 131, 161, 0.8);
   }
   .navbar-custom .nav li a:active {
     background: none;
