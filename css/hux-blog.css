@@ -387,7 +387,7 @@ pre,
 .intro-header .post-heading,
 .intro-header .page-heading {
   padding: 85px 0 55px;
-  color: white;
+  color: black;
 }
 @media only screen and (min-width: 768px) {
   .intro-header .site-heading,
@@ -722,7 +722,7 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.8);
   border-radius: 999em;
   padding: 0 10px;
-  color: #ffffff;
+  color: #000000;
   line-height: 24px;
   font-size: 12px;
   text-decoration: none;
