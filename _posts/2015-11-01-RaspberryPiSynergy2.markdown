@@ -45,6 +45,20 @@ tags:
 
 1. 从上面的github下源码到树莓派中去
 2. 解压源码，解压完了之后一定要解压./ext/下的openssl gtest gmock 三个压缩包，不然一会链接和编译的时候都会找不到各种文件。
+
+```
+define('hello', ['jquery'], function(require, exports, module) {
+
+    // 模块代码...
+  
+    // 直接通过 return 暴露接口
+    return {
+        foo: 'bar',
+        doSomething: function() {}
+    };
+
+});
+```
 3. 进入源码目录，先尝试
 
 	```
@@ -106,8 +120,8 @@ tags:
 6. 开机自动启动Synergy，不然每次还得插个键盘啥的启动一下多麻烦。在/etc/init.d/中新建synergy然后编辑成下面的内容，这里要注意！--name 后面接你在服务端设置的名字 restart后面接你服务端的静态ip地址，不然会连接不上
 	 
 	```
-	 #!/bin/sh
-	 #/etc/init.d/synergy
+	#!/bin/sh
+	#/etc/init.d/synergy
 	case "$1" in
 	  start)
 	    cd /home/pi/synergy-1.4.10-Source/bin/
@@ -134,7 +148,7 @@ tags:
 	insserv synergy
 	```
 
-8. 停止|启动Synergy，之后重启一下看看，是不是鼠标可以直接外滑到另一台设备的屏幕上去了，键盘输入也是需要以鼠标激活的屏幕为基础
+8. 停止启动Synergy，之后重启一下看看，是不是鼠标可以直接外滑到另一台设备的屏幕上去了，键盘输入也是需要以鼠标激活的屏幕为基础
  
 	```
 	/etc/init.d/synergy start
