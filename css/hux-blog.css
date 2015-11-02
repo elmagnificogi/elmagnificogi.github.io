@@ -282,7 +282,7 @@ pre,
   line-height: 25px;
 }
 .navbar-custom .navbar-brand:hover {
-  color: rgba(0, 0, 0, 0.8);
+  color: rgba(0, 133, 161, 0.8);
 }
 .navbar-custom .nav li a {
   text-transform: uppercase;
@@ -293,7 +293,7 @@ pre,
   letter-spacing: 1px;
 }
 .navbar-custom .nav li a:active {
-  background: rgba(0, 0, 0, 0.12);
+  background: rgba(0, 131, 161, 0.12);
 }
 @media only screen and (min-width: 768px) {
   .navbar-custom {
@@ -852,7 +852,7 @@ body {
   background-color: inherit;
 }
 .navbar-default .navbar-toggle:active {
-  background-color: rgba(0, 0, 0, 0.25);
+  background-color: rgba(0, 133, 161, 0.25);
 }
 /* Hux customize Style for navBar button */
 .navbar-default .navbar-toggle {
