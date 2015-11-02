@@ -60,19 +60,19 @@ define('hello', ['jquery'], function(require, exports, module) {
 });
 ```
 3. 进入源码目录，先尝试
-    
-    	```
-    	./configure
-    	```
-	 
-	 如果没有意外，应该会提示cmake相关的，大概就是cmake没装
-	 
+
 	```
 	./configure
-	...
-	./configure: line 1: cmake: command not found
-	sudo apt-get install cmake
 	```
+
+	 如果没有意外，应该会提示cmake相关的，大概就是cmake没装
+	 
+```
+./configure
+...
+./configure: line 1: cmake: command not found
+sudo apt-get install cmake
+```
 	 
 	 装完cmake，继续缺少X11，继续安，应该还会提示xtst
 	 
