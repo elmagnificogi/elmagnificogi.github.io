@@ -1,14 +1,14 @@
 ---
 layout:     post
-title:      "树莓派 & Synergy & 笔记本"
-subtitle:   "树莓派，Synergy"
-date:       2015-11-01
+title:      "嵌入式设备的串口驱动"
+subtitle:   "嵌入式，串口，驱动"
+date:       2015-11-02
 author:     "elmagnifico"
 header-img: "img/post-bg-js-module.jpg"
 tags:
-    - 树莓派
-    - RaspberrryPi
-    - Synergy
+    - 嵌入式
+    - 串口
+    - 驱动
 ---
 ## RaspberryPi & Synergy
 
