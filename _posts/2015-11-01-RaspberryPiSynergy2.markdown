@@ -60,10 +60,10 @@ define('hello', ['jquery'], function(require, exports, module) {
 });
 ```
 3. 进入源码目录，先尝试
-
-	```
-	./configure
-	```
+    
+    	```
+    	./configure
+    	```
 	 
 	 如果没有意外，应该会提示cmake相关的，大概就是cmake没装
 	 
