@@ -6,7 +6,7 @@ date:       2015-11-01
 author:     "elmagnifico"
 header-img: "img/post-bg-js-module.jpg"
 tags:
-    - 前端开发
+    - 树莓派
     - JavaScript
 ---
 
