@@ -49,22 +49,22 @@ tags:
 
 3. 进入源码目录，先尝试
 
-		```
+		
 		./configure
-		```
+		
 
-	如果没有意外，应该会提示cmake相关的，大概就是cmake没装
+   如果没有意外，应该会提示cmake相关的，大概就是cmake没装
 
-		```
+		
 		./configure
 		...
 		./configure: line 1: cmake: command not found
 		sudo apt-get install cmake
-		```
+		
 
-	装完cmake，继续缺少X11，继续安，应该还会提示xtst
+   装完cmake，继续缺少X11，继续安，应该还会提示xtst
 
-		```
+		
 		./configure
 		...
 		CMake Error at CMakeLists.txt:196 (message):
@@ -72,42 +72,41 @@ tags:
 		-- Configuring incomplete, errors occurred!
 		sudo apt-get install libx11-dev
 		sudo apt-get install libxtst-dev
-		```
+		
  
-	如果不是以上的错误，那仔细看一下错误提示是哪里的文件，哪行代码，缺少了什么东西
-	比如：
+   如果不是以上的错误，那仔细看一下错误提示是哪里的文件，哪行代码，缺少了什么东西
+   比如：
 	 
-		```
+		
 		CMake Error at CMakeLists.txt:196 (message):
 		Missing header: X11/Xlib.hX11/XKBlib.h
 		-- Configuring incomplete, errors occurred!
-		```
+		
 	 
-	就需要去看一下196行到底写了啥为什么没找到这个头文件
+   就需要去看一下196行到底写了啥为什么没找到这个头文件
 	 
-		```
+		
 		# add include dir for bsd (posix uses /usr/include/)
 		set(CMAKE_INCLUDE_PATH "${CMAKE_INCLUDE_PATH}:/usr/local/include")
 		set(XKBlib "X11/Xlib.h;X11/XKBlib.h")
-		```
+		
 	 
-	发现认为文件在/usr/local/include中实际上是在/usr/include才有x11的头文件，修改一下这里
-	就能继续了。
-	中间如果还提示缺少openssl gtest gmock等文件，那肯定是第二步没做，或者是放的文件夹不对，看错误提示修改一下解压的文件夹就没问题了。
-	如果没错了就能开始make了
+   发现认为文件在/usr/local/include中实际上是在/usr/include才有x11的头文件，修改一下这里就能继续了。
+   中间如果还提示缺少openssl gtest gmock等文件，那肯定是第二步没做，或者是放的文件夹不对，看错误提示修改一下解压的文件夹就没问题了。
+   如果没错了就能开始make了
 
 4. make，make时碰到的错误基本和上面一样，是一些头文件找不到，对应找到以后修改一下源码中的位置就奔最后就能ok了，大概要编译10分钟左右，就完成了
 
 
 5. 复制到/usr/bin中去
 		
-		```
+		
 		sudo cp -a ./bin/. /usr/bin
-		```
+		
 
 6. 开机自动启动Synergy，不然每次还得插个键盘啥的启动一下多麻烦。在/etc/init.d/中新建synergy然后编辑成下面的内容，这里要注意！--name 后面接你在服务端设置的名字 restart后面接你服务端的静态ip地址，不然会连接不上
 	 
-		```
+
 		#!/bin/sh
 		#/etc/init.d/synergy
 			case "$1" in
@@ -126,24 +125,24 @@ tags:
 			    ;;
 			esac
 			exit 0
-		```
+
 
 7. 设置权限，无论如何确保运行，会提示缺少LSB tags，可以无视
  
-		```
+
 		sudo chmod 755 /etc/init.d/synergy
 		update-rc.d synergy defaults
 		insserv synergy
-		```
+
 
 8. 停止启动Synergy，之后重启一下看看，是不是鼠标可以直接外滑到另一台设备的屏幕上去了，键盘输入也是需要以鼠标激活的屏幕为基础
  
-		```
+
 		/etc/init.d/synergy start
 		/etc/init.d/synergy stop
 		service synergy stop
 		service synergy start
-		```
+
 
 ## The end
 &emsp;&emsp;到这里就设置结束了，应该能正常使用Synergy，如果还有后续的话就是如何在windows下编译出来一个Synergy。
