@@ -1,4 +1,4 @@
-﻿---
+---
 layout:     post
 title:      "树莓派 & Synergy & 笔记本"
 subtitle:   "树莓派，Synergy"
@@ -7,10 +7,9 @@ author:     "elmagnifico"
 header-img: "img/post-bg-js-module.jpg"
 tags:
     - 树莓派
+    - RaspberrryPi
     - Synergy
 ---
-
-
 
 
 ## Foreword
@@ -151,5 +150,6 @@ service synergy start
 > http://blog.csdn.net/lonerzf/article/details/13996895
 > http://blog.sina.com.cn/s/blog_5922f3300101e20o.html
 > https://www.rootusers.com/compiling-synergy-from-source-on-the-raspberry-pi/
+
 
 
