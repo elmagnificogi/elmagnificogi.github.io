@@ -27,8 +27,8 @@ tags:
 
 &emsp;&emsp;毫无疑问这里我要选择使用Synergy来完成和树莓派的共享鼠键.非常感谢引用中的三位博主，我是借鉴了他们的才弄好的。
 
-
 ---
+
 ## Windows & Synergy
 &emsp;&emsp;我是Windows 10 能正常使用Synergy，那其他版本Windows应该问题不大。
 &emsp;&emsp;这个是Synergy的github，可以直接下到源代码，Windows下我是直接从网上下了一个synergy-1.7.4-stable的目前（2015年11月1日）的最新版本，Synergy的官网需要你购买才能下载，实际上安装的时候跳过注册也能正常使用。
