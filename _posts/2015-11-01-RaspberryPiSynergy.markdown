@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "树莓派 & Synergy & 笔记本"
-subtitle:   "树莓派，Synergy"
+subtitle:   "树莓派，Synergy，共用鼠键"
 date:       2015-11-01
 author:     "elmagnifico"
 header-img: "img/Raspberrypi-head-bg.png"
@@ -179,6 +179,20 @@ tags:
 &emsp;&emsp;到这里就设置结束了，应该能正常使用Synergy，如果还有后续的话就是如何在windows下编译出来一个Synergy。
 总体来说Synergy还是不错的，但是本来双屏幕的被占用了一个屏幕，并且不能随意拖拽东西过去（应该改是不能跨平台吧，同平台应该是可以的），所以最后还是PieTTY|PuTTY会比较好一些，毕竟用linux系的要什么桌面啊。
 &emsp;&emsp;树莓派下也可以用使用带UI的Synergy和QuickSynergy，就是不能自动启动需要你手动，下面的博客有介绍的。
+
+### 最新情况（周三/11/4 21:29:29）
+
+配完synergy的那天和第二天都非常好用，开机自启动，长时间开着都没有掉线的情况。
+
+放了几天以后，更新了一下系统，然后开机启动就废了，我重烧过系统，重做了三四遍，都不行。
+
+反复查原因，目前找到的就是：
+
+是开机启动项，服务激活（启动过），但是服务退出了（原因我找不到），这时候直接start无效，必须得stop 然后start 才能重新开起来。
+
+目前是开机以后，用putty手动启动一下synergy 然后再用，等我找到解决办法了再来更新。 
+
+（按照博客中所说的能做完整个流程的基本都成功了，只是不知道我这突然犯了什么病，死活不能启动）
 
 ## Quote
 

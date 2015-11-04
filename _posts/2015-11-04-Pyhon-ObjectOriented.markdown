@@ -1,8 +1,8 @@
 ---
 layout:     post
 title:      "Python学习第二章（面向对象）"
-subtitle:   "Python"
-date:       2015-11-03
+subtitle:   "Python,类,import"
+date:       2015-11-04
 author:     "elmagnifico"
 header-img: "img/python-head-bg.png"
 tags:
@@ -22,7 +22,7 @@ IDE：IDLE3
 
 ## 类
 
-###类=数据+函数
+### 类=数据+函数
 
 	class Person():
 		def __init__(self,age,name):
@@ -35,7 +35,7 @@ IDE：IDLE3
 Python类中 __init__就是构造函数，默认这么写
 self相当于是private 私有变量的声明
 
-###继承
+### 继承
 
 	class Parent(Person)
 		def __init__(self,age,name):
@@ -46,7 +46,7 @@ self相当于是private 私有变量的声明
 
 通过父类名可以直接调用父类的函数
 
-##import
+## import
 
 import就相当于是include 导入你自己写好的文件或者是系统的模块 
 

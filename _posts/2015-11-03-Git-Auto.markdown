@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "git的自动化以及快捷设置"
-subtitle:   "嵌入式，串口，驱动"
+subtitle:   "git，自动push，一键上传"
 date:       2015-11-03
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"
