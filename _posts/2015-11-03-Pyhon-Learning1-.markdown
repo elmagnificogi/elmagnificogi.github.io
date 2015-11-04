@@ -1,0 +1,124 @@
+---
+layout:     post
+title:      "Python学习第一章"
+subtitle:   "Python"
+date:       2015-11-03
+author:     "elmagnifico"
+header-img: "img/python-head-bg.png"
+tags:
+    - python
+    - raspberrypi
+---
+
+## 代码环境
+
+Raspberry Pi 下
+
+IDE：IDLE3
+## 画一个气球
+
+    
+但是这样有个一个问题，不管从哪里打开git bash，或者是右键从here 打开git bash 都会转到自己的项目目录去，很不方便，所以不推荐这个方法。
+
+- 方法二
+
+直接对着Git Bash 快捷方式右键-属性
+
+起始位置：填入你要到的目录
+
+比如：
+
+    cd e:\Github\elmagnificogi.github.io\
+
+这样的 然后应用-确定 
+再打开就发现直接到了自己想去的目录，也不会影响 git bash here命令了。
+
+- 后话
+
+刚开始不知道方法二，看到了右键-快捷方式-目标
+
+    D:\Git\git-bash.exe --cd-to-home
+
+以为修改后面的home就能实现更改默认目录呢
+死活改不对（闪退），直到发现方法二，才发现白费功夫啊。
+
+
+## Git Push 不用每次输入账号和密码
+
+Win10下
+
+每次都要输入用户名密码，我的f键还有点问题，经常输入的时候f键按了，但是没输入进去，导致一遍遍重输入账号密码，都快吐血了（后来直接在记事本里写好账号密码，然后输入的时候直接复制粘贴）
+
+那如何解决这个问题呢？
+
+- 方法一
+
+在windows中添加一个HOME环境变量（注意不是系统变量哦）
+
+变量名:HOME 
+
+变量值：%USERPROFILE%
+
+然后进入 %HOME% 目录（直接复制到地址栏就能进去了）
+
+新建一个名为"_netrc"的文件，文件中内容格式如下：
+
+    machine github.com
+    login 你的账户
+    password 你的密码
+
+重开git bash 再次push 你会发现不要账号和密码了
+
+- 方法二
+
+打开git bash 创建.git-credentials文件
+
+    touch .git-credentials
+
+    vim .git-credentials
+
+文本内容为：
+
+    https://你的账户:你的密码@github.com
+
+完成之后继续：
+
+    git config --global credential.helper store
+
+重开git bash 再次push 你会发现不要账号和密码了
+
+
+## github库一键更新上传
+
+每次都得输入
+
+    git add .
+	git commit -m "update-post"
+    git remote add origin https://github.com/elmagnificogi/elmagnificogi.github.io.git
+    #这货还老失败
+	git push -u origin master
+
+好麻烦，得弄个什么一键完成比较快，刚好也不用输入账号密码，省事
+
+找了找，应该写一个update.sh来完成就可以了
+于是如下：
+
+	git add .;
+	git commit -m "update-post";
+    git remote rm origin;
+    git remote add origin https://github.com/elmagnificogi/elmagnificogi.github.io.git;
+	git push -u origin master
+
+以后只需要调用
+    
+	./update.sh
+
+就可以完成所有操作啦。
+
+
+## The end
+
+
+
+
+

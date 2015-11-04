@@ -67,23 +67,26 @@ tags:
 		
 		./configure
 		...
-		CMake Error at CMakeLists.txt:196 (message):
+		CMake Error at CMakeLists.txt:203 (message):
 		Missing header: X11/Xlib.hX11/XKBlib.h
 		-- Configuring incomplete, errors occurred!
 		sudo apt-get install libx11-dev
 		sudo apt-get install libxtst-dev
 		
- 
+   我又出现了Missing library：curl 装了这个之后就能继续了
+
+    	sudo apt-get install libcurl4-openssl-dev
+
    如果不是以上的错误，那仔细看一下错误提示是哪里的文件，哪行代码，缺少了什么东西
    比如：
 	 
 		
-		CMake Error at CMakeLists.txt:196 (message):
+		CMake Error at CMakeLists.txt:203 (message):
 		Missing header: X11/Xlib.hX11/XKBlib.h
 		-- Configuring incomplete, errors occurred!
 		
 	 
-   就需要去看一下196行到底写了啥为什么没找到这个头文件
+   就需要去看一下203行到底写了啥为什么没找到这个头文件
 	 
 		
 		# add include dir for bsd (posix uses /usr/include/)
@@ -97,6 +100,24 @@ tags:
 
 4. make，make时碰到的错误基本和上面一样，是一些头文件找不到，对应找到以后修改一下源码中的位置就奔最后就能ok了，大概要编译10分钟左右，就完成了
 
+   我出现了：
+
+		cannot find -lssl
+		sudo apt-get install libssl-dev
+
+   之后恢复正常
+   一般出现了：
+
+		/usr/bin/ld: cannot find -lxxx
+
+   是指缺少lab xxx 那么只要对应安装xxx就行了
+
+		sudo apt-get install libxxx-dev
+
+   参考这里
+
+   > http://blog.csdn.net/a936676463/article/details/8480672  
+
 
 5. 复制到/usr/bin中去
 		
@@ -108,11 +129,20 @@ tags:
 	 
 
 		#!/bin/sh
+		### BEGIN INIT INFO
+		# Provides: synergy
+		# Required-Start: $local_fs $remote_fs $network $syslog
+		# Required-Stop:  $local_fs $remote_fs $network $syslog
+		# Default-Start:  2 3 4 5
+		# Default-Stop:   0 1 6
+		# Short-Description: synergy
+		# Description:  synergy 
+		### END INIT INFO
 		#/etc/init.d/synergy
 			case "$1" in
 			  start)
-			    cd /home/pi/synergy-1.4.10-Source/bin/
-			    su pi -c './synergyc --daemon --name Pi --restart 192.168.0.1'
+			    cd /home/pi/synergy-1.7.4-stable/bin/
+			    su pi -c './synergyc --daemon --name raspberrypi --restart 192.168.1.104'
 			    echo "Starting synergy client..."
 			    ;;
 			  stop)
@@ -127,7 +157,7 @@ tags:
 			exit 0
 
 
-7. 设置权限，无论如何确保运行，会提示缺少LSB tags，可以无视
+7. 设置权限，无论如何确保运行，如果提示缺少LSB tags(上面是有tags的所以应该不会提示)，可以无视
  
 
 		sudo chmod 755 /etc/init.d/synergy
