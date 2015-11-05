@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "树莓派 & Camera"
-subtitle:   "树莓派，vlc,网络流视频"
+subtitle:   "树莓派，vlc，网络流视频"
 date:       2015-11-04
 author:     "elmagnifico"
 header-img: "img/Raspberrypi-head-bg.png"
