@@ -150,3 +150,9 @@ url2是新的获取方式+我的APPID，可以看到返回的值 各种地方的
 第一章是Python的面向过程的部分
 
 写了一点书上的小例子，都能正常运行
+
+## Quote
+
+> http://www.jb51.net/article/42623.htm
+> http://blog.chinaunix.net/uid-20527331-id-95402.html
+

@@ -521,3 +521,9 @@ import就是用来导入copy模块
 要说不好就是用缩进来进行程序分块这一点可能不够好
 
 如果嵌套层数过多的话，代码就跟楼梯一样一直往下空下去了
+
+## Quote
+
+> http://www.runoob.com/python/python-tutorial.html
+> http://my.oschina.net/u/2260265/blog/411174
+> http://www.cnblogs.com/dolphin0520/archive/2013/03/14/2954733.html
