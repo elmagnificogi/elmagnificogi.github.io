@@ -152,7 +152,7 @@ match则是从字符串头匹配，头匹配了才会输出
 			file_a.write(letter+"\n")
 	with open("myfile.txt",encoding="utf-8") as file_a:
 		for line in file_a:
-			print(linek.strip())
+			print(line.strip())
 
 
 ## The end
