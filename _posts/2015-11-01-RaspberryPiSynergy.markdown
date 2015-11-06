@@ -41,6 +41,14 @@ tags:
 
 &emsp;&emsp;剩下还有热键等设置自己琢磨就好了,这里可能还会遇到比如某个按键不好使：shift等，那是版本太低就会有这个问题，之前我是树莓派是最新版，win是个低一些的版本，果断shift怎么都用不了，换成最新版本的就好了
 
+## 环境
+
+Camera：树莓派原装的摄像头
+
+system：2015-09-24-raspbian-jessie
+
+RaspberryPi：Raspberry Pi 2
+
 ## RaspberryPi & Synergy
 
 1. 从上面的github下源码到树莓派中去
@@ -125,62 +133,78 @@ tags:
 		sudo cp -a ./bin/. /usr/bin
 		
 
-6. 开机自动启动Synergy，不然每次还得插个键盘啥的启动一下多麻烦。在/etc/init.d/中新建synergy然后编辑成下面的内容，这里要注意！--name 后面接你在服务端设置的名字 restart后面接你服务端的静态ip地址，不然会连接不上
-	 
+6. 开机自动启动Synergy，不然每次还得插个键盘啥的启动一下多麻烦。在/etc/init.d/中新建synergy然后编辑成下面的内容。
 
-		#!/bin/sh
-		### BEGIN INIT INFO
-		# Provides: synergy
-		# Required-Start: $local_fs $remote_fs $network $syslog
-		# Required-Stop:  $local_fs $remote_fs $network $syslog
-		# Default-Start:  2 3 4 5
-		# Default-Stop:   0 1 6
-		# Short-Description: synergy
-		# Description:  synergy 
-		### END INIT INFO
-		#/etc/init.d/synergy
-			case "$1" in
-			  start)
-			    cd /home/pi/synergy-1.7.4-stable/bin/
-			    su pi -c './synergyc --daemon --name raspberrypi --restart 192.168.1.104'
-			    echo "Starting synergy client..."
-			    ;;
-			  stop)
-			    pkill synergyc
-			    echo "Attempting to kill synergy client"
-			    ;;
-			  *)
-			    echo "Usage: /etc/init.d/synergy (start/stop)"
-			    exit 1
-			    ;;
-			esac
-			exit 0
+   解释一下这里的参数 
+  - --daemon是将synergy作为后台程序
+  - --name 是指客户端的名字 填写你自己的到这里
+  - --restart 是指断线后重连（不是重启服务，只是重连而已，实际上我遇到的就是直接死了，只有pkill进程以后重新开才能恢复，所以这里就没办法了）
+  - --log /home/pi/log 可以把日志输出到这个目录的log文件中，实际上我每次开启以后都会出现dup2的error，但是程序是正常的，并不影响
+  - 还有其他-d debug 参数什么的 没有仔细研究
+
+
+    ```
+    	### BEGIN INIT INFO
+    	# Provides: py_synergy
+    	# Required-Start: $remote_fs $syslog
+    	# Required-Stop: $remote_fs $syslog
+    	# Default-Start: 2 3 4 5
+    	# Default-Stop: 0 1 6
+    	# Short-Description: synergy initscript
+    	# Description: This service is used to manage the synergy
+    	### END INIT INFO
+    	#!/bin/sh
+    	#/etc/init.d/synergy
+   
+		case "$1" in
+		  start)
+		    cd /home/pi/synergy-1.4.10-Source/bin/
+		    su pi -c './synergyc --daemon --name Pi --restart 192.168.0.1'
+		    echo "Starting synergy client..."
+		    ;;
+		  stop)
+		    pkill synergyc
+		    echo "Attempting to kill synergy client"
+		    ;;
+		  *)
+		    echo "Usage: /etc/init.d/synergy (start/stop)"
+		    exit 1
+		    ;;
+		esac
+		exit 0
+	```
+
+   这里必须用su pi -c 命令 不然会导致使用sudo service start等所有以sudo开头的命令无法使用。
+   比如 我直接减去了 cd 和 su 命令 如下
+
+		synergyc --daemon --name pi --restart --log /home/pi/sylog 192.168.1.104
+
+   用这个命令代替，那么结果就是服务无法启动，虽然执行了，但是你会发现synergyc进程根本没启动
+   当然，我用这个命令的前提是 我把 synergy编译后的./bin目录下的权限都改为了777 并且复制到了/usr/bin 的目录下，并且这个脚本也改为了777 在确保了所有权限都没错的情况下，如果用sudo/root权限 是完全打不开synergyc的 
+
+		sudo synergyc --daemon --name pi --restart --log /home/pi/sylog 192.168.1.104
+		sudo service synergy stop
+		sudo service synergy start
+
+   上面的命令你甚至能看到输出，但是实际上程序完全没起来
 
 
 7. 设置权限，无论如何确保运行，如果提示缺少LSB tags(上面是有tags的所以应该不会提示)，可以无视
  
 
 		sudo chmod 755 /etc/init.d/synergy
-		update-rc.d synergy defaults
-		insserv synergy
+		sudo update-rc.d synergy defaults
+		sudo insserv synergy
 
 
-8. 停止启动Synergy，之后重启一下看看，是不是鼠标可以直接外滑到另一台设备的屏幕上去了，键盘输入也是需要以鼠标激活的屏幕为基础
+8. 启动Synergy服务，之后重启一下看看，是不是鼠标可以直接外滑到另一台设备的屏幕上去了，键盘输入也是需要以鼠标激活的屏幕为基础
  
+		sudo /etc/init.d/synergy start
+		sudo /etc/init.d/synergy stop
+		sudo service synergy stop
+		sudo service synergy start
 
-		/etc/init.d/synergy start
-		/etc/init.d/synergy stop
-		service synergy stop
-		service synergy start
-
-
-## The end
-
-&emsp;&emsp;到这里就设置结束了，应该能正常使用Synergy，如果还有后续的话就是如何在windows下编译出来一个Synergy。
-总体来说Synergy还是不错的，但是本来双屏幕的被占用了一个屏幕，并且不能随意拖拽东西过去（应该改是不能跨平台吧，同平台应该是可以的），所以最后还是PieTTY|PuTTY会比较好一些，毕竟用linux系的要什么桌面啊。
-&emsp;&emsp;树莓派下也可以用使用带UI的Synergy和QuickSynergy，就是不能自动启动需要你手动，下面的博客有介绍的。
-
-### 最新情况（周三/11/4 21:29:29）
+## 以上方法无法自动启动的情况（周三/11/6 17:04:29）
 
 配完synergy的那天和第二天都非常好用，开机自启动，长时间开着都没有掉线的情况。
 
@@ -188,11 +212,127 @@ tags:
 
 反复查原因，目前找到的就是：
 
-是开机启动项，服务激活（启动过），但是服务退出了（原因我找不到），这时候直接start无效，必须得stop 然后start 才能重新开起来。
+是开机启动项，服务激活（启动过），但是看不到synergy连接的信息，这时候直接start无效，必须得stop 然后start 才能重新开起来。
 
-目前是开机以后，用putty手动启动一下synergy 然后再用，等我找到解决办法了再来更新。 
+只好开机以后，用putty手动启动一下synergy 然后再用 
 
-（按照博客中所说的能做完整个流程的基本都成功了，只是不知道我这突然犯了什么病，死活不能启动）
+（我查看了国外友人博客，有近期评论（5月前）中说做完整个流程的基本都成功了，至少我确实是成功好用了两天，如果你能正常使用上面的方式就不用往下看了）
+
+说一下我尝试解决的办法
+
+- 刚好学习了python就用python写了一个脚本，然后开机自动启动python，然后再用python脚本来调用synergy的服务，间接调用，依然是不能开机启动，所以问题应该在脚本/启动流程中
+- 修改了用su pi -c的脚本调用的方式，直接用synergyc 来启动 就遇到了上面说的问题，服务根本无法运行
+- 在su pi -c 前先pkill一次 然后再开启，失败
+- 参考另外一个博客的方法，使用LXDE的启动脚本来启动，失败
+
+```
+	sudo mkdir -p ~/.config/lxsession/LXDE
+	sudo touch ~/.config/lxsession/LXDE/autostart
+	sudo nano ~/.config/lxsession/LXDE/autostart
+	编辑下面内容
+	~/.startsynergy.sh
+	sudo nano ~/.startsynergy.sh
+	#!/bin/bash
+	killall synergyc
+	sleep 1
+	synergyc --name pi 192.168.0.16
+	exit 0
+	sudo chmod 777 ~/.startsynergy.sh
+```
+
+- synergy的官方论坛，提到树莓派的只有这一个，有人回答的也刚好是上面的方法并且还是最近10月20号的，说是可以，但我怀疑他应该用的是老版本的树莓派系统，不是最新的，链接在下面
+
+> http://synergy-project.org/forum/viewtopic.php?f=9&t=30&hilit=raspberry&start=10
+
+- 参考了synergy官方所有wiki呀，论坛啊之类的关于linux下autostartup的问题，全都无解
+- 单独查找树莓派设置开机启动的方法还有debian开机启动的方法，不外乎上面这种还有一种写在/etc/rc.local调用上面的脚本/直接命令启动，失败
+- 查看log，log是正常的，只有一次出了这个错误（忽略时间，我树莓派的时间是错的）
+
+	raspberrypi synergyc[629]: Synergy 1.7.4: [2015-09-26T04:19:32] WARNING: secondary screen unavailable: unable to open screen
+
+- 根据这个warning找到了另外一篇博客，帮我确定了错误,会出现越界的错误
+
+> http://wp.sgrosshome.com/2014/01/31/configure-synergy-client-systemd-service-auto-start-linux-fedora-20/
+> https://bugzilla.redhat.com/show_bug.cgi?id=1212860
+
+-从官方wiki来看，synergy是不能从boot启动的（更新不及时），也就是说不登录的情况下是无法启动synergyc的（会出现什么情况不知道，但不能用），但是呢，偏偏有不少博客写着成功从boot启动了，在用户未登录的情况下就能启动，但这基本取决于用的系统和当时的版本，更换了之后立马就都不行了，为此之后会单独写一篇关于树莓派/linux系统启动相关的，梳理一下我对于linux以及树莓派系统的理解
+
+
+截至到几个小时前，我都没找到自动启动的办法。直到我看到他
+
+> http://www.raspberrypi-spy.co.uk/2014/05/how-to-autostart-apps-in-rasbian-lxde-desktop/
+
+成功通过python脚本启动了synergyc 
+
+这个帖子中的第一种方法不知道由于什么原因，我在第一次做的时候，成功启动了终端，从此以后再也没成功过了。
+而100%成功的是第二种方法。
+
+## 第二种自启动方法
+
+下面介绍第二种100%成功的方法（基于树莓派2的2015-09-24-raspbian-jessie版本的系统下）
+其他的版本请尝试我上面提到过的所有方法
+
+首先，修改LXDE桌面自启动的脚本
+
+	sudo nano ~/.config/lxsession/LXDE-pi/autostart
+
+然后可以看到
+
+	@lxpanel --profile LXDE-pi
+	@pcmanfm --desktop --profile LXDE-pi
+	@xscreensaver -no-splash
+	@/usr/bin/python /home/pi/script/synergy.py
+	@lxterminal
+	@sh ${HOME}/.config/lxsession/LXDE-pi/autokey.sh
+
+在最后一行代码的前面加入
+
+	@/usr/bin/python /home/pi/script/synergy.py
+	@lxterminal
+
+@lxterminal是终端，可以测试重启是否执行了这上面的命令，执行了的话会自动打开终端的
+
+关键脚本就在这里了，首先调用/usr/bin下的python 来 运行/home/pi/script/目录下的synergy.py脚本
+
+synergy.py脚本内容如下
+
+	import subprocess
+	import time
+	time.sleep(1)
+	p=subprocess.Popen("sudo service synergy stop",shell=True,stdout=subprocess.PIP$
+	text=p.stdout.read().decode()
+	print(text)
+	text=p.stderr.read().decode()
+	print(text)
+	time.sleep(1)
+	p=subprocess.Popen("sudo service synergy start",shell=True,stdout=subprocess.PI$
+	text=p.stdout.read().decode()
+	print(text)
+	text=p.stderr.read().decode()
+	print(text)
+
+这是通过python的subprocess来启动synergy服务（这是建立在第一种方法建立好服务的基础上的）
+
+你也可以修改这里 选择直接调用这个，就不用做建立服务了
+
+	synergyc --daemon --name pi --restart --log /home/pi/sylog 192.168.1.104
+
+在启动前加了一个停止和延时，确保不会有冗余的进程存在。
+
+做完上面的步骤就可以reboot 重启看效果了，如果你的平台是和我一样的，没有自动启动，那就仔细检查上面的内容，肯定有小疏忽。
+
+## The end
+
+&emsp;&emsp;到这里就设置结束了，应该能正常使用Synergy，如果还有后续的话就是如何在windows下编译出来一个Synergy。
+总体来说Synergy还是不错的，我参考的博客中有提到占用cpu太高什么的，其实在我用的最新版本1.74中基本都解决了，没有体会到占用很高的cpu。
+
+&emsp;&emsp;但是本来双屏幕的被占用了一个屏幕，并且不能随意拖拽东西过去（我是指窗口，实际上剪贴板是共享的，文件也可以拖拽），不过有好几秒的延迟，有时候putty和winSCP配合使用还是不错的。
+
+&emsp;&emsp;其实也可以用VNC，虽然我是在一个局域网里，但是延迟感总是要高一些，很不舒服，synergy的鼠标和键盘的延迟很低，感觉就好像直接扩展屏一样。
+
+&emsp;&emsp;类似synergy的软件也有几个（zeroOS，input director，maxVista还有什么winnoborder），但他们都是不是全平台通用的，各自有各自的限制，synergy目前是mac linux windows android等等都可以用，从论坛什么的，也能看到synergy的bug颇多，什么情况都有
+
+&emsp;&emsp;树莓派下也可以用使用带UI的Synergy和QuickSynergy，就是不能自动启动需要你手动，下面的博客有介绍的。
 
 ## Quote
 
@@ -200,6 +340,10 @@ tags:
 > http://blog.csdn.net/lonerzf/article/details/13996895
 > http://blog.sina.com.cn/s/blog_5922f3300101e20o.html
 > https://www.rootusers.com/compiling-synergy-from-source-on-the-raspberry-pi/
+> http://synergy-project.org/forum/viewtopic.php?f=9&t=30&hilit=raspberry&start=10
+> https://learn.adafruit.com/synergy-on-raspberry-pi/setup-synergy-client-autostart
+> http://www.raspberrypi-spy.co.uk/2014/05/how-to-autostart-apps-in-rasbian-lxde-desktop/
+> http://wp.sgrosshome.com/2014/01/31/configure-synergy-client-systemd-service-auto-start-linux-fedora-20/
 
 
 
