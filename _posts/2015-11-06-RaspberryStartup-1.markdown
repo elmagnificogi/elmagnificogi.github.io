@@ -21,7 +21,7 @@ RaspberryPi：Raspberry Pi 2
 
 树莓派启动的相关问题，会从config.txt一直介绍到linux如何启动，启动流程分析，自启动脚本实现。
 
-###config.txt
+### config.txt
 
 首先是烧完系统以后，修改一下sd卡中的config.txt文件，这里面记录了boot的时候的启动参数
 
@@ -387,6 +387,8 @@ disable_overscan 设为1将禁用超出扫描.其实这个就是调整显示器�
 
 ### boot
 
+下面的参数都是与boot启动有关系的，应该是移植操作系统的时候会遇到的
+
 disable_commandline_tags 在启动内核前, 通过改写ATAGS (0x100处的内存)来阻止start.elf 
 
 cmdline (string) 命令行参数. 可用来代替cmdline.txt文件
@@ -440,6 +442,8 @@ avoid_safe_mode 如果设为1, 将不以安全模式启动. 默认为0
 ## The end
 
 这才介绍了一半的config，下次开始高级的config内容：超频相关
+
+(写的时候还发现了一个bug，当开着有道的划词翻译+MarkdownPad2的时候，由于划词的原因，在按Tab缩进的时候就会出现，MarkdownPad的cpu占用率飙升，然后Tab键无效，程序半卡死状态，刚开始我还以为是我写太长了呢，就分开写了，突然想到关了有道试试，没想到就好了。)
 
 ## Quote
 
