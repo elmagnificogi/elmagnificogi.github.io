@@ -1,8 +1,8 @@
 ---
 layout:     post
-title:      "树莓派启动流程与自启动（一）"
+title:      "树莓派启动那些事（二）"
 subtitle:   "超频，ondemand，多机配置"
-date:       2015-11-06
+date:       2015-11-07
 author:     "elmagnifico"
 header-img: "img/Raspberrypi-head-bg.png"
 tags:
@@ -179,6 +179,14 @@ GPU核心, h264, v3d和isp共享一个锁相环,所以他们是同频率的. ARM
 
 多数超频问题会直接无法启动，那只用按住shift键，会自动关闭超频进行启动，启动之后调整配置就可以了。
 
+#### 官方推荐，快速超频
+
+官方标配超频设置，完全没有后顾之忧
+	
+	sudo rasp-config
+	然后选择第七项 Overclock
+	然后根据你的情况尝试上面的配置（树莓派2直接选最后一个或者倒数第二个）
+	
 #### 多机适配
 
 如果只有一个树莓派，就设置一个config就ok了，但如果有多个树莓派，多个显示器等等，而且型号也不一样，那交换sd卡的时候就需要每个修改一下，就太麻烦了。那么如何修改config从而使得多个pi也适用呢

@@ -1,7 +1,7 @@
 ---
 layout:     post
-title:      "树莓派启动流程与自启动（一）"
-subtitle:   "树莓派，startup，linux"
+title:      "树莓派启动那些事（一）"
+subtitle:   "树莓派，startup，config"
 date:       2015-11-06
 author:     "elmagnifico"
 header-img: "img/Raspberrypi-head-bg.png"
