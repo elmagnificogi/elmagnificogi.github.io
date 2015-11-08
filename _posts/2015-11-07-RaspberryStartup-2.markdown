@@ -40,101 +40,30 @@ RaspberryPi：Raspberry Pi 2
 
 如果超频下，芯片温度超过85度，超频会自动失效来降低温度。
 
+|转义字符|说明|
+| ---------------|:-------------------------------:| 
+| arm_freq | 频率设置，默认700m |
+| gpu_freq | 同时设置了下面四个的频率，默认250 | 
+| core_freq | GPU频率，因为他和cpu共用二级缓存，所以会对cpu频率造成影响 |
+| h264_freq | 视频硬解频率 |
+| isp_freq | 图像信号的频率，这里应该是指原配摄像头的 | 
+| v3d_freq | 3D频率 | 
+| avoid_pwm_pll | 这个是pwm的锁相环开关，貌似会使耳机效果更差 |
+| sdram_freq | SDRAM速率，默认400，就是读写SD卡的速度 |
+| over_voltage | CPU/GPU的电压调整. [-16,8]对应[0.8V,1.4V]，默认为0->1.2v，只有在自调整超频的时候会提高电压 |
+| over_voltage_sdram | 设置下面的三个参数的电压 |
+| over_voltage_sdram_c | SDRAM的控制电压调节，[-16,8] 对应 [0.8V,1.4V] . 默认是0 |
+| over_voltage_sdram_i | SDRAM I/O 电压调节，[-16,8] 对应 [0.8V,1.4V] . 默认是0 |
+| over_voltage_sdram_p | SDRAM phy 电压调节，[-16,8] 对应 [0.8V,1.4V] . 默认是0 |
+| force_turbo | 关闭动态频率调节，和最小值设定，开启h246/v3d/isp的超频，默认0 |
+| initial_turbo | 如果有SD卡错误，那么修改这个初始化值，可能会让sd卡可读写，默认0 |
+| arm_freq_min | 设置最低频率，默认700 |
+| core_freq_min | 设置core_freq的最小频率，默认250 |
+| sdram_freq_min | 设置SDRAM的最低频率，默认400 |
+| over_voltage_min | 设置over_voltage的最低数值，默认0 |
+| temp_limit | 设置过热保护温度，默认85 |
+| current_limit_override | 置为0x5A000020时会让SMPS限流保护失效，当你超频之后遇到重启失败，那么设置这个通常可以保证不会遇到什么意外情况 |
 
-<table>
-<thead>
-<tr>
-<th>Option</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>arm_freq</td>
-<td>频率设置，默认700m</td>
-</tr>
-<tr>
-<td>gpu_freq</td>
-<td>同时设置了下面四个的频率，默认250</td>
-</tr>
-<tr>
-<td>core_freq</td>
-<td>GPU频率，因为他和cpu共用二级缓存，所以会对cpu频率造成影响</td>
-</tr>
-<tr>
-<td>h264_freq</td>
-<td>视频硬解频率</td>
-</tr>
-<tr>
-<td>isp_freq</td>
-<td>图像信号的频率，这里应该是指原配摄像头的</td>
-</tr>
-<tr>
-<td>v3d_freq</td>
-<td>3D频率</td>
-</tr>
-<tr>
-<td>avoid_pwm_pll</td>
-<td>这个是pwm的锁相环开关，貌似会使耳机效果更差</td>
-</tr>
-<tr>
-<td>sdram_freq</td>
-<td>SDRAM速率，默认400，就是读写SD卡的速度</td>
-</tr>
-<tr>
-<td>over_voltage</td>
-<td>CPU/GPU的电压调整. [-16,8]对应[0.8V,1.4V]，默认为0->1.2v，只有在自调整超频的时候会提高电压
-</tr>
-<tr>
-<td>over_voltage_sdram</td>
-<td>设置下面的三个参数的电压</td>
-</tr>
-<tr>
-<td>over_voltage_sdram_c</td>
-<td>SDRAM的控制电压调节，[-16,8] 对应 [0.8V,1.4V] . 默认是0</td>
-</tr>
-<tr>
-<td>over_voltage_sdram_i</td>
-<td>SDRAM I/O 电压调节，[-16,8] 对应 [0.8V,1.4V] . 默认是0</td>
-</tr>
-<tr>
-<td>over_voltage_sdram_p</td>
-<td>SDRAM phy 电压调节，[-16,8] 对应 [0.8V,1.4V] . 默认是0</td>
-</tr>
-<tr>
-<td>force_turbo</td>
-<td>关闭动态频率调节，和最小值设定，开启h246/v3d/isp的超频，默认0</td>
-</tr>
-<tr>
-<td>initial_turbo</td>
-<td>如果有SD卡错误，那么修改这个初始化值，可能会让sd卡可读写，默认0</td>
-</tr>
-<tr>
-<td>arm_freq_min</td>
-<td>设置最低频率，默认700</td>
-</tr>
-<tr>
-<td>core_freq_min</td>
-<td>设置core_freq的最小频率，默认250/td>
-</tr>
-<tr>
-<td>sdram_freq_min</td>
-<td>设置SDRAM的最低频率，默认400</td>
-</tr>
-<tr>
-<td>over_voltage_min</td>
-<td>设置over_voltage的最低数值，默认0</td>
-</tr>
-<tr>
-<td>temp_limit</td>
-<td>设置过热保护温度，默认85</td>
-</tr>
-<tr>
-<td>current_limit_override</td>
-<td>设置为0x5A000020时会让SMPS限流保护失效，当你超频之后遇到重启失败，那么设置这个通常可以保证不会遇到什么意外情况</td>
-</tr>
-</tbody>
-</table>
 
 #### force_turbo模式
 
