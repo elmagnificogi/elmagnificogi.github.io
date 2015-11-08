@@ -349,6 +349,29 @@ WinSCP是个非常好用的在系统之间传送文件的工具，开始的操�
 
 > http://winscp.net/eng/docs/lang:chs
 
+## ROOT
+
+树莓派使用的linux是debian系统的移植版本，所以树莓派启用root和debian是相同的。
+
+debian里root账户默认没有密码，但账户锁定。
+
+当需要root权限时，由默认账户经由sudo执行，Raspberry pi 系统中的Raspbian
+
+默认用户是pi 密码为raspberry
+
+> 重新开启root账号，可由pi用户登录后，在命令行下执行
+> 
+> 	sudo passwd root
+> 
+> 执行此命令后系统会提示输入两遍的root密码，输入你想设的密码即可，然后在执行
+> 
+> 	sudo passwd --unlock root
+> 
+> 这样就可以解锁root账户了。
+> 
+
+然而我没有开启root，感觉不开启的情况下 也不用输入密码就能sudo 还是蛮方便的，先这么用着吧
+
 ## The end
 
 最后的时间是最坑爹的用了两天确定了ntp的问题，最后只好用htpdate来代替，不过可喜的是自启动服务竟然有效，不然又要坑到这里了。下次开始系统内核启动的介绍。
