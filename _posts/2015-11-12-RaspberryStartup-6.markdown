@@ -1,13 +1,13 @@
 ---
 layout:     post
-title:      "树莓派启动那些事（五）"
-subtitle:   "linux启动，init，systemd，"
-date:       2015-11-11
+title:      "树莓派启动那些事（六）"
+subtitle:   "linux启动，systemd，unit，target"
+date:       2015-11-12
 author:     "elmagnifico"
 header-img: "img/Raspberrypi-head-bg.png"
 tags:
     - 树莓派
-    - RaspberrryPi
+    - RaspberryPi
 ---
 
 
@@ -57,6 +57,63 @@ Systemd同时也清晰地处理了系统关机过程。它在/usr/lib/systemd/�
 	systemd-analyze blame 可以看到每个启动项花费的时间
 
 由于Systemd向下兼容，所以正常的init.d中的脚本服务等，依然能够正常使用。
+
+#### 配置文件
+
+所有配置文件存放的目录可以在以下任一目录之中
+
+	/etc/systemd/system
+	/etc/systemd/system/
+	/usr/lib/systemd/system/
+	/lib/systemd/system/
+
+加载的第一个文件为default.target, systemd的启动逻辑顺序默认如下
+	
+	local-fs-pre.target
+	         |
+	         v
+	(various mounts and   (various swap (various cryptsetup
+	 fsck services...)     devices...)      devices...)     (various low-level 
+	         |                  |                |           services: udevd,  
+	         v                  v                v           tmpfiles, random   
+	  local-fs.target      swap.target   cryptsetup.target  seed, sysctl, ...) 
+	         |                  |                |                  |
+	         \__________________|_______________ | _________________/
+	                                            \|/
+	                                             v
+	                                      sysinit.target
+	                                             |
+	                             _______________/|\___________________
+	                            /                |                    \
+	                            |                |                    |
+	                            v                |                    v
+	                        (various             |              rescue.service
+	                       sockets...)           |                    |
+	                            |                |                    v
+	                            v                |              rescue.target
+	                     sockets.target          |
+	                            |                |
+	                            \_______________ |
+	                                            \|
+	                                             v
+	                                       basic.target
+	                                             |
+	            ________________________________/|             emergency.service
+	           /                |                |                     |
+	           |                |                |                     v
+	           v                v                v              emergency.target
+	       display-      (various system  (various system
+	   manager.service       services         services)
+	           |           required for          |
+	           |          graphical UIs)         v
+	           |                |         multi-user.target
+	           |                |                |
+	           \_______________ | _______________/
+	                           \|/
+	                            v
+	                    graphical.target (如果，我们的启动级别为5, 那么我们可以将 default.target 链接到graphical.target上)
+
+
 
 ### Systemd 的基本概念
 
@@ -217,23 +274,18 @@ PS：顺便回答一个经常被问到的问题，这个命令的输出的第一
 
 	sudo systemctl reset-failed
 
-
-##### Systemd总结
+## The end
 
 Systemd快速，高效，可以并发启动，并且简化了系统脚本，维护系统服务更加简单了，并且统一了接口，那么带来的效果就是不管什么系统，其服务启动方面是一样的，那么就很容易在不同linux的分支上移植服务。但与之带来的问题是一样，因为并发，所以某些情况可能会带来难以解决的bug。
 
-## The end
-
-
-
 ## Quote
 
-> http://elinux.org/RPi_Software
-> http://wiki.beyondlogic.org/index.php?title=Understanding_RaspberryPi_Boot_Process
-> https://www.raspberrypi.org/blog/raspberry-pi-compute-module-new-product/
-> https://wiki.gentoo.org/wiki/Raspberry_Pi
+> http://www.cnblogs.com/cfox/archive/2013/02/01/2888759.html
+> http://www.freedesktop.org/software/systemd/man/systemd.service.html
+> https://blog.linuxeye.com/400.html
+> http://www.lxway.com/88080114.htm
 > http://vbird.dic.ksu.edu.tw/linux_basic/0510osloader_1.php#process_1
-> http://m.blog.csdn.net/blog/gongora/4190056
+> http://www.ibm.com/developerworks/cn/linux/1407_liuming_init3/
 
 
 

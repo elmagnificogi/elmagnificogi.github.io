@@ -7,10 +7,12 @@ author:     "elmagnifico"
 header-img: "img/Embedded-head-bg.png"
 tags:
     - 嵌入式
-    - 串口
-    - 驱动
+    - 树莓派
+    - RaspberryPi
 ---
+
 ## 串口驱动
+
 一般常用能在淘宝买的usb转串口驱动基本就这么几种
 - CH340
 - CP2102
@@ -73,6 +75,7 @@ tags:
 这种情况换一个usb口或者是重启一下基本就又好了，不用重复装驱动
 
 ## CH340
+
 这种驱动网上比较多，找一个好用的也不难，还是贴一个我的分享吧
 
 >http://pan.baidu.com/s/1hqCq5Sg
@@ -86,6 +89,7 @@ tags:
 密码：50tg
 
 ## PL2303
+
 这种驱动网上最多各种的都有，但是适合你的却很少！
 
 特别是一遇到win8以上的系统立马黄感叹的

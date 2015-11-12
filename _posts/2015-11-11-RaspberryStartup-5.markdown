@@ -1,13 +1,13 @@
 ---
 layout:     post
 title:      "树莓派启动那些事（五）"
-subtitle:   "linux启动，init，systemd，"
+subtitle:   "linux启动，init，runlevel，shell"
 date:       2015-11-11
 author:     "elmagnifico"
 header-img: "img/Raspberrypi-head-bg.png"
 tags:
     - 树莓派
-    - RaspberrryPi
+    - RaspberryPi
 ---
 
 
@@ -480,12 +480,10 @@ Bash的设置之所以如此繁琐，是由于历史原因造成的。早期的�
 
 ## Quote
 
-> http://elinux.org/RPi_Software
-> http://wiki.beyondlogic.org/index.php?title=Understanding_RaspberryPi_Boot_Process
-> https://www.raspberrypi.org/blog/raspberry-pi-compute-module-new-product/
-> https://wiki.gentoo.org/wiki/Raspberry_Pi
 > http://vbird.dic.ksu.edu.tw/linux_basic/0510osloader_1.php#process_1
 > http://m.blog.csdn.net/blog/gongora/4190056
+> http://blog.chinaunix.net/uid-23069658-id-3142047.html
+> http://www.ruanyifeng.com/blog/2013/08/linux_boot_process.html
 
 
 

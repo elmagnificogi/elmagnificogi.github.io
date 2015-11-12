@@ -7,7 +7,7 @@ author:     "elmagnifico"
 header-img: "img/Raspberrypi-head-bg.png"
 tags:
     - 树莓派
-    - RaspberrryPi
+    - RaspberryPi
 ---
 
 
@@ -309,6 +309,7 @@ CentOS 5.x 的 initrd 文件内容
 > http://vbird.dic.ksu.edu.tw/linux_basic/0510osloader_1.php#process_1
 > http://linux.cn/article-3994-1.html
 > http://www.ruanyifeng.com/blog/2013/08/linux_boot_process.html
+> http://www.ruanyifeng.com/blog/2013/02/booting.html
 
 
 

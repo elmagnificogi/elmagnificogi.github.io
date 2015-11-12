@@ -7,7 +7,6 @@ author:     "elmagnifico"
 header-img: "img/ps-head-bg.jpg"
 tags:
     - ps
-    - 画图
     - 素材
     - 学习
 ---

@@ -1,18 +1,18 @@
 ---
 layout:     post
 title:      "树莓派 & Synergy & 笔记本"
-subtitle:   "树莓派，Synergy，共用鼠键"
+subtitle:   "开机启动，Synergy，共用鼠键"
 date:       2015-11-01
 author:     "elmagnifico"
 header-img: "img/Raspberrypi-head-bg.png"
 tags:
     - 树莓派
-    - RaspberrryPi
-    - Synergy
+    - RaspberryPi
 ---
 
 
 ## Foreword
+
 &emsp;&emsp;最近因为要学python，加上对于linux系并不是非常了解，操作也不熟练，干脆买了块Raspberry Pi来学习，刚好有换下来的老屏也是hdmi接口的当作是树莓派的屏幕好了，于是发现要操作树莓派还得另需一副鼠标键盘，之前也有过用PieTTY|PuTTY的经验，依然还是想试试看有没有共享鼠键的方式（其实老早之前有想尝试通过usb/串口连接两台电脑，加上上位机，当鼠标滑出屏幕之后切换到另外一边的显示器去实现鼠键共享，后来发现驱动部分非常麻烦，就暂时搁置了）.
 
 ----------
@@ -30,6 +30,7 @@ tags:
 ---
 
 ## Windows & Synergy
+
 &emsp;&emsp;我是Windows 10 能正常使用Synergy，那其他版本Windows应该问题不大。
 &emsp;&emsp;这个是Synergy的github，可以直接下到源代码，Windows下我是直接从网上下了一个synergy-1.7.4-stable的目前（2015年11月1日）的最新版本，Synergy的官网需要你购买才能下载，实际上安装的时候跳过注册也能正常使用。
 
