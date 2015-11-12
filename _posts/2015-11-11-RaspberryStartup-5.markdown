@@ -2,7 +2,7 @@
 layout:     post
 title:      "树莓派启动那些事（五）"
 subtitle:   "linux启动，init，systemd，"
-date:       2015-11-08
+date:       2015-11-11
 author:     "elmagnifico"
 header-img: "img/Raspberrypi-head-bg.png"
 tags:
@@ -66,7 +66,7 @@ Linux 就是藉由配置 run level 来规定系统使用不同的服务来启动
 
 由於 run level 0, 4, 6 不是关机、重新启动就是系统保留的，所以默认的run level并不能使这三个， 否则系统就会不断的自动关机或自动重新启动。那么我们启动时，是通过/etc/inittab取得系统的 run level,实际上debian没有规定像上面这样规定,debian的2-5都是多用户模式，这个要视系统来说，不一定。
 
-#### inittab
+### inittab
 
 init程序的配置文件是/etc/inittab。内容如下：
 
@@ -139,7 +139,7 @@ init程序的配置文件是/etc/inittab。内容如下：
 	#
 	#T3:23:respawn:/sbin/mgetty -x0 -s 57600 ttyS3
 
-#####  /etc/init.d/rcS脚本
+####  /etc/init.d/rcS脚本
 
 在这个配置文件中，第一个执行的脚本是/etc/init.d/rcS， 他会在开始加载各项系统服务之前，先配置好系统环境，要想知道到底 CentOS 启动的过程当中进行了什么动作，就得要仔细的分析 /etc/init.d/rcS。
 
@@ -174,7 +174,7 @@ init程序的配置文件是/etc/inittab。内容如下：
 - 清除启动过程当中的缓存文件：
 - 将启动相关资讯加载 /var/log/dmesg 文件中。
 
-#####  /etc/rcS.d脚本
+####  /etc/rcS.d脚本
 
 然后它会执行/etc/rcS.d目录下的所有脚本，/etc/rcS.d目录下的脚本名都以大写字母“S”和一个顺序号开头，它们在系统初始化时都要被执行。如果某个脚本你不想执行，则改成以大写字母“K”开头即可。以”K“开头的脚本会先被执行，它调用了脚本的stop参数，用来关闭一些进程，接着再执行以“S”开头的脚本，它调用了脚本的start参数，用以启动进程。其实/etc/rcS.d目录下的所有脚本都是符号链接，真正执行的脚本存放在/etc/init.d目录下。脚本会按从小到大的顺序执行，以S40开头的脚本执行之后，本地文件系统已加载，网络已启动，所有的驱动程序完成初始化。S60的脚本执行之后，系统时钟已设置，NFS文件系统已加载，文件系统已可用。
 
@@ -225,7 +225,7 @@ update-rc.d命令用以维护不同级别下的启动脚本，它会自动在rc?
 	 #       starting it via sysconfig editor: Network/Sound/Esound
 	 ### END INIT INFO
 
-##### /etc/inittab的action
+#### /etc/inittab的action
 
 /etc/inittab配置文件有专门的指令控制init进程的运行，指令格式如下：
 
@@ -273,18 +273,164 @@ action有很多种，下面分别介绍：
 
 - kbdrequest，把特殊的动作映射到特定的按键上。
 
-##### /etc/rc.d/rc.local脚本
+#### /etc/rc.d/rc.local脚本
 
 使用者自订启动启动程序 (/etc/rc.d/rc.local)
 在完成默认 runlevel 指定的各项服务的启动后，如果我还有其他的动作想要完成时，举例来说， 我还想要寄一封 mail 给某个系统管理帐号，通知他，系统刚刚重新启动完毕，那么是否应该要制作一个 shell script 放置在 /etc/init.d/ 里面，然后再以连结方式连结到 /etc/rc5.d/ 当然不需要！我有任何想要在启动时就进行的工作时，直接将他写入 /etc/rc.d/rc.local ， 那么该工作就会在启动的时候自动被加载而不必等我们登陆系统去启动。一般来说，把自己制作的 shell script 完整档名写入 /etc/rc.d/rc.local ，如此一来，启动就会将我的 shell script 运行。
 
-经过上面的步骤，各项服务都已经启动了，那么就进入到系统的用户登录的部分了
+#### 系统启动配置
 
-#####Sysini总结
+在 /sbin/init 的运行过程中有谈到许多运行脚本，包括 /etc/rc.d/rc.sysinit 以及 /etc/rc.d/rc 等等， 其实这些脚本都会使用到相当多的系统配置档，这些启动过程会用到的配置档则大多放在 /etc/sysconfig/ 目录下。 同时，由于核心还是需要加载一些驱动程序 (核心模块)，此时系统自定义的配置与模块对应档 (/etc/modprobe.conf) 就显的重要了
 
-总体来说inittab的启动方式是串行的，单线程，按顺序的，那么带来的问题就是启动的时候非常慢，以及配置服务的时候需要注意前后关系，否则有可能因为缺少依赖服务而无法启动或者是启动出错。
+##### /etc/modprobe.conf脚本
 
-### Sysini V与Systemd
+虽然核心提供的默认模块已经很足够我们使用了，但是，某些条件下还是得对模块进行一些参数的规划， 此时就得要使用到 /etc/modprobe.conf。举例来说，CentOS 主机的 modprobe.conf 像这样：
+
+	[root@www ~]# cat /etc/modprobe.conf
+	alias eth0 8139too               <==让 eth0 使用 8139too 的模块
+	alias scsi_hostadapter pata_sis
+	alias snd-card-0 snd-trident
+	options snd-card-0 index=0       <==额外指定 snd-card-0 的参数功能
+	options snd-trident index=0
+
+这个文件大多在指定系统内的硬件所使用的模块！这个文件通常系统是可以自行产生的，不过，如果系统使用了错误的驱动程序，或者是你想要使用升级的驱动程序来对应相关的硬件配备时， 你就得要自行手动的处理一下这个文件了。
+
+当我要启动网络卡时，系统会跑到这个文件来查阅一下，然后加载 8139too 驱动程序来驱动网络卡！
+
+
+#####  /etc/sysconfig/脚本
+
+整个启动的过程当中，读取的一些服务的相关配置档都是记录在 /etc/sysconfig 目录下的，那么该目录底下有些啥：
+
+- authconfig：
+- 这个文件主要在规范使用者的身份认证的机制，包括是否使用本机的 /etc/passwd, /etc/shadow 等， 以及 /etc/shadow 口令记录使用何种加密演算法，还有是否使用外部口令服务器提供的帐号验证 (NIS, LDAP) 等。 系统默认使用 MD5 加密演算法，并且不使用外部的身份验证机制；
+
+- clock：
+- 此文件在配置 Linux 主机的时区，可以使用格林威治时间(GMT)，也可以使用的本地时间 (local)。基本上，在 clock 文件内的配置项目『 ZONE 』所参考的时区位於 /usr/share/zoneinfo 目录下的相对路径中。而且要修改时区的话，还得将 /usr/share/zoneinfo/Asia/Taipei 这个文件复制成为 /etc/localtime 才行！
+
+- i18n：
+- i18n 在配置一些语系的使用方面，例如最麻烦的文字介面下的日期显示问题！ 如果你是以中文安装的，那么默认语系会被选择 zh_SI.UTF8 ，所以在纯文字介面之下， 你的文件日期显示可能就会呈现乱码！这个时候就需要更改一下这里啦！更动这个 i18n 的文件，将里面的 LC_TIME 改成 en 即可！
+
+- keyboard & mouse：
+- keyboard 与 mouse 就是在配置键盘与鼠标的形式；
+
+- network：
+- network 可以配置是否要启动网络，以及配置主机名称还有通讯闸 (GATEWAY) 
+
+- network-scripts/：
+- 至於 network-scripts 里面的文件，则是主要用在配置网络卡 
+
+
+总而言之一句话，这个目录下的文件很重要的啦！启动过程里面常常会读取到的！
+
+
+#### Run level 的切换
+
+经过上面的步骤，各项服务都已经启动了，那么就进入到系统的用户登录的部分了。但是，该如何切换 run level呢
+
+事实上，与 run level 有关的启动其实是在 /etc/rc.d/rc.sysinit 运行完毕之后。也就是说，其实 run level 的不同仅是 /etc/rc[0-6].d 里面启动的服务不同而已。不过，依据启动是否自动进入不同 run level 的配置，我们可以说：
+
+要每次启动都运行某个默认的 run level ，则需要修改 /etc/inittab 内的配置项目， 即是『 id:5:initdefault: 』里头的数字；
+
+如果仅只是暂时变更系统的 run level 时，则使用 init [0-6] 来进行 run level 的变更。 但下次重新启动时，依旧会是以 /etc/inittab 的配置为准。
+假设原本我们是以 run level 5 登陆系统的，但是因为某些因素，想要切换成为 run level 3 时， 该怎么办呢？
+
+很简单啊，运行『 init 3 』即可切换。但是 init 3 这个动作到底做了什么呢？ 不同的 run level 只是加载的服务不同罢了， 亦即是 /etc/rc5.d/ 还有 /etc/rc3.d 内的 Sxxname 与 Kxxname 有差异而已。 所以说，当运行 init 3 时，系统会：
+
+	先比对 /etc/rc3.d/ 及 /etc/rc5.d 内的 K 与 S 开头的文件；
+	在新的 runlevel 亦即是 /etc/rc3.d/ 内有多的 K 开头文件，则予以关闭；
+	在新的 runlevel 亦即是 /etc/rc3.d/ 内有多的 S 开头文件，则予以启动；
+
+也就是说，两个 run level 都存在的服务就不会被关闭啦！如此一来，就很容易切换 run level 了， 而且还不需要重新启动呢！那我怎么知道目前的 run level 是多少呢？ 直接在 bash 当中输入 runlevel 即可啊！
+	
+	 [root@www ~]# runlevel
+	N 5
+	# 左边代表前一个 runlevel ，右边代表目前的 runlevel。
+	# 由於之前并没有切换过 runlevel ，因此前一个 runlevel 不存在 (N)
+	# 将目前的 runlevel 切换成为 3 (注意， tty7 的数据会消失！)
+	
+	切换runlevel
+	[root@www ~]# init 3
+	NIT: Sending processes the TERM signal
+	Applying Intel CPU microcode update:        [  OK  ]
+	Starting background readahead:              [  OK  ]
+	Starting irqbalance:                        [  OK  ]
+	Starting httpd:                             [  OK  ]
+	Starting anacron:                           [  OK  ]
+	# 这代表，新的 runlevel 亦即是 runlevel3 比前一个 runlevel 多出了上述 5 个服务
+	
+	显示runlevel历史
+	[root@www ~]# runlevel
+	5 3
+	# 看吧！前一个是 runlevel 5 ，目前的是 runlevel 3 啦！
+	那么你能不能利用 init 来进行关机与重新启动呢？利用『 init 0 』就能够关机， 而『 init 6 』
+	就能够重新启动！往前翻一下 runlevel 的定义即可了解吧！
+
+#### 登陆
+
+开机启动程序加载完毕以后，就要让用户登录了。
+一般来说，用户的登录方式有三种：
+- 命令行登录
+- ssh登录
+- 图形界面登录
+
+这三种情况，都有自己的方式对用户进行认证。
+
+- 命令行登录：init进程调用getty程序（意为get teletype），让用户输入用户名和密码。输入完成后，再调用login程序，核对密码（Debian还会再多运行一个身份核对程序/etc/pam.d/login）。如果密码正确，就从文件 /etc/passwd 读取该用户指定的shell，然后启动这个shell。
+- ssh登录：这时系统调用sshd程序（Debian还会再运行/etc/pam.d/ssh ），取代getty和login，然后启动shell。
+- 图形界面登录：init进程调用显示管理器，Gnome图形界面对应的显示管理器为gdm（GNOME Display Manager），然后用户输入用户名和密码。如果密码正确，就读取/etc/gdm3/Xsession，启动用户的会话。
+
+#### 进入 login shell
+
+所谓shell，简单说就是命令行界面，让用户可以直接与操作系统对话。用户登录时打开的shell，就叫做login shell。
+
+Debian默认的shell是Bash，它会读入一系列的配置文件。上一步的三种情况，在这一步的处理，也存在差异。
+
+- 命令行登录：首先读入 /etc/profile，这是对所有用户都有效的配置；然后依次寻找下面三个文件，这是针对当前用户的配置。
+
+	~/.bash_profile
+	~/.bash_login
+	~/.profile
+　　
+需要注意的是，这三个文件只要有一个存在，就不再读入后面的文件了。比如，要是 ~/.bash_profile 存在，就不会再读入后面两个文件了。
+
+
+- ssh登录：与第一种情况完全相同。
+
+
+- 图形界面登录：只加载 /etc/profile 和 ~/.profile。也就是说，~/.bash_profile 不管有没有，都不会运行。
+
+#### 打开 non-login shell
+
+上一步完成以后，Linux的启动过程就算结束了，用户已经可以看到命令行提示符或者图形界面了。但是，为了内容的完整，必须再介绍一下这一步。
+
+用户进入操作系统以后，常常会再手动开启一个shell。这个shell就叫做 non-login shell，意思是它不同于登录时出现的那个shell，不读取/etc/profile和.profile等配置文件。
+
+non-login shell的重要性，不仅在于它是用户最常接触的那个shell，还在于它会读入用户自己的bash配置文件 ~/.bashrc。大多数时候，我们对于bash的定制，都是写在这个文件里面的。
+
+要是不进入 non-login shell，岂不是.bashrc就不会运行了，因此bash 也就不能完成定制了？事实上，Debian已经考虑到这个问题了，请打开文件 ~/.profile，可以看到下面的代码：
+
+	if [ -n "$BASH_VERSION" ]; then
+	　　if [ -f "$HOME/.bashrc" ]; then
+	　　　　　　. "$HOME/.bashrc"
+	　　fi
+	fi
+　　
+上面代码先判断变量 $BASH_VERSION 是否有值，然后判断主目录下是否存在 .bashrc 文件，如果存在就运行该文件。第三行开头的那个点，是source命令的简写形式，表示运行某个文件，写成"source ~/.bashrc"也是可以的。
+
+因此，只要运行～/.profile文件，～/.bashrc文件就会连带运行。但是上一节的第一种情况提到过，如果存在～/.bash_profile文件，那么有可能不会运行～/.profile文件。解决这个问题很简单，把下面代码写入.bash_profile就行了。
+
+	if [ -f ~/.profile ]; then
+	　　. ~/.profile
+	fi
+　　
+这样一来，不管是哪种情况，.bashrc都会执行，用户的设置可以放心地都写入这个文件了。
+
+Bash的设置之所以如此繁琐，是由于历史原因造成的。早期的时候，计算机运行速度很慢，载入配置文件需要很长时间，Bash的作者只好把配置文件分成了几个部分，阶段性载入。
+
+系统的通用设置放在 /etc/profile，用户个人的、需要被所有子进程继承的设置放在.profile，不需要被继承的设置放在.bashrc。
+
+顺便提一下，除了Linux以外， Mac OS X 使用的shell也是Bash。但是，它只加载.bash_profile，然后在.bash_profile里面调用.bashrc。而且，不管是ssh登录，还是在图形界面里启动shell窗口，都是如此。
 
 #### inux或unix有两种方式的启动模式：System V和BSD 
 
@@ -323,61 +469,14 @@ action有很多种，下面分别介绍：
 
 > http://www.ibm.com/developerworks/cn/linux/1407_liuming_init1/index.html
 
-#### systemd
 
-开发Systemd的主要目的就是减少系统引导时间和计算开销。Systemd（系统管理守护进程），最开始以GNU GPL协议授权开发，现在已转为使用GNU LGPL协议，它是如今讨论最热烈的引导和服务管理程序。如果你的Linux系统配置为使用Systemd引导程序，它取替传统的SysV init，启动过程将交给systemd处理。Systemd的一个核心功能是它同时支持SysV init的后开机启动脚本。
+#### Sysini总结
 
-Systemd引入了并行启动的概念，它会为每个需要启动的守护进程建立一个套接字，这些套接字对于使用它们的进程来说是抽象的，这样它们可以允许不同守护进程之间进行交互。Systemd会创建新进程并为每个进程分配一个控制组（cgroup）。处于不同控制组的进程之间可以通过内核来互相通信。systemd处理开机启动进程的方式非常漂亮，和传统基于init的系统比起来优化了太多。让我们看下Systemd的一些核心功能。
-
-- 和init比起来引导过程简化了很多
-- Systemd支持并发引导过程从而可以更快启动
-- 通过控制组来追踪进程，而不是PID
-- 优化了处理引导过程和服务之间依赖的方式
-- 支持系统快照和恢复
-- 监控已启动的服务；也支持重启已崩溃服务
-- 包含了systemd-login模块用于控制用户登录
-- 支持加载和卸载组件
-- 低内存使用痕迹以及任务调度能力
-- 记录事件的Journald模块和记录系统日志的syslogd模块
-
-Systemd同时也清晰地处理了系统关机过程。它在/usr/lib/systemd/目录下有三个脚本，分别叫systemd-halt.service，systemd-poweroff.service，systemd-reboot.service。这几个脚本会在用户选择关机，重启或待机时执行。在接收到关机事件时，systemd首先卸载所有文件系统并停止所有内存交换设备，断开存储设备，之后停止所有剩下的进程。
-
-#### systemd启动分析
-
-在内核被加载之后，第一次初始化运行的就是
-
-	/bin/systemd
-
-同时他成为了PID 1 的程序
-
-	systemd-analyze blame 可以看到每个启动项花费的时间
-
-由于Systemd向下兼容，所以正常的init.d中的脚本服务等，依然能够正常使用。
-
-##### Systemd 的基本概念
-
-单元的概念
-
-系统初始化需要做的事情非常多。需要启动后台服务，比如启动 SSHD 服务；需要做配置工作，比如挂载文件系统。这个过程中的每一步都被 systemd 抽象为一个配置单元，即 unit。可以认为一个服务是一个配置单元；一个挂载点是一个配置单元；一个交换分区的配置是一个配置单元；等等。systemd 将配置单元归纳为以下一些不同的类型。然而，systemd 正在快速发展，新功能不断增加。所以配置单元类型可能在不久的将来继续增加。
-
-- service ：代表一个后台服务进程，比如 mysqld。这是最常用的一类。
-- socket ：此类配置单元封装系统和互联网中的一个 套接字 。当下，systemd 支持流式、数据报和连续包的 AF_INET、AF_INET6、AF_UNIX socket 。每一个套接字配置单元都有一个相应的服务配置单元 。相应的服务在第一个"连接"进入套接字时就会启动(例如：nscd.socket 在有新连接后便启动 nscd.service)
-- device ：此类配置单元封装一个存在于 Linux 设备树中的设备。每一个使用 udev 规则标记的设备都将会在 systemd 中作为一个设备配置单元出现。
-- mount ：此类配置单元封装文件系统结构层次中的一个挂载点。Systemd 将对这个挂载点进行监控和管理。比如可以在启动时自动将其挂载；可以在某些条件下自动卸载。Systemd 会将/etc/fstab 中的条目都转换为挂载点，并在开机时处理。
-- automount ：此类配置单元封装系统结构层次中的一个自挂载点。每一个自挂载配置单元对应一个挂载配置单元 ，当该自动挂载点被访问时，systemd 执行挂载点中定义的挂载行为。
-- swap: 和挂载配置单元类似，交换配置单元用来管理交换分区。用户可以用交换配置单元来定义系统中的交换分区，可以让这些交换分区在启动时被激活。
-- target ：此类配置单元为其他配置单元进行逻辑分组。它们本身实际上并不做什么，只是引用其他配置单元而已。这样便可以对配置单元做一个统一的控制。这样就可以实现大家都已经非常熟悉的运行级别概念。比如想让系统进入图形化模式，需要运行许多服务和配置命令，这些操作都由一个个的配置单元表示，将所有这些配置单元组合为一个目标(target)，就表示需要将这些配置单元全部执行一遍以便进入目标所代表的系统运行状态。 (例如：multi-user.target 相当于在传统使用 SysV 的系统中运行级别 5)
-- timer：定时器配置单元用来定时触发用户定义的操作，这类配置单元取代了 atd、crond 等传统的定时服务。
-- snapshot ：与 target 配置单元相似，快照是一组配置单元。它保存了系统当前的运行状态。
-每个配置单元都有一个对应的配置文件，系统管理员的任务就是编写和维护这些不同的配置文件，比如一个 MySQL 服务对应一个 mysql.service 文件。这种配置文件的语法非常简单，用户不需要再编写和维护复杂的系统脚本了。
-
-##### Systemd总结
-
-Systemd快速，高效，可以并发启动，并且简化了系统脚本，维护系统服务更加简单了，并且统一了接口，那么带来的效果就是不管什么系统，其服务启动方面是一样的，那么就很容易在不同linux的分支上移植服务。但与之带来的问题是一样，因为并发，所以某些情况可能会带来难以解决的bug。
+总体来说inittab的启动方式是串行的，单线程，按顺序的，那么带来的问题就是启动的时候非常慢，以及配置服务的时候需要注意前后关系，否则有可能因为缺少依赖服务而无法启动或者是启动出错。
 
 ## The end
 
-
+下次就开始systemd的启动分析
 
 ## Quote
 
