@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "Python学习第三章（脚本）"
-subtitle:   "optparse,脚本,subprocess,Raspberry Pi，正则表达式"
+subtitle:   "optparse，脚本，subprocess，正则表达式"
 date:       2015-11-05
 author:     "elmagnifico"
 header-img: "img/python-head-bg.png"
