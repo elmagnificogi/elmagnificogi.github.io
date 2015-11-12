@@ -144,8 +144,7 @@ match则是从字符串头匹配，头匹配了才会输出
 
 然后通过读取这个文件，输出 
 
-- mode -w清空并写入，-a追加到文件尾写入
- 
+	- mode -w清空并写入，-a追加到文件尾写入
 	with open("myfile.txt",mode="w",encoding="utf-8") as file_a:
 		for letter in "abcde":
 			file_a.write(letter+"\n")
@@ -159,7 +158,6 @@ match则是从字符串头匹配，头匹配了才会输出
 这一章只学习Python的脚本部分
 
 日后有空将各种用到的脚本写到这里，作为记录
-
 
 ## Quote
 
