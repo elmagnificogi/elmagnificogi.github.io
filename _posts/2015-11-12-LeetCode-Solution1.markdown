@@ -4,7 +4,7 @@ title:      "LeetCode Solution(Easy.1)"
 subtitle:   "c/c++，python，for work"
 date:       2015-11-12
 author:     "elmagnifico"
-header-img: "img/git-head-bg"
+header-img: "img/git-head-bg.jpg"
 tags:
     - LeetCode
     - Work
