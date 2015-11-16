@@ -1,13 +1,13 @@
-  ---
+---
 layout:     post
 title:      "LeetCode Solution(Easy.1)"
-subtitle:   "linux启动，systemd，unit，target"
+subtitle:   "c/c++，python，for work"
 date:       2015-11-12
 author:     "elmagnifico"
-header-img: "img/Raspberrypi-head-bg.png"
+header-img: "img/git-head-bg"
 tags:
-    - 树莓派
-    - RaspberryPi
+    - LeetCode
+    - Work
 ---
 
 
