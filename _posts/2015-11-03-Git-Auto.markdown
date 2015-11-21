@@ -36,7 +36,7 @@ git的安装目录下搜索 bashrc
 
 比如：
 
-    cd e:\Github\elmagnificogi.github.io\
+    e:\Github\elmagnificogi.github.io\
 
 这样的 然后应用-确定 
 再打开就发现直接到了自己想去的目录，也不会影响 git bash here命令了。
