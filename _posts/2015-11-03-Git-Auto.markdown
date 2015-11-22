@@ -77,9 +77,13 @@ Win10下
 
 重开git bash 再次push 你会发现不要账号和密码了
 
+如果方法一没用的话再尝试方法二
+
 - 方法二
 
-打开git bash 创建.git-credentials文件
+打开git bash 在%HOME% 的目录下 创建.git-credentials文件
+
+先去看看自己的 %HOME% 是在哪里 然后再用下面的命令不然就无效
 
     touch .git-credentials
 
