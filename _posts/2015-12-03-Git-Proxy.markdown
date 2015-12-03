@@ -1,144 +1,271 @@
 ---
 layout:     post
-title:      "git的自动化以及快捷设置"
-subtitle:   "git，自动push，一键上传"
-date:       2015-11-03
+title:      "Shadowsocks与git的代理设置"
+subtitle:   "proxy，SocksCap64，pac"
+date:       2015-12-03
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"
 tags:
     - git
     - blog
-    - 脚本
+    - 代理
 ---
 
-## Git Bash 修改默认打开文件夹位置
+## 代理、翻墙
 
-Win10下
+### 前言
 
-如何让Git Bash打开的时候直接进入项目目录，而不是每次都要去cd...
+回到家了，突然发现csdn的blog、github、百度云盘（移动端能打开）都被封掉了
 
-- 方法一
+新疆真是个蛋疼的地方啊，没办法只好用代理了
 
-git的安装目录下搜索 bashrc
+### goagent、GEA
 
-然后编辑文本，最后一行加上
+最初翻墙用的是自由门，不过据说自由门不是很安全，而且还传递各种反动内容
 
-    #后面接你自己的项目目录就行了
-    cd e:\Github\elmagnificogi.github.io\
-    
-但是这样有个一个问题，不管从哪里打开git bash，或者是右键从here 打开git bash 都会转到自己的项目目录去，很不方便，所以不推荐这个方法。
+后来发现了goagent其实也就是GEA，只用登陆注册好之后，在本地更新一下，填好自己的appid，浏览器设置好，就能翻墙
 
-- 方法二
+看标清视频，查个资料，收个验证码什么的都是没啥问题的。
 
-直接对着Git Bash 快捷方式右键-属性
+某次大封之后发现goagent的ip被封了好多，导致不得不到处去找好用的代理ip，然后使用了gogotest，从十万ip中找到好用的ip
 
-起始位置：填入你要到的目录
+还真是一个蛋疼的事，直到看到了这位博主
 
-比如：
+> https://www.anotherhome.net/1727
 
-    e:\Github\elmagnificogi.github.io\
+### EasyGoAgent
 
-这样的 然后应用-确定 
-再打开就发现直接到了自己想去的目录，也不会影响 git bash here命令了。
+博主也是好心人，不但提供了若干账号，而且配有更新程序，自动更新可用的googleip
 
-- 后话
+最重要的是简单，每次只要点击开启以后，回车一下，浏览器切换成代理模式，就能直接使用了
 
-刚开始不知道方法二，看到了右键-快捷方式-目标
+超级好评，至少在2015年12月之前我都能勉强用，当然其实从8月份开始就已经卡的要死了
 
-    D:\Git\git-bash.exe --cd-to-home
+再次查看easygoagent发现博主已经打上了失效的标记，并且推荐使用Shadowsocks（付费的+打广告）
 
-以为修改后面的home就能实现更改默认目录呢
-死活改不对（闪退），直到发现方法二，才发现白费功夫啊。
+### 贵人相助
 
+还好有一位朋友无私共享了他的VPS给我用，这样我就能无忧翻墙了
 
-## Git Push 不用每次输入账号和密码
+朋友把Shadowsocks传给我，账号密码给我就能直接翻墙了
+（百度Shadowsocks基本没啥有用的信息，再加上github被封了，根本没办法下到它）
 
-Win10下
+## Shadowsocks
 
-每次都要输入用户名密码，我的f键还有点问题，经常输入的时候f键按了，但是没输入进去，导致一遍遍重输入账号密码，都快吐血了（后来直接在记事本里写好账号密码，然后输入的时候直接复制粘贴）
+这里是Shadowsocks的github，Shadowsocks不仅仅有windows平台，linux，android，ios等等很多冷门一些的操作系统都有其版本
 
-那如何解决这个问题呢？
+可以说非常强大，各种版本的程序也可以直接从下面的github的release中下载到
 
-- 方法一
+https://github.com/shadowsocks
 
-在windows中添加一个HOME环境变量（注意不是系统变量哦）
+### 原理
 
-变量名:HOME 
+Shadowsocks的原理其实和goagent这些个都很像，都具有自己的协议，Shadowsocks则是用的socks5的协议
 
-变量值：%USERPROFILE%
+SOCKS协议位于传输层(TCP/UDP等)与应用层之间，说白了这个协议其实就是强行在传输层和应用层之间增加了一个中间层
 
-然后进入 %HOME% 目录（直接复制到地址栏就能进去了）
+而socks5的协议则是ssh协议的拆分变种，它通过在这个中间层建立了一个加密的客户端和代理服务器解密端
 
-新建一个名为"_netrc"的文件，文件中内容格式如下：
-（一定要注意这个文件没有后缀名！显示一下后缀名确保正确！）
+让GFW无法通过特征分析等等方法，对每一个代理服务器的socks进行封锁，那么就能成功翻墙了。
 
+### 限制
 
-    machine github.com
-    login 你的账户
-    password 你的密码
+理论上说用这样的协议基本上是个程序都能通过shadowsocks来翻墙，实际上还是有一些限制，并不是全部程序都能设置socks5的代理
+（或者说你找不到在哪里设置使用代理）
 
-重开git bash 再次push 你会发现不要账号和密码了
+所以就导致一部分程序看着无法翻墙干着急，那就需要另外一个程序来帮忙了
 
-如果方法一没用的话再尝试方法二
+### proxifier
 
-- 方法二
+我先是找到了proxifier，他可以在设置了代理服务器为127.0.0.1端口1080之后，通过添加规则来设置程序是代理还是直连。
 
-打开git bash 在%HOME% 的目录下 创建.git-credentials文件
+但是在实际测试中发现他无法让qq通过代理来登陆，我查了登陆记录发现都是本地ip登陆的，而阿里旺旺则是可以通过代理登陆，ip显示是在加拿大
 
-先去看看自己的 %HOME% 是在哪里 然后再用下面的命令不然就无效
+但这个工具有一个好处，可以看到实时流量什么的，只是在proxifier中设置了qq代理登陆并不起作用（用qq自己的代理设置是有用的）
 
-    touch .git-credentials
+所以我就另外又找了找，发现Shadowsocks的作者有推荐配合使用的程序，SocksCap 或 ProxyCap
 
-    vim .git-credentials
+### SocksCap
 
-文本内容为：
+ProxyCap没用就不说了，SocksCap是现在用的。
 
-    https://你的账户:你的密码@github.com
+基本和proxifier一样，设置了代理服务器之后，添加程序进来，然后通过双击SocksCap内的程序图标来打开，这么打开的程序，就自动使用代理了，而proxifier则不行，只要设定程序之后，那么不管从哪里打开，都是走代理，必须要修改规则才行，就不如SocksCap方便
 
-完成之后继续：
+同时测试后发现，就算是qq只要是从SocksCap中打开，就是代理打开的，强制使用了代理，那么这个就非常好用了。
 
-    git config --global credential.helper store
+这里是官网，也是国人的作品
 
-重开git bash 再次push 你会发现不要账号和密码了
+> http://www.sockscap64.com/
 
+按道理来说各种国外联网类型的游戏也是可以使用这个来代理的，比如dayz、方舟、rust、gmod等等，这些需要测试，我还没空
 
-## github库一键更新上传
+### 全局代理和PAC
 
-每次都得输入
+在Shadowsocks的设置中有全局代理和PAC两种模式，但很多人都弄错了这两个的意思。
 
-    git add .
-	git commit -m "update-post"
-    git remote add origin https://github.com/elmagnificogi/elmagnificogi.github.io.git
-    #这货还老失败
-	git push -u origin master
+首先这里的全局代理的真实含义其实所有通过127.0.0.1端口1080的，那么都是通过代理访问，无论你是不是需要都不考虑，无脑代理就可以了
 
-好麻烦，得弄个什么一键完成比较快，刚好也不用输入账号密码，省事
+并不是说你在这里设置了全局，随便开什么程序不用设置就全都代理了。
 
-找了找，应该写一个update.sh来完成就可以了
-于是如下：
+而PAC是什么呢，其实就是一个过滤器，他帮你在代理的口上做检测，会按照设定的规则来决定是走代理还是走直连
 
+其中比较有名的就是GFWlist，说白了就是咱的长城防火墙的封禁列表，如果涉及到封禁的网址就会自动转代理连接
+
+否则就是直连，这样不会浪费流量，而且访问本地的内容也比较快。
+
+同时也提供了在线和本地两种策略，在线就是指实时的封禁列表，本地就是不及时更新的列表需要手动去更新，但是好处是可以自定义，比较符合我目前的需求
+
+所以如果开启代理以后浏览器没有通过代理打开网页，那么检查一下浏览器的代理设置是不是正确
+
+## PAC
+
+PAC规则分为两种，一种是可以直接应用官方的规则比如GFWlist，其内容都在pac.txt中
+
+而在这个基础上你可以自定义自己的规则，那么为了不让自己的规则被GFWlist更新的时候刷掉，就可以写规则在user-rule.txt中
+
+那就能做到又同步官方又自定义，当然如果出现冲突的时候还是得去改pac.txt的内容（比如我的百度云的问题，以及csdn的blog，默认列表中csdn是不会代理的，而我csdn的blog被屏蔽了，csdn其他的是好的，那就只好去改GFWlist了）
+
+### 语法
+
+自定义代理规则的设置语法与GFWlist相同，语法规则如下：
+
+- 通配符支持。
+- 比如 *.example.com/* 实际书写时可省略 * 
+
+    如 .example.com/  和 *.example.com/* 效果一样
+
+- 正则表达式支持。以 \ 开始和结束
+
+    如 \[\w]+:\/\/example.com\
+
+- 例外规则 @@ 
+
+    如 @@*.example.com/* 满足 @@ 后规则的地址不使用代理
+
+- 匹配地址开始和结尾 | 
+
+    如 |http://example.com 、 example.com| 分别表示以 http://example.com 开始和以 example.com 结束的地址
+
+- || 标记
+
+    如 ||example.com 则 http://example.com 、 https://example.com 、 ftp://example.com 等地址均满足条件
+
+- 注释 !
+ 
+    如 !我是注释
+
+更多user-rule.txt语法规则，可以参考AdBlockPlus过滤规则 
+
+> https://adblockplus.org/en/filter-cheatsheet
+
+### 我的修改
+
+首先打开pac.txt 在其中的rules中添加上csdn的blog，所有以它开头的都需要代理
+
+	var rules = [
+	  ".lsxszzg.com",
+	  "|http://85.17.73.31/",
+	  "||alien-ufos.com",
+	  "|http://blog.csdn.net/",
+	  ...
+
+在文档的最后，我添加上了我的github博客的地址，如果发现了我的地址，直接直连（因为我发现了一个奇葩情况，不挂代理上不去github但是上的去我的blog，而挂了代理blog无法打开，无奈我只好加上了一个关于我的地址的判断）
+
+同时由于新疆上不去github，但是内地可以上去，所以在这个基础上又加上了github的全站过滤。
+
+function FindProxyForURL(url, host) {
+	
+    if (shExpMatch(url,"http://elmagnificogi.github.io./")) {
+        return direct;
+    }
+
+    if (shExpMatch(url,"*github.com*")) {
+        return proxy;
+    }
+
+    if (defaultMatcher.matchesAny(url, host) instanceof BlockingFilter) {
+        return proxy;
+    }
+    return direct;
+}
+
+经过这样的折腾，总算是上网什么的没问题了
+
+## git使用sock5代理push和clone
+
+当要给新机子clone博客源码的时候发现，一直报错
+
+	$ git clone https://github.com/elmagnificogi/elmagnificogi.github.io
+	Cloning into 'elmagnificogi.github.io'...
+	fatal: unable to access 'https://github.com/elmagnificogi/elmagnificogi.github.io/': Failed to connect to github.com port 443: Timed out
+
+提示连接github.com 超时，我ping了一下，发现根本连不上，也就是说gitbash也需要代理
+
+上面提到的SocksCap能强制代理，刚好来试验一下，发现直接连正常打开gitbash都不行了
+
+于是搜索了一下 有什么用git能代理的办法
+
+### 让普通命令行工具使用代理
+
+可以在~/.profile或~/.bashrc里加上：
+
+(这两个文件在git目录中windows中叫profile或bash.bashrc)
+
+	enable_proxy() {
+	    export http_proxy="127.0.0.1:1080" 
+	    export https_proxy="127.0.0.1:1080"
+	}
+	
+	disable_proxy() {
+	    unset http_proxy
+	    unset https_proxy
+	}
+
+这里的127.0.0.1：1080则刚好就是Shadowsocks的代理端口
+
+### 快速测试
+
+也可以通过这样的方法来快速测试：
+
+	$ http_proxy="127.0.0.1:1080"  curl -I http://github.com
+	  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+	                                 Dload  Upload   Total   Spent    Left  Speed
+	  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0HTTP/1.1 301 Moved Permanently
+	Content-length: 0
+	Location: https://github.com/
+	Connection: close
+	Proxy-Connection: keep-alive
+
+类似这样的则就是ok的，代理没问题，那么就能clone我的blog了
+
+	enable_proxy；
+	git clone https://github.com/elmagnificogi/elmagnificogi.github.io
+
+### 更新我的push脚本
+
+同时我的自动push脚本也需要更新使用上面的命令才行
+
+	enable_proxy;
 	git add .;
 	git commit -m "update-post";
-    git remote rm origin;
-    git remote add origin https://github.com/elmagnificogi/elmagnificogi.github.io.git;
+	git remote rm origin;
+	git remote add origin https://github.com/elmagnificogi/elmagnificogi.github.io.git;
 	git push -u origin master
 
-以后只需要调用
-    
-	./update.sh
-
-就可以完成所有操作啦。
-
+经过这些折腾基本就ok了
 
 ## The end
 
+据说Shadowsocks的作者多次被警方约谈，并且Shadowsocks项目也在8月份的时候貌似被全部删除了，但是这种开源项目被fork的次数肯定不少，所以恢复起来都是秒秒钟的事情，而且现在来看都已经恢复了，只是一般渠道搜索不到Shadowsocks而已
+
+再次感谢璐借我VPS用，让我能完成这篇blog
 
 ## Quote
 
-> http://blog.csdn.net/on_1y/article/details/19259435
-> http://www.cnblogs.com/lixiaolun/p/4360732.html
-> http://blog.163.com/023_dns/blog/static/1187273662013111301046930/
-> http://www.cnblogs.com/ballwql/p/3462104.html
+> http://www.tuicool.com/articles/V77jyu
+> http://tieba.baidu.com/p/4060577753
+> http://yveschan.github.io/blog/shadowsocks-analysis/
+> http://vc2tea.com/whats-shadowsocks/
 
 
 
