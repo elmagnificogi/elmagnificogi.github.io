@@ -142,13 +142,13 @@ PAC规则分为两种，一种是可以直接应用官方的规则比如GFWlist�
 
     如 @@*.example.com/* 满足 @@ 后规则的地址不使用代理
 
-- 匹配地址开始和结尾 | 
+- 匹配地址开始和结尾 \| 
 
-    如 |http://example.com 、 example.com| 分别表示以 http://example.com 开始和以 example.com 结束的地址
+    如 \|http://example.com 、 example.com\| 分别表示以 http://example.com 开始和以 example.com 结束的地址
 
-- || 标记
+- \|\| 标记
 
-    如 ||example.com 则 http://example.com 、 https://example.com 、 ftp://example.com 等地址均满足条件
+    如 \|\|example.com 则 http://example.com 、 https://example.com 、 ftp://example.com 等地址均满足条件
 
 - 注释 !
  
