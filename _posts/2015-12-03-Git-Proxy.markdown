@@ -130,9 +130,9 @@ PAC规则分为两种，一种是可以直接应用官方的规则比如GFWlist�
 自定义代理规则的设置语法与GFWlist相同，语法规则如下：
 
 - 通配符支持。
-- 比如 *.example.com/* 实际书写时可省略 * 
+- 比如 \*.example.com\* 实际书写时可省略 * 
 
-    如 .example.com/  和 *.example.com/* 效果一样
+    如 .example.com/  和 \*.example.com\* 效果一样
 
 - 正则表达式支持。以 \ 开始和结束
 
@@ -140,7 +140,7 @@ PAC规则分为两种，一种是可以直接应用官方的规则比如GFWlist�
 
 - 例外规则 @@ 
 
-    如 @@*.example.com/* 满足 @@ 后规则的地址不使用代理
+    如 @@\*.example.com\* 满足 @@ 后规则的地址不使用代理
 
 - 匹配地址开始和结尾 \| 
 
@@ -173,7 +173,7 @@ PAC规则分为两种，一种是可以直接应用官方的规则比如GFWlist�
 
 同时由于新疆上不去github，但是内地可以上去，所以在这个基础上又加上了github的全站过滤。
 
-function FindProxyForURL(url, host) {
+	function FindProxyForURL(url, host) {
 	
     if (shExpMatch(url,"http://elmagnificogi.github.io./")) {
         return direct;
