@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "LeetCode Solution(Easy.4-8)"
+title:      "LeetCode Solution(Easy.5-8)"
 subtitle:   "c/c++，python，for work"
 date:       2015-12-5
 author:     "elmagnifico"
