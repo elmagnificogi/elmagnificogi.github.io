@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "LeetCode Solution(Easy.1)"
+title:      "LeetCode Solution(Easy.1-4)"
 subtitle:   "c/c++，python，for work"
 date:       2015-11-12
 author:     "elmagnifico"
@@ -386,48 +386,6 @@ Supposed the linked list is 1 -> 2 -> 3 -> 4 and you are given the third node wi
 	            pre.next=None
 	        pre.val=cur.val
 	        pre.next=next
-
-
-## 3.Maximum Depth of Binary Tree
-## 3.Maximum Depth of Binary Tree-analysis
-## 3.Maximum Depth of Binary Tree-Solution-C/C++
-## 3.Maximum Depth of Binary Tree-Solution-Python
-
-
-## 3.Maximum Depth of Binary Tree
-## 3.Maximum Depth of Binary Tree-analysis
-## 3.Maximum Depth of Binary Tree-Solution-C/C++
-## 3.Maximum Depth of Binary Tree-Solution-Python
-
-
-## 3.Maximum Depth of Binary Tree
-## 3.Maximum Depth of Binary Tree-analysis
-## 3.Maximum Depth of Binary Tree-Solution-C/C++
-## 3.Maximum Depth of Binary Tree-Solution-Python
-
-
-## 3.Maximum Depth of Binary Tree
-## 3.Maximum Depth of Binary Tree-analysis
-## 3.Maximum Depth of Binary Tree-Solution-C/C++
-## 3.Maximum Depth of Binary Tree-Solution-Python
-
-
-## 3.Maximum Depth of Binary Tree
-## 3.Maximum Depth of Binary Tree-analysis
-## 3.Maximum Depth of Binary Tree-Solution-C/C++
-## 3.Maximum Depth of Binary Tree-Solution-Python
-
-
-## 3.Maximum Depth of Binary Tree
-## 3.Maximum Depth of Binary Tree-analysis
-## 3.Maximum Depth of Binary Tree-Solution-C/C++
-## 3.Maximum Depth of Binary Tree-Solution-Python
-
-
-## 3.Maximum Depth of Binary Tree
-## 3.Maximum Depth of Binary Tree-analysis
-## 3.Maximum Depth of Binary Tree-Solution-C/C++
-## 3.Maximum Depth of Binary Tree-Solution-Python
 
 
 ## Quote
