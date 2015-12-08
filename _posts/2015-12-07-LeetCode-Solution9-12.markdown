@@ -399,9 +399,82 @@ For example, the lowest common ancestor (LCA) of nodes 2 and 8 is 6. Another exa
 
 ### 迭代
 
-迭代的方法貌似非常复杂一时半会想不出来
+迭代的方法貌似非常复杂一时半会想不出来(2015年12月7日23:30:36)
 
+总算想出来了，就是用了一个双层的循环，而且浪费了之前的查找记录
 
+原理：内层循环负责查找目标值的父节点，外层负责更替父节点，并且存储在了path中，最后父节点=root就结束了。
+
+但是问题就在于每次循环都浪费了上次查找的路径和记录，更好的办法应该是一次找两个目标，然后把目标路径存下来，并且边找边检查是否是最近的，这样就能很快解决这个问题了，不过写起来就更复杂了。
+
+	# Definition for a binary tree node.
+	# class TreeNode(object):
+	#     def __init__(self, x):
+	#         self.val = x
+	#         self.left = None
+	#         self.right = None
+	
+	class Solution(object):
+	    def recordpath(self, root, p,path):
+	        """
+	        :type root: TreeNode
+	        :type p: TreeNode
+	        :type q: TreeNode
+	        :type paht: TreeNode list path
+	        :rtype: bool
+	        """
+	        l=[] #l用来遍历的时候存储节点
+	        target=p;
+	        path.append(p)
+	        while True:
+	            target=path[-1]
+	            if target.val==root.val:
+	                return True
+	            l=[]
+	            l.append(root)
+	            temproot=root
+	            while True:
+	                #temproot=l[-1]
+	                #l.pop()
+	                
+	                if temproot==None:
+	                    temproot=l.pop()
+	                    continue
+	                
+	                if temproot.val==target.val:
+	                    path.append(temproot)
+	                    break;
+	                elif temproot.left!=None and temproot.left.val==target.val:
+	                    path.append(temproot)
+	                    break;
+	                elif temproot.right!=None and temproot.right.val==target.val:
+	                    path.append(temproot)
+	                    break;
+	                else:
+	                    if temproot.right!=None:
+	                        l.append(temproot.right)
+	                    temproot=temproot.left
+	
+	            
+	    def lowestCommonAncestor(self, root, p, q):
+	        """
+	        :type root: TreeNode
+	        :type p: TreeNode
+	        :type q: TreeNode
+	        :rtype: TreeNode
+	        """
+	        lp=[]
+	        lq=[]
+	        self.recordpath(root,p,lp)
+	        self.recordpath(root,q,lq)
+	        i=0
+	        j=0
+	        for i in range(0,len(lp)): 
+	            for j in range(0,len(lq)):
+	                if lp[i]==lq[j]:
+	                    return lp[i]
+	        
+	        
 
 ## Quote
 
