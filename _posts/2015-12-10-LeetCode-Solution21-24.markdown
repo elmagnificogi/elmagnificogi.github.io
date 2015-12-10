@@ -552,6 +552,7 @@ The above binary tree is serialized as "{1,2,3,#,#,4,#,#,5}".
 	        if(not root):
 	            return True
 	        return self.isSame(root.left,root.right)
+
 ### 迭代
 
 在这里发现了一个问题，python对于数据的空的判断要求高，也就是说空的情况下，如果要求返回值 必然会出错。
