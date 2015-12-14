@@ -153,7 +153,7 @@ The maximum depth is the number of nodes along the longest path from the root no
 
 ### 3.Maximum Depth of Binary Tree-Solution-C/C++
 
-递归式
+#### 递归式
 
 	/**
 	 * Definition for a binary tree node.
@@ -175,7 +175,7 @@ The maximum depth is the number of nodes along the longest path from the root no
 	    return depth;
 	}
 
-非递归式
+#### 非递归式
 
 如果要使用非递归式，那么基本就需要按照层遍历，记录下来总的层数就可以了。按照层遍历需要存储每一次的分支，那么就需要有一个结构来存储当前层所有的结点入口，用队列就可以，这样的话C就不方便了，那么就用C++来实现。
 

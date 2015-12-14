@@ -1,8 +1,8 @@
 ---
 layout:     post
-title:      "LeetCode Solution(Easy.45-48)"
+title:      "LeetCode Solution(Easy.49-52)"
 subtitle:   "c/c++，python，for work"
-date:       2015-12-13
+date:       2015-12-14
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"
 tags:
@@ -11,33 +11,137 @@ tags:
 ---
 
 
-## 45.Remove Nth Node From End of List
+## 49.Count and Say
 
-Given a linked list, remove the nth node from the end of list and return its head.
+The count-and-say sequence is the sequence of integers beginning as follows:
 
-For example,
-
-	Given linked list: 1->2->3->4->5, and n = 2.
+	1, 11, 21, 1211, 111221, ...
 	
-	After removing the second node from the end, the linked list becomes 1->2->3->5.
+	1 is read off as "one 1" or 11.
+	11 is read off as "two 1s" or 21.
+	21 is read off as "one 2, then one 1" or 1211.
 
-Note:
+Given an integer n, generate the nth sequence.
 
-Given n will always be valid.
+Note: The sequence of integers will be represented as a string.
 
-Try to do this in one pass.
+### 49.Count and Say-analysis
 
-## 45.Remove Nth Node From End of List-analysis
+题意是n=1时输出字符串1；
 
-要求删除倒数第n个元素
+n=2时，数一下上次字符串中的数值个数，因为上次字符串有1个1，所以输出11；
 
-而且要求遍历一遍就完成。
+n=3时，由于上次字符是11，有2个1，所以输出21；
 
-有一个小技巧：两个指针，让其中一个先走n步，然后让另外一个指针跟上，同步走，当先走的指针到达队尾的时候，删除当前的指针，连接起来就行了
+n=4时，由于上次字符串是21，有1个2和1个1，所以输出1211。
 
-## 45.Remove Nth Node From End of List-Solution-C/C++
+n=5时，由于上次字符串是1211，有1个1，1个2和2个1，所以输出111221。
 
-但是有一个麻烦的东西，就是临界值的判断，有可能需要删除的就是头节点，这样删除的节点就没有上一节点 或者是要删除的是尾节点，就没有下一节点。
+依次类推，写个countAndSay(n)函数返回字符串。
+
+思路：首先给定n=1的时候字符串为1的情况
+
+遍历当前的字符串，然后用一个num记录当前的的数字，一个count记录该数字出现的次数
+
+如果num和当前字符不一样的时候，把num和count转换为string输出到返回值中，继续遍历，直到当前的字符串为空
+
+根据输入的n决定遍历字符串的次数，遍历次数不够就把返回值作为当前的字符串再进行遍历，直到次数够了为止。
+
+### 49.Count and Say-Solution-C/C++
+
+	class Solution 
+	{
+	public:
+	    string countAndSay(int n) 
+	    {
+	        stringstream ss;
+	        string pre="1";
+	        string cur="";
+	        if(n==1)
+	            return pre;
+	        int count=0,num=1;
+	        string sc="",sn="";
+	        int i=0,j=0;
+	        for(i=0;i<n-1;i++)
+	        {
+	            cur="";
+	            while(pre[j])
+	            {
+	                if(num!=pre[j]-48)
+	                {
+	                    //输出到要输出的地方去
+	                    ss<<count<<num;
+	                    ss>>sc;
+	                    ss>>sn;
+	                    cur=cur+sc+sn;
+	                    ss.clear();
+	                    num=pre[j]-48;
+	                    count=1;
+	                }
+	                else
+	                    count++;
+	                j++;
+	            }
+	            j=0;
+	            ss<<count<<num;
+	            ss>>sc;
+	            ss>>sn;
+	            cur=cur+sc+sn;
+	            pre=cur;
+	            num=pre[j++]-48;
+	            count=1;
+	            ss.clear();
+	        }
+	        return cur;
+	    }
+	};
+
+### 49.Count and Say-Solution-Python
+
+	class Solution(object):
+	    def countAndSay(self, n):
+	        """
+	        :type n: int
+	        :rtype: str
+	        """
+	        pre='1'
+	        cur=''
+	        if n==1:
+	            return pre
+	        count=0
+	        num='1'
+	        for i in range(n-1):
+	            cur=''
+	            for j in range(len(pre)):
+	                if pre[j]!=num:
+	                    #输出当前num和count到cur
+	                    cur=cur+str(count)+num
+	                    num=pre[j]
+	                    count=1
+	                else:
+	                    count=count+1
+	            cur=cur+str(count)+num
+	            pre=cur
+	            num=pre[0]
+	            count=0
+	        return cur
+                    
+## 50.Remove Linked List Elements
+
+Remove all elements from a linked list of integers that have value val.
+
+Example
+	
+	Given: 1 --> 2 --> 6 --> 3 --> 4 --> 5 --> 6, val = 6
+	Return: 1 --> 2 --> 3 --> 4 --> 5
+
+Credits:
+
+### 50.Remove Linked List Elements-analysis
+
+只是简单的删除其中的目标元素而已
+
+### 50.Remove Linked List Elements-Solution-C/C++
 
 	/**
 	 * Definition for singly-linked list.
@@ -46,40 +150,51 @@ Try to do this in one pass.
 	 *     struct ListNode *next;
 	 * };
 	 */
-	struct ListNode* removeNthFromEnd(struct ListNode* head, int n) 
+	struct ListNode* removeElements(struct ListNode* head, int val) 
 	{
-	    int i=0;
-	    if(!head->next)
-	        return NULL;
-	    
-	    struct ListNode* first=head;
-	    struct ListNode* second=head;
-	    struct ListNode* temp;
-	    for(i=0;i<n;i++)
-	        if(first->next)
-	            first=first->next;
+	    struct ListNode*pre=NULL,*cur=head;
+	    if(!head)
+	        return head;
+	    while(cur)
+	    {
+	        if(cur->val==val)
+	        {
+	            if(cur->next)
+	            {
+	                if(pre==NULL)
+	                {
+	                    cur=cur->next;
+	                    head=cur;
+	                }
+	                else
+	                {
+	                    pre->next=cur->next;
+	                    cur=cur->next;
+	                }
+	            }
+	            else//cur.next不存在的情况下
+	            {
+	                if(pre==NULL)
+	                {
+	                    return NULL;
+	                }
+	                else//pre却存在
+	                {
+	                    pre->next=NULL;
+	                    return head;
+	                }
+	            }
+	        }
 	        else
 	        {
-	            //得到还几个数到达目的地，然后改变second的位置，返回
-	            int j=n-i;
-	            while(j--)
-	                second=second->next;
-	            return second;
+	            pre=cur;
+	            cur=cur->next;
 	        }
-	    while(first)
-	    {
-	        first=first->next;
-	        temp=second;
-	        second=second->next;
 	    }
-	    if(second->next)
-	        temp->next=second->next;
-	    else
-	        temp->next=NULL;
 	    return head;
 	}
 
-## 45.Remove Nth Node From End of List-Python
+### 50.Remove Linked List Elements-Solution-Python
 
 	# Definition for singly-linked list.
 	# class ListNode(object):
@@ -88,448 +203,255 @@ Try to do this in one pass.
 	#         self.next = None
 	
 	class Solution(object):
-	    def removeNthFromEnd(self, head, n):
+	    def removeElements(self, head, val):
 	        """
 	        :type head: ListNode
-	        :type n: int
+	        :type val: int
 	        :rtype: ListNode
 	        """
-	        first=head
-	        second=head
-	        if not head.next:
+	        if head==None:
 	            return None
-	        for i in range(n):
-	            if first.next:
-	                first=first.next
+	        cur=head
+	        pre=None
+	        while cur:
+	            if cur.val==val:
+	                if cur.next==None:
+	                    if pre==None:
+	                        return None
+	                    else:
+	                        pre.next=None
+	                        return head;
+	                else:
+	                    if pre==None:
+	                        cur=cur.next
+	                        head=cur
+	                    else:
+	                        pre.next=cur.next
+	                        cur=cur.next
 	            else:
-	                j=n-i
-	                while j:
-	                    j=j-1
-	                    second=second.next
-	                return second
-	        while first:
-	            first=first.next
-	            temp=second
-	            second=second.next
-	        if second.next:
-	            temp.next=second.next
-	        else:
-	            temp.next=None
+	                pre=cur
+	                cur=cur.next
 	        return head
-	            
-## 46.Valid Parentheses
+        
+## 51.Longest Common Prefix
 
-Given a string containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
+Write a function to find the longest common prefix string amongst an array of strings.
 
-The brackets must close in the correct order, "()" and "()[]{}" are all valid but "(]" and "([)]" are not.
+### 51.Longest Common Prefix-analysis
 
-## 46.Valid Parentheses-analysis
+查找字符串最长公共前缀，先比第一第二个找到一个com 然后继续用com往下找，碰到不同的就缩短com
 
-确定其中的括号是否匹配，也简单，只需要把对应的左括号压入栈中，每遇到一个右括号，就弹出一次，弹出的如果是相同的就ok 不同的话 就表示错误了
+直到结束或者是com为空；
 
-## 46.Valid Parentheses-Solution-C/C++
+思路：
+
+1. 判空是必须的
+2. 找到最短字符串
+3. 判断是否存在空串，如果有空串必然没有公共最小串，返回
+4. 遍历最短串，与每个串的相同位置进行比较，如果全相同最小串增加其内容，继续下一个，否则直接返回
+
+### 51.Longest Common Prefix-Solution-C/C++
 
 	class Solution 
 	{
 	public:
-	    bool isValid(string s) 
+	    string longestCommonPrefix(vector<string>& strs) 
 	    {
-	        stack<char> store;
+	        if(strs.empty())
+	            return "";
+	        string com="";
+	        char temp;
+	        int i=0,j=0,minlen=65535,min;
+	        for(i=0;i<strs.size();i++)
+	        {
+	            if(strs[i]=="")
+	                return "";
+	            if(strs[i].length()<minlen)
+	            {
+	                minlen=strs[i].length();
+	                min=i;
+	            }
+	        }
+	        for(i=0;i<minlen;i++)
+	        {
+	            temp=strs[min][i];
+	            for(j=0;j<strs.size();j++)
+	            {
+	                if(temp==strs[j][i])
+	                    continue;
+	                else
+	                    break;
+	            }
+	            //相等的情况下，说明完成一次全遍历 有公共com
+	            if(j==strs.size())
+	            {
+	                com=com+temp;
+	            }
+	            else
+	            {
+	                return com;
+	            }
+	        }
+	        return com;
+	    }
+	};
+
+### 51.Longest Common Prefix-Solution-Python
+
+又发现了python的一个小问题，for循环的问题，for会在循环的最后先判断条件后对i进行自增 如果条件不成立 那么i是不会自增的，这个就和c c++都不一样了，他们都是循环的最后先自增 然后去判断条件， 无论条件如何 最后的i肯定是增加了 让i与条件相当了，但是python则是会让i小于条件
+
+	class Solution(object):
+	    def longestCommonPrefix(self, strs):
+	        """
+	        :type strs: List[str]
+	        :rtype: str
+	        """
+	        if strs==[]:
+	            return ""
+	        com=""
+	        temp=""
+	        minlen=65535
+	        for i in range(len(strs)):
+	            if strs[i]=="":
+	                return ""
+	            if len(strs[i])<minlen:
+	                minlen=len(strs[i])
+	                min=i
+	        for i in range(minlen):
+	            temp=strs[min][i]
+	            for j in range(0,len(strs)):
+	                if temp==strs[j][i]:
+	                    continue
+	                else:
+	                    return com
+	            if j+1==len(strs):
+	                com=com+temp
+	            else:
+	                return com
+	        return com
+
+## 52.Bulls and Cows
+
+You are playing the following Bulls and Cows game with your friend: You write down a number and ask your friend to guess what the number is. Each time your friend makes a guess, you provide a hint that indicates how many digits in said guess match your secret number exactly in both digit and position (called "bulls") and how many digits match the secret number but locate in the wrong position (called "cows"). Your friend will use successive guesses and hints to eventually derive the secret number.
+
+For example:
+
+	Secret number:  "1807"
+	Friend's guess: "7810"
+
+Hint: 1 bull and 3 cows. (The bull is 8, the cows are 0, 1 and 7.)
+
+Write a function to return a hint according to the secret number and friend's guess, use A to indicate the bulls and B to indicate the cows. In the above example, your function should return "1A3B".
+
+Please note that both secret number and friend's guess may contain duplicate digits, for example:
+
+	Secret number:  "1123"
+	Friend's guess: "0111"
+
+In this case, the 1st 1 in friend's guess is a bull, the 2nd or 3rd 1 is a cow, and your function should return "1A1B".
+
+You may assume that the secret number and your friend's guess only contain digits, and their lengths are always equal.
+
+### 52.Bulls and Cows-analysis
+
+猜数字游戏，如果才对位置和数字 那么这个数字就是公牛，如果只猜对了数字，但是位置不对，那么这个数字就是母牛
+
+写一个函数来返回是公牛还是母牛 公牛用A表示 母牛用B表示
+
+其中会出现重复的数字，但是可以假设二者的数字个数都是相同的
+
+思路：
+
+首先找到相同数字的个数 
+（相同数字个数，先统计secret中各数字个数，然后减去guess中各个数字个数，如果为0则不动，最后得到二者的相同数字的个数）
+
+然后找到相同位置的个数=bull
+
+相同数字个数-相同位置个数=cow
+
+### 52.Bulls and Cows-Solution-C/C++
+
+	class Solution 
+	{
+	public:
+	    string getHint(string secret, string guess) 
+	    {
+	        stringstream ss;
+	        int bull=0;
+	        int cow=0;
 	        int i=0;
-	        for(i=0;i<s.length();i++)
+	        char num[10];
+	        for(i=0;i<10;i++)
+	            num[i]=0;
+	        for(i=0;i<secret.length();i++)
 	        {
-	            if(s[i]=='('||s[i]=='['||s[i]=='{')
-	                store.push(s[i]);
-	                
-	            if(s[i]==')')
-	                if(!store.empty())
-	                    if('('==store.top())
-	                        store.pop();
-	                    else
-	                        return false;
-	                else
-	                    return false;
-	                    
-	            if(s[i]==']')
-	                if(!store.empty())
-	                    if('['==store.top())
-	                        store.pop();
-	                    else
-	                        return false;
-	                else
-	                    return false;
-	            
-	            if(s[i]=='}')
-	                if(!store.empty())
-	                    if('{'==store.top())
-	                        store.pop();
-	                    else
-	                        return false;  
-	                else
-	                    return false;
+	            num[secret[i]-48]++;
 	        }
-	        if(store.empty())
-	            return true;
-	        return false;
+	
+	        for(i=0;i<10;i++)
+	            cow=num[i]+cow;
+	     
+	        for(i=0;i<secret.length();i++)
+	        {
+	            if(num[guess[i]-48]==0)
+	                continue;
+	            else
+	            {
+	                num[guess[i]-48]--;
+	            }
+	        }
+	        for(i=0;i<10;i++)
+	            bull=num[i]+bull;
+	        cow=cow-bull;
+	        bull=0;
+	        cout<<cow;
+	        for(i=0;i<secret.length();i++)
+	            if(secret[i]==guess[i])
+	                bull++;
+	        cow=cow-bull;
+	        ss<<bull<<'A'<<cow<<'B';
+	        return ss.str();
 	    }
 	};
 
-## 46.Valid Parentheses-Python
-
-本来很简单的，弄了老半天就是错，才发现之前一直用的一个函数竟然理解错了
-
-python的list remove 是删除第一个和目标元素相同的元素，是从list头往后删除的，所以就导致我在这里用的时候出错了，应该直接用del来删除的
+### 52.Bulls and Cows-Solution-Python
 
 	class Solution(object):
-	    def isValid(self, s):
+	    def getHint(self, secret, guess):
 	        """
-	        :type s: str
-	        :rtype: bool
+	        :type secret: str
+	        :type guess: str
+	        :rtype: str
 	        """
-	        store=[]
-	        for i in range(len(s)):
-	            if(s[i]=='[' or s[i]=='(' or s[i]=='{'):
-	                store.append(s[i])
-	            if s[i]==']':
-	                if (store!=[] and store[-1]=='['):
-	                    del store[-1]
-	                else:
-	                    return False
-	            if s[i]=='}':
-	                if (store!=[] and store[-1]=='{'):
-	                    del store[-1]
-	                else:
-	                    return False
-	            if s[i]==')':
-	                if (store!=[] and store[-1]=='('):
-	                    del store[-1]
-	                else:
-	                    return False
-	            print(store)
-	        
-	        if store==[]:
-	            return True
-	        return False            
-                
-## 47.Isomorphic Strings
-
-Given two strings s and t, determine if they are isomorphic.
-
-Two strings are isomorphic if the characters in s can be replaced to get t.
-
-All occurrences of a character must be replaced with another character while preserving the order of characters. No two characters may map to the same character but a character may map to itself.
-
-For example,
-
-	Given "egg", "add", return true.
-	
-	Given "foo", "bar", return false.
-	
-	Given "paper", "title", return true.
-
-Note:
-
-You may assume both s and t have the same length.
-
-## 47.Isomorphic Strings-analysis
-
-确定两个字符串是同构的，同构的定义是类似 
-
-	*BB，B*B这样的，
-	A*A**的这种也可以
-
-由于后一种同构的存在，让这个变得很难啊，但是题目中说到只有一个字母会出现同构
-
-而且二者的长度都是相同的，那么只需要找到一个单词中，多次出现的那个字母，然后和另外一个单词去比较，在相同位置如果都是相同的字母，那么就是同构，否则就不是。
-
-首先找到两个字符串中出现频率最高的，设定为同构的词，然后检索是否在同构词的位置上，二者是否都为同构词，如果有一者不是同构，那么就返回false，到最后返回true
-
-然后写出了下面的代码，然后修掉各种小bug以后，最后一个超级复杂的验证，没通过，然后我去百度了一下，发现我理解错了。
-
-题目中的同构的字母并不是一个的存在，而是多个的存在，说白了这类似一个一对一映射，类似于字符平移的密码，要求一对一对应，否则就无法解出来了。
-
-	bool isIsomorphic(char* s, char* t) 
-	{
-	    int c[128]={0};
-	    int i=0,j=0,max=0;
-	    char coms,comt;
-	    bool find=false;
-	    char *ss=s;
-	    char *st=t;
-	    for(i=0;i<128;i++)
-	        c[i]=0;
-	    while(*s)
-	    {
-	        c[(*s)]++;
-	        if(j<c[(*s)])
-	        {
-	            j=c[(*s)];
-	            max=*s;
-	        }
-	        s++;
-	    }
-	    //得到出现次数最多的字符，设定为同构的字符
-	    coms=max;
-	    j=0;
-	    for(i=0;i<128;i++)
-	        c[i]=0;
-	    while(*t)
-	    {
-	        c[(*t)]++;
-	        if(j<c[(*t)])
-	        {
-	            j=c[(*t)];
-	            max=*t;
-	        }
-	        t++;
-	    }    
-	    //得到出现次数最多的字符，设定为同构的字符
-	    comt=max;
-	    printf("%c",coms);
-	    printf("%c",comt);
-	    while(*ss)
-	    {
-	        //同构位置不相同时
-	        if((*ss==coms&&*st!=comt)||(*ss!=coms&&*st==comt))
-	        {   
-	            return false;
-	        }
-	        ss++;
-	        st++;
-	    }
-	    return true;
-	}
-
-所以正确的解法就是建立映射，只要出现了某个字母对应多个字符的情况，就返回false否则是true。
-
-当然这样对于 ab cc 这样的建立了 a-c b-c 这样是合法的 但是对于cc来说建立的就是 c-a c-b 就不合法了
-
-所以最后需要对于二者分别进行一次映射确保二者都没有相同元素就可以了。
-
-## 47.Isomorphic Strings-Solution-C/C++
-
-这里利用一个128的数字来做为映射的对应值，s作为index，t作为值， 每次建立映射之前，先判断映射是否存在，然后判断对应的s所对的值是否为t 为t就不管了
-不为t的话 就表示映射错误，然后颠倒二者的位置再来一遍就保证了二者都是唯一映射
-
-	bool isIsomorphic(char* s, char* t) 
-	{
-	    char *ss=s,*tt=t;
-	    int sc[128];
-	    int i=0;
-	    for(i=0;i<128;i++)
-	        sc[i]=0;
-	    while(*s)
-	    {
-	        if(sc[*s]==0)
-	        {
-	            sc[*s]=*t;
-	        }
-	        else
-	        {
-	            if(sc[*s]==*t)
-	                ;
-	            else
-	                return false;
-	        }
-	        s++;
-	        t++;
-	    }
-	    
-	    for(i=0;i<128;i++)
-	        sc[i]=0;
-	    while(*tt)
-	    {
-	        if(sc[*tt]==0)
-	        {
-	            sc[*tt]=*ss;
-	        }
-	        else
-	        {
-	            if(sc[*tt]==*ss)
-	                ;
-	            else
-	                return false;
-	        }
-	        ss++;
-	        tt++;
-	    }    
-	    return true;
-	}
-
-## 47.Isomorphic Strings-Python
-
-	class Solution(object):
-	    def isIsomorphic(self, s, t):
-	        """
-	        :type s: str
-	        :type t: str
-	        :rtype: bool
-	        """
-	        ss=s
-	        tt=t
-	        c=dict()
-	        for i in range(len(s)):
-	            exist=c.get(s[i])
-	            if exist==None:
-	                c[s[i]]=t[i]
-	                continue
-	            if exist==t[i]:
-	                continue
-	            else:
-	                return False
-	        cc=dict()
-	        for i in range(len(ss)):
-	            exist=cc.get(tt[i])
-	            if exist==None:
-	                cc[tt[i]]=ss[i]
-	                continue
-	            if exist==ss[i]:
-	                continue
-	            else:
-	                return False        
-	        return True
-
-## 48.Word Pattern
-
-Given a pattern and a string str, find if str follows the same pattern.
-
-Here follow means a full match, such that there is a bijection between a letter in pattern and a non-empty word in str.
-
-Examples:
-
-	pattern = "abba", str = "dog cat cat dog" should return true.
-	pattern = "abba", str = "dog cat cat fish" should return false.
-	pattern = "aaaa", str = "dog cat cat dog" should return false.
-	pattern = "abba", str = "dog dog dog dog" should return false.
-
-Notes:
-
-You may assume pattern contains only lowercase letters, and str contains lowercase letters separated by a single space.
-
-Credits:
-
-Special thanks to @minglotus6 for adding this problem and creating all test cases.
-
-## 48.Word Pattern-analysis
-
-又一个是对应，只是这次是给定固定模式，检测是否相对应
-
-一样的，建立一个字典，来对应对应的元素，检查一下就知道是否正确了。
-
-和上一题的解法相同，也是正面检查一次，然后反过来再检查一次元素的映射，就可以了。
-
-## 48.Word Pattern-Solution-C/C++
-
-c++是参考别人的方法，首先解决str是用空格为分隔符，istringstream类对象在输出的时候会自动用空格来分行输出
-
-通过依次输出istringstream的对象，就得到了每一个字符
-
-之前是假定二者长度是相等的，但这种字符映射字符串，就不一定是相等的，所以需要检测是否长度相等，不相等就返回false
-
-然后使用map来建立好映射,检查二者的映射是否正确。
-
-	class Solution 
-	{
-	public:
-	    bool wordPattern(string pattern, string str) 
-	    {
-	        vector<string> dic;
-	        istringstream sin(str);
-	        string tmp;
-	        while (sin >> tmp) dic.push_back(tmp);
-	        if (dic.size() != pattern.size()) return false;
-	        unordered_map<char, string> mp1;
-	        unordered_map<string, char> mp2;
-	        for (int i = 0; i < pattern.size(); ++i)
-	        {
-	            if (mp1.find(pattern[i]) == mp1.end())
-	            {
-	                //为空
-	                mp1[pattern[i]] = dic[i];
-	            } 
-	            else if (mp1[pattern[i]] != dic[i]) 
-	            {
-	                return false;
-	            }
-	            if (mp2.find(dic[i]) == mp2.end())
-	            {
-	                mp2[dic[i]] = pattern[i];
-	            }
-	            else if (mp2[dic[i]] != pattern[i])
-	            {
-	                return false;
-	            }
-	        }
-	        return true;
-	    }
-	};
-
-## 48.Word Pattern-Python
-
-先写了python的代码，成功通过了
-
-	class Solution(object):
-	    def wordPattern(self, pattern, str):
-	        """
-	        :type pattern: str
-	        :type str: str
-	        :rtype: bool
-	        """
-	        d=0
-	        s=''
-	        t=''
-	        def getword(s,d):
-	            """    
-	            :rtype: str
-	            """
-	            for j in range(d,len(str)):
-	                if str[j]!=' ':
-	                    s=s+str[j]
-	                else:
-	                    d=d+j+1
-	                    return s
-	            return s
-	        c=dict()
-	        for i in range(len(pattern)):
-	            exist=c.get(pattern[i])
-	            t=getword(s,d)
-	            d=d+len(t)+1
-	            if exist==None:
-	                c[pattern[i]]=t
-	                continue
-	            if exist==t:
-	                continue
-	            else:
-	                return False
-	
-	        cc=dict()
-	        d=0
-	        for i in range(len(pattern)):
-	            t=getword(s,d)
-	            exist=cc.get(t)
-	            d=d+len(t)+1
-	            if exist==None:
-	                cc[t]=pattern[i]
-	                continue
-	            if exist==pattern[i]:
-	                continue
-	            else:
-	                return False  
-	        d=d-1
-	        if d!=len(str):
-	            return False
-	                
-	        return True
+	        bull=0
+	        cow=0
+	        num=[0,0,0,0,0,0,0,0,0,0]
+	        for i in range(len(secret)):
+	            num[ord(secret[i])-48]=num[ord(secret[i])-48]+1
+	        for i in range(10):
+	            cow=num[i]+cow
 	            
-	        
+	        for i in range(len(secret)):
+	            if num[ord(guess[i])-48]==0:
+	                continue
+	            else:
+	                num[ord(guess[i])-48]=num[ord(guess[i])-48]-1
+	        for i in range(10):
+	            bull=num[i]+bull
+	        cow=cow-bull
+	        bull=0
+	        for i in range(len(secret)):
+	            if secret[i]==guess[i]:
+	                bull=bull+1
+	        cow=cow-bull
+	        return str(bull)+'A'+str(cow)+'B'
+
+
 	
 ## Quote
 
-> http://blog.csdn.net/wcyoot/article/details/6426436
-> http://www.cnblogs.com/zhengyuxin/articles/1938300.html
-> http://www.yiibai.com/python/dictionary_get.html
-> http://blog.csdn.net/xiayang05/article/details/5933893
-> http://www.cnblogs.com/easonliu/p/4856850.html
+> http://blog.csdn.net/hancunai0017/article/details/7032383
+> http://www.cnblogs.com/xFreedom/archive/2011/05/16/2048037.html
 
 
 

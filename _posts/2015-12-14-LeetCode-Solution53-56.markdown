@@ -1,8 +1,8 @@
 ---
 layout:     post
-title:      "LeetCode Solution(Easy.45-48)"
+title:      "LeetCode Solution(Easy.53-56)"
 subtitle:   "c/c++，python，for work"
-date:       2015-12-13
+date:       2015-12-14
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"
 tags:
@@ -11,33 +11,226 @@ tags:
 ---
 
 
-## 45.Remove Nth Node From End of List
+## 53.Add Binary
 
-Given a linked list, remove the nth node from the end of list and return its head.
+Given two binary strings, return their sum (also a binary string).
 
-For example,
+For example
 
-	Given linked list: 1->2->3->4->5, and n = 2.
-	
-	After removing the second node from the end, the linked list becomes 1->2->3->5.
+	a = "11"
+	b = "1"
 
-Note:
+Return "100".
 
-Given n will always be valid.
+### 53.Add Binary-analysis
 
-Try to do this in one pass.
+给二进制的string 然后求和 还能更简单吗？
 
-## 45.Remove Nth Node From End of List-analysis
+方法一把string的二进制直接转化成数的二进制，然后求和，之后再把int类型转化为string的二进制（但是如果string非常长，超过int范围就有可能出错）
 
-要求删除倒数第n个元素
+方法二 直接用string来做二进制求和。
 
-而且要求遍历一遍就完成。
+### 53.Add Binary-Solution-C/C++
 
-有一个小技巧：两个指针，让其中一个先走n步，然后让另外一个指针跟上，同步走，当先走的指针到达队尾的时候，删除当前的指针，连接起来就行了
+c++用方法二来实现的，除了代码很长以外，没什么难度。
 
-## 45.Remove Nth Node From End of List-Solution-C/C++
+	class Solution 
+	{
+	public:
+	    string addBinary(string a, string b) 
+	    {
+	        stringstream sum;
+	        string s;
+	        int i=0,alen=a.length(),blen=b.length();
+	        int min=alen>blen?blen:alen;
+	        int max=alen>blen?alen:blen;
+	        int c=0;
+	        for(i=0;i<min;i++)
+	        {
+	            if(a[alen-1-i]=='1'&&b[blen-1-i]=='1')
+	            {
+	                if(c==1)
+	                {
+	                    sum<<'1';
+	                    c=1;
+	                }
+	                else
+	                {
+	                    sum<<'0';
+	                    c=1;
+	                }
+	            }
+	            else if((a[alen-1-i]=='1' && b[blen-1-i]=='0')||(a[alen-1-i]=='0' && b[blen-1-i]=='1'))
+	            {
+	                if(c==1)
+	                {
+	                    sum<<'0';
+	                    c=1;
+	                }
+	                else
+	                {
+	                    sum<<'1';
+	                }
+	            }
+	            else
+	            {
+	                if(c==1)
+	                {
+	                    sum<<'1';
+	                    c=0;
+	                }
+	                else
+	                {
+	                    sum<<'0';
+	                }
+	            }
+	            
+	        }
+	        s=alen>blen?a:b;
+	        int dif=max-min;
+	        for(i=0;i<dif;i++)
+	        {
+	            if(s[dif-1-i]=='1')
+	            {
+	                if(c==1)
+	                {
+	                    sum<<'0';
+	                    c=1;
+	                }
+	                else
+	                {
+	                    sum<<'1';
+	                    c=0;
+	                }
+	            }
+	            else
+	            {
+	                if(c==1)
+	                {
+	                    sum<<'1';
+	                    c=0;
+	                }
+	                else
+	                {
+	                    sum<<'0';
+	                }
+	            }
+	        }
+	        if(c==1)
+	            sum<<'1';
+	        string ret=sum.str();
+	        string nn(ret.rbegin(),ret.rend());
+	        return nn;
+	    }
+	};
 
-但是有一个麻烦的东西，就是临界值的判断，有可能需要删除的就是头节点，这样删除的节点就没有上一节点 或者是要删除的是尾节点，就没有下一节点。
+### 53.Add Binary-Solution-Python
+	            
+python的string不支持list的操作，真是很麻烦的一个问题啊 
+
+还好可以使用 
+
+		sum.reverse()
+        ret=''.join(sum)
+		或
+		''.join(sum[::-1])
+		进行list到string，而string到list也只用强制转换就行了
+
+下面是具体的程序
+
+	class Solution(object):
+	    def addBinary(self, a, b):
+	        """
+	        :type a: str
+	        :type b: str
+	        :rtype: str
+	        """
+	        c=0
+	        aa=list(a)
+	        bb=list(b)
+	        sum=[]
+	        for i in range(min(len(aa),len(bb))):
+	            if aa[-1]=='1' and bb[-1]=='1':
+	                if c==1:
+	                    sum.append('1')
+	                    c=1
+	                else:
+	                    sum.append('0')
+	                    c=1
+	            elif (aa[-1]=='0' and bb[-1]=='0'):
+	                if c==1:
+	                    sum.append('1')
+	                    c=0
+	                else:
+	                    sum.append('0')
+	                    c=0
+	            else:
+	                if c==1:
+	                    sum.append('0')
+	                    c=1
+	                else:
+	                    sum.append('1')
+	                    c=0
+	            del aa[-1]
+	            del bb[-1]
+	        if aa==[]:
+	            s=bb
+	        else:
+	            s=aa
+	        for i in range(len(s)):
+	            if s[-1]=='1':
+	                if c==1:
+	                    sum.append('0')
+	                    c=1
+	                else:
+	                    sum.append('1')
+	                    c=0
+	            else:
+	                if c==1:
+	                    sum.append('1')
+	                    c=0
+	                else:
+	                    sum.append('0')
+	            del s[-1]
+	        if c==1:
+	            sum.append('1')
+	        sum.reverse()
+	        ret=''.join(sum)
+	        return ret        
+
+
+
+
+## 54.Palindrome Linked List
+
+Given a singly linked list, determine if it is a palindrome.
+
+Follow up:
+Could you do it in O(n) time and O(1) space?
+
+### 54.Palindrome Linked List-analysis
+
+判断一个单链表是不是回文？？？要求时间是 O(n) 空间是O(1)
+
+由于有空间的要求，所以要应用之前使用的一个办法，逆序。
+
+只是这次也需要先找到链表的中间部分，然后从中间部分开始逆序
+
+把后半截逆序之后，再跟前半截相比较，得到最后的结果。
+
+但其实这样的话时间不是完美的 O(n) 而是 O(n/2+n/2+n/2)
+
+还有一个递归的方式，直接递归到尾部，然后有一个全局变量记录头，
+
+尾部和头部相比较，如果二者相等，返回，如果不等，返回false 
+
+但是如果用递归其实有一个隐藏空间的存在，就是函数保存时用的stack。
+
+两种方法都会写一次
+
+### 54.Palindrome Linked List-Solution-C/C++
+
+#### 迭代
 
 	/**
 	 * Definition for singly-linked list.
@@ -46,40 +239,91 @@ Try to do this in one pass.
 	 *     struct ListNode *next;
 	 * };
 	 */
-	struct ListNode* removeNthFromEnd(struct ListNode* head, int n) 
+	bool isPalindrome(struct ListNode* head) 
 	{
-	    int i=0;
-	    if(!head->next)
-	        return NULL;
-	    
-	    struct ListNode* first=head;
-	    struct ListNode* second=head;
-	    struct ListNode* temp;
-	    for(i=0;i<n;i++)
-	        if(first->next)
-	            first=first->next;
-	        else
-	        {
-	            //得到还几个数到达目的地，然后改变second的位置，返回
-	            int j=n-i;
-	            while(j--)
-	                second=second->next;
-	            return second;
-	        }
-	    while(first)
+	    //找到链表的中间位置
+	    if(!head||!head->next)
+	        return true;
+	    struct ListNode* mid=head;
+	    struct ListNode* temp=head;
+	    while(mid->next&&mid->next->next)
 	    {
-	        first=first->next;
-	        temp=second;
-	        second=second->next;
+	        temp=temp->next;
+	        mid=mid->next->next;
 	    }
-	    if(second->next)
-	        temp->next=second->next;
-	    else
-	        temp->next=NULL;
-	    return head;
+	    mid=temp->next;//成为另一半节点的头节点
+	    temp->next=NULL;
+	    //开始翻转节点
+	    struct ListNode* pre=NULL;
+	    struct ListNode* cur=mid;
+	    struct ListNode* next=cur->next;
+	    while(next)
+	    {
+	            cur->next=pre;
+	            pre=cur;
+	            cur=next;
+	            next=next->next;
+	    }
+	    cur->next=pre;
+	    mid=cur;
+	    //开始对比
+	    while(mid->val==head->val)
+	    {
+	        if(head->next==NULL||mid->next==NULL||mid==head)
+	            return true;
+	        mid=mid->next;
+	        head=head->next;
+	    }
+	    return false;
 	}
 
-## 45.Remove Nth Node From End of List-Python
+
+#### 递归
+
+	/**
+	 * Definition for singly-linked list.
+	 * struct ListNode {
+	 *     int val;
+	 *     ListNode *next;
+	 *     ListNode(int x) : val(x), next(NULL) {}
+	 * };
+	 */
+	class Solution 
+	{
+	public:
+	    ListNode* temp;
+	    bool ispalindrome(ListNode* head) 
+	    {
+	        if(head==NULL)
+	            return true;
+	        if(ispalindrome(head->next)==false)
+	            return false;
+	        else
+	        {
+	            if(head->val==temp->val)
+	            {
+	                temp=temp->next;
+	                return true;
+	            }
+	            else
+	                return false;
+	        }
+	        
+	    }
+	    bool isPalindrome(ListNode* head) 
+	    {
+	        temp=head;
+	        return ispalindrome(head);
+	    }
+	};
+
+### 54.Palindrome Linked List-Solution-Python
+
+#### 递归
+
+不出所料，python的递归通不过，Memory Limit Exceeded ，也就是递归超界了
+
+所以递归的办法应该不是leetcode想要的
 
 	# Definition for singly-linked list.
 	# class ListNode(object):
@@ -88,448 +332,208 @@ Try to do this in one pass.
 	#         self.next = None
 	
 	class Solution(object):
-	    def removeNthFromEnd(self, head, n):
+	    def __init__(self):
+	        self.temp=None 
+	    def ispalindrome(self, head):
 	        """
 	        :type head: ListNode
-	        :type n: int
-	        :rtype: ListNode
+	        :rtype: bool
 	        """
-	        first=head
-	        second=head
-	        if not head.next:
-	            return None
-	        for i in range(n):
-	            if first.next:
-	                first=first.next
-	            else:
-	                j=n-i
-	                while j:
-	                    j=j-1
-	                    second=second.next
-	                return second
-	        while first:
-	            first=first.next
-	            temp=second
-	            second=second.next
-	        if second.next:
-	            temp.next=second.next
+	        if head==None:
+	            return True
+	        if self.ispalindrome(head.next)==False:
+	            return False
 	        else:
-	            temp.next=None
-	        return head
-	            
-## 46.Valid Parentheses
+	            if head.val==self.temp.val:
+	                self.temp=self.temp.next
+	                return True
+	            else:
+	                return False
+	        
+	    def isPalindrome(self, head):
+	        """
+	        :type head: ListNode
+	        :rtype: bool
+	        """
+	        self.temp=head
+	        return self.ispalindrome(head)
 
-Given a string containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
+#### 迭代
+	
+	# Definition for singly-linked list.
+	# class ListNode(object):
+	#     def __init__(self, x):
+	#         self.val = x
+	#         self.next = None
+	
+	class Solution(object):
+	    def __init__(self):
+	        self.temp=None 
+	    def isPalindrome(self, head):
+	        """
+	        :type head: ListNode
+	        :rtype: bool
+	        """
+	        if(not head) or (not head.next):
+	            return True
+	        mid=head
+	        temp=head
+	        #//查找中间节点
+	        while mid.next and mid.next.next:
+	            temp=temp.next
+	            mid=mid.next.next;
+	        mid=temp.next
+	        #//链表逆序
+	        temp.next=None
+	        pre=None
+	        cur=mid
+	        next=mid.next
+	        while next:
+	            cur.next=pre
+	            pre=cur
+	            cur=next
+	            next=next.next
+	        cur.next=pre
+	        mid=cur
+	        #//两个链表对比
+	        while mid.val==head.val:
+	            if mid==head or mid.next==None or head.next==None:
+	                return True
+	            mid=mid.next
+	            head=head.next
+	        return False
 
-The brackets must close in the correct order, "()" and "()[]{}" are all valid but "(]" and "([)]" are not.
+## 55.Binary Tree Paths
 
-## 46.Valid Parentheses-analysis
+Given a binary tree, return all root-to-leaf paths.
 
-确定其中的括号是否匹配，也简单，只需要把对应的左括号压入栈中，每遇到一个右括号，就弹出一次，弹出的如果是相同的就ok 不同的话 就表示错误了
+For example, given the following binary tree:
 
-## 46.Valid Parentheses-Solution-C/C++
+	   1
+	 /   \
+	2     3
+	 \
+	  5
 
-	class Solution 
-	{
+All root-to-leaf paths are:
+
+	["1->2->5", "1->3"]
+
+### 55.Binary Tree Paths-analysis
+
+返回根到子叶的路径，这不是前天做过的那个类似吗，返回根到节点的总和。
+
+一样是使用深度遍历，然后挨个存储把左子树和右子树的内容分开存储
+
+### 55.Binary Tree Paths-Solution-C/C++
+
+	/**
+	 * Definition for a binary tree node.
+	 * struct TreeNode {
+	 *     int val;
+	 *     TreeNode *left;
+	 *     TreeNode *right;
+	 *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+	 * };
+	 */
+	class Solution {
 	public:
-	    bool isValid(string s) 
+	    vector<string> ret;
+	    void depthsearch(TreeNode* root,string path)
 	    {
-	        stack<char> store;
-	        int i=0;
-	        for(i=0;i<s.length();i++)
+	        //cout<<path;
+	        if(root==NULL)
+	            return;
+	        if(root->left==NULL&&root->right==NULL)
 	        {
-	            if(s[i]=='('||s[i]=='['||s[i]=='{')
-	                store.push(s[i]);
-	                
-	            if(s[i]==')')
-	                if(!store.empty())
-	                    if('('==store.top())
-	                        store.pop();
-	                    else
-	                        return false;
-	                else
-	                    return false;
-	                    
-	            if(s[i]==']')
-	                if(!store.empty())
-	                    if('['==store.top())
-	                        store.pop();
-	                    else
-	                        return false;
-	                else
-	                    return false;
 	            
-	            if(s[i]=='}')
-	                if(!store.empty())
-	                    if('{'==store.top())
-	                        store.pop();
-	                    else
-	                        return false;  
-	                else
-	                    return false;
+	            //当前节点为叶节点,路径加入返回区
+	            stringstream sum;
+	            sum<<path<<root->val;
+	            path=sum.str();
+	            ret.push_back(path);
+	        }        
+	        if(root->left!=NULL)
+	        {
+	            stringstream sum;
+	            string p;
+	            sum<<path<<root->val;
+	            p=sum.str();
+	            depthsearch(root->left,p+"->");
+	        }  
+	        if(root->right!=NULL)
+	        {
+	            stringstream sum;
+	            string p;
+	            sum<<path<<root->val;
+	            p=sum.str();            
+	            depthsearch(root->right,p+"->");
 	        }
-	        if(store.empty())
-	            return true;
-	        return false;
+	    }
+	    vector<string> binaryTreePaths(TreeNode* root) 
+	    {
+	        if(root==NULL)
+	            return (vector<string>)0;
+	        stringstream sum;    
+	        sum<<root->val;
+	        string s="";//=sum.str();
+	        depthsearch(root,s);
+	        return ret;
 	    }
 	};
 
-## 46.Valid Parentheses-Python
+### 55.Binary Tree Paths-Solution-Python
 
-本来很简单的，弄了老半天就是错，才发现之前一直用的一个函数竟然理解错了
-
-python的list remove 是删除第一个和目标元素相同的元素，是从list头往后删除的，所以就导致我在这里用的时候出错了，应该直接用del来删除的
-
+	# Definition for a binary tree node.
+	# class TreeNode(object):
+	#     def __init__(self, x):
+	#         self.val = x
+	#         self.left = None
+	#         self.right = None
+	
 	class Solution(object):
-	    def isValid(self, s):
+	    def __init__(self):
+	        self.ret =[]  
+	    def depthsearch(self, root,path):
+	        if root==None:
+	            return
+	        path=path+str(root.val)
+	        if root.left==None and root.right==None:
+	            self.ret.append(path)
+	        if root.left!=None:
+	            self.depthsearch(root.left,path+"->")
+	        if root.right!=None:
+	            self.depthsearch(root.right,path+"->")
+	    
+	    def binaryTreePaths(self, root):
 	        """
-	        :type s: str
-	        :rtype: bool
+	        :type root: TreeNode
+	        :rtype: List[str]
 	        """
-	        store=[]
-	        for i in range(len(s)):
-	            if(s[i]=='[' or s[i]=='(' or s[i]=='{'):
-	                store.append(s[i])
-	            if s[i]==']':
-	                if (store!=[] and store[-1]=='['):
-	                    del store[-1]
-	                else:
-	                    return False
-	            if s[i]=='}':
-	                if (store!=[] and store[-1]=='{'):
-	                    del store[-1]
-	                else:
-	                    return False
-	            if s[i]==')':
-	                if (store!=[] and store[-1]=='('):
-	                    del store[-1]
-	                else:
-	                    return False
-	            print(store)
-	        
-	        if store==[]:
-	            return True
-	        return False            
-                
-## 47.Isomorphic Strings
+	        s=""
+	        self.depthsearch(root,s)
+	        return self.ret
 
-Given two strings s and t, determine if they are isomorphic.
+## 52.Bulls and Cows
 
-Two strings are isomorphic if the characters in s can be replaced to get t.
-
-All occurrences of a character must be replaced with another character while preserving the order of characters. No two characters may map to the same character but a character may map to itself.
+Given two binary strings, return their sum (also a binary string).
 
 For example,
+a = "11"
+b = "1"
+Return "100".
 
-	Given "egg", "add", return true.
-	
-	Given "foo", "bar", return false.
-	
-	Given "paper", "title", return true.
+### 52.Bulls and Cows-analysis
 
-Note:
+### 52.Bulls and Cows-Solution-C/C++
 
-You may assume both s and t have the same length.
-
-## 47.Isomorphic Strings-analysis
-
-确定两个字符串是同构的，同构的定义是类似 
-
-	*BB，B*B这样的，
-	A*A**的这种也可以
-
-由于后一种同构的存在，让这个变得很难啊，但是题目中说到只有一个字母会出现同构
-
-而且二者的长度都是相同的，那么只需要找到一个单词中，多次出现的那个字母，然后和另外一个单词去比较，在相同位置如果都是相同的字母，那么就是同构，否则就不是。
-
-首先找到两个字符串中出现频率最高的，设定为同构的词，然后检索是否在同构词的位置上，二者是否都为同构词，如果有一者不是同构，那么就返回false，到最后返回true
-
-然后写出了下面的代码，然后修掉各种小bug以后，最后一个超级复杂的验证，没通过，然后我去百度了一下，发现我理解错了。
-
-题目中的同构的字母并不是一个的存在，而是多个的存在，说白了这类似一个一对一映射，类似于字符平移的密码，要求一对一对应，否则就无法解出来了。
-
-	bool isIsomorphic(char* s, char* t) 
-	{
-	    int c[128]={0};
-	    int i=0,j=0,max=0;
-	    char coms,comt;
-	    bool find=false;
-	    char *ss=s;
-	    char *st=t;
-	    for(i=0;i<128;i++)
-	        c[i]=0;
-	    while(*s)
-	    {
-	        c[(*s)]++;
-	        if(j<c[(*s)])
-	        {
-	            j=c[(*s)];
-	            max=*s;
-	        }
-	        s++;
-	    }
-	    //得到出现次数最多的字符，设定为同构的字符
-	    coms=max;
-	    j=0;
-	    for(i=0;i<128;i++)
-	        c[i]=0;
-	    while(*t)
-	    {
-	        c[(*t)]++;
-	        if(j<c[(*t)])
-	        {
-	            j=c[(*t)];
-	            max=*t;
-	        }
-	        t++;
-	    }    
-	    //得到出现次数最多的字符，设定为同构的字符
-	    comt=max;
-	    printf("%c",coms);
-	    printf("%c",comt);
-	    while(*ss)
-	    {
-	        //同构位置不相同时
-	        if((*ss==coms&&*st!=comt)||(*ss!=coms&&*st==comt))
-	        {   
-	            return false;
-	        }
-	        ss++;
-	        st++;
-	    }
-	    return true;
-	}
-
-所以正确的解法就是建立映射，只要出现了某个字母对应多个字符的情况，就返回false否则是true。
-
-当然这样对于 ab cc 这样的建立了 a-c b-c 这样是合法的 但是对于cc来说建立的就是 c-a c-b 就不合法了
-
-所以最后需要对于二者分别进行一次映射确保二者都没有相同元素就可以了。
-
-## 47.Isomorphic Strings-Solution-C/C++
-
-这里利用一个128的数字来做为映射的对应值，s作为index，t作为值， 每次建立映射之前，先判断映射是否存在，然后判断对应的s所对的值是否为t 为t就不管了
-不为t的话 就表示映射错误，然后颠倒二者的位置再来一遍就保证了二者都是唯一映射
-
-	bool isIsomorphic(char* s, char* t) 
-	{
-	    char *ss=s,*tt=t;
-	    int sc[128];
-	    int i=0;
-	    for(i=0;i<128;i++)
-	        sc[i]=0;
-	    while(*s)
-	    {
-	        if(sc[*s]==0)
-	        {
-	            sc[*s]=*t;
-	        }
-	        else
-	        {
-	            if(sc[*s]==*t)
-	                ;
-	            else
-	                return false;
-	        }
-	        s++;
-	        t++;
-	    }
-	    
-	    for(i=0;i<128;i++)
-	        sc[i]=0;
-	    while(*tt)
-	    {
-	        if(sc[*tt]==0)
-	        {
-	            sc[*tt]=*ss;
-	        }
-	        else
-	        {
-	            if(sc[*tt]==*ss)
-	                ;
-	            else
-	                return false;
-	        }
-	        ss++;
-	        tt++;
-	    }    
-	    return true;
-	}
-
-## 47.Isomorphic Strings-Python
-
-	class Solution(object):
-	    def isIsomorphic(self, s, t):
-	        """
-	        :type s: str
-	        :type t: str
-	        :rtype: bool
-	        """
-	        ss=s
-	        tt=t
-	        c=dict()
-	        for i in range(len(s)):
-	            exist=c.get(s[i])
-	            if exist==None:
-	                c[s[i]]=t[i]
-	                continue
-	            if exist==t[i]:
-	                continue
-	            else:
-	                return False
-	        cc=dict()
-	        for i in range(len(ss)):
-	            exist=cc.get(tt[i])
-	            if exist==None:
-	                cc[tt[i]]=ss[i]
-	                continue
-	            if exist==ss[i]:
-	                continue
-	            else:
-	                return False        
-	        return True
-
-## 48.Word Pattern
-
-Given a pattern and a string str, find if str follows the same pattern.
-
-Here follow means a full match, such that there is a bijection between a letter in pattern and a non-empty word in str.
-
-Examples:
-
-	pattern = "abba", str = "dog cat cat dog" should return true.
-	pattern = "abba", str = "dog cat cat fish" should return false.
-	pattern = "aaaa", str = "dog cat cat dog" should return false.
-	pattern = "abba", str = "dog dog dog dog" should return false.
-
-Notes:
-
-You may assume pattern contains only lowercase letters, and str contains lowercase letters separated by a single space.
-
-Credits:
-
-Special thanks to @minglotus6 for adding this problem and creating all test cases.
-
-## 48.Word Pattern-analysis
-
-又一个是对应，只是这次是给定固定模式，检测是否相对应
-
-一样的，建立一个字典，来对应对应的元素，检查一下就知道是否正确了。
-
-和上一题的解法相同，也是正面检查一次，然后反过来再检查一次元素的映射，就可以了。
-
-## 48.Word Pattern-Solution-C/C++
-
-c++是参考别人的方法，首先解决str是用空格为分隔符，istringstream类对象在输出的时候会自动用空格来分行输出
-
-通过依次输出istringstream的对象，就得到了每一个字符
-
-之前是假定二者长度是相等的，但这种字符映射字符串，就不一定是相等的，所以需要检测是否长度相等，不相等就返回false
-
-然后使用map来建立好映射,检查二者的映射是否正确。
-
-	class Solution 
-	{
-	public:
-	    bool wordPattern(string pattern, string str) 
-	    {
-	        vector<string> dic;
-	        istringstream sin(str);
-	        string tmp;
-	        while (sin >> tmp) dic.push_back(tmp);
-	        if (dic.size() != pattern.size()) return false;
-	        unordered_map<char, string> mp1;
-	        unordered_map<string, char> mp2;
-	        for (int i = 0; i < pattern.size(); ++i)
-	        {
-	            if (mp1.find(pattern[i]) == mp1.end())
-	            {
-	                //为空
-	                mp1[pattern[i]] = dic[i];
-	            } 
-	            else if (mp1[pattern[i]] != dic[i]) 
-	            {
-	                return false;
-	            }
-	            if (mp2.find(dic[i]) == mp2.end())
-	            {
-	                mp2[dic[i]] = pattern[i];
-	            }
-	            else if (mp2[dic[i]] != pattern[i])
-	            {
-	                return false;
-	            }
-	        }
-	        return true;
-	    }
-	};
-
-## 48.Word Pattern-Python
-
-先写了python的代码，成功通过了
-
-	class Solution(object):
-	    def wordPattern(self, pattern, str):
-	        """
-	        :type pattern: str
-	        :type str: str
-	        :rtype: bool
-	        """
-	        d=0
-	        s=''
-	        t=''
-	        def getword(s,d):
-	            """    
-	            :rtype: str
-	            """
-	            for j in range(d,len(str)):
-	                if str[j]!=' ':
-	                    s=s+str[j]
-	                else:
-	                    d=d+j+1
-	                    return s
-	            return s
-	        c=dict()
-	        for i in range(len(pattern)):
-	            exist=c.get(pattern[i])
-	            t=getword(s,d)
-	            d=d+len(t)+1
-	            if exist==None:
-	                c[pattern[i]]=t
-	                continue
-	            if exist==t:
-	                continue
-	            else:
-	                return False
-	
-	        cc=dict()
-	        d=0
-	        for i in range(len(pattern)):
-	            t=getword(s,d)
-	            exist=cc.get(t)
-	            d=d+len(t)+1
-	            if exist==None:
-	                cc[t]=pattern[i]
-	                continue
-	            if exist==pattern[i]:
-	                continue
-	            else:
-	                return False  
-	        d=d-1
-	        if d!=len(str):
-	            return False
-	                
-	        return True
-	            
-	        
+### 52.Bulls and Cows-Solution-Python
 	
 ## Quote
 
-> http://blog.csdn.net/wcyoot/article/details/6426436
-> http://www.cnblogs.com/zhengyuxin/articles/1938300.html
-> http://www.yiibai.com/python/dictionary_get.html
-> http://blog.csdn.net/xiayang05/article/details/5933893
-> http://www.cnblogs.com/easonliu/p/4856850.html
+> http://blog.csdn.net/sunao2002002/article/details/46918645
+> http://www.bkjia.com/ASPjc/1031678.html
+> http://www.cnblogs.com/ganganloveu/p/4635328.html
 
 
 
