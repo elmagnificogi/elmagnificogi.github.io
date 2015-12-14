@@ -27,7 +27,7 @@ Given n will always be valid.
 
 Try to do this in one pass.
 
-### 45.Remove Nth Node From End of List-analysis
+## 45.Remove Nth Node From End of List-analysis
 
 要求删除倒数第n个元素
 
@@ -35,7 +35,7 @@ Try to do this in one pass.
 
 有一个小技巧：两个指针，让其中一个先走n步，然后让另外一个指针跟上，同步走，当先走的指针到达队尾的时候，删除当前的指针，连接起来就行了
 
-### 45.Remove Nth Node From End of List-Solution-C/C++
+## 45.Remove Nth Node From End of List-Solution-C/C++
 
 但是有一个麻烦的东西，就是临界值的判断，有可能需要删除的就是头节点，这样删除的节点就没有上一节点 或者是要删除的是尾节点，就没有下一节点。
 
@@ -79,7 +79,7 @@ Try to do this in one pass.
 	    return head;
 	}
 
-### 45.Remove Nth Node From End of List-Solution-Python
+## 45.Remove Nth Node From End of List-Python
 
 	# Definition for singly-linked list.
 	# class ListNode(object):
@@ -123,11 +123,11 @@ Given a string containing just the characters '(', ')', '{', '}', '[' and ']', d
 
 The brackets must close in the correct order, "()" and "()[]{}" are all valid but "(]" and "([)]" are not.
 
-### 46.Valid Parentheses-analysis
+## 46.Valid Parentheses-analysis
 
 确定其中的括号是否匹配，也简单，只需要把对应的左括号压入栈中，每遇到一个右括号，就弹出一次，弹出的如果是相同的就ok 不同的话 就表示错误了
 
-### 46.Valid Parentheses-Solution-C/C++
+## 46.Valid Parentheses-Solution-C/C++
 
 	class Solution 
 	{
@@ -174,7 +174,7 @@ The brackets must close in the correct order, "()" and "()[]{}" are all valid bu
 	    }
 	};
 
-### 46.Valid Parentheses-Solution-Python
+## 46.Valid Parentheses-Python
 
 本来很简单的，弄了老半天就是错，才发现之前一直用的一个函数竟然理解错了
 
@@ -231,7 +231,7 @@ Note:
 
 You may assume both s and t have the same length.
 
-### 47.Isomorphic Strings-analysis
+## 47.Isomorphic Strings-analysis
 
 确定两个字符串是同构的，同构的定义是类似 
 
@@ -306,7 +306,7 @@ You may assume both s and t have the same length.
 
 所以最后需要对于二者分别进行一次映射确保二者都没有相同元素就可以了。
 
-### 47.Isomorphic Strings-Solution-C/C++
+## 47.Isomorphic Strings-Solution-C/C++
 
 这里利用一个128的数字来做为映射的对应值，s作为index，t作为值， 每次建立映射之前，先判断映射是否存在，然后判断对应的s所对的值是否为t 为t就不管了
 不为t的话 就表示映射错误，然后颠倒二者的位置再来一遍就保证了二者都是唯一映射
@@ -356,7 +356,7 @@ You may assume both s and t have the same length.
 	    return true;
 	}
 
-### 47.Isomorphic Strings-Solution-Python
+## 47.Isomorphic Strings-Python
 
 	class Solution(object):
 	    def isIsomorphic(self, s, t):
@@ -410,7 +410,7 @@ Credits:
 
 Special thanks to @minglotus6 for adding this problem and creating all test cases.
 
-### 48.Word Pattern-analysis
+## 48.Word Pattern-analysis
 
 又一个是对应，只是这次是给定固定模式，检测是否相对应
 
@@ -418,7 +418,7 @@ Special thanks to @minglotus6 for adding this problem and creating all test case
 
 和上一题的解法相同，也是正面检查一次，然后反过来再检查一次元素的映射，就可以了。
 
-### 48.Word Pattern-Solution-C/C++
+## 48.Word Pattern-Solution-C/C++
 
 c++是参考别人的方法，首先解决str是用空格为分隔符，istringstream类对象在输出的时候会自动用空格来分行输出
 
@@ -464,7 +464,7 @@ c++是参考别人的方法，首先解决str是用空格为分隔符，istrings
 	    }
 	};
 
-### 48.Word Pattern-Solution-Python
+## 48.Word Pattern-Python
 
 先写了python的代码，成功通过了
 

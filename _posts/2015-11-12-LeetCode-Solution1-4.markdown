@@ -23,7 +23,7 @@ Both of you are very clever and have optimal strategies for the game. Write a fu
 
 For example, if there are 4 stones in the heap, then you will never win the game: no matter 1, 2, or 3 stones you remove, the last stone will always be removed by your friend.
 
-## 1.Nim Game-analysis
+### 1.Nim Game-analysis
  
 首先看题，题目看完了，先找找数学上的规律，如果能找到规律那么写起程序来就简单了。
 
@@ -34,7 +34,7 @@ For example, if there are 4 stones in the heap, then you will never win the game
 
 那就很简单了，只需要求余4就可以得到先手是否会赢的结果了
 
-## 1.Nim Game-Solution-C/C++
+### 1.Nim Game-Solution-C/C++
 
 	bool canWinNim(int n) 
 	{
@@ -46,7 +46,7 @@ For example, if there are 4 stones in the heap, then you will never win the game
 
 
 
-## 1.Nim Game-Solution-Python
+### 1.Nim Game-Solution-Python
 
 	class Solution(object):
 	    def canWinNim(self, n):
@@ -66,7 +66,7 @@ Given num = 38, the process is like: 3 + 8 = 11, 1 + 1 = 2. Since 2 has only one
 Follow up:
 Could you do it without any loop/recursion in O(1) runtime?
 
-## 2.Add Digits-analysis
+### 2.Add Digits-analysis
  
 开始题目只是加起来所有数字，这个很简单，无脑循环一下就行了。
 
@@ -111,14 +111,14 @@ Could you do it without any loop/recursion in O(1) runtime?
 (看来上面想的跟位有关系还是不对的)
 
 
-## 2.Add Digits-Solution-C/C++
+### 2.Add Digits-Solution-C/C++
 
 	int addDigits(int num)
 	{
 	    return num==0?0:(num%9==0?9:num % 9);
 	}
 
-## 2.Add Digits-Solution-Python
+### 2.Add Digits-Solution-Python
 
 	class Solution(object):
 	    def addDigits(self, num):
@@ -135,7 +135,7 @@ Given a binary tree, find its maximum depth.
 
 The maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node.
 
-## 3.Maximum Depth of Binary Tree-analysis
+### 3.Maximum Depth of Binary Tree-analysis
 
 要求返回最大深度，分别求左右子树的最大深度。
 
@@ -151,7 +151,7 @@ The maximum depth is the number of nodes along the longest path from the root no
 
 就应该用中序遍历，左根右，来遍历，得到最大高度
 
-## 3.Maximum Depth of Binary Tree-So lution-C/C++
+### 3.Maximum Depth of Binary Tree-Solution-C/C++
 
 递归式
 
@@ -287,7 +287,7 @@ The maximum depth is the number of nodes along the longest path from the root no
 	    }
 	};
 
-## 3.Maximum Depth of Binary Tree-Solution-Python
+### 3.Maximum Depth of Binary Tree-Solution-Python
 
 python自带列表结构，可以直接构造成带度节点，进行遍历
 
@@ -322,7 +322,7 @@ Write a function to delete a node (except the tail) in a singly linked list, giv
 
 Supposed the linked list is 1 -> 2 -> 3 -> 4 and you are given the third node with value 3, the linked list should become 1 -> 2 -> 4 after calling your function.
 
-## 4.Delete Node in a Linked List-analysis
+### 4.Delete Node in a Linked List-analysis
 
 给出某一结点，并进行删除，遍历一下就可以了。
 
@@ -334,7 +334,7 @@ Supposed the linked list is 1 -> 2 -> 3 -> 4 and you are given the third node wi
 
 这个就是需要注意一下，当只有2个节点、1个节点、是尾节点的时候的情况判断
 
-## 4.Delete Node in a Linked List-Solution-C/C++
+### 4.Delete Node in a Linked List-Solution-C/C++
 
 	/**
 	 * Definition for singly-linked list.
@@ -365,7 +365,7 @@ Supposed the linked list is 1 -> 2 -> 3 -> 4 and you are given the third node wi
 	    free(curnode);
 	}
 
-## 4.Delete Node in a Linked List-Solution-Python
+### 4.Delete Node in a Linked List-Solution-Python
 
 	# Definition for singly-linked list.
 	# class ListNode(object):

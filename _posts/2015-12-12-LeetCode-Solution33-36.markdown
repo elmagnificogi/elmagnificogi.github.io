@@ -32,7 +32,7 @@ return its level order traversal as:
 	  [15,7]
 	]
 
-## 33.Binary Tree Level Order Traversal-analysis
+### 33.Binary Tree Level Order Traversal-analysis
 
 这就是之前的那道题的基础，按层输出，上次是由底向上，这次由上向下
 
@@ -40,9 +40,9 @@ return its level order traversal as:
 
 以当前层为空，当前指针为空，队列为空作为最终的结束条件
 
-## 33.Binary Tree Level Order Traversal-Solution-C/C++
+### 33.Binary Tree Level Order Traversal-Solution-C/C++
 
-### 迭代
+#### 迭代
 
 	/**
 	 * Definition for a binary tree node.
@@ -92,7 +92,7 @@ return its level order traversal as:
 	    }
 	};
 	
-### 递归
+#### 递归
 
 	/**
 	 * Definition for a binary tree node.
@@ -128,9 +128,9 @@ return its level order traversal as:
 	    }
 	};
 
-## 33.Binary Tree Level Order Traversal-Python
+### 33.Binary Tree Level Order Traversal-Solution-Python
 
-### 迭代
+#### 迭代
 
 	# Definition for a binary tree node.
 	# class TreeNode(object):
@@ -167,7 +167,7 @@ return its level order traversal as:
 	                    store.append(temp.right)
 	        return ret
 
-### 递归
+#### 递归
 
 	# Definition for a binary tree node.
 	# class TreeNode(object):
@@ -217,7 +217,7 @@ Depending on your language, queue may not be supported natively. You may simulat
 
 You may assume that all operations are valid (for example, no pop or top operations will be called on an empty stack).
 
-## 34.Implement Stack using Queues-analysis
+### 34.Implement Stack using Queues-analysis
 
 这里要用队列来做栈的功能，和上次刚好反过来了。要求和上次也是一样的
 
@@ -227,7 +227,7 @@ You may assume that all operations are valid (for example, no pop or top operati
 
 python的代码就用不限制谁是存储或者是输出，减少移动次数。
 
-## 34.Implement Stack using Queues-Solution-C/C++
+### 34.Implement Stack using Queues-Solution-C/C++
 	
 	class Stack 
 	{
@@ -309,7 +309,7 @@ python的代码就用不限制谁是存储或者是输出，减少移动次数�
 	    }
 	};
 
-## 34.Implement Stack using Queues-Python
+### 34.Implement Stack using Queues-Solution-Python
 
 我终于发现了为什么之前用全局变量会出错了
 
@@ -407,7 +407,7 @@ Given the below binary tree and sum = 22,
 
 return true, as there exist a root-to-leaf path 5->4->11->2 which sum is 22.
 
-## 35.Path Sum-analysis
+### 35.Path Sum-analysis
 
 给定某一个值，确定给出的树中是否有一条路的和是它相等的
 
@@ -415,7 +415,7 @@ return true, as there exist a root-to-leaf path 5->4->11->2 which sum is 22.
 
 否则就继续寻找，直到深度搜索结束还没找到就返回false
 
-## 35.Path Sum-Solution-C/C++
+### 35.Path Sum-Solution-C/C++
 
 
 	/**
@@ -445,7 +445,7 @@ return true, as there exist a root-to-leaf path 5->4->11->2 which sum is 22.
 	    }
 	};
 
-## 35.Path Sum-Python
+### 35.Path Sum-Solution-Python
 
 	# Definition for a binary tree node.
 	# class TreeNode(object):
@@ -494,7 +494,7 @@ You could also try reversing an integer. However, if you have solved the problem
 
 There is a more generic way of solving this problem.
 
-## 36.Palindrome Number-analysis
+### 36.Palindrome Number-analysis
 
 判读是否是一个回文的数字串，说白了就是首尾相等
 
@@ -506,7 +506,7 @@ There is a more generic way of solving this problem.
 
 那么就简单了，构造数字的回文数字就可以了，然后比较一下是否相等。
 
-## 36.Palindrome Number-Solution-C/C++
+### 36.Palindrome Number-Solution-C/C++
 
 有一个小问题，就是leetcode认为负数不是回文串，所以其实可以直接判定负数就是错的
 	
@@ -533,7 +533,7 @@ There is a more generic way of solving this problem.
 	    x=-x;
 	}
 
-## 36.Palindrome Number-Python   
+### 36.Palindrome Number-Solution-Python   
 
 	class Solution(object):
 	    def isPalindrome(self, x):

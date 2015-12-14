@@ -17,7 +17,7 @@ You are climbing a stair case. It takes n steps to reach to the top.
 
 Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
 
-## 21.Climbing Stairs-analysis
+### 21.Climbing Stairs-analysis
 
 一步两步，我的滑板鞋...摩擦摩擦，又摩擦.... 
 
@@ -38,9 +38,9 @@ Each time you can either climb 1 or 2 steps. In how many distinct ways can you c
 
 好吧竟然是个类斐波那契数列
 
-## 21.Climbing Stairs-Solution-C/C++
+### 21.Climbing Stairs-Solution-C/C++
 
-### 迭代
+#### 迭代
 
 	int climbStairs(int n)
 	{
@@ -55,7 +55,7 @@ Each time you can either climb 1 or 2 steps. In how many distinct ways can you c
 	    return cur;
 	}
 
-### 递归
+#### 递归
 
 虽然递归是正确的，但是莫名其妙在输入42以后都会提示超时的问题 基本就是超过2s才能有答案，所以判定超时吧
 
@@ -66,9 +66,9 @@ Each time you can either climb 1 or 2 steps. In how many distinct ways can you c
 	    return climbStairs(n-1)+climbStairs(n-2);
 	}
 	
-## 21.Climbing Stairs-Python
+### 21.Climbing Stairs-Solution-Python
 
-### 迭代
+#### 迭代
 
 	class Solution(object):
 	    def climbStairs(self, n):
@@ -86,7 +86,7 @@ Each time you can either climb 1 or 2 steps. In how many distinct ways can you c
 	            pre=temp
 	        return cur
 
-### 递归
+#### 递归
 
 问题同上，只不过python的运行效率更差在33往后就 直接超时了
 
@@ -105,7 +105,7 @@ Each time you can either climb 1 or 2 steps. In how many distinct ways can you c
 
 Given an integer, write a function to determine if it is a power of two.
 
-## 22.Power of Two-analysis
+### 22.Power of Two-analysis
 
 判断一个数是不是2的x次方，这里其实可以取巧，直接看位就可以了。
 
@@ -113,7 +113,7 @@ Given an integer, write a function to determine if it is a power of two.
 
 当然这里用来计算1的个数可以用上一次提到的hammingweight的方法，可以提高一倍的速度
 
-## 22.Power of Two-Solution-C/C++
+### 22.Power of Two-Solution-C/C++
 
 	bool isPowerOfTwo(int n) 
 	{
@@ -129,7 +129,7 @@ Given an integer, write a function to determine if it is a power of two.
 	    return true;
 	}
 	
-## 22.Power of Two-Python
+### 22.Power of Two-Solution-Python
 
 	class Solution(object):
 	    def isPowerOfTwo(self, n):
@@ -154,7 +154,7 @@ Given a binary tree, determine if it is height-balanced.
 
 For this problem, a height-balanced binary tree is defined as a binary tree in which the depth of the two subtrees of every node never differ by more than 1.
 
-## 23.Balanced Binary Tree-analysis
+### 23.Balanced Binary Tree-analysis
 
 判断一个平衡二叉树是否是高度平衡的，左右子树结点数之差不超过1
 
@@ -162,9 +162,9 @@ For this problem, a height-balanced binary tree is defined as a binary tree in w
 
 首先就需要求解左右子树的度
 
-## 23.Balanced Binary Tree-Solution-C/C++
+### 23.Balanced Binary Tree-Solution-C/C++
 
-### 递归
+#### 递归
 
 在C的代码中
 
@@ -243,7 +243,7 @@ For this problem, a height-balanced binary tree is defined as a binary tree in w
 	    return balance;
 	}
 
-### 迭代
+#### 迭代
 
 我先尝试把上面的递归改成迭代，发现好麻烦啊，于是想一想有没有其他的简单一些的方法可以用呢
 
@@ -317,7 +317,7 @@ For this problem, a height-balanced binary tree is defined as a binary tree in w
 	}
 	};
 
-## 23.Balanced Binary Tree-Python
+### 23.Balanced Binary Tree-Solution-Python
 
 python也用递归的方式来完成
 
@@ -398,7 +398,7 @@ The above binary tree is serialized as "{1,2,3,#,#,4,#,#,5}".
 
 说白了#就等于之前null嘛
 
-## 24.Symmetric Tree-analysis
+### 24.Symmetric Tree-analysis
 
 判断一棵树是不是对称的。
 
@@ -406,9 +406,9 @@ The above binary tree is serialized as "{1,2,3,#,#,4,#,#,5}".
 
 还是有一点不同，在于对称的问题，也就是判等的时候要左和右相等而不是左等于左
 
-## 24.Symmetric Tree-Solution-C/C++
+### 24.Symmetric Tree-Solution-C/C++
 
-### 递归
+#### 递归
 
 	/**
 	 * Definition for a binary tree node.
@@ -434,7 +434,7 @@ The above binary tree is serialized as "{1,2,3,#,#,4,#,#,5}".
 	    return isSame(root->left,root->right);
 	}
 
-### 迭代
+#### 迭代
 
 这份代码优化了很多，比之前写的判断二叉树是否相等，去掉了很多重复的判断，简洁了一些。
 
@@ -521,9 +521,9 @@ The above binary tree is serialized as "{1,2,3,#,#,4,#,#,5}".
 	    }
 	};
 	
-## 24.Symmetric Tree-Python
+### 24.Symmetric Tree-Solution-Python
 
-### 递归
+#### 递归
 
 	# Definition for a binary tree node.
 	# class TreeNode(object):
@@ -553,7 +553,7 @@ The above binary tree is serialized as "{1,2,3,#,#,4,#,#,5}".
 	            return True
 	        return self.isSame(root.left,root.right)
 
-### 迭代
+#### 迭代
 
 在这里发现了一个问题，python对于数据的空的判断要求高，也就是说空的情况下，如果要求返回值 必然会出错。
 

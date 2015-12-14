@@ -21,7 +21,7 @@ Note:
 You must do this in-place without making a copy of the array.
 Minimize the total number of operations.
 
-## 5.Move Zeroes-analysis
+### 5.Move Zeroes-analysis
 
 空间压缩，并且要求是0的元素到最后去，而非0的元素的顺序不变。
 
@@ -31,7 +31,7 @@ Minimize the total number of operations.
 
 这样交换的次数是最少的
 
-## 5.Move Zeroes-Solution-C/C++
+### 5.Move Zeroes-Solution-C/C++
 
 	void moveZeroes(int* nums, int numsSize) 
 	{
@@ -48,7 +48,7 @@ Minimize the total number of operations.
 	                    }
 	}
 
-## 5.Move Zeroes-Python
+### 5.Move Zeroes-Solution-Python
 	
 	class Solution(object):
 	    def moveZeroes(self, nums):
@@ -73,7 +73,7 @@ Given two binary trees, write a function to check if they are equal or not.
 
 Two binary trees are considered equal if they are structurally identical and the nodes have the same value.
 
-## 6.Same Tree-analysis
+### 6.Same Tree-analysis
  
 检测是不是相同的树，要注意如果左右子树对阵的情况下也是一样的。
 
@@ -83,9 +83,9 @@ Two binary trees are considered equal if they are structurally identical and the
 
 这种会有递归和迭代的解法的都会写两种方式
 
-## 6.Same Tree-Solution-C/C++
+### 6.Same Tree-Solution-C/C++
 
-### 递归
+#### 递归
 
 	/**
 	 * Definition for a binary tree node.
@@ -107,7 +107,7 @@ Two binary trees are considered equal if they are structurally identical and the
 	    //||isSameTree(p->left,q->right) && isSameTree(p->right,q->left);
 	}
 
-### 迭代
+#### 迭代
 
 用迭代的方法，那么就是简单的左右子树相比较，但是需要一个容器用来存储上一次比较的地方，队列就可以了（堆栈都可以）
 
@@ -188,9 +188,9 @@ Two binary trees are considered equal if they are structurally identical and the
 	    }
 	};
 
-## 6.Same Tree-Solution-Python
+### 6.Same Tree-Solution-Python
 
-### 递归
+#### 递归
 
 	# Definition for a binary tree node.
 	# class TreeNode(object):
@@ -216,7 +216,7 @@ Two binary trees are considered equal if they are structurally identical and the
 
 才发现，python的class中递归自身需要前置self，不然就会提示没找到
 
-### 迭代
+#### 迭代
 
 	class Solution(object):
 	    def isSameTree(self, p, q):
@@ -287,13 +287,13 @@ Trivia:
 This problem was inspired by this original tweet by Max Howell:
 Google: 90% of our engineers use the software you wrote (Homebrew), but you can’t invert a binary tree on a whiteboard so fuck off.
 
-## 7.Invert Binary Tree-analysis
+### 7.Invert Binary Tree-analysis
 
 就是要翻转二叉树，用递归就是遍历到最后一个节点然后开始依次往上翻转，并且是做节点的交换，而不是值得交换（值交换，需要判读空的情况，并且新建节点，而且值交换的情况下，需要左右大子树交换的时候就很麻烦了，必须得用节点交换才比较方便）
 
-## 7.Invert Binary Tree-Solution-C/C++
+### 7.Invert Binary Tree-Solution-C/C++
 
-### 递归
+#### 递归
 
 递归思路：首先找到左右子树最下面的叶子节点，然后由叶子节点开始交换位置，并且依次往上进行
 
@@ -324,7 +324,7 @@ Google: 90% of our engineers use the software you wrote (Homebrew), but you can�
 	    }
 	};
 
-### 迭代
+#### 迭代
 
 非递归就需要挨个遍历一遍，依次交换.
 
@@ -382,9 +382,9 @@ Google: 90% of our engineers use the software you wrote (Homebrew), but you can�
 	    }
 	};
 
-## 7.Invert Binary Tree-Solution-Python
+### 7.Invert Binary Tree-Solution-Python
 
-### 递归
+#### 递归
 
 	# Definition for a binary tree node.
 	# class TreeNode(object):
@@ -410,7 +410,7 @@ Google: 90% of our engineers use the software you wrote (Homebrew), but you can�
 	        
 	        return root 
 
-### 迭代
+#### 迭代
 
 	# Definition for a binary tree node.
 	# class TreeNode(object):
@@ -456,7 +456,7 @@ s = "rat", t = "car", return false.
 Note:
 You may assume the string contains only lowercase alphabets.
 
-## 8.Valid Anagram-analysis
+### 8.Valid Anagram-analysis
 
 关键在于anagram这个词，意思是相同字母但是改变了顺序，而不是逆序。
 
@@ -469,7 +469,7 @@ You may assume the string contains only lowercase alphabets.
 
 百度了一下还看到一种思路，直接字母排序判等，这种貌似也可以，但是考虑时间的消耗当然是计数的方法最好只需要一遍就ok。（字母排序并不够稳定，耗时也很多）
 
-## 8.Valid Anagram-Solution-C/C++
+### 8.Valid Anagram-Solution-C/C++
 
 c用计数的方法来完成
 
@@ -496,7 +496,7 @@ c用计数的方法来完成
 	    return true;
 	}
 
-## 8.Valid Anagram-Solution-Python
+### 8.Valid Anagram-Solution-Python
 
 python就用第三种排序的方法来解决这个问题
 python的list有自带的排序功能比较好用，而c没有，c++就要用STL库的容器来弄。虽然python也需要转换一下容器。

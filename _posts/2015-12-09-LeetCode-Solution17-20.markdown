@@ -19,13 +19,13 @@ Ugly numbers are positive numbers whose prime factors only include 2, 3, 5. For 
 
 Note that 1 is typically treated as an ugly number.
 
-## 17.Ugly Number-analysis
+### 17.Ugly Number-analysis
 
 就是分解质因数，如果其质因子只包括2，3，5 那么就是丑数，否则就不是 而1是丑数
 
 如果这个数可以直接整除235 然后判读一次是否可以继续整除，如果还可以 再判读， 直到剩下1或者是剩下的不可整除，就结束了
 
-## 17.Ugly Number-Solution-C/C++
+### 17.Ugly Number-Solution-C/C++
 
 	bool isUgly(int num)
 	{
@@ -56,7 +56,7 @@ Note that 1 is typically treated as an ugly number.
 	    }
 	}
 
-## 17.Ugly Number-Python
+### 17.Ugly Number-Solution-Python
 
 	class Solution(object):
 	    def isUgly(self, num):
@@ -94,7 +94,7 @@ Example: 19 is a happy number
 	6^2 + 8^2 = 100
 	1^2 + 0^2 + 0^2 = 1
 
-## 18.Happy Number-analysis
+### 18.Happy Number-analysis
 
 先要分解n 得到每位数字，然后再按照这个来做 但题目没说这个数字有多大啊 如果非常大 那就很蛋疼了啊
 
@@ -111,7 +111,7 @@ Example: 19 is a happy number
 
 没有相同的就记录一下， 如果查找到了相同的数字 ，那么就是假的
 
-## 18.Happy Number-Solution-C/C++
+### 18.Happy Number-Solution-C/C++
 
 	bool isHappy(int n)
 	{
@@ -139,7 +139,7 @@ Example: 19 is a happy number
 	    return false;
 	}
 
-## 18.Happy Number-Python
+### 18.Happy Number-Solution-Python
 
 python的代码相对简单了一些，因为有set的存在 直接判断是否存在就很容易
 
@@ -180,7 +180,7 @@ You must use only standard operations of a stack -- which means only push to top
 Depending on your language, stack may not be supported natively. You may simulate a stack by using a list or deque (double-ended queue), as long as you use only standard operations of a stack.
 You may assume that all operations are valid (for example, no pop or peek operations will be called on an empty queue).
 
-## 19.Implement Queue using Stacks-analysis
+### 19.Implement Queue using Stacks-analysis
 
 使用栈来实现队列，所以用C++来写，而不用c，发现leetcode上c和c++要求还不一样，多了好几个函数
 
@@ -190,7 +190,7 @@ You may assume that all operations are valid (for example, no pop or peek operat
 
 如果在这个时候还需要添加或者删除队尾元素 就很麻烦，所以需要一个栈来存储剩下的元素。让两个栈来回切换存储就可以了。
 
-## 19.Implement Queue using Stacks-Solution-C/C++
+### 19.Implement Queue using Stacks-Solution-C/C++
 
 	class Queue 
 	{
@@ -238,7 +238,7 @@ You may assume that all operations are valid (for example, no pop or peek operat
 	    }
 	};
 
-## 19.Implement Queue using Stacks-Python
+### 19.Implement Queue using Stacks-Solution-Python
 
 	class Queue(object):
 	    datain=[] #我假装认为这里的list其实是一个栈好了
@@ -297,15 +297,15 @@ You may assume that all operations are valid (for example, no pop or peek operat
 
 Merge two sorted linked lists and return it as a new list. The new list should be made by splicing together the nodes of the first two lists.
 
-## 20.Merge Two Sorted Lists-analysis
+### 20.Merge Two Sorted Lists-analysis
 
 合并两个有序链表，没啥难得，就是不知道这个链表是什么顺序排列的 一般应该是由到大吧
 
 然后分别插入就ok了
 
-## 20.Merge Two Sorted Lists-Solution-C/C++
+### 20.Merge Two Sorted Lists-Solution-C/C++
 
-### 迭代
+#### 迭代
 
 说白了首先把各种空指针传入的情况给排除掉
 
@@ -389,7 +389,7 @@ Merge two sorted linked lists and return it as a new list. The new list should b
 	    return head;
 	}
 
-### 递归
+#### 递归
 
 这个题目无意间看到一个递归的解法，写的非常简单，比上面的代码少多了
 
@@ -431,9 +431,9 @@ Merge two sorted linked lists and return it as a new list. The new list should b
 	    return ret;
 	}
 
-## 20.Merge Two Sorted Lists-Python
+### 20.Merge Two Sorted Lists-Solution-Python
 
-### 递归
+#### 递归
 	
 	# Definition for singly-linked list.
 	# class ListNode(object):
@@ -460,7 +460,7 @@ Merge two sorted linked lists and return it as a new list. The new list should b
 	            head.next=self.mergeTwoLists(l1,l2.next)
 	        return head
 
-### 迭代
+#### 迭代
 	
 把之前c迭代部分稍微改了改，去掉了一些冗余判断
 

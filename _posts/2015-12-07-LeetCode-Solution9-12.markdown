@@ -15,7 +15,7 @@ tags:
 
 Given an array of integers, find if the array contains any duplicates. Your function should return true if any value appears at least twice in the array, and it should return false if every element is distinct.
 
-## 9.Contains Duplicate-analysis
+### 9.Contains Duplicate-analysis
 
 检查数组中重复的部分。由于是个整数数组用计数的方式不现实。
 
@@ -23,7 +23,7 @@ Given an array of integers, find if the array contains any duplicates. Your func
 
 查了一下别人都直接用java的hashset，可以通过插入元素得到结果插入的结果，从而判读重复元素。
 
-## 9.Contains Duplicate-Solution-C/C++
+### 9.Contains Duplicate-Solution-C/C++
 
 用c完成这个难度有点大，所以用c++来写
 
@@ -54,7 +54,7 @@ Given an array of integers, find if the array contains any duplicates. Your func
 
 	
 
-## 9.Contains Duplicate-Python
+### 9.Contains Duplicate-Solution-Python
 
 	class Solution(object):
 	    def containsDuplicate(self, nums):
@@ -83,11 +83,11 @@ For example:
     AA -> 27
     AB -> 28 
 
-## 10.Excel Sheet Column Number-analysis
+### 10.Excel Sheet Column Number-analysis
 
 就是一个26进制而已，只不过通过ABCD...来实现而已
 
-## 10.Excel Sheet Column Number-Solution-C/C++
+### 10.Excel Sheet Column Number-Solution-C/C++
 
 	int titleToNumber(char* s) 
 	{
@@ -100,7 +100,7 @@ For example:
 	    return sum;
 	}
 
-## 10.Excel Sheet Column Number-Python
+### 10.Excel Sheet Column Number-Solution-Python
 
 在这里发现python的string不可以直接相减，并且也不是ascii码。
 
@@ -127,7 +127,7 @@ Given an array of size n, find the majority element. The majority element is the
 
 You may assume that the array is non-empty and the majority element always exist in the array.
 
-## 11.Majority Element-analysis
+### 11.Majority Element-analysis
 
 得到超过数组长度一半的元素。
 
@@ -137,7 +137,7 @@ You may assume that the array is non-empty and the majority element always exist
 
 那么这里也是一样把所有数的位的个数全部统计出来，由于这个主要元素肯定存在，就会导致他的位为1的个数超过n/2，那么所有大于n/2的位为1，其他位为0.就能得到最后的结果，而且只需要遍历数组一次，统计一次32位的个数，空间和时间都很少
 
-## 11.Majority Element-Solution-C/C++
+### 11.Majority Element-Solution-C/C++
 
 	int majorityElement(int* nums, int numsSize) 
 	{
@@ -157,7 +157,7 @@ You may assume that the array is non-empty and the majority element always exist
 	    return i;
 	}	
 
-## 11.Majority Element-Python
+### 11.Majority Element-Solution-Python
 
 在这里python有一个bug的地方，就是他的数据位数和左移的问题 
 
@@ -249,7 +249,7 @@ According to the definition of LCA on Wikipedia: “The lowest common ancestor i
 
 For example, the lowest common ancestor (LCA) of nodes 2 and 8 is 6. Another example is LCA of nodes 2 and 4 is 2, since a node can be a descendant of itself according to the LCA definition.
 
-## 12.Lowest Common Ancestor of a Binary Search Tree-analysis
+### 12.Lowest Common Ancestor of a Binary Search Tree-analysis
 
 二叉搜索树/平衡树寻找祖先节点，说白了就是先找一个数，然后把他的祖先节点存下来，然后再找另外一个数，另一个数遇到的节点都与存下来的节点相对比，然后找到其中最后一个个相同的部分就是其最小公共祖先。这种方法是不考虑这是一个平衡二叉树这种特性的。
 
@@ -263,9 +263,9 @@ For example, the lowest common ancestor (LCA) of nodes 2 and 8 is 6. Another exa
 
 当然这是用递归实现的，同样的迭代方法也会实现一次
 
-## 12.Lowest Common Ancestor of a Binary Search Tree-Solution-C/C++
+### 12.Lowest Common Ancestor of a Binary Search Tree-Solution-C/C++
 
-### 递归
+#### 递归
 
 	/**
 	 * Definition for a binary tree node.
@@ -304,7 +304,7 @@ For example, the lowest common ancestor (LCA) of nodes 2 and 8 is 6. Another exa
 	    }
 	};
 	
-### 迭代
+#### 迭代
 
 由于这种平衡二叉树的特殊性，导致迭代的思路异常的简单，只需要改动一点内容就ok了
 
@@ -351,11 +351,11 @@ For example, the lowest common ancestor (LCA) of nodes 2 and 8 is 6. Another exa
 	};
 
 
-## 12.Lowest Common Ancestor of a Binary Search Tree-Python
+### 12.Lowest Common Ancestor of a Binary Search Tree-Solution-Python
 
 由于算法的特殊性，这里python使用第一种解法，需要使用广度优先搜索，记录路径，递归中找到的第一个共同点就是最小，迭代则是找到的最后一个点是最小。
 
-### 递归
+#### 递归
 	
 	# Definition for a binary tree node.
 	# class TreeNode(object):
@@ -397,7 +397,7 @@ For example, the lowest common ancestor (LCA) of nodes 2 and 8 is 6. Another exa
 	                if lp[i]==lq[j]:
 	                    return lp[i]
 
-### 迭代
+#### 迭代
 
 迭代的方法貌似非常复杂一时半会想不出来(2015年12月7日23:30:36)
 

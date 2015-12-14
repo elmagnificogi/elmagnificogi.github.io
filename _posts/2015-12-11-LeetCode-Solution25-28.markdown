@@ -17,7 +17,7 @@ Given an array and a value, remove all instances of that value in place and retu
 
 The order of elements can be changed. It doesn't matter what you leave beyond the new length.
 
-## 25.Remove Element-analysis
+### 25.Remove Element-analysis
 
 这个题目要求删除元素，但是呢，你删除后的长度，剩下的内容他是不管的，他只看你剩下长度的空间中内容是否正确
 
@@ -25,7 +25,7 @@ The order of elements can be changed. It doesn't matter what you leave beyond th
 
 http://blog.csdn.net/beiyetengqing/article/details/8274317
 
-## 25.Remove Element-Solution-C/C++
+### 25.Remove Element-Solution-C/C++
 
 	int removeElement(int* nums, int numsSize, int val) 
 	{
@@ -41,7 +41,7 @@ http://blog.csdn.net/beiyetengqing/article/details/8274317
 	    return j;
 	}
 	
-## 25.Remove Element-Python
+### 25.Remove Element-Solution-Python
 
 class Solution(object):
     def removeElement(self, nums, val):
@@ -80,15 +80,15 @@ return its bottom-up level order traversal as:
 	  [3]
 	]
 
-## 26.Binary Tree Level Order Traversal II-analysis
+### 26.Binary Tree Level Order Traversal II-analysis
 
 简单说就是要返回每层的元素
 
 用广度搜索，然后把每一层的分别加进去，最后把整个输出的内容逆序就能完成，从后往前输出了
 
-## 26.Binary Tree Level Order Traversal II-Solution-C/C++
+### 26.Binary Tree Level Order Traversal II-Solution-C/C++
 
-### 迭代
+#### 迭代
 
 迭代思路：用queue做广度遍历，用NULL来做层分割，遇到NULL以后判断当前层是否为空，不为空则添加NULL分隔，然后把整个一行加入到返回区中，继续遍历
 
@@ -143,7 +143,7 @@ return its bottom-up level order traversal as:
 	    }
 	};
 
-### 递归
+#### 递归
 
 递归思路：一样的层递归，当root为空时返回，如果当前层和返回区的层数相等，那么就添加一层进去，然后把当前的值加入到当前层中
 然后继续递归 最后对由上到下的层进行翻转。
@@ -183,9 +183,9 @@ return its bottom-up level order traversal as:
 	};
         
 
-## 26.Binary Tree Level Order Traversal II-Python
+### 26.Binary Tree Level Order Traversal II-Solution-Python
 
-### 递归
+#### 递归
 
 python这里又出现了之前遇到的bug 单独测试没有错，但是一旦提交就错了
 
@@ -257,7 +257,7 @@ python这里又出现了之前遇到的bug 单独测试没有错，但是一旦�
 	        ret.reverse()
 	        return ret
 
-### 迭代
+#### 迭代
 
 	# Definition for a binary tree node.
 	# class TreeNode(object):
@@ -331,13 +331,13 @@ Given input array nums = [1,1,2],
 
 Your function should return length = 2, with the first two elements of nums being 1 and 2 respectively. It doesn't matter what you leave beyond the new length.
 
-## 27.Remove Duplicates from Sorted Array-analysis
+### 27.Remove Duplicates from Sorted Array-analysis
 
 这个题和25题是一样的，都是删除元素，而且不计删除后的长度问题
 
 我想到的办法就是每次取一个，和之前的相比较，如果有相同的元素，那么就取下一个，如果全都不同，那么就存起来
 
-## 27.Remove Duplicates from Sorted Array-Solution-C/C++        
+### 27.Remove Duplicates from Sorted Array-Solution-C/C++        
 
 单独测试都能通过，但是 Time Limit Exceeded 超时了，就得想办法，主要这个没考虑到题目给的是sorted的，没有利用这个条件优化一下
 
@@ -424,7 +424,7 @@ Your function should return length = 2, with the first two elements of nums bein
 	    return ret;
 	}
 
-## 27.Remove Duplicates from Sorted Array-Python
+### 27.Remove Duplicates from Sorted Array-Solution-Python
 
 class Solution(object):
     def removeDuplicates(self, nums):
@@ -452,7 +452,7 @@ You are a professional robber planning to rob houses along a street. Each house 
 
 Given a list of non-negative integers representing the amount of money of each house, determine the maximum amount of money you can rob tonight without alerting the police.
 
-## 28.House Robber-analysis
+### 28.House Robber-analysis
 
 说白了相邻的房子同一晚上不能进，只能进不相邻的。最后要求最大值
 
@@ -475,7 +475,7 @@ Given a list of non-negative integers representing the amount of money of each h
 
 按照这个规则你一直抢到最后一家，比较一下notRob[N]和rob[N]哪个比较大就ok了。
 
-## 28.House Robber-Solution-C/C++   
+### 28.House Robber-Solution-C/C++   
 
 	
 	int rob(int* nums, int numsSize) 
@@ -503,7 +503,7 @@ Given a list of non-negative integers representing the amount of money of each h
 	}
 
      
-## 28.House Robber-Python
+### 28.House Robber-Solution-Python
 	
 	class Solution(object):
 	    def rob(self, nums):

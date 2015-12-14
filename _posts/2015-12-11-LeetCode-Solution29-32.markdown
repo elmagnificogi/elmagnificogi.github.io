@@ -17,11 +17,11 @@ Given a non-negative number represented as an array of digits, plus one to the n
 
 The digits are stored such that the most significant digit is at the head of the list.
 
-## 29.Plus One-analysis
+### 29.Plus One-analysis
 
 看了半天才看明白，原来是要做一个加法，给最后一个数字+1 然后检查进位标志，如果超了，那就加一个数字来表示
 
-## 29.Plus One-Solution-C/C++
+### 29.Plus One-Solution-C/C++
 
 
 	class Solution 
@@ -55,7 +55,7 @@ The digits are stored such that the most significant digit is at the head of the
 	};
 
 
-## 29.Plus One-Python
+### 29.Plus One-Solution-Python
 
 	class Solution(object):
 	    def plusOne(self, digits):
@@ -101,7 +101,7 @@ Return
 	 [1,4,6,4,1]
 	]
 
-## 30.Pascal's Triangle-analysis
+### 30.Pascal's Triangle-analysis
 
 这不就是杨辉三角形嘛，每个值等于其左上和右上两个值的和，如果不存在则为0
 
@@ -109,7 +109,7 @@ Return
 
 然后边界值手动加入，中间的值用循环计算。
 
-## 30.Pascal's Triangle-Solution-C/C++
+### 30.Pascal's Triangle-Solution-C/C++
 
 	class Solution
 	{
@@ -148,7 +148,7 @@ Return
 	    }
 	};
 
-## 30.Pascal's Triangle-Python
+### 30.Pascal's Triangle-Solution-Python
 
 	class Solution(object):
 	    def generate(self, numRows):
@@ -179,7 +179,7 @@ Given an integer n, return the number of trailing zeroes in n!.
 
 Note: Your solution should be in logarithmic time complexity.
 
-## 31.Factorial Trailing Zeroes-analysis
+### 31.Factorial Trailing Zeroes-analysis
 
 擦，这个英文完全没看懂，看了别人的分析才明白是什么意思。
 
@@ -199,7 +199,7 @@ Note: Your solution should be in logarithmic time complexity.
 所以 如果只是单独得到5的倍数，并不能找到所有的0，还需要继续再看商是否依然还能出现5的倍数，如果还能出现说明，其因子中还含有5
 
 
-## 31.Factorial Trailing Zeroes-Solution-C/C++
+### 31.Factorial Trailing Zeroes-Solution-C/C++
 
 	int trailingZeroes(int n)
 	{
@@ -214,7 +214,7 @@ Note: Your solution should be in logarithmic time complexity.
 	    }
 	}
 
-## 31.Factorial Trailing Zeroes-Python
+### 31.Factorial Trailing Zeroes-Solution-Python
 
 	class Solution(object):
 	    def trailingZeroes(self, n):
@@ -240,7 +240,7 @@ Given an index k, return the kth row of the Pascal's triangle.
 For example, given k = 3,
 Return [1,3,3,1].
 
-## 32.Pascal's Triangle II-analysis
+### 32.Pascal's Triangle II-analysis
 
 依然是杨辉三角形，但是这一次呢 要求只返回对应的行，其他的就不要了
 
@@ -248,7 +248,7 @@ Return [1,3,3,1].
 
 同时要注意这里的行号和之前的那个不一样了
 
-## 32.Pascal's Triangle II-Solution-C/C++
+### 32.Pascal's Triangle II-Solution-C/C++
 
 	class Solution {
 	public:
@@ -286,7 +286,7 @@ Return [1,3,3,1].
 	    }
 	};
 
-## 32.Pascal's Triangle II-Python
+### 32.Pascal's Triangle II-Solution-Python
 
 	class Solution(object):
 	    def getRow(self, rowIndex):

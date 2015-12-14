@@ -17,7 +17,7 @@ Write a function that takes an unsigned integer and returns the number of ’1' 
 
 For example, the 32-bit integer ’11' has binary representation 00000000000000000000000000001011, so the function should return 3.
 
-## 13.Number of 1 Bits-analysis
+### 13.Number of 1 Bits-analysis
 
 返回位为1的数量，so easy 
 
@@ -25,7 +25,7 @@ For example, the 32-bit integer ’11' has binary representation 000000000000000
 
 > http://www.cnblogs.com/graphics/archive/2010/06/21/1752421.html
 
-## 13.Number of 1 Bits-Solution-C/C++
+### 13.Number of 1 Bits-Solution-C/C++
 
 我的普通解法
 
@@ -109,7 +109,7 @@ HAKMEM算法和上面的也有类似的地方 他是使用3位为一组来做的
 	    return n;
 	}
 
-## 13.Number of 1 Bits-Python
+### 13.Number of 1 Bits-Solution-Python
 
 	class Solution(object):
 	    def hammingWeight(self, n):
@@ -128,7 +128,7 @@ Given a roman numeral, convert it to an integer.
 
 Input is guaranteed to be within the range from 1 to 3999.
 
-## 14.Roman to Integer-analysis
+### 14.Roman to Integer-analysis
 
 把罗马数字转换为普通数字
 
@@ -159,7 +159,7 @@ Input is guaranteed to be within the range from 1 to 3999.
 
 （在他blog看到一个会动的球形tags，并且会根据鼠标移动轨迹来顺着移动好流弊的样子，有空研究一下，扒一个过来）
 
-## 14.Roman to Integer-Solution-C/C++
+### 14.Roman to Integer-Solution-C/C++
 	
 	int flagtoint(char f)
 	{
@@ -207,7 +207,7 @@ Input is guaranteed to be within the range from 1 to 3999.
 	}
 
 
-## 14.Roman to Integer-Python
+### 14.Roman to Integer-Solution-Python
 
 	class Solution(object):
 	    def flagtoint(self, f):
@@ -260,7 +260,7 @@ click to show more hints.
 Hint:
 A linked list can be reversed either iteratively or recursively. Could you implement both?
 
-## 15.Reverse Linked List-analysis
+### 15.Reverse Linked List-analysis
 
 用两种方法来翻转单链表，这个练得比较多，easy
 
@@ -275,9 +275,9 @@ A linked list can be reversed either iteratively or recursively. Could you imple
 
 如果要用递归，也简单，只需要递归到最后一个next为空的情况下，开始进行翻转就可以了。
 
-## 15.Reverse Linked List-Solution-C/C++
+### 15.Reverse Linked List-Solution-C/C++
 
-### 迭代
+#### 迭代
 
 	/**
 	 * Definition for singly-linked list.
@@ -339,7 +339,7 @@ A linked list can be reversed either iteratively or recursively. Could you imple
 		*/
 	}
 
-### 递归
+#### 递归
 
 	/**
 	 * Definition for singly-linked list.
@@ -365,9 +365,9 @@ A linked list can be reversed either iteratively or recursively. Could you imple
 	    }
 	}
 
-## 15.Reverse Linked List-Python
+### 15.Reverse Linked List-Solution-Python
 
-### 递归
+#### 递归
 
 	# Definition for singly-linked list.
 	# class ListNode(object):
@@ -388,7 +388,7 @@ A linked list can be reversed either iteratively or recursively. Could you imple
 	        head.next=None
 	        return temp
 
-### 迭代
+#### 迭代
 
 	# Definition for singly-linked list.
 	# class ListNode(object):
@@ -450,11 +450,11 @@ For example,
 Given 1->1->2, return 1->2.
 Given 1->1->2->3->3, return 1->2->3.
 
-## 16.Remove Duplicates from Sorted List-analysis
+### 16.Remove Duplicates from Sorted List-analysis
 
 删除有序链表中的重复部分，看起来也很简单啊。
 
-## 16.Remove Duplicates from Sorted List-Solution-C/C++
+### 16.Remove Duplicates from Sorted List-Solution-C/C++
 
 	/**
 	 * Definition for singly-linked list.
@@ -490,7 +490,7 @@ Given 1->1->2->3->3, return 1->2->3.
 	}
 
 
-## 16.Remove Duplicates from Sorted List-Python
+### 16.Remove Duplicates from Sorted List-Solution-Python
 
 python在上面c的基础上，把一些重复的逻辑去掉了，稍微简洁了一些
 	
