@@ -514,26 +514,112 @@ All root-to-leaf paths are:
 	        self.depthsearch(root,s)
 	        return self.ret
 
-## 52.Bulls and Cows
+## 56.Range Sum Query - Immutable
 
-Given two binary strings, return their sum (also a binary string).
+Given an integer array nums, find the sum of the elements between indices i and j (i ≤ j), inclusive.
 
-For example,
-a = "11"
-b = "1"
-Return "100".
-
-### 52.Bulls and Cows-analysis
-
-### 52.Bulls and Cows-Solution-C/C++
-
-### 52.Bulls and Cows-Solution-Python
+Example:
 	
+	Given nums = [-2, 0, 3, -5, 2, -1]
+	
+	sumRange(0, 2) -> 1
+	sumRange(2, 5) -> -1
+	sumRange(0, 5) -> -3
+
+Note:
+
+You may assume that the array does not change.
+
+There are many calls to sumRange function.
+
+### 56.Range Sum Query - Immutable-analysis
+
+给定一组数，返回对应下标范围内的数字的总和
+
+但是这个题并不仅仅是到这里而已，他需要你自己写一个类对象，并且完成上面的操作
+
+也就是要自己写一个构造函数，和sumRange的成员函数，感觉很简单啊？
+
+实际上第一次写完以后就不通过，百度了一下，发现题目想要的是什么。
+
+### 56.Range Sum Query - Immutable-Solution-C/C++
+
+下面的代码，功能上没有问题，但是没通过，Time Limit Exceeded，竟然超时了，也就是说这里需要优化一下。
+
+	class NumArray 
+	{
+	public:
+	    vector<int> data;
+	    NumArray(vector<int> &nums)
+	    {
+	        data=nums;
+	    }
+	
+	    int sumRange(int i, int j)
+	    {
+	        int sum=0;
+	        for(i;i<=j;i++)
+	            sum=sum+data[i];
+	        return sum;
+	    }
+	};
+
+所以此题的解决办法就是提前计算好所有数字的和，存到vector中，在最后调用的时候用sum(j)-sum(i-1)就能得到i到j的总和了
+
+	class NumArray 
+	{
+	public:
+	    vector<int> data;
+	    NumArray(vector<int> &nums)
+	    {
+	        int sum=0,i=0;
+	        for(i=0;i<nums.size();i++)
+	        {
+	            sum=sum+nums[i];
+	            data.push_back(sum);
+	        }
+	    }
+	
+	    int sumRange(int i, int j)
+	    {
+	        if(i==0)
+	            return data[j];
+	        return data[j]-data[i-1];
+	    }
+	};
+
+### 56.Range Sum Query - Immutable-Solution-Python
+	
+	class NumArray(object):
+	    def __init__(self, nums):
+	        """
+	        initialize your data structure here.
+	        :type nums: List[int]
+	        """
+	        data=0
+	        self.sum=[]
+	        for i in range(len(nums)):
+	            data=data+nums[i]
+	            self.sum.append(data)
+	        
+	
+	    def sumRange(self, i, j):
+	        """
+	        sum of elements nums[i..j], inclusive.
+	        :type i: int
+	        :type j: int
+	        :rtype: int
+	        """
+	        if i==0:
+	            return self.sum[j]
+	        return self.sum[j]-self.sum[i-1]
+        
 ## Quote
 
 > http://blog.csdn.net/sunao2002002/article/details/46918645
 > http://www.bkjia.com/ASPjc/1031678.html
 > http://www.cnblogs.com/ganganloveu/p/4635328.html
+> http://my.oschina.net/Tsybius2014/blog/528708
 
 
 
