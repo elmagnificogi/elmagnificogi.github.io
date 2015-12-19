@@ -11,320 +11,495 @@ tags:
 ---
 
 
-## 5.Binary Tree Preorder Traversal
+## 9.Search Insert Position
 
-Given a binary tree, return the preorder traversal of its nodes' values.
+Given a sorted array and a target value, return the index if the target is found. If not, return the index where it would be if it were inserted in order.
 
-For example:
-Given binary tree {1,#,2,3},
+You may assume no duplicates in the array.
 
-	   1
-	    \
-	     2
-	    /
-	   3
+Here are few examples.
 
-return [1,2,3].
+	[1,3,5,6], 5 → 2
+	[1,3,5,6], 2 → 1
+	[1,3,5,6], 7 → 4
+	[1,3,5,6], 0 → 0
 
-Note: Recursive solution is trivial, could you do it iteratively?
+### 9.Search Insert Position-analysis
 
-### 5.Binary Tree Preorder Traversal-analysis
+从一个有序数组中寻找某一值，如果找到了返回其引索，否则返回该值插入引索
 
-返回前序遍历的结果，要求用迭代来解决这个问题。
+首先既然是有序数组，那就可以用二分搜索来寻找这个值，如果没找到，也能直接得到其插入引索的位置
 
-既然是前序遍历，其实也就需要一个队列来存储一下临时变量而已 
+### 9.Search Insert Position-Solution-C/C++
 
-### 5.Binary Tree Preorder Traversal-Solution-C/C++
-
-	/**
-	 * Definition for a binary tree node.
-	 * struct TreeNode {
-	 *     int val;
-	 *     TreeNode *left;
-	 *     TreeNode *right;
-	 *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
-	 * };
-	 */
-	class Solution {
+	class Solution 
+	{
 	public:
-	    vector<int> preorderTraversal(TreeNode* root) 
+	    int searchInsert(vector<int>& nums, int target) 
 	    {
-	        if(!root)
-	            return (vector<int>)0;
-	        queue<TreeNode*> store;
-	        stack<TreeNode*> storer;
-	        vector<int>ret;
-	        TreeNode *temp;
-	        int i=0;
-	        store.push(root);
-	        while(!store.empty()||!storer.empty())
+	        int low=0,high=nums.size(),mid=low+(high-low)/2;
+	        while(low<high)
 	        {
-	            if(!store.empty())
+	            if(nums[mid]>target)
 	            {
-	                temp=store.front();
-	                store.pop();
+	                high=mid;
 	            }
 	            else
 	            {
-	                temp=storer.top();
-	                storer.pop();
+	                low=mid+1;
 	            }
-	            if(temp!=NULL)
-	            {
-	                ret.push_back(temp->val);
-	            }
-	            if(temp->left)
-	                store.push(temp->left);
-	            if(temp->right)
-	                storer.push(temp->right);
+	            mid=low+(high-low)/2;
 	        }
-	        return ret;
+	        if(nums[mid-1]==target&&mid-1>=0)
+	            return mid-1;
+	        else
+	            return mid;
 	    }
 	};
 
-### 5.Binary Tree Preorder Traversal-Solution-Python
+### 9.Search Insert Position-Solution-Python
 
-	# Definition for a binary tree node.
-	# class TreeNode(object):
-	#     def __init__(self, x):
-	#         self.val = x
-	#         self.left = None
-	#         self.right = None
-	
 	class Solution(object):
-	    def preorderTraversal(self, root):
+	    def searchInsert(self, nums, target):
 	        """
-	        :type root: TreeNode
-	        :rtype: List[int]
+	        :type nums: List[int]
+	        :type target: int
+	        :rtype: int
 	        """
-	        if not root:
-	            return []
-	        store=[root]
-	        ret=[]
-	        temp=None
-	        while temp or len(store)!=0:
-	            if not temp:
-	                temp=store[-1]
-	                del store[-1]
-	            if temp:
-	                ret.append(temp.val)
-	            if temp.right:
-	                store.append(temp.right)
-	            if temp.left:
-	                temp=temp.left
+	        low=0
+	        high=len(nums)
+	        mid=low+(high-low)/2
+	        while low<high:
+	            if nums[mid]>target:
+	                high=mid
 	            else:
-	                temp=None
-	        return ret
+	                low=mid+1
+	            mid=low+(high-low)/2
+	        if nums[mid-1]==target and mid-1>=0:
+	            return mid-1
+	        else:
+	            return mid
 
-## 6.Binary Tree Inorder Traversal
 
-Given a binary tree, return the inorder traversal of its nodes' values.
 
-For example:
-Given binary tree {1,#,2,3},
-   1
-    \
-     2
-    /
-   3
-return [1,3,2].
+## 10. Populating Next Right Pointers in Each Node
 
-Note: Recursive solution is trivial, could you do it iteratively?
+Given a binary tree
 
-### 6.Binary Tree Inorder Traversal-analysis
+    struct TreeLinkNode {
+      TreeLinkNode *left;
+      TreeLinkNode *right;
+      TreeLinkNode *next;
+    }
 
-这个是中序遍历，一样的 
+Populate each next pointer to point to its next right node. If there is no next right node, the next pointer should be set to NULL.
 
-### 6.Binary Tree Inorder Traversal-Solution-C/C++
+Initially, all next pointers are set to NULL.
+
+Note:
+
+You may only use constant extra space.
+
+You may assume that it is a perfect binary tree (ie, all leaves are at the same level, and every parent has two children).
+
+For example,
+
+Given the following perfect binary tree,
+
+	         1
+	       /  \
+	      2    3
+	     / \  / \
+	    4  5  6  7
+
+After calling your function, the tree should look like:
+
+         1 -> NULL
+       /  \
+      2 -> 3 -> NULL
+     / \  / \
+    4->5->6->7 -> NULL
+
+### 10. Populating Next Right Pointers in Each Node-analysis
+
+给了一个完整树，同时在树节点中增加了一个next
+
+next表示是当前节点在树种右边节点的地址，现在需要对一个没有next节点的树完成所有next节点的初始化。
+
+既然是完整树，那么只要按层遍历就行了，对每层的节点进行next赋值。
+
+同时用degree来记录当前层，count用来记录当前层个数。
+
+如果count==1的时候 表示剩下的是最后一个，那么这个节点就是最右节点，就把他的next设置为NULL
+
+否则的情况下，next=队列中的头节点
+
+### 10. Populating Next Right Pointers in Each Node-Solution-C/C++
 
 	/**
-	 * Definition for a binary tree node.
-	 * struct TreeNode {
-	 *     int val;
-	 *     TreeNode *left;
-	 *     TreeNode *right;
-	 *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+	 * Definition for binary tree with next pointer.
+	 * struct TreeLinkNode {
+	 *  int val;
+	 *  TreeLinkNode *left, *right, *next;
+	 *  TreeLinkNode(int x) : val(x), left(NULL), right(NULL), next(NULL) {}
 	 * };
 	 */
 	class Solution 
 	{
 	public:
-	    vector<int> inorderTraversal(TreeNode* root) 
+	    void connect(TreeLinkNode *root) 
 	    {
-	        vector<int> ret;
-	        stack<TreeNode*> store;
-	        TreeNode *temp=root;
-	        while(temp||!store.empty())
+	        queue<TreeLinkNode*>store;
+	        TreeLinkNode*temp=NULL;
+	        store.push(root);
+	        int degree=1,count=1;
+	        while(!store.empty())
 	        {
+	            temp=store.front();
+	            store.pop();
 	            if(temp)
 	            {
-	                store.push(temp);
-	                temp=temp->left;
-	                continue;
+	                if(count==1)
+	                {
+	                    temp->next=NULL;
+	                    count=degree*2;
+	                    degree=degree*2;
+	                    ;
+	                }
+	                else
+	                {
+	                    count--;
+	                    temp->next=store.front();
+	                }
+	                if(temp->left)
+	                {
+	                    store.push(temp->left);
+	                    store.push(temp->right);
+	                }
 	            }
-	            temp=store.top();
-	            store.pop();
-	            ret.push_back(temp->val);
-	            temp=temp->right;
+	
 	        }
-	        return ret;
 	    }
 	};
 
-### 6.Binary Tree Inorder Traversal-Solution-Python
+### 10. Populating Next Right Pointers in Each Node-Solution-Python
 
-	# Definition for a binary tree node.
-	# class TreeNode(object):
+	# Definition for binary tree with next pointer.
+	# class TreeLinkNode(object):
 	#     def __init__(self, x):
 	#         self.val = x
 	#         self.left = None
 	#         self.right = None
+	#         self.next = None
 	
 	class Solution(object):
-	    def inorderTraversal(self, root):
+	    def connect(self, root):
 	        """
-	        :type root: TreeNode
-	        :rtype: List[int]
+	        :type root: TreeLinkNode
+	        :rtype: nothing
 	        """
-	        store=[]
-	        ret=[]
+	        store=[root]
 	        temp=root
-	        while temp or len(store)!=0:
+	        degree=1
+	        count=1
+	        while len(store)!=0:
+	            temp=store[0]
+	            del store[0]
 	            if temp:
-	                store.append(temp)
-	                temp=temp.left
-	                continue
-	            temp=store[-1]
-	            del store[-1]
-	            ret.append(temp.val)
-	            temp=temp.right
-	        return ret
+	                if count==1:
+	                    count=degree*2
+	                    degree=count
+	                    temp.next=None
+	                else:
+	                    count=count-1
+	                    temp.next=store[0]
+	                if temp.left:
+	                    store.append(temp.left)
+	                    store.append(temp.right)
+	                
 
+## 11.Single Number II
 
-## 7.Missing Number
-
-Given an array containing n distinct numbers taken from 0, 1, 2, ..., n, find the one that is missing from the array.
-
-For example,
-
-Given nums = [0, 1, 3] return 2.
+Given an array of integers, every element appears three times except for one. Find that single one.
 
 Note:
 
-Your algorithm should run in linear runtime complexity. Could you implement it using only constant extra space complexity?
+Your algorithm should have a linear runtime complexity. Could you implement it without using extra memory?
 
-### 7.Missing Number-analysis
+### 11.Single Number II-analysis
 
-找出连续数中缺失的那一个，但是题目没有说数组是排序过的！！
+给了一个数组，这次每个数出现了三次，有一个只有一次，找到这个数
 
-所以可能出现乱序，这个题比较像是智力题。
+两个方法：
 
-既然是连续个数，而且一定缺少了一个数，总个数为nums.size+1
+1. 统计32位的个数，最后模3 剩下的位组成的数，自然就是这个数，需要额外空间
 
-而且一定是从0开始的，那只需要求和 然后相减就可以了。
+2. 用两个变量来存储当前出现了1次、2次、3次的位，最后输出出现了1次的位的变量，就是这个数。
 
-n+1个数的总和-当前给出的n个数的总和=缺少的那个数
+这次使用方法二来完成，不需要额外空间，而且只需要遍历一次。
 
-### 7.Missing Number-Solution-C/C++
+难点主要在于怎么用遍历存储当前出现了1次2次3次的位的问题上
+
+首先说三次是怎么得到的：出现了三次的位自然就是one上面出现的位+two上面出现的位，其结果是出现了三次的位，所以有：
+	
+	three=two&one 二者与运算后留下的位就是出现了三次的位
+	在这里发现three这个值会一直变，而没有保存之前出现了三次的位，原因就在于出现了三次的位，是我们题目中所不需要的，本来就是出现了三次之后就置为0
+	所以 三次存在的目的，完全是为了去掉二次和一次中出现三次的位而已
+
+再说出现两次的位是怎么得到的,首先当前出现两次的位，肯定是出现了一次的位+当前这个数的位 重合的部分 再加上老两次的位=新两次的位
+
+	tow=two|(one&nums[i]);
+
+最后是一次的位是怎么得到的，出现一次的位就等于当前的数和一次的位取异或，所得到的1表示，二者不相同（只出现了一次），0则是表示二者相同(出现了两次，留给two去解决)
+	
+	one=one^nums[i];
+
+而然做完了这些还不行，因为只是计算了出现了这么多次数的，但是当计算完三次的时候，并没有把出现两次和出现一次中出现三次的位给置0，所以还需要一个清0的动作
+
+	one=one&(~three)
+	two=two&(~three)
+
+再说一下这里的计算顺序的问题，三次的计算顺序和清零的计算肯定都是放在后面的。主要就是先计算一次还是计算两次。可以发现必须要先二次后一次，理由如下
+
+	新二次中使用了一次，如果这个一次是新一次，那么 二次=新一次&当前值 （由于新一次和nums[i]求了异或，这里再用与就会丢失老一次的内容）
+	所以新二次先计算，然后再是新一次
+
+也有看到这样计算的：（本质上思路是一样的）
+
+	//一定是出现3次，2次，1次这样的顺序，如果反过来的话，先更新了one的话，会影响到two和three的
+	three =  two & A[i];//已经出现了两次，还出现了一次
+	two = two | one & A[i];//出现了1次又出现了1次，在加上以前已经出现了2次的，为新的出现了2次的            
+	one = one | A[i];//出现了1次
+	//将出现3次的其出现1次2次全部抹去
+	one = one & ~three;
+	two = two & ~three;
+
+或者这样的
+
+	int singleNumber(int a[], int len){ 
+	     int one = 0;
+	     int two = 0;
+	     int remain;
+	     for(int i = 0; i < len; ++i){
+	            remain = a[i] & ~two;
+	            two &= ~a[i];
+	            two |= one & remain;
+	            one ^=remain;
+	     }
+	     return one; 
+	} 
+
+这种方法更精炼了一下，之前都是在统计某一位出现了三次的情况，而这个就更简洁
+
+    public int singleNumber(int[] A) {
+        int zeros=0, ones=0;
+        for (int i=0; i<A.length; i++){  // 00 -> 01 -> 10 -> 00
+            zeros = (zeros^A[i]) & ~ones;  // if bit1 is 1 we should put bit0 as 0, otherwise just count
+            ones = (ones^A[i]) & ~zeros;  // if bit0 is 1 we should put bit1 as 0, otherwise just count
+        }
+        return ones|zeros;
+    }
+
+假设连续输入三个3(0011) 发现zero和ones最后都清零恢复到了最初的状态，而如果这个值只出现了一次那么zero中的值就是目标值，如果这个值出现了两次，那么ones中的值就是这个值
+
+	zeros  0   0^0011&1111=0011  0011^0011&1111=0  0^0011&1100=0 
+	ones   0   0^0011&1100=0     0^0011&1111=0011  0011^0011&1111=0
+
+也就是说这个式子有一个非常巧妙地地方，在于他会把输入的值按照位的规律依次存储在zero和one中，出现了一次就存在zero中，两次就存在one中，出现三次的时候，二者都会清零。
+
+如果要统计有一个数出现了2次或者是出现了1次 都可以用这个来统计返回。而且可以随着数字出现的次数来扩展。 他利用的特性就是一个数异或其自身两次以后就等于其自身的原理（事实上这个原理是在Single Number中出现的原理，把这个看似只能两个数来用的原理扩展到了三个数种，甚至还可以扩展到更多的数种，按照推断，这个解才是真正的leetcode想要我们给出的解，SingleNumber应该就是用来教会你如何使用异或的）
+
+同时还发现了一个特性： A XOR B = (A+B)%进制 这样的话以后计算加法的时候其实可以直接这个来表示，而且可以保证不会越界的问题
+
+### 11.Single Number II-Solution-C/C++
 
 	class Solution 
 	{
 	public:
-	    int missingNumber(vector<int>& nums)
+	    int singleNumber(vector<int>& nums) 
 	    {
-	        int i=0,sum=0,sdsum=0;
-	        for(i=0;i<nums.size()+1;i++)
+	        int i=0,one=0,two=0,three=0;
+	        for(i=0;i<nums.size();i++)
 	        {
-	            sdsum+=i;
-	            if(i<nums.size())
-	                sum=sum+nums[i];
+	            two=two|(one&nums[i]);
+	            one=one^nums[i];
+	            three=two&one;
+	            two=two&(~three);
+	            one=one&(~three);
 	        }
-	        return sdsum-sum;
+	        return one;
 	    }
 	};
 
-### 7.Missing Number-Solution-Python
+### 11.Single Number II-Solution-Python
 
 	class Solution(object):
-	    def missingNumber(self, nums):
+	    def singleNumber(self, nums):
 	        """
 	        :type nums: List[int]
 	        :rtype: int
 	        """
-	        sum=0
-	        sdsum=0
-	        for i in range(len(nums)+1):
-	            sdsum+=i
-	            if i<len(nums):
-	                sum+=nums[i]
-	        return sdsum-sum
+	        zero=0
+	        one=0
+	        for i in range(len(nums)):
+	            zero=zero^nums[i]&~one
+	            one=one^nums[i]&~zero
+	        return zero|one
 
-## 8.Linked List Cycle
+## 12.Unique Binary Search Trees
 
-Given a linked list, determine if it has a cycle in it.
+Given n, how many structurally unique BST's (binary search trees) that store values 1...n?
 
-Follow up:
+For example,
 
-Can you solve it without using extra space?
+Given n = 3, there are a total of 5 unique BST's.
 
-### 8.Linked List Cycle-analysis
+	   1         3     3      2      1
+	    \       /     /      / \      \
+	     3     2     1      1   3      2
+	    /     /       \                 \
+	   2     1         2                 3
 
-给定一个链表，判断是否存在环，这个也很简单，只要用两个指针同时走，一个指针一次走一个，一个一次走两步，这样如果快的出现了指向空则不成环，否则二者肯定会在某时相等，相等就成环。 
+### 12.Unique Binary Search Trees-analysis
 
-### 8.Linked List Cycle-Solution-C/C++
+给一个n 返回n个节点可以组成多少种不同结构的搜索树（二叉树）。
 
-	/**
-	 * Definition for singly-linked list.
-	 * struct ListNode {
-	 *     int val;
-	 *     ListNode *next;
-	 *     ListNode(int x) : val(x), next(NULL) {}
-	 * };
-	 */
+不论是二叉树还是搜索树其结果都是一样的。
+
+而二叉树的节点和对应的树的种类等于
+
+	C(2*n,n)/(n+1)=2n!/(n!*n!*(n+1))=(2n*(2n-1)*(2n-2)*(2n-3)...n+2)/(1*2*3*4*5*6...n)  
+
+求这个表达式的值，但是当n=10的时候就出现了int类型越界的问题，导致后面答案完全不对，所以得想办法能除的情况下赶紧除了
+
 	class Solution 
 	{
 	public:
-	    bool hasCycle(ListNode *head) 
+	    int numTrees(int n)
 	    {
-	        ListNode *slow=head;
-	        ListNode *fast=head;
-	        while(fast&&fast->next&&fast->next->next)
+	        int i=0,p1=1,p2=1;
+	        
+	        for(i=1;i<=2*n;i++)
 	        {
-	            slow=slow->next;
-	            fast=fast->next->next;
-	            if(fast==slow)
-	                return true;
+	            if(i>n+1)
+	                p1*=i;
+	            if(i<n+1)
+	                p2*=i;
 	        }
-	        return false;
+	        return p1/p2;                                           
+	    }
+	};  
+
+能整除的情况下先整除了，然后这个也只能做到n=17的时候就又越界了，经过测试leetcode要求能算到19.达到int的极限位，所以修改为long类型之后，通过了
+
+	class Solution 
+	{
+	public:
+	    int numTrees(int n)
+	    {
+	        long i=0,p1=1,p2=1;
+	        
+	        for(i=1;i<=n;i++)
+	        {
+	            p2*=i;
+	            if(i>=2)
+	                p1*=n+i;
+	            if(p1%p2==0)
+	            {
+	                p1=p1/p2;
+	                p2=1;
+	            }
+	                
+	        }
+	        return p1/p2;                                           
 	    }
 	};
 
-### 8.Linked List Cycle-Solution-Python
+当然其实这么做有一些赖皮的嫌疑，毕竟是以知道表达式直接计算，而不是自己一步一步推导出来的
 
-	# Definition for singly-linked list.
-	# class ListNode(object):
-	#     def __init__(self, x):
-	#         self.val = x
-	#         self.next = None
+首先集合为空时，只有一种树，空树 
+
+	f0=1
+
+如果只有一个节点，只有一种树 
+
+	f1=1
+
+如果有两个节点的时候，选择其中一个节点为根节点，另外一个节点就相当于只有一个节点时的情况，一共有两种根节点的选法，所以：
+
+	f2=根0*f1+根1*f1=2
+
+如果有三个节点，就是有三种根节点的选择，同时，每当你选择了一个根节点，那么其对应的就有左右子树，其左右子树，又可以当成下一个根节点来对待 
 	
+	f3=左子树为0*右子树为2+左子树为1*右子树为1+左子树为2*右子树为0 这样的情况总和就是3个节点的总和情况了
+	
+	f3=f0*f2+f1*f1+f2*f0=f2+f1*f1+f2=2+1+2=5
+
+推而广之，当有n个节点的时候：
+
+	fn=f0*fn-1 + f1*fn-2 + f2*fn-3...fn-1*f0  
+
+这样得到了递推式，之后计算一下递推式的总和就等于 
+
+	C(2*n,n)/(n+1)=C(n,2n)-C(n-1,2n)
+	
+	h(n)= h(0)*h(n-1)+h(1)*h(n-2) + ... + h(n-1)h(0) (n>=2)
+	
+这个是catalan数，满足其递推式，所以节点对应树个数的解为catalan数
+
+最后得到的表达式为
+
+	C(2*n,n)/(n+1)=C(n,2n)-C(n-1,2n)=(2n*(2n-1)*(2n-2)*(2n-3)...n+2)/(1*2*3*4*5*6...n)  
+
+### 12.Unique Binary Search Trees-Solution-C/C++
+
+	class Solution 
+	{
+	public:
+	    int numTrees(int n)
+	    {
+	        long i=0,p1=1,p2=1;
+	        
+	        for(i=1;i<=n;i++)
+	        {
+	            p2*=i;
+	            if(i>=2)
+	                p1*=n+i;
+	            if(p1%p2==0)
+	            {
+	                p1=p1/p2;
+	                p2=1;
+	            }
+	                
+	        }
+	        return p1/p2;                                           
+	    }
+	};
+
+### 12.Unique Binary Search Trees-Solution-Python
+
 	class Solution(object):
-	    def hasCycle(self, head):
+	    def numTrees(self, n):
 	        """
-	        :type head: ListNode
-	        :rtype: bool
+	        :type n: int
+	        :rtype: int
 	        """
-	        slow=head;
-	        fast=head;
-	        while fast and fast.next and fast.next.next:
-	            fast=fast.next.next
-	            slow=slow.next
-	            if slow==fast:
-	                return True
-	        return False;
+	        p1=1
+	        p2=1
+	        for i in range(1,n+1):
+	            p2*=i
+	            if i>=2:
+	                p1*=n+i
+	            if p1%p2==0:
+	                p1=p1/p2
+	                p2=1
+	        return p1/p2
 
 ## Quote
 
-> http://www.cnblogs.com/shuaiwhu/archive/2012/05/03/2480509.html
-> http://blog.csdn.net/cxllyg/article/details/7520037
-
-
+> http://www.cnblogs.com/zsboy/p/3889499.html
+> http://www.tuicool.com/articles/2uUJJbI
+> http://www.1point3acres.com/bbs/thread-111563-1-1.html
+> http://www.cnblogs.com/ShaneZhang/p/4102581.html
+> http://blog.csdn.net/lanxu_yy/article/details/17504837
+> http://www.2cto.com/kf/201312/262420.html
