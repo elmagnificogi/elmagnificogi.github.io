@@ -1,8 +1,8 @@
 ---
 layout:     post
-title:      "LeetCode Solution(Medium.5-8)"
+title:      "LeetCode Solution(Medium.9-12)"
 subtitle:   "c/c++，python，for work"
-date:       2015-12-18
+date:       2015-12-19
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"
 tags:
