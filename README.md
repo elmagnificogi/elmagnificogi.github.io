@@ -1,3 +1,30 @@
+# 注意
+
+我的blog来自于Hux的博客,但是下面Hux说的稳定模板,由于更新不及时,显示有问题,建议直接fork他的原本的就行了.
+
+还有一个问题:
+在about.html文件中:
+```
+<!-- 多说评论框 start -->
+<div class="comment">
+    <!-- This id is used for indexing my loss comments forcedly -->
+    <div class="ds-thread"
+    {% if site.duoshuo_username == "huxblog" %}
+        data-thread-id="1187623191091085319"
+    {% else %}
+    <!-- U can just use this key generated to index comments at page about -->
+        data-thread-key="{{site.duoshuo_username}}/about"
+    {% endif %}
+
+    data-title="{{page.title}}"
+    data-url="{{site.url}}/about/"></div>
+</div>
+<!-- 多说评论框 end -->
+```
+
+这里面Hux是他自己的ID,这个duoshuo_username其实没啥用,关键是: data-thread-id ,实际的效果大概就是会把热评给显示出来.
+具体为什么我没找到多说里详细解释
+
 # Hux blog 模板
 
 ### [我的博客在这里 &rarr;](http://huxpro.github.io)
