@@ -254,6 +254,16 @@ PAC规则分为两种，一种是可以直接应用官方的规则比如GFWlist�
 
 经过这些折腾基本就ok了
 
+当然其实也可以直接把设置代理的部分直接加到push脚本中,而不用enable/disable.如下就行.
+
+	export http_proxy="127.0.0.1:1080";
+	export https_proxy="127.0.0.1:1080";
+	git add .;
+	git commit -m "update-post";
+	git remote rm origin;
+	git remote add origin https://github.com/elmagnificogi/elmagnificogi.github.io.git;
+	git push -u origin master
+
 ## The end
 
 据说Shadowsocks的作者多次被警方约谈，并且Shadowsocks项目也在8月份的时候貌似被全部删除了，但是这种开源项目被fork的次数肯定不少，所以恢复起来都是秒秒钟的事情，而且现在来看都已经恢复了，只是一般渠道搜索不到Shadowsocks而已
