@@ -32,6 +32,10 @@ git的安装目录下搜索 bashrc
 
 直接对着Git Bash 快捷方式右键-属性
 
+将目标中
+
+	D:\Git\git-bash.exe --cd-to-home //--cd-to-home 这部分删除
+
 起始位置：填入你要到的目录
 
 比如：
