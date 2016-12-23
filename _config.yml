@@ -1,31 +1,38 @@
 # Site settings
-title: Elmagnifico's Blog
-SEOTitle: elmagnifico's blog
+title: Your Blog
+SEOTitle: 你的博客 | Your Blog
 header-img: img/home-bg.jpg
-email: elmagnificogg@gmail.com
-description: "关于后端与嵌入式、现实主义者 | elmagnifico， Back-end engineer & Embedded System Lover， Realist | 这里是elmagnifico的个人博客，君子之交淡如水。"
-keyword: " elmagnifico, elmagnifico's blog, elmagnificogi, 嵌入式, C, Python, C#, 后端, 四轴, Raspberry Pi, 树莓派, 大数据"
-url: "http://elmagnificogi.github.io"
-baseurl: ""
+email: huxpro@gmail.com
+description: ""
+keyword: ""
+url: "http://huangxuan.me"              # your host, for absolute URL
+baseurl: "/huxblog-boilerplate"         # for example, '/blog' if your blog hosted on 'host/blog'
 
 
 
 # SNS settings
 RSS: false
-weibo_username:     5329300217
-zhihu_username:     yun-qian-xue-82
-github_username:    elmagnificogi
-twitter_username:   elmagnificotw
-facebook_username:  magnificofa.el
+weibo_username:     huxpro
+zhihu_username:     huxpro
+github_username:    huxpro
+#twitter_username:  huxpro
+facebook_username:  huxpro
 
 
 
 # Build settings
-highlighter: pygments
+# from 2016, 'pygments' is unsupported on GitHub Pages. Use 'rouge' for highlighting instead.
+highlighter: rouge
 permalink: pretty
 paginate: 10
 exclude: ["less","node_modules","Gruntfile.js","package.json","README.md"]
 anchorjs: true                          # if you want to customize anchor. check out line:181 of `post.html`
+
+
+
+# Gems
+# from PR#40, to support local preview for Jekyll 3.0
+gems: [jekyll-paginate]
 
 
 
@@ -39,8 +46,11 @@ kramdown:
 
 
 
+# Disqus settings
+#disqus_username: _your_disqus_short_name_
+
 # Duoshuo settings
-duoshuo_username: elmagnificods
+duoshuo_username: huxblog
 # Share component is depend on Comment so we can NOT use share only.
 duoshuo_share: true                     # set to false if you want to use Comment without Sharing
 
@@ -49,17 +59,17 @@ duoshuo_share: true                     # set to false if you want to use Commen
 
 # Analytics settings
 # Baidu Analytics
-#ba_track_id: 4cc1f2d8f3067386cc5cdb626a202900
+ba_track_id: 4cc1f2d8f3067386cc5cdb626a202900
 # Google Analytics
-#ga_track_id: 'UA-49627206-1'            # Format: UA-xxxxxx-xx
-#ga_domain: huangxuan.me
+ga_track_id: 'UA-49627206-1'            # Format: UA-xxxxxx-xx
+ga_domain: huangxuan.me
 
 
 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
-sidebar-about-description: "人生就是这样，且行且过，君子之交淡如水"
-sidebar-avatar: /img/avatar-hux.jpg     # use absolute URL.
+sidebar-about-description: "写写代码，做做设计，看看产品。世界那么大，多玩玩看看。"
+sidebar-avatar: /img/avatar-hux.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
 
@@ -72,10 +82,19 @@ featured-condition-size: 1              # A tag will be featured if the size of 
 # Friends
 friends: [
     {
-        title: "等你成为我的朋友",
-        href: "http://等你成为我的朋友"
+        title: "Hux Blog",
+        href: "http://huangxuan.me"
     },{
-        title: "Wait for you",
-        href: "http://Wait for you"
+        title: "Foo",
+        href: "#"
+    },{
+        title: "Bar",
+        href: "#"
+    },{
+        title: "Example Friends",
+        href: "#"
+    },{
+        title: "It helps SEO",
+        href: "#"
     }
 ]
