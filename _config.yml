@@ -70,7 +70,7 @@ duoshuo_share: true                     # set to false if you want to use Commen
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
 sidebar-about-description: "人生就是这样，且行且过，君子之交淡如水"
-sidebar-avatar: /img/avatar-hux.jpg     # use absolute URL.
+sidebar-avatar: /img/avatar.jpg     # use absolute URL.
 
 
 
