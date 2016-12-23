@@ -274,7 +274,7 @@ Python的普通函数（参数为四大类型），是用值传递的
 	number2=add_one(number1)
 	print(number1,number2)
 
-输出的 number1=[2,2] number2=[2,2] 可见是值传递
+输出的 number1=[2,2] number2=[2,2] 可见是地址传递
 
 ### 深拷贝
 
@@ -290,7 +290,7 @@ import就是用来导入copy模块
 	number2=add_one(copy.deepcopy(number1))
 	print(number1,number2)
 
-输出的 number1=1 number2=2 可见是值传递,其实是传递了一个副本进去而已
+输出的 number1=[1,2] number2=[2,2] 可见是值传递,其实是传递了一个副本进去而已
 
 ### 默认值，可变参数
 
