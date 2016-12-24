@@ -344,9 +344,3 @@ python有一个问题就是string是不可变类型.也就是说我不能把stri
 > http://www.runoob.com/python/python-lists.html
 > http://blog.chinaunix.net/uid-26000296-id-3785610.html
 > http://bbs.csdn.net/topics/220013347
-
-
-
-
-
-
