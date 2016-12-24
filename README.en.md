@@ -190,7 +190,7 @@ featured-condition-size: 1     # A tag will be featured if the size of it is mor
 ```
 
 The only one thing need to be paid attention to is the `featured-condition-size`: A tag will be featured if the size of it is more than this condition value.  
-Internally, a condition template `{% if tag[1].size > {{site.featured-condition-size}} %}` is used to do the filter.
+Internally, a condition template `{% /if tag[1].size > {{site.featured-condition-size}} %}` is used to do the filter.
 
 #### Friends
 
