@@ -191,47 +191,6 @@ Note: m and n will be at most 100.
 	# sample_list ==[0,0,0,0,0]
 
 
-## 13.Integer to Roman
-
-
-### 13.Integer to Roman-analysis
-
-
-### 13.Integer to Roman-Solution-C/C++
-
-	
-
-### 13.Integer to Roman-Solution-Python
-
-
-
-
-## 13.Integer to Roman
-
-
-### 13.Integer to Roman-analysis
-
-
-### 13.Integer to Roman-Solution-C/C++
-
-	
-
-### 13.Integer to Roman-Solution-Python
-
-
-
-## 13.Integer to Roman
-
-
-### 13.Integer to Roman-analysis
-
-
-### 13.Integer to Roman-Solution-C/C++
-
-	
-
-### 13.Integer to Roman-Solution-Python
-
 ## Quote
 
 > http://www.cnblogs.com/qianye/archive/2013/09/06/3305680.html
