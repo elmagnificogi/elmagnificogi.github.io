@@ -21,7 +21,7 @@ Given an array of integers, every element appears twice except for one. Find tha
 Note:
 Your algorithm should have a linear runtime complexity. Could you implement it without using extra memory?
 
-### 1.Single Number-analysis
+### 1.Single Number-Analysis
  
 这个题好巧啊，碰到过好几次了，就是有一个重复的数组，每个元素都出现了2次或者是多次，但只有一个元素只出现了一次，然你找出来
 
@@ -100,7 +100,7 @@ The order of the result is not important. So in the above example, [5, 3] is als
 
 Your algorithm should run in linear runtime complexity. Could you implement it using only constant space complexity?
 
-### 2.Single Number III-analysis
+### 2.Single Number III-Analysis
 
 这次存在两个出现了一次的元素，这样如果只是异或，那么只能找到最后的两个元素的异或和，无法分开二者。
 
@@ -205,7 +205,7 @@ Say you have an array for which the ith element is the price of a given stock on
 
 Design an algorithm to find the maximum profit. You may complete as many transactions as you like (ie, buy one and sell one share of the stock multiple times). However, you may not engage in multiple transactions at the same time (ie, you must sell the stock before you buy again).
 
-### 3.Best Time to Buy and Sell Stock II-analysis
+### 3.Best Time to Buy and Sell Stock II-Analysis
 
 一个数组中存有股票第index天的股价，你可以尽可能的交易从而获取最大利益。
 
@@ -263,7 +263,7 @@ Follow up:
 
 Could you solve it with constant space complexity? (Note: The output array does not count as extra space for the purpose of space complexity analysis.)
 
-### 4.Product of Array Except Self-analysis
+### 4.Product of Array Except Self-Analysis
 
 返回一个数组，这个数组表示输入数组n[i]的第i个元素不存在的情况下，剩余元素的乘积。
 

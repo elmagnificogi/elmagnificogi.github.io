@@ -16,7 +16,7 @@ Given a non-negative number represented as an array of digits, plus one to the n
 
 The digits are stored such that the most significant digit is at the head of the list.
 
-### 29.Plus One-analysis
+### 29.Plus One-Analysis
 
 看了半天才看明白，原来是要做一个加法，给最后一个数字+1 然后检查进位标志，如果超了，那就加一个数字来表示
 
@@ -100,7 +100,7 @@ Return
 	 [1,4,6,4,1]
 	]
 
-### 30.Pascal's Triangle-analysis
+### 30.Pascal's Triangle-Analysis
 
 这不就是杨辉三角形嘛，每个值等于其左上和右上两个值的和，如果不存在则为0
 
@@ -178,7 +178,7 @@ Given an integer n, return the number of trailing zeroes in n!.
 
 Note: Your solution should be in logarithmic time complexity.
 
-### 31.Factorial Trailing Zeroes-analysis
+### 31.Factorial Trailing Zeroes-Analysis
 
 擦，这个英文完全没看懂，看了别人的分析才明白是什么意思。
 
@@ -239,7 +239,7 @@ Given an index k, return the kth row of the Pascal's triangle.
 For example, given k = 3,
 Return [1,3,3,1].
 
-### 32.Pascal's Triangle II-analysis
+### 32.Pascal's Triangle II-Analysis
 
 依然是杨辉三角形，但是这一次呢 要求只返回对应的行，其他的就不要了
 

@@ -27,7 +27,7 @@ return [1,2,3].
 
 Note: Recursive solution is trivial, could you do it iteratively?
 
-### 5.Binary Tree Preorder Traversal-analysis
+### 5.Binary Tree Preorder Traversal-Analysis
 
 返回前序遍历的结果，要求用迭代来解决这个问题。
 
@@ -130,7 +130,7 @@ return [1,3,2].
 
 Note: Recursive solution is trivial, could you do it iteratively?
 
-### 6.Binary Tree Inorder Traversal-analysis
+### 6.Binary Tree Inorder Traversal-Analysis
 
 这个是中序遍历，一样的 
 
@@ -212,7 +212,7 @@ Note:
 
 Your algorithm should run in linear runtime complexity. Could you implement it using only constant extra space complexity?
 
-### 7.Missing Number-analysis
+### 7.Missing Number-Analysis
 
 找出连续数中缺失的那一个，但是题目没有说数组是排序过的！！
 
@@ -266,7 +266,7 @@ Follow up:
 
 Can you solve it without using extra space?
 
-### 8.Linked List Cycle-analysis
+### 8.Linked List Cycle-Analysis
 
 给定一个链表，判断是否存在环，这个也很简单，只要用两个指针同时走，一个指针一次走一个，一个一次走两步，这样如果快的出现了指向空则不成环，否则二者肯定会在某时相等，相等就成环。 
 

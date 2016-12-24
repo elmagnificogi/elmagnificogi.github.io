@@ -16,7 +16,7 @@ Write a function that takes an unsigned integer and returns the number of ’1' 
 
 For example, the 32-bit integer ’11' has binary representation 00000000000000000000000000001011, so the function should return 3.
 
-### 13.Number of 1 Bits-analysis
+### 13.Number of 1 Bits-Analysis
 
 返回位为1的数量，so easy 
 
@@ -127,7 +127,7 @@ Given a roman numeral, convert it to an integer.
 
 Input is guaranteed to be within the range from 1 to 3999.
 
-### 14.Roman to Integer-analysis
+### 14.Roman to Integer-Analysis
 
 把罗马数字转换为普通数字
 
@@ -259,7 +259,7 @@ click to show more hints.
 Hint:
 A linked list can be reversed either iteratively or recursively. Could you implement both?
 
-### 15.Reverse Linked List-analysis
+### 15.Reverse Linked List-Analysis
 
 用两种方法来翻转单链表，这个练得比较多，easy
 
@@ -449,7 +449,7 @@ For example,
 Given 1->1->2, return 1->2.
 Given 1->1->2->3->3, return 1->2->3.
 
-### 16.Remove Duplicates from Sorted List-analysis
+### 16.Remove Duplicates from Sorted List-Analysis
 
 删除有序链表中的重复部分，看起来也很简单啊。
 

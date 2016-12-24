@@ -31,7 +31,7 @@ return its level order traversal as:
 	  [15,7]
 	]
 
-### 33.Binary Tree Level Order Traversal-analysis
+### 33.Binary Tree Level Order Traversal-Analysis
 
 这就是之前的那道题的基础，按层输出，上次是由底向上，这次由上向下
 
@@ -216,7 +216,7 @@ Depending on your language, queue may not be supported natively. You may simulat
 
 You may assume that all operations are valid (for example, no pop or top operations will be called on an empty stack).
 
-### 34.Implement Stack using Queues-analysis
+### 34.Implement Stack using Queues-Analysis
 
 这里要用队列来做栈的功能，和上次刚好反过来了。要求和上次也是一样的
 
@@ -406,7 +406,7 @@ Given the below binary tree and sum = 22,
 
 return true, as there exist a root-to-leaf path 5->4->11->2 which sum is 22.
 
-### 35.Path Sum-analysis
+### 35.Path Sum-Analysis
 
 给定某一个值，确定给出的树中是否有一条路的和是它相等的
 
@@ -493,7 +493,7 @@ You could also try reversing an integer. However, if you have solved the problem
 
 There is a more generic way of solving this problem.
 
-### 36.Palindrome Number-analysis
+### 36.Palindrome Number-Analysis
 
 判读是否是一个回文的数字串，说白了就是首尾相等
 

@@ -21,7 +21,7 @@ For example
 
 Return "100".
 
-### 53.Add Binary-analysis
+### 53.Add Binary-Analysis
 
 给二进制的string 然后求和 还能更简单吗？
 
@@ -207,7 +207,7 @@ Given a singly linked list, determine if it is a palindrome.
 Follow up:
 Could you do it in O(n) time and O(1) space?
 
-### 54.Palindrome Linked List-analysis
+### 54.Palindrome Linked List-Analysis
 
 判断一个单链表是不是回文？？？要求时间是 O(n) 空间是O(1)
 
@@ -418,7 +418,7 @@ All root-to-leaf paths are:
 
 	["1->2->5", "1->3"]
 
-### 55.Binary Tree Paths-analysis
+### 55.Binary Tree Paths-Analysis
 
 返回根到子叶的路径，这不是前天做过的那个类似吗，返回根到节点的总和。
 
@@ -531,7 +531,7 @@ You may assume that the array does not change.
 
 There are many calls to sumRange function.
 
-### 56.Range Sum Query - Immutable-analysis
+### 56.Range Sum Query - Immutable-Analysis
 
 给定一组数，返回对应下标范围内的数字的总和
 

@@ -95,7 +95,7 @@ The Sieve of Eratosthenes uses an extra O(n) memory and its runtime complexity i
 	}
 
 
-### 61.Count Primes-analysis
+### 61.Count Primes-Analysis
 
 神了，这道题竟然有8个线索，只是简单的求素数的个数而已啊？
 
@@ -203,7 +203,7 @@ Given a sorted integer array without duplicates, return the summary of its range
 
 For example, given [0,1,2,4,5,7], return ["0->2","4->5","7"].
 
-### 62.Summary Ranges-analysis
+### 62.Summary Ranges-Analysis
 
 给出一个排序好的数组，且没有重复元素，输出元素的范围。就是元素的连续部分
 
@@ -329,7 +329,7 @@ Suppose you have n versions [1, 2, ..., n] and you want to find out the first ba
 
 You are given an API bool isBadVersion(version) which will return whether version is bad. Implement a function to find the first bad version. You should minimize the number of calls to the API.
 
-### 63.First Bad Version-analysis
+### 63.First Bad Version-Analysis
 
 如果有一个版本出现问题，那么之后所有的都会有问题，要求你找到最先出现问题的那个版本。并且调用api的次数越少越好。
 
@@ -403,7 +403,7 @@ Design a stack that supports push, pop, top, and retrieving the minimum element 
 - top() -- Get the top element.
 - getMin() -- Retrieve the minimum element in the stack.
 
-### 64.Min Stack-analysis
+### 64.Min Stack-Analysis
 
 构造一个栈，除了基本操作以外，还需要有返回最小值的功能
 

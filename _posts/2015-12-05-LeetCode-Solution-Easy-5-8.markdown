@@ -20,7 +20,7 @@ Note:
 You must do this in-place without making a copy of the array.
 Minimize the total number of operations.
 
-### 5.Move Zeroes-analysis
+### 5.Move Zeroes-Analysis
 
 空间压缩，并且要求是0的元素到最后去，而非0的元素的顺序不变。
 
@@ -72,7 +72,7 @@ Given two binary trees, write a function to check if they are equal or not.
 
 Two binary trees are considered equal if they are structurally identical and the nodes have the same value.
 
-### 6.Same Tree-analysis
+### 6.Same Tree-Analysis
  
 检测是不是相同的树，要注意如果左右子树对阵的情况下也是一样的。
 
@@ -286,7 +286,7 @@ Trivia:
 This problem was inspired by this original tweet by Max Howell:
 Google: 90% of our engineers use the software you wrote (Homebrew), but you can’t invert a binary tree on a whiteboard so fuck off.
 
-### 7.Invert Binary Tree-analysis
+### 7.Invert Binary Tree-Analysis
 
 就是要翻转二叉树，用递归就是遍历到最后一个节点然后开始依次往上翻转，并且是做节点的交换，而不是值得交换（值交换，需要判读空的情况，并且新建节点，而且值交换的情况下，需要左右大子树交换的时候就很麻烦了，必须得用节点交换才比较方便）
 
@@ -455,7 +455,7 @@ s = "rat", t = "car", return false.
 Note:
 You may assume the string contains only lowercase alphabets.
 
-### 8.Valid Anagram-analysis
+### 8.Valid Anagram-Analysis
 
 关键在于anagram这个词，意思是相同字母但是改变了顺序，而不是逆序。
 

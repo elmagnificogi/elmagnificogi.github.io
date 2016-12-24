@@ -22,7 +22,7 @@ Both of you are very clever and have optimal strategies for the game. Write a fu
 
 For example, if there are 4 stones in the heap, then you will never win the game: no matter 1, 2, or 3 stones you remove, the last stone will always be removed by your friend.
 
-### 1.Nim Game-analysis
+### 1.Nim Game-Analysis
  
 首先看题，题目看完了，先找找数学上的规律，如果能找到规律那么写起程序来就简单了。
 
@@ -65,7 +65,7 @@ Given num = 38, the process is like: 3 + 8 = 11, 1 + 1 = 2. Since 2 has only one
 Follow up:
 Could you do it without any loop/recursion in O(1) runtime?
 
-### 2.Add Digits-analysis
+### 2.Add Digits-Analysis
  
 开始题目只是加起来所有数字，这个很简单，无脑循环一下就行了。
 
@@ -134,7 +134,7 @@ Given a binary tree, find its maximum depth.
 
 The maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node.
 
-### 3.Maximum Depth of Binary Tree-analysis
+### 3.Maximum Depth of Binary Tree-Analysis
 
 要求返回最大深度，分别求左右子树的最大深度。
 
@@ -321,7 +321,7 @@ Write a function to delete a node (except the tail) in a singly linked list, giv
 
 Supposed the linked list is 1 -> 2 -> 3 -> 4 and you are given the third node with value 3, the linked list should become 1 -> 2 -> 4 after calling your function.
 
-### 4.Delete Node in a Linked List-analysis
+### 4.Delete Node in a Linked List-Analysis
 
 给出某一结点，并进行删除，遍历一下就可以了。
 

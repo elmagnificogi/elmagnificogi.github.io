@@ -14,7 +14,7 @@ tags:
 
 Given an array of integers, find if the array contains any duplicates. Your function should return true if any value appears at least twice in the array, and it should return false if every element is distinct.
 
-### 9.Contains Duplicate-analysis
+### 9.Contains Duplicate-Analysis
 
 检查数组中重复的部分。由于是个整数数组用计数的方式不现实。
 
@@ -82,7 +82,7 @@ For example:
     AA -> 27
     AB -> 28 
 
-### 10.Excel Sheet Column Number-analysis
+### 10.Excel Sheet Column Number-Analysis
 
 就是一个26进制而已，只不过通过ABCD...来实现而已
 
@@ -126,7 +126,7 @@ Given an array of size n, find the majority element. The majority element is the
 
 You may assume that the array is non-empty and the majority element always exist in the array.
 
-### 11.Majority Element-analysis
+### 11.Majority Element-Analysis
 
 得到超过数组长度一半的元素。
 
@@ -248,7 +248,7 @@ According to the definition of LCA on Wikipedia: “The lowest common ancestor i
 
 For example, the lowest common ancestor (LCA) of nodes 2 and 8 is 6. Another example is LCA of nodes 2 and 4 is 2, since a node can be a descendant of itself according to the LCA definition.
 
-### 12.Lowest Common Ancestor of a Binary Search Tree-analysis
+### 12.Lowest Common Ancestor of a Binary Search Tree-Analysis
 
 二叉搜索树/平衡树寻找祖先节点，说白了就是先找一个数，然后把他的祖先节点存下来，然后再找另外一个数，另一个数遇到的节点都与存下来的节点相对比，然后找到其中最后一个个相同的部分就是其最小公共祖先。这种方法是不考虑这是一个平衡二叉树这种特性的。
 

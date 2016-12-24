@@ -26,7 +26,7 @@ Given n will always be valid.
 
 Try to do this in one pass.
 
-### 45.Remove Nth Node From End of List-analysis
+### 45.Remove Nth Node From End of List-Analysis
 
 要求删除倒数第n个元素
 
@@ -122,7 +122,7 @@ Given a string containing just the characters '(', ')', '{', '}', '[' and ']', d
 
 The brackets must close in the correct order, "()" and "()[]{}" are all valid but "(]" and "([)]" are not.
 
-### 46.Valid Parentheses-analysis
+### 46.Valid Parentheses-Analysis
 
 确定其中的括号是否匹配，也简单，只需要把对应的左括号压入栈中，每遇到一个右括号，就弹出一次，弹出的如果是相同的就ok 不同的话 就表示错误了
 
@@ -230,7 +230,7 @@ Note:
 
 You may assume both s and t have the same length.
 
-### 47.Isomorphic Strings-analysis
+### 47.Isomorphic Strings-Analysis
 
 确定两个字符串是同构的，同构的定义是类似 
 
@@ -409,7 +409,7 @@ Credits:
 
 Special thanks to @minglotus6 for adding this problem and creating all test cases.
 
-### 48.Word Pattern-analysis
+### 48.Word Pattern-Analysis
 
 又一个是对应，只是这次是给定固定模式，检测是否相对应
 

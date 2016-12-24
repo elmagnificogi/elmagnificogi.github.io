@@ -16,7 +16,7 @@ Given an array and a value, remove all instances of that value in place and retu
 
 The order of elements can be changed. It doesn't matter what you leave beyond the new length.
 
-### 25.Remove Element-analysis
+### 25.Remove Element-Analysis
 
 这个题目要求删除元素，但是呢，你删除后的长度，剩下的内容他是不管的，他只看你剩下长度的空间中内容是否正确
 
@@ -79,7 +79,7 @@ return its bottom-up level order traversal as:
 	  [3]
 	]
 
-### 26.Binary Tree Level Order Traversal II-analysis
+### 26.Binary Tree Level Order Traversal II-Analysis
 
 简单说就是要返回每层的元素
 
@@ -330,7 +330,7 @@ Given input array nums = [1,1,2],
 
 Your function should return length = 2, with the first two elements of nums being 1 and 2 respectively. It doesn't matter what you leave beyond the new length.
 
-### 27.Remove Duplicates from Sorted Array-analysis
+### 27.Remove Duplicates from Sorted Array-Analysis
 
 这个题和25题是一样的，都是删除元素，而且不计删除后的长度问题
 
@@ -451,7 +451,7 @@ You are a professional robber planning to rob houses along a street. Each house 
 
 Given a list of non-negative integers representing the amount of money of each house, determine the maximum amount of money you can rob tonight without alerting the police.
 
-### 28.House Robber-analysis
+### 28.House Robber-Analysis
 
 说白了相邻的房子同一晚上不能进，只能进不相邻的。最后要求最大值
 

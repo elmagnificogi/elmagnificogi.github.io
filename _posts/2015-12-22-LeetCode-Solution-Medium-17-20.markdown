@@ -24,7 +24,7 @@ Above is a 3 x 7 grid. How many possible unique paths are there?
 
 Note: m and n will be at most 100.
 
-### 17.Unique Paths-analysis
+### 17.Unique Paths-Analysis
 
 就问从左上到右下一次只能选一个方向走一步问有多少种走法而已。
 

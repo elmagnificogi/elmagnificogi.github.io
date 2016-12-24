@@ -23,7 +23,7 @@ Here are few examples.
 	[1,3,5,6], 7 → 4
 	[1,3,5,6], 0 → 0
 
-### 9.Search Insert Position-analysis
+### 9.Search Insert Position-Analysis
 
 从一个有序数组中寻找某一值，如果找到了返回其引索，否则返回该值插入引索
 
@@ -119,7 +119,7 @@ After calling your function, the tree should look like:
      / \  / \
     4->5->6->7 -> NULL
 
-### 10. Populating Next Right Pointers in Each Node-analysis
+### 10. Populating Next Right Pointers in Each Node-Analysis
 
 给了一个完整树，同时在树节点中增加了一个next
 
@@ -225,7 +225,7 @@ Note:
 
 Your algorithm should have a linear runtime complexity. Could you implement it without using extra memory?
 
-### 11.Single Number II-analysis
+### 11.Single Number II-Analysis
 
 给了一个数组，这次每个数出现了三次，有一个只有一次，找到这个数
 
@@ -359,7 +359,7 @@ Given n = 3, there are a total of 5 unique BST's.
 	    /     /       \                 \
 	   2     1         2                 3
 
-### 12.Unique Binary Search Trees-analysis
+### 12.Unique Binary Search Trees-Analysis
 
 给一个n 返回n个节点可以组成多少种不同结构的搜索树（二叉树）。
 

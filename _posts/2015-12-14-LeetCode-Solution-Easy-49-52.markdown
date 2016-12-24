@@ -24,7 +24,7 @@ Given an integer n, generate the nth sequence.
 
 Note: The sequence of integers will be represented as a string.
 
-### 49.Count and Say-analysis
+### 49.Count and Say-Analysis
 
 题意是n=1时输出字符串1；
 
@@ -136,7 +136,7 @@ Example
 
 Credits:
 
-### 50.Remove Linked List Elements-analysis
+### 50.Remove Linked List Elements-Analysis
 
 只是简单的删除其中的目标元素而已
 
@@ -236,7 +236,7 @@ Credits:
 
 Write a function to find the longest common prefix string amongst an array of strings.
 
-### 51.Longest Common Prefix-analysis
+### 51.Longest Common Prefix-Analysis
 
 查找字符串最长公共前缀，先比第一第二个找到一个com 然后继续用com往下找，碰到不同的就缩短com
 
@@ -351,7 +351,7 @@ In this case, the 1st 1 in friend's guess is a bull, the 2nd or 3rd 1 is a cow, 
 
 You may assume that the secret number and your friend's guess only contain digits, and their lengths are always equal.
 
-### 52.Bulls and Cows-analysis
+### 52.Bulls and Cows-Analysis
 
 猜数字游戏，如果才对位置和数字 那么这个数字就是公牛，如果只猜对了数字，但是位置不对，那么这个数字就是母牛
 

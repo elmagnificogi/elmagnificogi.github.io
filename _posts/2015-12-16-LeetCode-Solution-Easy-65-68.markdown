@@ -24,7 +24,7 @@ For example:
     27 -> AA
     28 -> AB 
 
-### 65.Excel Sheet Column Title-analysis
+### 65.Excel Sheet Column Title-Analysis
 
 这个也很简单，就是把数字转换成字母每26个转换列而已
 
@@ -82,7 +82,7 @@ Related problem: Reverse Words in a String II
 
 最重要的这个题的k的值还会大于n，大于的情况下k=k-n 题目中并没有明确说明
 
-### 66.Rotate Array-analysis
+### 66.Rotate Array-Analysis
 
 这个是旋转数组中的元素，找到其中的目标位置，然后把其后的放到其前，其前的放到其后
 
@@ -167,7 +167,7 @@ Here is an example of version numbers ordering:
 
 	0.1 < 1.1 < 1.2 < 13.37
 
-### 67.Compare Version Numbers-analysis
+### 67.Compare Version Numbers-Analysis
 
 有一个取巧的办法，就是去除其中的. 同时把string转换成对应的float来比较大小，这样速度更快（第一位为0的情况下变成小数）
 
@@ -317,7 +317,7 @@ If the first sequence of non-whitespace characters in str is not a valid integra
 
 If no valid conversion could be performed, a zero value is returned. If the correct value is out of the range of representable values, INT_MAX (2147483647) or INT_MIN (-2147483648) is returned.
 
-### 68.String to Integer (atoi)-analysis
+### 68.String to Integer (atoi)-Analysis
 
 做一个string to interger的函数，题目的原意是不给你任何要求，全凭自己yy 来看什么样的合适
 

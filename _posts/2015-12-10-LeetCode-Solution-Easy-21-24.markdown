@@ -16,7 +16,7 @@ You are climbing a stair case. It takes n steps to reach to the top.
 
 Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
 
-### 21.Climbing Stairs-analysis
+### 21.Climbing Stairs-Analysis
 
 一步两步，我的滑板鞋...摩擦摩擦，又摩擦.... 
 
@@ -104,7 +104,7 @@ Each time you can either climb 1 or 2 steps. In how many distinct ways can you c
 
 Given an integer, write a function to determine if it is a power of two.
 
-### 22.Power of Two-analysis
+### 22.Power of Two-Analysis
 
 判断一个数是不是2的x次方，这里其实可以取巧，直接看位就可以了。
 
@@ -153,7 +153,7 @@ Given a binary tree, determine if it is height-balanced.
 
 For this problem, a height-balanced binary tree is defined as a binary tree in which the depth of the two subtrees of every node never differ by more than 1.
 
-### 23.Balanced Binary Tree-analysis
+### 23.Balanced Binary Tree-Analysis
 
 判断一个平衡二叉树是否是高度平衡的，左右子树结点数之差不超过1
 
@@ -397,7 +397,7 @@ The above binary tree is serialized as "{1,2,3,#,#,4,#,#,5}".
 
 说白了#就等于之前null嘛
 
-### 24.Symmetric Tree-analysis
+### 24.Symmetric Tree-Analysis
 
 判断一棵树是不是对称的。
 

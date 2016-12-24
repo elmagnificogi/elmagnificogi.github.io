@@ -16,7 +16,7 @@ Given an integer, convert it to a roman numeral.
 
 Input is guaranteed to be within the range from 1 to 3999.
 
-### 13.Integer to Roman-analysis
+### 13.Integer to Roman-Analysis
 
 这个是要求把整数转换成罗马数字。和之前的easy系列中的14题是相反的
 
@@ -246,7 +246,7 @@ Input is guaranteed to be within the range from 1 to 3999.
 
 Given an array where elements are sorted in ascending order, convert it to a height balanced BST.
 
-### 14.Convert Sorted Array to Binary Search Tree-analysis
+### 14.Convert Sorted Array to Binary Search Tree-Analysis
 
 给了一个升序的数组，然后把他转化成一个平衡二叉树。
 
@@ -324,7 +324,7 @@ More practice:
 
 If you have figured out the O(n) solution, try coding another solution using the divide and conquer approach, which is more subtle.
 
-### 15.Maximum Subarray-analysis
+### 15.Maximum Subarray-Analysis
 
 给定一个数组，返回其部分最大值。
 
@@ -408,7 +408,7 @@ Find the minimum element.
 
 You may assume no duplicate exists in the array.
 
-### 16.Find Minimum in Rotated Sorted Array-analysis
+### 16.Find Minimum in Rotated Sorted Array-Analysis
 
 给定一个数组，但是这个数组内容是有序的，但是数组是以环的形式存在的，要求你找到最小的元素，或者说是找到这个环的头。
 

@@ -23,7 +23,7 @@ A partially filled sudoku which is valid.
 Note:
 A valid Sudoku board (partially filled) is not necessarily solvable. Only the filled cells need to be validated.
 
-### 41.Valid Sudoku-analysis
+### 41.Valid Sudoku-Analysis
 
 验证是否是有效的数独。
 
@@ -148,7 +148,7 @@ Given s = "Hello World",
 
 return 5.
 
-### 42.Length of Last Word-analysis
+### 42.Length of Last Word-Analysis
 
 返回最后一个单词的长度，单词的定义就是左右是空格 中间的是长度
 
@@ -222,7 +222,7 @@ python的代码从尾部开始计算，首先把尾部的空格全部排除掉
 
 Given an array of integers and an integer k, find out whether there are two distinct indices i and j in the array such that nums[i] = nums[j] and the difference between i and j is at most k.
 
-### 43.Contains Duplicate II-analysis
+### 43.Contains Duplicate II-Analysis
 
 找数组中是否有两个重复元素并且重复元素间隔为小于等于k
 
@@ -304,7 +304,7 @@ Each rectangle is defined by its bottom left corner and top right corner as show
 
 Assume that the total area is never beyond the maximum possible value of int.
 
-### 44.Rectangle Area-analysis
+### 44.Rectangle Area-Analysis
 
 计算两个矩形的重叠面积
 

@@ -16,7 +16,7 @@ Given a binary tree, find its minimum depth.
 
 The minimum depth is the number of nodes along the shortest path from the root node down to the nearest leaf node.
 
-### 37.Minimum Depth of Binary Tree-analysis
+### 37.Minimum Depth of Binary Tree-Analysis
 
 返回最短路径（根-叶） 
 
@@ -118,7 +118,7 @@ Notes:
 
 - Your code should preferably run in O(n) time and use only O(1) memory.
 
-### 38.Intersection of Two Linked Lists-analysis
+### 38.Intersection of Two Linked Lists-Analysis
 
 查找两个链表的公共部分，既然是公共部分，其实从尾部查找是最快的
 
@@ -276,7 +276,7 @@ Note:
 
 You may assume that nums1 has enough space (size that is greater or equal to m + n) to hold additional elements from nums2. The number of elements initialized in nums1 and nums2 are m and n respectively.
 
-### 39.Merge Sorted Array-analysis
+### 39.Merge Sorted Array-Analysis
 
 正常的想法就是一个一个比较，但是由于给的数组，所以插入新的数据进去非常的困难，所以换一个想法，那就是从尾部插入重新排序，这样就不会影响到前面的数据了，而当插到前面的数据的时候，由于后排的数据够多，并不会出现覆盖的问题，所以尾部插入非常适合
 
@@ -373,7 +373,7 @@ If this function is called many times, how would you optimize it?
 
 Related problem: Reverse Integer
 
-### 40.Reverse Bits-analysis
+### 40.Reverse Bits-Analysis
 
 简单说就是翻转位，这个也比较简单
 

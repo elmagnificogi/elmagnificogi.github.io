@@ -18,7 +18,7 @@ Ugly numbers are positive numbers whose prime factors only include 2, 3, 5. For 
 
 Note that 1 is typically treated as an ugly number.
 
-### 17.Ugly Number-analysis
+### 17.Ugly Number-Analysis
 
 就是分解质因数，如果其质因子只包括2，3，5 那么就是丑数，否则就不是 而1是丑数
 
@@ -93,7 +93,7 @@ Example: 19 is a happy number
 	6^2 + 8^2 = 100
 	1^2 + 0^2 + 0^2 = 1
 
-### 18.Happy Number-analysis
+### 18.Happy Number-Analysis
 
 先要分解n 得到每位数字，然后再按照这个来做 但题目没说这个数字有多大啊 如果非常大 那就很蛋疼了啊
 
@@ -179,7 +179,7 @@ You must use only standard operations of a stack -- which means only push to top
 Depending on your language, stack may not be supported natively. You may simulate a stack by using a list or deque (double-ended queue), as long as you use only standard operations of a stack.
 You may assume that all operations are valid (for example, no pop or peek operations will be called on an empty queue).
 
-### 19.Implement Queue using Stacks-analysis
+### 19.Implement Queue using Stacks-Analysis
 
 使用栈来实现队列，所以用C++来写，而不用c，发现leetcode上c和c++要求还不一样，多了好几个函数
 
@@ -296,7 +296,7 @@ You may assume that all operations are valid (for example, no pop or peek operat
 
 Merge two sorted linked lists and return it as a new list. The new list should be made by splicing together the nodes of the first two lists.
 
-### 20.Merge Two Sorted Lists-analysis
+### 20.Merge Two Sorted Lists-Analysis
 
 合并两个有序链表，没啥难得，就是不知道这个链表是什么顺序排列的 一般应该是由到大吧
 

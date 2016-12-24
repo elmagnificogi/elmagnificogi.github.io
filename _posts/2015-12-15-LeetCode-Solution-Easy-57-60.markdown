@@ -16,7 +16,7 @@ Implement strStr().
 
 Returns the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.
 
-### 57.Implement strStr()-analysis
+### 57.Implement strStr()-Analysis
 
 判断一个字符串是否是另外一个字符串的字串
 
@@ -309,7 +309,7 @@ Example1: x = 123, return 321
 
 Example2: x = -123, return -321
 
-### 58.Reverse Integer-analysis
+### 58.Reverse Integer-Analysis
 
 翻转整数。这个很简单，只要提取之后翻转就可以了
 
@@ -393,7 +393,7 @@ Have you consider that the string might be empty? This is a good question to ask
 
 For the purpose of this problem, we define empty string as valid palindrome.
 
-### 59.Valid Palindrome-analysis
+### 59.Valid Palindrome-Analysis
 
 有效回文判定，也就是无视大小写，无视符号，用剩下的字母来判断回文。
 
@@ -489,7 +489,7 @@ Write the code that will take a string and make this conversion given a number o
 
 convert("PAYPALISHIRING", 3) should return "PAHNAPLSIIGYIR".
 
-### 60.ZigZag Conversion-analysis
+### 60.ZigZag Conversion-Analysis
 
 看起来就很变态的输出格式啊，需要把数据转化成对角线，然后最后用横行的方式来输出
 
