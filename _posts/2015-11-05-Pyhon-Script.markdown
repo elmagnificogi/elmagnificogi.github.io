@@ -7,8 +7,6 @@ author:     "elmagnifico"
 header-img: "img/python-head-bg.png"
 tags:
     - python
-    - 学习
-    - 脚本
 ---
 
 ## 代码环境

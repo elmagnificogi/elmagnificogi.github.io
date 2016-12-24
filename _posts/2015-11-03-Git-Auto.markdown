@@ -8,7 +8,6 @@ header-img: "img/git-head-bg.jpg"
 tags:
     - git
     - blog
-    - 脚本
 ---
 
 ## Git Bash 修改默认打开文件夹位置

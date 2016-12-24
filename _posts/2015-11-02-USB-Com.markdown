@@ -7,8 +7,6 @@ author:     "elmagnifico"
 header-img: "img/Embedded-head-bg.png"
 tags:
     - 嵌入式
-    - 树莓派
-    - RaspberryPi
 ---
 
 ## 串口驱动

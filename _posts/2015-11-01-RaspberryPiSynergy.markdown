@@ -6,7 +6,6 @@ date:       2015-11-01
 author:     "elmagnifico"
 header-img: "img/Raspberrypi-head-bg.png"
 tags:
-    - 树莓派
     - RaspberryPi
 ---
 
