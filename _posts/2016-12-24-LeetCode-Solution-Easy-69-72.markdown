@@ -89,7 +89,7 @@ Example:
 	[5,6]
 
 
-### 70.Find All Numbers Disappeared in an Array-analysis
+### 70.Find All Numbers Disappeared in an Array-Analysis
 
 给一个长度在1到n的数组,其中数组内元素大小都在数组大小的范围内,其中存在重复的元素,求出其中缺少的元素.
 
