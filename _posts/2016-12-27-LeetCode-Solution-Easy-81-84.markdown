@@ -57,7 +57,7 @@ Note: You may assume the string contain only lowercase letters.
 	    }
 	};
 
-### 81.First Unique Character in a String -Solution-Python
+### 81.First Unique Character in a String-Solution-Python
 
 	class Solution(object):
     def firstUniqChar(self, s):
