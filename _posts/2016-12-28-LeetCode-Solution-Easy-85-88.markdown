@@ -461,9 +461,15 @@ python做起来较为简单,其string可以直接用n个字符串赋值,很容�
 ## Quote
 
 > http://blog.csdn.net/u014376961/article/details/53054941
+> 
 > http://bookshadow.com/weblog/2016/11/06/leetcode-number-of-boomerangs/
+> 
 > http://www.tuicool.com/articles/YbmYbyf
+> 
 > http://www.cnblogs.com/grandyang/p/5944311.html
+> 
 > http://blog.csdn.net/camellhf/article/details/52680097
+> 
 > http://www.cnblogs.com/BeginMan/archive/2013/03/14/2958985.html
+> 
 > http://www.runoob.com/python/python-strings.html
