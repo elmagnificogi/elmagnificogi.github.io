@@ -535,6 +535,3 @@ Given a list of non-negative integers representing the amount of money of each h
 > https://leetcode.com/discuss/68854/simple-iterative-python-o-n-solution
 > http://www.meetqun.com/thread-8777-1-1.html
 > http://www.cnblogs.com/ganganloveu/p/4417485.html
-
-
-
