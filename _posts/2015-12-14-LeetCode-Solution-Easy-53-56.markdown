@@ -619,6 +619,3 @@ There are many calls to sumRange function.
 > http://www.bkjia.com/ASPjc/1031678.html
 > http://www.cnblogs.com/ganganloveu/p/4635328.html
 > http://my.oschina.net/Tsybius2014/blog/528708
-
-
-

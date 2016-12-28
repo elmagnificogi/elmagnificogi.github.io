@@ -563,6 +563,3 @@ Design a stack that supports push, pop, top, and retrieving the minimum element 
 > http://my.oschina.net/Tsybius2014/blog/505462
 > http://m.shangxueba.com/jingyan/2926615.html
 > http://www.cnblogs.com/x1957/p/4086448.html
-
-
-

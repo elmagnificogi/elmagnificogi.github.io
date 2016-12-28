@@ -565,6 +565,3 @@ convert("PAYPALISHIRING", 3) should return "PAHNAPLSIIGYIR".
 > http://www.ruanyifeng.com/blog/2013/05/boyer-moore_string_search_algorithm.html
 > http://www.cppblog.com/oosky/archive/2006/07/06/9486.html
 > http://www.cnblogs.com/sanghai/p/3632528.html
-
-
-

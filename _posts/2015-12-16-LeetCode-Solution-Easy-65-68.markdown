@@ -481,6 +481,3 @@ python 是72ms 比c++慢多了
 > https://leetcode.com/discuss/66324/python-1-line-solution-without-loop
 > https://msdn.microsoft.com/zh-cn/library/7w2119c6.aspx
 > https://msdn.microsoft.com/zh-cn/library/efzty53k.aspx
-
-
-
