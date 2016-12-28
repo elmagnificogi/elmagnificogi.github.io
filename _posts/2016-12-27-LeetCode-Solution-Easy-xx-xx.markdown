@@ -9,6 +9,7 @@ tags:
     - LeetCode
 ---
 
+[TOC]
 
 ## xx.xxxxxxxxxx
 
