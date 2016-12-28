@@ -391,6 +391,3 @@ Supposed the linked list is 1 -> 2 -> 3 -> 4 and you are given the third node wi
 
 > http://blog.csdn.net/zhanglei0107/article/details/11472683
 > http://www.linuxidc.com/Linux/2015-01/111637.htm
-
-
-
