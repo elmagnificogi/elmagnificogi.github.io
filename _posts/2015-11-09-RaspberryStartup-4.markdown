@@ -302,12 +302,19 @@ CentOS 5.x 的 initrd 文件内容
 ## Quote
 
 > http://elinux.org/RPi_Software
+> 
 > http://wiki.beyondlogic.org/index.php?title=Understanding_RaspberryPi_Boot_Process
+> 
 > https://www.raspberrypi.org/blog/raspberry-pi-compute-module-new-product/
+> 
 > https://wiki.gentoo.org/wiki/Raspberry_Pi
+> 
 > http://vbird.dic.ksu.edu.tw/linux_basic/0510osloader_1.php#process_1
+> 
 > http://linux.cn/article-3994-1.html
+> 
 > http://www.ruanyifeng.com/blog/2013/08/linux_boot_process.html
+> 
 > http://www.ruanyifeng.com/blog/2013/02/booting.html
 
 

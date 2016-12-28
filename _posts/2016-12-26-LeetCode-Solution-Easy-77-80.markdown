@@ -344,5 +344,7 @@ python较为简单,set是其语言自带的容器,所以做起来非常容易
 ## Quote
 
 > http://bookshadow.com/weblog/2016/08/11/leetcode-ransom-note/
+> 
 > http://www.jiuzhang.com/solutions/intersection-of-two-arrays/
+> 
 > http://bookshadow.com/weblog/2016/11/06/leetcode-minimum-moves-to-equal-array-elements/

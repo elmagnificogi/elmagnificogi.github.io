@@ -480,8 +480,11 @@ Bash的设置之所以如此繁琐，是由于历史原因造成的。早期的�
 ## Quote
 
 > http://vbird.dic.ksu.edu.tw/linux_basic/0510osloader_1.php#process_1
+> 
 > http://m.blog.csdn.net/blog/gongora/4190056
+> 
 > http://blog.chinaunix.net/uid-23069658-id-3142047.html
+> 
 > http://www.ruanyifeng.com/blog/2013/08/linux_boot_process.html
 
 

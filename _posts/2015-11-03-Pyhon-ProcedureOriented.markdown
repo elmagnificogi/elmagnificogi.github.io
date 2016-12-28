@@ -522,5 +522,7 @@ import就是用来导入copy模块
 ## Quote
 
 > http://www.runoob.com/python/python-tutorial.html
+> 
 > http://my.oschina.net/u/2260265/blog/411174
+> 
 > http://www.cnblogs.com/dolphin0520/archive/2013/03/14/2954733.html

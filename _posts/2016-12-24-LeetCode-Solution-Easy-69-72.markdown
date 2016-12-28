@@ -338,9 +338,15 @@ python有一个问题就是string是不可变类型.也就是说我不能把stri
 ## Quote
 
 > http://www.myexception.cn/perl-python/1621795.html
+> 
 > http://www.runoob.com/python/python-strings.html
+> 
 > http://blog.sina.com.cn/s/blog_9054a03601013d5d.html
+> 
 > http://bbs.csdn.net/topics/320062997
+> 
 > http://www.runoob.com/python/python-lists.html
+> 
 > http://blog.chinaunix.net/uid-26000296-id-3785610.html
+> 
 > http://bbs.csdn.net/topics/220013347

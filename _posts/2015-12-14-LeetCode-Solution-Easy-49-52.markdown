@@ -450,6 +450,7 @@ You may assume that the secret number and your friend's guess only contain digit
 ## Quote
 
 > http://blog.csdn.net/hancunai0017/article/details/7032383
+> 
 > http://www.cnblogs.com/xFreedom/archive/2011/05/16/2048037.html
 
 

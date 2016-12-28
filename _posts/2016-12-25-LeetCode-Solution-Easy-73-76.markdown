@@ -408,6 +408,9 @@ Example 2:
 ## Quote
 
 > http://blog.csdn.net/booirror/article/details/51816003 
+> 
 > http://bookshadow.com/weblog/2016/06/30/leetcode-sum-of-two-integers/
+> 
 > http://blog.csdn.net/cnmilan/article/details/44777017 
+> 
 > http://blog.csdn.net/junchen1992/article/details/53147967 

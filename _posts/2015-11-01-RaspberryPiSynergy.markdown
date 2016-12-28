@@ -337,12 +337,19 @@ synergy.py脚本内容如下
 ## Quote
 
 > http://www.shumeipai.net/thread-18993-1-1.html?_dsign=4330837c
+> 
 > http://blog.csdn.net/lonerzf/article/details/13996895
+> 
 > http://blog.sina.com.cn/s/blog_5922f3300101e20o.html
+> 
 > https://www.rootusers.com/compiling-synergy-from-source-on-the-raspberry-pi/
+> 
 > http://synergy-project.org/forum/viewtopic.php?f=9&t=30&hilit=raspberry&start=10
+> 
 > https://learn.adafruit.com/synergy-on-raspberry-pi/setup-synergy-client-autostart
+> 
 > http://www.raspberrypi-spy.co.uk/2014/05/how-to-autostart-apps-in-rasbian-lxde-desktop/
+> 
 > http://wp.sgrosshome.com/2014/01/31/configure-synergy-client-systemd-service-auto-start-linux-fedora-20/
 
 

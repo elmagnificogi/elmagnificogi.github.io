@@ -478,7 +478,9 @@ For example, the lowest common ancestor (LCA) of nodes 2 and 8 is 6. Another exa
 ## Quote
 
 > https://msdn.microsoft.com/zh-cn/library/547ckb56.aspx
+> 
 > http://my.oschina.net/Tsybius2014/blog/517511?fromerr=cMRMLS2j
+> 
 > http://www.cnblogs.com/zhengyun_ustc/archive/2009/10/14/shifting.html
 
 

@@ -522,6 +522,7 @@ Merge two sorted linked lists and return it as a new list. The new list should b
 ## Quote
 
 > http://blog.csdn.net/business122/article/details/7541486
+> 
 > http://blog.csdn.net/sunao2002002/article/details/46793425
 
 

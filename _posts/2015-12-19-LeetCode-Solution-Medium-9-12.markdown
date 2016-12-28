@@ -497,8 +497,13 @@ Given n = 3, there are a total of 5 unique BST's.
 ## Quote
 
 > http://www.cnblogs.com/zsboy/p/3889499.html
+> 
 > http://www.tuicool.com/articles/2uUJJbI
+> 
 > http://www.1point3acres.com/bbs/thread-111563-1-1.html
+> 
 > http://www.cnblogs.com/ShaneZhang/p/4102581.html
+> 
 > http://blog.csdn.net/lanxu_yy/article/details/17504837
+> 
 > http://www.2cto.com/kf/201312/262420.html

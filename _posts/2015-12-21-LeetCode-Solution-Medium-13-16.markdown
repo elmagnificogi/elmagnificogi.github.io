@@ -473,8 +473,13 @@ You may assume no duplicate exists in the array.
 ## Quote
 
 > http://www.cnblogs.com/easonliu/p/3654182.html
+> 
 > http://blog.csdn.net/ljiabin/article/details/39968583
+> 
 > http://blog.csdn.net/zhuichao001/article/details/7843888
+> 
 > http://blog.csdn.net/sunbaigui/article/details/8980754
+> 
 > http://www.tuicool.com/articles/IbiMjaI
+> 
 > http://www.acmerblog.com/leetcode-solution-maximum-subarray-6334.html

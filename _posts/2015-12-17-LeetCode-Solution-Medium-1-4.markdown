@@ -333,9 +333,15 @@ Could you solve it with constant space complexity? (Note: The output array does 
 ## Quote
 
 > http://www.cnblogs.com/changchengxiao/p/3413294.html
+> 
 > http://www.cnblogs.com/aboutblank/p/4741051.html
+> 
 > http://www.cnblogs.com/daijinqiao/p/3352893.html
+> 
 > http://www.geekcome.com/content-10-2786-1.html
+> 
 > http://segmentfault.com/a/1190000002565570
+> 
 > http://www.tuicool.com/articles/IbUvmeJ
+> 
 > http://www.cnblogs.com/grandyang/p/4650187.html

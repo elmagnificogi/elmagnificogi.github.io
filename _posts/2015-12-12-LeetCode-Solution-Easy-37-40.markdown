@@ -417,7 +417,6 @@ Related problem: Reverse Integer
 ## Quote
 
 > http://blog.csdn.net/wcyoot/article/details/6426436
-> 
 
 
 

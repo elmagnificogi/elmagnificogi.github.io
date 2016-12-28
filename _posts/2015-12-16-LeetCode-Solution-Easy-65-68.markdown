@@ -475,9 +475,15 @@ python 是72ms 比c++慢多了
 ## Quote
 
 > http://blog.csdn.net/xudli/article/details/48286081
+> 
 > http://my.oschina.net/Tsybius2014/blog/505462
+> 
 > http://m.shangxueba.com/jingyan/2926615.html
+> 
 > http://www.cnblogs.com/x1957/p/4086448.html
+> 
 > https://leetcode.com/discuss/66324/python-1-line-solution-without-loop
+> 
 > https://msdn.microsoft.com/zh-cn/library/7w2119c6.aspx
+> 
 > https://msdn.microsoft.com/zh-cn/library/efzty53k.aspx

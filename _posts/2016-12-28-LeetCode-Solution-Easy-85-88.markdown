@@ -414,30 +414,26 @@ Example 3:
 
 ### 88.Repeated Substring Pattern-Solution-C/C++
 
-
-```c++
-class Solution
-{
-public:
-    bool repeatedSubstringPattern(string str) 
-    {
-        int n=str.size();
-        for(int i=1;i<=n/2;i++)
-        {
-            if(n%i==0)
-            {//i是其长度的公约数
-                string rsub="";
-                for(int j=0;j<n/i;j++)
-                    rsub+=str.substr(0,i);
-                if(rsub==str)
-                    return true;
-            }
-        }
-        return false;
-    }
-};
-
-``` 
+	class Solution
+	{
+	public:
+	    bool repeatedSubstringPattern(string str) 
+	    {
+	        int n=str.size();
+	        for(int i=1;i<=n/2;i++)
+	        {
+	            if(n%i==0)
+	            {//i是其长度的公约数
+	                string rsub="";
+	                for(int j=0;j<n/i;j++)
+	                    rsub+=str.substr(0,i);
+	                if(rsub==str)
+	                    return true;
+	            }
+	        }
+	        return false;
+	    }
+	};
 
 ### 88.Repeated Substring Pattern-Solution-Python
 

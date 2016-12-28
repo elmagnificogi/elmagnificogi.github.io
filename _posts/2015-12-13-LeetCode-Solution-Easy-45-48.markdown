@@ -525,9 +525,13 @@ c++是参考别人的方法，首先解决str是用空格为分隔符，istrings
 ## Quote
 
 > http://blog.csdn.net/wcyoot/article/details/6426436
+> 
 > http://www.cnblogs.com/zhengyuxin/articles/1938300.html
+> 
 > http://www.yiibai.com/python/dictionary_get.html
+> 
 > http://blog.csdn.net/xiayang05/article/details/5933893
+> 
 > http://www.cnblogs.com/easonliu/p/4856850.html
 
 

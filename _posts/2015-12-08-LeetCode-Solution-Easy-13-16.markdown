@@ -520,6 +520,7 @@ python在上面c的基础上，把一些重复的逻辑去掉了，稍微简洁�
 ## Quote
 
 > http://iask.sina.com.cn/b/1775817.html
+> 
 > http://blog.csdn.net/autumn20080101/article/details/7607148
 
 

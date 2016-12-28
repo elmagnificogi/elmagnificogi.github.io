@@ -533,9 +533,13 @@ python的list有自带的排序功能比较好用，而c没有，c++就要用STL
 ## Quote
 
 > http://segmentfault.com/a/1190000003768716
+> 
 > http://www.linuxidc.com/Linux/2015-01/111637.htm
+> 
 > http://blog.devtang.com/blog/2015/06/16/talk-about-tech-interview/
+> 
 > http://piziyin.blog.51cto.com/2391349/568426
+> 
 > http://www.cnblogs.com/ganganloveu/p/4694703.html
 
 

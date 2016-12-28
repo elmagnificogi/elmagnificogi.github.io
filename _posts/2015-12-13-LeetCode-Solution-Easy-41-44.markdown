@@ -402,4 +402,5 @@ Assume that the total area is never beyond the maximum possible value of int.
 ## Quote
 
 > http://www.tuicool.com/articles/zMn2ei
+> 
 > http://bookshadow.com/weblog/2015/05/29/leetcode-contains-duplicate-ii/

@@ -378,7 +378,9 @@ debian里root账户默认没有密码，但账户锁定。
 ## Quote
 
 > http://ntp.neu.edu.cn/archives/163
+> 
 > https://www.raspberrypi.org/forums/viewtopic.php?f=63&t=53506&p=409303&hilit=the+ntp+socket+is+in+use+exiting#p409303
+> 
 > https://github.com/iridium77/htpdate
 
 

@@ -280,10 +280,15 @@ Systemd快速，高效，可以并发启动，并且简化了系统脚本，维�
 ## Quote
 
 > http://www.cnblogs.com/cfox/archive/2013/02/01/2888759.html
+> 
 > http://www.freedesktop.org/software/systemd/man/systemd.service.html
+> 
 > https://blog.linuxeye.com/400.html
+> 
 > http://www.lxway.com/88080114.htm
+> 
 > http://vbird.dic.ksu.edu.tw/linux_basic/0510osloader_1.php#process_1
+> 
 > http://www.ibm.com/developerworks/cn/linux/1407_liuming_init3/
 
 

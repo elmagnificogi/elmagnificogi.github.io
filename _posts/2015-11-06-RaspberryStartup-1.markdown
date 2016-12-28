@@ -462,6 +462,7 @@ avoid_safe_mode 如果设为1, 将不以安全模式启动. 默认为0
 ## Quote
 
 > http://my.oschina.net/funnky/blog/132885#OSC_h1_1
+> 
 > http://www.wowotech.net/linux_kenrel/why-dt.html
 
 

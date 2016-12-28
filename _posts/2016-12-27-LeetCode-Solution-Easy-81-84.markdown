@@ -343,7 +343,11 @@ python中使用了一些较为方便的函数,bin是将对应int转换为二进�
 ## Quote
 
 > http://www.cnblogs.com/btchenguang/archive/2012/01/30/2332479.html
+> 
 > http://www.jb51.net/article/15716.htm
+> 
 > http://www.cnblogs.com/grandyang/p/5533305.html
+> 
 > http://bookshadow.com/weblog/2016/05/21/leetcode-intersection-of-two-arrays-ii/
+> 
 > http://bookshadow.com/weblog/2016/09/18/leetcode-binary-watch/
