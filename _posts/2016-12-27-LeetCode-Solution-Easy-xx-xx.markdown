@@ -9,7 +9,7 @@ tags:
     - LeetCode
 ---
 
-[TOC]
+
 
 ## xx.xxxxxxxxxx
 
@@ -21,13 +21,13 @@ tags:
 
 ### xx.xxxxxxxxxx-Solution-C/C++
 
-``` c++
+```cpp
 
 ```
 
 ### xx.xxxxxxxxxx-Solution-Python
 
-``` python
+```python
 
 ```
 	
@@ -41,13 +41,13 @@ tags:
 
 ### xx.xxxxxxxxxx-Solution-C/C++
 
-``` c++
+```cpp
 
 ```
 
 ### xx.xxxxxxxxxx-Solution-Python
 
-``` python
+```python
 
 ```
 
@@ -61,13 +61,13 @@ tags:
 
 ### xx.xxxxxxxxxx-Solution-C/C++
 
-``` c++
+```cpp
 
 ```
 
 ### xx.xxxxxxxxxx-Solution-Python
 
-``` python
+```python
 
 ```
 
@@ -81,13 +81,13 @@ tags:
 
 ### xx.xxxxxxxxxx-Solution-C/C++
 
-``` c++
+```cpp
 
 ```
 
 ### xx.xxxxxxxxxx-Solution-Python
 
-``` python
+```python
 
 ```
 
