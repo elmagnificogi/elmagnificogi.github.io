@@ -20,11 +20,15 @@ tags:
 
 ### xx.xxxxxxxxxx-Solution-C/C++
 
+``` c++
 
+```
 
 ### xx.xxxxxxxxxx-Solution-Python
 
+``` python
 
+```
 	
 ## xx.xxxxxxxxxx
 
@@ -36,11 +40,15 @@ tags:
 
 ### xx.xxxxxxxxxx-Solution-C/C++
 
+``` c++
 
+```
 
 ### xx.xxxxxxxxxx-Solution-Python
 
+``` python
 
+```
 
 ## xx.xxxxxxxxxx
 
@@ -52,11 +60,15 @@ tags:
 
 ### xx.xxxxxxxxxx-Solution-C/C++
 
+``` c++
 
+```
 
 ### xx.xxxxxxxxxx-Solution-Python
 
+``` python
 
+```
 
 ## xx.xxxxxxxxxx
 
@@ -68,12 +80,17 @@ tags:
 
 ### xx.xxxxxxxxxx-Solution-C/C++
 
+``` c++
 
+```
 
 ### xx.xxxxxxxxxx-Solution-Python
 
+``` python
 
+```
 
 ## Quote
 
 > xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+> 
