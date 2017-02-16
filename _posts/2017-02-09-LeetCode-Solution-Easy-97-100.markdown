@@ -36,11 +36,11 @@ Note:
 1. The given area won't exceed 10,000,000 and is a positive integer
 2. The web page's width and length you designed must be positive integers.
 
-### 97.Construct the Rectangle-Analysis
+#### 97.Analysis
 
 给定面积,要求输出矩形的长款,矩形的长必须大于宽,并且长款之差越小越好
 
-### 97.Construct the Rectangle-Solution-C/C++
+#### 97.Solution-C/C++
 
 ```cpp
 class Solution 
@@ -68,7 +68,7 @@ public:
 };
 ```
 
-### 97.Construct the Rectangle-Solution-Python
+#### 97.Solution-Python
 
 ```python
 class Solution(object):
@@ -140,13 +140,13 @@ Note:
 1. N is a positive integer and won't exceed 10,000.
 2. All the scores of athletes are guaranteed to be unique.
 
-### 98.Relative Ranks-Analysis
+#### 98.Analysis
 
 给一组成绩,给出其对应的名次.
 
 简单说依次取出最大值,之后分别对应各个位上排序就行了.
 
-### 98.Relative Ranks-Solution-C/C++
+#### 98.Solution-C/C++
 
 ```cpp
 class Solution 
@@ -190,7 +190,7 @@ public:
 
 c++这里可以直接使用priority_queue 优先级队列,自动排序,然后用排好序的直接输出名次即可
 
-### 98.Relative Ranks-Solution-Python
+#### 98.Solution-Python
 
 ```python
 class Solution(object):
@@ -229,11 +229,11 @@ You may assume that each input would have exactly one solution and you may not u
 	Input: numbers={2, 7, 11, 15}, target=9
 	Output: index1=1, index2=2
 
-### 99.Two Sum II - Input array is sorted-Analysis
+#### 99.Analysis
 
 给定一个排序数组,给一个目标值,要求用排序好的数组中的两个数相加等于目标值
 
-### 99.Two Sum II - Input array is sorted-Solution-C/C++
+#### 99.Solution-C/C++
 
 ```cpp
 class Solution 
@@ -296,7 +296,7 @@ public:
 };
 ```
 
-### 99.Two Sum II - Input array is sorted-Solution-Python
+#### 99.Solution-Python
 
 ```python
 class Solution(object):
@@ -374,7 +374,7 @@ Note: If a tree has more than one mode, you can return them in any order.
 
 Follow up: Could you do that without using any extra space? (Assume that the implicit stack space incurred due to recursion does not count).
 
-### 100.Find Mode in Binary Search Tree-Analysis
+#### 100.Analysis
 
 给一个有重复元素的二叉搜索树,找到最常出现的节点,可能有多个,不用额外空间完成
 
@@ -415,7 +415,7 @@ Follow up: Could you do that without using any extra space? (Assume that the imp
 
 最终找齐了所有元素,返回
 
-### 100.Find Mode in Binary Search Tree-Solution-C/C++
+#### 100.Solution-C/C++
 
 ```cpp
 /**
@@ -477,7 +477,7 @@ private:
 
 ```
 
-### 100.Find Mode in Binary Search Tree-Solution-Python
+#### 100.Solution-Python
 
 ```python
 # Definition for a binary tree node.
