@@ -25,7 +25,8 @@ Example:
 
 	Input: 4
 	Output: [2, 2]
-	Explanation: The target area is 4, and all the possible ways to construct it are [1,4], [2,2], [4,1]. 
+	Explanation: The target area is 4
+	and all the possible ways to construct it are [1,4], [2,2], [4,1]. 
 	But according to requirement 2, [1,4] is illegal; according to requirement 3,  
 	[4,1] is not optimal compared to [2,2]. So the length L is 2, and the width W is 2.
 
@@ -130,7 +131,8 @@ Example 1:
 	Output: ["Gold Medal", "Silver Medal", "Bronze Medal", "4", "5"]
 	Explanation: The first three athletes got the top three highest scores
 	so they got "Gold Medal", "Silver Medal" and "Bronze Medal". 
-	For the left two athletes, you just need to output their relative ranks according to their scores.
+	For the left two athletes
+	you just need to output their relative ranks according to their scores.
 
 Note:
 
@@ -388,12 +390,11 @@ Follow up: Could you do that without using any extra space? (Assume that the imp
 第一次:
 
 1. 如果当前元素和上一元素不同,那么开始记录这一元素,当前元素个数+1
+2.  如果当前元素和上一元素相同,当前元素个数+1
 
-如果当前元素和上一元素相同,当前元素个数+1
 
-2. 如果当前元素个数大于最大元素个数,最大元素出现次数修改,最大元素出现次数为1
-
-如果当前元素个数等于最大元素个数,最大元素出现次数+1;
+3. 如果当前元素个数大于最大元素个数,最大元素出现次数修改,最大元素出现次数为1
+4.  如果当前元素个数等于最大元素个数,最大元素出现次数+1;
 
 这样最终得到了出现次数最多的元素的个数
 
@@ -403,11 +404,11 @@ Follow up: Could you do that without using any extra space? (Assume that the imp
 
 1. 如果当前元素和上一元素不同,那么开始记录这一元素,当前元素个数+1
 
-如果当前元素和上一元素相同,当前元素个数+1
+2. 如果当前元素和上一元素相同,当前元素个数+1
 
-2. 如果当前元素个数大于最大元素个数(这不可能了,第一次已经得到了最大值,所以只会出现相等情况了)
+3. 如果当前元素个数大于最大元素个数(这不可能了,第一次已经得到了最大值,所以只会出现相等情况了)
 
-如果当前元素个数等于最大元素个数,说明他就是要找的目标值,将目标值加入到返回值中,最高频率元素序号++
+4. 如果当前元素个数等于最大元素个数,说明他就是要找的目标值,将目标值加入到返回值中,最高频率元素序号++
 
 继续循环,找下一个出现次数最多的元素.
 
@@ -527,12 +528,13 @@ class Solution(object):
 ## Quote
 
 > http://www.cnblogs.com/void/archive/2012/02/01/2335224.html
-
+> 
 > http://www.cnblogs.com/65702708/archive/2010/09/14/1826362.html
-
+> 
 > https://my.oschina.net/zyzzy/blog/115096
-
+> 
 > http://www.cnblogs.com/frydsh/archive/2012/07/10/2585370.html
-
+> 
 > http://www.cnblogs.com/yangyongzhi/archive/2012/09/17/2688326.html
+> 
 > http://www.cnblogs.com/ganganloveu/p/4198968.html
