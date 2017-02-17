@@ -269,12 +269,12 @@ int _tmain(int argc, _TCHAR* argv[])
 
 对于fstream来说操作文本文件与二进制文件完全是不同的操作函数,不能相互使用,用了会产生一些奇怪的情况.
 
-读写二进制文件使用
+##### 读写二进制文件使用
 
 	write ( char * buffer, streamsize size )
 	read  ( char * buffer, streamsize size )
 
-读写文本文件使用
+##### 读写文本文件使用
 
 	getline (char* s, streamsize n );
 	getline (char* s, streamsize n, char delim );	
