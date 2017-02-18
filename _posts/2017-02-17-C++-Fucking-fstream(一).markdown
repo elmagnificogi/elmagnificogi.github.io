@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "C++中坑人的fstream"
+title:      "C++中坑人的fstream(一)"
 subtitle:   "c/c++，fstream"
 date:       2017-02-17
 author:     "elmagnifico"
