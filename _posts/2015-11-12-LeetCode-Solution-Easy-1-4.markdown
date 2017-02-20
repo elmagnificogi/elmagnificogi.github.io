@@ -50,12 +50,15 @@ bool canWinNim(int n)
 #### Solution-Python
 
 ```python
-
 class Solution(object):
-	def canWinNim(self, n):
+    def canWinNim(self, n):
+        """
+        :type n: int
+        :rtype: bool
+        """
         if (n % 4 == 0 ):
             return False
-	    else:
+        else:
 	        return True
 ```
 
@@ -128,10 +131,14 @@ int addDigits(int num)
 
 ```python
 class Solution(object):
-	 def addDigits(self, num):
+    def addDigits(self, num):
+        """
+        :type num: int
+        :rtype: int
+        """
         if num==0:
             return 0
-	    elif (num % 9 == 0):
+        elif (num % 9 == 0):
 	        return 9
         else:
             return num%9
@@ -295,6 +302,13 @@ public:
 ###### 递归式
 
 ```python
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
 class Solution(object):
     def maxDepth(self, root):
         """
