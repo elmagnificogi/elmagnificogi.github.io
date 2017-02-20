@@ -5,6 +5,7 @@ subtitle:   "c/c++，python，for work"
 date:       2015-11-12
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"
+catalog:    true
 tags:
     - LeetCode
 ---
@@ -22,7 +23,7 @@ Both of you are very clever and have optimal strategies for the game. Write a fu
 
 For example, if there are 4 stones in the heap, then you will never win the game: no matter 1, 2, or 3 stones you remove, the last stone will always be removed by your friend.
 
-### 1.Nim Game-Analysis
+#### Analysis
  
 首先看题，题目看完了，先找找数学上的规律，如果能找到规律那么写起程序来就简单了。
 
@@ -33,26 +34,30 @@ For example, if there are 4 stones in the heap, then you will never win the game
 
 那就很简单了，只需要求余4就可以得到先手是否会赢的结果了
 
-### 1.Nim Game-Solution-C/C++
+#### Solution-C/C++
 
-	bool canWinNim(int n) 
-	{
-		if(n % 4 == 0 )
-			return 0;
-		else
-			return 1;
-	}
+```cpp
+bool canWinNim(int n) 
+{
+	if(n % 4 == 0 )
+		return 0;
+	else
+		return 1;
+}
+```
 
 
+#### Solution-Python
 
-### 1.Nim Game-Solution-Python
+```python
 
-	class Solution(object):
-	    def canWinNim(self, n):
-	        if (n % 4 == 0 ):
-	            return False
-	        else:
-	            return True
+class Solution(object):
+	def canWinNim(self, n):
+        if (n % 4 == 0 ):
+            return False
+	    else:
+	        return True
+```
 
 ## 2.Add Digits
 
@@ -65,7 +70,7 @@ Given num = 38, the process is like: 3 + 8 = 11, 1 + 1 = 2. Since 2 has only one
 Follow up:
 Could you do it without any loop/recursion in O(1) runtime?
 
-### 2.Add Digits-Analysis
+#### Analysis
  
 开始题目只是加起来所有数字，这个很简单，无脑循环一下就行了。
 
@@ -110,23 +115,27 @@ Could you do it without any loop/recursion in O(1) runtime?
 (看来上面想的跟位有关系还是不对的)
 
 
-### 2.Add Digits-Solution-C/C++
+#### Solution-C/C++
 
-	int addDigits(int num)
-	{
-	    return num==0?0:(num%9==0?9:num % 9);
-	}
+```cpp
+int addDigits(int num)
+{
+	return num==0?0:(num%9==0?9:num % 9);
+}
+```
 
-### 2.Add Digits-Solution-Python
+#### Solution-Python
 
-	class Solution(object):
-	    def addDigits(self, num):
-	        if num==0:
-	            return 0
-	        elif (num % 9 == 0):
-	            return 9
-	        else:
-	            return num%9
+```python
+class Solution(object):
+	 def addDigits(self, num):
+        if num==0:
+            return 0
+	    elif (num % 9 == 0):
+	        return 9
+        else:
+            return num%9
+```
 
 ## 3.Maximum Depth of Binary Tree
 
@@ -134,7 +143,7 @@ Given a binary tree, find its maximum depth.
 
 The maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node.
 
-### 3.Maximum Depth of Binary Tree-Analysis
+#### Analysis
 
 要求返回最大深度，分别求左右子树的最大深度。
 
@@ -150,31 +159,33 @@ The maximum depth is the number of nodes along the longest path from the root no
 
 就应该用中序遍历，左根右，来遍历，得到最大高度
 
-### 3.Maximum Depth of Binary Tree-Solution-C/C++
+#### Solution-C/C++
 
-#### 递归式
+###### 递归式
 
-	/**
-	 * Definition for a binary tree node.
-	 * struct TreeNode {
-	 *     int val;
-	 *     struct TreeNode *left;
-	 *     struct TreeNode *right;
-	 * };
-	 */
-	int maxDepth(struct TreeNode* root)
+```cpp
+/**
+* Definition for a binary tree node.
+* struct TreeNode {
+*     int val;
+*     struct TreeNode *left;
+*     struct TreeNode *right;
+* };
+*/
+int maxDepth(struct TreeNode* root)
+{
+	int depth = 0;
+	if (root)
 	{
-	    int depth=0; 
-	    if(root)
-	    {
-	        int left_depth=maxDepth(root->left);
-	        int right_depth=maxDepth(root->right);  
-	        depth=left_depth>=right_depth?left_depth+1:right_depth+1;
-	    }
-	    return depth;
+		int left_depth = maxDepth(root->left);
+		int right_depth = maxDepth(root->right);
+		depth = left_depth >= right_depth ? left_depth + 1 : right_depth + 1;
 	}
+	return depth;
+}
+```
 
-#### 非递归式
+###### 非递归式
 
 如果要使用非递归式，那么基本就需要按照层遍历，记录下来总的层数就可以了。按照层遍历需要存储每一次的分支，那么就需要有一个结构来存储当前层所有的结点入口，用队列就可以，这样的话C就不方便了，那么就用C++来实现。
 
@@ -182,136 +193,154 @@ The maximum depth is the number of nodes along the longest path from the root no
 
 如果队列不为空，那么说明还能往下一层走，那么就依次从队列头取出，判断是否可以往下一层走，可以走的再进入队列，当这一次走完以后，队列中剩下的就是下一层的入口。如此循环往复，计数外层循环了几次，就知道深度是多少了。
 
-	#include<queue>
-	/**
-	 * Definition for a binary tree node.
-	 * struct TreeNode {
-	 *     int val;
-	 *     TreeNode *left;
-	 *     TreeNode *right;
-	 *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
-	 * };
-	 */
-	class Solution 
+```cpp
+/**
+* Definition for a binary tree node.
+* struct TreeNode {
+*     int val;
+*     TreeNode *left;
+*     TreeNode *right;
+*     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+* };
+*/
+class Solution
+{
+public:
+	int maxDepth(TreeNode* root)
 	{
-		public:
-	    int maxDepth(TreeNode* root) 
+		int depth = 0;
+		if (!root)
+			return 0;
+		queue<TreeNode*> q;
+		q.push(root);
+		while (!q.empty())
 		{
-			int depth=0;
-			if(!root)
-				return 0;
-			queue<TreeNode*> q;
-			q.push(root);
-			while(!q.empty())
+			depth++;
+			int i = 0, j = q.size();
+			while (i<j)
 			{
-				depth++;
-				int i=0,j=q.size();
-				while (i<j)
-				{
-					i++;
-					TreeNode* curpoint =q.front();
-					q.pop();
-					if(curpoint->left)
-						q.push(curpoint->left);
-					if(curpoint->right)
-						q.push(curpoint->right);
-				}
+				i++;
+				TreeNode* curpoint = q.front();
+				q.pop();
+				if (curpoint->left)
+					q.push(curpoint->left);
+				if (curpoint->right)
+					q.push(curpoint->right);
 			}
-			return depth;
-	    }
-	};
+		}
+		return depth;
+	}
+};
+```
 
 但是感觉这个方法还是有点慢，毕竟需要遍历到每一个元素而且还是双层循环的嵌套。查了一下其他方法，非递归的要么就是再加上一个带标记的栈来记录是左子树还是右子树，依然是双层的
 
 下面这个方法就避免了双层循环，只是多了一个度结点，用来保存深度信息，这样就无脑遍历就可以了。
 
-	#include<queue>
-	/**
-	 * Definition for a binary tree node.
-	 * struct TreeNode {
-	 *     int val;
-	 *     TreeNode *left;
-	 *     TreeNode *right;
-	 *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
-	 * };
-	 */
-	struct denode  
-	{  
-	    TreeNode* node;  
-	    int degree;  
-	};  
-	class Solution 
+```cpp
+/**
+* Definition for a binary tree node.
+* struct TreeNode {
+*     int val;
+*     TreeNode *left;
+*     TreeNode *right;
+*     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+* };
+*/
+class Solution
+{
+public:
+    struct denode
+    {
+    	TreeNode* node;
+    	int degree;
+    };
+	int maxDepth(TreeNode* root)
 	{
-		public:
-	    int maxDepth(TreeNode *root) 
+		int depth = 0;
+		if (!root)
+			return 0;
+		queue<denode> q;
+		denode dnode;
+		dnode.degree=1;
+		dnode.node=root;
+		q.push(dnode);
+		while (!q.empty())
 		{
-	        // Start typing your C/C++ solution below
-	        // DO NOT write int main() function
-	     
-	    if(root==NULL)return 0;  
-	    queue<denode> que;  
-	      
-	    denode dnode;  
-	    dnode.degree=1;  
-	    dnode.node=root;  
-	  
-	    que.push(dnode);  
-	  
-	    int degree=1;  
-	    while(!que.empty())  
-	    {  
-	        denode ptr=que.front();  
-	        que.pop();  
-	  
-	        degree=ptr.degree;  
-	  
-	        if(ptr.node->left!=NULL)  
-	        {  
-	            denode p;  
-	            p.node=ptr.node->left;  
-	            p.degree=ptr.degree+1;  
-	            que.push(p);  
-	        }  
-	  
-	        if(ptr.node->right!=NULL)  
-	        {  
-	            denode p;  
-	            p.node=ptr.node->right;  
-	            p.degree=ptr.degree+1;  
-	            que.push(p);  
-	        }  
-	    }  
-	    return degree;   
-	        
-	    }
-	};
+			denode cn=q.front();
+			depth=cn.degree;
+			q.pop();
+			if(cn.node->left)
+			{
+			    denode ndn;
+			    ndn.node=cn.node->left;
+			    ndn.degree=cn.degree+1;
+			    q.push(ndn);
+			}
+			if(cn.node->right)
+			{
+			    denode ndn;
+			    ndn.node=cn.node->right;
+			    ndn.degree=cn.degree+1;
+			    q.push(ndn);
+			}
+		}
+		return depth;
+	}
+};
+```
 
-### 3.Maximum Depth of Binary Tree-Solution-Python
+#### Solution-Python
+
+###### 递归式
+
+```python
+class Solution(object):
+    def maxDepth(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+        """
+        depth=0
+        if root!=None:
+            leftdepth=self.maxDepth(root.left)
+            rightdepth=self.maxDepth(root.right)
+            depth=max(leftdepth+1,rightdepth+1)
+        return depth
+```
+
+###### 非递归式
 
 python自带列表结构，可以直接构造成带度节点，进行遍历
 
-	# Definition for a binary tree node.
-	# class TreeNode(object):
-	#     def __init__(self, x):
-	#         self.val = x
-	#         self.left = None
-	#         self.right = None
-	
-	class Solution(object):
-	    def maxDepth(self, root):
-	        if(root==None):
-	            return 0
-	        listq=[[root,1]]    
-	        depth=1
-	        while(listq!=[]):
-	            cTreeNode=listq[0][0]
-	            depth=listq[0][1]
-	            listq.remove(listq[0])
-	            if cTreeNode.left!=None:
-	                listq.append([cTreeNode.left,depth+1])
-	            if cTreeNode.right!=None:
-	                listq.append([cTreeNode.right,depth+1])
-	        return depth
+```python
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution(object):
+    def maxDepth(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+        """
+        if root==None:
+            return 0
+        depth=0
+        q=[[root,1]]
+        while(len(q)!=0):
+            cn=q[0][0]
+            depth=q[0][1]
+            q.remove(q[0])
+            if cn.left!=None:
+                q.append([cn.left,depth+1])
+            if cn.right!=None:
+                q.append([cn.right,depth+1])
+        return depth
+```
 
 顺带还学习到，原来listq没有元素的情况下 listq=[]！=None 所以经常判断listq有无元素要根据其长度或者是[]来判断，而不是根据None来判断，None在Python中一般指代没有进行定义初始化的情况
 
@@ -321,71 +350,79 @@ Write a function to delete a node (except the tail) in a singly linked list, giv
 
 Supposed the linked list is 1 -> 2 -> 3 -> 4 and you are given the third node with value 3, the linked list should become 1 -> 2 -> 4 after calling your function.
 
-### 4.Delete Node in a Linked List-Analysis
+#### Analysis
 
 给出某一结点，并进行删除，遍历一下就可以了。
 
 仔细一看给出的函数头，发现竟然没有给头指针，不知道前一个怎么删除下一个呢？？
 
-查了查，才恍然大悟，删除是真的要删，但不一定删的就是当前给的这个节点，可以移花接木
+一脸懵逼.jpg
 
-改变当前节点，删除下一个节点，连接下下个节点，这样就做到了没给头节点的情况下删除某一个节点
+查了以后发现可以用移花接木大法。
 
-这个就是需要注意一下，当只有2个节点、1个节点、是尾节点的时候的情况判断
+1. 如果要删除得是尾节点，那么直接删除就好
+2. 如果要删除得是倒数第二个节点，那么只要用倒数第一个节点代替最后一个即可，然后删除最后一个节点
+3. 如果删除得是其他节点，同上，用下一个阶段代替当前要删除得阶段，然后删除下一节点。
 
-### 4.Delete Node in a Linked List-Solution-C/C++
+#### Solution-C/C++
 
-	/**
-	 * Definition for singly-linked list.
-	 * struct ListNode {
-	 *     int val;
-	 *     struct ListNode *next;
-	 * };
-	 */
-	void deleteNode(struct ListNode* node) 
-	{
-	    struct ListNode* prenode=node;
-	    struct ListNode* curnode=prenode->next;
-	    if(!curnode)
-	    {
-	        free(curnode);
-	        return ;
-	    }
-	    struct ListNode* nextnode=curnode->next;
-	    if(!nextnode)
-	    {
-	        prenode->val=curnode->val;
-	        prenode->next=0;
-	        free(curnode);
-	        return ;
-	    }
-	    prenode->val=curnode->val;
+```cpp
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution 
+{
+public:
+    void deleteNode(ListNode* node) 
+    {
+
+        ListNode* prenode=node;
+        ListNode* curnode=prenode->next;
+        //如果下一个节点为空,表示是尾节点,直接删除
+        if(curnode==NULL)
+        {
+            free(curnode);
+            return;
+        }
+        ListNode* nextnode=curnode->next;
+        //如果下下个节点不存在,原节点改成下一节点,然后删除最后得节点
+	    //下下节点存在的情况下,把原节点改成下一节点,然后删除下一个节点
+        prenode->val=curnode->val;
 	    prenode->next=nextnode;
 	    free(curnode);
-	}
+    }
+};
+```
 
-### 4.Delete Node in a Linked List-Solution-Python
+#### Solution-Python
 
-	# Definition for singly-linked list.
-	# class ListNode(object):
-	#     def __init__(self, x):
-	#         self.val = x
-	#         self.next = None
-	
-	class Solution(object):
-	    def deleteNode(self, node):
-	        pre=node
-	        cur=node.next
-	        if(cur==None):
-	            pre.next=None
-	            return
-	        next=cur.next
-	        if(next==None):
-	            pre.val=cur.val
-	            pre.next=None
-	        pre.val=cur.val
-	        pre.next=next
+```python
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
 
+class Solution(object):
+    def deleteNode(self, node):
+        """
+        :type node: ListNode
+        :rtype: void Do not return anything, modify node in-place instead.
+        """
+        pre=node
+        cur=node.next
+        if cur==None:
+            pre.next=None
+            return
+        next=cur.next
+        pre.val=cur.val
+        pre.next=cur.next
+```
 
 ## Quote
 
