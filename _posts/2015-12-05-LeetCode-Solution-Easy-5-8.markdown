@@ -562,7 +562,7 @@ s = "rat", t = "car", return false.
 Note:
 You may assume the string contains only lowercase alphabets.
 
-### 8.Valid Anagram-Analysis
+#### Analysis
 
 关键在于anagram这个词，意思是相同字母但是改变了顺序，而不是逆序。
 
@@ -575,7 +575,7 @@ You may assume the string contains only lowercase alphabets.
 
 百度了一下还看到一种思路，直接字母排序判等，这种貌似也可以，但是考虑时间的消耗当然是计数的方法最好只需要一遍就ok。（字母排序并不够稳定，耗时也很多）
 
-### 8.Valid Anagram-Solution-C/C++
+#### Solution-C/C++
 
 c用计数的方法来完成
 
@@ -604,7 +604,7 @@ bool isAnagram(char* s, char* t)
 }
 ```
 
-### 8.Valid Anagram-Solution-Python
+#### Solution-Python
 
 python就用第三种排序的方法来解决这个问题
 python的list有自带的排序功能比较好用，而c没有，c++就要用STL库的容器来弄。虽然python也需要转换一下容器。
