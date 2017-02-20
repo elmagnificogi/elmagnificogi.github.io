@@ -43,9 +43,9 @@ void moveZeroes(int* nums, int numsSize)
 			for (j = i + 1; j<numsSize; j++)
 				if (nums[j] != 0)
 				{
-		nums[i] = nums[j];
-		nums[j] = 0;
-		break;
+					nums[i] = nums[j];
+					nums[j] = 0;
+					break;
 				}
 }
 ```
@@ -506,13 +506,6 @@ public:
 ###### 递归
 
 ```python
-# Definition for a binary tree node.
-# class TreeNode(object):
-#     def __init__(self, x):
-#         self.val = x
-#         self.left = None
-#         self.right = None
-
 class Solution(object):
     def invertTree(self, root):
         """

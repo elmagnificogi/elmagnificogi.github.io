@@ -14,15 +14,15 @@ tags:
 
 Given an array of integers, find if the array contains any duplicates. Your function should return true if any value appears at least twice in the array, and it should return false if every element is distinct.
 
-### 9.Contains Duplicate-Analysis
+#### Analysis
 
 检查数组中重复的部分。由于是个整数数组用计数的方式不现实。
 
 本方法，python中可以直接统计数字重复出现的次数，就是需要整个数组遍历一遍。而python却有另外一个数据容器，set，也就是集合，而集合不可能出现重复，通过比较转化后的长度，利用这个特性则就能知道是否有重复元素了。
 
-查了一下别人都直接用java的hashset，可以通过插入元素得到结果插入的结果，从而判读重复元素。
+查了一下别人都直接用java的hashset，可以通过插入元素得到结果，从而判读重复元素。
 
-### 9.Contains Duplicate-Solution-C/C++
+#### Solution-C/C++
 
 用c完成这个难度有点大，所以用c++来写
 
@@ -31,41 +31,44 @@ Given an array of integers, find if the array contains any duplicates. Your func
 查了MSDN以后发现其实有返回值，但是不是bool 返回两个内容，ret.first是插入的元素所在位置，而ret.second是是否插入了新元素。
 如果为真，表示插入了新元素，就继续，如果为假就表示没有插入新元素，有重复元素，并且first返回那个元素的指针。
 
+```cpp
+#include <cliext/set> 
+class Solution
+{
+public:
+    bool containsDuplicate(vector<int>& nums)
+    {
+        set<int> s;
+        for(int i=0;i<nums.size();i++)
+        {
+            auto ret=s.insert(nums[i]);
+            if(ret.second)
+                continue;
+            else
+                return true;
+        }
+        return false;
+    }
+};
+```
 
-	#include <cliext/set> 
-	class Solution {
-	public:
-	    bool containsDuplicate(vector<int>& nums) 
-	    {
-	        set<int> s;
-	        vector<int>::iterator i;
-	        for(i=nums.begin(); i != nums.end(); i++ )
-	        {
-	            auto ret = s.insert(*i);
-	            if(ret.second)
-	                continue;
-	            else
-	                return true;
-	        }
-	        return false;
-	    }
-	};
-
+其中auto是自动变量,会根据赋值类型自动适应.
 	
+#### Solution-Python
 
-### 9.Contains Duplicate-Solution-Python
+```python
+class Solution(object):
+    def containsDuplicate(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: bool
+        """
+        s=set(nums)
+        if(len(s)==len(nums)):
+            return False
+        return True
+```
 
-	class Solution(object):
-	    def containsDuplicate(self, nums):
-	        """
-	        :type nums: List[int]
-	        :rtype: bool
-	        """
-	        s=set(nums)
-	        if(len(s)==len(nums)):
-	            return False
-	        return True
-	
 ## 10.Excel Sheet Column Number
 
 Related to question Excel Sheet Column Title
@@ -82,42 +85,61 @@ For example:
     AA -> 27
     AB -> 28 
 
-### 10.Excel Sheet Column Number-Analysis
+#### Analysis
 
 就是一个26进制而已，只不过通过ABCD...来实现而已
 
-### 10.Excel Sheet Column Number-Solution-C/C++
+#### Solution-C/C++
 
-	int titleToNumber(char* s) 
-	{
-	    int sum=0;
-	    while(*s)
-	    {
-	        sum=sum*26+ (*s)-64;
-	        s++;
-	    }
-	    return sum;
-	}
+```c
+int titleToNumber(char* s) 
+{
+    int sum=0;
+    while(*s)
+    {
+        sum=sum*26+ (*s)-64;
+        s++;
+    }
+    return sum;
+}
+```
 
-### 10.Excel Sheet Column Number-Solution-Python
+```cpp
+class Solution 
+{
+public:
+    int titleToNumber(string s) 
+    {
+        int sum=0;
+        for(int i=0;i<s.size();i++)
+        {
+            sum=sum*26+(int)(s[i]-'A'+1);
+        }
+        return sum;
+    }
+};
+```
+
+#### Solution-Python
 
 在这里发现python的string不可以直接相减，并且也不是ascii码。
 
 所以需要把string中的内容通过ord转换为ascii码值，也可以通过chr把码值转化为字符，然后再进行计算
 
-	class Solution(object):
-	    def titleToNumber(self, s):
-	        """
-	        :type s: str
-	        :rtype: int
-	        """
-	        sum=0
-	        i=0
-	        while(i<len(s)):
-	            sum=sum*26+ord(s[i])-64
-	            i=i+1
-	        return sum
-
+```python
+class Solution(object):
+    def titleToNumber(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        sum=0
+        i=0
+        while(i<len(s)):
+            sum=sum*26+ord(s[i])-64
+            i=i+1
+        return sum
+```
 
 	
 ## 11.Majority Element
@@ -126,7 +148,7 @@ Given an array of size n, find the majority element. The majority element is the
 
 You may assume that the array is non-empty and the majority element always exist in the array.
 
-### 11.Majority Element-Analysis
+#### Analysis
 
 得到超过数组长度一半的元素。
 
@@ -136,27 +158,29 @@ You may assume that the array is non-empty and the majority element always exist
 
 那么这里也是一样把所有数的位的个数全部统计出来，由于这个主要元素肯定存在，就会导致他的位为1的个数超过n/2，那么所有大于n/2的位为1，其他位为0.就能得到最后的结果，而且只需要遍历数组一次，统计一次32位的个数，空间和时间都很少
 
-### 11.Majority Element-Solution-C/C++
+#### Solution-C/C++
 
-	int majorityElement(int* nums, int numsSize) 
-	{
-	    int bit[32],i=0,j=0;
-	    for(i=0;i<32;i++)
-	        bit[i]=0;
-	    for(i=0;i<numsSize;i++)
-	    {
-	        for(j=0;j<32;j++)
-	            bit[j]+=((nums[i] & (1<<j))?1:0);
-	    }
-	    i=0;
-	    for(j=0;j<32;j++)
-	        {
-	            i=bit[j]>(int)(numsSize/2)?(i|(1<<j)):i;
-	        }
-	    return i;
-	}	
+```c
+int majorityElement(int* nums, int numsSize) 
+{
+    int bit[32],i=0,j=0;
+    for(i=0;i<32;i++)
+        bit[i]=0;
+    for(i=0;i<numsSize;i++)
+    {
+        for(j=0;j<32;j++)
+            bit[j]+=((nums[i] & (1<<j))?1:0);
+    }
+    i=0;
+    for(j=0;j<32;j++)
+    {
+        i=bit[j]>(int)(numsSize/2)?(i|(1<<j)):i;
+    }
+    return i;
+}
+```
 
-### 11.Majority Element-Solution-Python
+#### Solution-Python
 
 在这里python有一个bug的地方，就是他的数据位数和左移的问题 
 
@@ -173,29 +197,31 @@ You may assume that the array is non-empty and the majority element always exist
 
 下面的代码就能看到这个问题
 
-	class Solution(object):
-	    def majorityElement(self, nums):
-	        """
-	        :type nums: List[int]
-	        :rtype: int
-	        """
-	        bit=[]
-	        i=0
-	        j=0
-	        for i in range(0,32):
-	            bit.append(0)
-	        for i in range(0,len(nums)):
-	            for j in range(0,32):
-	                if(nums[i]&(1<<j)):
-	                    bit[j]=bit[j]+1
-	        i=0
-	        #print(i)
-	        for j in range(0,32):
-	            #print(bit[j])
-	            if bit[j]>(len(nums)/2):
-	                i=i|(1<<j)
-	        #print(i<<1)
-	        return i
+```python
+class Solution(object):
+    def majorityElement(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        bit=[]
+        i=0
+        j=0
+        for i in range(0,32):
+            bit.append(0)
+        for i in range(0,len(nums)):
+            for j in range(0,32):
+                if(nums[i]&(1<<j)):
+                    bit[j]=bit[j]+1
+        i=0
+        #print(i)
+        for j in range(0,32):
+            #print(bit[j])
+            if bit[j]>(len(nums)/2):
+                i=i|(1<<j)
+        #print(i<<1)
+        return i
+```
 
 最后得到的解决方法来自于讨论区，讨论区中有人在返回值的地方进行了一个小处理从而解决了这个问题
 
@@ -210,28 +236,31 @@ You may assume that the array is non-empty and the majority element always exist
 
 > https://leetcode.com/discuss/64173/why-my-python-solution-is-wrong
 
-	class Solution(object):
-	    def majorityElement(self, nums):
-	        """
-	        :type nums: List[int]
-	        :rtype: int
-	        """
-	        bit=[]
-	        i=0
-	        j=0
-	        for i in range(0,32):
-	            bit.append(0)
-	        for i in range(0,len(nums)):
-	            for j in range(0,32):
-	                if(nums[i]&(1<<j)):
-	                    bit[j]=bit[j]+1
-	        i=0
-	        for j in range(0,32):
-	            if bit[j]>(len(nums)/2):
-	                i=i|(1<<j)
-	
-	        return i - (i >> 31 << 32)
-	
+```python
+class Solution(object):
+    def majorityElement(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        bit=[]
+        i=0
+        j=0
+        for i in range(0,32):
+            bit.append(0)
+        for i in range(0,len(nums)):
+            for j in range(0,32):
+                if(nums[i]&(1<<j)):
+                    bit[j]=bit[j]+1
+        i=0
+        for j in range(0,32):
+            if bit[j]>(len(nums)/2):
+                i=i|(1<<j)
+		#这句在这里的意思就是判断一下是否有最高为1的情况,如果有表示这个是负数,那那么这里就需要减去越界值
+		#而没有越界的情况下,这么操作以后=i-0 依然还是正值
+        return i - (i >> 31 << 32)
+```
+
 ## 12.Lowest Common Ancestor of a Binary Search Tree
 
 Given a binary search tree (BST), find the lowest common ancestor (LCA) of two given nodes in the BST.
@@ -248,7 +277,7 @@ According to the definition of LCA on Wikipedia: “The lowest common ancestor i
 
 For example, the lowest common ancestor (LCA) of nodes 2 and 8 is 6. Another example is LCA of nodes 2 and 4 is 2, since a node can be a descendant of itself according to the LCA definition.
 
-### 12.Lowest Common Ancestor of a Binary Search Tree-Analysis
+#### Analysis
 
 二叉搜索树/平衡树寻找祖先节点，说白了就是先找一个数，然后把他的祖先节点存下来，然后再找另外一个数，另一个数遇到的节点都与存下来的节点相对比，然后找到其中最后一个个相同的部分就是其最小公共祖先。这种方法是不考虑这是一个平衡二叉树这种特性的。
 
@@ -262,32 +291,64 @@ For example, the lowest common ancestor (LCA) of nodes 2 and 8 is 6. Another exa
 
 当然这是用递归实现的，同样的迭代方法也会实现一次
 
-### 12.Lowest Common Ancestor of a Binary Search Tree-Solution-C/C++
+#### Solution-C/C++
 
-#### 递归
+###### 递归
 
-	/**
-	 * Definition for a binary tree node.
-	 * struct TreeNode {
-	 *     int val;
-	 *     TreeNode *left;
-	 *     TreeNode *right;
-	 *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
-	 * };
-	 */
-	class Solution {
-	public:
-	    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) 
-	    {
+```cpp
+class Solution 
+{
+public:
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) 
+    {
+        if(p->val<root->val&&q->val<root->val)
+        {
+            //同在左侧
+            return lowestCommonAncestor(root->left,p,q); 
+        }
+        if(p->val>root->val&&q->val>root->val)
+        {
+            //同在右侧
+            return lowestCommonAncestor(root->right,p,q); 
+        }
+        if(p->val>root->val&&q->val<root->val)
+        {
+            //q左，p右
+            return root;
+        }
+        if(p->val<root->val&&q->val>root->val)
+        {
+            //q右，p左
+            return root;
+        }
+        return root;
+    }
+};
+```
+	
+###### 迭代
+
+由于这种平衡二叉树的特殊性，导致迭代的思路异常的简单，只需要改动一点内容就ok了
+
+```cpp
+class Solution
+{
+public:
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) 
+    {
+        while(1)
+        {
 	        if(p->val<root->val&&q->val<root->val)
 	        {
 	            //同在左侧
-	            return lowestCommonAncestor(root->left,p,q); 
+	            root=root->left;
+	            continue;
 	        }
 	        if(p->val>root->val&&q->val>root->val)
 	        {
 	            //同在右侧
-	            return lowestCommonAncestor(root->right,p,q); 
+	            root=root->right; 
+	            continue;
 	        }
 	        if(p->val>root->val&&q->val<root->val)
 	        {
@@ -300,179 +361,115 @@ For example, the lowest common ancestor (LCA) of nodes 2 and 8 is 6. Another exa
 	            return root;
 	        }
 	        return root;
-	    }
-	};
-	
-#### 迭代
+        }
+    }
+};
+```
 
-由于这种平衡二叉树的特殊性，导致迭代的思路异常的简单，只需要改动一点内容就ok了
-
-	/**
-	 * Definition for a binary tree node.
-	 * struct TreeNode {
-	 *     int val;
-	 *     TreeNode *left;
-	 *     TreeNode *right;
-	 *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
-	 * };
-	 */
-	class Solution {
-	public:
-	    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) 
-	    {
-	        while(1)
-	        {
-		        if(p->val<root->val&&q->val<root->val)
-		        {
-		            //同在左侧
-		            root=root->left;
-		            continue;
-		        }
-		        if(p->val>root->val&&q->val>root->val)
-		        {
-		            //同在右侧
-		            root=root->right; 
-		            continue;
-		        }
-		        if(p->val>root->val&&q->val<root->val)
-		        {
-		            //q左，p右
-		            return root;
-		        }
-		        if(p->val<root->val&&q->val>root->val)
-		        {
-		            //q右，p左
-		            return root;
-		        }
-		        return root;
-	        }
-	    }
-	};
-
-
-### 12.Lowest Common Ancestor of a Binary Search Tree-Solution-Python
+#### Solution-Python
 
 由于算法的特殊性，这里python使用第一种解法，需要使用广度优先搜索，记录路径，递归中找到的第一个共同点就是最小，迭代则是找到的最后一个点是最小。
 
-#### 递归
-	
-	# Definition for a binary tree node.
-	# class TreeNode(object):
-	#     def __init__(self, x):
-	#         self.val = x
-	#         self.left = None
-	#         self.right = None
-	
-	class Solution(object):
-	    def recordpath(self, root, p,l):
-	        """
-	        :type root: TreeNode
-	        :type p: TreeNode
-	        :type q: TreeNode
-	        :type l: TreeNode list
-	        :rtype: bool
-	        """
-	        if(root==None):
-	            return False
-	        if(root.val==p.val or self.recordpath(root.left,p,l) or self.recordpath(root.right,p,l)):
-	            l.append(root)
-	            return True
-	            
-	    def lowestCommonAncestor(self, root, p, q):
-	        """
-	        :type root: TreeNode
-	        :type p: TreeNode
-	        :type q: TreeNode
-	        :rtype: TreeNode
-	        """
-	        lp=[]
-	        lq=[]
-	        self.recordpath(root,p,lp)
-	        self.recordpath(root,q,lq)
-	        i=0
-	        j=0
-	        for i in range(0,len(lp)): 
-	            for j in range(0,len(lq)):
-	                if lp[i]==lq[j]:
-	                    return lp[i]
+###### 递归
 
-#### 迭代
+```python
+class Solution(object):
+    def recordpath(self, root, p, l):
+        """
+        :type root: TreeNode
+        :type p: TreeNode
+        :type q: TreeNode
+        :type l: TreeNode list
+        :rtype: bool
+        """
+        if root==None:
+            return False
+        if root.val==p.val or self.recordpath(root.left,p,l) or self.recordpath(root.right,p,l):
+            l.append(root)
+            return True
+    def lowestCommonAncestor(self, root, p, q):
+        """
+        :type root: TreeNode
+        :type p: TreeNode
+        :type q: TreeNode
+        :rtype: TreeNode
+        """
+        lp=[]
+        lq=[]
+        self.recordpath(root,p,lp)
+        self.recordpath(root,q,lq)
+        for i in range(len(lp)):
+            for j in range(len(lq)):
+                if lp[i]==lq[j]:
+                    return lp[i]
+```
+
+###### 迭代
 
 迭代的方法貌似非常复杂一时半会想不出来(2015年12月7日23:30:36)
 
-总算想出来了，就是用了一个双层的循环，而且浪费了之前的查找记录
+总算想出来了，就是用了一个双层的循环，但是浪费了之前的查找记录
 
 原理：内层循环负责查找目标值的父节点，外层负责更替父节点，并且存储在了path中，最后父节点=root就结束了。
 
 但是问题就在于每次循环都浪费了上次查找的路径和记录，更好的办法应该是一次找两个目标，然后把目标路径存下来，并且边找边检查是否是最近的，这样就能很快解决这个问题了，不过写起来就更复杂了。
 
-	# Definition for a binary tree node.
-	# class TreeNode(object):
-	#     def __init__(self, x):
-	#         self.val = x
-	#         self.left = None
-	#         self.right = None
-	
-	class Solution(object):
-	    def recordpath(self, root, p,path):
-	        """
-	        :type root: TreeNode
-	        :type p: TreeNode
-	        :type q: TreeNode
-	        :type paht: TreeNode list path
-	        :rtype: bool
-	        """
-	        l=[] #l用来遍历的时候存储节点
-	        target=p;
-	        path.append(p)
-	        while True:
-	            target=path[-1]
-	            if target.val==root.val:
-	                return True
-	            l=[]
-	            l.append(root)
-	            temproot=root
-	            while True:
-	                #temproot=l[-1]
-	                #l.pop()
-	                
-	                if temproot==None:
-	                    temproot=l.pop()
-	                    continue
-	                
-	                if temproot.val==target.val:
-	                    path.append(temproot)
-	                    break;
-	                elif temproot.left!=None and temproot.left.val==target.val:
-	                    path.append(temproot)
-	                    break;
-	                elif temproot.right!=None and temproot.right.val==target.val:
-	                    path.append(temproot)
-	                    break;
-	                else:
-	                    if temproot.right!=None:
-	                        l.append(temproot.right)
-	                    temproot=temproot.left
-	
-	            
-	    def lowestCommonAncestor(self, root, p, q):
-	        """
-	        :type root: TreeNode
-	        :type p: TreeNode
-	        :type q: TreeNode
-	        :rtype: TreeNode
-	        """
-	        lp=[]
-	        lq=[]
-	        self.recordpath(root,p,lp)
-	        self.recordpath(root,q,lq)
-	        i=0
-	        j=0
-	        for i in range(0,len(lp)): 
-	            for j in range(0,len(lq)):
-	                if lp[i]==lq[j]:
-	                    return lp[i]
-	        
+```python
+class Solution(object):
+    def recordpath(self, root, p,path):
+        """
+        :type root: TreeNode
+        :type p: TreeNode
+        :type q: TreeNode
+        :type paht: TreeNode list path
+        :rtype: bool
+        """
+        l=[] #l用来遍历的时候存储节点
+        target=p;
+        path.append(p)
+        while True:
+            target=path[-1]
+            if target.val==root.val:
+                return True
+            l=[]
+            l.append(root)
+            temproot=root
+            while True:
+                if temproot==None:
+                    temproot=l.pop()
+                    continue
+                if temproot.val==target.val:
+                    path.append(temproot)
+                    break;
+                elif temproot.left!=None and temproot.left.val==target.val:
+                    path.append(temproot)
+                    break;
+                elif temproot.right!=None and temproot.right.val==target.val:
+                    path.append(temproot)
+                    break;
+                else:
+                    if temproot.right!=None:
+                        l.append(temproot.right)
+                    temproot=temproot.left
+
+    def lowestCommonAncestor(self, root, p, q):
+        """
+        :type root: TreeNode
+        :type p: TreeNode
+        :type q: TreeNode
+        :rtype: TreeNode
+        """
+        lp=[]
+        lq=[]
+        self.recordpath(root,p,lp)
+        self.recordpath(root,q,lq)
+        i=0
+        j=0
+        for i in range(0,len(lp)): 
+            for j in range(0,len(lq)):
+                if lp[i]==lq[j]:
+                    return lp[i]
+```
 	        
 
 ## Quote
@@ -482,6 +479,8 @@ For example, the lowest common ancestor (LCA) of nodes 2 and 8 is 6. Another exa
 > http://my.oschina.net/Tsybius2014/blog/517511?fromerr=cMRMLS2j
 > 
 > http://www.cnblogs.com/zhengyun_ustc/archive/2009/10/14/shifting.html
+> 
+> http://blog.csdn.net/huang_xw/article/details/8760403 
 
 
 
