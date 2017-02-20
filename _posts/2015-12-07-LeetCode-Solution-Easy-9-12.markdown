@@ -5,6 +5,7 @@ subtitle:   "c/c++，python，for work"
 date:       2015-12-7
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"
+catalog:    true
 tags:
     - LeetCode
 ---
