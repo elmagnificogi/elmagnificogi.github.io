@@ -5,6 +5,7 @@ subtitle:   "c/c++，python，for work"
 date:       2015-12-8
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"
+catalog:    true
 tags:
     - LeetCode
 ---
@@ -16,7 +17,7 @@ Write a function that takes an unsigned integer and returns the number of ’1' 
 
 For example, the 32-bit integer ’11' has binary representation 00000000000000000000000000001011, so the function should return 3.
 
-### 13.Number of 1 Bits-Analysis
+#### Analysis
 
 返回位为1的数量，so easy 
 
@@ -24,21 +25,23 @@ For example, the 32-bit integer ’11' has binary representation 000000000000000
 
 > http://www.cnblogs.com/graphics/archive/2010/06/21/1752421.html
 
-### 13.Number of 1 Bits-Solution-C/C++
+#### Solution-C/C++
 
-我的普通解法
+###### 我的普通解法
 
-	int hammingWeight(uint32_t n) 
-	{
-	    int i=0,sum=0;
-	    for(i=0;i<32;i++)
-	        sum=sum+((n>>i)&1);
-	    return sum;
-	}
+```cpp
+int hammingWeight(uint32_t n) 
+{
+    int i=0,sum=0;
+    for(i=0;i<32;i++)
+        sum=sum+((n>>i)&1);
+    return sum;
+}
+```
 
 其实看给的标准函数名是hamming 就应该想到这个是哈明码，用来纠错的，或者说是奇偶校验码
 
-hamming算法
+###### hamming算法
 
 算法思路是什么呢？
 
@@ -54,41 +57,50 @@ hamming算法
 	如果n=0xABCDEFAA（1010 1011 1100 1101 1110 1111 1010 1010 ）
 	按照算法思路先要把每两位的1的个数统计出来，并且用二进制表示
 	那么就需要得到这样的结果
+
 	原数二进制  1010 1011 1100 1101 1110 1111 1010 1010
     2位压缩	   0101 0110 1000 1001 1001 1010 0101 0101
 	4位压缩	   0010 0011 0010 0011 0011 0100 0010 0010
 	8位压缩       0101       0101      0111     0100
     16位压缩           1010                1011
     32位压缩                10101   = 21
+
 	这样就得到了最后的结果21，剩下的问题就集中在于如何把这样的想法用算法实现了
 	首先看每两位计算1的个数要怎么做，两位，那就各取一位，然后相加不就可以了吗？
-	取位则用&，而每次只取两位中的1位 那么就可以用 01和10分别取高低位，但是这样取来的高位还是在高位上，低位还是在低位上
+	取位则用&，而每次只取两位中的1位 那么就可以用 01和10分别取高低位
+	但是这样取来的高位还是在高位上，低位还是在低位上
 	我们需要他们在低位的地方相加才行，那要怎么弄？ 
-	自然选择用01来获取低位，之后将原数右移1位，丢失了一位低位（但低位已经取过了所以没关系），而原来的高位顺移到了以前的低位的位置上，那么就能得到原来高位的0/1了，然后将二者相加即可得到用两位表示的两位的1的个数
+	自然选择用01来获取低位，之后将原数右移1位，丢失了一位低位（但低位已经取过了所以没关系）
+	而原来的高位顺移到了以前的低位的位置上，那么就能得到原来高位的0/1了，然后将二者相加即可得到用两位表示的两位的1的个数
 		
-	之后就是将上面的两位表示的两位的1的个数两两相加，从而得到用四位表示的四位的1的个数，由于是用四位表示了，可以从中分开分成高两位和低两位 同样的要面对获取高两位和低两位的问题，那么扩展之前的 使用0011来获取，移位时向右移动2位便可以获得低位/高位  
+	之后就是将上面的两位表示的两位的1的个数两两相加，从而得到用四位表示的四位的1的个数,由于是用四位表示了
+	可以从中分开分成高两位和低两位 同样的要面对获取高两位和低两位的问题
+	那么扩展之前的 使用0011来获取，移位时向右移动2位便可以获得低位/高位  
 		
 	以此类推就能得到 8位的时候应该用 00001111 移动4位 16位的时候是 0000 0000 1111 1111 移动8位 
 	最后则是32位的压缩 0000 0000 0000 0000 1111 1111 1111 1111 移动16位 
-	由于原数自身是32位的那么 所得到的结果32位的压缩 通过内存编译解释出来的数（1的个数的二进制表示） 自然也就是最后的结果1的个数的 如果原数是64位的 那么最后还需要再进一步 64位的压缩 然后才能得到结果
+	由于原数自身是32位的那么 所得到的结果32位的压缩 通过内存编译解释出来的数（1的个数的二进制表示） 
+	自然也就是最后的结果1的个数的 如果原数是64位的 那么最后还需要再进一步 64位的压缩 然后才能得到结果
 
-	int hammingWeight(uint32_t n) 
-	{
-	    int count = n;
-	    int a = 0x55555555; //010101010101010101010101010101 //用于相邻的两位相加
-	    int b = 0x33333333; //用于相邻的四位相加
-	    int c = 0x0f0f0f0f;
-	    int d = 0x00ff00ff;
-	    int e = 0x0000ffff;
-	    count = (count & a) + ((count>>1) & a);
-	    count = (count & b) +((count>>2) & b);
-	    count = (count & c) + ((count>>4) & c);
-	    count = (count & d) + ((count>>8) & d);
-	    count = (count & e) + ((count>>16) & e);
-	    return count;
-	}
+```cpp
+int hammingWeight(uint32_t n) 
+{
+    int count = n;
+    int a = 0x55555555; //010101010101010101010101010101 //用于相邻的两位相加
+    int b = 0x33333333; //用于相邻的四位相加
+    int c = 0x0f0f0f0f;
+    int d = 0x00ff00ff;
+    int e = 0x0000ffff;
+    count = (count & a) + ((count>>1) & a);
+    count = (count & b) +((count>>2) & b);
+    count = (count & c) + ((count>>4) & c);
+    count = (count & d) + ((count>>8) & d);
+    count = (count & e) + ((count>>16) & e);
+    return count;
+}
+```
 
-HAKMEM算法 
+###### HAKMEM算法 
 
 HAKMEM算法和上面的也有类似的地方 他是使用3位为一组来做的 只是最后需要对63来进行求余 得到的余数就是结果了，但是算法原理跟上面的根本不同！！详见此blog的分析，二进制的数的本质
 
@@ -96,30 +108,34 @@ HAKMEM算法和上面的也有类似的地方 他是使用3位为一组来做的
 
 这里0开头的是八进制
 
-	int hammingWeight(uint32_t n) 
-	{
-	    unsigned x;     
-	    x = (n >> 1) & 033333333333;     
-	    n = n - x;    
-	    x = (x >> 1) & 033333333333;    
-	    n = n - x;     
-	    n = (n + (n >> 3)) & 030707070707;    
-	    n = n%63;   
-	    return n;
-	}
+```cpp
+int hammingWeight(uint32_t n) 
+{
+    unsigned x;     
+    x = (n >> 1) & 033333333333;     
+    n = n - x;    
+    x = (x >> 1) & 033333333333;    
+    n = n - x;     
+    n = (n + (n >> 3)) & 030707070707;    
+    n = n%63;   
+    return n;
+}
+```
 
-### 13.Number of 1 Bits-Solution-Python
+#### Solution-Python
 
-	class Solution(object):
-	    def hammingWeight(self, n):
-	        """
-	        :type n: int
-	        :rtype: int
-	        """
-	        sum=0
-	        for i in range(0,32):
-	            sum=((n>>i)&1)+sum
-	        return sum
+```python
+class Solution(object):
+    def hammingWeight(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        sum=0
+        for i in range(0,32):
+            sum=((n>>i)&1)+sum
+        return sum
+```
 
 ## 14.Roman to Integer
 
@@ -127,7 +143,7 @@ Given a roman numeral, convert it to an integer.
 
 Input is guaranteed to be within the range from 1 to 3999.
 
-### 14.Roman to Integer-Analysis
+#### Analysis
 
 把罗马数字转换为普通数字
 
@@ -158,97 +174,100 @@ Input is guaranteed to be within the range from 1 to 3999.
 
 （在他blog看到一个会动的球形tags，并且会根据鼠标移动轨迹来顺着移动好流弊的样子，有空研究一下，扒一个过来）
 
-### 14.Roman to Integer-Solution-C/C++
+#### Solution-C/C++
 	
-	int flagtoint(char f)
-	{
-	    if(f=='I')
-	        return 1;
-	    if(f=='V')
-	        return 5;
-	    if(f=='X')
-	        return 10;
-	    if(f=='L')
-	        return 50;
-	    if(f=='C')
-	        return 100;
-	    if(f=='D')
-	        return 500;
-	    if(f=='M')
-	        return 1000;        
-	}
-	int romanToInt(char* s) 
-	{
-	    int sum=0;
-	    int temp=flagtoint(*s);
-	    
-	    while(*s)
-	    {
-	        s++;
-	        if(flagtoint(*s)==temp)
-	        {
-	            sum+=temp;
-	            temp=flagtoint(*s);
-	        }
-	        else if(flagtoint(*s)>temp)
-	        {
-	            sum-=temp;
-	            temp=flagtoint(*s);
-	        }
-	        else
-	        {
-	            sum+=temp;
-	            temp=flagtoint(*s);
-	        }
-	    }
-	    
-	    return sum;
-	}
+```cpp
+int flagtoint(char f)
+{
+    if(f=='I')
+        return 1;
+    if(f=='V')
+        return 5;
+    if(f=='X')
+        return 10;
+    if(f=='L')
+        return 50;
+    if(f=='C')
+        return 100;
+    if(f=='D')
+        return 500;
+    if(f=='M')
+        return 1000;        
+}
+int romanToInt(char* s) 
+{
+    int sum=0;
+    int temp=flagtoint(*s);
+    
+    while(*s)
+    {
+        s++;
+        if(flagtoint(*s)==temp)
+        {
+            sum+=temp;
+            temp=flagtoint(*s);
+        }
+        else if(flagtoint(*s)>temp)
+        {
+            sum-=temp;
+            temp=flagtoint(*s);
+        }
+        else
+        {
+            sum+=temp;
+            temp=flagtoint(*s);
+        }
+    }
+    
+    return sum;
+}
+```
 
+#### Solution-Python
 
-### 14.Roman to Integer-Solution-Python
-
-	class Solution(object):
-	    def flagtoint(self, f):
-	        """
-	        :type f: str
-	        :rtype: int
-	        """    
-	        if f=='I':
-	            return 1
-	        if f=='V':
-	            return 5   
-	        if f=='X':
-	            return 10 
-	        if f=='L':
-	            return 50 
-	        if f=='C':
-	            return 100
-	        if f=='D':
-	            return 500
-	        if f=='M':
-	            return 1000
-	    def romanToInt(self, s):
-	        """
-	        :type s: str
-	        :rtype: int
-	        """
-	        sum=0
-	        temp=self.flagtoint(s[0])
-	        i=0
-	        while i<len(s)-1:
-	            i=i+1
-	            if self.flagtoint(s[i])==temp:
-	                sum=sum+temp
-	                temp=self.flagtoint(s[i])
-	            elif self.flagtoint(s[i])>temp:
-	                sum=sum-temp
-	                temp=self.flagtoint(s[i])            
-	            else:
-	                sum=sum+temp
-	                temp=self.flagtoint(s[i])            
-	        sum=sum+self.flagtoint(s[-1])     
-	        return sum
+```cpp
+class Solution(object):
+    def flagtoint(self, f):
+        """
+        :type f: str
+        :rtype: int
+        """    
+        if f=='I':
+            return 1
+        if f=='V':
+            return 5   
+        if f=='X':
+            return 10 
+        if f=='L':
+            return 50 
+        if f=='C':
+            return 100
+        if f=='D':
+            return 500
+        if f=='M':
+            return 1000
+    def romanToInt(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        sum=0
+        temp=self.flagtoint(s[0])
+        i=0
+        while i<len(s)-1:
+            i=i+1
+            if self.flagtoint(s[i])==temp:
+                sum=sum+temp
+                temp=self.flagtoint(s[i])
+            elif self.flagtoint(s[i])>temp:
+                sum=sum-temp
+                temp=self.flagtoint(s[i])            
+            else:
+                sum=sum+temp
+                temp=self.flagtoint(s[i])            
+        sum=sum+self.flagtoint(s[-1])     
+        return sum
+```
 
 ## 15.Reverse Linked List
 
@@ -259,7 +278,7 @@ click to show more hints.
 Hint:
 A linked list can be reversed either iteratively or recursively. Could you implement both?
 
-### 15.Reverse Linked List-Analysis
+#### Analysis
 
 用两种方法来翻转单链表，这个练得比较多，easy
 
@@ -274,172 +293,148 @@ A linked list can be reversed either iteratively or recursively. Could you imple
 
 如果要用递归，也简单，只需要递归到最后一个next为空的情况下，开始进行翻转就可以了。
 
-### 15.Reverse Linked List-Solution-C/C++
+#### Solution-C/C++
 
-#### 迭代
+###### 递归
 
-	/**
-	 * Definition for singly-linked list.
-	 * struct ListNode {
-	 *     int val;
-	 *     struct ListNode *next;
-	 * };
-	 */
-	struct ListNode* reverseList(struct ListNode* head)
-	{
-	    struct ListNode*pre=NULL;
-	    struct ListNode*cur=head;
-	    if(!head||!head->next)
-	        return head;
-	    struct ListNode*temp=head->next;
-	    struct ListNode*next=head->next;
-	    while(1)
-	    {
-	        if(next->next!=NULL)
-	          temp=next->next;
-	        else
-	            temp=NULL;
-	        next->next=cur;
+```cpp
+struct ListNode* reverseList(struct ListNode* head)
+{
+    struct ListNode* temp;
+    if(head==NULL||head->next==NULL)
+    {
+        //开始翻转
+        return head;
+    }
+    else
+    {
+		//temp保存着老尾指针,最后返回作为新头指针.
+        temp=reverseList(head->next);
+        head->next->next=head;
+        head->next=NULL;
+        return temp;
+    }
+}
+```
 
-	        cur->next=pre;
-	        pre=cur;
-	        cur=next;
-	        if(temp==NULL)
-	            break;
-	        else
-	            next=temp;
-	    }
-	    return cur;
-	}
+###### 迭代
+
+```cpp
+struct ListNode* reverseList(struct ListNode* head)
+{
+    struct ListNode*pre=NULL;
+    struct ListNode*cur=head;
+    if(!head||!head->next)
+        return head;
+    struct ListNode*temp=head->next;
+    struct ListNode*next=head->next;
+    while(1)
+    {
+        if(next->next!=NULL)
+          temp=next->next;
+        else
+            temp=NULL;
+        next->next=cur;
+
+        cur->next=pre;
+        pre=cur;
+        cur=next;
+        if(temp==NULL)
+            break;
+        else
+            next=temp;
+    }
+    return cur;
+}
+```
 
 另外一份 逻辑上更简单明了一些
 
-	/**
-	 * Definition for singly-linked list.
-	 * struct ListNode {
-	 *     int val;
-	 *     struct ListNode *next;
-	 * };
-	 */
-	struct ListNode* reverseList(struct ListNode* head)
-	{
-	    struct ListNode* pre=NULL;
-	    struct ListNode* next;
-	    while(head)
-	    {
-	        next=head->next;//next指向head的下一个节点
-	        head->next=pre;//当前的head的下一个节点修改为前一个节点
-	        pre=head;//前一个节点更替为当前结点
-	        head=next;//当前节点更替为下一个节点
-	    }
-	    return pre;
-		/*
-		这种方式其实next用来保存下一个节点，pre其实是逆序后的节点头，head则是指向修改节点
-		*/
-	}
+```cpp
+class Solution 
+{
+public:
+    ListNode* reverseList(ListNode* head) 
+    {
+        ListNode* pre=NULL;
+        ListNode* cur=head;
+        ListNode* nex=NULL;
+        while(cur)
+        {
+            nex=cur->next;
+            cur->next=pre;
+            pre=cur;
+            cur=nex;
+        }
+        return pre;
+    }
+};
+```
 
-#### 递归
+#### Solution-Python
 
-	/**
-	 * Definition for singly-linked list.
-	 * struct ListNode {
-	 *     int val;
-	 *     struct ListNode *next;
-	 * };
-	 */
-	struct ListNode* reverseList(struct ListNode* head)
-	{
-	    struct ListNode* temp;
-	    if(head==NULL||head->next==NULL)
-	    {
-	        //开始翻转
-	        return head;
-	    }
-	    else
-	    {
-	        temp=reverseList(head->next);
-	        head->next->next=head;
-	        head->next=NULL;
-	        return temp;
-	    }
-	}
+###### 递归
 
-### 15.Reverse Linked List-Solution-Python
+```python
+class Solution(object):
+    def reverseList(self, head):
+        """
+        :type head: ListNode
+        :rtype: ListNode
+        """
+        if(head==None or head.next==None ):
+            return head
+        temp=self.reverseList(head.next)
+        head.next.next=head
+        head.next=None
+        return temp
+```
 
-#### 递归
+###### 迭代
 
-	# Definition for singly-linked list.
-	# class ListNode(object):
-	#     def __init__(self, x):
-	#         self.val = x
-	#         self.next = None
-	
-	class Solution(object):
-	    def reverseList(self, head):
-	        """
-	        :type head: ListNode
-	        :rtype: ListNode
-	        """
-	        if(head==None or head.next==None ):
-	            return head
-	        temp=self.reverseList(head.next)
-	        head.next.next=head
-	        head.next=None
-	        return temp
-
-#### 迭代
-
-	# Definition for singly-linked list.
-	# class ListNode(object):
-	#     def __init__(self, x):
-	#         self.val = x
-	#         self.next = None
-	
-	class Solution(object):
-	    def reverseList(self, head):
-	        """
-	        :type head: ListNode
-	        :rtype: ListNode
-	        """
-	        pre=None
-	        cur=head
-	        if(head==None or head.next==None ):
-	            return head        
-	        next=head.next
-	        while(cur):
-	            cur.next=pre
-	            pre=cur
-	            cur=next
-	            if(next.next!=None):
-	                next=next.next
-	            else:
-	                break
-	        cur.next=pre
-	        pre=cur
-	        return cur
+```python
+class Solution(object):
+    def reverseList(self, head):
+        """
+        :type head: ListNode
+        :rtype: ListNode
+        """
+        pre=None
+        cur=head
+        if(head==None or head.next==None ):
+            return head        
+        next=head.next
+        while(cur):
+            cur.next=pre
+            pre=cur
+            cur=next
+            if(next.next!=None):
+                next=next.next
+            else:
+                break
+        cur.next=pre
+        pre=cur
+        return cur
+```
 
 逻辑更好的
 
-	# Definition for singly-linked list.
-	# class ListNode(object):
-	#     def __init__(self, x):
-	#         self.val = x
-	#         self.next = None
-	
-	class Solution(object):
-	    def reverseList(self, head):
-	        """
-	        :type head: ListNode
-	        :rtype: ListNode
-	        """
-	        pre=None
-	        cur=head
-	        while(cur):
-	            next=cur.next
-	            cur.next=pre
-	            pre=cur
-	            cur=next
-	        return pre
+```python
+class Solution(object):
+    def reverseList(self, head):
+        """
+        :type head: ListNode
+        :rtype: ListNode
+        """
+        pre=None
+        cur=head
+        while(cur):
+            next=cur.next
+            cur.next=pre
+            pre=cur
+            cur=next
+        return pre
+```
 
 ## 16.Remove Duplicates from Sorted List
 
@@ -449,73 +444,68 @@ For example,
 Given 1->1->2, return 1->2.
 Given 1->1->2->3->3, return 1->2->3.
 
-### 16.Remove Duplicates from Sorted List-Analysis
+#### Analysis
 
 删除有序链表中的重复部分，看起来也很简单啊。
 
-### 16.Remove Duplicates from Sorted List-Solution-C/C++
+#### Solution-C/C++
 
-	/**
-	 * Definition for singly-linked list.
-	 * struct ListNode {
-	 *     int val;
-	 *     struct ListNode *next;
-	 * };
-	 */
-	struct ListNode* deleteDuplicates(struct ListNode* head)
-	{
-	    struct ListNode*pre=NULL;
-	    struct ListNode*cur=head;
-	    struct ListNode*next;
-	    if(head==NULL||head->next==NULL)
-	        return head;
-	    while(cur)
-	    {
-	        if(cur->next!=NULL)
-	            next=cur->next;
-	        else
-	            break;
-	        if(next->val==cur->val)
-	        {
-	            if(next->next!=NULL)
-	                cur->next=next->next;
-	            else
-	                {cur->next=NULL;cur=NULL;}
-	            continue;
-	        }
-	        cur=next;
-	    }
-	    return head;
-	}
+```c
+struct ListNode* deleteDuplicates(struct ListNode* head)
+{
+    struct ListNode*cur=head;
+    struct ListNode*next;
+    if(head==NULL||head->next==NULL)
+        return head;
+    while(cur)
+    {
+        if(cur->next!=NULL)
+            next=cur->next;
+        else
+            break;
+        if(next->val==cur->val)
+        {
+            if(next->next!=NULL)
+                cur->next=next->next;
+            else
+                {cur->next=NULL;cur=NULL;}
+            continue;
+        }
+        cur=next;
+    }
+    return head;
+}
+```
 
+2017年2月21日 13:04:12 
 
-### 16.Remove Duplicates from Sorted List-Solution-Python
+上面代码有一个问题,用C写的话,这里删除对应的节点,是直接修改了指针,而原节点还真实存在,应该加上一个free释放了那个节点才是正确的
+
+如果是其他语言,有内存回收机制的话应该是没问题的.
+
+#### Solution-Python
 
 python在上面c的基础上，把一些重复的逻辑去掉了，稍微简洁了一些
-	
-	# Definition for singly-linked list.
-	# class ListNode(object):
-	#     def __init__(self, x):
-	#         self.val = x
-	#         self.next = None
-	
-	class Solution(object):
-	    def deleteDuplicates(self, head):
-	        """
-	        :type head: ListNode
-	        :rtype: ListNode
-	        """
-	        if(head==None or head.next==None):
-	            return head
-	        cur=head
-	        while (cur):
-	            if cur.next==None:
-	                break;
-	            if cur.val==cur.next.val:
-	                cur.next=cur.next.next
-	            else:
-	                cur=cur.next
-	        return head
+
+```python
+class Solution(object):
+    def deleteDuplicates(self, head):
+        """
+        :type head: ListNode
+        :rtype: ListNode
+        """
+        if(head==None or head.next==None):
+            return head
+        cur=head
+        while (cur):
+            if cur.next==None:
+                break;
+            if cur.val==cur.next.val:
+                cur.next=cur.next.next
+            else:
+                cur=cur.next
+        return head
+```
 
 ## Quote
 
