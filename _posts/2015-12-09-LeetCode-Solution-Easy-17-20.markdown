@@ -5,6 +5,7 @@ subtitle:   "c/c++，python，for work"
 date:       2015-12-9
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"
+catalog:    true
 tags:
     - LeetCode
 ---
@@ -18,67 +19,71 @@ Ugly numbers are positive numbers whose prime factors only include 2, 3, 5. For 
 
 Note that 1 is typically treated as an ugly number.
 
-### 17.Ugly Number-Analysis
+#### Analysis
 
 就是分解质因数，如果其质因子只包括2，3，5 那么就是丑数，否则就不是 而1是丑数
 
 如果这个数可以直接整除235 然后判读一次是否可以继续整除，如果还可以 再判读， 直到剩下1或者是剩下的不可整除，就结束了
 
-### 17.Ugly Number-Solution-C/C++
+#### Solution-C/C++
 
-	bool isUgly(int num)
-	{
-	    if(num==0)
-	        return false;
-	    //int temp=0;
-	    while(1)
-	    {
-	        if(num==1)
-	            return true;
-	        if(num%2==0)
-	        {
-	            num=num/2;
-	            continue;
-	        }
-	        if(num%3==0)
-	        {
-	            num=num/3;
-	            continue;
-	        }
-	        if(num%5==0)
-	        {
-	            num=num/5;
-	            continue;
-	        }
-	        else
-	            return false;
-	    }
-	}
+```c
+bool isUgly(int num)
+{
+    if(num==0)
+        return false;
+    //int temp=0;
+    while(1)
+    {
+        if(num==1)
+            return true;
+        if(num%2==0)
+        {
+            num=num/2;
+            continue;
+        }
+        if(num%3==0)
+        {
+            num=num/3;
+            continue;
+        }
+        if(num%5==0)
+        {
+            num=num/5;
+            continue;
+        }
+        else
+            return false;
+    }
+}
+```
 
-### 17.Ugly Number-Solution-Python
+#### Solution-Python
 
-	class Solution(object):
-	    def isUgly(self, num):
-	        """
-	        :type num: int
-	        :rtype: bool
-	        """
-	        if num==0:
-	            return False
-	        while(1):
-	            if num==1:
-	                return True
-	            if num%2==0:
-	                num=num/2
-	                continue
-	            if num%3==0:
-	                num=num/3
-	                continue
-	            if num%5==0:
-	                num=num/5
-	                continue
-	            else:
-	                return False
+```
+class Solution(object):
+    def isUgly(self, num):
+        """
+        :type num: int
+        :rtype: bool
+        """
+        if num==0:
+            return False
+        while(1):
+            if num==1:
+                return True
+            if num%2==0:
+                num=num/2
+                continue
+            if num%3==0:
+                num=num/3
+                continue
+            if num%5==0:
+                num=num/5
+                continue
+            else:
+                return False
+```
 
 ## 18.Happy Number
 
@@ -93,7 +98,7 @@ Example: 19 is a happy number
 	6^2 + 8^2 = 100
 	1^2 + 0^2 + 0^2 = 1
 
-### 18.Happy Number-Analysis
+#### Analysis
 
 先要分解n 得到每位数字，然后再按照这个来做 但题目没说这个数字有多大啊 如果非常大 那就很蛋疼了啊
 
@@ -110,59 +115,65 @@ Example: 19 is a happy number
 
 没有相同的就记录一下， 如果查找到了相同的数字 ，那么就是假的
 
-### 18.Happy Number-Solution-C/C++
+#### Solution-C/C++
 
-	bool isHappy(int n)
-	{
-	    //先分解n
-	    int digit=n,sum=0,digit2=0,digit3=0,count=0,i=0;
-	    int sumlist[30]={0};
-	    while(1)
-	    {
-	        digit=n%10;
-	        n=n/10;
-	        sum=digit*digit+sum;
-	        if(n==0)
-	        {
-	            //这个数计算完毕，开始计算下一个数，存储sum
-	            n=sum;
-	            if(sum==1)
-	            return true;
-	            sum=0;
-	            for(i=0;i<count+1;i++)
-	                if(n==sumlist[i])
-	                    return false;
-	            sumlist[count++]=n;
-	        }
-	    }
-	    return false;
-	}
+```c
+bool isHappy(int n)
+{
+    //先分解n
+    int digit=n,sum=0,digit2=0,digit3=0,count=0,i=0;
+    int sumlist[30]={0};
+    while(1)
+    {
+        digit=n%10;
+        n=n/10;
+        sum=digit*digit+sum;
+        if(n==0)
+        {
+            //这个数计算完毕，开始计算下一个数，存储sum
+            n=sum;
+            if(sum==1)
+            	return true;
+            sum=0;
+			//检索是否有重复的结果
+            for(i=0;i<count+1;i++)
+                if(n==sumlist[i])
+                    return false;
+			//当前结果加入检索
+            sumlist[count++]=n;
+        }
+    }
+    return false;
+}
+```
 
-### 18.Happy Number-Solution-Python
+#### Solution-Python
 
 python的代码相对简单了一些，因为有set的存在 直接判断是否存在就很容易
 
-	class Solution(object):
-	    def isHappy(self, n):
-	        """
-	        :type n: int
-	        :rtype: bool
-	        """
-	        sum=0
-	        s=set()
-	        while 1:
-	            digit=n%10
-	            n=n/10
-	            sum=sum+digit*digit
-	            if n==0:
-	                if sum==1:
-	                    return True
-	                n=sum
-	                sum=0
-	                if(n in s ):
-	                    return False
-	                else:
-	                    s.add(n)
+```python
+class Solution(object):
+    def isHappy(self, n):
+        """
+        :type n: int
+        :rtype: bool
+        """
+        sum=0
+        s=set()
+        while 1:
+            digit=n%10
+            n=n/10
+            sum=sum+digit*digit
+            if n==0:
+                if sum==1:
+                    return True
+                n=sum
+                sum=0
+                if(n in s ):
+                    return False
+                else:
+                    s.add(n)
+```
 
 ## 19.Implement Queue using Stacks
 
@@ -179,7 +190,7 @@ You must use only standard operations of a stack -- which means only push to top
 Depending on your language, stack may not be supported natively. You may simulate a stack by using a list or deque (double-ended queue), as long as you use only standard operations of a stack.
 You may assume that all operations are valid (for example, no pop or peek operations will be called on an empty queue).
 
-### 19.Implement Queue using Stacks-Analysis
+#### Analysis
 
 使用栈来实现队列，所以用C++来写，而不用c，发现leetcode上c和c++要求还不一样，多了好几个函数
 
@@ -189,8 +200,9 @@ You may assume that all operations are valid (for example, no pop or peek operat
 
 如果在这个时候还需要添加或者删除队尾元素 就很麻烦，所以需要一个栈来存储剩下的元素。让两个栈来回切换存储就可以了。
 
-### 19.Implement Queue using Stacks-Solution-C/C++
+#### Solution-C/C++
 
+```cpp
 	class Queue 
 	{
 	public:
@@ -236,75 +248,155 @@ You may assume that all operations are valid (for example, no pop or peek operat
 	            return false;
 	    }
 	};
+```
 
-### 19.Implement Queue using Stacks-Solution-Python
+2017年2月21日 13:53:10 第二次重写,要求也有些不同了
 
-	class Queue(object):
-	    datain=[] #我假装认为这里的list其实是一个栈好了
-	    dataout=[]
-	    def __init__(self):
-	        """
-	        initialize your data structure here.
-	        """
-	        self.datain=[] #我假装认为这里的list其实是一个栈好了
-	        self.dataout=[]
-	        
-	    def move(self):
-	        """
-	        :type : nothing
-	        :rtype: nothing
-	        """
-	        while(self.datain!=[]):
-	            self.dataout.append(self.datain.pop())
-	
-	    def push(self, x):
-	        """
-	        :type x: int
-	        :rtype: nothing
-	        """
-	        self.datain.append(x)
-	        
-	
-	    def pop(self):
-	        """
-	        :rtype: nothing
-	        """
-	        if(self.dataout==[]):
-	            self.move()
-	        self.dataout.remove(self.dataout[-1])
-	
-	    def peek(self):
-	        """
-	        :rtype: int
-	        """
-	        if(self.dataout==[]):
-	            self.move()
-	        return self.dataout[-1] 
-	
-	    def empty(self):
-	        """
-	        :rtype: bool
-	        """
-	        if self.datain==[] and self.dataout==[] :
-	            return True
-	        else:
-	            return False
-	        
+思路更加明确:
+
+1. 首先两个栈,分管输入与输出.
+2. push时,全部加入输入栈
+3. peek时,由于要拿到最底的数据,如果out中有内容,那么栈顶就是队首,如果out是空的,那么把in栈内容全部压入out中,栈顶就是队首
+4. pop时,由于要先返回队首,所以先调用peek保存栈首内容,然后再像上面一样处理两个栈,处理完了以后再pop栈就行了.
+
+```cpp
+class MyQueue 
+{
+private:
+    stack<int> in;
+	stack<int> out;
+public:
+    /** Initialize your data structure here. */
+    MyQueue() 
+    {
+        
+    }
+    
+    /** Push element x to the back of queue. */
+    void push(int x)
+    {
+        in.push(x);
+    }
+    
+    /** Removes the element from in front of queue and returns that element. */
+    int pop() 
+    {
+        int temp=peek();
+        if(!out.empty())
+        {
+            out.pop();
+        }
+        else
+        {
+            while(!in.empty())
+            {
+                out.push(in.top());
+                in.pop();
+            }
+            out.pop();
+            
+        }
+        return temp;
+    }
+    
+    /** Get the front element. */
+    int peek() 
+    {
+        if(!out.empty())
+        {
+            return out.top();
+        }
+        else
+        {
+            while(!in.empty())
+            {
+                out.push(in.top());
+                in.pop();
+            }
+            return out.top();
+        }
+    }
+    
+    /** Returns whether the queue is empty. */
+    bool empty()
+    {
+        if(in.empty()&&out.empty())
+            return true;
+        else
+            return false;
+    }
+};
+```
+
+#### Solution-Python
+
+```python
+class Queue(object):
+    datain=[] #我假装认为这里的list其实是一个栈好了
+    dataout=[]
+    def __init__(self):
+        """
+        initialize your data structure here.
+        """
+        self.datain=[] #我假装认为这里的list其实是一个栈好了
+        self.dataout=[]
+        
+    def move(self):
+        """
+        :type : nothing
+        :rtype: nothing
+        """
+        while(self.datain!=[]):
+            self.dataout.append(self.datain.pop())
+
+    def push(self, x):
+        """
+        :type x: int
+        :rtype: nothing
+        """
+        self.datain.append(x)
+        
+
+    def pop(self):
+        """
+        :rtype: nothing
+        """
+        if(self.dataout==[]):
+            self.move()
+        self.dataout.remove(self.dataout[-1])
+
+    def peek(self):
+        """
+        :rtype: int
+        """
+        if(self.dataout==[]):
+            self.move()
+        return self.dataout[-1] 
+
+    def empty(self):
+        """
+        :rtype: bool
+        """
+        if self.datain==[] and self.dataout==[] :
+            return True
+        else:
+            return False
+```
 
 
 ## 20.Merge Two Sorted Lists
 
 Merge two sorted linked lists and return it as a new list. The new list should be made by splicing together the nodes of the first two lists.
 
-### 20.Merge Two Sorted Lists-Analysis
+#### Analysis
 
 合并两个有序链表，没啥难得，就是不知道这个链表是什么顺序排列的 一般应该是由到大吧
 
 然后分别插入就ok了
 
-### 20.Merge Two Sorted Lists-Solution-C/C++
+#### Solution-C/C++
 
-#### 迭代
+###### 迭代
 
 说白了首先把各种空指针传入的情况给排除掉
 
@@ -312,83 +404,115 @@ Merge two sorted linked lists and return it as a new list. The new list should b
 
 然后用pre记录上一节点，l1是在l1链表上的滑动指针，l2是在l2链表上的头指针，通过比较l1与l2的大小，插入值
 
-	/**
-	 * Definition for singly-linked list.
-	 * struct ListNode {
-	 *     int val;
-	 *     struct ListNode *next;
-	 * };
-	 */
-	struct ListNode* mergeTwoLists(struct ListNode* l1, struct ListNode* l2) 
-	{
-	    struct ListNode* temp=NULL;
-	    struct ListNode* head=l1;
-	    struct ListNode* pre=NULL;
-	    if(!l1&&!l2)
-	        return l1;
-	    if(!l1&&l2)
-	        return l2;
-	    if(l1&&!l2)
-	        return l1;
-	    //先解决头部问题，头部肯定是最小的值
-	    if(l2->val<l1->val||l2->val==l1->val)
-	    {
-	        if(l2->next)
-	        {
-	            temp=l2->next;
-	            l2->next=l1;
-	            head=l2;
-	            pre=head;
-	            l2=temp;
-	        }
-	        else
-	        {
-	            l2->next=l1;
-	            l1=l2;
-	            return l1;
-	        }
-	    }
-	    else
-	        pre=l1;
-	        
-	    while(1)
-	    {
-	        if(l2->val<l1->val||l2->val==l1->val)
-	        {    
-	            if(l2->next)
-	            {
-	                temp=l2->next;
-	                l2->next=l1;
-	                pre->next=l2;
-	                pre=l2;
-	                l2=temp;
-	            }
-	            else
-	            {
-	                l2->next=l1;
-	                pre->next=l2;
-	                l1=l2;
-	                break;
-	            }
-	        }
-	        else
-	        {
-	            if(l1->next)
-	            {
-	                pre=l1;
-	                l1=l1->next;
-	            }
-	            else
-	            {
-	                l1->next=l2;
-	                break;
-	            }
-	        }
-	    }
-	    return head;
-	}
+```c
+struct ListNode* mergeTwoLists(struct ListNode* l1, struct ListNode* l2) 
+{
+    struct ListNode* temp=NULL;
+    struct ListNode* head=l1;
+    struct ListNode* pre=NULL;
+    if(!l1&&!l2)
+        return l1;
+    if(!l1&&l2)
+        return l2;
+    if(l1&&!l2)
+        return l1;
+    //先解决头部问题，头部肯定是最小的值
+    if(l2->val<l1->val||l2->val==l1->val)
+    {
+        if(l2->next)
+        {
+            temp=l2->next;
+            l2->next=l1;
+            head=l2;
+            pre=head;
+            l2=temp;
+        }
+        else
+        {
+            l2->next=l1;
+            l1=l2;
+            return l1;
+        }
+    }
+    else
+        pre=l1;
+        
+    while(1)
+    {
+        if(l2->val<l1->val||l2->val==l1->val)
+        {    
+            if(l2->next)
+            {
+                temp=l2->next;
+                l2->next=l1;
+                pre->next=l2;
+                pre=l2;
+                l2=temp;
+            }
+            else
+            {
+                l2->next=l1;
+                pre->next=l2;
+                l1=l2;
+                break;
+            }
+        }
+        else
+        {
+            if(l1->next)
+            {
+                pre=l1;
+                l1=l1->next;
+            }
+            else
+            {
+                l1->next=l2;
+                break;
+            }
+        }
+    }
+    return head;
+}
+```
 
-#### 递归
+2017年2月21日 15:54:17 更简洁的写法.
+
+思路清晰:
+
+1. 首先创建一个pre头指针,保存好融合后的头指针,利用cur来指向当前尾指针
+2. 然后依次滑动两个链表,取小值,链入当前指针尾部,被取得链表头指针移动,当前尾指针移动
+3. 结束时由于有一个链表提前到尾部,结束循环,那么把剩下的另一个链表整个链接进来
+
+```cpp
+class Solution 
+{
+public:
+    ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) 
+    {
+        ListNode prehead(INT_MIN);
+        ListNode *tail =&prehead;
+        
+        while (l1 && l2)
+        {
+            if (l1->val < l2->val) 
+            {
+                tail->next = l1;
+                l1 = l1->next;
+            } 
+            else 
+            {
+                tail->next = l2;
+                l2 = l2->next;
+            }
+            tail = tail->next;
+        }
+        tail->next = l1 ? l1 : l2;
+        return prehead.next;
+    }
+};
+```
+
+###### 递归
 
 这个题目无意间看到一个递归的解法，写的非常简单，比上面的代码少多了
 
@@ -402,122 +526,155 @@ Merge two sorted linked lists and return it as a new list. The new list should b
 
 从而达成了递归
 
-	/**
-	 * Definition for singly-linked list.
-	 * struct ListNode {
-	 *     int val;
-	 *     struct ListNode *next;
-	 * };
-	 */
-	struct ListNode* mergeTwoLists(struct ListNode* l1, struct ListNode* l2) 
-	{
-	    if (l1 == NULL) return l2;
-	    if (l2 == NULL) return l1;
-	    
-	    struct ListNode *ret = NULL;
-	    
-	    if (l1->val < l2->val)
-	    {
-	        ret = l1;
-	        ret->next = mergeTwoLists(l1->next, l2);
-	    }
-	    else
-	    {
-	        ret = l2;
-	        ret->next = mergeTwoLists(l1, l2->next);
-	    }
-	    
-	    return ret;
-	}
+```cpp
+struct ListNode* mergeTwoLists(struct ListNode* l1, struct ListNode* l2) 
+{
+    if (l1 == NULL) return l2;
+    if (l2 == NULL) return l1;
+    
+    struct ListNode *ret = NULL;
+    
+    if (l1->val < l2->val)
+    {
+        ret = l1;
+        ret->next = mergeTwoLists(l1->next, l2);
+    }
+    else
+    {
+        ret = l2;
+        ret->next = mergeTwoLists(l1, l2->next);
+    }
+    
+    return ret;
+}
+```
 
-### 20.Merge Two Sorted Lists-Solution-Python
+#### Solution-Python
 
-#### 递归
-	
-	# Definition for singly-linked list.
-	# class ListNode(object):
-	#     def __init__(self, x):
-	#         self.val = x
-	#         self.next = None
-	
-	class Solution(object):
-	    def mergeTwoLists(self, l1, l2):
-	        """
-	        :type l1: ListNode
-	        :type l2: ListNode
-	        :rtype: ListNode
-	        """
-	        if l1==None:
-	            return l2
-	        if l2==None:
-	            return l1
-	        if l1.val<l2.val:
-	            head=l1
-	            head.next=self.mergeTwoLists(l1.next, l2)
-	        else:
-	            head=l2
-	            head.next=self.mergeTwoLists(l1,l2.next)
-	        return head
-
-#### 迭代
+###### 迭代
 	
 把之前c迭代部分稍微改了改，去掉了一些冗余判断
 
-	# Definition for singly-linked list.
-	# class ListNode(object):
-	#     def __init__(self, x):
-	#         self.val = x
-	#         self.next = None
-	
-	class Solution(object):
-	    def mergeTwoLists(self, l1, l2):
-	        """
-	        :type l1: ListNode
-	        :type l2: ListNode
-	        :rtype: ListNode
-	        """
-	        #排除空节点情况
-	        if(not l1):
-	            return l2
-	        if(not l2):
-	            return l1
-	        #确定头和上一节点
-	        if (l2.val<l1.val or l2.val==l1.val):
-	            if l2.next:#如果l2的下一个节点还存在，顺移l2，修改头和上一节点
-	                temp=l2.next
-	                l2.next=l1
-	                head=l2
-	                pre=l2
-	                l2=temp
-	            else:#如果l2的下一节点不存在了，l2直接接到l1的前面就可以了 返回l2
-	                l2.next=l1
-	                return l2
-	        else:
-	            head=l1
-	            pre=l1
-	            
-	        while True:
-	            if (l2.val<l1.val or l2.val==l1.val):
-	                if l2.next:#如果l2的下一个节点还存在，顺移l2，修改上一节点
-	                    temp=l2.next
-	                    l2.next=l1
-	                    pre.next=l2
-	                    pre=l2
-	                    l2=temp
-	                else:#如果l2的下一节点不存在了，l2直接接到l1的前面就可以了 返回l2
-	                    l2.next=l1
-	                    pre.next=l2
-	                    return head
-	            else:
-	                if l1.next:
-	                    pre=l1
-	                    l1=l1.next
-	                else:
-	                    l1.next=l2
-	                    break;
-	            
-	        return head
-	        
+```python
+class Solution(object):
+    def mergeTwoLists(self, l1, l2):
+        """
+        :type l1: ListNode
+        :type l2: ListNode
+        :rtype: ListNode
+        """
+        #排除空节点情况
+        if(not l1):
+            return l2
+        if(not l2):
+            return l1
+        #确定头和上一节点
+        if (l2.val<l1.val or l2.val==l1.val):
+            if l2.next:#如果l2的下一个节点还存在，顺移l2，修改头和上一节点
+                temp=l2.next
+                l2.next=l1
+                head=l2
+                pre=l2
+                l2=temp
+            else:#如果l2的下一节点不存在了，l2直接接到l1的前面就可以了 返回l2
+                l2.next=l1
+                return l2
+        else:
+            head=l1
+            pre=l1
+            
+        while True:
+            if (l2.val<l1.val or l2.val==l1.val):
+                if l2.next:#如果l2的下一个节点还存在，顺移l2，修改上一节点
+                    temp=l2.next
+                    l2.next=l1
+                    pre.next=l2
+                    pre=l2
+                    l2=temp
+                else:#如果l2的下一节点不存在了，l2直接接到l1的前面就可以了 返回l2
+                    l2.next=l1
+                    pre.next=l2
+                    return head
+            else:
+                if l1.next:
+                    pre=l1
+                    l1=l1.next
+                else:
+                    l1.next=l2
+                    break;
+            
+        return head
+```
+
+2017年2月23日 19:00:37 
+
+```python
+class Solution(object):
+    def mergeTwoLists(self, l1, l2):
+        """
+        :type l1: ListNode
+        :type l2: ListNode
+        :rtype: ListNode
+        """
+        head=ListNode(1)
+        cur=head
+        while l1 and l2:
+            if l1.val<l2.val:
+                cur.next=l1;
+                l1=l1.next
+            else:
+                cur.next=l2;
+                l2=l2.next
+            cur=cur.next
+        cur.next=l1 or l2
+        return head.next
+```
+
+###### 递归
+
+```python
+class Solution(object):
+    def mergeTwoLists(self, l1, l2):
+        """
+        :type l1: ListNode
+        :type l2: ListNode
+        :rtype: ListNode
+        """
+        if l1==None:
+            return l2
+        if l2==None:
+            return l1
+        if l1.val<l2.val:
+            ret=l1
+            ret.next=self.mergeTwoLists(l1.next, l2)
+        else:
+            ret=l2
+            ret.next=self.mergeTwoLists(l1, l2.next)
+        return ret
+```
+
+发现还能优化一下上面的代码
+
+```python
+class Solution(object):
+    def mergeTwoLists(self, l1, l2):
+        """
+        :type l1: ListNode
+        :type l2: ListNode
+        :rtype: ListNode
+        """
+        if not l1 or not l2:
+            return l1 or l2
+        if l1.val < l2.val:
+            l1.next = self.mergeTwoLists(l1.next, l2)
+            return l1
+        else:
+            l2.next = self.mergeTwoLists(l1, l2.next)
+            return l2
+```
+
+这样递归思路就是:找到两个链表的尾部,然后开始链接,最后返回的自然就是链表头了.
+
 
 ## Quote
 
