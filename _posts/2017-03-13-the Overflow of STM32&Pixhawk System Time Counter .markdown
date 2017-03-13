@@ -16,15 +16,13 @@ static volatile uint32_t timerx_micros_counter = 0;
 static volatile uint32_t timerx_millis_counter = 0;
 void TIMX_IRQHandler(void)
 {
-    if(TIM_GetITStatus(TIMx, TIM_IT_Update)==SET) 
+	if(TIM_GetITStatus(TIMx, TIM_IT_Update)==SET)
 	{
 		timerx_micros_counter += 20000; // 20000us each overflow=20ms
-    	timerx_millis_counter += 20; // 20ms each overlflow	
-
+		timerx_millis_counter += 20; // 20ms each overlflow	
 		...省略
-
-    }
-    TIM_ClearITPendingBit(TIMx, TIM_IT_Update);  
+	}
+	TIM_ClearITPendingBit(TIMx, TIM_IT_Update);  
 }
 uint32_t XXX_Scheduler::micros() 
 {
