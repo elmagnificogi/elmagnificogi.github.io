@@ -162,6 +162,4 @@ bool transfer (uint8_t data,*uint8_t output)
 
 ## Quote
 
-> https://www.arduino.cc/en/Reference/Micros
-> 
-> http://www.openedv.com/thread-82038-1-1.html
+> http://blog.csdn.net/mmhh3000/article/details/41644257
