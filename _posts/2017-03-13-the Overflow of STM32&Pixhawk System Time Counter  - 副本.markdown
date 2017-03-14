@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "Pixhawk与STM32中系统时间计数器溢出"
-subtitle:   "嵌入式，串口，驱动"
+subtitle:   "Pixhawk，STM32，Overflow"
 date:       2017-03-13
 author:     "elmagnifico"
 header-img: "img/Embedded-head-bg.png"
@@ -90,13 +90,13 @@ uint32_t XXX_Scheduler::micros()
 static volatile uint64_t timer5_micros_counter = 0x600000000;
 void TIM5_IRQHandler(void)
 {
-		//TIM5的中断
-    if(TIM_GetITStatus(TIM5, TIM_IT_Update)==SET) 
-		{
-			timer5_micros_counter += 20000; // 20000us each overflow
-      timer5_millis_counter += 20; //    20ms each overlflow	
-    }
-    TIM_ClearITPendingBit(TIM5, TIM_IT_Update);  
+	//TIM5的中断
+	if(TIM_GetITStatus(TIM5, TIM_IT_Update)==SET) 
+	{
+		timer5_micros_counter += 20000; // 20000us each overflow
+		timer5_millis_counter += 20; //    20ms each overlflow	
+	}
+	TIM_ClearITPendingBit(TIM5, TIM_IT_Update);
 }
 uint64_t micros() 
 {	
@@ -124,11 +124,11 @@ int main(void)
 	_init_timer(5, 20000-1, 84-1);
 	while(1)
 	{
-			timenow=micros();
-			first=(uint32_t*)&timenow;
-			second=first+1;
-			printf("\r\n 当前系统时间: %d %d %lld \r\n",*first,*second,timenow);
-			delay_ms(500);   
+		timenow=micros();
+		first=(uint32_t*)&timenow;
+		second=first+1;
+		printf("\r\n 当前系统时间: %d %d %lld \r\n",*first,*second,timenow);
+		delay_ms(500);   
 	}
 }
 ```
