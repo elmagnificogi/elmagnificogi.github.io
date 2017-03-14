@@ -5,6 +5,7 @@ subtitle:   "嵌入式，串口，驱动"
 date:       2017-03-13
 author:     "elmagnifico"
 header-img: "img/Embedded-head-bg.png"
+catalog:    true
 tags:
     - 嵌入式
 ---
@@ -80,6 +81,82 @@ uint32_t XXX_Scheduler::micros()
 > http://www.openedv.com/thread-82038-1-1.html
 
 比如这里，虽然他是用了keil的自带模拟查看的结果，可能不够准确，需要去拿板子实际测试一下才行。这个等我测试以后再说。
+
+2017年3月14日13:38:39
+
+经过测试：
+
+```
+static volatile uint64_t timer5_micros_counter = 0x600000000;
+void TIM5_IRQHandler(void)
+{
+		//TIM5的中断
+    if(TIM_GetITStatus(TIM5, TIM_IT_Update)==SET) 
+		{
+			timer5_micros_counter += 20000; // 20000us each overflow
+      timer5_millis_counter += 20; //    20ms each overlflow	
+    }
+    TIM_ClearITPendingBit(TIM5, TIM_IT_Update);  
+}
+uint64_t micros() 
+{	
+
+	uint64_t time_micros, tcnt, current;
+
+	do 
+	{
+	  time_micros = timer5_micros_counter;
+	  tcnt = TIM_GetCounter(TIM5);
+	} 
+	while(time_micros != timer5_micros_counter);
+
+	current = time_micros + tcnt;
+
+	return current;
+}
+int main(void)
+{ 
+	uint64_t timenow=0;
+	uint32_t *first,*second;
+	delay_init(168);
+	uart_init(115200);
+	//TIM5 20ms一次中断 每次+1=1us
+	_init_timer(5, 20000-1, 84-1);
+	while(1)
+	{
+			timenow=micros();
+			first=(uint32_t*)&timenow;
+			second=first+1;
+			printf("\r\n 当前系统时间: %d %d %lld \r\n",*first,*second,timenow);
+			delay_ms(500);   
+	}
+}
+```
+
+测试结果：
+
+	[13:46:44.325]收←◆
+	 当前系统时间: 3042703 6 25772846479 
+	
+	[13:46:44.829]收←◆
+	 当前系统时间: 3546520 6 25773350296 
+	
+	[13:46:45.333]收←◆
+	 当前系统时间: 4050337 6 25773854113 
+	
+	[13:46:45.837]收←◆
+	 当前系统时间: 4554154 6 25774357930 
+	
+	[13:46:46.340]收←◆
+	 当前系统时间: 5057971 6 25774861747 
+	
+	[13:46:46.843]收←◆
+	 当前系统时间: 5561788 6 25775365564 
+	
+	[13:46:47.350]收←◆
+	 当前系统时间: 6065606 6 25775869382 
+
+说明使用64位是没有问题的，至少STM32F4这里是没问题的。
 
 #### 调整TIMER滴答时间
 
