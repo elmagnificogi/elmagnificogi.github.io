@@ -86,7 +86,7 @@ uint32_t XXX_Scheduler::micros()
 
 经过测试：
 
-```
+```c
 static volatile uint64_t timer5_micros_counter = 0x600000000;
 void TIM5_IRQHandler(void)
 {
