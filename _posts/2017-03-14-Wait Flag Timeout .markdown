@@ -51,7 +51,6 @@ void Single_Write(unsigned char id,unsigned char write_address,unsigned char byt
 	I2C_GenerateSTOP(I2C1, ENABLE);
 }
 
-
 //来源于STM32F4系列官方标准例程
 {
   	/* Test on I2C1 EV5 and clear it */
@@ -118,7 +117,7 @@ static void TimeOut_UserCallback(void)
 ```c
 #define GetFlag_Timeout 840
 #define Transfer_Timeout 3
-bool transfer (uint8_t data，*uint8_t output)
+bool transfer (uint8_t data,*uint8_t output)
 {
 	int timeout_T=0,timeout_W=0;
 	
