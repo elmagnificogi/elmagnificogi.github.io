@@ -97,16 +97,16 @@ uint32_t XXX_Scheduler::micros()
 
 当然如果要这样做，和改成64位数据类型一样，也需要修改所有相关联的地方。
 
-#### 时间对比
+#### 修改函数意义
 
-突然发现利用封装可以再封装一层，保证没有问题。
+无论怎么改这个函数都无法避免要修改所有调用相关的部分，那么不如直接修改这个函数的意义。
 
-保存一次上一次使用这个函数时的上一次时间，对两次时间进行比较，进而保证没问题
+这个函数在整个系统里多用于，计算两个过程的时间差，那么直接把这个函数变成返回和上一次调用时的时间差不就可以了吗？
 
 ```c
 uint32_t XXX_Scheduler::micros() 
 {
-	uint32_t time_micros, tcnt, current;
+	uint32_t time_micros, tcnt, current,interval;
 	static uint32_t last_time_micros=0;
 	
 	do 
@@ -118,10 +118,13 @@ uint32_t XXX_Scheduler::micros()
 	current = time_micros + tcnt;
 	if(last_time_micros>current) 
 	{
-		current=current+0xffffffffffffffff-last_time_micros;
+		interval=current+0xffffffffffffffff-last_time_micros;
+		last_time_micros=current;
+		return interval;
 	}
+	interval=current-last_time_micros;
 	last_time_micros=current;
-	return current;
+	return interval;
 }
 ```
 ## Quote
