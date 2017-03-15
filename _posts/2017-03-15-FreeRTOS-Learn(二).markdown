@@ -10,90 +10,114 @@ tags:
     - 嵌入式
 ---
 
-## 操作系统
-
-以我的理解，从大方面来说，操作系统介于底层硬件和用户之间，他封装了底层驱动，对上统一接口，进而方便了上层软件开发。但不仅仅是这些，他介于二者之间，成为了硬件资源的管理者，为上层提供资源使用接口，进而完成用户所需要的功能。
-
-一般来说，一个现代操作系统需要具备以下的各种功能。
-
-- 进程管理（Processing management）
-- 内存管理（Memory management）
-- 文件系统（File system）
-- 网络通讯（Networking）
-- 安全机制（Security）
-- 用户界面（User interface）
-- 驱动程序（Device drivers）
-
-这些只是针对个人PC来说的操作系统。
-
-而实际上操作系统也有很多种，而且各自有各自的针对性，可能有的操作系统完全不需要网络通信，完全不需要内存管理，这种情况。
-
 ## 嵌入式操作系统
 
-嵌入式操作系统，一般应用的环境都很有限，所以各种功能可能不如PC上的操作系统那么全面。
+学习之前先了解一下，目前市面上都有些啥嵌入式操作系统
 
-但一般来说，都具有下面的这些功能。
+#### embOS
 
-- 任务调度系统
-- 中断管理系统
-- 资源管理系统
-- 内存管理系统
-- 通信系统（一般指任务间通信）
+> embOS is a priority-controlled real time operating system, designed to be used as foundation for the development of embedded real-time applications. It is a zero interrupt latency, high-performance RTOS that has been optimized for minimum memory consumption in both RAM and ROM, as well as high speed and versatility.
+> 
+> Throughout the development process of embOS, the limited resources of microcontrollers have always been kept in mind. The internal structure of embOS has been optimized in a variety of applications with different customers, to fit the needs of different industries.
+> 
+> embOS is fully source-compatible on different platforms (8/16/32 bits), making it easy to port applications to different CPUs. Its highly modular structure ensures that only the functions needed are linked, keeping the ROM size very small. Tasks can easily be created and safely communicate with each other using the complete panoply of communication mechanisms such as semaphores, mailboxes, and events. Interrupt Service Routines (ISRs) can also take advantage of these communication mechanisms. 
 
-至于下面的这些功能，一般来说都是可选的，或者可以添加/移植的
+简单说 embOS 最大的优势就是需要FLASH和RAM都非常小，很多上不了系统的板子也能上。
 
-- 网络通信系统
-- 文件系统
-- UI系统
+下面是其官网，当然也是收费的，试用版本是看不到源码的,这个系统是J-link的亲儿子
 
-而且一般嵌入式操作系统内核相对来说很小，便于移植到小FLASH上。
+> https://www.segger.com/embos.html
 
-#### 为什么要有操作系统
+#### RL-RTX
 
-从操作系统的概念就能知道，其实就是为了合理管理资源，分配资源，屏蔽底层硬件，提供统一的上层接口，操作系统其实就是对于底层硬件的一个超级大封装。
+> The RTX kernel is a real time operating system (RTOS) that enables you to create applications that simultaneously perform multiple functions or tasks. This is very useful in embedded applications. While it is certainly possible to create real-time programs without an RTOS (by executing one or more tasks in a loop), there are numerous scheduling, maintenance, and timing issues that an RTOS like RTX can solve for you.
+> 
+> An RTOS enables flexible scheduling of system resources like CPU and memory, and offers ways to communicate between tasks. The RTX kernel is a powerful RTOS that is easy to use and works with microcontrollers that are based on the ARM7™TDMI, ARM9™, or Cortex™-M3 CPU core.
+RTX programs are written using standard C constructs and compiled with the RealView® Compiler. The RTX.H header file defines the RTX functions and macros that allow you to easily declare tasks and access all RTOS features.
+> http://www.keil.com/support/man/docs/rlarm/rlarm_ar_artxarm.htm
 
-#### 那又为什么要有嵌入式操作系统
+RL-RTX是ARM的亲儿子，想也知道肯定对自家的板子支持特别好。
 
-多数单片机，其实完成的功能很单一，需要使用的硬件外设也是很单一的，这种情况下，其实不需要。
+#### uC/OS
 
-但是当单片机所具有的功能变多的时候，需要操作的硬件外设很多的时候，这种情况下，就需要操作系统来帮忙分配资源了。
+> uC/OS-III(Micro C OS Three 微型的C 语言编写的操作系统第3版)是一个可升级的，可固化的，基于优先级的实时内核。它对任务的个数无限制。uC/OS-III 是第3代的系统内核，支持现代的实时内核所期待的大部分功能。例如资源管理，同步，任务间的通信等等。然而，uC/OS-III 提供的特色功能在其它的实时内核中是找不到的，比如说完备的运行时间测量性能，直接地发送信号或者消息到任务，任务可以同时等待多个内核对象等。
 
-比如说：
+一般都喊做uCOS了，其中文资料特别多，当然它如果商用也是收费的，但是国内用的特别多，所以各种问题也都能及时得到解决。
 
-平常的单片机，只跑了一个流水灯，这只完成了一个任务。
+#### FreeRTOS
 
-后来有一天，又添加了一个，一边亮灯，一边放音乐的功能，灯还要随着音乐变化。
+> 作为一个轻量级的操作系统，FreeRTOS 提供的功能包括：任务管理、时间管理、信号量、消息队列、内存管理、记录功能等，可基本满足较小系统的需要。由于RTOS需占用一定的系统资源(尤其是RAM资源)，只有μC/OS、embOS、salvo、FreeRTOS等少数实时操作系统能在小RAM单片机上运行。相对μC/OS、embOS等商业操作系统，FreeRTOS操作系统是完全免费的操作系统，具有源码公开、可移植、可裁减、调度策略灵活的特点，可以方便地移植到各种单片机上运行。
+> 
+> http://www.freertos.org/index.html
 
-再后来又要能通过遥控点播音乐...
+想也不用想，为什么选择FreeRTOS了，就是因为它是免费的，而且开源，当前也算是比较火，虽然其操作系统附带的其他子系统较少，但是都是能移植过去的，而且官方也有给相应的例程。
 
-这个时候已经有很多功能了，这么多功能都集合在了这里
+#### RT-Thread OS
 
-```c
-while(1)
-{
-	检测遥控命令（）
-	播放音乐（）
-	PWM输出控制灯（）
-	...
-}
-```
+> RT-Thread是一款来自中国的开源嵌入式实时操作系统，由国内一些专业开发人员从2006年开始开发、维护，除了类似FreeRTOS和UCOS的实时操作系统内核外，也包括一系列应用组件和驱动框架，如TCP/IP协议栈，虚拟文件系统，POSIX接口，图形用户界面，FreeModbus主从协议栈，CAN框架，动态模块等，因为系统稳定，功能丰富的特性被广泛用于新能源，电网，风机等高可靠性行业和设备上，已经被验证是一款高可靠的实时操作系统。
+> 
+> RT-Thread实时操作系统遵循GPLv2+许可证，实时操作系统内核及所有开源组件可以免费在商业产品中使用，不需要公布应用源码，没有任何潜在商业风险。
+> http://www.rt-thread.org/
 
-而这个时候可能需要多个任务并行，或许你可以通过巧妙利用TIM定时器进行时间规划，安排各个任务的执行时间。
+这个是以前匿名四轴用了这么个操作系统才知道的，看它的使用案例就知道，非常小众，使用的也是很小的公司和个人而已。
 
-然而这样只是针对当前功能来说的，如果功能增加了，需要并行的任务更多了，那么TIM的时间安排可能还需要调整，这样很麻烦很不高级，很不程序员。
+维护上什么的也是相对较为简单的，跟上面的操作系统不具有竞争力吧。
 
-那么最好的办法自然是拥有一个任务调度系统，每次只需要把对应的任务交给系统，然后由系统去完成这个TIM时间的管理，而不是我们手动调整。
 
-当然这里除了这个并行的任务以外，还有中断，多个中断的情况下，需要先响应谁，后响应谁，当前任务是否可以被中断等这些问题考虑起来也很复杂，那么不如都交给系统去处理好了。
+## 对比
 
-功能多了，就有可能大家会抢硬件资源，比如某个引脚既需要输出PWM又需要由他输入模拟信号，那么这个资源就会被争抢，那么这个时候就需要对这个资源进行管理，什么时候给什么任务，那么如果有操作系统帮忙去处理这个问题，那不就好了？除了硬件资源以外，还有内存可以抢，两个任务共用了相同的内存块，但这一部分内存只能是由一方先使用之后，另一方才能使用，这个时候，一般可以用互斥啊，信号量啊，什么的来操作防止其他程序使用，但是如果这个内存，使用者越来越多，又或是还有很多其他内存块被多个任务共同使用，那么这个时候单独由使用者来维护资源，实在是太麻烦了，那不如都丢给操作系统去处理吧。
+这么多操作系统，总有人喜欢对比一下优劣，以下所有对比都是引用
 
-所以啊，当资源多了，各种管理都需要使用者自己来的时候就变得很麻烦了。
+>　　一、freeRTOS比uCOS II优胜的地方：
+>　　
+　　1.内核ROM和耗费RAM都比uCOS 小，特别是RAM。 这在单片机里面是稀缺资源，uCOS至少要5K以上， 而freeOS用2~3K也可以跑的很好。
+　　2.freeRTOS 可以用协程（Co-routine），减少RAM消耗（共用STACK）。uCOS只能用任务（TASK，每个任务有一个独立的STACK）。
+　　3.freeRTOS 可以有优先度一样的任务，这些任务是按时间片来轮流处理，uCOSII 每个任务都只有一个独一无二的优先级。因此，理论上讲，freeRTOS 可以管理超过64个任务，而uCOS只能管理64个。
+　　4.freeRTOS 是在商业上免费应用。uCOS在商业上的应用是要付钱的。
+>
+>　　二、freeRTOS 不如uCOS的地方：
+　　1.比uSOS简单，任务间通讯freeRTOS只支持Queque， Semaphores， Mutex。 uCOS除这些外，还支持Flag, MailBox.
+　　2.uCOS的支持比freeRTOS 多。除操作系统外，freeRTOS只支持TCPIP， uCOS则有大量外延支持，比如FS， USB， GUI， CAN等的支持3。uCOS可靠性更高，而且耐优化，freeRTOS 在我设置成中等优化的时候，就会出问题。
 
-而且如果有一天要开发新的功能，或者是有不懂底层的需要把应用层的代码放进来的时候，那么就更需要底层维护者提供支持，毫无疑问，操作系统更适合作为底层的维护者，省去大量的时间去维护这些问题。
+其实这个对比已经有点过时了，看上面uCOSIII的介绍就知道，那几个和freeRTOS不同的地方基本都相同了，唯一区别也就是商业化的问题了。
+
+#### FLASH和RAM的需求对比
+
+|      | RTX        | uCOS-II |FreeRTOS  |embOS     |uCOS-III  
+|------|------------|---------|----------|----------|----------|
+|FLASH | <4.0 Kbytes|6K----26K|6K --- 10K|1.1K - 1.6K|6K----24K | 
+|      |(Code Space)|(code footprint)|(ROM footprint )|(kernel)|(code footprint)| 
+|RAM   |300bytes +128bytes|1K+|没找到|18-50bytes|1K+|
+|      |(kernel)|(ram footprint)|没找到|(kernel)|(ram footprint)|
+
+#### 实时性对比
+
+这里提供一组实时性测试方面的数据，通过任务主动释放CPU权利来测试任务的切换速度
+
+测试条件 ：
+
+- STM32F103VET6，Cortex-M3内核，72Mhz，
+- 软件用的MDK4.54,  1级优化。
+- 测试10000次，2ms测试一次，然后求平均
+
+|OS|版本|切换时间|
+|---|---|---|
+|RTX|V4.5|252个时钟周期|
+|uCOS-II|V2.92.07|354个时钟周期|
+|embOS|V3.86|389个时钟周期|
+|FreeRTOS|V7.4.2|514个时钟周期（可能是这种测试方法对这个OS不太适合，另一个时间切换的时间是374个时钟周期）|
+|uCOS-III|V3.03.01 |576个时钟周期|
+
+#### 安全性对比
+
+安全性的对比，比较的麻烦些，这里提供一下各个OS的安全认证
+
+貌似FreeRTOS, embOS和RTX没有安全方面的认证
+
+FreeRTOS的另一个版本SafeRTOS有安全方面的认证
 
 ## Quote
 
-> http://www.nxpic.org/module/forum/thread-563173-2-1.html
+> http://bbs.armfly.com/read.php?tid=1531
 > 
-> http://bbs.eeworld.com.cn/thread-38282-1-1.html
+> http://blog.csdn.net/Airbnb/article/details/41248459
