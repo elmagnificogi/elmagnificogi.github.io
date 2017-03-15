@@ -64,7 +64,7 @@ RL-RTX是ARM的亲儿子，想也知道肯定对自家的板子支持特别好�
 
 ## 对比
 
-这么多操作系统，总有人喜欢对比一下优劣
+这么多操作系统，总有人喜欢对比一下优劣，以下所有对比都是引用
 
 >　　一、freeRTOS比uCOS II优胜的地方：
 >　　
@@ -72,8 +72,8 @@ RL-RTX是ARM的亲儿子，想也知道肯定对自家的板子支持特别好�
 　　2.freeRTOS 可以用协程（Co-routine），减少RAM消耗（共用STACK）。uCOS只能用任务（TASK，每个任务有一个独立的STACK）。
 　　3.freeRTOS 可以有优先度一样的任务，这些任务是按时间片来轮流处理，uCOSII 每个任务都只有一个独一无二的优先级。因此，理论上讲，freeRTOS 可以管理超过64个任务，而uCOS只能管理64个。
 　　4.freeRTOS 是在商业上免费应用。uCOS在商业上的应用是要付钱的。
-
-　　二、freeRTOS 不如uCOS的地方：
+>
+>　　二、freeRTOS 不如uCOS的地方：
 　　1.比uSOS简单，任务间通讯freeRTOS只支持Queque， Semaphores， Mutex。 uCOS除这些外，还支持Flag, MailBox.
 　　2.uCOS的支持比freeRTOS 多。除操作系统外，freeRTOS只支持TCPIP， uCOS则有大量外延支持，比如FS， USB， GUI， CAN等的支持3。uCOS可靠性更高，而且耐优化，freeRTOS 在我设置成中等优化的时候，就会出问题。
 
@@ -81,73 +81,41 @@ RL-RTX是ARM的亲儿子，想也知道肯定对自家的板子支持特别好�
 
 #### FLASH和RAM的需求对比
 
-|      | RTX    | cat
-|------|------------|-------------
-|FLASH | foo  | foo
-|RAM   | bar  | bar
-|      | baz  | baz
+|      | RTX        | uCOS-II |FreeRTOS  |embOS     |uCOS-III  
+|------|------------|---------|----------|----------|----------|
+|FLASH | <4.0 Kbytes|6K----26K|6K --- 10K|1.1K - 1.6K|6K----24K | 
+|      |(Code Space)|(code footprint)|(ROM footprint )|(kernel)|(code footprint)| 
+|RAM   |300bytes +128bytes|1K+|没找到|18-50bytes|1K+|
+|      |(kernel)|(ram footprint)|没找到|(kernel)|(ram footprint)|
 
+#### 实时性对比
 
-
-<table>
-   <tr>
-      <td>                      RTX                           uCOS-II                   FreeRTOS                  embOS            uCOS-III  </td>
-   </tr>
-   <tr>
-      <td>FLASH       <4.0 Kbytes                     6K----26K                 6K --- 10K               1.1K - 1.6K         6K----24K   </td>
-   </tr>
-   <tr>
-      <td>                    (Code Space)               (code footprint)        (ROM footprint )           (kernel)         (code footprint) </td>
-   </tr>
-   <tr>
-      <td></td>
-   </tr>
-   <tr>
-      <td>RAM         300bytes +128bytes          1K+                            没找到                    18-50bytes           1K+    </td>
-   </tr>
-   <tr>
-      <td>                     (kernel)                        (ram footprint)             没找到                       (kernel)           (ram footprint)</td>
-   </tr>
-</table>
-
-
-
-
-
-
-
-
-
-
- 1.FLASH和RAM的需求对比
-                      RTX                           uCOS-II                   FreeRTOS                  embOS            uCOS-III  
-FLASH       <4.0 Kbytes                     6K----26K                 6K --- 10K               1.1K - 1.6K         6K----24K   
-                    (Code Space)               (code footprint)        (ROM footprint )           (kernel)         (code footprint) 
-
-RAM         300bytes +128bytes          1K+                            没找到                    18-50bytes           1K+    
-                     (kernel)                        (ram footprint)             没找到                       (kernel)           (ram footprint)
-
-2. 功能对比
-这里暂时先不做了，这个对比的整理比较的麻烦
-
-3. 实时性对比
 这里提供一组实时性测试方面的数据，通过任务主动释放CPU权利来测试任务的切换速度
-测试条件 ：STM32F103VET6，Cortex-M3内核，72Mhz，
-                   软件用的MDK4.54,  1级优化。
-                   测试10000次，2ms测试一次，然后求平均
 
-RTX             V4.5             252个时钟周期
-uCOS-II       V2.92.07      354个时钟周期
-embOS        V3.86           389个时钟周期
-FreeRTOS   V7.4.2          514个时钟周期（可能是这种测试方法对这个OS不太适合，另一个时间切换的时
-                                                                      间是374个时钟周期）
-uCOS-III       V3.03.01      576个时钟周期
+测试条件 ：
 
-4.  安全性对比
+- STM32F103VET6，Cortex-M3内核，72Mhz，
+- 软件用的MDK4.54,  1级优化。
+- 测试10000次，2ms测试一次，然后求平均
+
+|OS|版本|切换时间|
+|---|---|---|
+|RTX|V4.5|252个时钟周期|
+|uCOS-II|V2.92.07|354个时钟周期|
+|embOS|V3.86|389个时钟周期|
+|FreeRTOS|V7.4.2|514个时钟周期（可能是这种测试方法对这个OS不太适合，另一个时间切换的时间是374个时钟周期）|
+|uCOS-III|V3.03.01 |576个时钟周期|
+
+#### 安全性对比
+
 安全性的对比，比较的麻烦些，这里提供一下各个OS的安全认证
+
 貌似FreeRTOS, embOS和RTX没有安全方面的认证
-FreeRTOS的另一个版本SafeRTOS有安全方面的认证，认证如下
+
+FreeRTOS的另一个版本SafeRTOS有安全方面的认证
 
 ## Quote
 
+> http://bbs.armfly.com/read.php?tid=1531
 > 
+> http://blog.csdn.net/Airbnb/article/details/41248459
