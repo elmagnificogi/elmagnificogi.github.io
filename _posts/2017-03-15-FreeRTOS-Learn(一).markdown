@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "FreeRTOS学习"
+title:      "FreeRTOS学习(一)"
 subtitle:   "嵌入式，FreeRTOS，学习"
 date:       2017-03-15
 author:     "elmagnifico"
@@ -11,6 +11,8 @@ tags:
 ---
 
 ## 嵌入式操作系统
+
+学习之前先了解一下，目前市面上都有些啥嵌入式操作系统
 
 #### embOS
 
