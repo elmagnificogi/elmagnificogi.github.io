@@ -2,7 +2,7 @@
 layout:     post
 title:      "嵌入式底层驱动中时序等待超时处理"
 subtitle:   "嵌入式，驱动，Timeout"
-date:       2017-03-13
+date:       2017-03-14
 author:     "elmagnifico"
 header-img: "img/Embedded-head-bg.png"
 catalog:    true
