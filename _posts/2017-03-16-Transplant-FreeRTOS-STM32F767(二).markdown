@@ -376,6 +376,8 @@ signed char *pcTaskName 是溢出的任务名
 
 原子基本就是把官方手册翻译了一遍...
 
+这里并不是全部的配置都有，还有许多配置需要参考手册去弄。
+
 ## Quote
 
 > FreeRTOS_Reference_Manual_V9.0.0
