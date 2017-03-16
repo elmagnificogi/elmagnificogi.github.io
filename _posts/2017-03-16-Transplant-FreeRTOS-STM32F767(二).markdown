@@ -31,7 +31,7 @@ tags:
 
 ##### config宏
 
-###### config通用部分
+###### 通用部分
 ```c
 #define configUSE_PREEMPTION 1
 ```
@@ -157,7 +157,7 @@ pdMS_TO_TICKS()及其相关配置只有在频率小于等于1000Hz的情况下�
 ```
 设置为1，表示启用计数型信号量。
 
-###### config内存相关
+###### 内存相关
 
 ```c
 #define configMINIMAL_STACK_SIZE ((unsigned short)130)
@@ -176,7 +176,7 @@ pdMS_TO_TICKS()及其相关配置只有在频率小于等于1000Hz的情况下�
 
 设置系统堆的总大小，总的来说是通过heap_1/2/3/4/5.c中的函数申请这个空间的内容的。
 
-###### config与Hook相关
+###### Hook相关
 
 ```c
 #define configCHECK_FOR_STACK_OVERFLOW 0
@@ -230,7 +230,7 @@ signed char *pcTaskName 是溢出的任务名
 ```c
 	void vApplicationTickHook( void );
 ```
-###### config运行和状态相关
+###### 运行和状态相关
 
 ```c
 #define configGENERATE_RUN_TIME_STATS 0
@@ -253,7 +253,7 @@ signed char *pcTaskName 是溢出的任务名
 
 为1启动了可视化跟踪调试
 
-###### config协程相关
+###### 协程相关
 
 ```c
 #define configUSE_CO_ROUTINES 0
@@ -266,7 +266,7 @@ signed char *pcTaskName 是溢出的任务名
 ```
 设置可以分配给协程的有效优先级数目，最高优先级为configMAX_CO_ROUTINE_PRIORITIES-1
 
-###### config定时器相关
+###### 定时器相关
 
 ```c
 #define configUSE_TIMERS 1   
@@ -291,7 +291,7 @@ signed char *pcTaskName 是溢出的任务名
 ```
 设置定时器任务的栈空间大小
 
-###### config中断相关
+###### 中断相关
 
 ```c
 #ifdef __NVIC_PRIO_BITS
@@ -368,10 +368,18 @@ signed char *pcTaskName 是溢出的任务名
 
 当然这里可以随你的想法来定义vAssertCalled函数。
 
+## 总结
+
+到这里基本上整个移植就结束了。
+
+绝大多数解释都来自于FreeRTOS_Reference_Manual_V9.0.0手册以及正点原子的STM32F767 FreeRTOS开发手册_V1.0。
+
+原子基本就是把官方手册翻译了一遍...
+
 ## Quote
 
-> http://blog.csdn.net/zhzht19861011/article/details/7745151
+> FreeRTOS_Reference_Manual_V9.0.0
 > 
-> http://www.openedv.com/thread-77593-1-1.html
+> http://blog.csdn.net/qqliyunpeng/article/details/53454188
 > 
-> http://www.openedv.com/thread-85247-1-1.html
+> http://blog.csdn.net/travel0er/article/details/46609841
