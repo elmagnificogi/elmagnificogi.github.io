@@ -8,6 +8,7 @@ header-img: "img/Embedded-head-bg.png"
 catalog:    true
 tags:
     - 嵌入式
+    - FreeRTOS
 ---
 
 ## 移植FreeRTOS到STM32F767
