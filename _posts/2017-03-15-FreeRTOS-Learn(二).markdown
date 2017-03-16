@@ -83,7 +83,7 @@ RL-RTX是ARM的亲儿子，想也知道肯定对自家的板子支持特别好�
 
 #### FLASH和RAM的需求对比
 
-|      | RTX        | uCOS-II |FreeRTOS  |embOS     |uCOS-III  
+|      | RTX        | uCOS-II |FreeRTOS  |embOS     |uCOS-III  |
 |------|------------|---------|----------|----------|----------|
 |FLASH | <4.0 Kbytes|6K----26K|6K --- 10K|1.1K - 1.6K|6K----24K | 
 |      |(Code Space)|(code footprint)|(ROM footprint )|(kernel)|(code footprint)| 
