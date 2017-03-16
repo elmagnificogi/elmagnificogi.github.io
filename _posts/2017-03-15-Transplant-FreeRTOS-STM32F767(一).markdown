@@ -148,7 +148,7 @@ void SVC_Handler(void)
 #endif
 
 #if SYSTEM_SUPPORT_OS	 	//使用OS
-	OSIntExit();  											 
+	OSIntExit();  			
 #endif
 ```
 
@@ -214,7 +214,7 @@ void delay_init(u8 SYSCLK)
 	reload*=1000000/configTICK_RATE_HZ;	
 	//根据delay_ostickspersec设定溢出时间
 										
-	//reload为24位寄存器,最大值:16777216,在216M下,约合77.7ms左右	
+	//reload为24位寄存器,最大值:16777216,在216M下,约合77.7ms左右
 	fac_ms=1000/configTICK_RATE_HZ;			
 	//代表OS可以延时的最少单位	   
 	SysTick->CTRL|=SysTick_CTRL_TICKINT_Msk;
@@ -227,7 +227,7 @@ void delay_init(u8 SYSCLK)
 
 //延时nus
 //nus:要延时的us数.	
-//nus:0~204522252(最大值即2^32/fac_us@fac_us=21)	    								   
+//nus:0~204522252(最大值即2^32/fac_us@fac_us=21)	
 void delay_us(u32 nus)
 {		
 	u32 ticks;
@@ -261,14 +261,14 @@ void delay_ms(u32 nms)
 	if(xTaskGetSchedulerState()!=taskSCHEDULER_NOT_STARTED)
 	//系统已经运行
 	{		
-		if(nms>=fac_ms)						
+		if(nms>=fac_ms)			
 		//延时的时间大于OS的最少时间周期 
 		{ 
-   			vTaskDelay(nms/fac_ms);	 		
+   			vTaskDelay(nms/fac_ms);	 
 			//FreeRTOS延时
 		}
 		nms%=fac_ms;						
-		//OS已经无法提供这么小的延时了,采用普通方式延时    
+		//OS已经无法提供这么小的延时了,采用普通方式延时
 	}
 	delay_us((u32)(nms*1000));				
 	//普通方式延时
