@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "FreeRTOS学习(二)"
+title:      "FreeRTOS学习准备(二)"
 subtitle:   "嵌入式，FreeRTOS，学习"
 date:       2017-03-15
 author:     "elmagnifico"
