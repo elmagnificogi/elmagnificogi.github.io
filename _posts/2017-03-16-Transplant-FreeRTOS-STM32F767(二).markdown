@@ -338,16 +338,16 @@ signed char *pcTaskName 是溢出的任务名
 
 ##### INCLUDE使能函数
 ```c
-#define INCLUDE_xTaskGetSchedulerState          1                       
-#define INCLUDE_vTaskPrioritySet		        1
-#define INCLUDE_uxTaskPriorityGet		        1
-#define INCLUDE_vTaskDelete				        1
-#define INCLUDE_vTaskCleanUpResources	        1
-#define INCLUDE_vTaskSuspend			        1
-#define INCLUDE_vTaskDelayUntil			        1
-#define INCLUDE_vTaskDelay				        1
-#define INCLUDE_eTaskGetState			        1
-#define INCLUDE_xTimerPendFunctionCall	        1
+#define INCLUDE_xTaskGetSchedulerState 1                       
+#define INCLUDE_vTaskPrioritySet       1
+#define INCLUDE_uxTaskPriorityGet      1
+#define INCLUDE_vTaskDelete            1
+#define INCLUDE_vTaskCleanUpResources  1
+#define INCLUDE_vTaskSuspend           1
+#define INCLUDE_vTaskDelayUntil        1
+#define INCLUDE_vTaskDelay             1
+#define INCLUDE_eTaskGetState          1
+#define INCLUDE_xTimerPendFunctionCall 1
 ```
 
 这里如果设置为1，则可以使用对应的函数
