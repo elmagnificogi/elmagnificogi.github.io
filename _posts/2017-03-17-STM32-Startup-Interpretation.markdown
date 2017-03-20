@@ -309,7 +309,7 @@ Default_Handler PROC
 
                 EXPORT  WWDG_IRQHandler                   [WEAK]                                        
                 EXPORT  PVD_IRQHandler                    [WEAK]                      
-                EXPORT  TAMP_STAMP_IRQHandler             [WEAK]    
+                EXPORT  TAMP_STAMP_IRQHandler             [WEAK]
 				...
                 EXPORT  CAN3_RX0_IRQHandler               [WEAK]
                 EXPORT  CAN3_RX1_IRQHandler               [WEAK]
