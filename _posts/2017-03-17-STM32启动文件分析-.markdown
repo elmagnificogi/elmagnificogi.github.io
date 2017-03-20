@@ -1,0 +1,27 @@
+---
+layout:     post
+title:      "STM32启动文件分析"
+subtitle:   "嵌入式，FreeRTOS，STM32"
+date:       2017-03-17
+author:     "elmagnifico"
+header-img: "img/Embedded-head-bg.png"
+catalog:    true
+tags:
+    - 嵌入式
+    - FreeRTOS
+---
+
+## 
+
+
+#### 环境
+
+编译环境：keil
+
+## 总结
+
+
+
+## Quote
+
+> 
