@@ -393,13 +393,13 @@ __user_initial_stackheap
 到这里启动文件分析就结束了，但是如果只看了这里其实还是没看明白怎么回事，还需要对STM32的启动过程有一个了解，才能明白这里做了什么事。
 
 想要知道具体main函数之前发生了什么，可以看这里
-> http://blog.csdn.net/norains/article/details/6052029
+<http://blog.csdn.net/norains/article/details/6052029>
 
 __main函数都干了什么，看这里
-> http://blog.csdn.net/wangfoquan/article/details/7650988
+<http://blog.csdn.net/wangfoquan/article/details/7650988>
 
 修改启动程序，看这里
-> http://www.openedv.com/posts/list/2647.htm
+<http://www.openedv.com/posts/list/2647.htm>
 
 ## Quote
 
