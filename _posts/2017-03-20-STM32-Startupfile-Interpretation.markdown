@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "STM32启动文件分析"
-subtitle:   "嵌入式，FreeRTOS，STM32"
+subtitle:   "嵌入式，bootloader，STM32"
 date:       2017-03-20
 author:     "elmagnifico"
 header-img: "img/Embedded-head-bg.png"
@@ -13,13 +13,15 @@ tags:
 
 ## STM32启动文件分析
 
-STM32的启动文件相当于就是bootload，平时虽然对外都是屏蔽的级别，但是有时候还是需要知道一下的。
+STM32的启动文件相当于就是bootloader，平时虽然对外都是屏蔽的级别，但是有时候还是需要知道一下的。
 
-特别是了解了当前这个板子的bootload之后，对于其他的板子的启动，其实也是类似的。
+特别是了解了当前这个板子的bootloader之后，对于其他的板子的启动，其实也是类似的。
 
 一般来说STM32系列的启动文件都是startup_stm32fxxxx.s，当然根据板子的内存大小，外设数量，封装不同可能使用的启动文件并不相同。
 
 但总的来说大同小异。
+
+启动代码的一般流程是：异常向量表的初始化–存储区分配–初始化堆栈–高级语言入口函数调用– main()函数。
 
 #### 环境
 
@@ -222,7 +224,7 @@ __Vectors_Size  EQU  __Vectors_End - __Vectors
 - \|.text\|，表示由 C 编译器生成的代码节，或以某种方式与 C 库关联的代码节。
 - CODE，表示包含机器指令。
 
-这里的AREA就是设定上面的中断向量表中的内容是编译器的函数名，表示的是代码，只读。
+这里的AREA是对代码段的定义，表示的是代码，只读。
 
 ##### 复位程序
 
@@ -259,7 +261,7 @@ __main()是编译系统提供的一个函数，负责完成库函数的初始化
 简单说就是调用了SystemInit()函数以及__main()函数然后结束。
 
 
-##### 异常处理程序入口
+##### 中断向量表的转移
 ```asm
 ; Dummy Exception Handlers (infinite loops which can be modified)
 
@@ -390,6 +392,15 @@ __user_initial_stackheap
 
 到这里启动文件分析就结束了，但是如果只看了这里其实还是没看明白怎么回事，还需要对STM32的启动过程有一个了解，才能明白这里做了什么事。
 
+想要知道具体main函数之前发生了什么，可以看这里
+> http://blog.csdn.net/norains/article/details/6052029
+
+__main函数都干了什么，看这里
+> http://blog.csdn.net/wangfoquan/article/details/7650988
+
+修改启动程序，看这里
+> http://www.openedv.com/posts/list/2647.htm
+
 ## Quote
 
 > http://blog.csdn.net/eleven_yy/article/details/7751995
@@ -401,3 +412,5 @@ __user_initial_stackheap
 > http://www.cnblogs.com/amanlikethis/p/3719529.html
 > 
 > http://blog.sina.com.cn/s/blog_616619c80100eqkj.html
+> 
+> http://www.worlduc.com/blog2012.aspx?bid=7329962
