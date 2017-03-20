@@ -42,17 +42,10 @@ M4和M3基本一样，但是到了M7的时候，这里就不同了。
 启动地址
 
 
-| Tables        | Are           | Cool  |
-| ------------- |:-------------:| -----:|
-| col 3 is      | right-aligned | $1600 |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
-
-
-| BOOT0 | 启动地址选项字节 |
-| -- | -- |
-| 0| BOOT_ADD0[15:0] | 由用户选项字节BOOT_ADD0[15:0]决定启动地址,ST 出厂默认的启动地址为:0X0020 0000 的 ITCM 上的 Flash |
-| 1| BOOT_ADD1[15:0] | 由用户选项字节BOOT_ADD1[15:0]决定启动地址,ST 出厂默认的启动地址为:0X0010 0000 的 ITCM 上的 Flash |
+|BOOT0|启动地址选项字节|启动地址|
+|--|--|
+|0|BOOT_ADD0[15:0]|由用户选项字节BOOT_ADD0[15:0]决定启动地址,ST 出厂默认的启动地址为:0X0020 0000 的 ITCM 上的 Flash|
+|1|BOOT_ADD1[15:0]|由用户选项字节BOOT_ADD1[15:0]决定启动地址,ST 出厂默认的启动地址为:0X0010 0000 的 ITCM 上的 Flash|
 
 - BOOT_ADDx = 0x0000：从 ITCM RAM(0x0000 0000)启动
 - BOOT_ADDx = 0x0040：从系统存储器(0x0010 0000)启动
