@@ -2,7 +2,7 @@
 layout:     post
 title:      "STM32启动文件分析"
 subtitle:   "嵌入式，FreeRTOS，STM32"
-date:       2017-03-17
+date:       2017-03-20
 author:     "elmagnifico"
 header-img: "img/Embedded-head-bg.png"
 catalog:    true
