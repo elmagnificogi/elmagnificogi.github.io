@@ -184,11 +184,11 @@ Atom的快捷键设置很有意思，给你看的快捷键都是系统固定的�
 
 ## 遗留问题
 
-> https://segmentfault.com/q/1010000004189036/a-1020000004189105
->
-> https://github.com/JoelBesada/activate-power-mode
->
-> https://ninghao.net/blog/2073
+    > https://segmentfault.com/q/1010000004189036/a-1020000004189105
+    >
+    > https://github.com/JoelBesada/activate-power-mode
+    >
+    > https://ninghao.net/blog/2073
 
 每次引用的网页都得这么写，不然就会两个引用占用一行，又或者是一个引用一行，我也不知道是什么原因。
 
