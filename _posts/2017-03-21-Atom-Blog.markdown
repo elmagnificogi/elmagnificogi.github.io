@@ -31,28 +31,177 @@ tags:
 
  MarkdownPad2 呢就会自动显示成一团乱七八糟的结构，虽然最后push上去以后没啥问题，但是预览就会显示的很难受。
 
-   ---
-   layout:     post
-   title:      "Atom、Markdown与github"
-   subtitle:   "proxy，SocksCap64，pac"
-   date:       2017-03-21
-   author:     "elmagnifico"
-   header-img: "img/git-head-bg.jpg"
-   catalog:    true
-   tags:
-       - git
-       - blog
-       - 代理
-   ---
+     ---
+     layout:     post
+     title:      "Atom、Markdown与github"
+     subtitle:   "proxy，SocksCap64，pac"
+     date:       2017-03-21
+     author:     "elmagnifico"
+     header-img: "img/git-head-bg.jpg"
+     catalog:    true
+     tags:
+         - git
+         - blog
+         - 代理
+     ---
 
 除了这个以外，下面这种包含头文件，他也会解析成一级标题，就算我这里是把他变成了代码格式，预览里显示的时候就变成了一级标题，特别显眼，同样的push以后就没有问题，完全是 MarkdownPad2 的解析问题。
 
-   #include<iostream>
+    #include<iostream>
 
-## The end
+## sublime text 3
 
+其实这个编辑器也很有名，也是神器级别。
 
+但是，新版的 sublime text 3 实在是太麻烦了。就为了装一个Packages Control ，死活装不好，装上了，不显示包安装器。
+
+可以用快捷键强行呼出，但是呼出以后的结果却是什么包都搜不到，也不能安装。
+
+简直不能再难用了，搜解决办法的时候出来了 Atom，看到了一个打字特效，感觉好牛逼的样子。
+
+果断放弃了 sublime text 3 ，转投 Atom 怀抱
+
+> https://segmentfault.com/q/1010000004189036/a-1020000004189105
+
+## Atom
+
+Atom 是 Github 专门为程序员推出的一个跨平台文本编辑器。具有简洁和直观的图形用户界面，并有很多有趣的特点：支持CSS，HTML，JavaScript等网页编程语言。它支持宏，自动完成分屏功能，集成了文件管理器。
+
+其官网：A hackable text editor for the 21st Century
+
+> https://atom.io/
+
+很简洁，二十一世纪的文本编辑器。
+
+某种程度上说和 sublime 非常相似。下载以后直接打开就自动安装好了，完全无法选择安装目录，还好的是，本体不算很大，自动安装就自动安装吧。
+
+关键特效才是最重要的啊。
+
+- 打字特性
+
+![](https://i.github-camo.com/b1d03b9b7a9d7dc9a32d1eab307b5378f8c59a7b/68747470733a2f2f636c6f75642e67697468756275736572636f6e74656e742e636f6d2f6173736574732f3638383431352f31313631353536352f31306631363435362d396336352d313165352d386166342d3236356630316663383361302e676966)
+
+- 连击特效
+
+![](https://i.github-camo.com/ca572e22e64a42c44f59e1ebb40d4a1e1b748761/68747470733a2f2f636c6f75642e67697468756275736572636f6e74656e742e636f6d2f6173736574732f31303539303739392f31383831373233372f38373663326438342d383332312d313165362d383332342d6631353430363034633062642e676966)
+
+## Activate Power Mode
+
+官方地址：
+
+> https://github.com/JoelBesada/activate-power-mode
+
+安装其实很简单，但是国内貌似就是不好用。
+
+一般的安装方法，直接从settings中的packages里搜索或者是install里搜索，讲道理都应该能搜到然后直接安装就行了。
+
+然而并不能，那只好麻烦一点了。
+
+#### 方法一
+
+直接从其github上下载源文件，然后解压放入下面的目录：
+
+    C:\Users\你的用户名\.atom\packages
+
+#### 方法二
+
+用管理员模式运行PowerShell，不是cmd！！！
+
+cmd无法正常安装，我已经试过了。
+
+    apm install activate-power-mode
+
+大概等个一两分钟，就会有一个done提示，那就安装好了。
+
+默认是开启的，所以立马就有特效了
+
+![](https://sfault-image.b0.upaiyun.com/479/720/479720314-567a61251fdb9_articlex)
+
+![](https://sfault-image.b0.upaiyun.com/224/038/2240383777-567a6194e7176_articlex)
+
+#### 设置
+
+可以从packages中搜索 Activate Power Mode 然后就能点进去看他的设置了。
+
+除了粒子特效意外，还可以配合震动、声音特效。
+
+声音里有打字机按键的那种声音，也有一个枪声，当然也能自定义，只是自定义的需要考虑到连击的时候声音是否能正常播放。
+
+##### Activation Threshold
+
+这个可以调节按键多少次以后出现粒子特效，默认是50，其实我感觉1就可以了，直接打字就是特效
+
+###### Screen Shake
+
+默认是1-3的震动强度，但是我感觉1-3有点眼瞎，震动幅度太强了。
+
+所以我现在尝试的是0.1-1，这样震动幅度不强，但是又能看出来，感觉还是比较好的。
+
+###### Play Audio
+
+可以设置声音，其实自己用的机械键盘完全没必要听这个声音...
+
+另外一个枪声，实在是有点刺耳，感觉不舒服。
+
+###### Particles Size
+
+可以调节例子特效的那个小球的最大和最小值
+
+###### Particles Spawn Count
+
+可以调节每次出现的粒子数量
+
+###### Particles Colours
+
+粒子特效的颜色，这个很重要。
+
+如果你是深色的编辑背景，那么什么颜色都很明显。
+
+但是如果你是白色的背景，那么其实很多颜色都很淡，不是很明显的。
+
+一共有三种特效，一个是根据你文本颜色来决定粒子颜色。
+
+一个是固定颜色的粒子特性，还有一个是随机颜色的粒子特性
+
+#### 快捷键
+
+首先是activate-power-mode:toggle 他决定右上角的Combo是显示还是隐藏，快捷键是ctrl-alt-o
+
+然后是activate-power-mode:reset-max-combo 他可以把Combo技术清零，没有设置快捷键。
+
+于是我就设置了如下快捷键
+
+    'atom-workspace, atom-workspace atom-text-editor':
+      'F5': 'markdown-preview:toggle'
+    'atom-workspace':
+      'ctrl-alt-p': 'activate-power-mode:reset-max-combo'
+
+Atom的快捷键设置很有意思，给你看的快捷键都是系统固定的，你想要自己定义就单独复制出来，然后去keymap里设置一个其他的。
+
+由于Atom的Markdown的预览是基于每个文件独立的，所以每次开一个文件要看预览就得，很复杂的操作一通，感觉很蠢。
+
+我就把 markdown-preview:toggle 设置为了F5，这样每次按一下刷新，就能看到对应的预览界面的，很舒服     
+
+## 遗留问题
+
+> https://segmentfault.com/q/1010000004189036/a-1020000004189105
+>
+> https://github.com/JoelBesada/activate-power-mode
+>
+> https://ninghao.net/blog/2073
+
+每次引用的网页都得这么写，不然就会两个引用占用一行，又或者是一个引用一行，我也不知道是什么原因。
+
+之前用 MarkdownPad2 写了第一个引用以后回车会自动出现 > 而Atom里明显没有这个设置，每次都得自己写，有点蛋疼。
+
+文本编辑器里基本都带有圈选然后鼠标拖动的功能，但是Atom里不行，我写错了位置想拖动到其他地方就不行。
+
+这几个问题看以后能遇到什么解决办法不。
 
 ## Quote
 
+> https://segmentfault.com/q/1010000004189036/a-1020000004189105
 >
+> https://github.com/JoelBesada/activate-power-mode
+>
+> https://ninghao.net/blog/2073
