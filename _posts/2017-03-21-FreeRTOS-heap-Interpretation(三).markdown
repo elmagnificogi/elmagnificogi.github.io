@@ -119,6 +119,7 @@ void *pvReturn;
 
 #### 内存释放函数
 
+```c
 void vPortFree( void *pv )
 {
 	if( pv )
@@ -131,6 +132,7 @@ void vPortFree( void *pv )
 		( void ) xTaskResumeAll();
 	}
 }
+```
 
 如果传入空间合法，挂起调度器
 
