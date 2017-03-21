@@ -199,7 +199,7 @@ void vListInitialise( List_t * const pxList )
 
 list的初始化函数，初始化所有list结构体的成员，并且插入了第一个item，作为链表尾部，视为maker。
 
-###### List_t结构体
+###### List_t 结构体
 
 首先看传入的参数List_t * const pxList的结构体List_t
 
@@ -222,7 +222,7 @@ typedef struct xLIST
 
 这个变量就是指list中item的数量，其尾item不算
 
-###### ListItem_t结构体
+###### ListItem_t 结构体
 
 	ListItem_t * configLIST_VOLATILE pxIndex;
 
@@ -259,7 +259,7 @@ list中用于排序的值
 
 指向存储这个item的list指针。
 
-###### MiniListItem_t结构体
+###### MiniListItem_t 结构体
 
 	MiniListItem_t xListEnd;
 
