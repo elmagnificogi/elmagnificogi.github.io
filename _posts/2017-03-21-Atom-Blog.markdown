@@ -1,0 +1,58 @@
+---
+layout:     post
+title:      "Atom、Markdown与github"
+subtitle:   "proxy，SocksCap64，pac"
+date:       2017-03-21
+author:     "elmagnifico"
+header-img: "img/git-head-bg.jpg"
+catalog:    true
+tags:
+    - git
+    - blog
+    - 代理
+---
+## Markdown
+
+博客的文章一直都是Markdown格式的，而且用多了，基本格式语法什么的都记住了，也很好用。
+
+再加上github一直有对Markdown的拓展，让其内容更加丰富了，所以选择使用Markdown感觉很好。
+
+不像Latex什么的格式那么复杂，而且还有各种模板什么的。
+
+## MarkdownPad2
+
+之前一直用 MarkdownPad2 来写博客的文章。
+
+但是 MarkdownPad2 有一个不好的地方，每次都需要安装 awesomium_v1.6.6_sdk_win 才能正常运行。
+
+除了这一点以外，其实格式也有点问题.
+
+比如，我文章的开头的这个部分，其实markdown是不能解析的，因为这个部分是给标题用的。
+
+ MarkdownPad2 呢就会自动显示成一团乱七八糟的结构，虽然最后push上去以后没啥问题，但是预览就会显示的很难受。
+
+   ---
+   layout:     post
+   title:      "Atom、Markdown与github"
+   subtitle:   "proxy，SocksCap64，pac"
+   date:       2017-03-21
+   author:     "elmagnifico"
+   header-img: "img/git-head-bg.jpg"
+   catalog:    true
+   tags:
+       - git
+       - blog
+       - 代理
+   ---
+
+除了这个以外，下面这种包含头文件，他也会解析成一级标题，就算我这里是把他变成了代码格式，预览里显示的时候就变成了一级标题，特别显眼，同样的push以后就没有问题，完全是 MarkdownPad2 的解析问题。
+
+   #include<iostream>
+
+## The end
+
+
+
+## Quote
+
+>
