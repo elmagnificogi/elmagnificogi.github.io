@@ -39,6 +39,24 @@ heap_2.c适用于需要动态创建任务的大多数小型实时系统（smallr
 
 目标系统：FreeRTOS 9.0
 
+## 注释
+
+```c
+/*
+ * A sample implementation of pvPortMalloc() and vPortFree() that permits
+ * allocated blocks to be freed, but does not combine adjacent free blocks
+ * into a single larger block (and so will fragment memory).  See heap_4.c for
+ * an equivalent that does combine adjacent blocks into single larger blocks.
+ *
+ * See heap_1.c, heap_3.c and heap_4.c for alternative implementations, and the
+ * memory management pages of http://www.FreeRTOS.org for more information.
+ */
+```
+
+老样子，先来看看文件注释说了什么，如何介绍这个文件的。
+
+允许内存释放，但是不能把相连的块进行合并，所以将会有内存碎片，heap4中会对内存碎片进行合并。基本没说。
+
 #### 碎片插入函数
 
 ```c
@@ -100,8 +118,8 @@ xStart是整个链表的头，xEnd是链表的尾。
 ```c
 static void prvHeapInit( void )
 {
-BlockLink_t *pxFirstFreeBlock;
-uint8_t *pucAlignedHeap;
+	BlockLink_t *pxFirstFreeBlock;
+	uint8_t *pucAlignedHeap;
 
 	/* Ensure the heap starts on a correctly aligned boundary. */
 	pucAlignedHeap = ( uint8_t * ) ( ( ( portPOINTER_SIZE_TYPE ) &ucHeap[ portBYTE_ALIGNMENT ] ) & ( ~( ( portPOINTER_SIZE_TYPE ) portBYTE_ALIGNMENT_MASK ) ) );
@@ -140,9 +158,9 @@ uint8_t *pucAlignedHeap;
 ```c
 void *pvPortMalloc( size_t xWantedSize )
 {
-BlockLink_t *pxBlock, *pxPreviousBlock, *pxNewBlockLink;
-static BaseType_t xHeapHasBeenInitialised = pdFALSE;
-void *pvReturn = NULL;
+	BlockLink_t *pxBlock, *pxPreviousBlock, *pxNewBlockLink;
+	static BaseType_t xHeapHasBeenInitialised = pdFALSE;
+	void *pvReturn = NULL;
 
 	vTaskSuspendAll();
 	{
@@ -275,8 +293,8 @@ void *pvReturn = NULL;
 ```c
 void vPortFree( void *pv )
 {
-uint8_t *puc = ( uint8_t * ) pv;
-BlockLink_t *pxLink;
+	uint8_t *puc = ( uint8_t * ) pv;
+	BlockLink_t *pxLink;
 
 	if( pv != NULL )
 	{

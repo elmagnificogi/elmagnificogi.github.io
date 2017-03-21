@@ -132,14 +132,14 @@ void *pvPortMalloc( size_t xWantedSize )
 ###### 内存对齐
 
 ```c
-	#if( portBYTE_ALIGNMENT != 1 )
+#if( portBYTE_ALIGNMENT != 1 )
+{
+	if( xWantedSize & portBYTE_ALIGNMENT_MASK )
 	{
-		if( xWantedSize & portBYTE_ALIGNMENT_MASK )
-		{
-			/* Byte alignment required. */
-			xWantedSize += ( portBYTE_ALIGNMENT - ( xWantedSize & portBYTE_ALIGNMENT_MASK ) );
-		}
+		/* Byte alignment required. */
+		xWantedSize += ( portBYTE_ALIGNMENT - ( xWantedSize & portBYTE_ALIGNMENT_MASK ) );
 	}
+}
 ```
 这里是内存的对齐设置，根据下面的宏定义，可以将输入的参数，取其最小可被8整除的数，进而内存对齐
 
