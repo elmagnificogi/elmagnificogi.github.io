@@ -171,11 +171,11 @@ void vTaskSuspendAll( void )
 ###### 分配内存
 
 ```c
-		if( pucAlignedHeap == NULL )
-		{
-			/* Ensure the heap starts on a correctly aligned boundary. */
-			pucAlignedHeap = ( uint8_t * ) ( ( ( portPOINTER_SIZE_TYPE ) &ucHeap[ portBYTE_ALIGNMENT ] ) & ( ~( ( portPOINTER_SIZE_TYPE ) portBYTE_ALIGNMENT_MASK ) ) );
-		}
+if( pucAlignedHeap == NULL )
+{
+	/* Ensure the heap starts on a correctly aligned boundary. */
+	pucAlignedHeap = ( uint8_t * ) ( ( ( portPOINTER_SIZE_TYPE ) &ucHeap[ portBYTE_ALIGNMENT ] ) & ( ~( ( portPOINTER_SIZE_TYPE ) portBYTE_ALIGNMENT_MASK ) ) );
+}
 ```
 
 如果pucAlignedHeap == NULL，表示当前是内存分配的头地址
@@ -206,16 +206,16 @@ static size_t xNextFreeByte = ( size_t ) 0;
 ###### 恢复调度器
 
 ```c
-	( void ) xTaskResumeAll();
-	#if( configUSE_MALLOC_FAILED_HOOK == 1 )
+( void ) xTaskResumeAll();
+#if( configUSE_MALLOC_FAILED_HOOK == 1 )
+{
+	if( pvReturn == NULL )
 	{
-		if( pvReturn == NULL )
-		{
-			extern void vApplicationMallocFailedHook( void );
-			vApplicationMallocFailedHook();
-		}
+		extern void vApplicationMallocFailedHook( void );
+		vApplicationMallocFailedHook();
 	}
-	#endif
+}
+#endif
 ```
 
 回复调度器，检查是否有分配内存失败的Hook函数，如果有的话，调用分配失败Hook函数，
