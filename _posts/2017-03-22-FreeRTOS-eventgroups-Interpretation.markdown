@@ -121,6 +121,7 @@ configUSE_16_BIT_TICKS 如果是 0 的话，event group 就有24位可用。
 ```
 
 ###### EventGroup_t 结构体
+
 ```c
 typedef struct xEventGroupDefinition
 {
@@ -147,6 +148,7 @@ typedef TickType_t EventBits_t;
 
 ###### xSTATIC_EVENT_GROUP 结构体
 
+```c
 typedef struct xSTATIC_EVENT_GROUP
 {
 	TickType_t xDummy1;
@@ -161,6 +163,7 @@ typedef struct xSTATIC_EVENT_GROUP
 	#endif
 
 } StaticEventGroup_t;
+```
 
 静态结构和上面的差不多。
 
@@ -387,7 +390,7 @@ BaseType_t xTimeoutOccurred = pdFALSE;
 ```
 这个函数也是不能中断调用。
 
-此函数用来等待某些位被置为。
+此函数用来等待某些位被置位
 
 参数检测之后，挂起调度系统
 
@@ -791,5 +794,7 @@ const List_t *pxTasksWaitingForBits = &( pxEventBits->xTasksWaitingForBits );
 ## Quote
 
 > event_groups.c
+>
+> event_groups.h
 >
 > http://cstriker1407.info/blog/freertos-event-groups/
