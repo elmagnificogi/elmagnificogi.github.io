@@ -146,6 +146,12 @@ static const TickType_t uxFlashRates[ 2 ] = { 200, 400 };
 ```
 其基础和上面介绍的协程本质很类似，当然也有很多细节地方不同。
 
+croutine 进行多任务切换的唯一的方法就是调用 crDELAY ，这里宏展开后
+是 switch 的一个 case ，并且会把 xHandle 的状态更新，这样当该任务重新调度后，
+可以通过 case 跳转到这里，这就是 croutine 能模拟多任务切换的核心，本质上是
+任务函数的重新调用，这也是为什么参数不能用局部变量保存的原因。
+
+
 ## Quote
 
 > http://www.cnblogs.com/dengxiaojun/p/4385357.html
@@ -155,3 +161,5 @@ static const TickType_t uxFlashRates[ 2 ] = { 200, 400 };
 > http://blog.csdn.net/zhzht19861011/article/details/50312443
 >
 > http://www.cnblogs.com/adinosaur/p/5889014.html
+>
+> http://www.chiark.greenend.org.uk/~sgtatham/coroutines.html
