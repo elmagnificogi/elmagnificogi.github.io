@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "FreeRTOS中port源文件分析"
-subtitle:   "嵌入式，FreeRTOS，croutine"
+subtitle:   "嵌入式，FreeRTOS，port"
 date:       2017-03-24
 author:     "elmagnifico"
 header-img: "img/Embedded-head-bg.png"
