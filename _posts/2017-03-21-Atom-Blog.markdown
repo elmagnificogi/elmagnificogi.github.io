@@ -365,3 +365,5 @@ Activate Power Mode 如果在高速输入的情况下也是一样的，会卡，
 > https://github.com/JoelBesada/activate-power-mode
 >
 > https://ninghao.net/blog/2073
+>
+> http://blog.csdn.net/dream_an/article/details/51800523
