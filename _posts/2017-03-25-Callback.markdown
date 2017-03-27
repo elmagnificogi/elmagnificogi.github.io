@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "C++中回调函数"
+title:      "回调函数"
 subtitle:   "c/c++，callback"
 date:       2017-03-25
 author:     "elmagnifico"
