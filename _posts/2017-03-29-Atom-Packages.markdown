@@ -1,0 +1,194 @@
+---
+layout:     post
+title:      "Atom插件"
+subtitle:   "pdf,packages,view"
+date:       2017-03-29
+author:     "elmagnifico"
+header-img: "img/git-head-bg.jpg"
+catalog:    true
+tags:
+    - Markdown
+---
+## Packages
+
+日后常用的Packages的添加都更新在这里
+
+## markdown-pdf
+
+有时候需要把内容导出成pdf或者什么jpeg或者png等图片格式，这个时候就需要用markdown转pdf了
+
+> https://github.com/travs/markdown-pdf
+
+今天网络极好，竟然settings中的install可以用了，直接搜索markdown-pdf就能安装了
+
+安好以后设置了一下，其对应的快捷键，一键转换。
+
+    '.platform-win32 .editor, .platform-linux atom-text-editor':
+      'F7': 'markdown-pdf:convert'
+
+在markdown-pdf的设置中可以设置对应转换的格式应该是什么。
+
+需要注意的是他需要其他组件支付，一个是 tree-view ，一个是 markdown-preview ,这两个安装Atom就自带了
+
+但是其是这还不够，还有可能出现下面的问题
+
+#### 无法转换问题
+
+    markdown-pdf: AssertionError: html-pdf: Failed to load PhantomJS module. You have to set the path to the PhantomJS binary using 'options.phantomPath'
+
+遇到这个问题，其是是系统少了几个框架。
+
+###### node.js
+
+先要装 node.js ，其官网如下：
+
+> http://nodejs.cn/
+
+默认安装即可
+
+###### phantomjs-prebuilt
+
+cmd 命令行输入：(注意一定不要是管理员模式)
+
+    npm install phantomjs-prebuilt
+
+如果上面安装不动，那么手动下载吧：
+
+> http://phantomjs.org/download.html
+
+把下的安装包扔到下面这个目录里
+
+    C:\Users\你的用户名\AppData\Local\Temp\phantomjs
+
+再执行一次安装命令，很快就能安装完。
+
+    PhantomJS not found on PATH
+    Download already available at C:\Users\ELMAGN~1\AppData\Local\Temp\phantomjs\phantomjs-2.1.1-windows.zip
+    Verified checksum of previously downloaded file
+    Extracting zip contents
+    Removing C:\Users\elmagnifico\node_modules\phantomjs-prebuilt\lib\phantom
+    Copying extracted folder C:\Users\ELMAGN~1\AppData\Local\Temp\phantomjs\phantomjs-2.1.1-windows.zip-extract-1490592067250\phantomjs-2.1.1-windows -> C:\Users\elmagnifico\node_modules\phantomjs-prebuilt\lib\phantom
+    Writing location.js file
+    Done. Phantomjs binary available at C:\Users\elmagnifico\node_modules\phantomjs-prebuilt\lib\phantom\bin\phantomjs.exe
+    C:\Users\elmagnifico
+    `-- phantomjs-prebuilt@2.1.14
+    ...
+      `-- which@1.2.14
+        `-- isexe@2.0.0
+
+    npm WARN enoent ENOENT: no such file or directory, open 'C:\Users\elmagnifico\package.json'
+    npm WARN elmagnifico No description
+    npm WARN elmagnifico No repository field.
+    npm WARN elmagnifico No README data
+    npm WARN elmagnifico No license field.
+
+Done 了就行了，剩下的警告无视就好。
+
+这里 elmagnifico是我的用户名，而如果你用管理员模式安装，那么最后安装的路径是不对的，导致Atom实际上还是找不到你安装的phantomjs，我之前就以为管理员安装怎么都对，然后发现安装完根没安差不多。
+
+错误安装如下：
+
+    Writing location.js file
+    Done. Phantomjs binary available at C:\Windows\system32\node_modules\phantomjs-prebuilt\lib\phantom\bin\phantomjs.exe
+    C:\Windows\system32
+    `-- phantomjs-prebuilt@2.1.14
+      +-- es6-promise@4.0.5
+      +-- extract-zip@1.5.0
+      ...
+      +-- request-progress@2.0.1
+      | `-- throttleit@1.0.0
+      `-- which@1.2.14
+        `-- isexe@2.0.0
+
+    npm WARN enoent ENOENT: no such file or directory, open 'C:\Windows\system32\package.json'
+    npm WARN system32 No description
+    npm WARN system32 No repository field.
+    npm WARN system32 No README data
+    npm WARN system32 No license field.
+
+当然其实这种安装也不能说绝对错了，只是如果这么安装了需要你配置一下环境变量，才行。非管理员模式就不用配置环境变量。
+
+重开一下Atom，然后再次转换，应该就不会有上面的错误提示了。
+
+每次生成路径无法指定，都是被生成文档的同目录下同文件名，只有后缀不同而已。
+
+#### image format issue
+
+    Uncaught Error converting to image format. Check console for more information.
+
+    C:\Users\********\.atom\packages\markdown-pdf\lib\markdown-pdf.js:166
+
+    The error was thrown from the markdown-pdf package. This issue has already been reported.
+
+其实这个转换器还是有一个问题，我刚好也遇到了，如果遇到图片，而且格式什么的还有问题，那么就自然会发生这个错误。
+
+比如本文就有好几个动态图，根本无法转换，其他没图的就没事，点开View Issue，可以看到也有很多人都有这个问题。
+
+所以，markdown-pdf 就介绍到这里，如果没有发生错误的情况下，可以用他，所见即所得，很好。
+
+当然其实图片也不一定一定会出错，同一个文档有时候生成就出错了，有时候又不出错，非常奇怪，感觉生成不是很稳定。
+
+#### 不出错小窍门
+
+会出错应该是他调用动态生成的html或者js文件出错了，想要不出错就关闭预览，重新打开，直接生成，好像就不会报错。
+
+## markdown-themeable-pdf
+
+有了上面的经验，用 markdown-themeable-pdf 就很轻松了。
+
+但是他虽然没有了图片转换的问题，他转换的结果和 markdownpad 2 基本是一致的，这就导致所见不是所得
+
+当然也只是部分格式可能和 markdown-view 里所看到的不一样，大部分还是一样的。
+
+所以其实也不是太完美，他转换完成以后会需要自动打开pdf然后看一下，其实就需要下面的这个插件支持了
+
+除了上面说的问题，他的生成pdf的快捷键修改以后没有反应，这个我也不知道为什么，其他的都可以就他的不行。
+
+    'atom-workspace, atom-workspace atom-text-editor':
+      'ctrl-shift-E': 'markdown-themeable-pdf:export'
+
+他还有一个好处，就是可以支持页脚和页头等格式编辑，具体目录在
+
+    C:\Users\你的用户名\.atom\markdown-themeable-pdf
+
+可以对应修改成你要的格式
+
+## pdf-view
+
+pdf-view 支持pdf预览，这样转换完成以后就可以直接打开看是否满意了。
+
+## 红色虚线
+
+打字的时候，一直都有各种红色虚线在下面，就跟word的拼写检查的错误一样，非常讨厌。
+
+要取消拼写检查
+
+    packages--->spell check--->disable
+
+讨厌的红线再也没有了。
+
+## Language Markdown
+
+其实如果不想取消拼写检查，其实可以添加这个包，这个可以给markdown文本加上对应语言的拼写检查
+
+红线相对会消失很多
+
+## Markdown Scroll Sync
+
+使用预览的时候发现，旁边的预览和当前写的地方，并没有对上，需要手动拖动才能看到。
+
+而且每次一修改就会自动移动到头部去，就很烦。
+
+那么有了 Markdown Scroll Sync 就可以自动跟随了。
+
+相当于两个文档的滚轮会同步了，只是每次修改默认渲染会移动到最上方，会导致预览界面无限鬼畜的情况。
+
+这一点不如 markdown pad2 的实时渲染。
+
+## Quote
+
+> http://blog.csdn.net/mishifangxiangdefeng/article/details/53308343
+>
+> http://ask.csdn.net/questions/247824
+>
+> http://blog.csdn.net/dream_an/article/details/51800523
