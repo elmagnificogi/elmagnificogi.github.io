@@ -185,6 +185,61 @@ pdf-view 支持pdf预览，这样转换完成以后就可以直接打开看是�
 
 这一点不如 markdown pad2 的实时渲染。
 
+## markdown-preview-enhanced
+
+markdown的拓展, 虽然没用但是动态图看着非常强大。
+
+需要一些外部库的支持，同时作者是国人，下面有中文介绍
+
+> https://github.com/shd101wyy/markdown-preview-enhanced/blob/0.10.11/docs/README_CN.md
+
+## plantuml
+
+plantuml用的人还是比较少的，能找到配置的人也很少
+
+首先如果使用Atom来写uml是不需要 graphviz 支持也行的。
+
+但是必须要有 plantuml.jar 的包，我是win10环境下的配置，其他环境官方就有文档教你怎么弄。
+
+> http://trevershick.github.io/atom/2015/12/04/plantuml-snippets.html
+
+上面是官方的配置参考，除了win系统基本都能按照上面的来
+
+> https://atom.io/packages/plantuml-preview
+> https://atom.io/packages/plantuml
+
+首先需要安装上面的两个包，作为plantuml的预览和编译支持
+
+> https://atom.io/packages/language-plantuml
+
+这个包是用来edit环境的代码颜色支持
+
+安好上面的包以后，下载 plantuml.jar，放到一个你认为安全的地方就行了。
+
+> http://plantuml.com/download
+
+记下你放的目录。
+
+比如我放的目录是：
+
+    C:\Users\elmagnifico\.atom\packages\plantuml-support\plantuml.jar
+
+然后进入到了plantuml-preview 的设置中去
+
+设置PlantUML Jar的路径为：
+
+    C:/Users/elmagnifico/.atom/packages/plantuml-support/plantuml.jar
+
+注意程序里的路径的斜杠方向不同了！
+
+#### Output format
+
+生成的图片一共有两种，一个是png 一个是svg，png很容易模糊，推荐用svg吧
+
+下面的 Use Temp Directory 建议不要勾选，让他自己生成到和 .pu 文件相同目录下就好了。
+
+快捷键也建议自己设定，因为用的插件多了，太容易冲突了。
+
 ## Quote
 
 > http://blog.csdn.net/mishifangxiangdefeng/article/details/53308343
@@ -192,3 +247,7 @@ pdf-view 支持pdf预览，这样转换完成以后就可以直接打开看是�
 > http://ask.csdn.net/questions/247824
 >
 > http://blog.csdn.net/dream_an/article/details/51800523
+>
+> http://v7sky.iteye.com/blog/2314072
+>
+> http://www.jianshu.com/p/e92a52770832
