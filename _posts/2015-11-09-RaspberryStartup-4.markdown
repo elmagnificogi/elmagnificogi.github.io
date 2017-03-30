@@ -58,7 +58,7 @@ RaspberryPi：Raspberry Pi 2
 
 
 
-```	
+```
  	dma.dmachans=0x7f35
 	bcm2708_fb.fbwidth=1280
 	bcm2708_fb.fbheight=1024
@@ -73,7 +73,7 @@ RaspberryPi：Raspberry Pi 2
 	console=tty1
 	root=/dev/mmcblk0p2
 	rootfstype=ext4
-	rootwait 
+	rootwait
 ```
 主流的linux内核可能并没有这些参数
 
@@ -129,22 +129,22 @@ Bootloader依赖于实际的硬件和应用环境，因此要为嵌入式系统�
 
 
 2. 完成系统启动所必须的最小配置，某些处理器芯片包含一个或几个全局寄存器，这些寄存器必须在系统启动的最初进行配置。
-        
+
 
 3. 设置看门狗，用户设计的部分外围电路如果必须在系统启动时初始化，就可以放在这一步。
-        
+
 
 4. 配置系统所使用的存储器，包括Flash，SRAM和DRAM等，并为他们分配地址空间。如果系统使用了DRAM或其它外设，就需要设置相关的寄存器，以确定其刷新频率，数据总线宽度等信息，初始化存储器系统。有些芯片可通过寄存器编程初始化存储器系统，而对于较复杂系统通常集成有MMU来管理内存空间。
-        
+
 
 5. 为处理器的每个工作模式设置栈指针，ARM处理器有多种工作模式，每种工作模式都需要设置单独的栈空间。
-        
+
 
 6. 变量初始化，这里的变量指的是在软件中定义的已经赋好初值的全局变量，启动过程中需要将这部分变量从只读区域，也就是Flash拷贝到读写区域(SRAM)中，因为这部分变量的值在软件运行时有可能重新赋值。还有一种变量不需要处理，就是已经赋好初值的静态全局变量，这部分变量在软件运行过程中不会改变，因此可以直接固化在只读的Flash或EEPROM中。
-        
+
 
 7. 数据区准备，对于软件中所有未赋初值的全局变量，启动过程中需要将这部分变量所在区域全部清零。
-        
+
 
 8. 最后一步是调用高级语言入口函数，比如main函数等。
 
@@ -214,7 +214,7 @@ BIOS叫做"基本输入输出系統"（Basic Input/Output System），简称为B
 - loader可直接指向或者是间接将管理权转交给另一个管理程序。
 
 MBR的启动管理程序提供两个菜单，菜单一(M1)可以直接加载Windows的核心文件来启动； 菜单二(M2)则是将启动管理工作交给第二个分割槽的启动磁区(boot sector)。当使用者在启动的时候选择菜单二时， 那么整个启动管理工作就会交给第二分割槽的启动管理程序了。 当第二个启动管理程序启动后，该启动管理程序内仅有一个启动菜单，因此就能够使用Linux的核心文件来启动。
- 
+
 ## linux初启动
 
 当bootloader开始读取核心文件后，接下来， Linux 就会将核心解压缩到主内存当中， 并且利用核心的功能，开始测试与驱动各个周边装置，包括储存装置、CPU、网络卡、声卡等等。 此时 Linux 核心会以自己的功能重新侦测一次硬件，而不一定会使用 BIOS 检测到的硬件信息！核心此时才开始接管 BIOS 后的工作，核心文件会被放置到 /boot 里面，并且取名为 /boot/vmlinuz。
@@ -229,7 +229,7 @@ MBR的启动管理程序提供两个菜单，菜单一(M1)可以直接加载Wind
 
 此版本的 Linux 核心为 2.6.18-92.el5版本。为了硬件开发商与其他核心功能开发者的便利， 因此 Linux 核心是可以透过动态加载核心模块的，这些核心模块就放置在 /lib/modules/ 目录内。 由于模块在根目录内 (要记得 /lib 不可以与 / 分别放在不同的 partition ！)， 因此在启动的过程中核心必须要挂载根目录，这样才能够读取核心模块提供加载驱动程序的功能。 而且为了担心影响到磁碟内的文件系统，因此启动过程中根目录是以只读的方式来挂载的。
 
-### 虚拟文件系统 
+### 虚拟文件系统
 
 一般来说，有些硬件的驱动会被编译成模块，某特通用的会被编译进linux中，成为核心的一部分。 因此 U盘, SATA, SCSI... 等硬盘装置的驱动程序通常都是以模块的方式来存在的。 现在来思考一种情况，假设你的 linux 是安装在 SATA 磁碟上面的，你可以透过 BIOS 的 INT 13 取得 boot loader 与 kernel 文件来启动，然后 kernel 会开始接管系统并且检测硬件及尝试挂载根目录来取得其他的驱动程序。
 
@@ -248,14 +248,14 @@ CentOS 5.x 的 initrd 文件内容
 	[root@www initrd]# file initrd-2.6.18-92.el5.img
 	initrd-2.6.18-92.el5.img: gzip compressed data, ...
 	# 原来是 gzip 的压缩档！因为是 gzip ，所以扩展名给他改成 .gz 吧！
-	
+
 	# 2. 将上述的文件解压缩：
 	[root@www initrd]# mv initrd-2.6.18-92.el5.img initrd-2.6.18-92.el5.gz
 	[root@www initrd]# gzip -d initrd-2.6.18-92.el5.gz
 	[root@www initrd]# file initrd-2.6.18-92.el5
 	initrd-2.6.18-92.el5: ASCII cpio archive (SVR4 with no CRC)
 	#  cpio 的命令压缩成的文件，解压缩看看！
-	
+
 	# 3. 用 cpio 解压缩
 	[root@www initrd]# cpio -ivcdu < initrd-2.6.18-92.el5
 	[root@www initrd]# ll
@@ -271,7 +271,7 @@ CentOS 5.x 的 initrd 文件内容
 	drwx------ 2 root root    4096 Apr 10 02:05 sysroot
 	# 看！是否很像根目录！尤其也是有 init 这个运行档！务必看一下权限！
 	# 接下来看看 init 这个文件内有啥咚咚？
-	
+
 	# 4. 观察 init 文件内较重要的运行项目
 	[root@www initrd]# cat init
 	#!/bin/nash                  <==使用类似 bash 的 shell 来运行
@@ -302,21 +302,17 @@ CentOS 5.x 的 initrd 文件内容
 ## Quote
 
 > http://elinux.org/RPi_Software
-> 
+>
 > http://wiki.beyondlogic.org/index.php?title=Understanding_RaspberryPi_Boot_Process
-> 
+>
 > https://www.raspberrypi.org/blog/raspberry-pi-compute-module-new-product/
-> 
+>
 > https://wiki.gentoo.org/wiki/Raspberry_Pi
-> 
+>
 > http://vbird.dic.ksu.edu.tw/linux_basic/0510osloader_1.php#process_1
-> 
+>
 > http://linux.cn/article-3994-1.html
-> 
+>
 > http://www.ruanyifeng.com/blog/2013/08/linux_boot_process.html
-> 
+>
 > http://www.ruanyifeng.com/blog/2013/02/booting.html
-
-
-
-

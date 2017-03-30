@@ -199,46 +199,103 @@ plantuml用的人还是比较少的，能找到配置的人也很少
 
 首先如果使用Atom来写uml是不需要 graphviz 支持也行的。
 
-但是必须要有 plantuml.jar 的包，我是win10环境下的配置，其他环境官方就有文档教你怎么弄。
+当然最好是有支持，不然可能会出现有一些图无法支持，显示不出来的情况。
 
-> http://trevershick.github.io/atom/2015/12/04/plantuml-snippets.html
+而上面提到的 markdown 的拓展插件就可以支持在 markdown 中写plantuml 非常强大，不过其需要 graphviz 的支持。
 
-上面是官方的配置参考，除了win系统基本都能按照上面的来
+要在Atom环境下使用 plantuml 下面的插件各有不同但都能支持
 
-> https://atom.io/packages/plantuml-preview
-> https://atom.io/packages/plantuml
+### plantuml
 
-首先需要安装上面的两个包，作为plantuml的预览和编译支持
+    apm install plantuml
 
-> https://atom.io/packages/language-plantuml
+首先他不能预览，只有生成功能，也就是说你按照 plantuml 格式写的.pu 或者.puml 文本都可以利用他的快捷键直接生成.
 
-这个包是用来edit环境的代码颜色支持
+然而由于他原生于Mac OSX，所以windows基本不支持，我用不了。
 
-安好上面的包以后，下载 plantuml.jar，放到一个你认为安全的地方就行了。
+### language-plantuml
+
+    apm install language-plantuml
+
+这个是拼写支持，也就是书写语法，如果要自己写，还是必须要安装的
+
+### plantuml-viewer
+
+    apm install plantuml-viewer
+
+这个就可以对写的plantuml进行预览，同时支持导出，拖动，缩放等功能
+
+同时设置：
+
+    Charset：UTF-8
+
+就能支持中文字符/日语什么的其实也是可以的
+
+这个需要Graphviz的支持，从下面下载，建议下 graphviz-2.38.msi ，一路默认安装就行。
+
+> http://www.graphviz.org/Download_windows.php
+
+如果被墙进不去，下面的方法也可以
+
+管理员模式开Cmd，然后
+
+    @powershell -NoProfile -ExecutionPolicy unrestricted -Command "iex ((new-object net.webclient).DownloadString('http://bit.ly/psChocInstall'))" && SET PATH=%PATH%;%systemdrive%\chocolatey\bin
+
+    choco install Graphviz
+
+    yes
+
+    //如果没有java，也一并安装了吧
+    cinst jdk8 -y
+
+在这里我安java多次出问题，安完以后必须管理员开Atom才不会显示java找不到，不然就一直有下面的错，导致无法生成预览，最后下了一个jdk8，然后安装重启以后才正常。
+
+    'java' could not be spawned. Is it installed and on your path? If so please open an issue on the package spawning the process.
+
+在设置里写入你的Graphviz的dot.exe的路径
+
+    Graphviz Dot Executable：C:\Program Files (x86)\Graphviz2.38\bin\dot.exe
+
+这样以后就能正常生成了，但是这个插件有一个bug，如果你以前生成过，然后下次打开atom打开某个你生成过的文件，无论你怎么写入都无法实时更新预览的内容,除非你重新激活预览窗口才行.
+
+这个问题见下面：
+
+> https://github.com/markushedvall/plantuml-viewer/issues/11
+>
+> https://github.com/markushedvall/plantuml-viewer/pull/16
+
+虽然说是有解决办法，但实际上这个版本还是有这个问题。
+
+### plantuml-preview
+
+    apm install plantuml-preview
+    apm install plantuml
+
+这个plantuml 没有上面说的bug，而且可以配合 plantuml 的插件的生成快捷键来激活生成(本质上这个插件就当了快捷键的角色，他自身的生成其实还是无效的)，或者是用保存的快捷键来刷新预览界面和生成。而且他可以选择生成png还是svg，png有一个问题，就是放大一点就很模糊，但是svg就非常清楚。
+
+但是他也有明显的缺点，就是不支持预览界面拖动和缩放，必须要用快捷键ctr-+这种来缩放，而且keybind无法修改成使用滚轮来完成这个，所以使用上就感觉不如前一个预览插件了。
+
+plantuml-preview 可以不需要graphz的支持，但是必须要有 plantuml.jar 的支持。
+
+所以需要先从官网下载以后，放到某个安全路径里面
 
 > http://plantuml.com/download
 
-记下你放的目录。
-
-比如我放的目录是：
+然后设置其路径，比如我就放在了下面这个位置
 
     C:\Users\elmagnifico\.atom\packages\plantuml-support\plantuml.jar
 
-然后进入到了plantuml-preview 的设置中去
+我是win10环境下的配置，其他环境官方就有文档教你怎么弄，除了win系统基本都能按照下面的来
 
-设置PlantUML Jar的路径为：
+> http://trevershick.github.io/atom/2015/12/04/plantuml-snippets.html
 
-    C:/Users/elmagnifico/.atom/packages/plantuml-support/plantuml.jar
-
-注意程序里的路径的斜杠方向不同了！
-
-#### Output format
-
-生成的图片一共有两种，一个是png 一个是svg，png很容易模糊，推荐用svg吧
-
-下面的 Use Temp Directory 建议不要勾选，让他自己生成到和 .pu 文件相同目录下就好了。
+设置里的 Use Temp Directory 建议不要勾选，让他自己生成到和 .pu 文件相同目录下就好了。
 
 快捷键也建议自己设定，因为用的插件多了，太容易冲突了。
+
+## 总结
+
+plantuml国内用的还是挺少的，反而一搜好多日本blog里都有记录怎么用，让我参考了一下win下的设置。
 
 ## Quote
 
@@ -251,3 +308,7 @@ plantuml用的人还是比较少的，能找到配置的人也很少
 > http://v7sky.iteye.com/blog/2314072
 >
 > http://www.jianshu.com/p/e92a52770832
+>
+> https://segmentfault.com/a/1190000004991637
+>
+> http://qiita.com/nakahashi/items/3d88655f055ca6a2617c
