@@ -266,6 +266,13 @@ plantuml用的人还是比较少的，能找到配置的人也很少
 
 虽然说是有解决办法，但实际上这个版本还是有这个问题。
 
+快捷键设置如下:
+
+    'atom-workspace':
+      'f7': 'plantuml-viewer:toggle'
+
+需要保存对应的 plantuml 的直接右键save as 就可以了，建议保存为svg，其他格式一放大就失真了。
+
 ### plantuml-preview
 
     apm install plantuml-preview
