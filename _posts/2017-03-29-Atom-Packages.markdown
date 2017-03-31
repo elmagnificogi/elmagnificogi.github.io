@@ -193,6 +193,12 @@ markdown的拓展, 虽然没用但是动态图看着非常强大。
 
 > https://github.com/shd101wyy/markdown-preview-enhanced/blob/0.10.11/docs/README_CN.md
 
+这个插件太强大了，他基本把本篇说的所有功能都合在了一起。
+
+可以生成plantuml，可以直接右键导出pdf，可以设置同步滚动条等等功能。
+
+然后突然发现，Atom自带的markdown+Markdown Scroll Sync的功能会在他的强大干扰下无法使用了
+
 ## plantuml
 
 plantuml用的人还是比较少的，能找到配置的人也很少
