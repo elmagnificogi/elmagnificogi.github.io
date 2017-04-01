@@ -15,6 +15,16 @@ tags:
 
 这里是对STM32f767的分析
 
+编译之后的各种大小：
+
+    Program Size: Code=5190 RO-data=562 RW-data=16 ZI-data=1944
+
+转换成hex也就是
+
+    Code=0x1446 RO-data=0x232 RW-data=0x10 ZI-data=0x798
+
+下面的分析中，有可能遇到的各种赋值都与他们相关。
+
 #### Simulator
 
 要分析_main中做了什么需要我们先使用调试模式进行调试。
@@ -63,8 +73,11 @@ tags:
 在这里则是把r0的内容内容给了r10和r11
 
 r10+=r0
+
 r11+=r0
+
 r7=r10-1
+
 r10-r11
 
 > BNE 是不相等跳转
@@ -119,6 +132,9 @@ r3|=0x01，然后跳转到r3地址
 0x0800024A 600C      STRMI         r4,[r1,#0x00]
 0x0800024C 4770      BX            lr
 ```
+
+我们可以分析一下里面的内容，R0就是程序加载视图的RW区的起始地址（0x08002de0），R1就是要输出的执行视图的RW区的地址（0x20000000），R2就是要复制的RW数据的个数，R3是复制函数（__scatterload_copy)的地址。
+
 r2-=0x10
 
 ITT则是根据C位的情况来执行下面的两条指令
@@ -278,6 +294,8 @@ __rt_lib_init 初始化
 
 下次再配合.map 分析一下整个链接 编译过程，看看到底有什么。
 
+当前的map已经不再是以前的map了，所以我们想要看到的东西，这里并没有
+
 ## Quote
 
 > http://blog.csdn.net/wangfoquan/article/details/7650988
@@ -285,3 +303,5 @@ __rt_lib_init 初始化
 > http://www.openedv.com/posts/list/20164.htm
 >
 > http://blog.csdn.net/ropai/article/details/7493168
+>
+> http://kmoving.blog.163.com/blog/static/20504919720129241952437/
