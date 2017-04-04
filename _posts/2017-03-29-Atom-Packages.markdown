@@ -9,6 +9,71 @@ catalog:    true
 tags:
     - Markdown
 ---
+## Atom安装
+
+首先Atom虽然安装很快，而且安装包很小，但是其依赖项却很大很多。
+
+通过cmd窗口 apm -v 可以查看atom需要的依赖项有什么
+
+    >apm -v
+    apm  1.15.3
+    npm  3.10.5
+    node 4.4.5 x64
+    python
+    git 2.12.0.windows.1
+    visual studio
+
+在Windows平台上 Visual studio 基本是必须的，或者说其核心编译组件是必备的，你不安一个
+还真不行，我这里没有显示vs版本，因为我装了最新版的vs17，但是实际上没有问题。
+
+python和nodejs 没有也行，但是很有可能有很多插件都需要他们支持，所以你也得装。
+
+java虽 然上面没有说，但是需要的地方太多了，不安一个不行。
+
+git 必须要有，不然连插件都没法安装。
+
+#### 新安装可能碰到的问题
+
+    Compiler tools not found
+    Packages that depend on modules that contain C/C++ code will fail to install.
+    Read here for instructions on installing Python and Visual Studio.
+    Run apm install --check after installing to test compiling a native module
+
+这个想都不想，肯定没有安 visual studio，安一个基本就没有这个问题了。
+
+
+    xxx.xxx.xxx.xxx timeout
+
+此类错误，想都不用想,肯定是网络有问题，但是这个要看情况，时好时坏的。
+
+有的时候需要挂vpn，有的时候又不需要，需要的时候ss就可以，不需要的时候直连就行。
+
+Atom挂ss其是有两种办法，先说麻烦的。
+
+##### ss
+
+###### 方法一
+
+在.atom的目录下创建一个名为.apmrc的文件，自然是用git vi 来弄了，文件内容如下
+
+    strict-ssl = false
+    http_proxy = socks5://127.0.0.1:1080
+    https_proxy = socks5://127.0.0.1:1080
+
+然后开着ss代理就行了，这样就发现可以下载安装packages了
+
+###### 方法二
+
+ss设置全局代理，然后浏览器里勾选使用ie代理
+
+说白了就是internet属性-局域网设置-代理服务器打勾-地址127.0.0.1端口1080，这样的话
+
+可以不用任何修改文件就能直接代理安装packages，比较简单，如果是其他vpn就需要修改方法一的地址了。
+
+#### Editor Setting
+
+tab的制表符，atom默认是2个，一般用4个，如果需要修改直接从settings-editor-Tab Length 修改就可以了
+
 ## Packages
 
 日后常用的Packages的添加都更新在这里
