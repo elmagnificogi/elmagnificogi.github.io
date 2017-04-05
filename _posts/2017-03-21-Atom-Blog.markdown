@@ -161,6 +161,32 @@ cmd无法正常安装，我已经试过了。
 
 一个是固定颜色的粒子特性，还有一个是随机颜色的粒子特性
 
+###### Comba Mode Streak Timeout
+
+这个值可以改变，连击的自动重置时间，最小是1，最大是100，单位是秒
+
+但是有的时候又想统计一下一天的连击数量，这样的话，这个时间走的太快了。
+
+100秒根本不够用，那么怎么办呢？突然想到这些包都是有源码的，如果能找到对应的位置直接修改就可以了。
+
+需要修改的文件就是config-schema.coffee，在下面的路径里就能直接找到了
+
+    .atom\packages\activate-power-mode\lib
+
+    streakTimeout:
+      title: "Combo Mode - Streak Timeout"
+      description: "Timeout to reset the streak counter. In seconds."
+      type: "integer"
+      default: 10
+      minimum: 1
+      maximum: 100
+
+然后就能看到上面的这一段代码了，限制了刷新的最大超时时间。
+
+把这里改为10000 基本就够用了，接近三个小时没有敲代码的话就会自动刷新一次。
+
+又或者再改大一个单位 100000，总够了吧，不用担心一天会超时的情况了。
+
 #### 快捷键
 
 首先是activate-power-mode:toggle 他决定右上角的Combo是显示还是隐藏，快捷键是ctrl-alt-o
@@ -178,7 +204,7 @@ Atom的快捷键设置很有意思，给你看的快捷键都是系统固定的�
 
 由于Atom的Markdown的预览是基于每个文件独立的，所以每次开一个文件要看预览就得，很复杂的操作一通，感觉很蠢。
 
-我就把 markdown-preview:toggle 设置为了F5，这样每次按一下刷新，就能看到对应的预览界面的，很舒服     
+我就把 markdown-preview:toggle 设置为了F5，这样每次按一下刷新，就能看到对应的预览界面的，很舒服
 
 ## 汉化包
 
