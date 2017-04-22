@@ -129,7 +129,21 @@ Win10下
 
 就可以完成所有操作啦。
 
-## github库克隆
+## add
+
+    git add .
+
+把添加文件改动添加到缓存区中，就是为了添加新文件而生的
+
+## commit
+
+    git commit  -a -m "提交信息记录"
+
+把改动提交到缓冲区中，其中-m是为了有提交记录，-a是了只提交被删除或者修改了的文件。
+
+而新添加的文件是不会被加入到HEAD区中的，新添加的需要用add来完成。
+
+## clone
 
 	git clone <版本库地址>
 	git clone <版本库的网址> <本地目录名>
@@ -144,7 +158,7 @@ Win10下
 
 如果感觉速度太慢了，那就挂代理克隆
 
-## github库更新
+## pull
 
     git pull
 
@@ -160,7 +174,53 @@ Win10下
 
 然后进行对比之后，再融合。
 
-## The end
+## checkout
+
+    git checkout new_branch
+
+从当前分支切换到new_branch分支中去。
+
+    git checkout -- test.txt
+
+虽然不加--也可以完成这个操作，用来从最新的commit中恢复test.txt文件，但是为了避免歧义
+
+有可能他会识别文件明和分支名相同的情况，从而去切换分支了
+
+## merge
+
+    git merge old_branch
+
+这里是将old_branch分支合并到当前目录的分支中，有可能会出现冲突
+
+    git diff <source_branch> <target_branch>
+
+查看分支的不同之处，进而合并分支，有必要时需要使用 add来添加文件
+
+## status
+
+    git status
+
+查看当前分支的状态，会显示增删改的文件
+
+## log
+
+    git log
+
+可以查看你之前commit的记录
+
+## submodule
+
+有时候clone的工程里有submodule，这个时候submodule的工程都不会自动关联下载的。
+
+要我们指定下载，如下即可自动递归寻找需要下载的子模块
+
+    git submodule update --init --recursive
+
+## 图形化界面
+
+    gitk
+
+图形化上面的各种命令和对比，更加直观。
 
 
 ## Quote
