@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "Redirector"
+title:      "USB-Redirector"
 subtitle:   "Tools"
 date:       2017-07-25
 author:     "elmagnifico"
@@ -79,9 +79,11 @@ sudo ./install install-server
 
 ### 使用
 
-win10下选择需要共享的USB设备，共享就好了
+##### windows
 
-linux下
+选择需要共享的USB设备，共享就好了
+
+##### linux
 
 
 首先添加服务端
