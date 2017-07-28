@@ -328,6 +328,8 @@ static void print_call_stack(uint32_t sp) {
 }
 ```
 
+断言函数
+
 ```c
 void cm_backtrace_assert(uint32_t sp) {
     CMB_ASSERT(init_ok);
@@ -546,6 +548,29 @@ void cm_backtrace_fault(uint32_t fault_handler_lr, uint32_t fault_handler_sp) {
 }
 ```
 
+## 查错
+
+当发生错误以后，使用 addr2line 命令，查看函数调用栈详细信息，并定位错误代码
+
+> Addr2line 工具（它是标准的 GNU Binutils 中的一部分）是一个可以将指令的地址和可执行映像转换成文件名、函数名和源代码行数的工具。这种功能对于将跟踪地址转换成更有意义的内容来说简直是太棒了。
+
+通过上面的函数，会在串口或者什么其他输出地方，输出栈的函数指针的具体地址，进而就可以定位
+出来具体是哪行出错了，当然调用 addr2line 命令应该在程序的 bin/mot/elf 文件目录下
+
+如下，只需要到对应的目录下执行下面的代码即可
+
+```
+Firmware name: xxxxx, hardware version: xxxxx, software version: xxxxx
+Fault on thread God
+=================== Registers information ====================
+  R0 : 2000ba2c  R1 : 2000903c  R2 : 00140006  R3 : 00140006
+  R12: 2000a594  LR : 0807a5ad  PC : 08076ea8  PSR: 01070000
+==============================================================
+Bus fault is caused by precise data access violation
+The bus fault occurred address is 0014000e
+Show more call stack info by run: addr2line -e xxxx.elf -a -f 08076ea8 0807a5a9 0807d9dc 080769bf 0807d9d9 0807d517 0807d32b 080563bd 0804c207 0804c357 0804e65b 0804f89d 0804f6c7 080742af 080742c1 08077005 
+```
+
 ## Summary
 
 总的来说大部分和寄存器以及出错相关的信息基本都来自于
@@ -571,3 +596,9 @@ CmBacktrace 的作者也提供了对应的功能，不过其中用 flash 来做�
 > https://github.com/armink/EasyLogger
 >
 > https://github.com/armink/EasyFlash
+>
+> http://blog.csdn.net/lhf_tiger/article/details/9088609
+>
+> https://www.ibm.com/developerworks/cn/linux/l-graphvis/
+>
+> http://blog.csdn.net/whz_zb/article/details/7604760
