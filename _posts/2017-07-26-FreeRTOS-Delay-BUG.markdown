@@ -7,8 +7,8 @@ author:     "elmagnifico"
 header-img: "img/Embedded-head-bg.png"
 catalog:    true
 tags:
-    - c/c++
-    - firmware
+    - 嵌入式
+    - FreeRTOS
 ---
 
 ## Foreword
