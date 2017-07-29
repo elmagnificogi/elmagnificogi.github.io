@@ -1,0 +1,137 @@
+---
+layout:     post
+title:      "一些Cmd的自动化脚本"
+subtitle:   "cmd，Jlink，plink"
+date:       2017-07-29
+author:     "elmagnifico"
+header-img: "img/git-head-bg.jpg"
+catalog:    true
+tags:
+    - 脚本
+---
+
+## Foreword
+
+有些批量工作，如果一个一个完成，太麻烦了，这里记录一些脚本，用来批量完成某一些任务。
+
+大部分都是基于 Cmd 命令和对应支持的命令工具而已
+
+## Jlink 批量烧写
+
+简单说拿已有固件，反复烧写大量板子，本质上还是同过Jlink而已，需要安装Jlink驱动。
+
+这个是基于JLink_Windows_V614版本的，更老的版本，有可能命令不支持或者略有不同。
+
+这里的 JLink.exe 其实就是 J-Link Commander 或者说是 linux 下的 JLinkExe 而已。
+
+当然其实也可以用 J-Flash 带 UI 的进行烧写，就是麻烦一点而已
+
+Flash.bat
+
+```
+@echo off
+:start
+echo 确保你当前J-Link驱动正常，并且连接到了对应的接口上
+set "answer=0"
+echo 输入1 烧写MCU，2 烧写IMU，3 烧写GPS 回车开始烧写
+set /p answer=
+if "%answer%"=="1" (echo 开始烧写MCU
+JLink.exe <F407MCU.txt
+goto note)
+if "%answer%"=="2" (echo 开始烧写IMU
+JLink.exe <F407IMU.txt
+goto note)
+if "%answer%"=="3" (echo 开始烧写GPS
+JLink.exe <F103GPS.txt
+goto note)
+:note
+echo 注意查看返回信息中是否有 Failed
+echo 如果有重新刷，正确情况下是successful
+echo 正确烧写:读完进度条之后有烧写时间提示
+echo 如果提示skipped 表示已有固件和当前相同
+goto start
+```
+
+F103GPS.txt 这里是 Jlink 具体执行的命令文件
+
+```
+usb
+si 1
+speed 4000
+device stm32f103c8
+loadfile c:\f103GPS.bin
+verifybin c:\f103GPS.bin 0x8000000
+r
+go
+q
+```
+
+## plink
+
+plink 知道的人比较少，而且相关资料其实也非常少。
+
+plink 是 PuTTY 的命令行模式而已，本质上就好像 J-Link Commander 是 J-Flash 的命令行而
+已。
+
+-m 表示会执行其后面的文件中的所有 shell 命令
+
+```
+@echo off
+echo 如果中途遇到了需要输入的情况，请输入y回车
+echo signal后跟信号强度，Link Quality 表示连接质量
+:start
+plink.exe pi@192.168.1.119 -pw raspberry -m .\commands.txt
+plink.exe pi@192.168.1.181 -pw raspberry -m .\commands.txt
+pause
+goto start
+```
+
+commands.txt 中的内容，只是用来显示当前 Wlan 的信号强度等信息而已
+
+替换成其他命令一样也是可行的，需要注意的是，可能都需要有 root 权限才能如此操作。
+
+```
+sudo iw dev wlan0 link | grep -i --color signal
+sudo iwconfig wlan0| grep -i --color Quality
+```
+
+## 切换 DHCP / 静态 IP
+
+这里是把名为 WLAN 的无线网络修改成了静态IP，对应不同的网络，自然需要修改下面的网络名，
+否则会提示找不到对应的网络
+
+```
+@echo off
+cls
+Echo ***************************************************************************
+Echo           正在修改IP地址和DNS服务器地址,请耐心等待…………
+Echo ***************************************************************************
+cmd /c netsh interface ip set address name="WLAN" source=static addr=192.168.1.1 mask=255.255.255.0 gwmetric=1
+Echo ***************************************************************************
+Echo          OK！！已修改成功！请按任意键继续…………
+Echo ***************************************************************************
+Pause
+```
+
+这里是把名为 WLAN 的无线网络修改成了自动IP，并且刷新了一次 dns 缓冲池。
+对应不同的网络，自然需要修改下面的网络名，否则会提示找不到对应的网络
+
+```
+@echo off
+cls
+Echo ***************************************************************************
+Echo           正在修改IP地址和DNS服务器地址,请耐心等待…………
+Echo ***************************************************************************
+netsh interface ip set address name="WLAN" source=dhcp
+ipconfig /flushdns
+Echo ***************************************************************************
+Echo          OK！！已修改成功！请按任意键继续…………
+Echo ***************************************************************************
+Pause
+```
+
+## Summary
+
+目前只遇到了上面的三个，日后再有用到继续补充
+
+## Quote
