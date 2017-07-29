@@ -306,6 +306,163 @@ F3 一键切换到夜间主题
     highlight CursorLine cterm=None ctermbg=darkred ctermfg=white guibg=darkred guifg=white
     highlight CursorColumn cterm=None ctermbg=darkred ctermfg=white guibg=darkred guifg=white
 
+## Vundle
+
+> Vundle is short for Vim bundle and is a Vim plugin manager.Vim
+>
+> https://github.com/VundleVim/Vundle.vim#quick-start
+
+Vim 中用来管理插件的一个插件，很多插件通过他都可以比较快捷方便的安装
+
+###### 安装
+
+通过 git 直接把 Vundle 安装在 .vim 的目录下
+
+$ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+
+###### 配置文件
+
+需要把下面的内容添加到 .vimrc 的开头部分，保障所有插件都能正常运行
+
+    set nocompatible              " be iMproved, required
+    filetype off                  " required
+
+    " set the runtime path to include Vundle and initialize
+    set rtp+=~/.vim/bundle/Vundle.vim
+    call vundle#begin()
+    " alternatively, pass a path where Vundle should install plugins
+    "call vundle#begin('~/some/path/here')
+
+    " let Vundle manage Vundle, required
+    Plugin 'VundleVim/Vundle.vim'
+
+    " The following are examples of different formats supported.
+    " Keep Plugin commands between vundle#begin/end.
+    " plugin on GitHub repo
+    Plugin 'tpope/vim-fugitive'
+    " plugin from http://vim-scripts.org/vim/scripts.html
+    " Plugin 'L9'
+    " Git plugin not hosted on GitHub
+    Plugin 'git://git.wincent.com/command-t.git'
+    " git repos on your local machine (i.e. when working on your own plugin)
+    Plugin 'file:///home/gmarik/path/to/plugin'
+    " The sparkup vim script is in a subdirectory of this repo called vim.
+    " Pass the path to set the runtimepath properly.
+    Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+    " Install L9 and avoid a Naming conflict if you've already installed a
+    " different version somewhere else.
+    " Plugin 'ascenator/L9', {'name': 'newL9'}
+
+    " All of your Plugins must be added before the following line
+    call vundle#end()            " required
+    filetype plugin indent on    " required
+    " To ignore plugin indent changes, instead use:
+    "filetype plugin on
+    "
+    " Brief help
+    " :PluginList       - lists configured plugins
+    " :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+    " :PluginSearch foo - searches for foo; append `!` to refresh local cache
+    " :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+    "
+    " see :h vundle for more details or wiki for FAQ
+    " Put your non-Plugin stuff after this line
+
+要安装 其他插件 打开 vim 然后运行：
+
+    :PluginInstall
+
+会安装你需要的插件
+
+## YouCompleteMe
+
+> YouCompleteMe is a fast, as-you-type, fuzzy-search code completion engine for Vim.
+>
+> https://github.com/Valloric/YouCompleteMe#full-installation-guide
+
+vim 中最强大的补全插件，真的没有之一，而且名字也很有意思，很诗意，很美。
+
+不过其安装难度真的很大，很容易因为各种环境不正确而出错，大概是他自身需要的相关东西太多了
+吧，不过安好了还是非常好用的说，很值得。
+
+###### 安装
+
+1. 确保 VIM 版本是 >=7.4 的
+
+```
+vim --version
+VIM - Vi IMproved 7.4 (2013 Aug 10, compiled Nov 24 2016 16:44:48)
+```
+
+确保你的 vim 支持 python 2.6 以上版本
+
+```
+vim --version | grep python
++cryptv          +linebreak       -python          +vreplace
++cscope          +lispindent      +python3         +wildignore
+```
+
+加号表示支持，减号表示不支持，这里有 python3 就表示足够用了
+
+因为使用 vundle 完全看不出来安装进度，所以这里只用 git 来安装 ，出错了也很明显。
+
+2. 拿到YCM的源码
+
+```
+git clone --recursive https://github.com/Valloric/YouCompleteMe.git
+```
+
+上一步如果失败了，没关系，再运行一次，肯定能成功，下面进行完整性检查
+
+```
+git submodule update --init --recursive
+```
+
+3. 由于是 C 家族语言，需要语义补全，需要下面的库支持
+
+```
+sudo apt-get install llvm-3.9 clang-3.9 libclang-3.9-dev libboost-all-dev
+```
+
+4. 创建编译过程文件目录，并且切换过去，然后运行 C 家族语言
+
+```
+mkdir ~/.ycm_build
+cd ~/.ycm_build
+cmake -G "Unix Makefiles" -DUSE_SYSTEM_BOOST=ON -DUSE_SYSTEM_LIBCLANG=ON . ~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp
+```
+
+这里可能会出很多错误，需要自行解决，我这里一个错都没出...运气太好了
+
+5. 构建 ycm_core
+
+```
+    cmake --build . --target ycm_core
+```
+
+6. 复制 .ycm_extra_conf.py 文件到 .vim 下
+
+```
+    cp ~/.vim/bundle/YouCompleteMe/third_party/ycmd/examples/.ycm_extra_conf.py ~/.vim/
+```
+
+7. 修改 .vimrc 文件，添加如下内容
+
+```
+    let g:ycm_server_python_interpreter='/usr/bin/python'
+    let g:ycm_global_ycm_extra_conf='~/.vim/.ycm_extra_conf.py'
+```
+
+8. 在 vim 中运行如下命令，检查是否有错误
+
+```
+:YcmToggleLogs stderr
+```
+
+如果没有任何提示，说明没有发生错误，那么就正常安装成功了
+
+就可以正常使用，随便切到某个 .c 文件中，然后输入一下就发现补全已经自动出现了。
+
 #### 最终的配置文件
 
 ```
@@ -368,3 +525,5 @@ endif
 > http://blog.sina.com.cn/s/blog_684355870100jqz3.html
 >
 > http://blog.csdn.net/longerzone/article/details/7789581
+>
+> http://www.jianshu.com/p/d908ce81017a?nomobile=yes
