@@ -176,4 +176,3 @@ void iap_load_app(u32 appxaddr)
 > http://www.worlduc.com/blog2012.aspx?bid=7329962
 >
 > http://blog.chinaunix.net/uid-20734916-id-4007594.html
->

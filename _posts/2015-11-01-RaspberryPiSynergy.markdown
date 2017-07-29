@@ -57,22 +57,22 @@ RaspberryPi：Raspberry Pi 2
 
 3. 进入源码目录，先尝试
 
-		
+
 		./configure
-		
+
 
    如果没有意外，应该会提示cmake相关的，大概就是cmake没装
 
-		
+
 		./configure
 		...
 		./configure: line 1: cmake: command not found
 		sudo apt-get install cmake
-		
+
 
    装完cmake，继续缺少X11，继续安，应该还会提示xtst
 
-		
+
 		./configure
 		...
 		CMake Error at CMakeLists.txt:203 (message):
@@ -80,28 +80,28 @@ RaspberryPi：Raspberry Pi 2
 		-- Configuring incomplete, errors occurred!
 		sudo apt-get install libx11-dev
 		sudo apt-get install libxtst-dev
-		
+
    我又出现了Missing library：curl 装了这个之后就能继续了
 
     	sudo apt-get install libcurl4-openssl-dev
 
    如果不是以上的错误，那仔细看一下错误提示是哪里的文件，哪行代码，缺少了什么东西
    比如：
-	 
-		
+
+
 		CMake Error at CMakeLists.txt:203 (message):
 		Missing header: X11/Xlib.hX11/XKBlib.h
 		-- Configuring incomplete, errors occurred!
-		
-	 
+
+
    就需要去看一下203行到底写了啥为什么没找到这个头文件
-	 
-		
+
+
 		# add include dir for bsd (posix uses /usr/include/)
 		set(CMAKE_INCLUDE_PATH "${CMAKE_INCLUDE_PATH}:/usr/local/include")
 		set(XKBlib "X11/Xlib.h;X11/XKBlib.h")
-		
-	 
+
+
    发现认为文件在/usr/local/include中实际上是在/usr/include才有x11的头文件，修改一下这里就能继续了。
    中间如果还提示缺少openssl gtest gmock等文件，那肯定是第二步没做，或者是放的文件夹不对，看错误提示修改一下解压的文件夹就没问题了。
    如果没错了就能开始make了
@@ -124,18 +124,18 @@ RaspberryPi：Raspberry Pi 2
 
    参考这里
 
-   > http://blog.csdn.net/a936676463/article/details/8480672  
+   > http://blog.csdn.net/a936676463/article/details/8480672
 
 
 5. 复制到/usr/bin中去
-		
-		
+
+
 		sudo cp -a ./bin/. /usr/bin
-		
+
 
 6. 开机自动启动Synergy，不然每次还得插个键盘啥的启动一下多麻烦。在/etc/init.d/中新建synergy然后编辑成下面的内容。
 
-   解释一下这里的参数 
+   解释一下这里的参数
   - --daemon是将synergy作为后台程序
   - --name 是指客户端的名字 填写你自己的到这里
   - --restart 是指断线后重连（不是重启服务，只是重连而已，实际上我遇到的就是直接死了，只有pkill进程以后重新开才能恢复，所以这里就没办法了）
@@ -155,7 +155,7 @@ RaspberryPi：Raspberry Pi 2
     	### END INIT INFO
     	#!/bin/sh
     	#/etc/init.d/synergy
-   
+
 		case "$1" in
 		  start)
 		    cd /home/pi/synergy-1.4.10-Source/bin/
@@ -180,7 +180,7 @@ RaspberryPi：Raspberry Pi 2
 		synergyc --daemon --name pi --restart --log /home/pi/sylog 192.168.1.104
 
    用这个命令代替，那么结果就是服务无法启动，虽然执行了，但是你会发现synergyc进程根本没启动
-   当然，我用这个命令的前提是 我把 synergy编译后的./bin目录下的权限都改为了777 并且复制到了/usr/bin 的目录下，并且这个脚本也改为了777 在确保了所有权限都没错的情况下，如果用sudo/root权限 是完全打不开synergyc的 
+   当然，我用这个命令的前提是 我把 synergy编译后的./bin目录下的权限都改为了777 并且复制到了/usr/bin 的目录下，并且这个脚本也改为了777 在确保了所有权限都没错的情况下，如果用sudo/root权限 是完全打不开synergyc的
 
 		sudo synergyc --daemon --name pi --restart --log /home/pi/sylog 192.168.1.104
 		sudo service synergy stop
@@ -190,7 +190,7 @@ RaspberryPi：Raspberry Pi 2
 
 
 7. 设置权限，无论如何确保运行，如果提示缺少LSB tags(上面是有tags的所以应该不会提示)，可以无视
- 
+
 
 		sudo chmod 755 /etc/init.d/synergy
 		sudo update-rc.d synergy defaults
@@ -198,7 +198,7 @@ RaspberryPi：Raspberry Pi 2
 
 
 8. 启动Synergy服务，之后重启一下看看，是不是鼠标可以直接外滑到另一台设备的屏幕上去了，键盘输入也是需要以鼠标激活的屏幕为基础
- 
+
 		sudo /etc/init.d/synergy start
 		sudo /etc/init.d/synergy stop
 		sudo service synergy stop
@@ -214,7 +214,7 @@ RaspberryPi：Raspberry Pi 2
 
 是开机启动项，服务激活（启动过），但是看不到synergy连接的信息，这时候直接start无效，必须得stop 然后start 才能重新开起来。
 
-只好开机以后，用putty手动启动一下synergy 然后再用 
+只好开机以后，用putty手动启动一下synergy 然后再用
 
 （我查看了国外友人博客，有近期评论（5月前）中说做完整个流程的基本都成功了，至少我确实是成功好用了两天，如果你能正常使用上面的方式就不用往下看了）
 
@@ -262,7 +262,7 @@ RaspberryPi：Raspberry Pi 2
 
 > http://www.raspberrypi-spy.co.uk/2014/05/how-to-autostart-apps-in-rasbian-lxde-desktop/
 
-成功通过python脚本启动了synergyc 
+成功通过python脚本启动了synergyc
 
 这个帖子中的第一种方法不知道由于什么原因，我在第一次做的时候，成功启动了终端，从此以后再也没成功过了。
 而100%成功的是第二种方法。
@@ -337,20 +337,17 @@ synergy.py脚本内容如下
 ## Quote
 
 > http://www.shumeipai.net/thread-18993-1-1.html?_dsign=4330837c
-> 
+>
 > http://blog.csdn.net/lonerzf/article/details/13996895
-> 
+>
 > http://blog.sina.com.cn/s/blog_5922f3300101e20o.html
-> 
+>
 > https://www.rootusers.com/compiling-synergy-from-source-on-the-raspberry-pi/
-> 
+>
 > http://synergy-project.org/forum/viewtopic.php?f=9&t=30&hilit=raspberry&start=10
-> 
+>
 > https://learn.adafruit.com/synergy-on-raspberry-pi/setup-synergy-client-autostart
-> 
+>
 > http://www.raspberrypi-spy.co.uk/2014/05/how-to-autostart-apps-in-rasbian-lxde-desktop/
-> 
+>
 > http://wp.sgrosshome.com/2014/01/31/configure-synergy-client-systemd-service-auto-start-linux-fedora-20/
-
-
-

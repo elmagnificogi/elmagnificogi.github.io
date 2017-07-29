@@ -11,7 +11,7 @@ tags:
 
 ## 代码环境
 
-System：Raspberry Pi 
+System：Raspberry Pi
 
 IDE：IDLE3
 
@@ -29,7 +29,7 @@ IDE：IDLE3
 就可以调用到bash命令了
 
 ### 信息分离处理
-	
+
 这里使用了Popen，就是通过管道的方式进行信息通信。
 
 将命令的标准输出（正确的）、标准错误输出（发生错误）分开了，其实还有一个标准的输入stdin
@@ -104,7 +104,7 @@ match则是从字符串头匹配，头匹配了才会输出
 	else:
 		for line in text.splitlines():
 			if not options.regex or (options.regex and re.search(options.regex,line)):
-				print(line)	
+				print(line)
 通过调用：
 
 	python3 程序文件名.py -f /var/log/syslog -r "synergy"
@@ -125,13 +125,13 @@ match则是从字符串头匹配，头匹配了才会输出
 ### 正则表达式转义字符
 
 |转义字符|说明|
-| ---|:---:| 
+| ---|:---:|
 | \n | 换行 |
-| \t | 制表符 | 
+| \t | 制表符 |
 | \d | 任意数字 |
 | \D | 任意非数字字符 |
-| \s | 任意空白符 | 
-| \w | 字母/数字/下划线/汉字 | 
+| \s | 任意空白符 |
+| \w | 字母/数字/下划线/汉字 |
 | \W | 上面的取补集 |
 | \  | 转义有特殊定义的字符 |
 
@@ -140,7 +140,7 @@ match则是从字符串头匹配，头匹配了才会输出
 
 通过打开myfile文件，然后写入abcde 每写一个加一个换行符
 
-然后通过读取这个文件，输出 
+然后通过读取这个文件，输出
 
 	- mode -w清空并写入，-a追加到文件尾写入
 	with open("myfile.txt",mode="w",encoding="utf-8") as file_a:
@@ -160,8 +160,7 @@ match则是从字符串头匹配，头匹配了才会输出
 ## Quote
 
 >http://shelly-kuang.iteye.com/blog/797713
-
+>
 >http://blog.chinaunix.net/uid-14833587-id-76547.html
-
+>
 >http://blog.csdn.net/menglei8625/article/details/7494094
-
