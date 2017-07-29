@@ -229,7 +229,10 @@ Tag generation is supported for these programming languages.
 >
 > http://ctags.sourceforge.net/
 
-ctags 提供的是各种函数、变量的跳转表，他不能提供函数反查调用的功能，所以不如cscope好用
+ctags 提供的是各种函数、变量的跳转表，他不能提供函数反查调用的功能，所以不如 cscope 好用。
+
+但是 cscope 也有问题，经常有一些函数使用跳转跳不进去，但是用搜索就能搜索到，而 ctags
+就不存在这个问题，所以一般两个都安装相互补充吧
 
 ###### 安装
 
