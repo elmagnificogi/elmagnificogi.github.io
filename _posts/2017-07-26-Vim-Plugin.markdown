@@ -387,7 +387,7 @@ vim 中最强大的补全插件，真的没有之一，而且名字也很有意�
 
 ###### 安装
 
-1. 确保 VIM 版本是 >=7.4 的
+1 . 确保 VIM 版本是 >=7.4 的
 
 ```
 vim --version
@@ -406,7 +406,7 @@ vim --version | grep python
 
 因为使用 vundle 完全看不出来安装进度，所以这里只用 git 来安装 ，出错了也很明显。
 
-2. 拿到YCM的源码
+2 . 拿到YCM的源码
 
 ```
 git clone --recursive https://github.com/Valloric/YouCompleteMe.git
@@ -418,13 +418,13 @@ git clone --recursive https://github.com/Valloric/YouCompleteMe.git
 git submodule update --init --recursive
 ```
 
-3. 由于是 C 家族语言，需要语义补全，需要下面的库支持
+3 . 由于是 C 家族语言，需要语义补全，需要下面的库支持
 
 ```
 sudo apt-get install llvm-3.9 clang-3.9 libclang-3.9-dev libboost-all-dev
 ```
 
-4. 创建编译过程文件目录，并且切换过去，然后运行 C 家族语言
+4 . 创建编译过程文件目录，并且切换过去，然后运行 C 家族语言
 
 ```
 mkdir ~/.ycm_build
@@ -434,26 +434,26 @@ cmake -G "Unix Makefiles" -DUSE_SYSTEM_BOOST=ON -DUSE_SYSTEM_LIBCLANG=ON . ~/.vi
 
 这里可能会出很多错误，需要自行解决，我这里一个错都没出...运气太好了
 
-5. 构建 ycm_core
+5 . 构建 ycm_core
 
 ```
     cmake --build . --target ycm_core
 ```
 
-6. 复制 .ycm_extra_conf.py 文件到 .vim 下
+6 . 复制 .ycm_extra_conf.py 文件到 .vim 下
 
 ```
     cp ~/.vim/bundle/YouCompleteMe/third_party/ycmd/examples/.ycm_extra_conf.py ~/.vim/
 ```
 
-7. 修改 .vimrc 文件，添加如下内容
+7 . 修改 .vimrc 文件，添加如下内容
 
 ```
     let g:ycm_server_python_interpreter='/usr/bin/python'
     let g:ycm_global_ycm_extra_conf='~/.vim/.ycm_extra_conf.py'
 ```
 
-8. 在 vim 中运行如下命令，检查是否有错误
+8 . 在 vim 中运行如下命令，检查是否有错误
 
 ```
 :YcmToggleLogs stderr
