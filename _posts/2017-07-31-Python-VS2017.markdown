@@ -16,8 +16,8 @@ Visual Studio 2017 同样也支持 python 。
 
 python 可以使用3.6 或者2.7版本，通过工程环境配置就可以直接切换，十分快捷。
 
-但是今天的主体不是 vs 的 python 多好用，而是解决如何在 win10 && VS2017 的环境下使用
-和安装python 以及各种插件。
+但是今天的主体不是 vs 的 python 多好用，而是解决如何在 win10 && VS2017 的环境下使用和
+安装 python 以及各种插件。
 
 ### Python Version
 
@@ -120,26 +120,26 @@ pyinstaller 主要是用来帮你把 py 脚本转化为 windows 下，可以直�
 
 ```python
 import subprocess
- import sys
+import sys
 
-+from .log import logger
+from .log import logger
 
- # Distinguish code for different major Python version.
- is_py2 = sys.version_info[0] == 2
+# Distinguish code for different major Python version.
+is_py2 = sys.version_info[0] == 2
 @@ -869,8 +870,11 @@ def check_requirements():
-         if 'win32api' in sys.modules or 'pywintypes' in sys.modules:
-             # Users should never see this error; if it occurs, it means someone
-             # wasn't careful and added an import where it shouldn't be
--            raise SystemExit("Internal error: early pywin32 import was introduced")
--
-+            # Unfortunately this error is triggered when running under pytest
-+            # since all PyInstaller runs are done in the same process
-+            logger.warning("Internal error: early pywin32 import was introduced")
-+            return
-+
-         try:
-             from PyInstaller.utils.win32 import winutils
-             try:
+    if 'win32api' in sys.modules or 'pywintypes' in sys.modules:
+    # Users should never see this error; if it occurs, it means someone
+    # wasn't careful and added an import where it shouldn't be
+        raise SystemExit("Internal error: early pywin32 import was introduced")
+
+        # Unfortunately this error is triggered when running under pytest
+        # since all PyInstaller runs are done in the same process
+        logger.warning("Internal error: early pywin32 import was introduced")
+        return
+
+    try:
+        from PyInstaller.utils.win32 import winutils
+        try:
 ```
 
 会出这个错大概就是有人不小心引用了不应该引用的文件，然后导致这样的，而实际上所有文件都是
@@ -170,7 +170,7 @@ import subprocess
 
 需要注意的是生成的 exe 是在同目录下的 dist 文件夹中生成 demo.exe，而不是当前目录下的
 demo.exe ，我之前一直以为是当前目录，然后各种测试，发现exe文件执行了和没执行都一样，后
-来才发现，原来不是这个exe
+来才发现，原来不是这个 exe
 
 ### 编码问题
 
