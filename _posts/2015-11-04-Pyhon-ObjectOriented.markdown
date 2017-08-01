@@ -11,7 +11,7 @@ tags:
 
 ## 代码环境
 
-System：Raspberry Pi 
+System：Raspberry Pi
 
 IDE：IDLE3
 
@@ -45,10 +45,10 @@ self相当于是private 私有变量的声明
 
 ## import
 
-import就相当于是include 导入你自己写好的文件或者是系统的模块 
+import就相当于是include 导入你自己写好的文件或者是系统的模块
 
 	hello.py
-	
+
 	def hello():
 		print（"hello world")
 
@@ -58,7 +58,7 @@ import就相当于是include 导入你自己写好的文件或者是系统的模
 	hello.hello()
 
 文件名.函数名 就能直接调用了-
-	
+
 要使其使用起来就像是自己的一样
 
 	from hello import hello
@@ -67,7 +67,7 @@ import就相当于是include 导入你自己写好的文件或者是系统的模
 
 全部导入
 
-	from hello import 
+	from hello import
 
 需要注意一个问题，Python不存在重载，也就是说，同样的名字就会出现覆盖
 
@@ -78,20 +78,20 @@ import就相当于是include 导入你自己写好的文件或者是系统的模
 ### 简单的服务与客户端 by socket
 
 服务端
-	
+
 	import socket
 	comms_socket=socket.socket()
 	comms_socket.bind(('localhost',50000))
 	comms_socket.listen(10)
 	connection,address=comms_socket.accept()
-	
+
 	while True:
 	    print(connection.recv(4096).decode("UTF-8"))
 	    send_data=input("Reply?")
 	    connection.send(bytes(send_data,"UTF-8"))
 
 客户端
-	
+
 	import socket
 	comms_socket=socket.socket()
 	comms_socket.connect(('localhost',50000))
@@ -127,11 +127,11 @@ url2是新的获取方式+我的APPID，可以看到返回的值 各种地方的
 ### 本机目录服务器 by HTTP
 
 	import http.server,os
-	
+
 	os.chdir("/home/pi")
 	http=http.server.HTTPServer(('127.0.0.1',8000),http.server.SimpleHTTPRequestHandler)
 	http.serve_forever()
- 
+
 用浏览器打开
 
 > http://localhost:8000
@@ -151,6 +151,5 @@ url2是新的获取方式+我的APPID，可以看到返回的值 各种地方的
 ## Quote
 
 > http://www.jb51.net/article/42623.htm
-> 
+>
 > http://blog.chinaunix.net/uid-20527331-id-95402.html
-
