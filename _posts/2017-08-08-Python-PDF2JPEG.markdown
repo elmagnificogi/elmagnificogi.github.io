@@ -73,7 +73,7 @@ Wand 0.4.4
 安装过程中，还需要勾选上 Install development headers and libraries for C and C++ ，
 防止可能缺少的依赖库文件
 
-除此以外还需要设置环境变量，添加如下
+除此以外还需要设置环境变量，在系统环境变量下添加如下
 
     MAGICK_HOME
     C:\Program Files\ImageMagick-6.9.3-Q16
@@ -108,7 +108,7 @@ Wand 0.4.4
 
 > an interpreter for the PostScript language and for PDF.
 >
-> http://mstamy2.github.io/PyPDF2/
+> https://www.ghostscript.com/download/gsdnld.html
 
 ###### 安装
 
