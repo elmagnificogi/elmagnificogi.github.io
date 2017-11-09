@@ -23,6 +23,8 @@ pymel则是有人不满足于脚本式的开发，面向过程的书写方式，
 
 目前我主要用python在写脚本，其中也遇到了maya python很多奇葩的问题。
 
+## Maya Python
+
 #### setuptools
 
 虽然python自身集成了很多库，但是开发过程中还是会出现需要使用外部库的情况，这种时候就发现了maya的python非常的简陋，要啥没啥，连最基本的setuptools竟然都没有，但是python版本却是2.7.11.
