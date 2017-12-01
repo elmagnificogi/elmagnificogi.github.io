@@ -4,14 +4,14 @@ title:      "keil debug 不重启连接硬件"
 subtitle:   "嵌入式，debug，STM32"
 date:       2017-12-01
 author:     "elmagnifico"
-header-img: "/p09tzvz74.bkt.clouddn.com/blog/171201/mj1J7GDCjB.png?imageslim"
+header-img: "img/Embedded-head-bg.png"
 catalog:    true
 tags:
     - 嵌入式
     - stm32
 ---
 
-# Foreword
+## Foreword
 
 默认keil下使用jlink在线调试的时候会自动重启硬件,虽然平时用着好像也行,但是关键时刻,硬件跑飞了,需要看一下具体为啥会跑飞,找到隐藏的bug,这种时候就会很坑爹,一重启就无法复现该情况了,这里记录一下如何修改keil 工程配置从而可以不重启的情况下进入在线调试.
 
