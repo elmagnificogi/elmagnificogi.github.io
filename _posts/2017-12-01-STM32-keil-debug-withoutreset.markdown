@@ -4,7 +4,7 @@ title:      "keil debug 不重启连接硬件"
 subtitle:   "嵌入式，debug，STM32"
 date:       2017-12-01
 author:     "elmagnifico"
-header-img: "img/Embedded-head-bg.png"
+header-img: "/p09tzvz74.bkt.clouddn.com/blog/171201/mj1J7GDCjB.png?imageslim"
 catalog:    true
 tags:
     - 嵌入式
@@ -40,7 +40,7 @@ tags:
         ```
         LOAD %L INCREMENTAL
         ```
-    
+
     然后再刚才的Load Application at Startup 下的Initialization File中选择建好的文件.
 
 点击仿真,就可以直连跑飞的硬件,并且查看到当前代码停在了哪里,所有信息都是完整的
