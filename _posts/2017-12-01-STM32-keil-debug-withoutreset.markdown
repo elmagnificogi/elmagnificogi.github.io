@@ -37,11 +37,11 @@ tags:
 
 4\.  以上完成其实可以直接连接飞机了,但是这种连接模式下,无法跳转代码无法加断点,只能用于查看内存和各种寄存器的情况.如果要查看代码,则需要完成Load文件,新建一个文件,起名随意,内容入下:
 
-        ```
-        LOAD %L INCREMENTAL
-        ```
+```
+LOAD %L INCREMENTAL
+```
 
-    然后再刚才的Load Application at Startup 下的Initialization File中选择建好的文件.
+然后再刚才的Load Application at Startup 下的Initialization File中选择建好的文件.
 
 点击仿真,就可以直连跑飞的硬件,并且查看到当前代码停在了哪里,所有信息都是完整的
 

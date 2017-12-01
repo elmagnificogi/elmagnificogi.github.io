@@ -101,7 +101,7 @@ def Dmd_UAVC_exfunc_clear_output_windows():
 			print("Child window wasn't found")
 ```
 
-上面的是源码,下面的是混淆后的代码.可以看到导入库的名称被混淆了,函数名,变量名进行了混淆,当然没有使用到的是不会进行混淆的.
+上面的是源码,下面的是混淆后的代码.可以看到导入库的名称被混淆了,函数名,变量名进行了混淆,全局性质的他不会进行混淆.
 
 ```python
 import sys as O0O0O0OO0O0O0OO0O #line:1
