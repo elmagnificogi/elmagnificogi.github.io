@@ -1,7 +1,7 @@
 # Site settings
 title: Elmagnifico's Blog
 SEOTitle: elmagnifico's blog
-header-img: "http://p09tzvz74.bkt.clouddn.com/blog/171201/57ADl6jlgK.jpg?imageslim"
+header-img: "/p09tzvz74.bkt.clouddn.com/blog/171201/57ADl6jlgK.jpg?imageslim"
 email: elmagnificogg@gmail.com
 description: "关于后端与嵌入式、现实主义者 | elmagnifico， Back-end engineer & Embedded System Lover， Realist | 这里是elmagnifico的个人博客，君子之交淡如水。"
 keyword: " elmagnifico, elmagnifico's blog, elmagnificogi, 嵌入式, C, Python, C#, 后端, 四轴, Raspberry Pi, 树莓派, 大数据"
