@@ -61,6 +61,7 @@ if __name__ == "__main__":
     output_time = time.strftime('%Y-%m-%d %H%M%S',time.localtime(time.time()))
     output_file_path = str(r'F:\output\Editor'+ output_time+'.py')
     # print(output_time)
+
     # copy the source file to the git repository
     shutil.copy(soure_file_path, git_file_path)
 
@@ -131,11 +132,61 @@ driver.execute_script("arguments[0].value = arguments[1];", input_text_element,n
 
 其实还有一种办法,使用剪贴板操作,将文本内容先输入到剪贴板中,然后再对文本框进行复制操作,进而完成文本的输入,这不过这样绕的太多了,没有特殊限制的情况下没必要.
 
+## Htmlunit
+
+在使用上面的webdriver接口的时候就会发现,执行过程是有一个浏览器操作的过程的,如果不要浏览器执行过程,轻量化快速化,那么就需要用HtmlUnit或PhantomJs,这里直接介绍Htmlunit接口,他本身就被封装在了selenium中,可以直接调用.
+
+#### 安装
+
+在使用Htmlunit之前还需要先开启java的专用服务器才可以正常操作
+
+首先在这里下载对应的jar包,selenium-server-standalone-x.x.x.jar
+
+> http://www.seleniumhq.org/download/
+
+而这里的selenium服务器必须和python pip list中的selenium相同版本
+
+#### 启动
+
+通过cmd(当然需要提前装好java)
+
+    java -jar selenium-server-standalone-x.x.x.jar
+
+就能看到服务器正常启动:
+
+    11:13:48.385 INFO - Selenium build info: version: '3.7.0', revision: '2321c73'
+    11:13:48.385 INFO - Launching a standalone Selenium Server
+    2017-12-04 11:13:48.422:INFO::main: Logging initialized @304ms to org.seleniumhq.jetty9.util.log.StdErrLog
+    11:13:48.471 INFO - Driver class not found: com.opera.core.systems.OperaDriver
+    11:13:48.512 INFO - Driver provider class org.openqa.selenium.safari.SafariDriver registration is skipped:
+     registration capabilities Capabilities {browserName: safari, platform: MAC, version: } does not match the current platform WIN10
+    11:13:48.569 INFO - Using the passthrough mode handler
+    2017-12-04 11:13:48.593:INFO:osjs.Server:main: jetty-9.4.5.v20170502
+    2017-12-04 11:13:48.611:WARN:osjs.SecurityHandler:main: ServletContext@o.s.j.s.ServletContextHandler@11438d26{/,null,STARTING} has uncovered http methods for path: /
+    2017-12-04 11:13:48.615:INFO:osjsh.ContextHandler:main: Started o.s.j.s.ServletContextHandler@11438d26{/,null,AVAILABLE}
+    2017-12-04 11:13:48.794:INFO:osjs.AbstractConnector:main: Started ServerConnector@63440df3{HTTP/1.1,[http/1.1]}{0.0.0.0:4444}
+    2017-12-04 11:13:48.795:INFO:osjs.Server:main: Started @677ms
+    11:13:48.795 INFO - Selenium Server is up and running
+
+服务器启动之后,修改上面的代码,添加新的引入
+
+```python
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+```
+
+然后修改驱动接口,使用HTMLUNIT,其他内容保持不变,继续运行.
+
+```python
+driver = webdriver.Remote(desired_capabilities=DesiredCapabilities.HTMLUNIT)
+```
+
+可以看到得到了正确的结果,并且cmd中会有对应操作的输出回显
+
 # Summary
 
 按键精灵当然也可以完成类似的功能,其网页的操作有可能就是封装了selenium来完成的.
 
-selenium本身的webdriver就是用于显示化的自动化测试,如果你想要用不显示执行过程的方式来实现,那么需要使用HtmlUnit或PhantomJs来做.
+selenium本身的Firefox接口就是用于显示化的自动化测试,如果你想要用不显示执行过程的方式来实现,那么需要使用HtmlUnit或PhantomJs来做.
 
 # Quote
 
@@ -158,3 +209,5 @@ selenium本身的webdriver就是用于显示化的自动化测试,如果你想�
 > https://www.v2ex.com/t/356473
 >
 > http://www.cnblogs.com/we8fans/p/6934592.html
+>
+> https://www.cnblogs.com/Test-road-me/p/4907156.html
