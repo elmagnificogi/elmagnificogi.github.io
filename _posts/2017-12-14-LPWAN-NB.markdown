@@ -1,0 +1,224 @@
+---
+layout:     post
+title:      "WSN"
+subtitle:   "无线传感网络-窄带宽广域"
+date:       2017-11-27
+author:     "elmagnifico"
+header-img: "img/git-head-bg.jpg"
+catalog:    true
+tags:
+    - LPWAN
+---
+
+# Foreword
+
+最近寻找合适的网络方案,查询了不少无线传感网络的相关信息,这里一一举例其相关信息
+
+下图基本列举出了目前在用的各种方案，下文将按照图中的顺序来进行介绍。
+
+![](http://5b0988e595225.cdn.sohucs.com/images/20171127/de40efdafae04655a1bef0062b2950ce.png)
+
+# 物联网无线通信技术
+
+## 远距离广域无线网络
+
+### 窄带广域/LPWAN
+
+一般来说窄带是泛指Sub-1GHz，1G赫兹以下的频段，称之为窄带
+
+也有许多通讯协议其既有窄带也有宽带，比如LTE，Zigbee,Thread.
+
+#### NB-IoT
+
+当下最火的物联网协议应该就是NB-IoT了，而且有政府支持，《关于全面推进移动物联网（NB-IoT）建设发展的通知》，此通知在17年6月16号作为政策文件在工信部官方网站正式发布。
+
+###### 网络结构
+
+目前看到最多的是华为提供了其支持平台，可以看一下其结构图，了解其工作方式。
+
+<center>![](http://developer.huawei.com/ict/sites/default/files/ueditor/26/upload/image/20170519/1495175063383960.png)</center>
+
+- Device：NB-IoT终端（如智能水表、智能气表等）通过空口连接到eNodeB。
+
+- eNodeB：主要承担空口接入处理和小区管理等相关功能，通过S1-lite接口与IoT核心网进行连接，将非接入层数据转发给高层网元处理。
+
+- IoT Core：承担与终端非接入层交互的功能，将IoT业务相关数据转发到IoT平台进行处理。
+
+- IoT Platform：IoT联接管理平台汇聚从各种接入网得到的IoT数据，根据不同类型转发给相应的业务应用进行处理。
+
+- APP Server：是IoT数据的最终汇聚点，根据客户的需求进行数据处理等操作。
+
+###### 数据流
+
+下面是华为的数据流图
+
+<center>![](http://developer.huawei.com/ict/forum/data/attachment/developerAtt/attachment/forum/201705/10/083816qbdm8dmk3fbzwac6.jpg)</center>
+
+简单说你先有NB-IoT节点，节点通过现有运营商部署的基站，将信息传递给运营商端，然后运营商将信息转发给IoT平台（华为），然后我们可以通过华为提供的平台API或者插件等，对信息进行编解码，然后获取到我们需要的信息
+
+<center>![](http://developer.huawei.com/ict/forum/data/attachment/developerAtt/attachment/forum/201705/10/083817mvqjcw3j4i0n3nln.jpg)</center>
+
+数据下发类似，基本都是这个模式。
+
+###### 注意
+
+首先目前（2017年12月1日）,虽然已经有了政策支持,但是目前各大运营商各个地区的基站部署并不一致,可能有的地区可用有的地区不可用,还没做到全地区无碍.
+
+其次,每个节点都需要使用物联网卡,收费模式,目前只看到了电信是包年(送2w连接次数)-通过连接次数(超出套餐的每2w,20元)来收费的,具体连接次数的计算有专门的说明,基本上一次业务通信是2次连接,所以不适合高频通信,除非日后推出其他套餐.
+
+电信资费标准:
+
+![mark](http://p09tzvz74.bkt.clouddn.com/blog/171214/0l1eKbFKH2.png?imageslim)
+
+联通测试资费标准:
+
+![mark](http://p09tzvz74.bkt.clouddn.com/blog/171214/m745dc78GK.png?imageslim)
+
+目前只有电信是实际部署了,而联通还在测试阶段(只有部分地区可以用),移动还没有牌照.
+
+关于响应速度,说法不一致,华为的官方说法大概是从发指令到响应是10s,有些情况是6s,但是并没有具体说明,有人测试的说法大概是1-2s,这个要具体实测才能知道
+
+IoT Platform 是可以自己搭建的,目前提供平台的非常多,比如华为,小米,亚马逊等等,当然各自都有各自的API和通讯协议,透传的平台也有,不过都是一些小公司在做.
+
+NB-IoT节点是半双工模式,下行峰值为226.7kbps。上行multi-tone传输为250kbps，上行single-tone为20kbps,对于这个速率也是和基站地区有关系,对于速度有要求的也要实际测试.
+
+节点的包大小以及发包频次的提高都会导致系统可承载节点数量的减少,所以高频次或者大数据包都需要测试后才能知道(有人测试高包高频会导致未知原因通信断开)
+
+总体来说NB-IoT目前正在大力发展,各地发展情况不同,具体实用还需要再等一段时间.
+
+#### Sigfox
+
+Sigfox也是使用窄宽通信的方式,官方的说明中是说每秒速率在100或600bits,其速率和其使用的带宽宽度大小有关系.一条上行消息总帧大小是26字节,有效负载最大是12字节,大概要2s到达监控基站,下行消息的有效负载最大是8字节.有效负载可以为0字节,从而表示当前数据帧是一个心跳帧.
+
+![mark](http://p09tzvz74.bkt.clouddn.com/blog/171205/gjE04DcFC1.png?imageslim)
+
+可以看到Sigfox,也是从节点到基站,然后到Sigfox云平台之后,再推送到对应的开发者的平台或者服务器
+
+Sigfox的特点就是轻型,省点,容量大,但是对应的其限制也非常多比如最大传输字节数,比如传输速率,等等基本全部都限制住了.Sigfox是一整套方案,其所有节点到基站到云平台,全部为其所有,如果要部署也是全套上,而且他也需要运营商的支持,所以国内目前基本不可行,目前国外部署的比较多.而Sigfox的终端节点目前也需要授权生产,也只有ST等几家生产.
+
+Sigfox的协议相对封闭,其具体实现细节无法知晓,只有签订协议以后才能拿到相关说明文档.
+
+#### LoRa
+
+LoRa 与上述的都不同,他是用的是开放频段进行通信,完全可以自己部署,不受运营商的影响,而且其完全开源,非常开放.
+
+###### 网络架构
+
+<center>![](http://7xkqvo.com1.z0.glb.clouddn.com/lorawan_architecture.png)</center>
+
+基本就是节点到网关，网关再到LoRa服务器(network server)，LoRa服务器再和应层服务器交互，最后是服务器和客户端的交换，安全性上全程都有AES加密。
+
+节点：这里节点只负责采集数据，然后按照协议传输给网关
+
+网关：网关不处理数据，只是打包封装数据，把原本数据从lora格式转到对应的网络格式，然后给LoRa服务器
+
+LoRa服务器：处理节点发送来的数据或者是入网命令,然后将数据发送给应用服务器
+
+###### 限制
+
+首先LoRa有三种终端节点:
+
+- Class A
+    - 最省电
+    - 每次上行传输后紧跟两个下行接收窗，从而实现双向传输（服务器要发送数据必须等其上行传输后）
+- Class B
+    - 在 A 的基础上，增加了一个定时开启的接收窗，为了实现同步它需要接收网关的同步Beacon。
+    - 没有A省电
+- Class C
+    - C与B不同，没有Beacon，但是C是全时刻打开接收窗，所以C可以实时响应。
+    - 功耗最高
+
+不同节点对应不同的应用场景,A适合主动上传型,B适合轻量受控型,C是响度实时响应型.LoRa网络中,如果有一个节点在和某网关进行通信,那么其他节点是无法与该网关进行任何通信的,只有当这次通信完成以后该网关才会恢复正常.
+
+
+![mark](http://p09tzvz74.bkt.clouddn.com/blog/171205/fIkJFIlgiA.png?imageslim)
+
+![](http://7xkqvo.com1.z0.glb.clouddn.com/lorawan_ed_receive_slot_timing.png)
+
+可以看到就算选择C型,其消息天生自带的延时等待下行消息就很长.
+
+![mark](http://p09tzvz74.bkt.clouddn.com/blog/171205/Dfa3mhEFAi.png?imageslim)
+
+还有一点,传输信息点是随机时间发送,有一篇文章提出LoRa发生传输错误/冲突的次数非常
+
+这里有关于LoRa一些限制的分析
+
+> https://www.thethingsnetwork.org/forum/t/limitations-data-rate-packet-size-30-seconds-uplink-and-10-messages-downlink-per-day-fair-access-policy/1300/2
+> https://arxiv.org/pdf/1607.08011.pdf
+> https://www.thethingsnetwork.org/forum/t/universal-lora-wan-gateway-limitations-because-physics/1749
+
+#### Telensa
+
+Telensa 公司是一家无线监控系统供应商，将其智能无线技术应用于路灯,停车位以及智慧城市等市场，特别关注于街道照明和停车的远程控制和管理。其掌握的低功耗无线通信技术仅开放用户界面，协议本身并不开放，该公司认为自己在应用层具有差异化的优势，而不是在底层协议层上。
+
+#### RPMA
+
+RPMA（随机相位多址接入）是由Ingenu开发的无线技术,使用了2.4G频段,Ingenu是Machine Network™的创建者,Machine Network™是专为机器到机器（M2M）和物联网（IoT）应用而设计的唯一无线网络。全球超过29个国家已采用Machine Network。其采用随机相位多址接入的方式实现了低成本、高容量的物联网通信，相比其他LPWA能够以更少的基站连接更多的终端，具有31 kb/s的下载速度和15.6 kb/s的上传速度,通信能力远高于其他同类通信网络。
+
+RPMA的终端容量大于其他方案,其网关数量也少于其他方案,其传输速率也高,并且时延较低,但是其耗能肯定是高于其他方案的,还有一点RPMA的基站功率太高,可能不是个人或者小公司能够搭建的.
+
+目前RPMA已经有了中国代理,下面的网址有未来规划的一些信息,但是目前能搜到的信息非常少,至于是否会部署可能还有待调查.
+
+> http://www.mctiot.com/index.php?m=page&a=index&id=2
+
+![mark](http://p09tzvz74.bkt.clouddn.com/blog/171205/EcIj2da06f.png?imageslim)
+
+#### Weightless
+
+Weightless有三个不同的架构：Weightless-N、Weightless-P和Weightless-W。Weightless-N单向通信，是低成本的版本；Weightless-P是双向通信；如果当地TV空白频段可用，可选择Weightless-W,比如印度.
+三种方案对应试用范围也不同.
+
+|| 	Weightless-N|	Weightless-P|	Weightless-W|
+|----|--|----|----|
+|Directionality	|1-way	|2-way	|2-way|
+|Feature |set	|Simple	Full	|Extensive|
+|Range	|5km+	|2km+|	5km+|
+|Battery life	|10 years|	3-8 years|	3-5 years|
+|Terminal| cost	Very low|	Low	|Low-medium|
+|Network| cost	Very low|	Medium|	Medium|
+
+可以看到在一个基站的情况下,每15分钟传输200字节情况下,可容纳的终端数量,Weightless具有一定的优势
+
+![mark](http://p09tzvz74.bkt.clouddn.com/blog/171214/FgEH0hl703.png?imageslim)
+
+#### ZETA
+
+ZETA，同样也是在开放频段，由纵行科技完全自主研发,也是目前能看到的比较知名的国内的解决方案,具体的实现细节透露的并不多.
+
+![mark](http://p09tzvz74.bkt.clouddn.com/blog/171214/Ej89g90ceL.png?imageslim)
+
+- 多个Sub-GHz频段可选（如：433、470、500、787、868和915MHz等） 。可定制专有频段，支持100bps-50kbps速率传输。
+
+更多信息,需要咨询官网,才能知道他们的具体的细节
+
+> http://www.zifisense.com/
+
+#### other
+
+其他在窄带上做文章的公司应该还有不少,不过总体感觉上大同小异,都是在这个基础上加上自己的上下层通信协议,从而将网络容量扩大的.
+
+## Summary
+
+总结一下，在窄带领域中，大致只有三种方案，NB-IoT,RPMA,LoRa和LoRalike（sigfox，Telensa，ZETA等），这里只能大概介绍一下各种方案，具体的是否可以转化可用，还需要实际测试才知道。
+
+> http://www.iot101.com/dghgyw/2016-06-02/11649.html
+>
+> https://zhuanlan.zhihu.com/p/28444812
+>
+> https://zhuanlan.zhihu.com/p/27469984
+>
+> https://www.u-blox.com/zh/rpma
+>
+> https://iot-daily.com/tag/weightless-p/
+>
+> http://developer.huawei.com/ict/cn/site-iot/product/nb-iot
+>
+> https://www.zhihu.com/question/47538137
+>
+> http://developer.huawei.com/ict/forum/thread-20193.html#pid5485
+>
+> http://blog.sina.com.cn/s/blog_927cff010102xeu5.html
+>
+> http://blog.csdn.net/qingchuwudi/article/details/50786289
+>
+> http://www.cnblogs.com/answerinthewind/p/6200497.html
