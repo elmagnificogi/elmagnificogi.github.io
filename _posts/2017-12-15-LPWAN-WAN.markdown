@@ -1,0 +1,121 @@
+---
+layout:     post
+title:      "IoT-WAN"
+subtitle:   "无线物联网，宽带广域，WAN"
+date:       2017-12-15
+author:     "elmagnifico"
+header-img: "img/git-head-bg.jpg"
+catalog:    true
+tags:
+    - LPWAN
+---
+
+# Foreword
+
+最近寻找合适的网络方案,查询了不少无线传感网络的相关信息,这里一一举例其相关信息
+
+下图基本列举出了目前在用的各种方案，下文将按照图中的顺序来进行介绍。
+
+![](http://5b0988e595225.cdn.sohucs.com/images/20171127/de40efdafae04655a1bef0062b2950ce.png)
+
+# 物联网无线通信技术
+
+## 远距离广域无线网络
+
+### 宽带广域/WAN
+
+一般来说窄带是泛指Sub-1GHz，1G赫兹以下的频段，称之为窄带.
+
+也有许多通讯协议其既有窄带也有宽带，比如LTE，Zigbee,Thread.
+
+#### GSM
+
+GSM,Global System for Mobile Communications,全球移动通讯系统.
+
+这里泛指为2G无网络,可使用的两个主要功能就是短信和语音了,目前仅仅依靠短信和语音来完成IoT应用基本没有,而目前多数语音依然还是通过GSM网络来进行的.
+
+#### GPRS
+
+GPRS,General Packet Radio Service,通用分组无线服务.
+
+这里泛指2G有网络,能使用的自然就是GSM+网络,只不过网络速度较慢,但是对于多数IoT来说都够用了.
+
+而基本年年都会提到2G退网,目前2G网络是不会继续新增,但是要退网估计还早,毕竟有很多相关的项目或者有年头的项目都是与2G相关的(至少国内5-10年内都还无法退网)
+
+#### UMTS
+
+UMTS,Universal Mobile Telecommunications System,通用移动通信系统,他是第三代移动通信技术.
+
+所以这里就泛指3G,3G除了有自己的语音通信,还有更快的网速,可以支持高流量的IoT应用,比如监控等视频流.
+
+###### CDMA
+
+CDMA,Code Division Multiple Access,电信3G使用的通信制式与其他运营商不同
+
+#### LTE
+
+LTE,Long Term Evolution,只看名字完全不懂什么意思,其实应该是通用移动通信技术的长期演进.也就是 the Long Term Evolution of Universal Mobile Telecommunications System.其所指代的是其实是从GSM/UMTS到4G的一个过渡版本,而代表着4G的通用移动通信系统则是 LTE - Advanced.
+
+不过在本文这里泛指4G,但是4G网络用于语音的只有VoLTE,而VoLTE并没有普及,所以一旦2G退网,但是3G普及并不高的情况下,可能打电话就有点问题了,基于这样那样的原因,2G也因此并不会短期内退网.
+
+目前基本多数IoT设备都需要物联网卡,与NB-IoT的物联网卡所不同的大概就是其多数以流量为主,而且流量费较正常通信的流量费用来说便宜了很多,每个地区都略有不同,需要根据当地的物联网卡运营商来决定.
+
+#### LTE-MTC
+
+LTE-M,LTE-Machine-to-Machine,后期改名为LTE enhanced MTC (eMTC)
+
+#### eMTC/Cat M
+
+eMTC是LTE-M（LTE-Machine-to-Machine）在3GPP R13中的叫法，是基于LTE演进的物联网技术。在R12中叫Low-Cost MTC，在R13中被称为LTE enhanced MTC (eMTC)，即Cat-M1，旨在基于现有的LTE载波满足物联网设备需求。
+
+![mark](http://p09tzvz74.bkt.clouddn.com/blog/171215/HAH7AiL16i.png?imageslim)
+
+由图可以看到与NB-IoT技术相比，eMTC优势则在于传输速率更快，更低延时（100ms级，NB-IoT是秒级），支持移动性、FDD、定位、支持VoLTE语音通信,同时传输速率更快,传输内容也更多,虽然日后NB-IoT也会推出定位服务,不过相对而言eMTC更适合于对响应速率要求比较高的环境,而且其移动性较高也适合运动的情景.
+
+由于有政策所以NB-IoT先行,所以eMTC感觉还要再等个一两年,按照中国电信的目标，今年年底(2017)，将会展开eMTC试商用(并没有)，2018年将会实现eMTC正式商用。
+
+###### 运营商特点
+
+中国联通的2G网络（GSM）覆盖较差、已经开始退网；3G网络（WCDMA）优势明显，可承载语音和中低速数据业务；4G网络（TD-LTE/FDD LTE）则中规中矩，没有CAT.0/CAT.1网络。
+
+中国电信的2G网络（CDMA 1X）覆盖一般；3G网络（EVDO）劣势明显，无法承载语音；4G网络（TD-LTE/FDD LTE）则有一定优势，且CAT.1、VoLTE等业务也即将全网商用 。
+
+中国移动的2G网络（GSM）覆盖非常完善，可以承载语音和极低速数据业务；3G网络（TD-SCDMA）劣势明显，无法承载语音；4G网络（TD-LTE）也一定劣势：没有FDD牌照，没有CAT.0/CAT.1网络。
+
+由于中国移动没有FDD牌照,所以目前中国移动的NB-IoT一点消息都没有.而电信目前走得最快,而联通目前也只是在测试阶段,但也比移动速度进度快.
+
+#### LTE-V
+
+3GPP 基于LTE D2D开发了基于蜂窝的V2X 技术（C-V2X），提高了通信距离、车速、容量等系统设计指标。其中基于LTE技术的被称为LTE-V2X，包括车车直通和基于网络转发两种模式。随着 LTE 技术演进到 5G NR（新空口），车联网技术也将使用新空口作为系统设计的基础（NR-V2X）。LTE-V目前是韩国与中国主推的车联网方案,而且其也作为未来5G标准的一部分.
+
+#### WiMAX
+
+WiMAX目前基本凉了,基本原先各种支持WiMAX的运营商基本都退出了.
+
+WiMAX技术最早提出时，WiMAX定位是取代WiFi的一种新的无线传输方式，但后来发现WiMAX定位比较像3.5G一样，提供终端使用者任意上网的连结，这些功能3.5G/LTE都可以达到。WiMAX于市场上所面临的竞争，主要是来自已广为布局且能提供相同服务的无线系统，如CDMA2000和UMTS，以及许多网络导向的系统如HIPERMAN和WiBro。市场定位模糊成为WiMax的最大致命伤。
+
+## Summary
+
+所以目前还是以2g/3g/4g作为物联网通信方案较多,其他方案或多或少都有一些局限性
+
+> https://www.zhihu.com/question/62590259
+>
+> https://zhuanlan.zhihu.com/p/27163048
+>
+> https://www.u-blox.com/en/lte-cat-m1
+>
+> http://lucky6.coding.me/2017/09/24/eMTC/
+>
+> https://ubidots.com/blog/what-is-cat-m1-and-what-it-means-for-iot/
+>
+> https://www.iot-now.com/2016/06/21/48833-cat-m1-vs-nb-iot-examining-the-real-differences/
+>
+>
+>
+>
+>
+>
+>
+>
+>
+>
