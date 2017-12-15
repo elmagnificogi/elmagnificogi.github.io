@@ -86,6 +86,15 @@ eMTC是LTE-M（LTE-Machine-to-Machine）在3GPP R13中的叫法，是基于LTE�
 
 #### LTE-V
 
+车联网目前也是比较火的,其涵盖的范围也很大,以车为主体,主要分成下面四种:
+
+- V2N,Vehicle-To-Network
+- V2V,Vehicle-To-Vehicle
+- V2I,Vehicle-To-Infrastructure
+- V2P,Vehicle-To-Pedestrian
+
+其中涉及到人车安全的问题,所以对于通信要求比较高,延迟低,移动性高,数据同步要求高.
+
 3GPP 基于LTE D2D开发了基于蜂窝的V2X 技术（C-V2X），提高了通信距离、车速、容量等系统设计指标。其中基于LTE技术的被称为LTE-V2X，包括车车直通和基于网络转发两种模式。随着 LTE 技术演进到 5G NR（新空口），车联网技术也将使用新空口作为系统设计的基础（NR-V2X）。LTE-V目前是韩国与中国主推的车联网方案,而且其也作为未来5G标准的一部分.
 
 #### WiMAX
