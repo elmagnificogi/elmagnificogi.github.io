@@ -1460,6 +1460,19 @@ print y
 
 但是这个也有很多问题，他直接对文件进行一行化的时候基本很难通过运行，建议只是对某个函数或者若干函数这样操作，又或者是配合上面的混淆一起使用，得到的结果会非常难以复原查看。
 
+#### base64
+
+还有一种掩耳盗铃的方式,就是使用base64先把代码全部转化为字节码,然后在代码里再把它解码变成code string,然后交由编译器执行.
+
+```python
+import base64
+mycode = "print 'Hello World!'"
+secret = base64.b64encode(mycode)
+print(secret)
+mydecode = base64.b64decode(secret)
+eval(compile(mydecode,'<string>','exec'))
+```
+
 ## others
 
 github 上还有不少混淆的工程,但是呢需要注意一下,这里经常会遇到各种错误,这些错误大部分都产生于编码以及字符集出错,导致的.比如我用的是UTF-8以及GBK,其中含有中文(用于界面部分),然后就出现了各种报错
