@@ -35,7 +35,7 @@ maya除了可以直接使用MEL和Python的脚本语言（Maya Commands）来开
 
 MayaPluginWizard 这个比较简单，就是普通Visual Studio中新建项目时的项目引导，或者说工程模板，帮助你快速建立项目，而与maya相关的配置他都帮你配好了，非常好用。
 
-Visual Studio的版本更新比较快，而maya自然不可能跟上最新版的VS，比如maya2017使用的是vs2012，而maya2018使用的是vs2015，所以经常会遇到问题。
+Visual Studio的版本更新比较快，而maya自然不可能跟上最新版的VS，比如maya2017使用的是vs2012，而maya2018使用的是vs2015，所以经常会遇到问题,使用这种方法,就需要和maya相配套的vs.
 
 ###### 使用方法
 
@@ -56,7 +56,7 @@ Visual Studio的版本更新比较快，而maya自然不可能跟上最新版的
 
 #### Maya Plug-in Tutorials
 
-MayaPluginWizard 在16版之前，都是1.0版本，并且不同版本对应的Visual Studio版本并不相同，之前的版本可能都可以跨版本使用，但是到了Visual Studio2017以后Wizard的路径以及存储方式都发生了改变，想要继续使用就不行了。还有一种方式，手动配置工程，完全从头开始.
+MayaPluginWizard 在16版之前，都是1.0版本，并且不同版本对应的Visual Studio版本并不相同，之前的版本可能都可以跨版本使用，但是到了Visual Studio2017以后Wizard的路径以及存储方式都发生了改变，想要继续使用就不行了,这里就只能用另一种方式，手动配置工程，完全从头开始.
 
 ###### 使用方法
 
@@ -68,6 +68,7 @@ MayaPluginWizard 在16版之前，都是1.0版本，并且不同版本对应的V
 
 ```c++
 #include <maya/MIOStream.h>
+
 cout<<"Hello World"<<endl;
 ```
 
@@ -103,7 +104,7 @@ MAYA_PATH,或者是手动修改工程中lib和include的搜索目录.
 
 自己手动配置maya工程的方式在maya的help中并没有提及,网上能找到的资料都很有限,而AutoDesk论坛上关于VS和maya的问题基本上都是被要求切换到对应的VS版本来解决了,也没有人说具体怎么配置.
 
-上面提到的流定向的问题,在Maya2017配合VS2017无输出的情况下,安装了VS2012版本,而然问题依旧,要解决这个问题可能需要一个干净的VS2012,没有装其他VS版本的情况下,应该是正常的.
+上面提到的流定向的问题,在Maya2017配合VS2017无输出的情况下,安装了VS2012版本,而然问题依旧,要解决这个问题可能需要一个干净的VS2012.未安装其他VS版本的情况下,应该是正常的.
 
 ## Quote
 
