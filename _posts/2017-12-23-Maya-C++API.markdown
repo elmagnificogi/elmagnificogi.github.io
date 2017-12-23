@@ -1,0 +1,115 @@
+---
+layout:     post
+title:      "Maya C++开发 in VS2017"
+subtitle:   "API, HelloWorld, plugin"
+date:       2017-12-23
+author:     "elmagnifico"
+header-img: "img/python-head-bg.png"
+catalog:    true
+tags:
+    - C++
+    - maya
+---
+
+## Foreword
+
+maya除了可以直接使用MEL和Python的脚本语言（Maya Commands）来开发，还可以使用C++ API或者python API，又或者C#
+
+![mark](http://p09tzvz74.bkt.clouddn.com/blog/171223/50GGI0eb5C.png?imageslim)
+
+从本质上说python API 是基于C++ API来的，而C#的API基本就是C++ API
+
+在这里面C++无疑是速度最快的,并且最接近maya的，而python则是速度最慢的。
+
+要开发maya c++ plugin插件，需要先搭好环境，这里记录两种初始化环境的方式。
+
+## Maya Developer Kit (aka devkit)
+
+首先自从maya2016以后开始，maya就不自带开发套件了，需要单独从官网的APP商城里下载
+
+> https://apps.autodesk.com/MAYA/en/Home/Index
+
+商城里搜索develope 就能找到2016版以后的开发套件，需要与你开发的版本一一对应，否则可能会有无法解决的错误。
+
+#### MayaPluginWizard
+
+MayaPluginWizard 这个比较简单，就是普通Visual Studio中新建项目时的项目引导，或者说工程模板，帮助你快速建立项目，而与maya相关的配置他都帮你配好了，非常好用。
+
+Visual Studio的版本更新比较快，而maya自然不可能跟上最新版的VS，比如maya2017使用的是vs2012，而maya2018使用的是vs2015，所以经常会遇到问题。
+
+###### 使用方法
+
+下载完Maya2017_DEVKIT_Windows之后，解压下面目录中的内容
+
+    devkitBase\devkit\pluginwizard\MayaPluginWizard2.0
+
+将顶层目录MayaPluginWizard整个复制到C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\VCWizards（你自己的安装路径）
+
+
+然后将MayaPluginWizard目录下的这三个文件全都放到 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\vcprojects目录下（你自己的安装路径）。
+
+    MayaPluginWizard.ico
+    MayaPluginWizard.vsz
+    MayaPluginWizard.vsdir
+
+然后重新打开一下VS和MAYA，基本就可以直接通过项目模板，建立一个简单的MAYA插件的工程了，其相关的所有配置都给你配置好了。
+
+#### Maya Plug-in Tutorials
+
+MayaPluginWizard 在16版之前，都是1.0版本，并且不同版本对应的Visual Studio版本并不相同，之前的版本可能都可以跨版本使用，但是到了Visual Studio2017以后Wizard的路径以及存储方式都发生了改变，想要继续使用就不行了。还有一种方式，手动配置工程，完全从头开始.
+
+###### 使用方法
+
+> http://blog.josephkider.com/2015/08/20/creating-your-first-maya-plug-in-in-visual-studio/#comment-274
+
+具体流程,参见上面的博文.他是基于maya2016并且使用Visual Studio 2015 来创建的.整个配置流程照搬到maya2017以及Visual Studio 2017也是可以使用的.
+
+唯一遇到的问题是输入输出流定向好像出了问题,使用maya的流文件,无法从脚本编辑器或者是Output Windows中看到输出信息,加上断点,可以看到代码执行了,但是内容输出到哪去了就不知道了.
+
+```c++
+#include <maya/MIOStream.h>
+cout<<"Hello World"<<endl;
+```
+
+而使用下面的输出方式,则都能在脚本编辑器中看到正确的输出.
+
+```c++
+setResult("helloworld command executed!\n");
+MGlobal::displayInfo("Hello world!~!!");
+```
+
+当然如果嫌麻烦,也可以直接使用博文中的工程,其git在下面,但是使用他的工程就需要配置一下环境变量,
+MAYA_PATH,或者是手动修改工程中lib和include的搜索目录.
+
+> https://github.com/hepcatjk/maya_tutorials
+
+不过他的工程不能直接调试,调试需要再配置一下.
+
+打开他的工程过程中可能会提示工程版本更新等信息,更新不更新都可以正常运行.
+
+###### Debug
+
+使用VS直接调试maya插件,需要在工程配置中的Debugging中,切换到远程Windows调试器,然后下面的命令指定到maya.exe的位置,比如:
+
+    D:\Autodesk\Maya2017\bin\maya.exe
+
+附加选项也要选择是.
+
+每次开始调试前,一定要确保maya已经打开,并且maya已经加载完成,可以操作为止,否则会报异常.
+
+调试的时候也要切换到远程调试模式下,再按F5.
+
+## Summary
+
+自己手动配置maya工程的方式在maya的help中并没有提及,网上能找到的资料都很有限,而AutoDesk论坛上关于VS和maya的问题基本上都是被要求切换到对应的VS版本来解决了,也没有人说具体怎么配置.
+
+上面提到的流定向的问题,在Maya2017配合VS2017无输出的情况下,安装了VS2012版本,而然问题依旧,要解决这个问题可能需要一个干净的VS2012,没有装其他VS版本的情况下,应该是正常的.
+
+## Quote
+
+> http://help.autodesk.com/view/MAYAUL/2017/CHS/?guid=__files_API_Introduction_htm
+>
+> http://blog.josephkider.com/2015/08/20/creating-your-first-maya-plug-in-in-visual-studio/#comment-274
+>
+> https://nickcullen.net/blog/misc-tutorials/how-to-debug-a-maya-2016-c-plugin-using-visual-studio-2015/
+>
