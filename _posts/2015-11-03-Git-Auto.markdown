@@ -108,9 +108,7 @@ Win10下
 
     git add .
 	git commit -m "update-post"
-    git remote add origin https://github.com/elmagnificogi/elmagnificogi.github.io.git
-    #这货还老失败
-	git push -u origin master
+	git push origin master
 
 好麻烦，得弄个什么一键完成比较快，刚好也不用输入账号密码，省事
 
@@ -119,9 +117,7 @@ Win10下
 
 	git add .;
 	git commit -m "update-post";
-    git remote rm origin;
-    git remote add origin https://github.com/elmagnificogi/elmagnificogi.github.io.git;
-	git push -u origin master
+	git push origin master
 
 以后只需要调用
 

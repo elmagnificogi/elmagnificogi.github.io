@@ -130,7 +130,7 @@ PAC规则分为两种，一种是可以直接应用官方的规则比如GFWlist�
 自定义代理规则的设置语法与GFWlist相同，语法规则如下：
 
 - 通配符支持。
-- 比如 \*.example.com\* 实际书写时可省略 * 
+- 比如 \*.example.com\* 实际书写时可省略 *
 
     如 .example.com/  和 \*.example.com\* 效果一样
 
@@ -138,11 +138,11 @@ PAC规则分为两种，一种是可以直接应用官方的规则比如GFWlist�
 
     如 \[\w]+:\/\/example.com\
 
-- 例外规则 @@ 
+- 例外规则 @@
 
     如 @@\*.example.com\* 满足 @@ 后规则的地址不使用代理
 
-- 匹配地址开始和结尾 \| 
+- 匹配地址开始和结尾 \|
 
     如 \|http://example.com 、 example.com\| 分别表示以 http://example.com 开始和以 example.com 结束的地址
 
@@ -151,10 +151,10 @@ PAC规则分为两种，一种是可以直接应用官方的规则比如GFWlist�
     如 \|\|example.com 则 http://example.com 、 https://example.com 、 ftp://example.com 等地址均满足条件
 
 - 注释 !
- 
+
     如 !我是注释
 
-更多user-rule.txt语法规则，可以参考AdBlockPlus过滤规则 
+更多user-rule.txt语法规则，可以参考AdBlockPlus过滤规则
 
 > https://adblockplus.org/en/filter-cheatsheet
 
@@ -174,7 +174,7 @@ PAC规则分为两种，一种是可以直接应用官方的规则比如GFWlist�
 同时由于新疆上不去github，但是内地可以上去，所以在这个基础上又加上了github的全站过滤。
 
 	function FindProxyForURL(url, host) {
-	
+
     if (shExpMatch(url,"http://elmagnificogi.github.io./")) {
         return direct;
     }
@@ -212,10 +212,10 @@ PAC规则分为两种，一种是可以直接应用官方的规则比如GFWlist�
 (这两个文件在git目录中windows中叫profile或bash.bashrc)
 
 	enable_proxy() {
-	    export http_proxy="127.0.0.1:1080" 
+	    export http_proxy="127.0.0.1:1080"
 	    export https_proxy="127.0.0.1:1080"
 	}
-	
+
 	disable_proxy() {
 	    unset http_proxy
 	    unset https_proxy
@@ -248,9 +248,7 @@ PAC规则分为两种，一种是可以直接应用官方的规则比如GFWlist�
 	enable_proxy;
 	git add .;
 	git commit -m "update-post";
-	git remote rm origin;
-	git remote add origin https://github.com/elmagnificogi/elmagnificogi.github.io.git;
-	git push -u origin master
+	git push origin master
 
 经过这些折腾基本就ok了
 
@@ -260,9 +258,7 @@ PAC规则分为两种，一种是可以直接应用官方的规则比如GFWlist�
 	export https_proxy="127.0.0.1:1080";
 	git add .;
 	git commit -m "update-post";
-	git remote rm origin;
-	git remote add origin https://github.com/elmagnificogi/elmagnificogi.github.io.git;
-	git push -u origin master
+	git push origin master
 
 ## The end
 
@@ -273,12 +269,9 @@ PAC规则分为两种，一种是可以直接应用官方的规则比如GFWlist�
 ## Quote
 
 > http://www.tuicool.com/articles/V77jyu
-> 
+>
 > http://tieba.baidu.com/p/4060577753
-> 
+>
 > http://yveschan.github.io/blog/shadowsocks-analysis/
-> 
+>
 > http://vc2tea.com/whats-shadowsocks/
-
-
-
