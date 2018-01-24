@@ -47,12 +47,11 @@ tags:
 
 ###### code
 
-```c++
+```c
 const int MAX_V = 1000;
 
 int V, E;
 // V 定点数，E边数
-
 
 vector<int> G[MAX_V];
 // 这里使用邻接表，而不是邻接矩阵
@@ -142,7 +141,7 @@ void judge()
 
 ###### code
 
-```c++
+```c
 #define maxn 10
 // x集合和y集合中顶点的最大个数
 int nx, ny;
