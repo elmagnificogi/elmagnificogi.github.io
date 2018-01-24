@@ -64,21 +64,21 @@ int color[MAX_V];
 
 bool DFS(int v, int c)
 {
-	color[v] = c;
+    color[v] = c;
     //将顶点v染成颜色c
 
-	for(int i = 0; i < G[v].size(); i++)
+    for(int i = 0; i < G[v].size(); i++)
 	{
         // 如果邻接点是同色，说明矛盾了
-		if(color[G[v][i]] == c)
+        if(color[G[v][i]] == c)
 			return false;
         // 如果邻接点未染色，那么染相反颜色 递归染色
-		if (color[G[v][i]] == 0 && !dfs(G[v][i], -c))
+        if (color[G[v][i]] == 0 && !dfs(G[v][i], -c))
 			return false;
 	}
 
     // 如果都染色了，没有发生矛盾，返回true
-	return true;
+    return true;
 }
 
 void judge()
@@ -86,7 +86,7 @@ void judge()
 	for (int i = 0; i < V; i++)
 	{
         // 如果没染色
-		if (color[i] == 0)
+        if (color[i] == 0)
 		{
 			if (!DFS(i, 1))
 			{
@@ -162,14 +162,14 @@ int DFS(int u)
 	for(v = 0; v<ny; v++)
 	{
         // 存在边 并且没有访问过
-		if(edge[u][v] && !visited[v])
+        if(edge[u][v] && !visited[v])
 		{
 			visited[v] = 1;
-			if(cy[v] == -1 || DFS(cy[v]))
             // 找到非匹配点 或者从该点往下能找到一条增广路
-			{
+			if(cy[v] == -1 || DFS(cy[v]))
+            {
                 // 将这两点设置为互相匹配点（匹配和非匹配边交换）
-				cx[u] = v;
+                cx[u] = v;
 				cy[v] = u;
 				return 1;
 			}
@@ -181,11 +181,11 @@ int DFS(int u)
 int maxmatch()
 {
     // 最大匹配数
-	int res = 0;
+    int res = 0;
 
 	memset(cx, -1, sizeof(cx));
 	memset(cy, -1, sizeof(cy));
-	//初始值为-1表示两个集合中都没有匹配的顶点
+    //初始值为-1表示两个集合中都没有匹配的顶点
 
 	for(int i = 0; i <= nx; i++)
 	{
