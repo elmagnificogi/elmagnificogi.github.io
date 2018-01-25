@@ -45,7 +45,7 @@ tags:
 
 ###### code
 
-```c
+```js
 // 最大点数量
 const int MAXN = 300;
 // 最大整数
