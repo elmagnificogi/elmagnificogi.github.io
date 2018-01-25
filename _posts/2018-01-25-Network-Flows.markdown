@@ -2,7 +2,7 @@
 layout:     post
 title:      "网络流，最小费用最大流"
 subtitle:   "增广路，EK"
-date:       2018-01-24
+date:       2018-01-25
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"
 catalog:    true
