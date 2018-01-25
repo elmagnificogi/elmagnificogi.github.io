@@ -7,7 +7,7 @@ author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"
 catalog:    true
 tags:
-    - python
+    - Graph Theory
 ---
 
 ## Foreword
