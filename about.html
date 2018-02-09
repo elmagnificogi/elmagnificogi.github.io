@@ -1,38 +1,26 @@
 ---
 layout: page
 title: "About"
-description: "Hey, this is Hux."
-header-img: "img/about-bg-walle.jpg"
+description: "Hey, this is elmagnifico."
+header-img: "/p09tzvz74.bkt.clouddn.com/blog/171201/6gf9HIi6Jj.jpg?imageslim"
 multilingual: true
 ---
 
-<!-- Language Selector -->
-<select class="sel-lang" onchange= "onLanChange(this.options[this.options.selectedIndex].value)">
-    <option value="0" selected> 中文 Chinese </option>
-    <option value="1"> 英文 English </option>
-</select>
-
-<!-- Chinese Version -->
 <div class="zh post-container">
     {% capture about_zh %}{% include about/zh.md %}{% endcapture %}
     {{ about_zh | markdownify }}
 </div>
 
-<!-- English Version -->
-<div class="en post-container">
-    {% capture about_en %}{% include about/en.md %}{% endcapture %}
-    {{ about_en | markdownify }}
-</div>
 
+    {% if site.disqus_username %}
+    <!-- disqus 评论框 start -->
+    <div class="comment">
+        <div id="disqus_thread" class="disqus-thread">
 
-{% if site.disqus_username %}
-<!-- disqus 评论框 start -->
-<div class="comment">
-    <div id="disqus_thread" class="disqus-thread">
-
+        </div>
     </div>
-</div>
-<!-- disqus 评论框 end -->
+    <!-- disqus 评论框 end -->
+
 
 <!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
 <script type="text/javascript">
