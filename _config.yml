@@ -47,7 +47,7 @@ kramdown:
 
 
 # Disqus settings
-#disqus_username: _your_disqus_short_name_
+disqus_username: elmagnificodi
 
 # Netease setttings
 netease_comment: false
