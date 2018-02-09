@@ -5,7 +5,9 @@ subtitle:   "0/1，DP,NPC"
 date:       2018-02-08
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"
+header-mask:  0.3
 catalog:    true
+multilingual: true
 tags:
     - Algorithm
 ---
