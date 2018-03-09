@@ -78,17 +78,17 @@ ASF从2.0到3.0改变了很多东西，刚开始我是看2.0的教程，然后�
 
 1.下载文件包,这里必须用ASF-generic的版本,其他版本我测试都无法正常运行.有可能下载特别慢,那我建议就用winscp连到云服务器上,把本地下好的传过去就行了.
 ```
-    wget https://github.com/JustArchi/ArchiSteamFarm/releases/download/3.1.1.1/ASF-generic.zip
+wget https://github.com/JustArchi/ArchiSteamFarm/releases/download/3.1.1.1/ASF-generic.zip
 ```
 
 2.解压
 ```
-    unzip ASF-generic.zip -d asf
+unzip ASF-generic.zip -d asf
 ```
 
 3.修改权限
 ```
-    chmod +x ArchiSteamFarm.sh
+chmod +x ArchiSteamFarm.sh
 ```
 
 4.修改config,更好的做法是通过解压后的文件,从中打开ConfigGenerator.html,然后通过网页配置,配置好了以后再通过下载到config中就可以了.如果不用网页配置,也能自己手改,如下:
