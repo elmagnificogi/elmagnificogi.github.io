@@ -1,0 +1,223 @@
+---
+layout:     post
+title:      "腾讯云与ASF"
+subtitle:   "0/1，DP,NPC"
+date:       2018-03-09
+author:     "elmagnifico"
+header-img: "img/git-head-bg.jpg"
+header-mask:  0.3
+catalog:    true
+tags:
+    - ECS
+---
+
+## Foreword
+
+最近刚好碰到腾讯云阿里云各种云一起打折，于是入了一个腾讯云，1核，2g内存，1m带宽，120块16个月。(没赶上降配延迟时间的bug)
+
+服务器可选地址，一共就只有北京，上海，广州，成都，并不能选择国外节点，所以vps什么的就别想了。
+
+而且最近香港或者其他海外地区的ip疯狂被封，无论你是阿里云还是什么的，都不好使。
+
+这里记录一下用腾讯云挂卡，搭建ASF的过程。
+
+### 腾讯云
+
+申请到腾讯云以后，就可以收到一条站内信，站内信中有初始密码（第一次弄找了半天密码）
+
+可以通过网页直接登陆，也可以使用putty来登陆。
+
+### ArchiSteamFarm
+
+挂卡界三王之一，没啥说的,一般来说ASF出问题比较小，而且也稳定。
+
+官网：
+
+> https://github.com/JustArchi/ArchiSteamFarm
+
+记得以前还有云挂卡服务，基本后端就是ASF，前端弄了个网页，然后还有点不规矩，被人抓到小尾巴。
+
+所以出于安全考虑自己搭建更好一点。
+
+#### 注意
+
+ASF从2.0到3.0改变了很多东西，刚开始我是看2.0的教程，然后用的3.0的客户端，怎么都不成功，后来才发现已经不支持以前的老操作了。
+
+如果要使用ASF2.x的版本，那么在centos上要用mono来运行，如果使用的是3.0版本，只要安装了dotnet以后，在centos上就能直接运行了。
+
+#### 安装.NET
+
+1. 安装签名
+
+    sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
+
+
+2. 添加产品源。（这一步必须紧跟上一步，独立执行会出现没权限的情况）
+
+    sudo sh -c 'echo -e "[packages-microsoft-com-prod]\nname=packages-microsoft-com-prod \nbaseurl=https://packages.microsoft.com/yumrepos/microsoft-rhel7.3-prod\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" &gt; /etc/yum.repos.d/dotnetdev.repo'
+
+
+3. 安装 .NET Core SDK。
+
+    sudo yum update
+    sudo yum install libunwind libicu
+    sudo yum install dotnet-sdk-2.0.0
+
+
+4. 将 dotnet 添加到 PATH
+
+    export PATH=$PATH:$HOME/dotnet
+
+
+5. 检测是否安装成功，不成功重来一遍就行了。
+
+    dotnet --version
+
+#### 安装ASF
+
+1. 下载文件包,这里必须用ASF-generic的版本,其他版本我测试都无法正常运行.有可能下载特别慢,那我建议就用winscp连到云服务器上,把本地下好的传过去就行了.
+
+    wget https://github.com/JustArchi/ArchiSteamFarm/releases/download/3.1.1.1/ASF-generic.zip
+
+
+2. 解压
+
+    unzip ASF-generic.zip -d asf
+
+
+3.  修改权限
+
+    chmod +x ArchiSteamFarm.sh
+
+
+4. 修改config,更好的做法是通过解压后的文件,从中打开ConfigGenerator.html,然后通过网页配置,配置好了以后再通过下载到config中就可以了.
+    如果不用网页配置,也能自己手改,如下
+    这一步可做可不做。
+    "IPCPrefixes": [
+		"http://127.0.0.1:1242/"
+	]
+    为了防止被封1242端口，这里可以修改成其他端口1242-65535就行
+
+	"SteamOwnerID": 0
+
+    steam的主id，这里可写可不写，如果有小号给大号挂卡，那就写，不然就不用了。
+
+
+> https://steamid.io/
+
+从这里可以直接赋值steam个人资料的链接得到64位ID
+
+添加一个新bot文件,命名随意,不是中文就行,格式是json
+
+```c
+{
+  "SteamLogin": "你的账号",
+  "SteamPassword": "你的密码",
+  "Enabled": true,
+  "UseLoginKeys": true,
+  "FarmingOrder": 9,//随机挂卡
+  "FarmOffline": true //离线挂卡
+}
+```
+
+正常到这里应该就结束了,但是由于国内封了steamcommunity的ip,导致获取不到steam的徽章库,从而不能正常挂卡.
+
+###### 常见问题
+
+    Cannot open assembly 'ArchiSteamFarm.exe': File does not contain a valid CIL
+
+这个基本说明这个程序不支持mono打开,其实是用mono开了3.0的程序
+
+    Segmentation fault
+
+执行./ArchiSteamFarm.exe时出现的,原因同上.
+
+    Request failing: https://steamcommunity.com/dev/apikey?l=english
+    could not get the badge information,we will try again later
+
+出现这种情况,其实就是所在的网络有问题,导致获取不到steam的相关信息.
+
+### ASCF
+
+ASCF:AnotherSteamCommunityFix,同样是用于修复steam社区的小工具,也蛮好用的.
+
+官网:
+> https://github.com/zyfworks/AnotherSteamCommunityFix
+
+1. 下载并解压缩
+
+    wget https://github.com/zyfworks/AnotherSteamCommunityFix/releases/download/1.2.2/ascf_v1.2.2_Linux_x64.zip
+
+
+2. 赋予程序可执行权限，在终端中输入命令：
+
+    chmod +x ./ascf
+
+3. 以后台的方式运行程序
+
+    nohup sudo ./ascf &
+
+
+做完这个以后可以使用打开steam社区试试看,是否成功
+
+#### 运行
+
+运行,其实这个脚本会检测环境,然后安装一些东西
+
+    ./ArchiSteamFarm.sh
+
+#### screen
+
+需要注意的是如果运行以后,直接退出终端会导致相关进程全都被清除,所以这里要用screen来运行ASF,或者也可以类似修复社区的方式,使用nohup来让ASF在后台运行，不过这里还是说一下screen的问题。
+
+screen相当于是建立多个终端同时运行，并且不会因某个终端退出而退出。
+
+新建一个终端，命名为asf，会看到一个进入screen的提示
+
+    screen -s asf
+
+然后运行，即可
+
+    ./ArchiSteamFarm.sh
+
+但是这里别直接退出，而是Ctrl-a 然后按一下d 绝对不能Ctrl-a Ctrl-d！！！虽然screen的快捷键是可以的，但是putty里Ctrl-d的意思是关闭终端退出，这样一操作putty程序就直接关闭了。
+
+这样就会回到使用putty连接进来的终端画面，而ASF运行的终端还在后台。
+
+查看当前screen终端
+
+    screen -ls
+
+恢复某一个终端,就能回到其输出的界面了.
+
+    screen -r 程序id
+
+screen比nohup好的地方就是可以回到程序运行的界面里,而不是只能把输出输出到某个文件,无法实时查看。
+
+需要注意的是screen所有快捷键都是Ctrl-a开始加某个按键结束，这很可能和当前win系统里其他程序冲突，从而导致在putty里按并不起作用。
+
+putty中 Ctrl-s 是锁定当前终端界面，不小心误按了，还以为是程序崩了呢。
+
+Ctrl-q 是恢复输入
+
+## Summary
+
+基本到这里就能正使用ASF了,正常运行以后会有提示告诉你预计需要多少天挂完多少卡的.
+
+如果非常多,就需要自己建一个开机启动项,然后每次自动后台运行.
+
+## Quote
+
+> https://steamcn.com/t339641-1-1
+>
+> https://www.jianshu.com/p/3fd90384fc24
+>
+> https://www.jianshu.com/p/13beaf40fa0a?utm_campaign=maleskine&utm_content=note&utm_medium=seo_notes&utm_source=recommendation
+>
+> https://steamcn.com/t339527-1-1
+>
+> https://steamcn.com/t339641-1-1
+>
+> http://man.linuxde.net/screen
+>
+> https://chaifeng.com/blog/2007/06/putty_200611.html
