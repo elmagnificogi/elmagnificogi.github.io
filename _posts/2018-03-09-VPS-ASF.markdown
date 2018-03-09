@@ -76,22 +76,22 @@ ASF从2.0到3.0改变了很多东西，刚开始我是看2.0的教程，然后�
 
 #### 安装ASF
 
-1. 下载文件包,这里必须用ASF-generic的版本,其他版本我测试都无法正常运行.有可能下载特别慢,那我建议就用winscp连到云服务器上,把本地下好的传过去就行了.
+1.下载文件包,这里必须用ASF-generic的版本,其他版本我测试都无法正常运行.有可能下载特别慢,那我建议就用winscp连到云服务器上,把本地下好的传过去就行了.
 ```
     wget https://github.com/JustArchi/ArchiSteamFarm/releases/download/3.1.1.1/ASF-generic.zip
 ```
 
-2. 解压
+2.解压
 ```
     unzip ASF-generic.zip -d asf
 ```
 
-3.  修改权限
+3.修改权限
 ```
     chmod +x ArchiSteamFarm.sh
 ```
 
-4. 修改config,更好的做法是通过解压后的文件,从中打开ConfigGenerator.html,然后通过网页配置,配置好了以后再通过下载到config中就可以了.如果不用网页配置,也能自己手改,如下:
+4.修改config,更好的做法是通过解压后的文件,从中打开ConfigGenerator.html,然后通过网页配置,配置好了以后再通过下载到config中就可以了.如果不用网页配置,也能自己手改,如下:
 ```
     这一步可做可不做。
     "IPCPrefixes": [
@@ -108,7 +108,7 @@ ASF从2.0到3.0改变了很多东西，刚开始我是看2.0的教程，然后�
 
 从这里可以直接赋值steam个人资料的链接得到64位ID
 
-5. 添加一个新bot文件,命名随意,不是中文就行,格式是json
+5.添加一个新bot文件,命名随意,不是中文就行,格式是json
 
 ```c
 {
@@ -149,17 +149,17 @@ ASCF:AnotherSteamCommunityFix,同样是用于修复steam社区的小工具,也�
 
 #### 安装
 
-1. 下载并解压缩
+1.下载并解压缩
 
 ```
 wget https://github.com/zyfworks/AnotherSteamCommunityFix/releases/download/1.2.2/ascf_v1.2.2_Linux_x64.zip
 ```
 
-2. 赋予程序可执行权限，在终端中输入命令：
+2.赋予程序可执行权限，在终端中输入命令：
 ```
 chmod +x ./ascf
 ```
-3. 以后台的方式运行程序
+3.以后台的方式运行程序
 ```
 nohup sudo ./ascf &
 ```
