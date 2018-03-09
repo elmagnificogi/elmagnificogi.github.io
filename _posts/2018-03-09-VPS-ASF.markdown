@@ -73,6 +73,7 @@ ASF从2.0到3.0改变了很多东西，刚开始我是看2.0的教程，然后�
 ```
     dotnet --version
 ```
+
 #### 安装ASF
 
 1. 下载文件包,这里必须用ASF-generic的版本,其他版本我测试都无法正常运行.有可能下载特别慢,那我建议就用winscp连到云服务器上,把本地下好的传过去就行了.
@@ -123,19 +124,21 @@ ASF从2.0到3.0改变了很多东西，刚开始我是看2.0的教程，然后�
 正常到这里应该就结束了,但是由于国内封了steamcommunity的ip,导致获取不到steam的徽章库,从而不能正常挂卡.
 
 ###### 常见问题
+
 ```
-    Cannot open assembly 'ArchiSteamFarm.exe': File does not contain a valid CIL
+Cannot open assembly 'ArchiSteamFarm.exe': File does not contain a valid CIL
 ```
 这个基本说明这个程序不支持mono打开,其实是用mono开了3.0的程序
 ```
-    Segmentation fault
+Segmentation fault
 ```
 执行./ArchiSteamFarm.exe时出现的,原因同上.
 ```
-    Request failing: https://steamcommunity.com/dev/apikey?l=english
-    could not get the badge information,we will try again later
+Request failing: https://steamcommunity.com/dev/apikey?l=english
+could not get the badge information,we will try again later
 ```
 出现这种情况,其实就是所在的网络有问题,导致获取不到steam的相关信息.
+
 
 ### ASCF
 
@@ -147,17 +150,18 @@ ASCF:AnotherSteamCommunityFix,同样是用于修复steam社区的小工具,也�
 #### 安装
 
 1. 下载并解压缩
+
 ```
-    wget https://github.com/zyfworks/AnotherSteamCommunityFix/releases/download/1.2.2/ascf_v1.2.2_Linux_x64.zip
+wget https://github.com/zyfworks/AnotherSteamCommunityFix/releases/download/1.2.2/ascf_v1.2.2_Linux_x64.zip
 ```
 
 2. 赋予程序可执行权限，在终端中输入命令：
 ```
-    chmod +x ./ascf
+chmod +x ./ascf
 ```
 3. 以后台的方式运行程序
 ```
-    nohup sudo ./ascf &
+nohup sudo ./ascf &
 ```
 
 做完这个以后可以使用打开steam社区试试看,是否成功
@@ -166,7 +170,7 @@ ASCF:AnotherSteamCommunityFix,同样是用于修复steam社区的小工具,也�
 
 运行,其实这个脚本会检测环境,然后安装一些东西
 ```
-    ./ArchiSteamFarm.sh
+./ArchiSteamFarm.sh
 ```
 ### screen
 
@@ -176,11 +180,11 @@ screen相当于是建立多个终端同时运行，并且不会因某个终端�
 
 新建一个终端，命名为asf，会看到一个进入screen的提示
 ```
-    screen -s asf
+screen -s asf
 ```
 然后运行，即可
 ```
-    ./ArchiSteamFarm.sh
+./ArchiSteamFarm.sh
 ```
 但是这里别直接退出，而是Ctrl-a 然后按一下d 绝对不能Ctrl-a Ctrl-d！！！虽然screen的快捷键是可以的，但是putty里Ctrl-d的意思是关闭终端退出，这样一操作putty程序就直接关闭了。
 
@@ -188,11 +192,11 @@ screen相当于是建立多个终端同时运行，并且不会因某个终端�
 
 查看当前screen终端
 ```
-    screen -ls
+screen -ls
 ```
 恢复某一个终端,就能回到其输出的界面了.
 ```
-    screen -r 程序id
+screen -r 程序id
 ```
 screen比nohup好的地方就是可以回到程序运行的界面里,而不是只能把输出输出到某个文件,无法实时查看。
 
