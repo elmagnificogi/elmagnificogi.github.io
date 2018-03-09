@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "腾讯云与ASF"
-subtitle:   "0/1，DP,NPC"
+subtitle:   "steam,挂卡"
 date:       2018-03-09
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"
