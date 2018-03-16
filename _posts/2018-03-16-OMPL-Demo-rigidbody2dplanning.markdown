@@ -15,7 +15,7 @@ tags:
 本篇内容基本来自于官网的第一篇教程，但是这里还是有些东西没有解释清楚。
 > http://ompl.kavrakilab.org/geometricPlanningSE3.html
 
-比如其中的RealVectorBounds维度边界为什么是（-1，1），然后有为啥是二维？
+比如其中的RealVectorBounds维度边界为什么是（-1，1）?
 
 ### source code
 
