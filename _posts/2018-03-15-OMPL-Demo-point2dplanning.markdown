@@ -5,9 +5,7 @@ subtitle:   "motion planning"
 date:       2018-03-15
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"
-header-mask:  0.3
 catalog:    true
-multilingual: true
 tags:
     - Algorithm
 ---

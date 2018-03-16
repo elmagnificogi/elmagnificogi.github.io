@@ -5,7 +5,6 @@ subtitle:   "steam,挂卡"
 date:       2018-03-09
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"
-header-mask:  0.3
 catalog:    true
 tags:
     - ECS
