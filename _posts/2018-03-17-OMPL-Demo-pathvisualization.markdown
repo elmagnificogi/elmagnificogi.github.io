@@ -44,7 +44,7 @@ Control Space 比 State Space 维度直接翻倍了,多了每个轴上数据发�
 
 如果只想要控制点,而不需要控制时间,那么下面这种方式是是将Control Space的值转化成一个一个控制点来进行输出,会自动进行转换,并且根据预设的步长来插值,得到类似于上面的输出方式.
 
-在源码中的./demo中RigidBodyPlanningWithControls.py就是使用的Control Space的方式进行规划的,输出的结果也是Control Space式的,那么就可以使用下面的方法来输出位置点.
+在源码中的./demo/RigidBodyPlanningWithControls.py就是使用的Control Space的方式进行规划的,输出的结果也是Control Space式的,那么就可以使用下面的方法来输出位置点.
 
 ```python
 # python
