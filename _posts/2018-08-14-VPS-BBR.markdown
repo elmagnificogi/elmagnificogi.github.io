@@ -1,0 +1,123 @@
+---
+layout:     post
+title:      "VPS BBR"
+subtitle:   "centos 7"
+date:       2018-08-14
+author:     "elmagnifico"
+header-img: "img/git-head-bg.jpg"
+catalog:    true
+tags:
+    - vps
+---
+
+## Foreword
+
+BBR 是一个由谷歌社区开发的 TCP 拥塞控制技术，目前处于开发初期，同时BBR是集成于Linux最新版本的内核的。
+
+拥塞控制是一套比较复杂的东西，一两句可能说不清，简单说就是网络流量本身是随发的，不可预测的，如果同时有很多流量从某一个地方走过，必然会发生阻塞的情况，那么这种情况下就需要有一个东西来管理这些流量，让他们不是一拥而上，而是最大化的利用目前的网络链路，让各种流量到达他应去的目的地。
+
+
+
+BBR官方项目地址：https://github.com/google/bbr
+
+首先开启BBR必须是在KVM的vps上才能开启，否则脚本会报错。当然openvz也是可以使用BBR的但是效果并不好。
+
+
+#### SETUP
+
+首先使用doubi的脚本来安装BBR
+
+    wget -N --no-check-certificate https://github.com/teddysun/across/raw/master/bbr.sh && chmod +x bbr.sh && bash bbr.sh
+
+安装完成后，脚本会提示需要重启 VPS，输入 y 并回车后重启。
+
+重启完成后，进入 VPS，验证一下是否成功安装最新内核并开启 TCP BBR，输入以下命令：
+
+    uname -r
+    # 查看内核版本，大于等 4.9.0 就表示 OK 了
+    # ————————————
+    sysctl net.ipv4.tcp_available_congestion_control
+    # 返回值一般为：
+    # net.ipv4.tcp_available_congestion_control = bbr cubic reno
+    # ————————————
+    sysctl net.ipv4.tcp_congestion_control
+    # 返回值一般为：
+    # net.ipv4.tcp_congestion_control = bbr
+    # ————————————
+    sysctl net.core.default_qdisc
+    # 返回值一般为：
+    # net.core.default_qdisc = fq
+    # ————————————
+    lsmod | grep bbr
+    # 返回值有 tcp_bbr 模块即说明bbr已启动。
+
+###### 修改启动内核
+
+如果上述操作结果看到的内核版本并不正确，那么说明你并没有切到新内核。
+
+首先查看grub2的配置文件
+
+    cat /boot/grub2/grub.cfg
+
+![mark](http://p09tzvz74.bkt.clouddn.com/blog/180814/2eBDH7g0eE.png?imageslim)
+
+可以看到存在两个内核，并且其顺序也就是启动的顺序，那么第一个就是0，第二个就是1.
+
+然后修改配置文件，将大于4.9版本的内核作为第一启动顺序。
+
+    vim /etc/default/grub
+    # 将GRUB_DEFAULT=saved 改成 GRUB_DEFAULT=0
+    GRUB_TIMEOUT=5
+    GRUB_DISTRIBUTOR="$(sed 's, release .*$,,g' /etc/system-release)"
+    GRUB_DEFAULT=0
+    GRUB_DISABLE_SUBMENU=true
+    GRUB_TERMINAL_OUTPUT="console"
+    GRUB_CMDLINE_LINUX="rd.lvm.lv=rhel/root rd.lvm.lv=rhel/swap rhgb quiet"
+    GRUB_DISABLE_RECOVERY="true"
+
+让配置文件生效
+
+    grub2-mkconfig -o /boot/grub2/grub.cfg
+
+然后重启vps，再验证一遍上面的操作即可。
+
+###### 其他相关命令
+
+由于使用下面的命令无法修改启动内核，所以才使用上面的特殊方法来修改启动内核，如果可以用下面的办法正常修改，那么推荐用下面的方法。
+
+查看系统可用内核
+
+    cat /boot/grub2/grub.cfg |grep menuentry
+
+修改开机时默认使用的内核
+
+    grub2-set-default 'CentOS Linux (3.10.0-327.el7.x86_64) 7 (Core)'
+
+查看内核修改结果
+
+    grub2-editenv list
+    saved_entry=CentOS Linux (3.10.0-327.el7.x86_64) 7 (Core)
+
+查看系统安装了哪些内核包
+
+    rpm -qa |grep kernel
+
+使用yum remove 或rpm -e 删除无用内核
+
+    yum remove kernel-3.10.0-327.el7.x86_64
+
+## Summary
+
+其实BBR到底有没有那么好用，本质上还是取决于你和BBR的应用网络的相似程度，本质上你的网络情况越接近BBR所优化的情况那么网络就越好，否则并不一定是用了BBR就更好，而且就算某些属性好了，可能某些属性会差，这些个都需要辨证的看吧，一味跟风追求这种优化并不一定会带来更好的效果。
+
+## Quote
+
+> https://doub.io/wlzy-22/
+>
+> https://www.aliyun.com/jiaocheng/29183.html?spm=5176.100033.2.6.AQqAbE
+>
+> https://www.aliyun.com/jiaocheng/36963.html?spm=5176.100033.2.7.AQqAbE
+>
+> http://blog.51cto.com/hugyou/1794198
+>
+> https://www.cnblogs.com/niyeshiyoumo/p/6762193.html
