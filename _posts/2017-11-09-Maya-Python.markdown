@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "Maya-Python"
-subtitle:   "pip, setuptools, plusin"
+subtitle:   "pip, setuptools, plugin"
 date:       2017-11-09
 author:     "elmagnifico"
 header-img: "img/python-head-bg.png"

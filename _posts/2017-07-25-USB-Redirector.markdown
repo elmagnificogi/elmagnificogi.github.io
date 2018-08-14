@@ -183,7 +183,7 @@ sudo ./uninstall.sh uninstall
 重装
 ```
 sudo apt-get install linux-headers-`uname -r`
-sudo ./install install-client
+sudo ./installer.sh install-client
 ```
 
 重装之后恢复正常
