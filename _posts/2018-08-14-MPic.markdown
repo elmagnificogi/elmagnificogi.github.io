@@ -1,0 +1,57 @@
+---
+layout:     post
+title:      "MPic 图床工具"
+subtitle:   "七牛云"
+date:       2018-08-14
+author:     "elmagnifico"
+header-img: "img/git-head-bg.jpg"
+catalog:    true
+tags:
+    - Tools
+---
+
+## Foreword
+
+写blog经常需要配图，然后配图如果直接穿到github上，然后静态加载的时候会特别慢，为了更快的加载图片，那么可以使用图床，国内访问速度会快很多。
+
+图床的话，我目前使用的还是七牛云存储，本身注册验证通过以后可以免费使用一定大小的空间，对于我这种小blog足够使用了。
+
+#### MPic
+
+非常小巧的工具，在使用截图或者说复制了图片以后会自动上传图片到图传并且会在右键剪贴板中产生一个markdown的图片连接，这样就可以直接添加到markdown中，十分简单易用。
+
+> http://mpic.lzhaofu.cn/
+
+![mark](http://p09tzvz74.bkt.clouddn.com/blog/180814/DC92jFCH1g.png?imageslim)
+
+当然拖拽等操作也是可以的，然后截图与复制自动上传的功能可以右键关闭，只使用拖怪上传。
+
+##### Config
+
+![mark](http://p09tzvz74.bkt.clouddn.com/blog/180814/IJkf5e2FHj.png?imageslim)
+
+配置自然也非常简单，只需要填入七牛的空间名以及授权码、域名即可。
+
+##### 七牛云
+
+在使用前肯定需要注册一个七牛账号，并且实名认证通过，然后新建一个存储空间就能得到需要的东西了。
+
+![mark](http://p09tzvz74.bkt.clouddn.com/blog/180814/8gIgE85FmL.png?imageslim)
+
+如图新建以后在内容管理里就可以看到外链的域名
+
+##### 上传管理
+
+> http://mpic.lzhaofu.cn/home/History
+
+登陆这里就可以看到最近上传的内容，然后也可以很方便的进行删除
+
+## Summary
+
+这个工具已经一年多没有更新了，对应的也是七牛云的API没有更新，所以才能一直使用的。
+
+不排除日后可能七牛云的API有所改动，然后这个程序就不能用了。
+
+## Quote
+
+> http://mpic.lzhaofu.cn/
