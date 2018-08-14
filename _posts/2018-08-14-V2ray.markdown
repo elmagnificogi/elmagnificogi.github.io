@@ -1,0 +1,172 @@
+---
+layout:     post
+title:      "V2ray"
+subtitle:   "ssr,ss,vps"
+date:       2018-08-14
+author:     "elmagnifico"
+header-img: "img/git-head-bg.jpg"
+catalog:    true
+tags:
+    - vps
+---
+
+## Foreword
+
+之前一直用ss或者ssr，但是由于其热度逐年增高导致目前防火墙也会针对这两个协议，为了更安全更自由的翻墙，那么有必要使用一些其他手段。
+
+> https://www.v2ray.com/
+
+V2Ray 是 Project V 下的一个工具。Project V 是一个包含一系列构建特定网络环境工具的项目，而 V2Ray 属于最核心的一个。 官方中介绍Project V 提供了单一的内核和多种界面操作方式。内核（V2Ray）用于实际的网络交互、路由等针对网络数据的处理，而外围的用户界面程序提供了方便直接的操作流程。不过从时间上来说，先有 V2Ray 才有 Project V。 如果还是不理解，那么简单地说，V2Ray 是一个与 Shadowsocks 类似的代理软件，可以用来科学上网（翻墙）学习国外先进科学技术。
+
+## SETUP
+
+先记录一下如何安装，使用的是CentOS 7
+
+    bash <(curl -L -s https://install.direct/go.sh)
+
+运行该指令下载并安装 V2Ray。当 yum 或 apt-get 可用的情况下，此脚本会自动安装 unzip 和 daemon。这两个组件是安装 V2Ray 的必要组件。如果你使用的系统不支持 yum 或 apt-get，请自行安装 unzip 和 daemon
+
+一般来说就能正常安装了，如果还有其他问题可以去手册上看，用的人也多各种解决方法也有。
+
+然后 /etc/v2ray/config.json 是V2ray的配置文件
+运行 service v2ray start 来启动 V2Ray 进程；
+使用 service v2ray start|stop|status|reload|restart|force-reload 控制 V2Ray 的运行。
+
+## CONFIG
+
+记录一下v2ray的服务器配置
+
+```
+{
+  "log" : {
+    "access": "/var/log/v2ray/access.log",
+    "error": "/var/log/v2ray/error.log",
+    "loglevel": "warning"
+  },
+  "inbound": {
+    "port": 4396,
+    "protocol": "vmess",
+    "settings": {
+      "clients": [
+        {
+          "id": "asdfoij2-712b-4b19-b3ab-fasdfksadf0",
+          "level": 1,
+          "alterId": 64
+        }
+      ]
+    }
+  },
+  "inboundDetour":[
+    {
+      "protocol":"shadowsocks",
+      "port":1207,
+      "settings":{
+        "method":"aes-256-cfb",
+        "password":"password",
+        "udp":true
+       }
+    }
+  ],
+
+  "outbound": {
+    "protocol": "freedom",
+    "settings": {}
+  },
+  "outboundDetour": [
+    {
+      "protocol": "blackhole",
+      "settings": {},
+      "tag": "blocked"
+    }
+  ],
+  "routing": {
+    "strategy": "rules",
+    "settings": {
+      "rules": [
+        {
+          "type": "field",
+          "ip": [
+            "0.0.0.0/8",
+            "10.0.0.0/8",
+            "100.64.0.0/10",
+            "127.0.0.0/8",
+            "169.254.0.0/16",
+            "172.16.0.0/12",
+            "192.0.0.0/24",
+            "192.0.2.0/24",
+            "192.168.0.0/16",
+            "198.18.0.0/15",
+            "198.51.100.0/24",
+            "203.0.113.0/24",
+            "::1/128",
+            "fc00::/7",
+            "fe80::/10"
+          ],
+          "outboundTag": "blocked"
+        }
+      ]
+    }
+  }
+}
+
+```
+
+首先v2ray使用的是json的格式，所以很容易修改。
+
+log中的access记录的是连接的情况，而error则是记录的程序启动关闭以及各种出错的情况。
+
+我这里支持了两种协议，一个是v2ray自带的vmess一个是shadowssocks，在shadowssocks中开启了udp支持。
+
+#### vmess
+
+使用vmess协议只要设定好端口和各id就行了。
+
+这里的id不是随便填的,可以在下面的网址生成随机的id，作为密钥。
+
+> https://www.uuidgenerator.net/
+
+其他要连入这个vmess的用户就是靠这个id来连接的，同一个id可以多人同时使用。
+
+###### alterId
+
+一般建议服务器和客户都都配置的相同，但是不同也一样可以正常工作，这个不是bug。
+
+#### shadowsocks
+
+V2ray他并不是一个单一的协议，他同时可以开启很多其他的协议，更多的协议则需要写在 inboundDetour 中
+
+所以这里加配了一个shadowsocks，使用端口1207，并且开启了udp，这样使用shadowsocks的客户端就能直接翻墙了。
+
+通过上面的配置就可以达到既可以使用v2ray自带的客户端也可以使用shadowsocks来翻墙。
+
+需要注意修改了config配置以后需要重启服务端与客户端才能正常工作。
+
+### v2rayN
+
+有了v2ray服务端，自然还需要一个客户端。v2ray本身是有windows的release版本的，但是由于是console的模式，不是很好用，所以有个UI会更好一点。
+
+我试用了v2ray上推荐的一些客户端，目前只有v2rayN算是比较好用的了。
+
+直接导入配置，就按照上面的服务器的配置方式，填入各个参数即可，然后重启服务器即可使用。
+
+有几个问题需要注意，v2rayN会自动设置对应的internet里的局域网设置，退出的时候会自动恢复。
+
+v2rayN同时也支持扫描二维码导入/导出配置（勾选显示分享内容），当然剪贴板导入配置也是可以的。
+
+### v2rayNG
+
+有了windows版本的，还需要一个安卓版本的，v2rayNG是比较不错的，可以直接扫描v2rayN的配置导入，然后也可以只使用shadowsocks，算是比较好用的了。
+
+## Summary
+
+v2ray基本就是这些了，日后还有什么再补充，更高阶的配置需要查看v2ray的手册来，一两句也说不清。
+
+## Quote
+
+> https://www.v2ray.com/ui_client/windows.html
+>
+> https://toutyrater.github.io/basic/vmess.html
+>
+> https://www.daehub.com/archives/2156.html
+>
+> https://www.hyperapp.fun/zh/proxy/V2ray+Websocket.html
