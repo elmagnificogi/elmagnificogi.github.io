@@ -209,172 +209,173 @@ V2ray他并不是一个单一的协议，他同时可以开启很多其他的协
 - 包含一个额外的ss传入连接，该连接会把所有数据转发到墙外服务器（即全部中转）
 - socks配置中，如果开启UDP，需使用腾讯云服务器的内网IP，而不是公网IP。
 
-
+```
+{
+  "log" : {
+    "access": "/var/log/v2ray/access.log",
+    "error": "/var/log/v2ray/error.log",
+    "loglevel": "warning"
+  },
+  "inbound": {
+    "port": 8866,
+    "listen": "0.0.0.0",
+    "protocol": "socks",
+    "settings": {
+      "auth": "password",
+      "accounts": [
+        {
+          "user": "my-socks",
+          "pass": "my-password"
+        }
+      ],
+      "udp": true,
+      "ip": "腾讯云内网IP地址"
+    },
+    "tag": "socks-in"
+  },
+  "outbound": {
+    "protocol": "shadowsocks",
+    "settings": {
+      "servers": [
+        {
+          "email": "ss2@v2ray.com",
+          "address": "225.255.255.255",
+          "port": 6656,
+          "method": "aes-256-cfb",
+          "password": "my-password",
+          "ota": false
+        }
+      ]
+    },
+    "tag": "ss-out"
+  },
+  "inboundDetour": [
     {
-      "log" : {
-        "access": "/var/log/v2ray/access.log",
-        "error": "/var/log/v2ray/error.log",
-        "loglevel": "warning"
-      },
-      "inbound": {
-        "port": 8866,
-        "listen": "0.0.0.0",
-        "protocol": "socks",
-        "settings": {
-          "auth": "password",
-          "accounts": [
-            {
-              "user": "my-socks",
-              "pass": "my-password"
-            }
-          ],
-          "udp": true,
-          "ip": "腾讯云内网IP地址"
-        },
-        "tag": "socks-in"
-      },
-      "outbound": {
-        "protocol": "shadowsocks",
-        "settings": {
-          "servers": [
-            {
-              "email": "ss2@v2ray.com",
-              "address": "225.255.255.255",
-              "port": 6656,
-              "method": "aes-256-cfb",
-              "password": "my-password",
-              "ota": false
-            }
-          ]
-        },
-        "tag": "ss-out"
-      },
-      "inboundDetour": [
-        {
-          "port": 8800,
-          "listen": "0.0.0.0",
-          "protocol": "vmess",
-          "settings": {
-            "clients": [
-              {
-                "id": "4119f123-3863-4d3e-aaf6-379fdda3a371",
-                "level": 1,
-                "alterId": 64,
-                "email": "vmess@v2ray.com"
-              }
-            ]
-          },
-          "tag": "v2ray-in"
-        },
-        {
-          "port": 8899,
-          "listen": "0.0.0.0",
-          "protocol": "shadowsocks",
-          "settings": {
-            "email": "ss1@v2ray.com",
-            "method": "aes-256-cfb",
-            "password": "my-password",
-            "udp": true,
-            "level": 0,
-            "ota": false
-          },
-          "tag": "ss-in"
-        }
-      ],
-      "outboundDetour": [
-        {
-          "protocol": "freedom",
-          "settings": {},
-          "tag": "direct"
-        },
-        {
-          "protocol": "blackhole",
-          "settings": {},
-          "tag": "blocked"
-        },
-        {
-          "protocol": "vmess",
-          "settings": {
-            "vnext": [
-              {
-                "address": "v2ray.cool",
-                "port": 10086,
-                "users": [
-                  {
-                    "id": "a3482e88-686a-4a58-8126-99c9df64b7bf",
-                    "alterId": 64,
-                    "security": "auto"
-                  }
-                ]
-              }
-            ]
-          },
-          "mux": {
-            "enabled": true
-          },
-          "tag": "v2ray-out"
-        }
-      ],
-      "dns": {
-        "servers": [
-          "114.114.114.114",
-          "114.114.115.115",
-          "localhost"
+      "port": 8800,
+      "listen": "0.0.0.0",
+      "protocol": "vmess",
+      "settings": {
+        "clients": [
+          {
+            "id": "4119f123-3863-4d3e-aaf6-379fdda3a371",
+            "level": 1,
+            "alterId": 64,
+            "email": "vmess@v2ray.com"
+          }
         ]
       },
-      "routing": {
-        "strategy": "rules",
-        "settings": {
-          "domainStrategy": "IPIfNonMatch",
-          "rules": [
-            {
-              "type": "field",
-              "ip": [
-                "0.0.0.0/8",
-                "10.0.0.0/8",
-                "100.64.0.0/10",
-                "127.0.0.0/8",
-                "169.254.0.0/16",
-                "172.16.0.0/12",
-                "192.0.0.0/24",
-                "192.0.2.0/24",
-                "192.168.0.0/16",
-                "198.18.0.0/15",
-                "198.51.100.0/24",
-                "203.0.113.0/24",
-                "::1/128",
-                "fc00::/7",
-                "fe80::/10"
-              ],
-              "outboundTag": "blocked"
-            },
-            {
-              "type": "field",
-              "inboundTag": [
-                "ss-in"
-              ],
-              "outboundTag": "ss-out"
-            },
-            {
-              "type": "field",
-              "domain": [
-                "baidu.com",
-                "qq.com"
-              ],
-              "outboundTag": "direct"
-            },
-            {
-              "type": "chinaip",
-              "outboundTag": "direct"
-            },
-            {
-              "type": "chinasites",
-              "outboundTag": "direct"
-            }
-          ]
-        }
-      }
+      "tag": "v2ray-in"
+    },
+    {
+      "port": 8899,
+      "listen": "0.0.0.0",
+      "protocol": "shadowsocks",
+      "settings": {
+        "email": "ss1@v2ray.com",
+        "method": "aes-256-cfb",
+        "password": "my-password",
+        "udp": true,
+        "level": 0,
+        "ota": false
+      },
+      "tag": "ss-in"
     }
+  ],
+  "outboundDetour": [
+    {
+      "protocol": "freedom",
+      "settings": {},
+      "tag": "direct"
+    },
+    {
+      "protocol": "blackhole",
+      "settings": {},
+      "tag": "blocked"
+    },
+    {
+      "protocol": "vmess",
+      "settings": {
+        "vnext": [
+          {
+            "address": "v2ray.cool",
+            "port": 10086,
+            "users": [
+              {
+                "id": "a3482e88-686a-4a58-8126-99c9df64b7bf",
+                "alterId": 64,
+                "security": "auto"
+              }
+            ]
+          }
+        ]
+      },
+      "mux": {
+        "enabled": true
+      },
+      "tag": "v2ray-out"
+    }
+  ],
+  "dns": {
+    "servers": [
+      "114.114.114.114",
+      "114.114.115.115",
+      "localhost"
+    ]
+  },
+  "routing": {
+    "strategy": "rules",
+    "settings": {
+      "domainStrategy": "IPIfNonMatch",
+      "rules": [
+        {
+          "type": "field",
+          "ip": [
+            "0.0.0.0/8",
+            "10.0.0.0/8",
+            "100.64.0.0/10",
+            "127.0.0.0/8",
+            "169.254.0.0/16",
+            "172.16.0.0/12",
+            "192.0.0.0/24",
+            "192.0.2.0/24",
+            "192.168.0.0/16",
+            "198.18.0.0/15",
+            "198.51.100.0/24",
+            "203.0.113.0/24",
+            "::1/128",
+            "fc00::/7",
+            "fe80::/10"
+          ],
+          "outboundTag": "blocked"
+        },
+        {
+          "type": "field",
+          "inboundTag": [
+            "ss-in"
+          ],
+          "outboundTag": "ss-out"
+        },
+        {
+          "type": "field",
+          "domain": [
+            "baidu.com",
+            "qq.com"
+          ],
+          "outboundTag": "direct"
+        },
+        {
+          "type": "chinaip",
+          "outboundTag": "direct"
+        },
+        {
+          "type": "chinasites",
+          "outboundTag": "direct"
+        }
+      ]
+    }
+  }
+}
+```
 
 ### v2rayN
 
