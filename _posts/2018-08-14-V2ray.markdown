@@ -26,11 +26,23 @@ V2Ray 是 Project V 下的一个工具。Project V 是一个包含一系列构�
 
 运行该指令下载并安装 V2Ray。当 yum 或 apt-get 可用的情况下，此脚本会自动安装 unzip 和 daemon。这两个组件是安装 V2Ray 的必要组件。如果你使用的系统不支持 yum 或 apt-get，请自行安装 unzip 和 daemon
 
+    yum install zip unzip
+    yum update -y && yum install curl -y
+
 一般来说就能正常安装了，如果还有其他问题可以去手册上看，用的人也多各种解决方法也有。
 
 然后 /etc/v2ray/config.json 是V2ray的配置文件
-运行 service v2ray start 来启动 V2Ray 进程；
+
+运行 service v2ray start 来启动 V2Ray 进程
+
 使用 service v2ray start|stop|status|reload|restart|force-reload 控制 V2Ray 的运行。
+
+或者是：
+
+    sudo systemctl start v2ray
+    sudo systemctl stop v2ray
+    sudo systemctl restart v2ray
+    sudo systemctl status v2ray
 
 ## CONFIG
 
@@ -113,6 +125,10 @@ V2Ray 是 Project V 下的一个工具。Project V 是一个包含一系列构�
 
 首先v2ray使用的是json的格式，所以很容易修改。
 
+可以使用下面的命令来检查你写的json格式是否正确：
+
+    /usr/bin/v2ray/v2ray -test -config /etc/v2ray/config.json
+
 log中的access记录的是连接的情况，而error则是记录的程序启动关闭以及各种出错的情况。
 
 我这里支持了两种协议，一个是v2ray自带的vmess一个是shadowssocks，在shadowssocks中开启了udp支持。
@@ -159,6 +175,206 @@ V2ray他并不是一个单一的协议，他同时可以开启很多其他的协
 
 需要注意修改了config配置以后需要重启服务端与客户端才能正常工作。
 
+### 国内中转
+
+有些时候使用人的网络情况并不相同，如果只有一个国外vps的话，那么就会出现不同网络运营商连接到同一个vps，使用体验会一个天上一个地下，为了缓解这种情况，或者说改变使用者网络环境，可以先让国内使用者连接到一个国内的vps上，然后再统一通过国内的vps将其消息转发到国外的vps，通过这样中转一下让翻墙体验的差别控制在国内网络差异的范围内。
+
+要做到国内中转就需要在国内的vps上也开启v2ray，然后修改转出的部分，不再是free，而是指向国外的vps。
+
+    "outbound": {
+      "protocol": "vmess",
+      "settings": {
+        "vnext": [
+          {
+            "address": "xxx.xx.xx.x",
+            "port": 4396,
+            "users": [
+              {
+                "id": "a23sa2-712b-4b19-b3ab-f1sdf1fsdba70",
+                "alterId": 64,
+                "security": "aes-128-gcm"
+              }
+            ]
+          }
+        ]
+      }
+    },
+
+这里有一份参考别人的配置，他就是多个入口通过国内腾讯云中转，然后到国外vps，进而翻墙。
+（我这里出现了一个小问题：我腾讯云是1m带宽，理论上通过中转以后我的带宽应该被限制在1m以内，然而实际上并没有，略小于不中转的方案，不知道是不是腾讯云的漏洞）
+
+![mark](http://p09tzvz74.bkt.clouddn.com/blog/180824/e06E3ligGC.png?imageslim)
+- 使用socks作为主传入连接，该连接可进行游戏加速或者透明代理
+- 包含一个额外的vmess传入连接，该连接可进行路由选择（国内直连，国外中转）
+- 包含一个额外的ss传入连接，该连接会把所有数据转发到墙外服务器（即全部中转）
+- socks配置中，如果开启UDP，需使用腾讯云服务器的内网IP，而不是公网IP。
+
+    {
+      "log" : {
+        "access": "/var/log/v2ray/access.log",
+        "error": "/var/log/v2ray/error.log",
+        "loglevel": "warning"
+      },
+      "inbound": {
+        "port": 8866,
+        "listen": "0.0.0.0",
+        "protocol": "socks",
+        "settings": {
+          "auth": "password",
+          "accounts": [
+            {
+              "user": "my-socks",
+              "pass": "my-password"
+            }
+          ],
+          "udp": true,
+          "ip": "腾讯云内网IP地址"
+        },
+        "tag": "socks-in"
+      },
+      "outbound": {
+        "protocol": "shadowsocks",
+        "settings": {
+          "servers": [
+            {
+              "email": "ss2@v2ray.com",
+              "address": "225.255.255.255",
+              "port": 6656,
+              "method": "aes-256-cfb",
+              "password": "my-password",
+              "ota": false
+            }
+          ]
+        },
+        "tag": "ss-out"
+      },
+      "inboundDetour": [
+        {
+          "port": 8800,
+          "listen": "0.0.0.0",
+          "protocol": "vmess",
+          "settings": {
+            "clients": [
+              {
+                "id": "4119f123-3863-4d3e-aaf6-379fdda3a371",
+                "level": 1,
+                "alterId": 64,
+                "email": "vmess@v2ray.com"
+              }
+            ]
+          },
+          "tag": "v2ray-in"
+        },
+        {
+          "port": 8899,
+          "listen": "0.0.0.0",
+          "protocol": "shadowsocks",
+          "settings": {
+            "email": "ss1@v2ray.com",
+            "method": "aes-256-cfb",
+            "password": "my-password",
+            "udp": true,
+            "level": 0,
+            "ota": false
+          },
+          "tag": "ss-in"
+        }
+      ],
+      "outboundDetour": [
+        {
+          "protocol": "freedom",
+          "settings": {},
+          "tag": "direct"
+        },
+        {
+          "protocol": "blackhole",
+          "settings": {},
+          "tag": "blocked"
+        },
+        {
+          "protocol": "vmess",
+          "settings": {
+            "vnext": [
+              {
+                "address": "v2ray.cool",
+                "port": 10086,
+                "users": [
+                  {
+                    "id": "a3482e88-686a-4a58-8126-99c9df64b7bf",
+                    "alterId": 64,
+                    "security": "auto"
+                  }
+                ]
+              }
+            ]
+          },
+          "mux": {
+            "enabled": true
+          },
+          "tag": "v2ray-out"
+        }
+      ],
+      "dns": {
+        "servers": [
+          "114.114.114.114",
+          "114.114.115.115",
+          "localhost"
+        ]
+      },
+      "routing": {
+        "strategy": "rules",
+        "settings": {
+          "domainStrategy": "IPIfNonMatch",
+          "rules": [
+            {
+              "type": "field",
+              "ip": [
+                "0.0.0.0/8",
+                "10.0.0.0/8",
+                "100.64.0.0/10",
+                "127.0.0.0/8",
+                "169.254.0.0/16",
+                "172.16.0.0/12",
+                "192.0.0.0/24",
+                "192.0.2.0/24",
+                "192.168.0.0/16",
+                "198.18.0.0/15",
+                "198.51.100.0/24",
+                "203.0.113.0/24",
+                "::1/128",
+                "fc00::/7",
+                "fe80::/10"
+              ],
+              "outboundTag": "blocked"
+            },
+            {
+              "type": "field",
+              "inboundTag": [
+                "ss-in"
+              ],
+              "outboundTag": "ss-out"
+            },
+            {
+              "type": "field",
+              "domain": [
+                "baidu.com",
+                "qq.com"
+              ],
+              "outboundTag": "direct"
+            },
+            {
+              "type": "chinaip",
+              "outboundTag": "direct"
+            },
+            {
+              "type": "chinasites",
+              "outboundTag": "direct"
+            }
+          ]
+        }
+      }
+    }
+
 ### v2rayN
 
 有了v2ray服务端，自然还需要一个客户端。v2ray本身是有windows的release版本的，但是由于是console的模式，不是很好用，所以有个UI会更好一点。
@@ -188,3 +404,5 @@ v2ray基本就是这些了，日后还有什么再补充，更高阶的配置需
 > https://www.daehub.com/archives/2156.html
 >
 > https://www.hyperapp.fun/zh/proxy/V2ray+Websocket.html
+>
+> https://axu.me/linux/20170820/cvm-v2ray.html
