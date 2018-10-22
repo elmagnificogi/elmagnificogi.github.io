@@ -148,6 +148,8 @@ Docker Compose 的好处在于有些需要多个docker容器组成的应用，�
 
 > https://feedocean.com/
 
+缺点还是有的，有些网站他不能正常解析，所以不是万能的
+
 ## Summary
 
 TTRSS与feedly相比还是有一点差距，就是feedly添加源的时候只需要直接搜索对应的网址就行，完全无视其是否拥有feed，而ttrss还需要手动添加其对应的feed页面才可以正常抓取，除了这个以外还有一个问题，有些网站信息源在用国外vps直接就获取不到，而有些则可以，这个问题在feedly和ttrss都有发生，无法互补，比较尴尬
