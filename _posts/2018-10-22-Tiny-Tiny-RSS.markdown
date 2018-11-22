@@ -64,9 +64,9 @@ TinyTinyRSS，可以认为他就是一个可以自定义的feedly，它本身是
 
 使用docker-compose
 
-    wget
-    https://raw.githubusercontent.com/HenryQW/docker-ttrss-plugins/master/docker-compose.yml
+    wget https://raw.githubusercontent.com/HenryQW/docker-ttrss-plugins/master/docker-compose.yml
     修改docker-compose.yml中的数据库postgres的密码，有两个地方需要修改
+    修改docker-compose.yml中的http://你vps的ip:181/
     docker-compose up -d 后台部署
     http://你vps的ip:181/ 访问ttrss
 
@@ -119,6 +119,23 @@ https://github.com/dugite-code/tt-rss-nextcloud-theme
     # 验证是否安装好了
     docker version
 
+docker的基本操作：
+
+    # 查看所有正在运行容器
+    docker ps
+    # 停止指定容器 containerId 是容器的ID
+    docker stop containerId
+
+    # 查看所有容器
+    docker ps -a
+    # 查看所有容器ID
+    docker ps -a -q
+
+    # stop 停止所有容器
+    docker stop $(docker ps -a -q)
+    # remove 删除所有容器,删之前要先停止
+    docker  rm $(docker ps -a -q)
+
 #### Docker Compose
 
 Docker Compose 的好处在于有些需要多个docker容器组成的应用，可以使用docker-compose.yml直接完成，而不需要一步一步去配。
@@ -136,6 +153,10 @@ Docker Compose 的好处在于有些需要多个docker容器组成的应用，�
 安卓移动端可以直接在谷歌商店找到Tiny Tiny RSS的应用，有试用版，收费的也是一次性买断450日元，也不超过30块，还可以速度很快。
 
 我平时用的是Palabre，它本身不支持TTRSS的订阅源，但是有一个插件在谷歌商店里可以看到，免费的，安装以后Palabre就能持支TTRSS了，本身也挺好用的，但是不知道什么原因，第一次用还挺好的，后来必须要开启readbility才能显示全文，而且速度很慢。
+
+换了手机重新安装了TTRSS以及APP以后发现Palabre貌似效果还不错，关键是免费可用。
+
+Tiny Tiny RSS的试用版APP也可以，收费版也不是很贵
 
 #### 其他问题
 
