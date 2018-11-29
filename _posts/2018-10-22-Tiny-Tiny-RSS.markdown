@@ -38,7 +38,7 @@ RSSHub的部署，使用docker当然是最简单的方式，通过这里就能�
 
 https://rsshub.app/bilibili/user/coin/2267573?filterout=微小微|赤九玖|暴走大事件
 
-![mark](http://p09tzvz74.bkt.clouddn.com/blog/181022/mdLGC6bJ7m.png?imageslim)
+![mark](https://i.loli.net/2018/11/29/5bffc33b563ce.png)
 
 他支持的信息源非常多，具体去官网查询吧。
 
@@ -157,6 +157,8 @@ Docker Compose 的好处在于有些需要多个docker容器组成的应用，�
 换了手机重新安装了TTRSS以及APP以后发现Palabre貌似效果还不错，关键是免费可用。
 
 Tiny Tiny RSS的试用版APP也可以，收费版也不是很贵
+
+News+ 配合对应的News+ TTRSS的插件也可以使用TTRSS，并且其可以利用网页的加载模式打开很多在TTRSS里显示不全的信息，但是他的问题在于如果使用带图的预览模式，就会出现闪烁的情况，图片闪烁，非常别扭，如果是小图或者是无图模式就不存在，其免费版的自带广告，收费版本的没有，价格是540日语，还有一点就是其TTRSS插件已经四五年没有更新了，虽然还能用，但是News+其自身也是多年没有大更新过了，多少还是有些bug的
 
 #### 其他问题
 

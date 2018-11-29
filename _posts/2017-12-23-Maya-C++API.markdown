@@ -15,7 +15,7 @@ tags:
 
 maya除了可以直接使用MEL和Python的脚本语言（Maya Commands）来开发，还可以使用C++ API或者python API，又或者C#
 
-![mark](http://p09tzvz74.bkt.clouddn.com/blog/171223/50GGI0eb5C.png?imageslim)
+![mark](https://i.loli.net/2018/11/29/5bffc6b4bebe1.png)
 
 从本质上说python API 是基于C++ API来的，而C#的API基本就是C++ API
 

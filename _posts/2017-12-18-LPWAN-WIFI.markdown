@@ -32,21 +32,15 @@ Wireless Neighborhood Area Network,无线邻域网络
 
 ZigBee NAN = JupiterMesh,其本质上是一个低功耗的工业级的mesh网络,传输速率6.25kbps到800kbps,最关键的在于其支持IPV6,可以将现有的ZigBee网络整合进mesh中.
 
-![mark](http://p09tzvz74.bkt.clouddn.com/blog/171218/eA18JlDL7m.png?imageslim)
-
 #### Wireless M-bus
 
 Wireless M-Bus 标准用于定义水表、燃气表、热量表和电表与数据收集器件之间的射频通信链路。目前该标准广为欧洲市场所接受，用于智能计量或先进抄表基础设施 (AMI) 应用。无线 M-Bus 最初专为 868MHz 的运行频带而定义，该频带能够在射频范围和天线尺寸之间实现很好的平衡。后来，wM-Bus 规范还扩展到了另外两个新频带（169MHz 和 433MHz），这两个窄带解决方案具有更高的链路预算，从而能够提供比 868MHz 更远距离的解决方案。
-
-![mark](http://p09tzvz74.bkt.clouddn.com/blog/171218/J4d3EFEfaI.png?imageslim)
 
 本质上Wireless M-bus依然是一个窄带通信方案,其速率以及范围都有一定的限制,Wireless M-Bus 其实是M-Bus协议的无线版本.
 
 #### WNaN
 
 WNaN,Wireless Network after Next,下下代无线网络是美国国防高级研究计划局推出的,专门为军方所提供的自适应ad-hoc型网络,其使用频率从900mhz-6ghz,可容纳节点大概在100个左右,速率大于1mbps,提供aes256加密,最大功率下可以满负载连续工作8小时.其设备价格非常高(600刀一个节点,还是批量够买的情况下)
-
-![mark](http://p09tzvz74.bkt.clouddn.com/blog/171218/38h76KijjA.png?imageslim)
 
 ### WLAN
 
