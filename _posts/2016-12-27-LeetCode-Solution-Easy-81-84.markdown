@@ -18,7 +18,7 @@ Examples:
 
 	s = "leetcode"
 	return 0.
-	
+
 	s = "loveleetcode",
 	return 2.
 
@@ -32,10 +32,10 @@ Note: You may assume the string contain only lowercase letters.
 
 ### 81.First Unique Character in a String-Solution-C/C++
 
-	class Solution 
+	class Solution
 	{
 	public:
-	    int firstUniqChar(string s) 
+	    int firstUniqChar(string s)
 	    {
 	        int st[2][26]={0};
 	        for(int i=0;i<s.size();i++)
@@ -53,7 +53,7 @@ Note: You may assume the string contain only lowercase letters.
 	        if(min==0x7fffffff)
 	            return -1;
 	        return min;
-	        
+
 	    }
 	};
 
@@ -75,7 +75,7 @@ Note: You may assume the string contain only lowercase letters.
             if st[1][i]==1:
                 if min>st[0][i]:
                     min=st[0][i]
-                    
+
         if min==0x7fffffff:
             return -1;
         return min
@@ -83,7 +83,7 @@ Note: You may assume the string contain only lowercase letters.
 这里遇到了一个python的二维数组创建问题
 
 	#创建一个宽度为3，高度为4的数组
-	#[[0,0,0], 
+	#[[0,0,0],
 	# [0,0,0],
 	# [0,0,0],
 	# [0,0,0]]
@@ -108,7 +108,7 @@ Example:
 
 	Input:
 	"abccccdd"
-	
+
 	Output:
 	7
 
@@ -126,7 +126,7 @@ Example:
 	class Solution
 	{
 	public:
-	    int longestPalindrome(string s) 
+	    int longestPalindrome(string s)
 	    {
 	        int st[52]={0},r=0,odd=0;
 	        for(int i=0;i<s.size();i++)
@@ -135,7 +135,7 @@ Example:
 	                st[s[i]-'A'+26]++;
 	            else
 	                st[s[i]-'a']++;
-	        
+
 	        }
 	        for(int i=0;i<52;i++)
 	        {
@@ -200,7 +200,7 @@ Follow up:
 同时也引申了三个情况
 
 1.如果给的是排序的数组,用什么算法合适
-	
+
 	直接用双指针一个循环依次移动,重复的就加入到输出队列,这个很简单
 
 2.如果明确其中一个数组比另外一个小,用什么算法
@@ -213,8 +213,8 @@ Follow up:
 	如果太大了不能一次读取,那就部分搜索,同时对字典中对应的重复元素进行减少.
 
 ### 83.Intersection of Two Arrays II-Solution-C/C++
-	
-	class Solution 
+
+	class Solution
 	{
 	public:
 	    vector<int> intersect(vector<int>& nums1, vector<int>& nums2)
@@ -236,7 +236,7 @@ Follow up:
 	        return re;
 	    }
 	};
-	
+
 ### 83.Intersection of Two Arrays II-Solution-Python
 
 之前做过的77.Ransom Note中使用了collection下的Counter来统计字符出现的次数,这次也是可以利用这个类来完成.
@@ -266,7 +266,7 @@ A binary watch has 4 LEDs on the top which represent the hours (0-11), and the 6
 
 Each LED represents a zero or one, with the least significant bit on the right.
 
-![](https://upload.wikimedia.org/wikipedia/commons/8/8b/Binary_clock_samui_moon.jpg)
+![SMMS](https://i.loli.net/2018/11/30/5c00aa2d50d97.jpg)
 
 For example, the above binary watch reads "3:25".
 
@@ -343,11 +343,11 @@ python中使用了一些较为方便的函数,bin是将对应int转换为二进�
 ## Quote
 
 > http://www.cnblogs.com/btchenguang/archive/2012/01/30/2332479.html
-> 
+>
 > http://www.jb51.net/article/15716.htm
-> 
+>
 > http://www.cnblogs.com/grandyang/p/5533305.html
-> 
+>
 > http://bookshadow.com/weblog/2016/05/21/leetcode-intersection-of-two-arrays-ii/
-> 
+>
 > http://bookshadow.com/weblog/2016/09/18/leetcode-binary-watch/

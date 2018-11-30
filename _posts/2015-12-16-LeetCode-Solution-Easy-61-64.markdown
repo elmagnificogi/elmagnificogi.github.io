@@ -45,7 +45,7 @@ Our total runtime has now improved to O(n1.5), which is slightly better. Is ther
 	   }
 	   return count;
 	}
-	
+
 	private boolean isPrime(int num) {
 	   if (num <= 1) return false;
 	   // Loop's ending condition is i * i <= num instead of i <= sqrt(num)
@@ -58,7 +58,7 @@ Our total runtime has now improved to O(n1.5), which is slightly better. Is ther
 
 4.The Sieve of Eratosthenes is one of the most efficient ways to find all prime numbers up to n. But don't let that name scare you, I promise that the concept is surprisingly simple.
 
-![](https://leetcode.com/static/images/solutions/Sieve_of_Eratosthenes_animation.gif)
+![SMMS](https://i.loli.net/2018/11/30/5c00aaae780f1.gif)
 
 Sieve of Eratosthenes: algorithm steps for primes below 121. "Sieve of Eratosthenes Animation" by SKopp is licensed under CC BY 2.0.
 
@@ -109,7 +109,7 @@ The Sieve of Eratosthenes uses an extra O(n) memory and its runtime complexity i
 
 	class Solution {
 	public:
-	    int countPrimes(int n) 
+	    int countPrimes(int n)
 	    {
 	        vector<int> num;
 	        if(n<2)
@@ -127,12 +127,12 @@ The Sieve of Eratosthenes uses an extra O(n) memory and its runtime complexity i
 	                    if(j+1>=sqrt(i))
 	                    {
 	                        num.push_back(i);
-	                    }    
+	                    }
 	                }
 	            }
 	        }
 	        return num.size();
-	        
+
 	    }
 	};
 
@@ -162,15 +162,15 @@ The Sieve of Eratosthenes uses an extra O(n) memory and its runtime complexity i
 		       if(num[i]==true)
 		            count++;
 		   }
-	
+
 		   return count;
-		}	
+		}
 	};
 
 ### 61.Count Primes-Solution-Python
 
 python的代码竟然用了1600ms 而上面的C++采用了56ms 而且leetcode的python有bug 时而提示能通过时而提示超时
-	            
+
 	class Solution(object):
 	    def countPrimes(self, n):
 	        """
@@ -211,7 +211,7 @@ For example, given [0,1,2,4,5,7], return ["0->2","4->5","7"].
 
 ### 62.Summary Ranges-Solution-C/C++
 
-	class Solution 
+	class Solution
 	{
 	public:
 	    vector<string> summaryRanges(vector<int>& nums)
@@ -307,9 +307,9 @@ For example, given [0,1,2,4,5,7], return ["0->2","4->5","7"].
 	                    #新数据入行
 	                    line=[]
 	                    line.append(nums[i])
-	        ret.append(line)                
-	        s=''            
-	        sret=[]            
+	        ret.append(line)
+	        s=''
+	        sret=[]
 	        for i in range(len(ret)):
 	            if len(ret[i])==1:
 	                s=str(ret[i][0])
@@ -341,12 +341,12 @@ You are given an API bool isBadVersion(version) which will return whether versio
 
 	// Forward declaration of isBadVersion API.
 	bool isBadVersion(int version);
-	
+
 	class Solution {
 	public:
 	    int firstBadVersion(int n)
 	    {
-	        
+
 	        //二分法查找
 	        int low=1,high=n,mid=low+(high-low)/2;
 	        while(low<high)
@@ -354,7 +354,7 @@ You are given an API bool isBadVersion(version) which will return whether versio
 	            if(isBadVersion(mid)==true)
 	            {
 	                high=mid;
-	                
+
 	            }
 	            else
 	            {
@@ -372,7 +372,7 @@ You are given an API bool isBadVersion(version) which will return whether versio
 	# @param version, an integer
 	# @return a bool
 	# def isBadVersion(version):
-	
+
 	class Solution(object):
 	    def firstBadVersion(self, n):
 	        """
@@ -426,34 +426,34 @@ Design a stack that supports push, pop, top, and retrieving the minimum element 
 只需要取两者中的最小值就可以得到了.因为删除元素只有pop方法，也就是说只能删除最上面的元素，而minstack只要记录过程中最小的值就可以了
 
 而最小值要么是minstack要么是当前的sdstack中的top值
-   
+
 ### 64.Min Stack-Solution-C/C++
 
-	class MinStack 
+	class MinStack
 	{
 	public:
 	    stack<int> sd;
 	    stack<int> min;
-	    void push(int x) 
+	    void push(int x)
 	    {
 	        sd.push(x);
 	        if(min.size()==0||x<=min.top())
 	            min.push(x);
 	    }
-	
-	    void pop() 
+
+	    void pop()
 	    {
 	        if(min.top()==sd.top())
 	            min.pop();
 	        sd.pop();
 	    }
-	
-	    int top() 
+
+	    int top()
 	    {
 	        return sd.top();
 	    }
-	
-	    int getMin() 
+
+	    int getMin()
 	    {
 	        return min.top()<sd.top()?min.top():sd.top();
 	    }
@@ -472,7 +472,7 @@ Design a stack that supports push, pop, top, and retrieving the minimum element 
 	        """
 	        self.minstack=[]
 	        self.sdstack=[]
-	
+
 	    def push(self, x):
 	        """
 	        :type x: int
@@ -484,8 +484,8 @@ Design a stack that supports push, pop, top, and retrieving the minimum element 
 	        if len(self.minstack)==0:
 	            self.minstack.append(x)
 	        self.sdstack.append(x)
-	            
-	
+
+
 	    def pop(self):
 	        """
 	        :rtype: nothing
@@ -496,13 +496,13 @@ Design a stack that supports push, pop, top, and retrieving the minimum element 
 	            if x==self.minstack[i]:
 	                del self.minstack[i]
 	                break;
-	
+
 	    def top(self):
 	        """
 	        :rtype: int
 	        """
 	        return self.sdstack[-1]
-	
+
 	    def getMin(self):
 	        """
 	        :rtype: int
@@ -521,7 +521,7 @@ Design a stack that supports push, pop, top, and retrieving the minimum element 
 	        """
 	        self.minstack=[]
 	        self.sdstack=[]
-	
+
 	    def push(self, x):
 	        """
 	        :type x: int
@@ -532,7 +532,7 @@ Design a stack that supports push, pop, top, and retrieving the minimum element 
 	        elif x<=self.minstack[-1]:
 	            self.minstack.append(x)
 	        self.sdstack.append(x)
-	
+
 	    def pop(self):
 	        """
 	        :rtype: nothing
@@ -541,13 +541,13 @@ Design a stack that supports push, pop, top, and retrieving the minimum element 
 	        del self.sdstack[-1]
 	        if len(self.minstack)>0 and x==self.minstack[-1]:
 	            del self.minstack[-1]
-	            
+
 	    def top(self):
 	        """
 	        :rtype: int
 	        """
 	        return self.sdstack[-1]
-	
+
 	    def getMin(self):
 	        """
 	        :rtype: int
@@ -556,13 +556,13 @@ Design a stack that supports push, pop, top, and retrieving the minimum element 
 	            return min(self.minstack[-1],self.sdstack[-1])
 	        else:
 	            return 0
-        
+
 ## Quote
 
 > http://blog.csdn.net/xudli/article/details/48286081
-> 
+>
 > http://my.oschina.net/Tsybius2014/blog/505462
-> 
+>
 > http://m.shangxueba.com/jingyan/2926615.html
-> 
+>
 > http://www.cnblogs.com/x1957/p/4086448.html

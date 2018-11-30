@@ -20,12 +20,11 @@ Example:
 	 [1,1,1,0],
 	 [0,1,0,0],
 	 [1,1,0,0]]
-	
+
 	Answer: 16
 	Explanation: The perimeter is the 16 yellow stripes in the image below:
 
-![](https://leetcode.com/static/images/problemset/island.png)
-
+![SMMS](https://i.loli.net/2018/11/30/5c00aa4b4ece3.png)
 
 ### 73.Island Perimeter-Analysis
 
@@ -37,10 +36,10 @@ Example:
 
 ### 73.Island Perimeter-Solution-C/C++
 
-	class Solution 
+	class Solution
 	{
 	public:
-	    int islandPerimeter(vector<vector<int>>& grid) 
+	    int islandPerimeter(vector<vector<int>>& grid)
 	    {
 	        int edge=0,r=0;
 	        for(int i=0;i<grid.size();i++)
@@ -59,19 +58,19 @@ Example:
 	                    if((i!=grid.size()-1)&&(grid[i+1][j]==1))
 	                    {//下
 	                        ;
-	                    }           
+	                    }
 	                    else
 	                        edge+=1;
 	                    if((j!=0)&&(grid[i][j-1]==1))
 	                    {//左
 	                        ;
-	                    }           
+	                    }
 	                    else
 	                        edge+=1;
 	                    if((j!=grid[i].size()-1)&&(grid[i][j+1]==1))
 	                    {//右
 	                        ;
-	                    }           
+	                    }
 	                    else
 	                        edge+=1;
 	                }
@@ -144,10 +143,10 @@ Special thanks to @fujiaozhu for adding this problem and creating all test cases
 
 ### 74.Sum of Two Integers-Solution-C/C++
 
-	class Solution 
+	class Solution
 	{
 	public:
-	    int getSum(int a, int b) 
+	    int getSum(int a, int b)
 	    {
 	        while(b)
 	        {
@@ -227,10 +226,10 @@ Example:
 	Input:
 	s = "abcd"
 	t = "abcde"
-	
+
 	Output:
 	e
-	
+
 	Explanation:
 	'e' is the letter that was added.
 
@@ -247,7 +246,7 @@ Example:
 	class Solution
 	{
 	public:
-	    char findTheDifference(string s, string t) 
+	    char findTheDifference(string s, string t)
 	    {
 	        char r=0;
 	        for(int i=0;i<s.size();i++)
@@ -260,7 +259,7 @@ Example:
 	};
 
 ### 75.Find the Difference-Solution-Python
-	
+
 	class Solution(object):
 	    def findTheDifference(self, s, t):
 	        """
@@ -283,28 +282,28 @@ Example:
 Assume you are an awesome parent and want to give your children some cookies. But, you should give each child at most one cookie. Each child i has a greed factor gi, which is the minimum size of a cookie that the child will be content with; and each cookie j has a size sj. If sj >= gi, we can assign the cookie j to the child i, and the child i will be content. Your goal is to maximize the number of your content children and output the maximum number.
 
 Note:
-You may assume the greed factor is always positive. 
+You may assume the greed factor is always positive.
 You cannot assign more than one cookie to one child.
 
 Example 1:
 
 	Input: [1,2,3], [1,1]
-	
+
 	Output: 1
-	
-	Explanation: You have 3 children and 2 cookies. The greed factors of 3 children are 1, 2, 3. 
-	And even though you have 2 cookies, since their size is both 1 
+
+	Explanation: You have 3 children and 2 cookies. The greed factors of 3 children are 1, 2, 3.
+	And even though you have 2 cookies, since their size is both 1
 	you could only make the child whose greed factor is 1 content.
 	You need to output 1.
 
 Example 2:
 
 	Input: [1,2], [1,2,3]
-	
+
 	Output: 2
-	
-	Explanation: You have 2 children and 3 cookies. The greed factors of 2 children are 1, 2. 
-	You have 3 cookies and their sizes are big enough to gratify all of the children, 
+
+	Explanation: You have 2 children and 3 cookies. The greed factors of 2 children are 1, 2.
+	You have 3 cookies and their sizes are big enough to gratify all of the children,
 	You need to output 2.
 
 ### 76.Assign Cookies-Analysis
@@ -315,10 +314,10 @@ Example 2:
 
 ### 76.Assign Cookies-Solution-C/C++
 
-	class Solution 
+	class Solution
 	{
 	public:
-	    int findContentChildren(vector<int>& g, vector<int>& s) 
+	    int findContentChildren(vector<int>& g, vector<int>& s)
 	    {
 	        int count=0,cur=0,curs=0,find=0;
 	        for(int i=0;i<g.size();i++)
@@ -356,7 +355,7 @@ Example 2:
 	                count++;
 	                s[curs]=0;
 	            }
-	            
+
 	        }
 	        return count;
 	    }
@@ -367,10 +366,10 @@ Example 2:
 
 还有一种,就是先把供给和需求各自排序,排序完成以后再用一一对应最小满足的方式去计算人数就行了.
 
-	class Solution 
+	class Solution
 	{
 	public:
-	    int findContentChildren(vector<int>& g, vector<int>& s) 
+	    int findContentChildren(vector<int>& g, vector<int>& s)
 	    {
 	        int n=g.size(),m=s.size();
 	        sort(g.begin(),g.end());
@@ -407,10 +406,10 @@ Example 2:
 
 ## Quote
 
-> http://blog.csdn.net/booirror/article/details/51816003 
-> 
+> http://blog.csdn.net/booirror/article/details/51816003
+>
 > http://bookshadow.com/weblog/2016/06/30/leetcode-sum-of-two-integers/
-> 
-> http://blog.csdn.net/cnmilan/article/details/44777017 
-> 
-> http://blog.csdn.net/junchen1992/article/details/53147967 
+>
+> http://blog.csdn.net/cnmilan/article/details/44777017
+>
+> http://blog.csdn.net/junchen1992/article/details/53147967

@@ -18,7 +18,7 @@ The robot can only move either down or right at any point in time. The robot is 
 
 How many possible unique paths are there?
 
-![](http://articles.leetcode.com/wp-content/uploads/2014/12/robot_maze.png)
+![SMMS](https://i.loli.net/2018/11/30/5c00aa6106ed0.png)
 
 Above is a 3 x 7 grid. How many possible unique paths are there?
 
@@ -32,7 +32,7 @@ Note: m and n will be at most 100.
 
 向下的选择次数是一定的 m-1
 
-向右的次数也是一定的 n-1 
+向右的次数也是一定的 n-1
 
 从排列组合的角度来说，所有走法就等于C（m-1，n+m-2）=C（n-1，n+m-2）
 
@@ -42,7 +42,7 @@ Note: m and n will be at most 100.
 
 结合之前遇到的题，求解排列组合非常容易越界，比如下面这个不到20就已经越界了。
 
-	class Solution 
+	class Solution
 	{
 	public:
 	    int uniquePaths(int m, int n)
@@ -53,7 +53,7 @@ Note: m and n will be at most 100.
 	        {
 	            if(i<=(m-1))
 	                p2*=i;
-	            if(i<=(n-1))    
+	            if(i<=(n-1))
 	                p3*=i;
 	            p1*=i;
 	            if(p1%p2==0)
@@ -94,7 +94,7 @@ Note: m and n will be at most 100.
 
 #### 排列组合
 
-	class Solution 
+	class Solution
 	{
 	public:
 	    int uniquePaths(int m, int n)
@@ -106,7 +106,7 @@ Note: m and n will be at most 100.
 	        {
 	            if(i<=min-1)
 	                p2*=i;
-	            if(i>max-1)     
+	            if(i>max-1)
 	                p1*=i;
 	            if(p1%p2==0)
 	            {
@@ -122,42 +122,42 @@ Note: m and n will be at most 100.
 
 时间空间都为O(mn)
 
-	class Solution 
+	class Solution
 	{
 	public:
 	    int uniquePaths(int m, int n)
 	    {
-	        vector<vector<int>> v(m, vector<int>(n, 1));  
+	        vector<vector<int>> v(m, vector<int>(n, 1));
 	        for(int i=1; i<m; ++i)
-	        {  
+	        {
 	            for(int j=1; j<n; ++j)
-	            {  
-	                v[i][j]=v[i-1][j]+v[i][j-1];  
-	            }  
-	        }  
-	        return v[m-1][n-1];  
+	            {
+	                v[i][j]=v[i-1][j]+v[i][j-1];
+	            }
+	        }
+	        return v[m-1][n-1];
 	    }
 	};
 
 时间为O(mn) 空间为O(n)
 
-	class Solution 
-	{  
-	public:  
-	    int uniquePaths(int m, int n) 
-	    { 
+	class Solution
+	{
+	public:
+	    int uniquePaths(int m, int n)
+	    {
 	        int max=m>n?m:n,min=m>n?n:m;
-	        vector<int> v(min, 1);  
+	        vector<int> v(min, 1);
 	        for(int i=1; i<max; ++i)
-	        {  
+	        {
 	            for(int j=1; j<min; ++j)
-	            {  
-	                v[j]+=v[j-1];  
-	            }  
-	        }  
-	        return v[min-1];  
-	    }  
-	};  
+	            {
+	                v[j]+=v[j-1];
+	            }
+	        }
+	        return v[min-1];
+	    }
+	};
 
 ### 17.Unique Paths-Solution-Python
 
@@ -172,8 +172,8 @@ Note: m and n will be at most 100.
 	        """
 	        mnmax=max(m,n)
 	        mnmin=min(m,n)
-	        initial_value=1  
-	        list_length=mnmin  
+	        initial_value=1
+	        list_length=mnmin
 	        v=[initial_value]*list_length
 	        for i in range(1,mnmax):
 	            for j in range(1,mnmin):
@@ -182,17 +182,17 @@ Note: m and n will be at most 100.
 
 这里也学习了一下如何给python的list初始化同一个值
 
-	initial_value = 0  
-	list_length = 5  
+	initial_value = 0
+	list_length = 5
 	方法一，直接用循环遍历赋值
 	sample_list = [ initial_value for i in range(list_length)]
   	方法二，用这样的格式也可以
-	sample_list = [initial_value]*list_length  
+	sample_list = [initial_value]*list_length
 	# sample_list ==[0,0,0,0,0]
 
 
 ## Quote
 
 > http://www.cnblogs.com/qianye/archive/2013/09/06/3305680.html
-> 
+>
 > http://blog.csdn.net/jiadebin890724/article/details/23302123

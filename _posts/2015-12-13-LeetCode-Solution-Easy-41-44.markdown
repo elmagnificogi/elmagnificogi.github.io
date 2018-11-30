@@ -16,7 +16,7 @@ Determine if a Sudoku is valid, according to: Sudoku Puzzles - The Rules.
 
 The Sudoku board could be partially filled, where empty cells are filled with the character '.'.
 
-![](https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Sudoku-by-L2G-20050714.svg/250px-Sudoku-by-L2G-20050714.svg.png)
+![SMMS](https://i.loli.net/2018/11/30/5c00aacee9f9c.png)
 
 A partially filled sudoku which is valid.
 
@@ -35,7 +35,7 @@ A valid Sudoku board (partially filled) is not necessarily solvable. Only the fi
 
 除了比较复杂再就没什么了
 
-	bool isValidSudoku(char** board, int boardRowSize, int boardColSize) 
+	bool isValidSudoku(char** board, int boardRowSize, int boardColSize)
 	{
 	    int i=0,j=0,k=0,n=0,f;
 	    int num[9]={0,0,0,0,0,0,0,0,0};
@@ -82,7 +82,7 @@ A valid Sudoku board (partially filled) is not necessarily solvable. Only the fi
 	                {
 	                    if(board[k+i][j+n]!='.')
 	                        num[board[k+i][j+n]-49]++;
-	                    //printf("%c",board[k+i][j+n]);    
+	                    //printf("%c",board[k+i][j+n]);
 	                }
 	            }
 	            for(f=0;f<9;f++)
@@ -94,7 +94,7 @@ A valid Sudoku board (partially filled) is not necessarily solvable. Only the fi
 	            }
 	            //printf("%d %d ",k+i,j+n);
 	        }
-	    return true;     
+	    return true;
 	}
 
 ### 41.Valid Sudoku-Solution-Python
@@ -125,12 +125,12 @@ Python用另外一种方法，每检测一个格子，就在所在行、列、�
 	                    continue
 	                tmp=board[i][j]
 	                board[i][j]='D'
-	                if isValid(i,j,tmp)==False: 
+	                if isValid(i,j,tmp)==False:
 	                    return False
 	                else:
 	                    board[i][j]=tmp
 	        return True
-	        
+
 
 
 
@@ -142,7 +142,7 @@ If the last word does not exist, return 0.
 
 Note: A word is defined as a character sequence consists of non-space characters only.
 
-For example, 
+For example,
 
 Given s = "Hello World",
 
@@ -154,13 +154,13 @@ return 5.
 
 所以只要顺序查找，如果找到尾部就结束
 
-如果找到不为空格，那么找到了word，然后开始记录，如果找到下一个空格就结束 
+如果找到不为空格，那么找到了word，然后开始记录，如果找到下一个空格就结束
 
 直到最后，但是这样有一个小问题，就是从头开始找到，因为想找的是最后一个word，所以其实比较慢。
 
 ### 42.Length of Last Word-Solution-C/C++
 
-	int lengthOfLastWord(char* s) 
+	int lengthOfLastWord(char* s)
 	{
 	    char* temp=s;
 	    bool find=false;
@@ -215,9 +215,9 @@ python的代码从尾部开始计算，首先把尾部的空格全部排除掉
 	                    slen=slen+1
 	                    continue
 	                else:
-	                    return slen 
-	        return slen            
-                               
+	                    return slen
+	        return slen
+
 ## 43.Contains Duplicate II
 
 Given an array of integers and an integer k, find out whether there are two distinct indices i and j in the array such that nums[i] = nums[j] and the difference between i and j is at most k.
@@ -236,7 +236,7 @@ Given an array of integers and an integer k, find out whether there are two dist
 
 ### 43.Contains Duplicate II-Solution-C/C++
 
-	bool containsNearbyDuplicate(int* nums, int numsSize, int k) 
+	bool containsNearbyDuplicate(int* nums, int numsSize, int k)
 	{
 	    int i=0,j=0,n=k;
 	    for(i=0;i<numsSize-1;i++)
@@ -300,7 +300,7 @@ Find the total area covered by two rectilinear rectangles in a 2D plane.
 
 Each rectangle is defined by its bottom left corner and top right corner as shown in the figure.
 
-![](https://leetcode.com/static/images/problemset/rectangle_area.png)
+![SMMS](https://i.loli.net/2018/11/30/5c00aae8c6b68.png)
 
 Assume that the total area is never beyond the maximum possible value of int.
 
@@ -333,9 +333,9 @@ Assume that the total area is never beyond the maximum possible value of int.
 	    //不相交情况
 	    if(C<=E||G<=A||D<=F||H<=B)
 	        return (C-A)*(D-B)+(G-E)*(H-F);
-	    
-	    
-	        
+
+
+
 	    //相交情况
 	    a=A<E?E:A;
 	    b=B>F?B:F;
@@ -390,17 +390,17 @@ Assume that the total area is never beyond the maximum possible value of int.
 	        print(a,b,c,d)
 	        chang=max(a-c,c-a)
 	        kuan=max(b-d,d-b)
-	        #按道理来说ab是左下的 cd是右上的 
-	        #也就是说ab的值应该小于cd的 
+	        #按道理来说ab是左下的 cd是右上的
+	        #也就是说ab的值应该小于cd的
 	        #如果出现了ab值大于cd 就是相离的情况下会出现这种情况，那么就可以判断出来是否有重合部分了
 	        if(d<b or c<a):
 	            return (C-A)*(D-B)+(G-E)*(H-F)
 	        return (C-A)*(D-B)+(G-E)*(H-F)-chang*kuan
-	        
-	
-	
+
+
+
 ## Quote
 
 > http://www.tuicool.com/articles/zMn2ei
-> 
+>
 > http://bookshadow.com/weblog/2015/05/29/leetcode-contains-duplicate-ii/
