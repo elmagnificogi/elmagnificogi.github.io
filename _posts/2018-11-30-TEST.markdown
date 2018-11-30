@@ -4,7 +4,7 @@ title:      "Tiny Tiny RSS"
 subtitle:   "docker,mercury,vps"
 date:       2018-10-22
 author:     "elmagnifico"
-header-img: "https://i.loli.net/2018/11/30/5c00acffe4a97.jpg"
+header-img: https://i.loli.net/2018/11/30/5c00acffe4a97.jpg
 catalog:    true
 tags:
     - vps
