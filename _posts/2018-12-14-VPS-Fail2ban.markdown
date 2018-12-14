@@ -96,6 +96,27 @@ tags:
 
     echo > /var/log/wtmp;echo > /var/log/btmp;history -c;
 
+#### firewalld
+
+需要注意由于这里开启了防火墙，那意味着处理后台网站的安全组里要设置开端口，那么防火墙也需要设置开端口，否则之前的服务可能不能正常运行或者无法访问
+
+显示已打开端口
+
+    firewall-cmd --zone=public --list-ports
+
+添加一个tcp/udp端口，重启后也有效
+
+    firewall-cmd --zone=public --add-port=80/tcp --permanent
+    firewall-cmd --zone=public --add-port=80/udp --permanent
+
+添加完成后，重载才会生效
+
+    firewall-cmd --reload
+
+删除一个添加的端口
+
+    firewall-cmd --zone= public --remove-port=80/tcp --permanent
+
 ## Summary
 
 这样配置了以后，在lastb中还是能看到有破解的迹象，但是暴力破解基本不存在了。
@@ -114,3 +135,5 @@ tags:
 > https://www.longger.net/article/270a0c33.html
 >
 > https://www.cnblogs.com/zdz8207/p/linux-systemctl.html
+>
+> https://www.cnblogs.com/moxiaoan/p/5683743.html
