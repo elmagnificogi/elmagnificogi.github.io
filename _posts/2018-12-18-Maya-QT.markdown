@@ -1,0 +1,109 @@
+---
+layout:     post
+title:      "Maya QT in VS 2017"
+subtitle:   "UI, helixQtCmd, plugin"
+date:       2018-12-18
+author:     "elmagnifico"
+header-img: "img/python-head-bg.png"
+catalog:    true
+tags:
+    - QT
+    - maya
+---
+
+## Foreword
+
+大部分时候maya的UI要不是用自己的UI脚本来写，要不就是用QT Designer来写，或者是用pyside来写。
+
+单纯只用c++来写QT的UI，反倒是没看到什么例子。
+
+官方的说明文档中基本也只给出了一个例子，就是helixQtCmd，例子比较简单，但是编译的时候问题特别多，而且官方也没明确说明，这里补充记录一下.
+
+#### maya环境
+
+先提前说一些关于maya的环境问题,首先我这里用的是maya2017,17与之前所有版本都有不同,17版本开始使用QT5,16之前的是QT4或者其他的方式,然后还有一个地方不同,maya的QT和原生的QT并不一样,是修改过的版本.具体根据maya版本不同,有对应不同的QT版本.
+
+对应版本在这里可以看到:
+
+> https://www.autodesk.com/company/legal-notices-trademarks/open-source-distribution
+
+你可以单独安装一个与maya无关的QT,也可以使用这里的安装包装一个maya的QT,又或者你直接用maya自带的QT.
+
+###### DevKit
+
+> https://www.autodesk.com/developer-network/platform-technologies/maya
+
+现在的开发套件下载地址,选择对应版本下载完成以后,可看到四个文件夹
+
+- cmake
+- devkit
+- include
+- mkspecs
+
+这个四个文件夹分别对应到安装目录下的
+
+- maya2017\lib\cmake
+- maya2017\devkit
+- maya2017\include
+- maya2017\mkspecs
+
+到这里基础的头文件什么的就有了,python什么的需要的文件基本都有.
+
+###### maya QT
+
+如果要使用maya自带的QT,其实有一些小问题,如果是python可以直接调用,都装好了,但是如果是C++这种就不行了.
+
+实际上maya里有QT的运行插件,但是没有QT的编译所需库文件
+
+如图所示:在maya的安装路径下的 include,lib/cmake,mkspecs中分别有qt打好包的头文件库文件,那我们需要的就是在这里把他们全都解压到他们当前的目录下.
+
+![SMMS](https://i.loli.net/2018/12/18/5c18531be0b19.png)
+
+如果想要正常运行例程这里还需要设置一下环境变量
+
+- MAYA_LOCATION 就是maya的安装目录
+- PATH 添加 D:\Autodesk\Maya2017\bin\qmake.exe 为了正常运行qmake
+
+到这里基本上QT需要的环境就都有了,在devkit中有许多例程,然后这些例程所需要的库文件就是上面的这些.
+
+#### 编译helixQtCmd
+
+- 新建一个文件夹名为 helixQtCmd
+- 复制 helixQtCmd.cpp,helixQtCmd.h,helixQtCmd.pro,Makefile.qt以及qtconfig 文件到这个文件夹,他们都在devkit\plug-ins中
+
+需要注意,如果helixQtCmd不是在 devkit\plug-ins 中的话,需要对应修改qtconfig文件中的LABS和INCLUDEPATH的路径,LIB指定的路径就是 maya2017\lib 而INCLUDEPATH指定的是 maya2017\include
+
+qtconfig文件:
+
+    CONFIG += qt warn_on release plugin
+
+    LIBS		+= -L..\..\lib -lOpenMaya -lFoundation
+    DEFINES		+= NDEBUG _WINDOWS NT_PLUGIN
+    INCLUDEPATH	+= . ../../include
+    QMAKE_LFLAGS	= /export:initializePlugin /export:uninitializePlugin /SUBSYSTEM:WINDOWS
+    _CFLAGS		= /FD /GS
+    QMAKE_CFLAGS	+= $${_CFLAGS}
+    QMAKE_CXXFLAGS	+= $${_CFLAGS}
+    TARGET_EXT	= .mll
+
+- 然后在文件夹内打开cmd,运行 qmake helixQtCmd.pro,就可以得到一个 makefile 文件
+- 运行 D:\Visual Studio 2012\VC\vcvarsall.bat amd64 ,这里是选择编译的平台,如果不选则会在下一步报错
+- 运行 nmake /f Makefile,就可以得到对应的helixQtCmd.mll
+
+如果出现报错,仔细查看qtconfig或者是makefile中的内容,一般都是库什么的不对之类的。
+
+还有一点，这个编译貌似只有vs2012才能正常通过，用2017版本的基本都会直接报错或者是其他情况，比较棘手。
+
+## Summary
+
+只要能正常通过编译，那么拿到maya里基本就没问题了
+
+## Quote
+
+> https://help.autodesk.com/view/MAYAUL/2017/ENU/?guid=__files_GUID_13434252_F0BF_4AC0_B47B_09BD626B0881_htm
+>
+> https://blog.csdn.net/lulongfei172006/article/details/80380750
+>
+> https://around-the-corner.typepad.com/adn/2016/07/-maya-2017-devkit-building-qt-plug-ins-instructions.html
+>
+> https://knowledge.autodesk.com/support/maya/learn-explore/caas/sfdcarticles/sfdcarticles/Where-is-the-Maya-2016-devkit.html

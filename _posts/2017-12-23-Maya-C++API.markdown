@@ -28,6 +28,8 @@ maya除了可以直接使用MEL和Python的脚本语言（Maya Commands）来开
 首先自从maya2016以后开始，maya就不自带开发套件了，需要单独从官网的APP商城里下载
 
 > https://apps.autodesk.com/MAYA/en/Home/Index
+或者
+> https://www.autodesk.com/developer-network/platform-technologies/maya
 
 商城里搜索develope 就能找到2016版以后的开发套件，需要与你开发的版本一一对应，否则可能会有无法解决的错误。
 
