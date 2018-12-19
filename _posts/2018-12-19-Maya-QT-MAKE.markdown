@@ -108,11 +108,13 @@ pro相对比较简单，而且内容都是和当前项目相关的，而qtconfig
 - CONFIG += debug
 - 使用 nmake /f Makefile.qt myPlugin.mak 生成 .mak.Debug,然后将其中的LABS，带有 d 结尾的库，改成不带d的库
 
+
     # 原生
     LIBS = /LIBPATH:..\..\lib ..\..\lib\OpenMaya.lib ..\..\lib\Foundation.lib ..\..\lib\OpenMayaUI.lib c:\qt-adsk-5.6.1\lib\QtGuid4.lib c:\qt-adsk-5.6.1\lib\QtCored4.lib`
 
     # 修改后的
     LIBS = /LIBPATH:..\..\lib ..\..\lib\OpenMaya.lib ..\..\lib\Foundation.lib ..\..\lib\OpenMayaUI.lib c:\qt-adsk-5.6.1\lib\QtGui4.lib c:\qt-adsk-5.6.1\lib\QtCore4.lib`
+
 
 - 然后使用 nmake /f myPlugin.mak.Debug debug\myPlugin.mll 生成debug的mll
 
