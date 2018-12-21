@@ -30,6 +30,13 @@ tags:
 
 ![SMMS](https://i.loli.net/2018/12/14/5c131056b852a.png)
 
+查看每日登陆失败的次数
+
+    cat /var/log/secure* | grep 'Failed password' | grep sshd | awk '{print $1,$2}' | sort | uniq -c
+
+查看登陆log文件大小：
+
+    du -h /var/log/secure
 
 #### Fail2ban
 
@@ -125,6 +132,14 @@ tags:
 延长到一周或者是三四天，这样的话大时间范围内所有登陆失败的对象都会被直接封禁，比较符合更安全的设定。
 
 当然还有两种方式，一个是改变ssh端口，让对方找不到你端口，也就无从暴力破解，另一种就是密钥登陆的模式，更安全的密码，让这样的暴力破解基本无效。
+
+## 后记
+
+2018-12-21
+
+国内还是牛逼啊，腾讯云一周时间ban了455个IP
+
+阿里云国际，一周ban了11个IP
 
 ## Quote
 
