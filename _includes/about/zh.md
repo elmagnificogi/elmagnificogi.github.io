@@ -4,7 +4,7 @@
 
 我是elmagnifico
 
-程序员，能copy、coding、debugging、building
+程序员,无人机集群表演设计师
 
 全栈工程师，除去后端还在学，UI不精通，各种框架基本不懂，我已经全栈了
 
@@ -13,10 +13,10 @@
 联系方式：
 
 - 邮箱:elmagnificogg@gmail.com
-- QQ:363562671
+- QQ:叁6三5⑥2六7Ⅰ
 
 一些期待成为的角色:
 
-- Back-end engineer
+- TD
 - Product Engineer
 - "Full Stack" Engineer/Designer
