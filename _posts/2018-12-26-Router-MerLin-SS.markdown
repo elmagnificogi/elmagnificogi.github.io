@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "基于MIPSEL架构的梅林固件中小宝软件中心的shadowsocks"
+title:      "MIPSEL架构-梅林固件中小宝软件中心的shadowsocks"
 subtitle:   "MerLin,Asus RT-AC66u"
 date:       2018-12-26
 author:     "elmagnifico"
@@ -15,7 +15,7 @@ tags:
 
 路由器比较老，Asus RT-AC66u，并不是AC66u b1,是老的MIPSEL架构的，而小宝的软件中心则是很久不更新了，有一年半了，我才注意到路由里的shadows的路由表啊什么的都不更新了，再加上软件中心这里还有一个bug，只要更新ss，就会出现更新以后验证失败，离线安装也会验证失败，从而导致只能手动ssh上去更新的情况，基于这个维护一个我自己用的版本。
 
-## 基于MIPSEL架构的梅林固件ss
+## 基于MIPSEL架构的梅林固件-shadowsocks
 
 merlin koolshare ss for mipsel,下面是我的git地址
 
