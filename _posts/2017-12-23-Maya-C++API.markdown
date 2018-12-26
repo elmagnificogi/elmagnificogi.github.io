@@ -45,10 +45,25 @@ Visual Studio的版本更新比较快，而maya自然不可能跟上最新版的
 
     devkitBase\devkit\pluginwizard\MayaPluginWizard2.0
 
-将顶层目录MayaPluginWizard整个复制到C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\VCWizards（你自己的安装路径）
+###### vs2012
 
+将顶层目录MayaPluginWizard整个复制到 D:\Visual Studio 2017\Common7\IDE\VC\VCWizards（你自己的安装路径）
 
-然后将MayaPluginWizard目录下的这三个文件全都放到 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\vcprojects目录下（你自己的安装路径）。
+###### vs2017
+
+将顶层目录MayaPluginWizard整个复制到 D:\Visual Studio 2017\Common7\IDE\VC\VCWizards（你自己的安装路径）
+
+###### vs2012
+
+然后将MayaPluginWizard目录下的这三个文件全都放到 D:\Visual Studio 2012\VC\vcprojects 目录下（你自己的安装路径）。
+
+    MayaPluginWizard.ico
+    MayaPluginWizard.vsz
+    MayaPluginWizard.vsdir
+
+###### vs2017
+
+然后将MayaPluginWizard目录下的这三个文件全都放到 D:\Visual Studio 2017\Common7\IDE\VC\vcprojects 目录下（你自己的安装路径）。
 
     MayaPluginWizard.ico
     MayaPluginWizard.vsz
@@ -56,9 +71,25 @@ Visual Studio的版本更新比较快，而maya自然不可能跟上最新版的
 
 然后重新打开一下VS和MAYA，基本就可以直接通过项目模板，建立一个简单的MAYA插件的工程了，其相关的所有配置都给你配置好了。
 
+![SMMS](https://i.loli.net/2018/12/26/5c22e9006b0a5.png)
+
+然后选择maya版本，这里最好是使用 Custom location，不然一会还要手动设置maya的库文件路径什么的
+
+![SMMS](https://i.loli.net/2018/12/26/5c22e96760223.png)
+
+选择模板类型，是mel命令还是node节点等
+
+![SMMS](https://i.loli.net/2018/12/26/5c22e9849d0d9.png)
+
+最后选择是要用的库都有哪些
+
+![SMMS](https://i.loli.net/2018/12/26/5c22e9b67bd31.png)
+
+然后就能正常编译了,同时使用cout流输出也是会自动输出到 output window,都是正常的
+
 #### Maya Plug-in Tutorials
 
-MayaPluginWizard 在16版之前，都是1.0版本，并且不同版本对应的Visual Studio版本并不相同，之前的版本可能都可以跨版本使用，但是到了Visual Studio2017以后Wizard的路径以及存储方式都发生了改变，想要继续使用就不行了,这里就只能用另一种方式，手动配置工程，完全从头开始.
+MayaPluginWizard 可能vs版本不同或者更新的版本导致不能用,这里用另一种方式，手动配置工程，完全从头开始.
 
 ###### 使用方法
 
@@ -106,7 +137,7 @@ MAYA_PATH,或者是手动修改工程中lib和include的搜索目录.
 
 自己手动配置maya工程的方式在maya的help中并没有提及,网上能找到的资料都很有限,而AutoDesk论坛上关于VS和maya的问题基本上都是被要求切换到对应的VS版本来解决了,也没有人说具体怎么配置.
 
-上面提到的流定向的问题,在Maya2017配合VS2017无输出的情况下,安装了VS2012版本,而然问题依旧,要解决这个问题可能需要一个干净的VS2012.未安装其他VS版本的情况下,应该是正常的.
+上面提到的流定向的问题,在Maya2017配合VS2017无输出的情况下,安装了VS2012版本,而然问题依旧,要解决这个问题最好是使用现成的工程模板或者说是从工程模板里反向找到缺少的设置。
 
 ## Quote
 
@@ -116,3 +147,4 @@ MAYA_PATH,或者是手动修改工程中lib和include的搜索目录.
 >
 > https://nickcullen.net/blog/misc-tutorials/how-to-debug-a-maya-2016-c-plugin-using-visual-studio-2015/
 >
+> https://beesoverdundee.wordpress.com/2015/04/02/tutorial-making-maya-2015-plugins-with-visual-studio/
