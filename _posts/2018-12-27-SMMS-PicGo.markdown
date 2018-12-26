@@ -75,6 +75,14 @@ git:
 
 切换七牛的时候也发现了图片没有给标记，导致找有图片的文章有点麻烦，这次开始给对应图床的标记，以后写程序批量替换图片。
 
+还有一点发现，就是黄玄的这个博客，他竟然不支持RSS，但是文件中却有feed.xml,通过下面的链接可以直接打开我的，但是呢，如果直接用浏览器或者是rss订阅工具会提示该网站没有feed，而用下面网址就是正确的。
+
+http://elmagnifico.me/feed.xml
+
+同时我参考了一下他copy的原作者的，原作者的是支持的，直接订阅就会显示出来feed，不知道黄玄是遗漏了什么，日后有空再补充一下。
+
 ## Quote
 
 > https://sspai.com/post/42310
+>
+> http://blackrockdigital.github.io/startbootstrap-clean-blog-jekyll/
