@@ -1,10 +1,10 @@
 ---
 layout:     post
 title:      "STM32 HAL与FreeRTOS造成的死锁"
-subtitle:   "Interrupt"
+subtitle:   "Interrupt,I2C"
 date:       2018-12-27
 author:     "elmagnifico"
-header-img: "img/git-head-bg.jpg"
+header-img: "img/Embedded-head-bg.png"
 catalog:    true
 tags:
     - STM32
@@ -338,7 +338,7 @@ static HAL_StatusTypeDef I2C_Master_ISR_IT(struct __I2C_HandleTypeDef *hi2c, uin
   return HAL_OK;
 }
 ```
-##### 引发的问题1
+##### 引发的问题
 
 由于上述的中断需要解锁状态下才能操作总线，导致中断标记无法被正常清除，无限进中断，整个系统的时间轮转，就由于中断，无法正常工作，系统基本执行不了一两句代码就得跳转执行中断，进而导致被挂起的总线超时线程，一直得不到响应，从而出现死机状态。
 
@@ -546,4 +546,6 @@ static HAL_StatusTypeDef I2C_Disable_IRQ(I2C_HandleTypeDef *hi2c, uint16_t Inter
 > stm32 CubeMX
 >
 > stm32f7xx_it.c
+>
+> https://community.st.com/s/question/0D50X0000ADB6NNSQ1/there-is-a-bug-in-stm32f7xxhali2cc
 >
