@@ -555,3 +555,4 @@ static HAL_StatusTypeDef I2C_Disable_IRQ(I2C_HandleTypeDef *hi2c, uint16_t Inter
 >
 > https://community.st.com/s/question/0D50X0000ADB6NNSQ1/there-is-a-bug-in-stm32f7xxhali2cc
 >
+> https://community.st.com/s/question/0D50X0000ADDM7oSQH/there-is-a-problem-in-i2c-hal-library
