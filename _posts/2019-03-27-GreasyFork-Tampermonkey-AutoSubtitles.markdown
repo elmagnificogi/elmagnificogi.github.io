@@ -18,7 +18,7 @@ tags:
 
 ## Script
 
-```JS
+```Java
 // ==UserScript==
 // @name         自动英文字幕
 // @namespace    http://elmagnifico.me/
