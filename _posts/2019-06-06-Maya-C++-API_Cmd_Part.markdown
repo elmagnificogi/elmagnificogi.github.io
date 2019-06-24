@@ -154,6 +154,10 @@ cgsociety 可以提问,看看是否有大佬可以帮忙什么的
 
 stackoverflow 上也有一部分maya相关的提问什么的
 
+> https://forum.highend3d.com/c/maya-help-forums
+
+highend3d 也有maya板块,但是人比较少
+
 ## 总结
 
 maya API 相关的资料也好,例程也好,相对来说领域细分的比较小,很多东西不好找,只能自己多看看多琢磨琢磨
