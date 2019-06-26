@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "maya c++ API CMD部分"
-subtitle:   "重构"
+subtitle:   "API 学习"
 date:       2019-06-06
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"
