@@ -83,7 +83,7 @@ maya里基本都是代理类，代理类通过构建一个代理类，将原先�
 - dagMessageCmd 增加一个回调函数,返回当前dag节点连接或者断开状态,学习如何建立一个回调函数,寻找父子节点上下游之类的东西.
 - deletedMsgCmd 增加三个删除回调函数，在删除当前节点相关内容的时候进行回调
 - findFileTexturesCmd 找到一个渲染组中的文件材质节点，教你如何寻找依赖节点，并且使用DG迭代器
-- findTexturesPerPolygonCmd 找到每个多边形的材质
+- findTexturesPerPolygonCmd 找到每个多边形的文件材质，但是这个代码本身有点问题，实际可以编译通过，但是却找不到任何文件材质，不过倒是可以学会怎么找对应的材质，shadernode什么的。
 - iffInfoCmd 返回maya iff 文件信息，如何操作iff文件类型
 - multiPlugInfoCmd 显示当前子插件命令信息
 - nodeInfoCmd 返回一个节点的类型以及连接的属性信息，可以学会如何查找对应的一个节点的类型和属性
