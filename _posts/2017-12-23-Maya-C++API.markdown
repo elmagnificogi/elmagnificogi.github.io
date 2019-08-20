@@ -133,6 +133,26 @@ MAYA_PATH,或者是手动修改工程中lib和include的搜索目录.
 
 调试的时候也要切换到远程调试模式下,再按F5.
 
+### Cout
+
+之前一直有maya中cout无法正常工作，或者是在某些条件下又能正常工作
+
+- Debug/Release
+- 管理员模式/非管理员模式
+- 2016版本/2013版本/2018版本等等
+
+实际上这个情况并不明确，所以这里通过重新向流来保证Cout一定能正常工作
+
+我工作电脑上cout正常工作，编译出来的插件也是正常工作的，但是家里电脑上编译出来的不能正常输出信息，在插件的初始化地方直接重定向流，可以确保不同环境下cout也能正常工作。
+
+```c++
+// rebuf the stream to the maya output windows
+// without this some envs cound now cout anything
+std::cout.set_rdbuf(MStreamUtils::stdOutStream().rdbuf());
+std::cerr.set_rdbuf(MStreamUtils::stdErrorStream().rdbuf());
+```
+
+
 ## Summary
 
 自己手动配置maya工程的方式在maya的help中并没有提及,网上能找到的资料都很有限,而AutoDesk论坛上关于VS和maya的问题基本上都是被要求切换到对应的VS版本来解决了,也没有人说具体怎么配置.
