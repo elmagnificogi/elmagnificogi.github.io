@@ -1,0 +1,474 @@
+---
+layout:     post
+title:      "Visual Studio2017 编译使用libcurl"
+subtitle:   "C++,http"
+date:       2019-08-21
+author:     "elmagnifico"
+header-img: "img/git-head-bg.jpg"
+catalog:    true
+tags:
+    - C++
+---
+## HTTP
+
+C++写要实现Http的get post等操作，就需要使用socket编程了，但是由于socket本身比较低级一些，如果直接使用还是相当麻烦，虽然我的需求比较低，直接用也行，但是由于日后还需要加上SSL，加上加密，FTP等，这样的话直接自己实现一个HTTP接口就相对比较麻烦一些。
+
+这里有一些库可以选择，看情况选择就好了。
+
+- libcurl http客户端，开源
+- libevent 支持服务端开发
+- TinyHTTPd 轻量，支持的特性较少，较原始，用于学习
+- lighttpd 偏嵌入式一些
+- thttpd 超级轻量，支持服务端开发
+- mongoose 嵌入式，轻量 支持websocket
+
+
+
+#### Socket实现HTTP
+
+这里还是放一个Socket实现Http协议的例子，偶尔可能会用一下
+
+
+
+这里实现了http的get和post请求，可以自定义参数和域名
+
+###### HttpConnect.h
+
+```c++
+#pragma once
+#include <string>
+#include <vector>
+#include <winsock.h>
+#include <iostream>
+#include <sstream>
+
+#define DBG std::cout
+
+class HttpConnect
+{
+public:
+	HttpConnect();
+	~HttpConnect(void);
+
+	void socketHttp(std::string host, std::string request);
+	void postData(std::string host, std::string path, std::string post_content);
+	void getData(std::string host, std::string path, std::string get_content);
+};
+
+```
+
+###### HttpConnect.c
+
+```c++
+#include "HttpConnect.h"
+
+#ifdef WIN32
+#pragma comment(lib,"ws2_32.lib")
+#endif
+
+// UTF-8转为GBK2312
+char* UtfToGbk(const char* utf8)
+{
+	int len = MultiByteToWideChar(CP_UTF8, 0, utf8, -1, NULL, 0);
+	wchar_t* wstr = new wchar_t[len+1];
+	memset(wstr, 0, len+1);
+	MultiByteToWideChar(CP_UTF8, 0, utf8, -1, wstr, len);
+	len = WideCharToMultiByte(CP_ACP, 0, wstr, -1, NULL, 0, NULL, NULL);
+	char* str = new char[len+1];
+	memset(str, 0, len+1);
+	WideCharToMultiByte(CP_ACP, 0, wstr, -1, str, len, NULL, NULL);
+	if(wstr) delete[] wstr;
+	return str;
+}
+
+
+HttpConnect::HttpConnect()
+{
+#ifdef WIN32
+	//此处一定要初始化一下，否则gethostbyname返回一直为空
+	WSADATA wsa = { 0 };
+	WSAStartup(MAKEWORD(2, 2), &wsa);
+#endif
+}
+
+HttpConnect::~HttpConnect()
+{
+
+}
+void HttpConnect::socketHttp(std::string host, std::string request)
+{
+	int sockfd;
+	struct sockaddr_in address;
+	struct hostent *server;
+	sockfd = socket(AF_INET,SOCK_STREAM,0);
+	address.sin_family = AF_INET;
+	//端口号在这里修改
+	address.sin_port = htons(8080);
+	server = gethostbyname(host.c_str());
+	memcpy((char *)&address.sin_addr.s_addr,(char*)server->h_addr, server->h_length);
+
+	if(-1 == connect(sockfd,(struct sockaddr *)&address,sizeof(address))){
+		DBG <<"connection error!"<<std::endl;
+		return;
+	}
+
+	DBG << request << std::endl;
+#ifdef WIN32
+	send(sockfd, request.c_str(),request.size(),0);
+#else
+	write(sockfd,request.c_str(),request.size());
+#endif
+    // 这里极大可能是有问题的，注意
+	char buf[1024*1024] = {0};
+	int offset = 0;
+	int rc;
+
+#ifdef WIN32
+	while(rc = recv(sockfd, buf+offset, 1024,0))
+#else
+	while(rc = read(sockfd, buf+offset, 1024))
+#endif
+	{
+		offset += rc;
+	}
+
+#ifdef WIN32
+	closesocket(sockfd);
+#else
+	close(sockfd);
+#endif
+	buf[offset] = 0;
+	DBG << std::string(buf) << std::endl;
+    // 确保中文输出正常
+	DBG<<UtfToGbk(buf)<< std::endl;
+}
+
+void HttpConnect::postData(std::string host, std::string path, std::string post_content)
+{
+	//POST请求方式
+	std::stringstream stream;
+	stream << "POST " << path;
+	stream << " HTTP/1.0\r\n";
+	stream << "Host: "<< host << "\r\n";
+	stream << "User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; zh-CN; rv:1.9.2.3) Gecko/20100401 Firefox/3.6.3\r\n";
+	stream << "Content-Type:application/x-www-form-urlencoded\r\n";
+	stream << "Content-Length:" << post_content.length()<<"\r\n";
+	stream << "Connection:close\r\n\r\n";
+	stream << post_content.c_str();
+
+	socketHttp(host, stream.str());
+}
+
+void HttpConnect::getData(std::string host, std::string path, std::string get_content)
+{
+	//GET请求方式
+	std::stringstream stream;
+	stream << "GET " << path << "?" << get_content;
+	stream << " HTTP/1.0\r\n";
+	stream << "Host: " << host << "\r\n";
+	stream <<"User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; zh-CN; rv:1.9.2.3) Gecko/20100401 Firefox/3.6.3\r\n";
+	stream <<"Connection:close\r\n\r\n";
+
+	socketHttp(host, stream.str());
+}
+```
+
+###### 测试
+
+```c++
+int main()
+{
+	HttpConnect *http = new HttpConnect();
+	http->getData("127.0.0.1", "/de/15a17b405a37f2aeb189916ec951ef8c", "参数");
+	//http->postData("127.0.0.1", "/login","id=xxxx&pw=098873");
+
+	delete http;
+	return 0;
+}
+```
+这里可能会报堆栈溢出的错误，这个可能是由于上面申请的空间太大了导致程序直接崩溃了
+
+```
+“ConsoleApplication7.exe”(Win32): 已卸载“C:\Windows\SysWOW64\ucrtbased.dll”
+0x0084A5C9 处(位于 ConsoleApplication7.exe 中)引发的异常: 0xC00000FD: Stack overflow (参数: 0x00000000, 0x00402000)。
+```
+
+要避免这个问题就是堆栈大小设置的大一些，或者是不要用这种方式申请内存空间，用new或者其他更好的方式。
+
+![SMMS](https://i.loli.net/2019/08/21/DSvGs7OjxmEF5Yo.png)
+
+
+
+## libcurl
+
+curl可以认为是一个命令行工具，经常被脚本啊或者什么其他的程序调用，它是通过URL进行数据传输的，而libcurl则是构建这个命令行的基础库，而这个库封装了HTTP，HTTPS，FTP，SSL等等常用的一些协议，并且其又是开源的，无论是linux下还是windows下都有官方的编译指导，使用起来比较方便。
+
+#### 下载
+
+> https://curl.haxx.se/download.html
+
+直接下载最新的zip，然后解压即可，官方有提供一个Wizard，但是不如这样简单粗暴
+
+#### 编译
+
+编译需要注意的地方比较多，虽然多数情况下都能正常编译，但是万一后面使用的时候报一个莫名其妙的错，最后发现是编译造成的那就很头大，主要是比较难查这种错。
+
+解压之后直接进入\curl-7.65.3\winbuild目录下，查看BUILD.WINDOWS.txt，这个里面会告诉你怎么编译，但我还是总结一下，他告诉你的方法是希望你能把SSL ZLIB PREFIX等等都提前装好，然后最后进行编译，这样你使用到最后的库的时候，功能是大而全的，不会报错。但是如果你完全不需要这几个东西，那不安装这些前置库也没有问题。
+
+然后使用管理员权限打开Developer Command Prompt for VS 2017,其实这个东西再打开一层可以发现这个东西有细分，有本地和交叉编译的选项，还有64和32位的区分，一般都选本地64位就行了。
+
+![SMMS](https://i.loli.net/2019/08/21/G6vYdJhSNCXcFfP.png)
+
+打开后一样的，通过命令行cd 到 \curl-7.65.3\winbuild 目录下
+
+先确定一下，当前的VS是什么版本的，通过下面的命令查看版本信息，这个是14.1版本，可以认为是14版本的
+
+```
+nmake -version
+```
+
+![SMMS](https://i.loli.net/2019/08/21/zuhJSvnktBaC2sW.png)
+
+如果想使用动态编译，将mode=static改为mode=dll
+如果使用x86，将MACHINE=x64改为MACHINE=x86
+如果需要debug版，将DEBUG=no改为DEBUG=yes
+如果你是VS2017且未更新到最新版，VC=15建议改为VC=14
+更详细的编译指令及说明可以打开winbuild文件夹中的BUILD.WINDOWS.txt查看或者直接从Makefile.vc查看也可以得到更详细的解释
+
+```
+!MESSAGE Usage: nmake /f Makefile.vc mode=<static or dll> <options>
+!MESSAGE where <options> is one or many of:
+!MESSAGE   VC=<6,7,8,9,10,11,12,14,15>    - VC versions
+!MESSAGE   WITH_DEVEL=<path>              - Paths for the development files (SSL, zlib, etc.)
+!MESSAGE                                    Defaults to curl's sibling directory deps: ../deps
+!MESSAGE                                    Libraries can be fetched at https://windows.php.net/downloads/php-sdk/deps/
+!MESSAGE                                    Uncompress them into the deps folder.
+!MESSAGE   WITH_PREFIX=<path>             - Installation directory path
+!MESSAGE                                    Defaults to a configuration dependent (SSL, zlib, etc.)
+!MESSAGE                                    directory inside curl's subdirectory builds: ./builds
+!MESSAGE                                    Use backslashes as path separator
+!MESSAGE   WITH_SSL=<dll or static>       - Enable OpenSSL support, DLL or static
+!MESSAGE   WITH_NGHTTP2=<dll or static>   - Enable HTTP/2 support, DLL or static
+!MESSAGE   WITH_CARES=<dll or static>     - Enable c-ares support, DLL or static
+!MESSAGE   WITH_ZLIB=<dll or static>      - Enable zlib support, DLL or static
+!MESSAGE   WITH_SSH2=<dll or static>      - Enable libSSH2 support, DLL or static
+!MESSAGE   WITH_MBEDTLS=<dll or static>   - Enable mbedTLS support, DLL or static
+!MESSAGE   ENABLE_IDN=<yes or no>         - Enable use of Windows IDN APIs, defaults to yes
+!MESSAGE                                    Requires Windows Vista or later
+!MESSAGE   ENABLE_IPV6=<yes or no>        - Enable IPv6, defaults to yes
+!MESSAGE   ENABLE_SSPI=<yes or no>        - Enable SSPI support, defaults to yes
+!MESSAGE   ENABLE_WINSSL=<yes or no>      - Enable native Windows SSL support, defaults to yes
+!MESSAGE   ENABLE_OPENSSL_AUTO_LOAD_CONFIG=<yes or no>
+!MESSAGE                                  - Whether the OpenSSL configuration will be loaded automatically, defaults to yes
+!MESSAGE   GEN_PDB=<yes or no>            - Generate Program Database (debug symbols for release build)
+!MESSAGE   DEBUG=<yes or no>              - Debug builds
+!MESSAGE   MACHINE=<x86 or x64>           - Target architecture (default x64 on AMD64, x86 on others)
+!MESSAGE   CARES_PATH=<path to cares>     - Custom path for c-ares
+!MESSAGE   MBEDTLS_PATH=<path to mbedTLS> - Custom path for mbedTLS
+!MESSAGE   NGHTTP2_PATH=<path to HTTP/2>  - Custom path for nghttp2
+!MESSAGE   SSH2_PATH=<path to libSSH2>    - Custom path for libSSH2
+!MESSAGE   SSL_PATH=<path to OpenSSL>     - Custom path for OpenSSL
+!MESSAGE   ZLIB_PATH=<path to zlib>       - Custom path for zlib
+```
+
+
+
+```
+nmake /f Makefile.vc mode=static VC=12 MACHINE=x64 DEBUG=no
+```
+
+我需要的一个12版本的VS（我本机上还有一个12版本的VS）代码，同时我需要的是一个静态库所以 mode是static，机器是64位，不需要debug，然后回车进行编译。
+
+![SMMS](https://i.loli.net/2019/08/21/PN3G7Dsl8ajt4Uo.png)
+
+然后就可以看到builds目录下对应的这里会有一个lib和include，这两个一般放到源码中使用，bin是直接生成了对应curl命令行程序
+
+#### 配置
+
+随便建一个c++程序，确保以下几点都是正确的，那么编译就能顺利通过
+
+1. 引入头文件目录，引入库文件目录，要注意的是这里一定是要引入include还有lib，否则很有可能内部识别路径出错
+
+  ![1566382204007](C:\Users\elmagnifico\AppData\Roaming\Typora\typora-user-images\1566382204007.png)
+
+2. 预处理器中增加 CURL_STATICLIB
+    ![SMMS](https://i.loli.net/2019/08/21/fh2pLrCeclit7J9.png)
+
+3. 链接器的输入中增加以下几个lib
+
+  ```
+  libcurl_a.lib
+  Ws2_32.lib
+  Wldap32.lib
+  winmm.lib
+  Crypt32.lib
+  Normaliz.lib
+  ```
+
+  ![SMMS](https://i.loli.net/2019/08/21/I1bz2MBPnd4rCcs.png)
+
+4. c++代码生成中运行库选择/MD模式
+    ![SMMS](https://i.loli.net/2019/08/21/oiOhgkFnur6tLsy.png)
+
+完成上四部以后，基本工程配置就ok了
+
+#### 测试
+
+一个简单的get请求
+
+```c++
+int main(int argc, char* argv[]) {
+	CURL *curl = 0;
+	CURLcode res;
+	curl = curl_easy_init();
+	if (curl != 0) {
+		curl_easy_setopt(curl, CURLOPT_URL, "http://127.0.0.1:8080/de/15a17b405a37f2aeb189916ec951ef8c");
+		/* example.com is redirected, so we tell libcurl to follow redirection */
+		curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
+		/* Perform the request, res will get the return code */
+        // 这里会直接打印输出
+		res = curl_easy_perform(curl);
+		/* Check for errors */
+		if (res != CURLE_OK) {
+			fprintf(stderr, "curl_easy_perform() failed: %s\n", 		curl_easy_strerror(res));
+		}
+		/* always cleanup */
+		curl_easy_cleanup(curl);
+	}
+	char a;
+	cin >> a;
+
+	return 0;
+}
+```
+
+通过这里可以直接返回对应的接口信息，只是由于可能有中文，还需要对字符再转一下。
+
+在这里这两个函数需要注意一下，他们是线程安全的，但是这两个函数在一个项目之中只能使用一次，而且是必须使用，在主线程的开头和结尾的地方使用。
+
+```c++
+curl_easy_init();
+
+curl_easy_cleanup(curl);
+```
+
+## /MD /MT
+
+还没完，上面有一个奇怪的地方，基本所有人的教程都是这样的，明明是用的静态编译，但是为什么最后编译出来以后是在/MD模式下进行的编译
+
+- /MD 这个模式下，所有库使用的都是动态链接库，也就是DLL文件，这样依赖的情况下，就需要各种DLL，但是我们这里只有LIB文件，并没有一个DLL，可以却使用了/MD，这就很奇怪了，我查过以后基本所有人都是这么操作的，但是我的程序里是全部/MT,我本身程序是想生成一个DLL文件，是不想额外依赖一堆DLL
+- /MD 这种模式下，在生成代码时使用的是静态链接库，也就是直接将所使用的非我所写的code的定义直接拿过来用，而不是去依赖其他文件，讲道理前面对libcurl选择了一堆静态编译，实际上使用的时候却用了动态，这就很维和
+
+这里如果直接修改第四步为/MT，那么编译会报错
+
+```
+1>LINK : warning LNK4098: 默认库“MSVCRT”与其他库的使用冲突；请使用 /NODEFAULTLIB:library
+1>libcurl_a.lib(strerror.obj) : error LNK2001: 无法解析的外部符号 __imp_strerror
+1>libcurl_a.lib(url.obj) : error LNK2001: 无法解析的外部符号 __imp_strerror
+```
+
+这里其实第一句就已经提示了错误所在，默认库“MSVCRT”其实是指那个DLL，实际上这里缺少了对应的msvcrtd.lib，后面的报错信息报的函数大概看一眼基本都是系统函数，所以在第三步中再增加一个，变成下面这样
+
+```
+  libcurl_a.lib
+  Ws2_32.lib
+  Wldap32.lib
+  winmm.lib
+  Crypt32.lib
+  Normaliz.lib
+  msvcrtd.lib
+```
+
+这样以后就能正常通过编译了，但是还会有两个warning
+
+```
+1>LINK : warning LNK4098: 默认库“LIBCMT”与其他库的使用冲突；请使用 /NODEFAULTLIB:library
+1>LINK : warning LNK4098: 默认库“MSVCRT”与其他库的使用冲突；请使用 /NODEFAULTLIB:library
+```
+
+通过在忽略特定默认库，可以消除warning
+
+![SMMS](https://i.loli.net/2019/08/21/iZXITF8BW7zaGfP.png)
+
+这样在之后的工程中就可以正式将libcurl作为我们的一部分拿进来使用了
+
+#### 用/MT编的静态链接库
+
+其实仔细想一下上面的东西会发现一个奇怪的地方，我们明明是用static来编译的，为什么编译出来的东西最后会造成冲突？
+
+说不复杂也不复杂，说简单也简单，就是编译libcurl的时候vs使用的是/MD模式编译的，虽然编译后的结果是静态的连接库，但是c/c++的运行库却使用的是动态的DLL，这就很奇怪。
+
+查看 \curl-7.65.3\winbuild\MakefileBuild.vc 
+
+- Makefile.vc 其实只是用来解析处理命令行传过去的参数的，当其处理完参数以后调用的是MakefileBuild.vc
+- MakefileBuild.vc 则是根据参数来决定到底该如何处理这些参数，实际应该调用什么程序 带什么样的参数来编译 连接
+
+```
+# Runtime library configuration
+
+!IF "$(RTLIBCFG)"=="static"
+RTLIB = /MT
+RTLIB_DEBUG = /MTd
+!ELSE
+RTLIB = /MD
+RTLIB_DEBUG  = /MDd
+!ENDIF
+
+!IF "$(MODE)"=="static"
+TARGET = $(LIB_NAME_STATIC)
+CURL_LIBCURL_LIBNAME=$(LIB_NAME_STATIC)
+AS_DLL = false
+CFGSET = true
+!ELSEIF "$(MODE)"=="dll"
+TARGET = $(LIB_NAME_DLL)
+CURL_LIBCURL_LIBNAME=$(LIB_NAME_IMP)
+AS_DLL = true
+CFGSET = true
+!ENDIF
+```
+
+从MakefileBuild中可以看到，这里对于MODE的static的选择是决定了使用的目标库是什么，但是运行库却不是由这个MODE决定的，而是由RTLIBCFG来决定，在没有配置的情况下默认都是使用/MD来编译的，这也就是为什么我们会出现冲突的情况。
+
+RTLIBCFG这个参数在Makefile.vc中完全没有提及，我是反向往下找找到MakefileBuild.vc 中这个参数的。
+
+其实呢，在BUILD.WINDOWS.txt中有提到这个参数，但是是不推荐使用的，因为这个使用的人很少，而且使用的不确定性比较大
+
+```
+# Static linking of Microsoft's C RunTime (CRT):
+
+If you are using mode=static nmake will create and link to the static build of
+libcurl but *not* the static CRT. If you must you can force nmake to link in
+the static CRT by passing RTLIBCFG=static. Typically you shouldn't use that
+option, and nmake will default to the DLL CRT. RTLIBCFG is rarely used and
+therefore rarely tested. When passing RTLIBCFG for a configuration that was
+already built but not with that option, or if the option was specified
+differently, you must destroy the build directory containing the configuration
+so that nmake can build it from scratch.
+
+```
+
+然后使用的时候要注意，每次把builds文件夹都删掉，确保每次编译的时候都是使用的当前参数进行编译的，否则有可能参数不起作用。
+
+```
+nmake /f Makefile.vc mode=static VC=12 ENABLE_IDN=no ENABLE_SSPI=no DEBUG=no MACHINE=x64 RTLIBCFG=static
+```
+
+## 总结
+
+libcurl 大概就是这样的，基本涵盖了全部的编译选项和可能，搞懂了这个libcurl以后其他库类似于这样，但是可能对于windows的支持不如libcurl，可能没有那么多编译选项可以选则。
+
+## Quote
+
+> https://www.csdn.net/gather_20/OtTaEg1sMTMtYmxvZwO0O0OO0O0O.html
+>
+> http://www.voidcn.com/article/p-tafwiplc-bqh.html
+>
+> https://blog.csdn.net/DaSo_CSDN/article/details/77587916
+>
+> https://blog.csdn.net/u012814856/article/details/81638421
+>
+> https://www.cnblogs.com/minggoddess/archive/2010/12/29/1921077.html
+>
+> https://blog.csdn.net/qq_20408397/article/details/77803215
+>
+> https://blog.csdn.net/liangls1982/article/details/6297651
