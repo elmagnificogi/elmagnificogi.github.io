@@ -287,14 +287,14 @@ nmake /f Makefile.vc mode=static VC=12 MACHINE=x64 DEBUG=no
 
 随便建一个c++程序，确保以下几点都是正确的，那么编译就能顺利通过
 
-1. 引入头文件目录，引入库文件目录，要注意的是这里一定是要引入include还有lib，否则很有可能内部识别路径出错
+1.引入头文件目录，引入库文件目录，要注意的是这里一定是要引入include还有lib，否则很有可能内部识别路径出错
 
   ![1566382204007](C:\Users\elmagnifico\AppData\Roaming\Typora\typora-user-images\1566382204007.png)
 
-2. 预处理器中增加 CURL_STATICLIB
+2.预处理器中增加 CURL_STATICLIB
     ![SMMS](https://i.loli.net/2019/08/21/fh2pLrCeclit7J9.png)
 
-3. 链接器的输入中增加以下几个lib
+3.链接器的输入中增加以下几个lib
 
   ```
   libcurl_a.lib
@@ -307,7 +307,7 @@ nmake /f Makefile.vc mode=static VC=12 MACHINE=x64 DEBUG=no
 
   ![SMMS](https://i.loli.net/2019/08/21/I1bz2MBPnd4rCcs.png)
 
-4. c++代码生成中运行库选择/MD模式
+4.c++代码生成中运行库选择/MD模式
     ![SMMS](https://i.loli.net/2019/08/21/oiOhgkFnur6tLsy.png)
 
 完成上四部以后，基本工程配置就ok了
