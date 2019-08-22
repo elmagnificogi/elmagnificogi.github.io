@@ -274,10 +274,12 @@ nmake -version
 
 
 ```
-nmake /f Makefile.vc mode=static VC=12 MACHINE=x64 DEBUG=no
+nmake /f Makefile.vc mode=static VC=11 MACHINE=x64 DEBUG=no
 ```
 
-我需要的一个12版本的VS（我本机上还有一个12版本的VS）代码，同时我需要的是一个静态库所以 mode是static，机器是64位，不需要debug，然后回车进行编译。
+我需要的一个11版本的VS（我本机上还有一个12版本的VS）代码，同时我需要的是一个静态库所以 mode是static，机器是64位，不需要debug，然后回车进行编译。
+
+这里要注意 这里是指VC的版本，VS2012是VC11，而VS2017是VC14，每个对应不一样，否则编译出来的会报错
 
 ![SMMS](https://i.loli.net/2019/08/21/PN3G7Dsl8ajt4Uo.png)
 
@@ -297,12 +299,12 @@ nmake /f Makefile.vc mode=static VC=12 MACHINE=x64 DEBUG=no
 3.链接器的输入中增加以下几个lib
 
   ```
-  libcurl_a.lib
-  Ws2_32.lib
-  Wldap32.lib
-  winmm.lib
-  Crypt32.lib
-  Normaliz.lib
+libcurl_a.lib
+Ws2_32.lib
+Wldap32.lib
+winmm.lib
+Crypt32.lib
+Normaliz.lib
   ```
 
   ![SMMS](https://i.loli.net/2019/08/21/I1bz2MBPnd4rCcs.png)
@@ -370,13 +372,13 @@ curl_easy_cleanup(curl);
 这里其实第一句就已经提示了错误所在，默认库“MSVCRT”其实是指那个DLL，实际上这里缺少了对应的msvcrtd.lib，后面的报错信息报的函数大概看一眼基本都是系统函数，所以在第三步中再增加一个，变成下面这样
 
 ```
-  libcurl_a.lib
-  Ws2_32.lib
-  Wldap32.lib
-  winmm.lib
-  Crypt32.lib
-  Normaliz.lib
-  msvcrtd.lib
+libcurl_a.lib
+Ws2_32.lib
+Wldap32.lib
+winmm.lib
+Crypt32.lib
+Normaliz.lib
+msvcrt.lib
 ```
 
 这样以后就能正常通过编译了，但是还会有两个warning
@@ -450,7 +452,7 @@ so that nmake can build it from scratch.
 然后使用的时候要注意，每次把builds文件夹都删掉，确保每次编译的时候都是使用的当前参数进行编译的，否则有可能参数不起作用。
 
 ```
-nmake /f Makefile.vc mode=static VC=12 ENABLE_IDN=no ENABLE_SSPI=no DEBUG=no MACHINE=x64 RTLIBCFG=static
+nmake /f Makefile.vc mode=static VC=11 ENABLE_IDN=no ENABLE_SSPI=no DEBUG=no MACHINE=x64 RTLIBCFG=static
 ```
 
 ## 总结
