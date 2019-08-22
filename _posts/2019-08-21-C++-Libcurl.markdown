@@ -349,9 +349,12 @@ int main(int argc, char* argv[]) {
 在这里这两个函数需要注意一下，他们是线程安全的，但是这两个函数在一个项目之中只能使用一次，而且是必须使用，在主线程的开头和结尾的地方使用。
 
 ```c++
-curl_easy_init();
+curl_global_init();
 
-curl_easy_cleanup(curl);
+curl_global_cleanup(curl);
+
+// 如果在调用easy之前没有调用过global，那么easy中会自动调用global
+curl_easy_init()
 ```
 
 ## /MD /MT
