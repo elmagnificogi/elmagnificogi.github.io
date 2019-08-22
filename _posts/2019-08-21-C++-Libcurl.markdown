@@ -289,7 +289,7 @@ nmake /f Makefile.vc mode=static VC=12 MACHINE=x64 DEBUG=no
 
 1.引入头文件目录，引入库文件目录，要注意的是这里一定是要引入include还有lib，否则很有可能内部识别路径出错
 
-  ![1566382204007](C:\Users\elmagnifico\AppData\Roaming\Typora\typora-user-images\1566382204007.png)
+ ![SMMS](https://i.loli.net/2019/08/21/TBOD4KsXtPdxUgo.png)
 
 2.预处理器中增加 CURL_STATICLIB
     ![SMMS](https://i.loli.net/2019/08/21/fh2pLrCeclit7J9.png)
