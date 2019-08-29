@@ -1,0 +1,114 @@
+---
+layout:     post
+title:      "HTML CSS"
+subtitle:   "入门"
+date:       2019-08-09
+author:     "elmagnifico"
+header-img: "img/git-head-bg.jpg"
+catalog:    true
+tags:
+    - HTML
+    - CSS
+---
+
+## Foreword
+
+首先一些基本的HTML标签我还是知道的，这里主要记录一下我不熟悉或者忘记的标签或者属性，主要是通过手动拉下来一个bootstrap的login或者signin页面和教程中的页面源码对比学习，看看到底是少了什么，多了什么。
+
+## HTML
+
+##### xmlns
+
+指定命名空间，这里就是thymeleaf的命名空间
+
+```html
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+```
+
+##### meta
+
+meta是一个辅助性元素，其实可以当作一个网页的公开参数，告诉外部浏览器一些信息，比如如何处理这个页面的内容，编码，适用于什么版本的浏览器之类的这种不给用户看到的信息。
+
+这里有一个东西比较好用，就是禁用缓冲，相当于在开发阶段把这个属性给设置上以后，每次不使用浏览器缓存而是重新加载，就能及时看到效果。
+
+##### link
+
+link用来链接需要的css或者js，href是url，rel则是其到底是属于什么类型的内容
+
+##### style
+
+不知道为什么有时候会抛开css，然后单独写一个样式在html，所以一般在模板里面就直接删除这个部分了。
+
+##### form
+
+表单，用来向服务器传输数据
+
+action指定是向谁发送表单数据
+
+method指定发送的方法是啥
+
+##### hr
+
+创建一条水平分割线
+
+##### ul
+
+无序列表
+
+##### a
+
+超链接，跳转的时候就要用a标签来跳转
+
+
+
+## CSS
+
+一般是通过标签中的class来应用对应css中的各种样式的
+
+```html
+<body class="text-center">
+
+<body class="bg-dark">
+```
+
+类名是可以起叠加效果的
+
+```html
+<div class="form-group col-md-1">
+<a class="btn btn-sm btn-primary" ></a>
+```
+
+
+
+#### 同步问题
+
+![SMMS](https://i.loli.net/2019/08/29/oGVyBvfcNLetE9r.png)
+
+这里可以看到这个css有一个层级关系，而在文件夹中实际上是两个并列且独立的文件
+
+![SMMS](https://i.loli.net/2019/08/29/i7rcHjd96vDhUqM.png)
+
+之前修改一个样式，修改了以后怎么都不起作用，反复查看代码，后来发现起作用的是带min后缀的，而他的上层样式无论我怎么修改都没用。
+
+而不带min的样式，本身是以可读模式写的代码，修改查找起来比较方便，而min版本则是去掉了空格回车等等多余的字符，用来减小传输量的压缩模式，理论上应该是改了sb-admin-2.css以后min后缀的版本应该与之同步才对，不知道为什么在我的IDEA中并不能同步，或者说这个东西应该是在Dreamweaver中用的？
+
+对应的js文件也有类似的形式，但是我这里都不能同步
+
+## Template
+
+startbootstrap上有一些比较简单的模板，比较适合我用，记录一下
+
+这个入门级模板自带jQuery和一些常用插件
+
+https://startbootstrap.com/templates/
+
+## 总结
+
+通过删除一些无用或者无意义的标签，最后得到的模板类已经非常相似了。
+
+把这个搞了一通以后估计我的blog也可以升级一下了，以前懒得去看黄玄写的这些个东西，其实问题挺多的我懒得弄，看的懂了就要自己改一改了
+
+## 参考
+
+> https://startbootstrap.com/templates/
+>
