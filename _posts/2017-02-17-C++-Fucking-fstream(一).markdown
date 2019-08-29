@@ -135,7 +135,7 @@ int _tmain(int argc, _TCHAR* argv[])
 返回当前文件读取位置
 
 	.seekp()
-
+	
 	第二参数:
 	ios::beg 文件开始位置,绝对0
 	ios::end 文件尾
@@ -154,7 +154,7 @@ int _tmain(int argc, _TCHAR* argv[])
 而通过sync()就可以强制同步内存与硬盘的文件内容,相当于变相强制写入文件.
 
 	.seekg()
-
+	
 	第二参数:
 	ios::beg 文件开始位置,绝对0
 	ios::end 文件尾
@@ -268,7 +268,7 @@ int _tmain(int argc, _TCHAR* argv[])
 - UNIX格式，每行的行尾都是用一个0x0a字符（换行字符LF）表示
 
 - WINDOWS/DOS下每行的行尾都是用0x0d 0x0a两个字符（回车字符CR，换行字符LF）表示的
- 
+
 - MAC机，每行的行尾都是0x0d字符表示，即回车字符CR。
 
 二进制文件顾名思义完全不考虑文件字符所表示内容,相当于内存中存储是什么样,操作起来就是什么样的.

@@ -286,6 +286,10 @@ int _tmain(int argc, _TCHAR* argv[])
 
 为什么文本读写的方式会在写入0a的情况下,连带写入0d 0a
 
+##### 20190829
+
+0d 0a 完全是windows下的换行符的问题,每次莫名其妙的值完全是为了解决这个换行符的问题
+
 ## Quote
 
 > http://www.cplusplus.com/reference/fstream/fstream/
