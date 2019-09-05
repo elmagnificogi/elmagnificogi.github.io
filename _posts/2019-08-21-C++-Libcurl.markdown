@@ -458,6 +458,29 @@ so that nmake can build it from scratch.
 nmake /f Makefile.vc mode=static VC=11 ENABLE_IDN=no ENABLE_SSPI=no DEBUG=no MACHINE=x64 RTLIBCFG=static
 ```
 
+## SSL HTTPS
+
+之前的编译都是基于http的，如果要支持https，那么之前编译的是无法正常工作的，会提示不支持协议。
+
+要支持https也比较简单，直接添加一个参数 ENABLE_WINSSL=yes ，就可以利用windows 本身的 ssl 支持了
+
+```
+nmake /f Makefile.vc mode=static VC=11 ENABLE_WINSSL=yes DEBUG=no MACHINE=x64 RTLIBCFG=static
+```
+
+如果想要支持一些 更老的系统，那这个就不行了，就需要openssl来完成，当然本身也可以选择使用openssl来编译从而在各个平台上通用。
+
+```
+Legacy Windows and SSL
+======================
+When you build curl using the build files in this directory the default SSL
+backend will be WinSSL (Windows SSPI, more specifically Schannel), the native
+SSL library that comes with the Windows OS. WinSSL in Windows <= XP is not able
+to connect to servers that no longer support the legacy handshakes and
+algorithms used by those versions. If you will be using curl in one of those
+earlier versions of Windows you should choose another SSL backend like OpenSSL.
+```
+
 ## 总结
 
 libcurl 大概就是这样的，基本涵盖了全部的编译选项和可能，搞懂了这个libcurl以后其他库类似于这样，但是可能对于windows的支持不如libcurl，可能没有那么多编译选项可以选则。
