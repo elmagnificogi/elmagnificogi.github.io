@@ -161,7 +161,7 @@ The server time zone value '�й���׼ʱ��' is unrecognized or represe
 同过mysql命令行，可以查看到当前时区情况
 
 ```
-show variables ``like` `"%time_zone%"``;
+show variables like '%time_zone%';
 ```
 
 如果看到的是

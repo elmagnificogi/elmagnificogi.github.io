@@ -17,6 +17,83 @@ tags:
 
 然后这两套的数据库要求是完全独立的，两个实例
 
+## dockerfile
+
+```java
+FROM java:8
+
+MAINTAINER demo demo@xxx.com
+
+VOLUME /tmp
+
+ADD demo-0.0.1-SNAPSHOT.jar demo.jar
+
+RUN bash -c 'touch /demo.jar'
+
+EXPOSE 4396
+
+ENTRYPOINT ["java", "-jar", "demo.jar"]
+
+```
+
+平常看到的dockerfile类似与上面这样的，但是这种dockerfile是用docker直接build或者启动用的，如果用了docker-compose文件，其实这里有些东西就要改一下。
+
+这句是最大的坑，这里的java会让docker自动拉去一个java 8的image，但是这个java8有个小问题，就是它本身是纯净版本，是没有maven的，本机上maven是不能直接拿给docker里的镜像去用的。
+
+```
+FROM java:8 
+或者
+FROM openjdk:8-jdk-alpine
+```
+
+平常在一个有maven的机器上build什么的可能没问题，但是如果是结合了docker-compose这里就会报错了。
+
+```yaml
+  web:
+    container_name: web
+    restart: always
+    build:
+      context: ./src/main/docker
+      dockerfile: Dockerfile
+    working_dir: /web
+    volumes:
+      - .:/web
+      - ~/.m2:/root/.m2
+    networks:
+      - dmdnet
+    ports:
+      - "80:80"
+    depends_on:
+      - mysql
+    command: mvn clean spring-boot:run -Dspring-boot.run.profiles=prod
+```
+
+比如这样的配置下，需要docker内build，就会出现下面的找不到mvn的路径
+
+```
+starting container process caused "exec: \"mvn\": executable file not found in $PATH"
+```
+
+要解决这个问题，要么手动进到镜像里去安装一个maven，要么就是换一个引用。
+
+```
+FROM maven:3.6-jdk-8
+```
+
+用这方式，就可以让build的时候有maven了，但是如果只是改了这里可能还会出问题。
+
+docker-compose的时候由于自带缓存，改了以后其实并不会拉取对应的maven镜像，会导致错误依旧。
+
+> https://docs.docker.com/compose/reference/build/
+
+docker-compose 官方有一个build参数，在无缓存的情况下进行build，这样的情况下，会重新拉取对应的images，然后maven就会被加进来了，这样的整个服务就能正常build了
+
+```bash
+docker-compose build --no-cache
+```
+
+之后有大的镜像或者之类的改动的时候最好是用这个命令重新构建一下
+
 ## 问题docker-compose
 
 ```java
