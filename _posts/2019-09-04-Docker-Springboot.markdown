@@ -223,8 +223,6 @@ systemctl daemon-reload   #重新载入服务
 systemctl restart rngd    #重启服务
 ```
 
-## dockerfile
-
 ## 总结
 
 目前就记录了这些，一个月后还会重新再建一次镜像，那时还会对照个再来一遍，对细节部分会再补充一次
