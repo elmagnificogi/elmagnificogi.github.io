@@ -33,6 +33,8 @@ tags:
 
 ```bash
 yum update
+yum install -y yum-utils device-mapper-persistent-data lvm2
+yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 yum install docker-ce
 ```
 
@@ -69,7 +71,9 @@ docker pull mysql
 安装git 非常简单
 
 ```
-yum git
+yum install git
+git version
+git version 1.8.3.1
 ```
 
 但是这样的git是没有自动补全的，用起来就是有点别扭
@@ -90,6 +94,14 @@ cp contrib/completion/git-completion.bash /etc/bash_completion.d/
 if [ -f /etc/bash_completion.d/git-completion.bash ]; then
 . /etc/bash_completion.d/git-completion.bash
 fi
+```
+
+#### 免密码
+
+第一次输入以后还需要输入密码，后续就不需要了
+
+```
+git config --global credential.helper store
 ```
 
 ## java
@@ -192,6 +204,9 @@ https://docs.docker.com/compose/install/
 
 ```bash
 sudo curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+如果这个地址下不动，那么切换到国内地址
+sudo curl -L "https://get.daocloud.io/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+
 sudo chmod +x /usr/local/bin/docker-compose
 ```
 
