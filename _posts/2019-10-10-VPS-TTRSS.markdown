@@ -1,0 +1,183 @@
+---
+layout:     post
+title:      "VPS选择以及TTRSS更新"
+subtitle:   "v2ray,docker-compose"
+date:       2019-10-10
+author:     "elmagnifico"
+header-img: "img/Raspberrypi-head-bg.png"
+catalog:    true
+tags:
+    - vps
+    - ttrss
+
+---
+
+## Forward
+
+2019-09-16晚，我的阿里云香港VPS被墙,后来套了cloudflare复活了，但是速度还是很慢，用着很不爽，所以十一期间就挑了挑vps，然后重新买了一家，但是也感觉好像上了贼船。
+
+## VPS商家对比
+
+| 商家      | cpu/core | 内存/GB | 硬盘/GB | 带宽/Mbps | 流量/GB | 价格/月     | 网络    |
+| --------- | -------- | ------- | ------- | --------- | ------- | ----------- | ------- |
+| starrydns | 1        | 1       | 20      | 100       | 500     | 70.1/58.4年 | pccw    |
+| uovz      | 1        | 1       | 10      | 50        | 200     | 99          |         |
+| uovz      | 1        | 1       | 20      | 100       | 700     | 71/66年     | CMI     |
+| on9host   | 1        | 0.5     | 20      | 30        | 500     | 55.7521     |         |
+| fncloud   | 2        | 1       | 15      | 50        | 400     | 80          |         |
+| uuuvps    | 3        | 4       | 60      | 50        | 1200    | 109.6       | CMI     |
+| uuuvps    | 2        | 2       | 40      | 50        | 600     | 无货        |         |
+| godeng    | 4        | 4       | 80      | 15        | 5210    | 27.75‬/2年   |         |
+| hostkvm   | 2        | 4       | 30      | 50        | 1024    | 75.0509     |         |
+| combcloud | 2        | 2       | 30      | 15        | 800     | 76          |         |
+| cubecloud | 2        | 1       | 15      | 50        | 400     | 75/70.83年  | CN2     |
+| cubecloud | 1        | 0.5     | 10      | 100       | 600     | 50          |         |
+| xiuluoyun | 1        | 1       | 25      | 30        | 600     | 40          |         |
+| qexw      | 1        | 0.5     | 10      | 100(20%)  | 500     | 63.55       |         |
+| qexw      | 1        | 0.5     | 10      | 100       | 900     | 91.2        |         |
+| qexw      | 1        | 1       | 15      | 100(20%)  | 1000    | 89.1        | CN2+CMI |
+| qexw      | 1        | 1       | 30      | 100       | 600     | 65          | CN2+CMI |
+| qexw      | 2        | 2       | 100     | 100       | 129     | 129/55年    | CN2+CMI |
+| ali二代   | 1        | 0.5     | 20      | 30        | 1024    | 50.0339     |         |
+| ali二代   | 1        | 1       | 20      | 30        | 2048    | 135.8063    |         |
+| ali一代   | 1        | 1       | 20      | 30        | 1024    | 64.3293     | CN2     |
+| 6le       | 2        | 2       | 60      | 50        | 300     | 48          | 混合    |
+| 6le       | 2        | 2       | 60      | 15        | 不限    | 48          | 混合    |
+
+以上数据来自于2019.10.02，所有vps都位于香港的情况下，不过有些已经没有货或者已经下架了，比如ali一代，目前已经买不到了，只有二代了，而且现存的一代也将于2020.1月结束
+
+以上价格部分都是我查到了优惠券的情况下，换算到了CNY或者年费下每月的费用，也有没找到优惠券的情况。
+
+ali的二代一键套餐不推荐了，因为所有主机都是突发性能了，而且对比老一代，性能降低了不说，内存还少了，这就有点坑，其次ali虽然还有流量包，但是毕竟ali，被封ip以后不给换，只能eip，但是eip就会导致流量计费+ip使用费，二次收费，就很贵了。
+
+
+
+其次挑选香港的，自然要有CN2或者CMI加持，不然不如不选，CMI有最好也有，这样无论什么网络都可以很舒服。
+
+
+
+一番对比下来，看起来试qexw，也就是企鹅小屋的是最具性价比的，然而，等我犹豫完，已经没货了（1c1g，100M，20M最低保障，），价格便宜，流量足够，确实不错，最后没办法选择了qexw的2c2g，100M，1200g流量的，但是没有20M带宽的最低保障，由于我年付了，所以合下来价格是55CNY/月，比之前阿里云（1c1g，30M，1024g流量）的9$便宜了将近10块钱，一年便宜了120左右。
+
+#### 被坑的点
+
+- qexw是国内商人，有跑路风险，年付风险太大，但是由于买不到其他的只好选了这个，建议还是月付保险。
+- 由于没有20M的低保，导致高峰期网速其实不够好，而且高峰期明显有限速20M的情况，这就不如阿里云了，阿里云30M基本都能够跑满
+- 100M峰值，基本只是个噱头，实际绝对跑不到，能跑到40M已经很好了，而且还是凌晨三四点，绝对很少人用的情况下
+- 本身VPS里有禁止使用KCP和BBR PLUS，但是普通的BBR可以用，而且不能做大机场，自用没啥问题
+- IP被封，年付可以免费换一次，月付的就需要15CNY/次 来换了
+
+对比而言，阿里云一代还是挺良心的，当初还有升200M的bug，1c1g不限制性能，而且1T流量包是通用包，就算用了EIP也是通用的不会另收费，可惜就要没了。
+
+这个里面还有一家6le，实际叫伏羲云，也是国人商家，15M不限流量很诱人，而且价格也比较便宜，我有建ecs测试过，IO速度还有网速其实都跑的满，还是不错的，如果流量要求不高，其实选他们的50M 300G流量的也不错。
+
+## Tiny Tiny RSS
+
+距离上一次更新ttrss，差不多也一年了。由于阿里云被墙导致我自己也用不了ttrss，后来还不小心误操作，docker-compose down 了，我去，然后当时的ttrss的docker-compose还非常简陋，连个数据库持久化都没有，导致我的订阅和标星，全丢了，感觉贼蠢。
+
+之前使用的就是他的ttrss，然后上去看了一下，更新了挺多内容的，之前没有的东西基本都在docker-compose中加上了，所以还是继续使用他的。
+
+> *https://github.com/HenryQW/docker-ttrss-plugins*
+
+#### 误导
+
+![sm.ms](https://i.loli.net/2019/10/10/3Nrd6a8IHDQFLfG.png)
+
+他的wiki中这里有一些误导，以前确实是可以直接拉docker-compose.yml，然后直接构建就行了，像下面这样
+
+```
+wget https://raw.githubusercontent.com/HenryQW/docker-ttrss-plugins/master/docker-compose.yml
+修改docker-compose.yml中的数据库postgres的密码，有两个地方需要修改
+修改docker-compose.yml中的[http://你vps的ip:181/](http://xn--vpsip-r52h715u:181/)
+docker-compose up -d 后台部署
+[http://你vps的ip:181/](http://xn--vpsip-r52h715u:181/) 访问ttrss
+```
+
+但是呢，现在并不可以，必须要拉取源码，不然肯定会报错，如下
+
+> https://github.com/HenryQW/Awesome-TTRSS/issues/73
+
+我当时发现的错是因为没有拉取到监听端口的sh文件，后来再拉取还是失败，就一直等更新，然后就被强行关了issue，我就有点蒙蔽，这人问题都没看清就关issue，后来又老外反应相同问题，才发现现在必须要拉源码，真的有点蠢了。拉完源码以后，再docker-compose，其实还有问题。
+
+#### 数据库未初始化
+
+错误情况如下
+
+> https://github.com/HenryQW/Awesome-TTRSS/issues/75
+
+实际上需要将docker-compose.yml中的数据库名字部分注释掉
+
+```
+[root@qexw-elmagnifico Awesome-TTRSS]# vi docker-compose.yml 
+
+version: "3"
+services:
+  database.postgres:
+    image: sameersbn/postgresql:latest
+    container_name: postgres
+    environment:
+      - PG_PASSWORD=123456 # please change the password
+      #- DB_NAME=ttrss # please make sure the database name is consistent with the one defined in service.rss below
+      - DB_EXTENSION=pg_trgm
+    volumes:
+      - ~/postgres/data/:/var/lib/postgresql/ # persist postgres data to ~/postgres/data/ on the host
+    restart: always
+
+```
+
+然后将用来持久化数据库的目录删空，也就是/postgres全删
+
+再重新启动docker-compose，就可以正常运行了。
+
+#### Mercury
+
+去年的时候Mercury还是去其官网申请key，然后拿到key以后填到plugin的参数中去
+
+可能Mercury发现他们在免费提供全文服务，可能白亏，所以直接开源，不提供以前的key服务了，必须要自己搭建对应的Mercury服务才能正常使用了。
+
+HenryQW的这个ttrss，好处就是他本身已经继承了mercury的服务，并且开在了3000端口
+
+###### 使用
+
+首先在插件中启用mercury
+
+![sm.ms](https://i.loli.net/2019/10/10/PQIq1E9bZ82zhjg.png)
+
+然后在信息源中找到插件，并且填入服务器地址
+
+![sm.ms](https://i.loli.net/2019/10/10/qQrz981i4mHUpaW.png)
+
+这里要注意服务器地址，就是这样的写法，在docker-compose中有说明。
+
+如果是另外的服务器，那就按照示例写法来写。
+
+由于默认使用的是fever api，所以要启用mercury要单独给源设置，或者直接不启用fever而只用mercuy
+
+#### 移动端APP
+
+以前还用Palabre或者是Tiny Tiny RSS的原生应用，但是都有一些问题，所以都弃用了。
+
+现在用FeedMe，作者也是国人，但是支持了ttrss，非常好用，有很多设置可以和ttrss本来的设置相同，速度也不 慢，只需要启用API，允许外部客户端通过 API 来访问该账户就可以了，如果使用news+或者FeedReader就要在插件里启用他们的API才行。
+
+总的来说效果还是非常好的。
+
+![sm.ms](https://i.loli.net/2019/10/10/2ls4r8gfHCBjhzm.png)
+
+#### 主题问题
+
+![sm.ms](https://i.loli.net/2019/10/10/Hqg6boUGpTduQMX.png)
+
+主题这里，其实rsshub我觉得比较现代一些，看着比较好看，但是呢，这个有个bug，在我的带鱼屏下显示永远无法占满整个浏览器，就算用一些方法占满了，下次重开又回去了，其他主题就没有这个问题
+
+![sm.ms](https://i.loli.net/2019/10/10/LMs5SKpZrgBtbnf.png)
+
+这还不是浏览器全屏的情况下，如果全屏至少有70%的空间都是空的，其他主题都可以自动填满空白地方
+
+## 总结
+
+大概是这样吧，更新了一下这些内容
+
+## 参考
+
+> https://github.com/HenryQW/Awesome-TTRSS/issues/75
+>
+> https://github.com/HenryQW/Awesome-TTRSS/pull/76

@@ -50,15 +50,15 @@ tags:
 修改如下内容：
 
     before = paths-fedora.conf        # 36行
-
+    
     ignoreip = 127.0.0.1/8            # 50行，不封禁的IP及IP段，多段用空格隔开。
-
+    
     bantime  = 8640000                # 59行，封禁时间100天
     findtime  = 600                   # 63行，单位秒，暴力破解IP的查询窗口时间
                                       # 意为10分钟内失败次数达到封禁界限将被封禁
     maxretry = 6                      # 66行 尝试猜测6次用户名，封禁此IP
     backend = gamin                   # 87行
-
+    
     vim /etc/fail2ban/jail.d/sshd.local
 
 修改内容如下：
@@ -122,7 +122,7 @@ tags:
 
 删除一个添加的端口
 
-    firewall-cmd --zone= public --remove-port=80/tcp --permanent
+    firewall-cmd --zone=public --remove-port=80/tcp --permanent
 
 ## Summary
 
