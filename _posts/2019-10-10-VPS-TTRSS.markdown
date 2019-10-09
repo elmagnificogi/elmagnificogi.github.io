@@ -172,6 +172,32 @@ HenryQW的这个ttrss，好处就是他本身已经继承了mercury的服务，�
 
 这还不是浏览器全屏的情况下，如果全屏至少有70%的空间都是空的，其他主题都可以自动填满空白地方
 
+#### 自动更新
+
+```
+  service.opencc: # set OpenCC API endpoint to `service.opencc:3000` on TTRSS plugin setting page
+    image: wangqiru/opencc-api-server:latest
+    container_name: opencc
+    environment:
+      NODE_ENV: production
+    expose:
+      - 3000
+    restart: always
+
+  # utility.watchtower:
+  #   container_name: watchtower
+  #   image: containrrr/watchtower:latest
+  #   volumes:
+  #     - /var/run/docker.sock:/var/run/docker.sock
+  #   environment:
+  #     - WATCHTOWER_CLEANUP=true
+  #     - WATCHTOWER_POLL_INTERVAL=86400
+  #   restart: always
+
+```
+
+实际上docker-compose中有一段被注释了的内容，这个watchower其实就是一个更新服务，用来自动更新ttrss的，但是以这个作者的情况来看，建议还是不要开自动更新了，更新完他自己没有测试，自动更新了反而会有各种问题，甚至可能丢数据，所以还是弄好稳定了，就不更新了，等有了新需求再更新。
+
 ## 总结
 
 大概是这样吧，更新了一下这些内容
