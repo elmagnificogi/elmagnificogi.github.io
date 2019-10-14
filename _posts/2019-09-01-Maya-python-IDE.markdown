@@ -121,6 +121,12 @@ maya的开发包必须要有
 \Maya2017\devkit\other\pymel\extras\completion\py
 ```
 
+#### 删除默认python路径
+
+![SMMS](https://i.loli.net/2019/10/14/kcgEW7uRAdaGLeB.png)
+
+将这一条选中，然后点减号，之后会自动将该路径排除，这样才能正确解析mayapy
+
 #### 添加mayacharm
 
 ![SMMS](https://i.loli.net/2019/08/30/l91HQs6tbdIjp2A.png)
