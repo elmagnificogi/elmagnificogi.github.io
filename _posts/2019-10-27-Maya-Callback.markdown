@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:     "Maya Callback与python partial和lambda"
+title:      "Maya Callback与python partial和lambda"
 subtitle:   "CallbackWithArgs，script,exec()，string"
 date:       2019-10-27
 author:     "elmagnifico"
@@ -8,7 +8,7 @@ header-img: "img/Raspberrypi-head-bg.png"
 catalog:    true
 tags:
     - Maya
-	- python
+    - python
 ---
 
 ## Forward
