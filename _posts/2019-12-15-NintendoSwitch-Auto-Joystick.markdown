@@ -519,7 +519,9 @@ void GetNextReport(USB_JoystickReport_Input_t* const ReportData) {
 
 ## The end
 
-后面有空再继续完善一下，或者转而使用树莓派来做这个事情也可以，可以直接通过网络或者usb连接，然后传输多个脚本，并且能通过按钮什么的选择执行的脚本，那样会更方便一些吧
+> https://github.com/elmagnificogi/nintendo_switch_auto_ctrl_script
+
+我的项目地址，后面有空再继续完善一下，或者转而使用树莓派来做这个事情也可以，可以直接通过网络或者usb连接，然后传输多个脚本，并且能通过按钮什么的选择执行的脚本，那样会更方便一些吧
 
 ## Quote
 
