@@ -111,6 +111,43 @@ msys-1.0.dll下载链接：
 
 > http://www.lab-z.com/wp-content/uploads/2018/10/msys-1.0-vista64.zip
 
+#
+
+##### 编译报错
+
+如果编译的atmega16u2可能会出现下面的编译报错，主要问题集中在这个clock_div_1没声明。
+
+```
+Joystick.c: In function 'SetupHardware':
+Joystick.c:142: warning: implicit declaration of function 'clock_prescale_set'
+Joystick.c:142: error: 'clock_div_1' undeclared (first use in this function)
+Joystick.c:142: error: (Each undeclared identifier is reported only once
+Joystick.c:142: error: for each function it appears in.)
+make: *** [obj/Joystick.o] Error 1
+```
+
+这个错主要是，由于WinAVR的版本是2010年的老版本了，所以16u2的宏定义不一样了，需要你补充一个上去。
+
+打开D:\winavr\avr\include\avr目录下的power.h，如下
+
+![SMMS](https://i.loli.net/2020/03/09/bEDstNVcw5ZAvTO.png)
+
+补充上16u2的宏定义，保存一下再make就发现没问题了。
+
+![SMMS](https://i.loli.net/2020/03/09/cFoIzl8pC1GvjwU.png)
+
+
+
+当然还有一种办法，直接把源码中的注释掉，或者直接填个0进去，也是正确的，他默认值本身就是0，都能正常工作，当然如果这里分频真的不同，那就不能用这种取巧的办法了，这里只是临时用用改改而已
+
+```
+//clock_prescale_set(clock_div_1);
+
+clock_prescale_set(0);
+```
+
+
+
 #### 原帖方法
 
 原帖是不用WinAVR的，他是要你下一个avr8-gnu-toolchain-win32_x86，这个相当于是对板子的支持，然后还需要你下一个MinGW，这个是相当于你有了make，而WinAVR是将二者打包在了一起，所以比较简单一些，当然可能太老了，有些东西不支持了或者有可能出错，不过那都是后话了。
