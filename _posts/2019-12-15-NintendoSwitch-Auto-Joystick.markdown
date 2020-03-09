@@ -134,6 +134,10 @@ make: *** [obj/Joystick.o] Error 1
 
 补充上16u2的宏定义，保存一下再make就发现没问题了。
 
+```
+|| defined(__AVR_ATmega16U2__) \
+```
+
 ![SMMS](https://i.loli.net/2020/03/09/cFoIzl8pC1GvjwU.png)
 
 
