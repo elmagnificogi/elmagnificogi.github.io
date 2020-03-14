@@ -1,14 +1,15 @@
 ---
 layout:     post
 title:      "Tracealyzer Crack"
-subtitle:   "Switch-Fightstick，auto，AVR USB"
+subtitle:   "FreeRTOS，Trace"
 date:       2020-03-13
 author:     "elmagnifico"
-header-img: "img/Raspberrypi-head-bg.png"
+header-img: "img/Embedded-head-bg.png"
 catalog:    true
 tags:
-    - AVR
-    - Nintendo Switch
+    - FreeRTOS
+    - Trace
+	- Embedded
 ---
 
 ## Forward
