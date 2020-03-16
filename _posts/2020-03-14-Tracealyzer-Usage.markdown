@@ -9,12 +9,14 @@ catalog:    true
 tags:
     - FreeRTOS
     - Trace
-	- Embedded
+    - Embedded
 ---
 
 ## Forward
 
-最近要用到Tracealyzer来分析一下当前FreeRTOS中的一些平常看不见的bug，有些关于Tracealyzer介绍的地方可能也没说清楚，这里再补充一些
+有些关于Tracealyzer介绍的地方可能也没说清楚，这里再补充一些
+
+以及有可能遇到的一些问题也都补充在这里
 
 ## 环境
 
