@@ -9,7 +9,7 @@ catalog:    true
 tags:
     - FreeRTOS
     - Trace
-	- Embedded
+    - Embedded
 ---
 
 ## Forward
