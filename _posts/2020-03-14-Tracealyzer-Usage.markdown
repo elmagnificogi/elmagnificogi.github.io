@@ -174,7 +174,39 @@ vTraceSetFilterMask( FilterGroup1 | FilterGroup2 );
 
 通过这样的方式我就把原来1400多KB/s的总数据流分割成若干个小数据流，然后每次烧写修改具体要查看的数据流到底是哪个。
 
-当然这个东西到底能不能动态修改，我没试过，可能会有点问题吧。
+## 动态分组
+
+上面说了分组来实现流量切割，实际上测试了一下也可以动态分组，分组用的是一个全局变量，只要前面的步骤正确，那么可以直接切换实际输出的通道。
+
+```c
+    switch(params[0]){
+		case 0:
+			vTraceSetFilterMask(FilterGroup0);
+			break;
+		case 1:
+			vTraceSetFilterMask(FilterGroup1);
+			break;
+		case 2:
+			vTraceSetFilterMask(FilterGroup2);
+			break;
+		case 3:
+			vTraceSetFilterMask(FilterGroup3);
+			break;
+		case 4:
+			vTraceSetFilterMask(FilterGroup4);
+			break;
+		case 5:
+			vTraceSetFilterMask(FilterGroup5);
+			break;
+		case 6:
+			vTraceSetFilterMask(FilterGroup6);
+			break;
+		default:
+			printf("unknow FilterMask \n");
+			return;
+    }
+	printf("tracealyzer set FilterMask ok\n");
+```
 
 ## CPU 100%
 
@@ -183,6 +215,8 @@ Tracealyzer的cpu计算方式挺奇怪的，他计算的是这个负载量，而
 也就是说你通道里只有部分任务，所有任务都在跑的情况下，那么cpu就是100%.如果你加上一个不频繁跑的任务进去cpu可能就变成90%了
 
 所以这里cpu统计的是相对量，是指输出通道中的所有任务是100%，占比也是基于这个，而不是实际cpu的使用100%
+
+
 
 ## End
 
