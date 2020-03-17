@@ -111,8 +111,6 @@ msys-1.0.dll下载链接：
 
 > http://www.lab-z.com/wp-content/uploads/2018/10/msys-1.0-vista64.zip
 
-#
-
 ##### 编译报错
 
 如果编译的atmega16u2可能会出现下面的编译报错，主要问题集中在这个clock_div_1没声明。
