@@ -92,7 +92,7 @@ tags:
 
 trcConfig.h中，这两个关闭可以减少大概一半的流量吧
 
-```
+```c
 是否记录就绪事件
 TRC_CFG_INCLUDE_READY_EVENTS 
 
@@ -106,8 +106,8 @@ TRC_CFG_INCLUDE_OSTICK_EVENTS
 
 使用这两个来自定义用户通道
 
-```
-vTraceSetFilterMask 
+```c
+vTraceSetFilterMask
 vTraceSetFilterGroup
 ```
 
@@ -117,7 +117,7 @@ trcConfig.h中的配置是相当于一个全局性的开关，都是针对系统
 
 系统里一共给了16个自定义通道，其实就是16个集合，可以自己分类各个任务到各个通道，默认所有任务都是自动分配到通道0的
 
-```
+```c
 #define FilterGroup0 (uint16_t)0x0001
 #define FilterGroup1 (uint16_t)0x0002
 #define FilterGroup2 (uint16_t)0x0004
@@ -140,7 +140,7 @@ vTraceSetFilterGroup(FilterGroup0);
 
 vTraceSetFilterGroup的含义就是开启一个划分，这句往下到另外一个划分为止，这之间所有开启的任务都属于一个通道。
 
-```
+```c
 // 由于未指定通道，默认都归属于通道0
 xTaskCreate( vTaskFunction1, "TASK1", TASK_STACK_SIZE, NULL, TASK1_PRIORITY, NULL );
 xTaskCreate( vTaskFunction1, "TASK2", TASK_STACK_SIZE, NULL, TASK1_PRIORITY, NULL );
@@ -168,7 +168,7 @@ xTaskCreate( vTaskFunction1, "TASK10", TASK_STACK_SIZE, NULL, TASK1_PRIORITY, NU
 
 划分好了通道以后，还需要设置一下具体这次输出到底输出什么通道，这就靠vTraceSetFilterMask
 
-```
+```c
 vTraceSetFilterMask( FilterGroup1 | FilterGroup2 );
 ```
 
