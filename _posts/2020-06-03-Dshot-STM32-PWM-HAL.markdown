@@ -75,6 +75,28 @@ DSHOT本身一个完整控制帧，是16bits，其中11bits用来表示油门，
 
 这里我说明一下，实际并不是2us，应该是3个bit时间，取决于使用的模式，DSHOT1200可能需要更多一点4bit时间，这个都是我实际测试的结果（有可能受到电调和电机的实际情况影响，需要自行测试）。多个开源飞控里的我看到都是至少3bit时间，如果少于3bit时间，输出相同的油门，可以看到电机明显的顿挫，而时间给够以后明显流畅了。实际输出的频率自然也会随着这3bit降低，大概就变成了31.5khz，我实测是ok的。
 
+#### CRC
+
+既然这里有CRC，然后无论哪里都不具体说用的是啥CRC,下面是实际4位crc的算法，packet中是只有油门的，没有telemetry，可能需要根据情况设置telemetry
+
+```c
+uint16_t add_checksum_and_telemetry(uint16_t packet) {
+    uint16_t packet_telemetry = (packet << 1) | 0;
+    uint8_t i;
+    int csum = 0;
+    int csum_data = packet_telemetry;
+
+    for (i = 0; i < 3; i++) {
+        csum ^=  csum_data;   // xor data by nibbles
+        csum_data >>= 4;
+    }
+    csum &= 0xf;
+    packet_telemetry = (packet_telemetry << 4) | csum;
+
+    return packet_telemetry;    //append checksum
+}
+```
+
 
 
 有了这些基础，DSHOT基本就可以正常工作了，剩下telemetry的协议内容，日后再说
