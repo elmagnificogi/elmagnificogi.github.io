@@ -4,7 +4,7 @@ title:      "BLHeli-Uart-Usb-Protocol"
 subtitle:   "4way-if，ardupilot"
 date:       2020-06-03
 author:     "elmagnifico"
-header-img: "img/Embedded-head-bg.png"
+header-img: "img/drone-head-bg.png"
 catalog:    true
 tags:
     - BLHeli
