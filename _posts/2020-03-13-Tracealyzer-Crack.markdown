@@ -230,6 +230,8 @@ de4dot-x64.exe -r D:\Tracealyzer4 -ro D:\Tracealyzer4\cleaned
 xmlElement6.InnerText = b2;
 ```
 
+下图中的text就是b2，只是两次反编译时变量名不同而已
+
 ![SMMS](https://i.loli.net/2020/03/13/hoOiNBzARYj2cWd.png)
 
 然后编译，保存模块，重新加载所有模块，再跑一次，发现正常跑通了。
