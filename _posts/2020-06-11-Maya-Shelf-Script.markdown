@@ -8,7 +8,7 @@ header-img: "img/line-head-bg.png"
 catalog:    true
 tags:
     - maya
-	- python
+    - python
 ---
 
 ## Foreword
