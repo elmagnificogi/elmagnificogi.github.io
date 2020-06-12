@@ -349,6 +349,93 @@ C0 50 是crc
 
 暂时不知道还有啥办法可以解密这个具体内容
 
+## 自动dump配置信息
+
+#### 硬件连接
+
+串口19200，R接到电调信号线上，同时电调/串口/电调配置小板共地
+
+（串口主要用来监听，电调配置过程中的数据包）
+
+1. 启动机器，让esc处于没收到任何pwm或者飞控信号的情况下
+2. 打开串口助手,勾选hex显示
+3. 打开电调配置软件BLHeliSuite32,连接，读取配置
+4. 修改配置，然后写入配置，此时串口助手以及记录下来所有发送的命令
+5. 将串口助手中所有内容复制粘贴到rawdata.txt
+6. 运行get_settings.py
+7. 得到配置存储在settings.txt中，直接复制粘贴替换到老的settings即可
+
+#### dump脚本
+
+```python
+import sys
+import os
+
+f = open(os.path.dirname(__file__) +"/rawdata.txt")
+hex_data = f.read()
+print hex_data
+
+start = None
+end = None
+
+state = 0
+for i in range(0, len(hex_data), 3):
+    if (hex_data[i] + hex_data[i + 1]) == "FE" and state == 0:
+        state = 1
+    elif (hex_data[i] + hex_data[i + 1]) == "00" and state == 1:
+        state = 2
+    elif (hex_data[i] + hex_data[i + 1]) == "01" and state == 2:
+        state = 3
+    elif (hex_data[i] + hex_data[i + 1]) == "00" and state == 3:
+        state = 4
+        start = i - 9
+        break
+    else:
+        state = 0
+
+if start == None:
+    print "no start,exit"
+    sys.exit(0)
+
+state = 0
+for i in range(0, len(hex_data), 3):
+    if (hex_data[i] + hex_data[i + 1]) == "30" and state == 0:
+        state = 1
+    elif (hex_data[i] + hex_data[i + 1]) == "01" and state == 1:
+        state = 2
+    elif (hex_data[i] + hex_data[i + 1]) == "01" and state == 2:
+        state = 3
+    elif (hex_data[i] + hex_data[i + 1]) == "C0" and state == 3:
+        state = 4
+        end = i - 9
+        break
+    else:
+        state = 0
+
+if end == None:
+    print "no start,exit"
+    sys.exit(0)
+
+print(start, end)
+
+print len(hex_data)
+output_data = ""
+
+n=4
+for i in range(start, end, 3):
+    output_data += "0x" + hex_data[i] + hex_data[i + 1] + ','
+    n+=1
+    if n%24==0:
+        output_data+="\n"
+
+f.close()
+
+f = open(os.path.dirname(__file__) +"/settings.txt", 'w')
+f.write(output_data[:-1])
+print output_data[:-1]
+
+```
+
 ## End
 
 最后三种interface可以支持的功能不太一样，4way-if显然可以支持多电调同时配置，同时查看.而usb/com则只能配置一个,betaflight则是可以不直接连接电调的情况下透传协议,但是呢比较复杂,需要实现betaflight本身的MSP协议然后转成4way-if协议然后再到BLH的核心协议,如果不需要的话,没必要弄这么麻烦的协议,写进去还丑的不行.
