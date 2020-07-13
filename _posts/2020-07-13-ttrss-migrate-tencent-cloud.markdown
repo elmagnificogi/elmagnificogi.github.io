@@ -4,11 +4,10 @@ title:      "TTRSS迁移到腾讯云"
 subtitle:   "轻量服务器"
 date:       2020-07-13
 author:     "elmagnifico"
-header-img: "img/drone-head-bg.png"
+header-img: "img/desk-head-bg.png"
 catalog:    true
 tags:
-    - esc
-    - BLHeli
+    - vps
 ---
 
 ## Foreword
