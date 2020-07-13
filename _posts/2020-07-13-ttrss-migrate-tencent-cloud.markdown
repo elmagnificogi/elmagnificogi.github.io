@@ -1,0 +1,106 @@
+---
+layout:     post
+title:      "TTRSS迁移到腾讯云"
+subtitle:   "轻量服务器"
+date:       2020-07-13
+author:     "elmagnifico"
+header-img: "img/drone-head-bg.png"
+catalog:    true
+tags:
+    - esc
+    - BLHeli
+---
+
+## Foreword
+
+从6月30日开始，阿里云国际新加坡2.5刀再也没了，然后由于是月底买的所以续费了一下个月，也就是七月多就要没了，至于阿里云国际的新手套餐3.0的轻量，实在不太行所以一直在观望，本来之前想买水墨云的香港，但是只有年付而且不稳，所以一直没下手。
+
+好巧不巧，腾讯云轻量竟然出了国外的服务器，一个硅谷一个新加坡，毫无疑问，上新加坡。
+
+据说后面还会出轻量香港，延迟会更低一些，等出了再说吧
+
+## 轻量新加坡
+
+150 ip开头，感觉速度稍微有点不稳吧，30M，1c，2g，34月付，还是挺实惠的，加上之前用阿里云的0.5g内存，每天不定时卡死，真的难受坏了，所以挑了2g的内存。
+
+如果是水墨云，大概45/月，1c，1g，100M，但是必须年付， 有点危险，虽然也挺好的，不过有腾讯大厂，还是先耍腾讯吧
+
+当然二者都是CN2 gia，不过水墨对移动和联通用户可能更友好一些，腾讯差了点。
+
+#### 移除腾讯监控
+
+当然这个只是部分，据说如果要全移除还是得在线重装系统，不过我也不干啥就不折腾了。
+
+```
+/usr/local/qcloud/stargate/admin/uninstall.sh
+/usr/local/qcloud/YunJing/uninst.sh
+/usr/local/qcloud/monitor/barad/admin/uninstall.sh
+```
+
+接着就是bbr+v2ray+ws全套搞上去，测试正常就行了。
+
+## TTRSS迁移
+
+其实之前已经迁移过一次了，不过还是记录一下吧，防止找不到了
+
+#### Postgres 数据库迁移
+
+首先数据库有两种办法迁移，第一种就是直接复制粘贴整个数据库本地存储的内容，但是非常大，我有大概1个多g，迁移起来有点麻烦（而且会出现一个问题，就是如果你的TTRSS很久没更新，直接copy过去的数据库版本对不上，就会导致启动报错，一堆问题，建议还是导出迁移）
+
+在迁移之前先做好备份：
+
+1. 停止所有服务容器：
+
+   ```bash
+   docker-compose stop
+   ```
+
+2. 复制 Postgres 数据卷 `~/postgres/data/`（或者你在 docker-compose 中指定的目录）至其他任何地方作为备份
+
+3. 在启动一次
+
+   ```
+   docker-compose up 或者 只启动 postgres的容器
+   ```
+
+4. 执行如下命令来导出所有数据：
+
+   ```bash
+   docker exec postgres pg_dumpall -c -U 数据库用户名 > export.sql
+   如果没修改过数据库名，就用下面的:
+   docker exec postgres pg_dumpall -c -U postgres > export.sql
+   ```
+
+5. 根据最新docker-compose.yml中的
+
+   ```
+   database.postgres
+   ```
+
+   部份来更新你的 docker-compose 文件（注意: `DB_NAME` 不可更改），并启动：
+
+   ```bash
+   docker-compose up -d
+   ```
+
+6. 执行如下命令来导入所有数据：
+
+   ```bash
+   cat export.sql | docker exec -i postgres psql -U 数据库用户名
+   如果没修改过数据库名，就用下面的:
+   cat export.sql | docker exec -i postgres psql -U postgres
+   ```
+
+7. 测试所有服务是否正常工作
+
+这样就基本可以正常工作了，啥配置基本都在，如果是老版本升级可能有些配置需要重新再配一下，最新版的基本没啥问题了。
+
+## Summary
+
+
+
+## Quote
+
+> http://ttrss.henry.wang/zh/
+>
+
