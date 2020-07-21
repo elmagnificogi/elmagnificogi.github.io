@@ -35,7 +35,15 @@ dag_modifier.deleteNode(obj_transform);
 dag_modifier.doIt();
 ```
 
-使用MDagModifier的deleteNode删除节点就不会导致view刷新出错。
+使用MDagModifier的deleteNode删除节点就不会导致view刷新出错
+
+但是使用DAG的deleteNode依然有概率崩溃，崩溃的原因也同样和view有关。
+
+DAG的deleteNode，其实有一个前置条件，这个条件就是删除的这个节点，最好和其他相关节点已经断开了，然后再使用删除。
+
+如果不断开，直接删除，多数情况下可能不会有问题，但是某些情况下就是会出错，这种时候出错还有一个办法就是用removeFromModel来删除，就没有这么多问题了。
+
+
 
 ### 数组类型属性
 
