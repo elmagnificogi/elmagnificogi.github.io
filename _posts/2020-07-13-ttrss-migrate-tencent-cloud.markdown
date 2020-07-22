@@ -34,6 +34,7 @@ tags:
 /usr/local/qcloud/stargate/admin/uninstall.sh
 /usr/local/qcloud/YunJing/uninst.sh
 /usr/local/qcloud/monitor/barad/admin/uninstall.sh
+rm -fr /usr/local/qcloud
 ```
 
 接着就是bbr+v2ray+ws全套搞上去，测试正常就行了。
