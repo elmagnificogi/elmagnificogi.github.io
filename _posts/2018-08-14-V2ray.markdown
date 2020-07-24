@@ -35,9 +35,7 @@ V2Ray 是 Project V 下的一个工具。Project V 是一个包含一系列构�
 
 运行 service v2ray start 来启动 V2Ray 进程
 
-使用 service v2ray start|stop|status|reload|restart|force-reload 控制 V2Ray 的运行。
-
-或者是：
+使用下面的命令控制 V2Ray 的运行：
 
     sudo systemctl start v2ray
     sudo systemctl stop v2ray
