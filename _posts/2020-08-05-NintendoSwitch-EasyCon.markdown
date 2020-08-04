@@ -2,7 +2,7 @@
 layout:     post
 title:      "伊机控使用教程"
 subtitle:   "宝可梦，单片机"
-date:       2020-08-04
+date:       2020-08-05
 author:     "elmagnifico"
 header-img: "img/Raspberrypi-head-bg.png"
 catalog:    true
