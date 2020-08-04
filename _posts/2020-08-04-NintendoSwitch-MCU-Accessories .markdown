@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "NS 单片机以及相关配件选购指南"
-subtitle:   "MCU，串口，采集卡"
+subtitle:   "MCU，串口，采集卡，宝可梦"
 date:       2020-08-04
 author:     "elmagnifico"
 header-img: "img/Raspberrypi-head-bg.png"
@@ -9,6 +9,7 @@ catalog:    true
 tags:
     - NintendoSwitch
     - NS
+    - EasyCon
 ---
 
 ## Foreword
