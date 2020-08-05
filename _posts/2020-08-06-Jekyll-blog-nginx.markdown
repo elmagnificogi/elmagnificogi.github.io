@@ -1,15 +1,15 @@
 ---
 layout:     post
-title:      "VPS上使用nginx搭建Jekyll blog（转移github博客）"
-subtitle:   "rvm，git pages"
-date:       2020-08-06
+title:      "NS 单片机以及相关配件选购指南"
+subtitle:   "MCU，串口，采集卡，宝可梦"
+date:       2020-08-04
 author:     "elmagnifico"
-header-img: "img/git-head-bg.jpg"
+header-img: "img/Raspberrypi-head-bg.png"
 catalog:    true
 tags:
-    - blog
-    - vps
-    - Jekyll
+    - NintendoSwitch
+    - NS
+    - EasyCon
 ---
 
 ## Foreword
