@@ -181,12 +181,9 @@ crontab -e
 
 使用watch命令让jekyll监控变更，自动更新
 
-{% raw %}
 ```
-jekyll build --source /root/elmagnificogi.github.io --destination /usr/share/nginx/html --incremental --watch&
+jekyll build --source /root/elmagnificogi.github.io --destination /usr/share/nginx/html --incremental --watch与符号
 ```
-{% endraw %}
-
 ## Summary
 
 自动化部署还有更好的方法，比如用git action，就可以完美更新，而不是靠crontab来轮询，后面研究清楚以后会更新到git action
