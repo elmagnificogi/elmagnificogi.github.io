@@ -160,13 +160,11 @@ jekyll build --source /root/elmagnificogi.github.io --destination /usr/share/ngi
 其实是版本更新了语法变了,需要修改一下语法
 
 {% raw %}
-{% comment %} 
 ```bash
 {% if tag[1].size > {{site.featured-condition-size}} %}
 修改为：
 {% if tag[1].size > site.featured-condition-size %}
 ```
-{% endcomment %}
 {% endraw %}
 
 然后重新编译部署一下，就全都正常了
