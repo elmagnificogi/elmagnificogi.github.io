@@ -159,11 +159,15 @@ jekyll build --source /root/elmagnificogi.github.io --destination /usr/share/ngi
 
 其实是版本更新了语法变了,需要修改一下语法
 
+{% raw %}
+
 ```bash
 {% if tag[1].size > {{site.featured-condition-size}} %}
 修改为：
 {% if tag[1].size > site.featured-condition-size %}
 ```
+
+{% endraw %}
 
 然后重新编译部署一下，就全都正常了
 
@@ -173,10 +177,17 @@ jekyll build --source /root/elmagnificogi.github.io --destination /usr/share/ngi
 
 检测更新可以用crontab
 
+```bash
+crontab -e
+添加每分钟拉取一次更新
+*/1 * * * *  git --git-dir=/root/elmagnificogi.github.io/.git pull origin master> /dev/null
+```
 
 使用watch命令让jekyll监控变更，自动更新
 
-
+```
+jekyll build --source /root/elmagnificogi.github.io --destination /usr/share/nginx/html --incremental --watch&
+```
 ## Summary
 
 自动化部署还有更好的方法，比如用git action，就可以完美更新，而不是靠crontab来轮询，后面研究清楚以后会更新到git action
