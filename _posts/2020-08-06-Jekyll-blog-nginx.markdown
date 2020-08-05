@@ -173,17 +173,10 @@ jekyll build --source /root/elmagnificogi.github.io --destination /usr/share/ngi
 
 检测更新可以用crontab
 
-```bash
-crontab -e
-添加每分钟拉取一次更新
-*/1 * * * *  git --git-dir=/root/elmagnificogi.github.io/.git pull origin master> /dev/null
-```
 
 使用watch命令让jekyll监控变更，自动更新
 
-```
 
-```
 ## Summary
 
 自动化部署还有更好的方法，比如用git action，就可以完美更新，而不是靠crontab来轮询，后面研究清楚以后会更新到git action
