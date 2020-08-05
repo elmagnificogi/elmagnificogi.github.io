@@ -150,7 +150,7 @@ jekyll build --source /root/elmagnificogi.github.io --destination /usr/share/ngi
 由于好久没有更新blog了，导致以前黄玄的语法存在错误，进而导致编译的时候出现了一些err，类似这样的:
 
 ```bash
-	Liquid Warning: Liquid syntax error (line 126): Unexpected character { in "tag[1].size > {{site.featured-condition-size}}" in /root/elmagnificogi.github.io/_layouts/post.html
+    Liquid Warning: Liquid syntax error (line 126): Unexpected character { in "tag[1].size > {{site.featured-condition-size}}" in /root/elmagnificogi.github.io/_layouts/post.html
     Liquid Warning: Liquid syntax error (line 87): Unexpected character { in "tag[1].size > {{site.featured-condition-size}}" in /root/elmagnificogi.github.io/_layouts/page.html
     Liquid Warning: Liquid syntax error (line 38): Unexpected character { in "tag[1].size > {{site.featured-condition-size}}" in /root/elmagnificogi.github.io/_layouts/page.html
 ```
