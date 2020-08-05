@@ -181,9 +181,11 @@ crontab -e
 
 使用watch命令让jekyll监控变更，自动更新
 
-```bash
-jekyll build --source /root/elmagnificogi.github.io --destination /usr/share/nginx/html --incremental --watch&amp;
+{% raw %}
 ```
+jekyll build --source /root/elmagnificogi.github.io --destination /usr/share/nginx/html --incremental --watch&
+```
+{% endraw %}
 
 ## Summary
 
