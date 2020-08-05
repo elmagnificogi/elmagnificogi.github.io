@@ -20,7 +20,7 @@ github的blog还是太慢了，现在这个腾讯云也够，就转移到这边�
 
 默认安装get，但是这样不行，版本太老了
 
-```shell
+```bash
 yum install ruby
 yum install gem
 
@@ -36,7 +36,7 @@ gem -v
 
 首先安装RVM，然后通过RVM安装ruby
 
-```shell
+```bash
 gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
 curl -sSL https://get.rvm.io | bash -s stable
 source /etc/profile.d/rvm.sh
@@ -44,14 +44,14 @@ source /etc/profile.d/rvm.sh
 
 装完以后再看一下版本
 
-```shell
+```bash
 rvm -v
 rvm 1.29.10 (latest) by Michal Papis, Piotr Kuczynski, Wayne E. Seguin [https://rvm.io]
 ```
 
 选择安装ruby版本，可以看到版本号跟上了
 
-```shell
+```bash
 rvm install 2.7
 ruby -v
 ruby 2.7.0p0 (2019-12-25 revision 647ee6f091) [x86_64-linux]
@@ -61,7 +61,7 @@ gem -v
 
 更新gem
 
-```shell
+```bash
 gem update --system
 ```
 
@@ -69,14 +69,14 @@ gem update --system
 
 尝试安装 jekyll，大概率会出现找不到库
 
-```shell
+```bash
 gem install jekyll bundler
 ERROR:  Could not find a valid gem 'jekyll' (>= 0) in any repository
 ```
 
 修改源
 
-```shell
+```bash
 查看所有源
 gem sources -l
 删掉所有源
@@ -87,14 +87,14 @@ gem rem --add https://gems.ruby-china.com/
 
 再次安装，应该能正常装上了。
 
-```shell
+```bash
 jekyll -v
 jekyll 4.1.1
 ```
 
 如果找不到jeky命令，首先查找ruby/bin的目录,可以看到一堆地址找到对应的bin所在目录
 
-```shell
+```bash
 gem env
 从上面的回显中寻找bin目录，添加到path目录
 export PATH=${PATH}:/usr/local/rvm/gems/ruby-2.7.0/bin
@@ -104,7 +104,7 @@ export PATH=${PATH}:/usr/local/rvm/gems/ruby-2.7.0/bin
 
 首先找到nginx的配置文件，然后修改查看
 
-```shell
+```bash
 nginx -t
 nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
 nginx: configuration file /etc/nginx/nginx.conf test is successful
@@ -113,7 +113,7 @@ vi /etc/nginx/nginx.conf
 
 一般都能看到对应的nginx的index目录是：/usr/share/nginx/html
 
-```shell
+```bash
 server {
         listen       80 default_server;
         listen       [::]:80 default_server;
@@ -139,7 +139,7 @@ server {
 
 那么就需要编译部署到这个文件夹或者修改为自己的也行
 
-```shell
+```bash
 jekyll build --source /root/elmagnificogi.github.io --destination /usr/share/nginx/html --incremental
 ```
 
@@ -149,7 +149,7 @@ jekyll build --source /root/elmagnificogi.github.io --destination /usr/share/ngi
 
 由于好久没有更新blog了，导致以前黄玄的语法存在错误，进而导致编译的时候出现了一些err，类似这样的:
 
-```shell
+```bash
 	Liquid Warning: Liquid syntax error (line 126): Unexpected character { in "tag[1].size > {{site.featured-condition-size}}" in /root/elmagnificogi.github.io/_layouts/post.html
     Liquid Warning: Liquid syntax error (line 87): Unexpected character { in "tag[1].size > {{site.featured-condition-size}}" in /root/elmagnificogi.github.io/_layouts/page.html
     Liquid Warning: Liquid syntax error (line 38): Unexpected character { in "tag[1].size > {{site.featured-condition-size}}" in /root/elmagnificogi.github.io/_layouts/page.html
@@ -159,7 +159,7 @@ jekyll build --source /root/elmagnificogi.github.io --destination /usr/share/ngi
 
 其实是版本更新了语法变了,需要修改一下语法
 
-```shell
+```bash
 {% if tag[1].size > {{site.featured-condition-size}} %}
 修改为：
 {% if tag[1].size > site.featured-condition-size %}
@@ -173,7 +173,7 @@ jekyll build --source /root/elmagnificogi.github.io --destination /usr/share/ngi
 
 检测更新可以用crontab
 
-```shell
+```bash
 crontab -e
 添加每分钟拉取一次更新
 */1 * * * *  git --git-dir=/root/elmagnificogi.github.io/.git pull origin master> /dev/null
@@ -181,7 +181,7 @@ crontab -e
 
 使用watch命令让jekyll监控变更，自动更新
 
-```shell
+```bash
 jekyll build --source /root/elmagnificogi.github.io --destination /usr/share/nginx/html --incremental --watch&
 ```
 
@@ -198,8 +198,3 @@ jekyll build --source /root/elmagnificogi.github.io --destination /usr/share/ngi
 > https://www.jianshu.com/p/728184da1699
 > http://www.voidcn.com/article/p-yyutevrw-ud.html
 > https://www.jianshu.com/p/58f19083138f
-
-
-
-
-
