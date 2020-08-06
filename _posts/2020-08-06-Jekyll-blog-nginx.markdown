@@ -213,6 +213,24 @@ jekyll build --source /root/elmagnificogi.github.io --destination /usr/share/ngi
 jekyll build --source /root/elmagnificogi.github.io --destination /usr/share/nginx/html --watch&
 ```
 
+#### nohup
+
+由于jekyll --watch 在终端退出以后就自动退出了，所以为了维持运行，要让他后台工作
+
+安装nohup
+
+```
+yum install nohup
+```
+
+后台运行
+
+```
+nohup jekyll build --source /root/elmagnificogi.github.io --destination /usr/share/nginx/html --watch&
+```
+
+
+
 ## Summary
 
 自动化部署还有更好的方法，比如用git action，就可以完美更新，而不是靠crontab来轮询，后面研究清楚以后会更新到git action
