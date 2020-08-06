@@ -4,11 +4,9 @@ result=$(cd /root/elmagnificogi.github.io && git pull origin master | grep "Alre
 if [[ "$result" != "" ]]
 then
   exit 0
-  #echo "`date '+%Y%m%d %H:%M'`:不需要更新代码"
 else
-  echo "`date '+%Y%m%d %H:%M'`: post update,start build"
-  result=$(jekyll build --source /root/elmagnificogi.github.io --destination /usr/share/nginx/html)
-  echo $result>> /root/cronblogpull.log
-  echo "`date '+%Y%m%d %H:%M'`: build over"
-  #
+  #echo "`date '+%Y%m%d %H:%M'`: post update,start build"
+  #result=$(jekyll build --source /root/elmagnificogi.github.io --destination /usr/share/nginx/html)
+  #echo $result
+  #echo "`date '+%Y%m%d %H:%M'`: build over"
 fi

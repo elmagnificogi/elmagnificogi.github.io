@@ -173,19 +173,46 @@ jekyll build --source /root/elmagnificogi.github.io --destination /usr/share/ngi
 
 要类似github就得自动检测最新的更新，然后对应部署下来
 
-检测更新可以用crontab
+检测更新可以用crontab配合脚本来完成
 
 ```bash
-crontab -e
-添加每分钟拉取一次更新
-*/1 * * * *  git --git-dir=/root/elmagnificogi.github.io/.git pull origin master> /dev/null
+SHELL=/bin/bash
+BASH_ENV=/root/.bashrc
+
+*/1 * * * * /root/elmagnificogi.github.io/deploy.sh  >> /root/cronblogpull.log
+
 ```
 
-使用watch命令让jekyll监控变更，自动更新
+首先前面的这两个必需要有，而且.bashrc里必须是已经添加了rvm环境的，否则脚本中的jekyll永远无法执行成功（因为缺少rvm环境）
+
+具体更新脚本：只有在检测到全部更新才会重编译
+
+```
+#! /bin/bash
+
+result=$(cd /root/elmagnificogi.github.io && git pull origin master | grep "Already up-to-date" )
+if [[ "$result" != "" ]]
+then
+  exit 0
+else
+  echo "`date '+%Y%m%d %H:%M'`: post update,start build"
+  result=$(jekyll build --source /root/elmagnificogi.github.io --destination /usr/share/nginx/html)
+  echo $result
+  echo "`date '+%Y%m%d %H:%M'`: build over"
+fi
+```
+
+有些人推荐使用使用watch命令让jekyll监控变更，自动更新，类似如下，或者增加一个增量式更新
 
 ```
 jekyll build --source /root/elmagnificogi.github.io --destination /usr/share/nginx/html --incremental --watch&
 ```
+但是这个东西在我这里有问题，首先增量式更新只更新post，而不更新index等静态页面，这就导致我主页一直不会刷新，而文章增加了，这就导致这个watch完全没用了，我需要的是完全重新编译那种，所以建议用watch的时候不要增量
+
+```
+jekyll build --source /root/elmagnificogi.github.io --destination /usr/share/nginx/html --watch&
+```
+
 ## Summary
 
 自动化部署还有更好的方法，比如用git action，就可以完美更新，而不是靠crontab来轮询，后面研究清楚以后会更新到git action
@@ -195,3 +222,10 @@ jekyll build --source /root/elmagnificogi.github.io --destination /usr/share/ngi
 > https://jekyllrb.com/docs/
 > https://zhuanlan.zhihu.com/p/141578820
 > https://www.cnblogs.com/tonyY/p/12150589.html
+>
+> http://rvm.io/integration/cron
+>
+> https://stackoverflow.com/questions/19181789/cron-wont-execute-ruby-script
+>
+> https://stackoverflow.com/questions/20366718/crontab-not-running-ruby-script
+
