@@ -7,7 +7,7 @@ then
   #echo "`date '+%Y%m%d %H:%M'`:不需要更新代码"
 else
   echo "`date '+%Y%m%d %H:%M'`: post update,start build"
-  jekyll build --source /root/myblog --destination /home/wwwroot/example.com --incremental
+  jekyll build --source /root/elmagnificogi.github.io --destination /usr/share/nginx/html
   echo "`date '+%Y%m%d %H:%M'`: build over"
-  #rm -rf /usr/share/nginx/html
+  #
 fi
