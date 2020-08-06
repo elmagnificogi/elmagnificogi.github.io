@@ -228,4 +228,6 @@ jekyll build --source /root/elmagnificogi.github.io --destination /usr/share/ngi
 > https://stackoverflow.com/questions/19181789/cron-wont-execute-ruby-script
 >
 > https://stackoverflow.com/questions/20366718/crontab-not-running-ruby-script
+>
+> https://www.cnblogs.com/nima/p/11751469.html
 
