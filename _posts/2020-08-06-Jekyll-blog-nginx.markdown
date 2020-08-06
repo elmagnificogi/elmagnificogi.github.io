@@ -194,8 +194,4 @@ jekyll build --source /root/elmagnificogi.github.io --destination /usr/share/ngi
 
 > https://jekyllrb.com/docs/
 > https://zhuanlan.zhihu.com/p/141578820
-> http://kevinlt.top/2018/07/01/build-blog/
 > https://www.cnblogs.com/tonyY/p/12150589.html
-> https://www.jianshu.com/p/728184da1699
-> http://www.voidcn.com/article/p-yyutevrw-ud.html
-> https://www.jianshu.com/p/58f19083138f
