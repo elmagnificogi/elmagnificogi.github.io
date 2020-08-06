@@ -8,6 +8,7 @@ then
 else
   echo "`date '+%Y%m%d %H:%M'`: post update,start build"
   result=$(jekyll build --source /root/elmagnificogi.github.io --destination /usr/share/nginx/html)
+  echo $result>> /root/cronblogpull.log
   echo "`date '+%Y%m%d %H:%M'`: build over"
   #
 fi
