@@ -302,6 +302,14 @@ NEXT
 
 
 
+## 演示视频
+
+这里是演示自动识别人名上车的具体图片采集位置，和使用效果，最好全屏放大观看。
+
+<iframe src="//player.bilibili.com/player.html?aid=711626557&bvid=BV1iD4y1U7a1&cid=222140667&page=1" scrolling="no" width="640px" height="480px" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+
+
+
 ## 伊机控的优势
 
 目前已有的脚本也好固件也好或者是其他人卖的单片机也好，各自有各自的长处吧，缺点我就不说了你们对比一下就行了。

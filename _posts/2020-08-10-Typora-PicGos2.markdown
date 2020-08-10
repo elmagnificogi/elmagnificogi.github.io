@@ -56,9 +56,11 @@ tags:
 
 
 
-嵌入视频测试
+这里再提一个Typora的小bug，有时候非常难受。平常都是在直接渲染编辑的界面，而不是源代码模式，但是如果文本比较长了，代码块比较多一些，如果这个时候切换到源码模式，然后点鼠标，切换focus，立马光标位置就自动跑偏到最上面的第一行，特别是代码多了以后非常容易复现，查了一下好像没啥人反馈这个问题。
 
-<iframe src="http://player.bilibili.com/player.html?aid=24931813&cid=42084760&page=1" scrolling="no" width="800px" height="600px" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+> https://tieba.baidu.com/p/5891309792
+
+类似，但是还是有些不同。
 
 ## wolai-我来
 
