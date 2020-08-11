@@ -4,7 +4,7 @@ title:      "树莓派启动那些事（四）"
 subtitle:   "boot，启动，ARM，虚拟文件系统"
 date:       2015-11-09
 author:     "elmagnifico"
-header-img: "img/Raspberrypi-head-bg.jpg"
+header-img: "img/Raspberrypi-head-bg.png"
 tags:
     - RaspberryPi
 ---

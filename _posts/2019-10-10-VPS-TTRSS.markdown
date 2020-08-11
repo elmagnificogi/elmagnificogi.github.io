@@ -4,7 +4,7 @@ title:      "VPS选择以及TTRSS更新"
 subtitle:   "v2ray,docker-compose"
 date:       2019-10-10
 author:     "elmagnifico"
-header-img: "img/Raspberrypi-head-bg.jpg"
+header-img: "img/Raspberrypi-head-bg.png"
 catalog:    true
 tags:
     - vps

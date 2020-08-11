@@ -4,7 +4,7 @@ title:      "树莓派无线网卡节能模式BUG"
 subtitle:   "Wlan，power_save off"
 date:       2019-10-16
 author:     "elmagnifico"
-header-img: "img/Raspberrypi-head-bg.jpg"
+header-img: "img/Raspberrypi-head-bg.png"
 catalog:    true
 tags:
     - RaspberryPi

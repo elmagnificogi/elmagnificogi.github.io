@@ -4,7 +4,7 @@ title:      "树莓派启动那些事（五）"
 subtitle:   "linux启动，init，runlevel，shell"
 date:       2015-11-11
 author:     "elmagnifico"
-header-img: "img/Raspberrypi-head-bg.jpg"
+header-img: "img/Raspberrypi-head-bg.png"
 tags:
     - RaspberryPi
 ---

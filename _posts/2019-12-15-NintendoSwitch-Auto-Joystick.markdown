@@ -4,7 +4,7 @@ title:      "Nintendo Switch 自动手柄"
 subtitle:   "Switch-Fightstick，auto，AVR USB"
 date:       2019-12-15
 author:     "elmagnifico"
-header-img: "img/Raspberrypi-head-bg.jpg"
+header-img: "img/Raspberrypi-head-bg.png"
 catalog:    true
 tags:
     - AVR
