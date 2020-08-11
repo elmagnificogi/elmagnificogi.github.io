@@ -189,7 +189,7 @@ C-FROCE也是可以用的
 
 > https://item.taobao.com/item.htm?spm=a230r.1.14.38.77a86bbat1M7FH&id=613383712791&ns=1&abbucket=5#detail
 
-![image-20200402220531301](E:\elmagnificogi.github.io\_posts\2020-08-04-NintendoSwitch-MCU-Accessories .assets\image-20200402220531301.png)
+![image-20200402220531301](https://i.loli.net/2020/08/12/EeQAwlIWxgvRS4M.png)
 
 
 
@@ -197,7 +197,7 @@ C-FROCE也是可以用的
 
 > https://item.taobao.com/item.htm?spm=a230r.1.14.28.77a86bbat1M7FH&id=611648312056&ns=1&abbucket=5#detail
 
-![image-20200402220711558](E:\elmagnificogi.github.io\_posts\2020-08-04-NintendoSwitch-MCU-Accessories .assets\image-20200402220711558.png)
+![image-20200402220711558](https://i.loli.net/2020/08/12/joqCOYnkZz7LpVP.png)
 
 其他可能还有很多，不过是互相抄而已就不介绍了，咸鱼随便搜搜宝可梦单片机，一堆一堆收智商税的
 
