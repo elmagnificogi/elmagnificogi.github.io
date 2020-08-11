@@ -4,7 +4,7 @@ title:      "Maya 环境自动重配置"
 subtitle:   "python"
 date:       2020-06-11
 author:     "elmagnifico"
-header-img: "img/line-head-bg.png"
+header-img: "img/line-head-bg.jpg"
 catalog:    true
 tags:
     - maya

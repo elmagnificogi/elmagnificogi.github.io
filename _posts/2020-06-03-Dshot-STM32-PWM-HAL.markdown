@@ -4,7 +4,7 @@ title:      "STM32 PWM DSHOT驱动"
 subtitle:   "HAL，DSHOT1200"
 date:       2020-06-03
 author:     "elmagnifico"
-header-img: "img/sensor-head-bg.png"
+header-img: "img/sensor-head-bg.jpg"
 catalog:    true
 tags:
     - STM32

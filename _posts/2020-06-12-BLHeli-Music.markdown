@@ -4,7 +4,7 @@ title:      "BLHeli 自定义音乐与乐理常识"
 subtitle:   "esc"
 date:       2020-06-12
 author:     "elmagnifico"
-header-img: "img/drone-head-bg.png"
+header-img: "img/drone-head-bg.jpg"
 catalog:    true
 tags:
     - esc

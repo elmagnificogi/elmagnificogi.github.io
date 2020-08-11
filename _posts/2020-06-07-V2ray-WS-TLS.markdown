@@ -4,7 +4,7 @@ title:      "V2ray WS TLS自动续签证书+订阅"
 subtitle:   "Nignx,SSL"
 date:       2020-06-07
 author:     "elmagnifico"
-header-img: "img/cap-head-bg.png"
+header-img: "img/cap-head-bg.jpg"
 catalog:    true
 tags:
     - vps
