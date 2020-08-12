@@ -4,7 +4,7 @@ title:      "FreeRTOS中croutine源文件分析"
 subtitle:   "嵌入式，FreeRTOS，croutine"
 date:       2017-03-23
 author:     "elmagnifico"
-header-img: "img/Embedded-head-bg.png"
+header-img: "img/freertos.jpg"
 catalog:    true
 tags:
     - 嵌入式

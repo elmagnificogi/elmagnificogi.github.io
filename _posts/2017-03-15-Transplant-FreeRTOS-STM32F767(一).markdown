@@ -4,7 +4,7 @@ title:      "FreeRTOS移植到STM32F767(一)"
 subtitle:   "嵌入式，FreeRTOS，STM32F767"
 date:       2017-03-15
 author:     "elmagnifico"
-header-img: "img/Embedded-head-bg.png"
+header-img: "img/freertos.jpg"
 catalog:    true
 tags:
     - 嵌入式

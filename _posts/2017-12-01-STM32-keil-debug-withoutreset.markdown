@@ -4,7 +4,7 @@ title:      "keil debug 不重启连接硬件"
 subtitle:   "嵌入式，debug，STM32"
 date:       2017-12-01
 author:     "elmagnifico"
-header-img: "img/Embedded-head-bg.png"
+header-img: "img/cap-head-bg.jpg"
 catalog:    true
 tags:
     - 嵌入式

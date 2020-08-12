@@ -4,7 +4,7 @@ title:      "FreeRTOS中heap源文件分析(四)"
 subtitle:   "嵌入式，FreeRTOS，heap"
 date:       2017-03-22
 author:     "elmagnifico"
-header-img: "img/Embedded-head-bg.png"
+header-img: "img/freertos.jpg"
 catalog:    true
 tags:
     - 嵌入式

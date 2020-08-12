@@ -4,7 +4,7 @@ title:      "STM32 _main 里做了什么"
 subtitle:   "嵌入式，bootloader，_main"
 date:       2017-04-01
 author:     "elmagnifico"
-header-img: "img/Embedded-head-bg.png"
+header-img: "img/pcb-head-bg.jpg"
 catalog:    true
 tags:
     - 嵌入式
