@@ -4,7 +4,7 @@ title:      "Typora配合PicGo（三）"
 subtitle:   "图床，wolai，我来"
 date:       2020-08-10
 author:     "elmagnifico"
-header-img: "img/git-head-bg.jpg"
+header-img: "img/line-head-bg.jpg"
 catalog:    true
 tags:
     - Tools

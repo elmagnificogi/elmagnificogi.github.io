@@ -4,7 +4,7 @@ title:      "微信、QQ、Telegram对比"
 subtitle:   "work，life"
 date:       2020-08-08
 author:     "elmagnifico"
-header-img: "img/git-head-bg.jpg"
+header-img: "img/pen-head-bg.jpg"
 catalog:    true
 tags:
     - 杂谈

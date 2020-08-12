@@ -4,7 +4,7 @@ title:      "反代谷歌API"
 subtitle:   "Nginx，谷歌地图"
 date:       2020-08-10
 author:     "elmagnifico"
-header-img: "img/git-head-bg.jpg"
+header-img: "img/desk-head-bg.jpg"
 catalog:    true
 tags:
     - VPS
