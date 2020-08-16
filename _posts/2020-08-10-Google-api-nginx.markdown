@@ -206,7 +206,7 @@ location /468724d08bce9811e989b526c6222863/ { proxy_pass https://www.google.com/
 vi replace_cn.txt
 ```
 
-这里注意一下还有一个mapsapis.your-domain.com ig; 和其他的不一样，原作者是区分了map和mapsapis
+这里注意一下原文还有一个mapsapis.your-domain.com ig; 和其他的不一样，原作者是区分了map和mapsapis，我这里不区分
 
 ```
 replace_filter mts0.google.com maps.your-domain.com/e173754b3b1bbd62a0be9c4afea73fdf ig;
@@ -219,7 +219,7 @@ replace_filter mts0.googleapis.com maps.your-domain.com/c7d52b85d86a06df50621e66
 replace_filter mts1.googleapis.com maps.your-domain.com/57cf283b871304a296c3bd8acde4cc22 ig;
 replace_filter maps.gstatic.com maps.your-domain.com/3e0ae61058d4e7be83d222fb1f107310 ig;
 replace_filter csi.gstatic.com maps.your-domain.com/ae5102db1431e3fd01dc8336085d150f ig;
-replace_filter maps.googleapis.com mapsapis.your-domain.com ig;
+replace_filter maps.googleapis.com maps.your-domain.com ig;
 replace_filter maps.google.com maps.your-domain.com/946eb25413c43b235b5806e999044125 ig;
 replace_filter gg.google.com maps.your-domain.com/dcd331573c0980eab6fe7346468e9974 ig;
 replace_filter www.google.com maps.your-domain.com/468724d08bce9811e989b526c6222863 ig;
@@ -267,7 +267,7 @@ systemctl restart nginx
 然后这个是一个佬的反代，偷偷发一下，试过了完全可用
 
 ```
-https://maps.beeyun.cn/maps/api/js?key=YOUR_GOOGLEMAP_API&callback=initMap&sensor=false" async defer></script>
+https://maps.beeyun.cn/maps/api/js?key=YOUR_GOOGLEMAP_API&callback=initMap&sensor=false
 ```
 
 
