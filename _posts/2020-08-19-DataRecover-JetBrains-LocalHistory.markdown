@@ -85,6 +85,23 @@ JetBrains 设置Local History本意就是用来恢复某些情况下误删或者
 
 > http://www.maddogsw.com/cmdutils/
 
+这里注意一下要删除带空格的路径，需要转义一下路径，否则Recycle识别不了
+
+```python
+def del_file(path_data):
+    for i in os.listdir(path_data) :
+        file_data = path_data + "\\" + i
+        print file_data
+        if os.path.isfile(file_data) == True:
+            os.system('Recycle.exe "'+ file_data+"\"")
+            #os.remove(file_data)
+        else:
+            os.system('Recycle.exe "'+ file_data+"\"")
+            #shutil.rmtree(file_data)
+```
+
+
+
 移动到$Recycle.Bin目录
 
 由于windows目前是将删除的文件改名，然后索引连接到这个目录中，xp时代还可以直接看到对应的文件，但是现在好像不行了，实际里面的链接和删除的对不上，而且其含义也变了，所以这种操作方式基本不可能了。
