@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "Python in VS2017"
+title:      "Python in VS2017并且使用Pyinstaller打包成exe"
 subtitle:   "Anaconda,VS2017,Pyinstaller"
 date:       2017-07-31
 author:     "elmagnifico"
@@ -155,7 +155,7 @@ is_py2 = sys.version_info[0] == 2
 ###### 使用
 
     pyinstaller [opts] demo.py
-
+    
     　　可选的opts有：
     　　-F, –onefile 打包成一个exe文件。
     　　-D, –onedir 创建一个目录，包含exe文件，但会依赖很多文件（默认选项）。
