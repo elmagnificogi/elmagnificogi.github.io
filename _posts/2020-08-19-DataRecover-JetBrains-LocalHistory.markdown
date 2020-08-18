@@ -81,6 +81,8 @@ JetBrains 设置Local History本意就是用来恢复某些情况下误删或者
 
 > https://pypi.org/project/Send2Trash/
 
+
+
 也可以通过额外的cmd命令来完成，删除到回收站的目的，虽然是个20年前的程序，但是依然可以工作
 
 > http://www.maddogsw.com/cmdutils/
