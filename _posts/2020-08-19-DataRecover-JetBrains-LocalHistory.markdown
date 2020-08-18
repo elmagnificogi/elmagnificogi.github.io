@@ -4,7 +4,7 @@ title:      "JetBrains数据恢复"
 subtitle:   "git，DataRecover"
 date:       2020-08-19
 author:     "elmagnifico"
-header-img: "img/pen-head-bg.jpg"
+header-img: "img/cap-head-bg.jpg"
 catalog:    true
 tags:
     - git
