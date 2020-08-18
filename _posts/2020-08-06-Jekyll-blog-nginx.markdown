@@ -187,7 +187,7 @@ BASH_ENV=/root/.bashrc
 
 具体更新脚本：只有在检测到全部更新才会重编译
 
-```
+```bash
 #! /bin/bash
 
 result=$(cd /root/elmagnificogi.github.io && git pull origin master | grep "Already up-to-date" )
@@ -204,12 +204,12 @@ fi
 
 有些人推荐使用使用watch命令让jekyll监控变更，自动更新，类似如下，或者增加一个增量式更新
 
-```
+```bash
 jekyll build --source /root/elmagnificogi.github.io --destination /usr/share/nginx/html --incremental --watch&
 ```
 但是这个东西在我这里有问题，首先增量式更新只更新post，而不更新index等静态页面，这就导致我主页一直不会刷新，而文章增加了，这就导致这个watch完全没用了，我需要的是完全重新编译那种，所以建议用watch的时候不要增量
 
-```
+```bash
 jekyll build --source /root/elmagnificogi.github.io --destination /usr/share/nginx/html --watch&
 ```
 
@@ -219,13 +219,13 @@ jekyll build --source /root/elmagnificogi.github.io --destination /usr/share/ngi
 
 安装nohup
 
-```
+```bash
 yum install nohup
 ```
 
 后台运行
 
-```
+```bash
 nohup jekyll build --source /root/elmagnificogi.github.io --destination /usr/share/nginx/html --watch&
 ```
 
