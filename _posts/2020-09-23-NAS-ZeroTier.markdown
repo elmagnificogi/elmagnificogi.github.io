@@ -17,7 +17,7 @@ tags:
 
 
 
-时不时还需要远程到公司，加上群晖的Synology Drive 由于没划分每个个体，各个部门用各个部分的账号，导致实际从外部连接到NAS的时候如果只用Quick connect非常慢，而我开了DDNS以后基本可以跑满整个带宽了，但是为了把控使用的人以及外部连接到公司内网设备还是挺不安全的，而且Synology Drive Client的客户端不是非常好用，每次要重新连DDNS而不是Quick connect必须要删除所有同步任务，重新添加才能正常连上，否则就算你填了DDNS地址也会直接连Quick connect。
+由于时不时还需要远程到公司，加上群晖的Synology Drive 由于没划分每个个体，各个部门用各个部分的账号，导致实际从外部连接到NAS的时候如果只用Quick connect非常慢，而我开了DDNS以后基本可以跑满整个带宽了，但是为了把控使用的人以及外部连接到公司内网设备还是挺不安全的，而且Synology Drive Client的客户端不是非常好用，每次要重新连DDNS而不是Quick connect必须要删除所有同步任务，重新添加才能正常连上，否则就算你填了DDNS地址也会直接连Quick connect。
 
 
 
