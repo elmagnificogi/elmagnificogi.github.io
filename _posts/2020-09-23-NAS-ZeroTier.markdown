@@ -129,6 +129,42 @@ uname -ar
 
 
 
+## 远程
+
+#### windows
+
+windows开启远程，打开控制面板，选择系统，选择远程设置
+
+![image-20200925140934198](https://i.loli.net/2020/09/25/iydCYceT9zjfVMO.png)
+
+然后允许远程连接到此计算机，如果不是用Microsoft账号登录的话，或者是其他账号登录的话，需要选择用户添加一下远程过来的账号，然后应用确定就行了。
+
+如果是用Microsoft账号登录默认登录账号就开启了，无需设置用户。
+
+![image-20200925141144240](https://i.loli.net/2020/09/25/rvaWqk2z7OEYdl1.png)
+
+然后开启ZeroTier，通过mstsc，输入要连接的目标内网地址，连接即可
+
+![image-20200925141221587](https://i.loli.net/2020/09/25/VzpJTUwEKoYQlfL.png)
+
+
+
+#### NAS
+
+同理可以透过内网连接到NAS，公司内NAS以及连接到ZeroTier了，并且有内网地址
+
+```
+10.244.***.xxx
+```
+
+在Synology Drive Client连接的时候就可以通过搜索看到对应的内网设备IP，进而可以连接
+
+- 注意，Synology Drive新建同步任务会认为你已经连接到了老的nas，所以需要删除所有原来的的同步任务再重新创建才能正常工作
+
+![image-20200925142224332](https://i.loli.net/2020/09/25/VeaodnIZ4FS5BPM.png)
+
+这样就能正常工作了
+
 ## Summary
 
 **ZeroTier**有点好用，吹爆，吹爆，这个设计也很符合我的心意，这样远程到公司或者家里，都可以直接用windows自带的远程，只需要填对应内网地址即可，没有公网IP也能用，虽然我有公网IP，这样最大的好处是端口映射不需要在主路由上单独给每个设备开远程端口，也比较安全。 
