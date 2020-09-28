@@ -22,16 +22,16 @@ tags:
 平常markdown基本不会有插入视频这种操作，所以一般人都略过了，不过之前也记录过如何插入视频
 
 一般情况下都是直接插入一个iframe，然后连接一个外部视频，比如B站之类的
-
+{% raw %} 
 ```
 <iframe src="//player.bilibili.com/player.html?aid=711626557&bvid=BV1iD4y1U7a1&cid=222140667&page=1" scrolling="no" width="640px" height="480px" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
 ```
-
+{% endraw %}
 效果如下：
 
 <iframe src="//player.bilibili.com/player.html?aid=711626557&bvid=BV1iD4y1U7a1&cid=222140667&page=1" scrolling="no" width="640px" height="480px" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
 
-
+{% raw %}
 
 #### 本地视频
 
@@ -111,9 +111,9 @@ tags:
 
 > 运动图像专家组MPEG 于1999年2月正式公布了MPEG-4（ISO/IEC14496）标准第一版本。同年年底MPEG-4第二版亦告底定，且于2000年年初正式成为国际标准。
 >
-> MPEG-4与MPEG-1和MPEG-2有很大的不同。MPEG-4不只是具体压缩算法，它是针对数字电视、交互式绘图应用（影音合成内容）、[交互式多媒体](https://baike.baidu.com/item/交互式多媒体/5349314)（WWW、资料撷取与分散）等整合及[压缩技术](https://baike.baidu.com/item/压缩技术/1444262)的需求而制定的国际标准。
+> MPEG-4与MPEG-1和MPEG-2有很大的不同。MPEG-4不只是具体压缩算法，它是针对数字电视、交互式绘图应用（影音合成内容）、交互式多媒体（WWW、资料撷取与分散）等整合及压缩技术的需求而制定的国际标准。
 >
-> MPEG-4标准将众多[多媒体](https://baike.baidu.com/item/多媒体/140486)[应用集成](https://baike.baidu.com/item/应用集成/6754287)于一个完整框架内，旨在为多媒体通信及应用环境提供标准算法及工具，从而建立起一种能被多媒体传输、[存储](https://baike.baidu.com/item/存储/1582924)、检索等应用领域普遍采用的统一数据格式。
+> MPEG-4标准将众多多媒体应用集成于一个完整框架内，旨在为多媒体通信及应用环境提供标准算法及工具，从而建立起一种能被多媒体传输、存储、检索等应用领域普遍采用的统一数据格式。
 
 简单说MPEG-4是一个大标准,所有符合这个标准的文件在windows下的后缀名都是mp4
 
@@ -158,7 +158,7 @@ html的中<video>到底支持什么样的格式,其实还是还是浏览器说�
 
 如果浏览器不支持,那这个视频格式就不能播放,浏览器支持那就能放,而这东西在浏览器界又不统一,所以就导致很多时候都需要引用一个播放器进来来专门播放视频,从而屏蔽各种浏览器的问题
 
-
+ {% endraw %}
 
 ## Summary
 
