@@ -22,16 +22,15 @@ tags:
 平常markdown基本不会有插入视频这种操作，所以一般人都略过了，不过之前也记录过如何插入视频
 
 一般情况下都是直接插入一个iframe，然后连接一个外部视频，比如B站之类的
-{% raw %} 
+
 ```
 <iframe src="//player.bilibili.com/player.html?aid=711626557&bvid=BV1iD4y1U7a1&cid=222140667&page=1" scrolling="no" width="640px" height="480px" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
 ```
-{% endraw %}
+
 效果如下：
 
 <iframe src="//player.bilibili.com/player.html?aid=711626557&bvid=BV1iD4y1U7a1&cid=222140667&page=1" scrolling="no" width="640px" height="480px" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
 
-{% raw %}
 
 #### 本地视频
 
