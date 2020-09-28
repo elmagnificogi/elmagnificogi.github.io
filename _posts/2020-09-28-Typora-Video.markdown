@@ -1,13 +1,13 @@
 ---
 layout:     post
-title:      "Typora 视频无法正常显示与mp4格式"
+title:      "Typora视频无法正常显示与mp4格式"
 subtitle:   "mp4，H.264,xdiv,xvid,html5"
 date:       2020-09-28
 author:     "elmagnifico"
 header-img: "img/typora.jpg
 catalog:    true
 tags:
-    - Typora
+    - typora
     - markdown
 ---
 
