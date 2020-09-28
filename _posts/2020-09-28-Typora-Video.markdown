@@ -1,14 +1,14 @@
 ---
 layout:     post
-title:      "Typora视频无法正常显示与mp4格式"
-subtitle:   "mp4，H.264,xdiv,xvid,html5"
-date:       2020-09-28
+title:      "NAS与ZeroTier内网穿透"
+subtitle:   "Frp，群晖"
+date:       2020-09-23
 author:     "elmagnifico"
-header-img: "img/typora.jpg
+header-img: "img/zerotier.jpg"
 catalog:    true
 tags:
-    - typora
-    - markdown
+    - nas
+    - 群晖
 ---
 
 ## Forward
