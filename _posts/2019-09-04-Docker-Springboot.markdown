@@ -36,6 +36,8 @@ yum update
 yum install -y yum-utils device-mapper-persistent-data lvm2
 yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 yum install docker-ce
+或者 一步到位
+yum install docker -y
 ```
 
 验证
@@ -71,7 +73,7 @@ docker pull mysql
 安装git 非常简单
 
 ```
-yum install git
+yum install git -y
 git version
 git version 1.8.3.1
 ```
@@ -208,6 +210,9 @@ sudo curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-
 sudo curl -L "https://get.daocloud.io/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 
 sudo chmod +x /usr/local/bin/docker-compose
+
+或者直接一步到位,看情况吧
+yum install docker-compose -y
 ```
 
 检测
@@ -225,7 +230,7 @@ OpenSSL version: OpenSSL 1.1.0j  20 Nov 2018
 用来补充熵池，解决tomcat启动慢，session阻塞的问题
 
 ```bash
-yum install rng-tools      #安装rngd熵服务
+yum install rng-tools -y      #安装rngd熵服务
 systemctl start rngd       #启动服务
 cp /usr/lib/systemd/system/rngd.service /etc/systemd/system
 cd /etc/systemd/system/
@@ -236,6 +241,7 @@ ExecStart=/sbin/rngd -f -r /dev/urandom
 
 systemctl daemon-reload   #重新载入服务 
 systemctl restart rngd    #重启服务
+systemctl enable rngd    #自动启动
 ```
 
 ## 总结

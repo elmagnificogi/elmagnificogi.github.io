@@ -1,0 +1,160 @@
+---
+layout:     post
+title:      "V2ray升级到V2fly"
+subtitle:   "Nignx,bbr,ws"
+date:       2020-10-14
+author:     "elmagnifico"
+header-img: "img/cap-head-bg.jpg"
+catalog:    true
+tags:
+    - vps
+---
+
+## Foreword
+
+v2ray老的链接已经提示不能用了，所以更新一下
+
+## V2ray/V2fly
+
+#### 下载
+
+```
+curl -O https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh
+```
+
+#### 安装
+
+```
+bash install-release.sh
+```
+
+#### 控制
+
+```
+systemctl start v2ray
+systemctl stop v2ray
+systemctl restart v2ray
+systemctl status v2ray
+```
+
+#### 配置
+
+新版本的配置文件改地方了
+
+##### 迁移之前的配置文件
+
+```
+mv /etc/v2ray/ /usr/local/etc/
+```
+
+所以后面要修改配置的都是都是在这个位置了
+
+```
+vi /usr/local/etc/v2ray/config.json
+```
+
+#### 检测配置
+
+```
+v2ray -test -config /usr/local/etc/v2ray/config.json
+```
+
+
+
+## nginx+tls+ws+certbot
+
+```
+wget https://dl.eff.org/certbot-auto
+chmod a+x certbot-auto
+service nginx stop
+./certbot-auto certonly --standalone --email elmagnificogg@gmail.com --agree-tos -d 你的域名
+```
+
+
+
+#### 自动renew证书
+
+比之前多了关闭和打开nginx，开着nginx的情况下无法更新证书
+
+```
+crontab -e
+
+添加如下内容:
+0 3 1 * * service nginx stop && /root/certbot-auto renew --renew-hook "sudo nginx -s reload" && service nginx start
+```
+
+ 
+
+#### nginx安装设置
+
+```
+yum install nginx -y
+systemctl enable nginx
+nginx -t
+# nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+# nginx: configuration file /etc/nginx/nginx.conf test is successful
+vi /etc/nginx/nginx.conf
+
+添加下面的内容
+server {
+        listen       443 ssl http2 default_server;
+        listen       [::]:443 ssl http2 default_server;
+        server_name  你的域名;
+        root         /usr/share/nginx/html;
+
+        ssl_certificate "/etc/letsencrypt/live/你的域名/fullchain.pem";
+        ssl_certificate_key "/etc/letsencrypt/live/你的域名/privkey.pem";
+        ssl_session_cache shared:SSL:1m;
+        ssl_session_timeout  10m;
+        ssl_ciphers HIGH:!aNULL:!MD5;
+        ssl_prefer_server_ciphers on;
+
+        # Load configuration files for the default server block.
+        include /etc/nginx/default.d/*.conf;
+
+        location /v2ray {#这个位置和v2ray中的相同
+        proxy_redirect off;
+        proxy_pass http://127.0.0.1:43968; #此IP地址和端口需要和v2ray中监听的端口保持一致，
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_set_header Host $http_host;
+        }
+
+        error_page 404 /404.html;
+            location = /40x.html {
+        }
+
+        error_page 500 502 503 504 /50x.html;
+            location = /50x.html {
+        }
+    }
+保存以后，重启nginx
+systemctl start nginx
+```
+
+#### 检测
+
+启动v2ray
+
+```
+systemctl start v2ray
+```
+
+## bbr
+
+选择一个bbr模式
+
+```
+wget -N --no-check-certificate "https://raw.githubusercontent.com/chiakge/Linux-NetSpeed/master/tcp.sh" && chmod +x tcp.sh && ./tcp.sh
+```
+
+如果出错了要全部卸载然后重新安装，否则怎么安装都是错的
+
+## Summary
+
+日后再补充
+
+## Quote
+
+> https://github.com/v2fly/fhs-install-v2ray/wiki/Migrate-from-the-old-script-to-this
