@@ -126,6 +126,8 @@ keytool -importkeystore -srckeystore D:\https\214215109110451.pfx -destkeystore 
 
 需要留意这里的别名是 alias,配置的时候这里的别名也要填的相同
 
+- 这里key-store-password最好是和上一步输入口令的时候保持一致，否则需要通过keytool 修改password和口令相同，不然tomcat启动不了
+
 ```
 server:
   port: 4396

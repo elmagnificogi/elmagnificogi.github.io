@@ -68,6 +68,38 @@ systemctl enable docker
 docker pull mysql
 ```
 
+检测mysql时区，需要进入到mysql
+
+```
+# 进入容器
+docker exec -it 容器id bash
+# 进入mysql
+mysql -uroot -p
+# 输入密码
+# 显示mysql时区
+show variables like '%time_zone%';
+# 退出mysql
+quit
+# 退出容器
+exit
+```
+
+#### 其他可能的操作
+
+查看控制台的log
+
+```
+docker logs 容器id
+```
+
+查看容器的所有属性，配置
+
+```
+docker inspect 容器id 
+```
+
+
+
 ## git
 
 安装git 非常简单
@@ -211,7 +243,7 @@ sudo curl -L "https://get.daocloud.io/docker/compose/releases/download/1.24.1/do
 
 sudo chmod +x /usr/local/bin/docker-compose
 
-或者直接一步到位,看情况吧
+或者直接一步到位,看情况吧,不行就手动安装
 yum install docker-compose -y
 ```
 
