@@ -1,14 +1,14 @@
 ---
 layout:     post
-title:      "Docker下编译部署springboot web"
+title:      "springboot使用Docker所需环境配置"
 subtitle:   "docker-compose,centos,maven,java"
 date:       2019-09-04
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"
 catalog:    true
 tags:
-    - java
-    - mysql
+    - springboot
+    - docker
 ---
 
 ## Forward
