@@ -1,0 +1,419 @@
+---
+layout:     post
+title:      "C++中json库的选择"
+subtitle:   "cJson,nlohmann,rapidjson"
+date:       2020-11-12
+author:     "elmagnifico"
+header-img: "img/python-head-bg.png"
+catalog:    true
+tags:
+    - c++
+    - json
+---
+
+## Foreword
+
+平时python和java中使用json，都非常简单，无论是序列化还是反序列化，java封装/注解都比较高级，springboot全家桶可以直接用，python稍微麻烦一些，但是如果是c++中要使用时json那就必须要外部辅助了。
+
+而之前json库选型的时候没有注意，直接选了一个国人的新手库，导致我现在遇到了明显的性能问题。
+
+
+
+## c++ json困境
+
+由于c++的版本相当多，而且c++由于不像json或者python有个非常统一的专用平台，导致对应的库其实都在各自为战，分散在各个地方，而且指不定c++的库还依赖了其他的c++库，用起来非常麻烦，所以当初选了一个只有几个文件的cjson，减轻依赖。
+
+同时c++语言本身就存在很多标志，c11，c14，c17，都是c++在向高级语音进化，但是同时也就造成了很多库无法兼容的情况。
+
+自然对应的json库多的要死，轻量使用可能都可以，但是对于性能或者内存有要求的情况下，就会出现各种毛病了
+
+
+
+## CJsonObject
+
+> https://github.com/Bwar/CJsonObject
+
+先说我最初选择的cJson，这个是一个国人写的，其本身是基于cJson的，之后在其上增加了比较现代的接口吧，然后转成了他自己的库。
+
+实话实话，这个库不太行，里面还是有一些bug，我都自己修了，现在是遇到了实打实的性能问题，要直接替换掉他。
+
+当然使用起来比较简单，只需要把几个文件放到工程里，也不需要单独编译，引入头文件以后，就能正常使用了。
+
+#### demo
+
+这里有一点demo，可以看到他的基本语法模式
+
+```c++
+int main(int argc, char* argv[])
+{
+    std::ifstream fin(argv[1]);
+    if (fin.good())
+    {
+        neb::CJsonObject oJson;
+        std::stringstream ssContent;
+        ssContent << fin.rdbuf();
+        if (oJson.Parse(ssContent.str()))
+        {
+            std::cout << oJson.ToString() << std::endl;
+        }
+        else
+        {
+            std::cerr << "parse json error" << "\n";// << ssContent.str() << std::endl;
+        }
+        fin.close();
+    }
+    int iValue;
+    double fTimeout;
+    std::string strValue;
+    neb::CJsonObject oJson("{\"refresh_interval\":60,"
+                        "\"test_float\":[18.0, 10.0, 5.0],"
+                        "\"test_int\":[135355, -1844674407370955161, -935375],"
+                        "\"timeout\":12.5,"
+                        "\"dynamic_loading\":["
+                            "{"
+                                "\"so_path\":\"plugins/User.so\", \"load\":false, \"version\":1,"
+                                "\"cmd\":["
+                                     "{\"cmd\":2001, \"class\":\"neb::CmdUserLogin\"},"
+                                     "{\"cmd\":2003, \"class\":\"neb::CmdUserLogout\"}"
+                                "],"
+                                "\"module\":["
+                                     "{\"path\":\"im/user/login\", \"class\":\"neb::ModuleLogin\"},"
+                                     "{\"path\":\"im/user/logout\", \"class\":\"neb::ModuleLogout\"}"
+                                "]"
+                             "},"
+                             "{"
+                             "\"so_path\":\"plugins/ChatMsg.so\", \"load\":false, \"version\":1,"
+                                 "\"cmd\":["
+                                      "{\"cmd\":2001, \"class\":\"neb::CmdChat\"}"
+                                 "],"
+                             "\"module\":[]"
+                             "}"
+                        "]"
+                    "}");
+     std::cout << oJson.ToString() << std::endl;
+     std::cout << "-------------------------------------------------------------------" << std::endl;
+     std::cout << oJson["dynamic_loading"][0]["cmd"][1]("class") << std::endl;
+     oJson["dynamic_loading"][0]["cmd"][0].Get("cmd", iValue);
+     std::cout << "iValue = " << iValue << std::endl;
+     oJson["dynamic_loading"][0]["cmd"][0].Replace("cmd", -2001);
+     oJson["dynamic_loading"][0]["cmd"][0].Get("cmd", iValue);
+     std::cout << "iValue = " << iValue << std::endl;
+     oJson.Get("timeout", fTimeout);
+     std::cout << "fTimeout = " << fTimeout << std::endl;
+     oJson["dynamic_loading"][0]["module"][0].Get("path", strValue);
+     std::cout << "strValue = " << strValue << std::endl;
+     std::cout << "-------------------------------------------------------------------" << std::endl;
+     oJson.AddEmptySubObject("depend");
+     oJson["depend"].Add("nebula", "https://github.com/Bwar/Nebula");
+     oJson["depend"].AddEmptySubArray("bootstrap");
+     oJson["depend"]["bootstrap"].Add("BEACON");
+     oJson["depend"]["bootstrap"].Add("LOGIC");
+     oJson["depend"]["bootstrap"].Add("LOGGER");
+     oJson["depend"]["bootstrap"].Add("INTERFACE");
+     oJson["depend"]["bootstrap"].Add("ACCESS");
+     std::cout << oJson.ToString() << std::endl;
+     std::cout << "-------------------------------------------------------------------" << std::endl;
+     std::cout << oJson.ToFormattedString() << std::endl;
+
+     std::cout << "-------------------------------------------------------------------" << std::endl;
+     neb::CJsonObject oCopyJson = oJson;
+     if (oCopyJson == oJson)
+     {
+         std::cout << "json equal" << std::endl;
+     }
+     oCopyJson["depend"]["bootstrap"].Delete(1);
+     oCopyJson["depend"].Replace("nebula", "https://github.com/Bwar/CJsonObject");
+     std::cout << oCopyJson.ToString() << std::endl;
+     std::cout << "-------------------------key traverse------------------------------" << std::endl;
+     std::string strTraversing;
+     while(oJson["dynamic_loading"][0].GetKey(strTraversing))
+     {
+         std::cout << "traversing:  " << strTraversing << std::endl;
+     }
+     std::cout << "---------------add a new key, then key traverse---------------------" << std::endl;
+     oJson["dynamic_loading"][0].Add("new_key", "new_value");
+     while(oJson["dynamic_loading"][0].GetKey(strTraversing))
+     {
+         std::cout << "traversing:  " << strTraversing << std::endl;
+     }
+
+     std::cout << oJson["test_float"].GetArraySize() << std::endl;
+     float fTestValue = 0.0;
+     for (int i = 0; i < oJson["test_float"].GetArraySize(); ++i)
+     {
+         oJson["test_float"].Get(i, fTestValue);
+         std::cout << fTestValue << "\t in string: " << oJson["test_float"](i) << std::endl;
+     }
+     for (int i = 0; i < oJson["test_int"].GetArraySize(); ++i)
+     {
+         std::cout << "in string: " << oJson["test_int"](i) << std::endl;
+     }
+     oJson.AddNull("null_value");
+     std::cout << oJson.IsNull("test_float") << "\t" << oJson.IsNull("null_value") << std::endl;
+     oJson["test_float"].AddNull();
+     std::cout << oJson.ToString() << std::endl;
+
+}
+```
+
+
+
+#### 弃用原因
+
+> https://github.com/Bwar/CJsonObject/issues/35
+
+其json转换，在嵌套了多层字典或者数组的情况下会出现性能下降30倍的情况
+
+```
+// 20 秒执行完
+Channels_json["Channels"].Add(Channel_json);
+
+// 10分钟执行完
+drama_json["Drones"][index]["Channels"].Add(Channel_json);
+
+事实上我将drama_json["Drones"][index]["Channels"]转化成顺序执行也依然会出现性能问题，大概是6-10倍下降
+所以嵌套层次只要多了，这个必然会爆炸，只适合非常轻量的使用。
+```
+
+我这里套用的数据量大概是100MB左右，可能50MB就已经很明显了
+
+然后我用了一个实际的小例子（json格式化数据大小为83.6MB）跑了一下rapidjson和CJsonObject，同样的格式，同样的数据
+
+```
+rapidjson，1s不到，我连计时器还没按下就弹起来导出了...
+CJsonObject,导出的位置会卡住大概2分钟以上，然后才能弹出导出框
+二者都是按照json的阅读顺序由上往下一层一层输出的，没有来回切换对象输出
+```
+
+
+
+## rapidjson
+
+> https://github.com/TencentOpen/rapidjson
+
+这是腾讯开源的c++ json，但是其api接口简直反人类，当初设计的人的思路和现在使用方式完全不同，所以非常非常奇怪，如果要使用的话需要二次封装。
+
+中文文档
+
+> http://miloyip.github.io/rapidjson/zh-cn/
+
+
+
+#### demo
+
+内存流式输出json，这个写法简直了，看的都贼奇怪，但是可以摸索到一点c的感觉，以前的c经常用这样的过程来完成某个设计。
+
+当然这种写法，本身是顺序的，所以可能这样的写法会让他本身解析的时候更快一些吧
+
+```c++
+
+int test_rapidjson_write()
+{
+	rapidjson::StringBuffer buf;
+	//rapidjson::Writer<rapidjson::StringBuffer> writer(buf);
+	rapidjson::PrettyWriter<rapidjson::StringBuffer> writer(buf); // it can word wrap
+ 
+	writer.StartObject();
+ 
+	writer.Key("name"); writer.String("spring");
+	writer.Key("address"); writer.String("北京");
+	writer.Key("age"); writer.Int(30);
+ 
+	writer.Key("value1");
+	writer.StartArray();
+	writer.StartArray();
+ 
+	writer.StartObject();
+ 
+	writer.Key("name"); writer.String("spring");
+	writer.Key("address"); writer.String("北京");
+	writer.Key("age"); writer.Int(30);
+ 
+	writer.Key("value1");
+	writer.StartArray();
+	writer.StartArray();
+	writer.Double(23); writer.Double(43); writer.Double(-2.3); writer.Double(6.7);     
+    writer.Double(90);
+	writer.EndArray();
+ 
+	writer.StartArray();
+	writer.Int(-9); writer.Int(-19); writer.Int(10); writer.Int(2);
+	writer.EndArray();
+ 
+	writer.StartArray();
+	writer.Int(-5); writer.Int(-55);
+	writer.EndArray();
+	writer.EndArray();
+ 
+	writer.Key("value2");
+	writer.StartArray();
+	writer.Double(13.3); writer.Double(1.9); writer.Double(2.10);
+	writer.EndArray();
+ 
+	writer.Key("bei_jing");
+	writer.StartObject();
+	writer.Key("address"); writer.String("海淀");
+	writer.Key("car"); writer.Bool(false);
+	writer.Key("cat"); writer.Bool(true);
+	writer.EndObject();
+ 
+	writer.Key("shan_dong");
+	writer.StartObject();
+	writer.Key("address"); writer.String("济南");
+	writer.Key("value1");
+	writer.StartArray();
+	writer.Key("ji_nan"); writer.String("趵突泉");
+	writer.Key("tai_an"); writer.String("泰山");
+	writer.EndArray();
+	writer.EndObject();
+ 
+	writer.EndObject();
+ 
+	const char* json_content = buf.GetString();
+	fprintf(stdout, "json content: %s\n", json_content);
+ 
+#ifdef _MSC_VER
+	const char* file_name = "E:/GitCode/Messy_Test/testdata/out.json";
+#else
+	const char* file_name = "testdata/out.json";
+#endif
+	std::ofstream outfile;
+	outfile.open(file_name);
+	if (!outfile.is_open()) {
+		fprintf(stderr, "fail to open file to write: %s\n", file_name);
+		return -1;
+	}
+ 
+	outfile << json_content << std::endl;
+	outfile.close();
+ 
+	return 0;
+}
+```
+
+
+
+#### 安装使用
+
+下载源码，将源码中include/rapidjson内的内容全部加入到工程中，然后加入头文件引用和命名空间，就能正常使用了
+
+```
+#include "rapidjson/writer.h"
+#include "rapidjson/stringbuffer.h"
+using namespace rapidjson;
+```
+
+
+
+## nlohmann
+
+> https://github.com/nlohmann/json
+
+目前github上最受欢迎的c++ json了吧，其本身是支持c++ 11的，支持STL等等容器，由于它本身是面向现代设计的，所以不再有那种奇怪的接口，也可以像python java一样给对象序列化或者反序列化，也可以自定义解析等等，功能非常强大
+
+
+
+#### demo
+
+```c++
+// create an empty structure (null)
+json j;
+
+// add a number that is stored as double (note the implicit conversion of j to an object)
+j["pi"] = 3.141;
+
+// add a Boolean that is stored as bool
+j["happy"] = true;
+
+// add a string that is stored as std::string
+j["name"] = "Niels";
+
+// add another null object by passing nullptr
+j["nothing"] = nullptr;
+
+// add an object inside the object
+j["answer"]["everything"] = 42;
+
+// add an array that is stored as std::vector (using an initializer list)
+j["list"] = { 1, 0, 2 };
+
+// add another object (using an initializer list of pairs)
+j["object"] = { {"currency", "USD"}, {"value", 42.99} };
+
+// instead, you could also write (which looks very similar to the JSON above)
+json j2 = {
+  {"pi", 3.141},
+  {"happy", true},
+  {"name", "Niels"},
+  {"nothing", nullptr},
+  {"answer", {
+    {"everything", 42}
+  }},
+  {"list", {1, 0, 2}},
+  {"object", {
+    {"currency", "USD"},
+    {"value", 42.99}
+  }}
+};
+
+// serialization
+
+// create object from string literal
+json j = "{ \"happy\": true, \"pi\": 3.141 }"_json;
+
+// or even nicer with a raw string literal
+auto j2 = R"(
+  {
+    "happy": true,
+    "pi": 3.141
+  }
+)"_json;
+
+// parse explicitly
+auto j3 = json::parse("{ \"happy\": true, \"pi\": 3.141 }");
+
+
+// explicit conversion to string
+std::string s = j.dump();    // {\"happy\":true,\"pi\":3.141}
+
+// serialization with pretty printing
+// pass in the amount of spaces to indent
+std::cout << j.dump(4) << std::endl;
+// {
+//     "happy": true,
+//     "pi": 3.141
+// }
+```
+
+
+
+## nativejson-benchmark
+
+> https://github.com/miloyip/nativejson-benchmark
+
+经常有人问，各种c++的json到底有什么区别，这里有一个benchmark，对比了各种json的解析速度/一致性/内存占用等等数据
+
+可以看到rapidjson速度非常快，内存占用也比较少，而对比nlohmann就相对比较中庸一些
+
+当然这个对比时间比较老了，而且有一点这个是rapidjson作者自己写的，所以不排除他的benchmark可能比较针对顺序插入或者顺序写json，这样可能优势会比较大。
+
+
+
+## Summary
+
+当然在用json的时候遇到了性能问题，其实某种程度应该考虑json是不是还合适做为你数据的载体，还有其他的序列化方式，比如Protobuf，XML，Thrift,avro等等。
+
+rapidjson本身速率可以，但是这个api用起来太别扭了，所以下一篇文章会介绍一个对他封装方式
+
+## Quote
+
+> https://www.zhihu.com/question/23654513
+>
+> https://www.cnblogs.com/kezunlin/p/12058300.html
+>
+> https://www.cnblogs.com/gistao/p/4369216.html
+>
+> https://blog.csdn.net/qq_27385759/article/details/79277434
+>
+> https://www.cnblogs.com/fnlingnzb-learner/p/10334988.html
+
