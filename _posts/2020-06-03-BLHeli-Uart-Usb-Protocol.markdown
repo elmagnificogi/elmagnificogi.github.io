@@ -185,6 +185,9 @@ ardupilot中基本每个命令都是1秒延迟发送的,通信频率相当低,�
 FD 00 40 90 
 解析：
 40 90 是crc
+
+发送保持以后esc会自动回复一个字节
+C1
 ```
 
 
@@ -365,6 +368,10 @@ C0 50 是crc
 6. 运行get_settings.py
 7. 得到配置存储在settings.txt中，直接复制粘贴替换到老的settings即可
 
+
+
+- **这里要注意一下，如果当前配置和写入配置相同的时候，可能写入的那个加密配置其实什么都没改，所以需要先把电调改到一个不同的配置的下，然后再用dump出来的写入配置去配，就没有问题了**。
+
 #### dump脚本
 
 ```python
@@ -399,12 +406,16 @@ if start == None:
 
 state = 0
 for i in range(0, len(hex_data), 3):
+    # ack
     if (hex_data[i] + hex_data[i + 1]) == "30" and state == 0:
         state = 1
+    # write to flash addr1
     elif (hex_data[i] + hex_data[i + 1]) == "01" and state == 1:
         state = 2
+    # write to flash addr2
     elif (hex_data[i] + hex_data[i + 1]) == "01" and state == 2:
         state = 3
+    # write to flash crc1
     elif (hex_data[i] + hex_data[i + 1]) == "C0" and state == 3:
         state = 4
         end = i - 9
@@ -413,7 +424,7 @@ for i in range(0, len(hex_data), 3):
         state = 0
 
 if end == None:
-    print "no start,exit"
+    print "no end,exit"
     sys.exit(0)
 
 print(start, end)
@@ -434,6 +445,16 @@ f = open(os.path.dirname(__file__) +"/settings.txt", 'w')
 f.write(output_data[:-1])
 print output_data[:-1]
 
+```
+
+#### 测试数据
+
+这里是一次完整的过程，可以用来测试是否能dump到配置文件，并且使用dump到的配置去配置后的结果，也可以核对是否正确。
+
+
+
+```
+FD 00 40 90 C1 FD 00 40 90 C1 FD 00 40 90 C1 FD 00 40 90 C1 FD 00 40 90 C1 FD 00 40 90 C1 FD 00 40 90 C1 FF 00 7C 00 10 D4 30 03 00 00 F0 1A 82 89 C7 48 0D 68 49 86 12 68 B9 24 BE D3 2E 5E 3F 0D 3A 31 A4 25 C2 C7 2F D8 FA 3B 8C 8C 54 CE C8 A6 9C 89 89 58 FB 0A 7F CF 28 8A 14 74 0C 26 95 6F C8 57 00 E0 1D 4C 93 08 2E 88 21 1A FC 85 AD 98 72 7E 61 8C 44 91 B6 3F F2 CB 34 ED 3D FD 21 93 67 92 36 38 1C DA BB F9 2C FE 35 4D A9 C4 3E 5B E0 3E 59 86 46 A8 E1 7A 98 4A D7 AB 16 40 69 74 57 4F CA CD 15 F0 6E 75 88 F3 9D 1E 1D 33 0C 38 CA 5C 30 39 21 86 1E 3C 53 F6 60 70 41 D8 BB A5 F9 AB E9 1D AB 53 D1 D9 D0 FF 49 0B DB 66 4B F4 7E AE FC 4D 00 4D 32 10 B7 E5 2E 91 9F F7 B4 0A F7 0F E0 79 8B 40 C5 E8 68 BB 49 5E 79 E1 39 C4 20 36 6E 16 0F BF 1F 1A 79 68 7E FD 7F 59 DD BC FA 7C 6B C6 34 94 AC 03 E1 A5 51 41 A3 EC F7 24 35 AD ED 35 DD 6E 13 B2 19 47 10 C7 05 73 29 51 55 42 33 12 D1 E8 09 74 16 41 3C C8 3F 03 ED 30 FF 00 EB 00 7E E4 30 03 10 01 3C 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 30 FF 00 F7 AC 76 59 30 03 10 01 3C 41 00 4F 00 11 57 42 46 36 36 34 20 DE 06 EC 05 26 BF 30 FF 00 7C 00 10 D4 30 FE 00 01 00 30 78 9D D7 DE 3F 49 2D 26 30 F4 A6 83 20 1F 72 9B 81 E3 CE AD 4F A7 36 6F 59 45 27 DD B0 83 F2 C5 E8 41 7E E2 D3 C6 40 15 86 8A 3E AC E1 EE AC E6 E6 A4 4D 77 95 B6 58 B0 7F C6 94 C4 1D F4 44 28 70 47 4C 1E 56 A0 D9 41 CB 33 06 14 A5 50 7F 4C 09 1C F6 21 4A E1 DB AD 71 3E 5D AF C4 E4 A6 AE 5F DA 31 31 8D 5F 4C D3 C8 80 FE 5C D3 E1 40 60 61 72 DE 32 D5 1B 99 76 FA 3C 2D C8 E1 27 43 66 8E 59 61 51 D9 E4 70 47 D2 7D 8D 6C 09 70 6E 58 10 1D DD 09 80 F9 0B 94 9E 7F 5A 7C FE 7B CF 91 66 0C 90 60 32 7E 6C 02 33 3D D3 6F 85 3E 00 B3 F2 55 A0 A1 6B E9 F4 F7 82 F1 53 68 56 E7 1E 05 25 49 E2 53 91 8F 07 7F 54 0A 95 8F 99 CE ED 5F 71 77 EC B6 F3 CC 40 C7 D7 C7 C0 E2 27 08 F3 50 0E 61 CF 1D 18 E0 3A 61 A8 BF 6F 52 2C 34 3D 54 B6 8E E3 30 37 53 3E 0E BF FC D5 74 A7 5C 3F 0B 67 AF 1F 30 01 01 C0 50 30 FF 00 7C 00 10 D4 30 03 00 00 F0 A4 03 22 5A F5 53 22 17 13 02 74 5B 7B 90 54 72 55 0F 99 4B 6B B7 EA 6C 77 F1 DF 39 BA 77 3F 44 C0 F4 CC 1D B2 02 E7 F3 25 94 A3 F0 D3 77 8E B0 44 87 5F 2B D5 08 05 1E E5 98 A7 E3 43 58 17 8E AD B5 62 5D D4 61 C1 E8 03 53 BA 2F E0 7A 5E AE 48 A0 8A CE AC FE E3 AF D7 36 90 77 78 14 23 74 01 8E 49 36 CC E6 DB A1 EA 4A A1 6F 5D B5 5A E4 3C 60 46 18 2B 01 F7 D8 C0 78 AE 30 96 60 2D A4 BA 60 92 9D 9E 0E 68 0C 97 28 63 65 3F 27 57 C7 EB 06 07 71 EA BC 22 6D EF F8 73 4F 57 7A 50 C4 28 04 21 D1 0A 44 86 54 7E 39 2B 5D ED 50 97 60 54 8A EC 96 B4 F7 77 C3 94 D9 21 63 53 9A 1C 19 0A B4 00 C7 8A 87 6C E4 1C D4 19 93 02 F4 19 1C B2 3E 54 3D FE 5B 1C D8 2C F2 7C 73 37 08 11 11 B8 42 1E F5 89 67 ED 31 26 60 1F 94 21 86 2D 4A BA 9C 7D D7 C8 0B 17 2E DF 85 C0 9E 22 1C CC 42 71 43 30 FF 00 EB 00 7E E4 30 03 10 01 3C 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 30 FF 00 F7 AC 76 59 30 03 10 01 3C 41 00 4F 00 11 57 42 46 36 36 34 20 DE 06 EC 05 26 BF 30 FD 00 40 90 C1 FF 00 7C 00 10 D4 30 03 00 00 F0 D5 5B C8 46 64 45 DE 2A AD 21 A6 E8 B2 01 8B 8E B5 A7 78 81 FE 15 41 2E 8D EC 13 81 DD AB 81 3A 70 70 38 3E FC 4D B5 9F B9 8F 5B F0 A8 48 13 88 C8 0F F2 AA C8 AA 90 FA D7 D3 29 17 91 27 98 1A 4B 75 D0 0A 12 DB C9 3D 1E A0 62 10 82 9F AE EB 59 67 CC A7 C0 9C C4 37 3B 8B D1 3F 82 DA 4D 41 3C 18 A9 71 95 A9 01 1B D3 A4 61 A7 EC 44 27 1E B4 6D 91 DE CC 33 F9 06 F2 6F E2 58 28 1D 24 5C B4 E6 7C D2 BE F0 0E A2 B0 C1 09 6F 5E 18 C5 3F C7 1C 50 16 4E A2 FA 9E 79 C9 5D A5 5F 50 BA 68 43 48 57 A7 42 B3 04 91 1C 9C 78 B2 E3 35 4F 39 84 8A 02 B5 A3 3E 00 F6 CC 9C BC 44 72 13 03 8C 98 72 61 44 EA 23 56 4A 67 4E C2 FB 06 FB 86 94 D8 BF 6F 38 4A F4 D1 13 E7 C9 48 B8 66 19 22 59 C7 07 6D 35 5B FD 92 47 60 A4 04 FD 38 C6 FD DF C5 E4 AF 09 C9 EC 39 37 0F F5 3D 29 C1 C7 FD D0 65 85 30 FF 00 EB 00 7E E4 30 03 10 01 3C 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 30 FF 00 F7 AC 76 59 30 03 10 01 3C 41 00 4F 00 11 57 42 46 36 36 34 20 DE 06 EC 05 26 BF 30 FD 00 40 90 C1 FD 00 40 90 C1 00 01 C1 C0 30 
 ```
 
 ## End
