@@ -23,7 +23,7 @@ MGlobal 中有下面两个方法
 
 - MStatus deleteNode	(	MObject & 	object	)
 
-maya自己的例子中有很多删除节点都是用removeFromModel，但是这个方法实际上并不是真的删除了这个节点，只是从这个场景中移除出去了，而在maya的某个空间中他依然存在，而且这个只能删除DAG节点，其他节点会导致maya崩溃。
+maya自己的例子中有很多删除节点都是用removeFromModel，但是这个方法实际上并不是真的删除了这个节点，只是从这个场景中移除出去了，而在maya的某个空间中他依然存在,比如他会存在undo队列之中，而且这个只能删除DAG节点，其他节点会导致maya崩溃。
 
 deleteNode，可以删除DAG或者DG节点，并且是真的删除，不会在maya中藏着，看起来很美好，但是还是有问题，有啥问题呢，比如在某个时刻，通过插件你建立了一系列节点，并且这些节点会渲染和显示在view中，而这个命令的结束时刻你用deleteNode删除了这个被渲染的节点，多数情况下可能都是正常的，但是某些未知情况（无法判定具体是发生了什么），会导致maya直接崩溃，而崩溃的地方我查看过了，不是在我的代码中，大概是在场景刷新或者帧缓冲，帧填充之类的东西里面，反正就是与view刷新有关系，这谁能想到这个命令会导致出错，出错频率大概是1/10左右。
 
@@ -41,7 +41,20 @@ dag_modifier.doIt();
 
 DAG的deleteNode，其实有一个前置条件，这个条件就是删除的这个节点，最好和其他相关节点已经断开了，然后再使用删除。
 
-如果不断开，直接删除，多数情况下可能不会有问题，但是某些情况下就是会出错，这种时候出错还有一个办法就是用removeFromModel来删除，就没有这么多问题了。
+如果不断开，直接删除，多数情况下可能不会有问题，但是某些情况下就是会出错。
+
+
+
+当然还有更稳妥的办法，就是直接调用python api的删除，这个没有明显bug
+
+```c++
+MStatus delete_object(MString name)
+{
+	MString cmd;
+	cmd = "maya.cmds.delete(\"" + name + "\")";
+	return MGlobal::executePythonCommand(cmd, false, false);
+}
+```
 
 
 
@@ -259,3 +272,5 @@ MStatus rename_nodes(MObject transform, MString baseName)
 > maya例程
 >
 > http://help.autodesk.com/view/MAYAUL/2017/CHS/
+>
+> http://forums.cgsociety.org/t/maya-api-removing-objects-from-scene/1143366
