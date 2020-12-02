@@ -121,7 +121,8 @@ https://download.csdn.net/detail/lightspear/9746091
 #define RapidjsonWriteChar(XXX) writer.Key(#XXX);writer.String(XXX,strlen(XXX));
 #define RapidjsonWriteInt(XXX) writer.Key(#XXX);writer.Int(XXX);
 #define RapidjsonWriteInt64(XXX) writer.Key(#XXX);writer.Int64(XXX);
-#define RapidjsonWriteUInt(XXX) writer.Key(#XXX);writer.UInt(XXX);
+//这里有个笔误 原来写的是UInt
+#define RapidjsonWriteUInt(XXX) writer.Key(#XXX);writer.Uint(XXX);
 #define RapidjsonWriteUint64(XXX) writer.Key(#XXX);writer.Uint64(XXX);
 #define RapidjsonWriteDouble(XXX) writer.Key(#XXX);writer.Double(XXX);
 #define RapidjsonWriteClass(XXX) writer.Key(#XXX);((JsonBase*)(&XXX))->ToWrite(writer);	
@@ -208,33 +209,58 @@ namespace PBLIB
 		class JsonArray :public JsonBase
 		{
 		public:
-
-			std::list<T> arr;
+			// 这里原本用的list 但是我喜欢下标访问 所以换成了vector
+			std::vector<T> arr;
 			JsonArray() {}
 			~JsonArray() {}
 
 		public:
-			virtual void ToWrite(Writer<StringBuffer>  &writer)
-			{
-				writer.StartArray();
-				for each (T ent in arr)
-				{
-					ToWriteEvery(writer, ent);
-				}
-				writer.EndArray();
-			}
+            
+            // 追加了几个操作，可以把这个直接当成队列来用
+            void append(T t)
+            {
+                internalArray.push_back(t);
+            }
+			
+            // 返回大小
+            size_t len()
+            {
+                return internalArray.size();
+            }
+			
+            // 重载[]运算符
+            T& operator[](size_t index)
+            {
+                if( index > internalArray.size() )
+                {
+                    cerr << "索引超过最大值" <<endl; 
+                    // 返回第一个元素
+                    return internalArray.front();
+                }
+                return internalArray[index];
+            }
 
-			virtual void ParseJson(const Value& val)
-			{
-				SizeType len = val.Size();
-				for (size_t i = 0; i < len; i++)
-				{
-					const Value &f = val[i];
-					T t;
-					ToParseEvery(f, t);
-					arr.push_back(t);
-				}
-			}
+            virtual void ToWrite(Writer<StringBuffer>  &writer)
+            {
+                writer.StartArray();
+                for each (T ent in internalArray)
+                {
+                    ToWriteEvery(writer, ent);
+                }
+                writer.EndArray();
+            }
+
+            virtual void ParseJson(const Value& val)
+            {
+                SizeType len = val.Size();
+                for (SizeType i = 0; i < len; i++)
+                {
+                    const Value &f = val[i];
+                    T t;
+                    ToParseEvery(f, t);
+                    internalArray.push_back(t);
+                }
+            }
 		};
 	}
 }
@@ -522,7 +548,7 @@ int main(int argc, _TCHAR* argv[])
 
 RapidjsonHelper大概就这么多内容，写的比较简单，算是一个起点，本身对比java那种用起来还是有点弱，而且基本所有操作都认为会成功，异常处理没有，而且由于使用的是内存的流方式，所以可能遇到大文件的时候不合适需要修改整个接口，这个就只能轻度使用吧。
 
-
+正常使用中基于RapidjsonHelper加了一些操作或者函数，方便自己使用。
 
 ## Quote
 
