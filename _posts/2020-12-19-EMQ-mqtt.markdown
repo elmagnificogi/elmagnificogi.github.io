@@ -1,0 +1,146 @@
+---
+layout:     post
+title:      "EMQ Docker搭建"
+subtitle:   "腾讯云，mqtt"
+date:       2020-12-19
+author:     "elmagnifico"
+header-img: "img/drone-head-bg"
+catalog:    true
+tags:
+    - vps
+    - EMQ
+---
+
+## Foreword
+
+尝试了一下使用docker搭建EMQ 的mqtt服务器，比较简单
+
+其他方式搭建，参考官方文档
+
+> https://docs.emqx.cn/cn/broker/latest/getting-started/install.html
+
+
+
+## 服务端
+
+
+
+### 搭建
+
+EMQ用Docker搭建，比较简单，第一步pull下来对应的img，然后按照下面的命令启动即可
+
+```
+docker pull emqx/emqx:v4.0.0
+docker run -d --name emqx -p 1883:1883 -p 8083:8083 -p 8883:8883 -p 8084:8084 -p 18083:18083 emqx/emqx:v4.0.0
+```
+
+
+
+#### 安全组
+
+由于是在腾讯云上搭建的，所以需要配置安全组
+
+EMQ 将占用以下端口：
+
+| 端口  | 说明                                        |
+| ----- | ------------------------------------------- |
+| 1883  | MQTT/TCP 协议端口                           |
+| 11883 | MQTT/TCP 协议内部端口，仅用于本机客户端连接 |
+| 8883  | MQTT/SSL 协议端口                           |
+| 8083  | MQTT/WS 协议端口                            |
+| 8084  | MQTT/WSS 协议端口                           |
+
+
+
+#### web后台
+
+设置好了以后就可以通过web直接访问到后台界面了
+
+```
+http://服务器地址:18083/#/
+```
+
+默认后台账号是admin，密码是public，记得修改密码
+
+就能看到下面的画面了
+
+![image-20201219102413292](https://i.loli.net/2020/12/19/LIKVqmXYsECPvkg.png)
+
+
+
+## 客户端
+
+客户端各种都有，我这里只是初次尝试，调试，所以要一个有UI，好用的，具体各种语言的客户端API可以参考官方文档
+
+> https://docs.emqx.cn/cn/broker/latest/development/client.html
+
+其他客户端看这里
+
+> https://docs.emqx.cn/cn/broker/latest/development/resource.html
+
+
+
+#### MQTTX
+
+这里我使用MQTTX作为测试客户端
+
+> https://github.com/emqx/MQTTX
+
+都是国人写的，所以都能切换到中文，客户端也比较简单
+
+![image-20201219103319801](https://i.loli.net/2020/12/19/KYz8qDPh43Vi9lO.png)
+
+- 名称，自定义
+- Client ID 相当于客户端的uuid，需要唯一，一般自动生成即可
+- 服务器地址，就填刚才的地址，这里只用填IP即可，要注意使用的协议是什么mqtt还是ws，加密还是没加密的
+- 端口是取决于刚才上一步选择的协议，和前面搭建的时候的端口号有关系
+- 账号密码，没有设置，留空即可
+
+第一次使用就选择用ws好了，然后也能通过web面板中的Websocket工具里看到当前服务器的设置，可以参考一下
+
+![image-20201219103602852](https://i.loli.net/2020/12/19/FQSJrzsvUnTGf1C.png)
+
+
+
+#### emqx.io
+
+emqx.io是个web版本的客户端，不用下载安装，也比较方便
+
+> http://tools.emqx.io/
+
+一样的填好信息以后，点击连接，然后订阅相同toipic，就可以发送信息给对方了
+
+![image-20201219111106786](https://i.loli.net/2020/12/19/j2AWLYQtSvrOoNz.png)
+
+
+
+## 测试
+
+设置好了以后，点击连接，就能连接到对应的服务器了
+
+新建一个topic，名字类似于一个路径，然后发送的payload切成json格式，随便写点什么，点击发送即可
+
+然后就能从web这边控制台信息里看到有人连接上了，并切对应的topic也能显示出来。
+
+
+
+MQTTX这边先添加上一个订阅，然后对这个订阅发送一个信息
+
+![image-20201219105003669](https://i.loli.net/2020/12/19/UoJbM2hzSFPecK3.png)
+
+接着从服务器这边，也添加相同主题的订阅，然后也发送信息，可以看到双方都能正常接收到
+
+![image-20201219104949343](https://i.loli.net/2020/12/19/1ASuJLE8O4qrgGN.png)
+
+
+
+## Summary
+
+EMQ初体验就这么多
+
+## Quote
+
+> https://www.jianshu.com/p/e5cf0c1fd55c
+>
+> https://www.jianshu.com/p/ebbe25d1c4b2
+
