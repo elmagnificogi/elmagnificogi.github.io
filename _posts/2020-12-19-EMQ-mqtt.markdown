@@ -4,7 +4,7 @@ title:      "EMQ Docker搭建"
 subtitle:   "腾讯云，mqtt"
 date:       2020-12-19
 author:     "elmagnifico"
-header-img: "img/drone-head-bg"
+header-img: "img/mqtt.jpg"
 catalog:    true
 tags:
     - vps
@@ -143,4 +143,8 @@ EMQ初体验就这么多
 > https://www.jianshu.com/p/e5cf0c1fd55c
 >
 > https://www.jianshu.com/p/ebbe25d1c4b2
+>
+> https://bbs.huaweicloud.com/blogs/120069
+>
+> https://www.liumwei.org/blog/mqtt-broker-Mosquitto
 

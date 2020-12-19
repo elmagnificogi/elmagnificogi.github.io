@@ -4,7 +4,7 @@ title:      "rapidjson helper"
 subtitle:   "对象序列化与反序列化"
 date:       2020-11-13
 author:     "elmagnifico"
-header-img: "img/drone-head-bg"
+header-img: "img/drone-head-bg.jpg"
 catalog:    true
 tags:
     - c++
