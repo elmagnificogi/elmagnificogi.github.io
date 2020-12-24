@@ -47,15 +47,15 @@ Visual Studio的版本更新比较快，而maya自然不可能跟上最新版的
 
 ###### vs2012
 
-将顶层目录MayaPluginWizard整个复制到 D:\Visual Studio 2017\Common7\IDE\VC\VCWizards（你自己的安装路径）
+将顶层目录MayaPluginWizard整个复制到 D:\Microsoft Visual Studio 11.0\VC\VCWizards（你自己的安装路径）
 
 ###### vs2017
 
-将顶层目录MayaPluginWizard整个复制到 D:\Visual Studio 2017\Common7\IDE\VC\VCWizards（你自己的安装路径）
+将顶层目录MayaPluginWizard整个复制到 D:\Visual Studio 2017\\VC\VCWizards（你自己的安装路径）
 
 ###### vs2012
 
-然后将MayaPluginWizard目录下的这三个文件全都放到 D:\Visual Studio 2012\VC\vcprojects 目录下（你自己的安装路径）。
+然后将MayaPluginWizard目录下的这三个文件全都放到 D:\Microsoft Visual Studio 11.0\VC\vcprojects 目录下（你自己的安装路径）。
 
     MayaPluginWizard.ico
     MayaPluginWizard.vsz
