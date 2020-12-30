@@ -120,9 +120,6 @@ def del_file(path_data):
             
 if __name__ == "__main__":
 
-    # if true, it will change the version of unit test as same as the release version
-    unit_test = True
-
     curpath = ""
     if getattr(sys, 'frozen', False):
         curpath = os.path.dirname(sys.executable)
