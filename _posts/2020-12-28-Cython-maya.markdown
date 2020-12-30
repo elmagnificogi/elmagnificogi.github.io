@@ -136,6 +136,7 @@ Finished processing dependencies for Cython==0.26
 直接进入python，输入下面命令，无报错基本就正常了。
 
 ```python
+D:\Autodesk\Maya2017\bin\mayapy.exe
 import cython
 from distutils.core import setup
 from Cython.Build import cythonize
