@@ -4,7 +4,7 @@ title:      "Maya C++开发 in VS2017"
 subtitle:   "API, HelloWorld, plugin"
 date:       2017-12-23
 author:     "elmagnifico"
-header-img: "img/python-head-bg.png"
+header-img: "img/bg5.jpg"
 catalog:    true
 tags:
     - C++

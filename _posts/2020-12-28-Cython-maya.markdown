@@ -4,7 +4,7 @@ title:      "Maya python转Cython"
 subtitle:   "pyd，c"
 date:       2020-12-28
 author:     "elmagnifico"
-header-img: "img/desk-head-bg.jpg"
+header-img: "img/bg7.jpg"
 catalog:    true
 tags:
     - maya

@@ -4,7 +4,7 @@ title:      "Cython的坑"
 subtitle:   "python，加密，混淆"
 date:       2020-12-30
 author:     "elmagnifico"
-header-img: "img/Embedded-head-bg.png"
+header-img: "img/bg6.jpg"
 catalog:    true
 tags:
     - maya
@@ -17,6 +17,8 @@ tags:
 之前的[文章](http://elmagnifico.tech/2017/12/01/Python-obfuscate/)写过了，我平常都是用下面的混淆来加密python代码，但是这种混淆总是可以被看到运行逻辑的，只是分析起来困难一点而已。
 
 > https://pyob.oxyry.com/
+
+pyob的混淆商业购买要1998刀，以前很便宜30刀的时候没买，现在没机会了。
 
 所以基于这种不是很安全的python代码形式，我才用了cython来对纯python进行加密，但是国内对于cython的介绍也好，使用也好都比较简单，实际该怎么用没有非常详尽的指导，这里记录一下我的使用场景。
 

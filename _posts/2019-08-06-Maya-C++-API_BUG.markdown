@@ -4,7 +4,7 @@ title:      "maya c++ API Bug"
 subtitle:   "API 学习"
 date:       2019-08-06
 author:     "elmagnifico"
-header-img: "img/git-head-bg.jpg"
+header-img: "img/bg1.jpg"
 catalog:    true
 tags:
     - API
