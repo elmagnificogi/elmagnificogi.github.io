@@ -4,7 +4,7 @@ title:      "UE4报错LowLevelFatalError"
 subtitle:   "虚幻引擎，epic，Borderlands3，Remnant: From the Ashes"
 date:       2020-09-29
 author:     "elmagnifico"
-header-img: "img/typora.jpg"
+header-img: "img/cap-head-bg2.jpg"
 catalog:    true
 tags:
     - UE4

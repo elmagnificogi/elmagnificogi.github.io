@@ -4,7 +4,7 @@ title:      "Typora视频无法正常显示与mp4格式"
 subtitle:   "mp4，H.264,xdiv,xvid,html5"
 date:       2020-09-28
 author:     "elmagnifico"
-header-img: "img/typora.jpg"
+header-img: "img/bg6.jpg"
 catalog:    true
 tags:
     - typora
