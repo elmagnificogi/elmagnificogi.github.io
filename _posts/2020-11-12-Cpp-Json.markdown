@@ -4,7 +4,7 @@ title:      "C++中json库的选择"
 subtitle:   "cJson,nlohmann,rapidjson"
 date:       2020-11-12
 author:     "elmagnifico"
-header-img: "img/bg2.png"
+header-img: "img/bg2.jpg"
 catalog:    true
 tags:
     - c++
