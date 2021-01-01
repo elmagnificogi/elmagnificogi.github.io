@@ -1,0 +1,249 @@
+---
+layout:     post
+title:      "我的装备"
+subtitle:   "pc，console，others"
+date:       2021-01-01
+author:     "elmagnifico"
+header-img: "img/play.jpg"
+catalog:    true
+tags:
+    - equip
+    - goods
+    - share
+---
+
+## Foreword
+
+新的一年，分享一下我的配置和装备，先说硬件再说软件
+
+
+
+## 硬件
+
+#### PC
+
+- cpu - Intel Core i7 7700K
+- gpu - GALAXY GTX 1080Ti
+- ram - GALAXY 8Gx2 DDR4 3000MHz
+- ram - USCORSAIR16Gx2 DDR4 3000MHz
+- motherboard - PRIME Z270-AR
+- SSD1 - 60g 笔记本拆机SSD，本身是minpcie接口，后来转成的SATA口的
+- SSD2 - 250g 笔记本拆机SSD,SATA接口的
+- SSD3 - 250g pc原本的m.2接口的SSD
+- SSD4 - 1.5TB Gloway 专门用来装游戏等不重要的资源
+- ~~HardDisk - 500g 已经报废~~
+- monitor1 - LG34UC88B
+- monitor2 - 13寸老笔记电脑拆机屏+50液晶驱动
+- network card - 技嘉GC-WB867D-I 5G+BT4.2蓝牙8265AC PCI-E网卡
+
+17年买的，已经是老电脑了，打算新的一年升级到amd平台+RX6800XT或者是在原基础上替换电源+RTX3080，现在这套配置在我的3K屏上跑不满60fps，经常得下调配置或者不全屏游玩，还是有点难受的，但是前提是有货给我买...
+
+
+
+#### Laptop
+
+- 戴尔xps13 9360
+- 13.3英寸，1920x1080
+- Intel 酷睿i5 7200U
+- 8g Ram，120g SSD
+
+常年吃灰，就出差带一下，其他时间基本不用
+
+![image-20210101173146447](https://i.loli.net/2021/01/01/EgB27WzmireIvdc.png)
+
+
+
+- CVK扩展坞Typec接口
+
+![image-20210101173537064](https://i.loli.net/2021/01/01/dkI7TzK9Ym3gPcH.png)
+
+可以给笔记本用，同时switch也能用。
+
+
+
+#### 外设
+
+- mouse - Logitech g900
+
+![image-20210101162507214](https://i.loli.net/2021/01/01/WxqtXowfKlbSDjy.png)
+
+Logitech g900的鼠标年纪大了，当初是图便宜买的夺宝岛的，现在电量经常不够，两三天就得冲一下。前面微动还坏了一次，然后我也自己动手更换了一次微动（刚换完其实又坏了一次，不小心摔地上了直接微动没反馈了）还换了一次滚轮，但是发现第三方的太难用了，又换了回来。
+
+>https://www.bilibili.com/video/BV1c4411L7h6?from=search&seid=17270918824574832712
+>
+>http://www.inwaishe.com/article-2738-1.html
+
+
+
+- keyboard - IKBC DC108
+
+![image-20210101162838337](https://i.loli.net/2021/01/01/vicke1SrPAauxL5.png)
+
+IKBC 的这个键盘，之前也有看到说，各种断连啊，卡顿啊，刚开始用的时候确实没有，用到后来就开始出现了，着实找不到干扰源，也不知道为什么。刚开始还挺耐用的，后来电池也不行，经常一个月就没电了，后来几周就没电了，最后没得办法还专门买了充电7号电池再加上充电器一起用的。我还买了2把，一把公司一把家里，公司的后来直接接线用了不然很麻烦。这个是单蓝牙+有线版本的，感觉蓝牙其实没啥用，以后应该只用2.4g版本的应该会好一些，确实不需要蓝牙的切换功能。
+
+紫米7号电池和充电器，同时还买了5号充电电池
+
+![image-20210101163300880](https://i.loli.net/2021/01/01/5YSrcVHdoJpul6Z.png)
+
+
+
+
+
+- headphone1 - B&O H9i 
+
+![image-20210101162600899](https://i.loli.net/2021/01/01/Q95WpJmMqOwaGzY.png)
+
+耳机嘛，H9i当初是图好看买了，实际体验后来夹耳朵，他是圆形耳罩，导致不能长时间戴，就又换了 1000xm3。当初H9i也在实体店里试过，确实感觉很好才决定买的，但是没有长时间佩戴，导致后面翻了车。
+
+
+
+- headphone2 - Sony WH-1000XM3
+
+![image-20210101162644598](https://i.loli.net/2021/01/01/TxNKV9HgALPuC8B.png)
+
+这个不夹耳朵，日常都用这个，H9i现在就完全纯落灰了。只有1000xm3没电的时候上场，其他时间坐冷板凳。
+
+
+
+#### Console
+
+![image-20210101164840360](https://i.loli.net/2021/01/01/IrgLoZcbWk93Jdt.png)
+
+- Nintendo Switch 二手收的，非续航版，那会非常新，价格也很便宜，机体本身的塑料香味都还在。
+
+刚买的时候由于是带数字账号一起买的，后来发现账号是黑号，游戏被回收，卖家被我人肉出了真实身份（一学生，然后被我邮件轰炸了整个学校老师和领导层，后来联系我退钱了），中间经历了很多，后来拆了底座，替换成了这样的加强散热
+
+![image-20210101163701837](https://i.loli.net/2021/01/01/fIgYekjbvEWSRJU.png)
+
+> https://detail.tmall.com/item.htm?id=609301030116&spm=a1z09.2.0.0.5b212e8dK4H9gB&_u=11g76mj9235f
+
+中间还换过一次硅脂，然而实际上根本没用，硅脂是好硅脂，只是实际散热完全是机体本身不行，起到的效果很小，不值得替换。而替换硅脂的时候，拆了壳，导致螺丝滑口，卡住了，后来同事帮忙用螺丝钻取下来了，非常坑爹，而同时所有淘宝卖的Y字螺丝刀和对应的螺丝都太滑了，实际上拆卸风险非常大，稍微一不小心就会造成滑口取不下来或者安不上去。通过实际观测，其实可以发现，任天堂设计的时候就是不让你拆的，基本一定会拆滑口，螺丝本身size很小，而国产螺丝也好，号称的原装螺丝也好，其实size都不对。
+
+- Y字螺丝刀是1.2mm的
+- 对应的螺丝也应该是1.2mm的
+
+但是这个Y形螺丝容易滑口，建议替换成十字螺丝，但是国产的这个螺丝硬度都不行，很容易出问题，建议能不拆千万别拆，拆了以后修复很麻烦。
+
+
+
+- nintendo switch pro手柄
+
+![image-20210101170304737](https://i.loli.net/2021/01/01/ZMAvnFQewijl6G7.png)
+
+pro手柄还是可以的，虽然也用来落灰了，同时我还有2副joy-con，基本也落灰了。
+
+
+
+- ZMI紫米充电宝QC快充10号PD移动电源
+
+当年神器，可以冲switch，可以快冲手机，甚至还能冲笔记本，现在依然好用。
+
+
+
+#### 其他
+
+- 树莓派 2b
+
+![image-20210101165423867](https://i.loli.net/2021/01/01/zstJfhy6ETDIQSc.png)
+
+完全闲置了，自从当年写过树莓派文章以后再也没咋用过了
+
+
+
+- TTGO T8V1.7wifi 蓝牙ESP32WROVER 4MB FLASH 8MB PSRAM开发板
+
+![image-20210101170836310](https://i.loli.net/2021/01/01/4KYmGx1cfJWHbSz.png)
+
+本来就是打算用来给switch当作蓝牙自动脚本手柄用的，但是奈何蓝牙手柄的断连问题和延迟问题实在是太严重了，导致实际体验不好，不如Teensy的小板子，所以吃灰了。
+
+
+
+- Teensy2.0++
+
+![image-20210101172333848](https://i.loli.net/2021/01/01/JFqID6iUpcm3aXY.png)
+
+Switch 手柄模拟，还是很好用的。
+
+
+
+- 36记智能手写本
+
+![image-20210101165632815](https://i.loli.net/2021/01/01/Jjh9aqcuQGZS4W2.png)
+
+其实就是个手写本，只不过可以同步到手机上而已，类似柔宇的手写本，只不过我是二手捡的全新的，便宜很多。实际上由于他的电磁笔写字的时候笔尖会回收，导致实际写字体验非常差，类似于你铺张纸在床上写字，基本用来落灰了，其本身也有pc的手写板功能，但是那个程序是个0.01版本，非常多bug，基本不能用，谁买谁是傻子。
+
+
+
+- 天创恒达TC-UB90采集卡
+
+![image-20210101170439493](https://i.loli.net/2021/01/01/dVHgyoU8hPpBiG9.png)
+
+本身支持4k，usb3.0接口，可以同时环出，但是实际上体验不太好，有色偏，工作时采集卡本身非常烫，用的时间长了以后会导致卡顿和延迟超高的情况，感觉这种卡不太行，还是得买pcie接口的内置卡，可能更好一些。
+
+
+
+## 软件
+
+#### 开发IDE
+
+- Visual Studio 2012，主要用来c++开发
+
+- Visual Studio 2019，主要是C#开发
+
+- Pycharm，maya python开发
+
+- IEDA，java开发
+
+- Keil，stm32 开发，已经很少用了
+
+- source insight 4，偶尔看个代码
+- Eclipse，嵌入式开发，不是很好用，但是没办法
+- git，必备
+
+
+
+#### 全家桶
+
+- Adobe 全家桶
+- Maya 2017
+- Vmware 16，推荐版本，16明显提升了3d，显卡相关效果，总算没那么卡了
+- Mysql 8
+- Office 2016全家桶
+
+
+
+#### 实用软件
+
+- everything，查找文件
+- Quicker，软件快捷启动工具
+- Chrome，逐步取代傲游中
+- 傲游浏览器，已经用了好多年，但是耐不住他不务正业，而且是不是还有个小bug，本身就是chrome源码再编译，最新6的版本直接就是源码了，ui都不改了，实在是扶不上墙
+- Q-Dir，同时开启多目录，取代资源管理器，但是还是有一些地方不好用，找不到更好的了
+- EIZO ScreenSlicer，屏幕分割工具，找不到更好用的了，但是有些程序无法生效
+- Typora，markdown编辑软件
+- Picgo，图片保存软件
+- Beyond Compare 4，最好用的文件对比软件了
+- Internet Download Manager，下载工具
+- PotPlayer，播放视频软件
+- sscom5.13.1，串口调试软件
+- Xshell，终端工具
+- qBittorrent，种子下载
+- 迅雷9.0绿色版，迅雷链接专用
+- AnyDesk，远程工具
+- ZeroTier One，nat穿透工具
+- OBS Studio，直播、录屏、采集专用。
+- AIDA64 Extreme，硬件测试，烤机软件
+- One Drive，云盘，部分资料同步
+- Firefox，登陆政府网页必备
+- SSTap，自建游戏加速必备，实际效果不好。
+- 腾讯加速器，自建怎么也比不过腾讯的好，便宜，稳定，支持3端，没有其他的收三次费的情况。
+- NetLimiter，非常强大的限制网速的工具
+- Mail，windows自带邮箱功能，我只是轻度使用，足够了
+- 便笺，windows自带便笺功能，非常好用，多端同步，随手记录一些东西足够了。
+
+
+
+## Summary
+
+常用的软件大概就这些，日后再次重装的时候再补充吧
+
