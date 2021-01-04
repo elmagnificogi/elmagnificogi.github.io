@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "maya python脚本的编辑器"
+title:      "maya python脚本编辑器"
 subtitle:   "IDE，Script editor"
 date:       2019-09-01
 author:     "elmagnifico"
