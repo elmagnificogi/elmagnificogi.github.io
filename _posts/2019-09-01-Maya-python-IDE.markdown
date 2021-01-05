@@ -109,15 +109,27 @@ maya的开发包必须要有
 
 添加完了以后，就可以选择正确的interperter了，然后就会自动搜索看到这个python里安装了哪些包，maya本身的python当然没有这些包，这都是我后来自己加上去的。
 
-#### 添加maya python 扩展包
 
-##### maya devkit
+
+#### maya devkit
 
 有可能新maya环境没有devkit，会出现找不到下一步的目录，所以要先下载解压devkit包
 
 > https://s3-us-west-2.amazonaws.com/autodesk-adn-transfer/ADN+Extranet/M%26E/Maya/devkit+2017/Maya2017_DEVKIT_Windows.zip
 
 
+
+#### 删除默认python路径
+
+![SMMS](https://i.loli.net/2019/10/14/kcgEW7uRAdaGLeB.png)
+
+将这一条选中，然后点减号，之后会自动将该路径排除，这样才能正确解析mayapy
+
+- 一定要先删除，再增加，pycharm好像对这个顺序有bug，导致如果先增加再删除会导致自动补全非常卡或者说整个pycharm会很卡
+
+
+
+#### 添加maya python 扩展包
 
 ![SMMS](https://i.loli.net/2019/08/30/5LnM8couAEUri2t.png)
 
@@ -131,11 +143,9 @@ maya的开发包必须要有
 \Maya2017\devkit\other\pymel\extras\completion\py
 ```
 
-#### 删除默认python路径
 
-![SMMS](https://i.loli.net/2019/10/14/kcgEW7uRAdaGLeB.png)
 
-将这一条选中，然后点减号，之后会自动将该路径排除，这样才能正确解析mayapy
+
 
 #### 添加mayacharm
 
