@@ -7,7 +7,7 @@ author:     "elmagnifico"
 header-img: "img/desk-head-bg.jpg"
 catalog:    true
 tags:
-    - VPS
+    - vps
     - google
 ---
 
