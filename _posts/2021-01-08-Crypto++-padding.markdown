@@ -120,7 +120,7 @@ DD DD DD DD DD DD DD DD | DD DD DD DD | 04 04 04 04 |
 
 
 
-##### ISO/IEC 7816-4
+#### ISO/IEC 7816-4
 
 他是强制填充一字节的80，然后后面跟00,当然这种模式下这个80相当于不能是内容的结尾字符，否则会出错
 
@@ -196,6 +196,15 @@ bool CBC_AESEncryptFile(std::string aesKey, std::string sIV, const std::string &
 ```
 
 给进去的文件大小是不满16字节的，给出来的直接是16的整数倍，而当给出16字节的文件的时候，使用pkcs就直接解不开了，反而使用不填充可以解开
+
+
+
+```c++
+		BlockPaddingSchemeDef::BlockPaddingScheme padding = BlockPaddingSchemeDef::BlockPaddingScheme::PKCS_PADDING;
+		FileSource(input_filename.c_str(), true,new StreamTransformationFilter(cbcDecryption,new FileSink(output_filename.c_str()),padding));
+```
+
+正确的做法，增加padding参数。
 
 
 
