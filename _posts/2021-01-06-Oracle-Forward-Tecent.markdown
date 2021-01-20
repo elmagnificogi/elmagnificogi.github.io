@@ -198,9 +198,41 @@ There were too many requests of a given type :: Error creating new order :: too 
 
 
 
+## 其他一键脚本
+
+
+
+#### wulabing
+
 最后选择一键安装v2ray+ws+tls+nginx+自动续期，不过这个脚本实在太洁癖了，基本所有库都是开源，然后重新编译，再编排文件，我就装这么个东西跑了至少半个小时，不适合机器性能差的。
 
 > https://github.com/wulabing/V2Ray_ws-tls_bash_onekey
+
+
+
+#### atrandys
+
+> https://github.com/atrandys/v2ray-ws-tls
+
+安装
+
+```bash
+curl -O https://raw.githubusercontent.com/atrandys/v2ray-ws-tls/master/v2ray_ws_tls1.3.sh 
+chmod +x v2ray_ws_tls1.3.sh 
+./v2ray_ws_tls1.3.sh
+```
+
+**这个脚本有一个bug，他安装以后生成的伪装域名是myws，但是实际上是错的，伪装域名是你自己的域名而不是myws，如果按照他给的link导入就会直接报错**
+
+
+
+#### BBR
+
+BBR加速脚本
+
+> wget -N --no-check-certificate "https://raw.githubusercontent.com/chiakge/Linux-NetSpeed/master/tcp.sh" && chmod +x tcp.sh && ./tcp.sh
+
+**这个脚本也有一个bug，就是偶尔如果你卸载已有的多余内核，大概率会导致引导失败，所以建议不要卸载内核，可以的情况下直接安装新内核就行了**
 
 
 
