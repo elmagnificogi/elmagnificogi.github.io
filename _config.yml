@@ -89,6 +89,14 @@ service-worker: true
 # Friends
 friends: [
     {
+      title: "智伤帝",
+      href: "https://blog.l0v0.com/"
+    },
+    {
+      title: "城南旧事",
+      href: "https://blog.loli.top/"
+    },
+    {
         title: "等你成为我的朋友",
         href: "http://等你成为我的朋友"
     },{
