@@ -87,7 +87,7 @@ print 'set the command port at 4434'
 - markingMenus 菜单设置 
 - scripts 脚本
 - shelves 所有脚本button的配置
-- workspaces 侧边栏等工作区域的配置信息
+- workspaces/Maya_Classic.json 侧边栏等工作区域的配置信息
 - synColorConfig.xml.lock 颜色配置相关
 - synColorConfig.xml 颜色配置相关
 - synColorFileRules.xml 颜色配置相关
@@ -101,6 +101,10 @@ print 'set the command port at 4434'
 - windowPrefs.mel 主要是窗口设置，窗口大小之类的东西
 - MayaInterfaceScalingConfig 未知
 - scriptEditorTemp 这里存的就是脚本编辑器中的临时代码，经常maya崩了或者删了maya导致脚本编辑器里刚写的代码没了，都是在这里的
+
+
+
+
 
 #### hotkeys
 
@@ -270,6 +274,8 @@ optionVar
 ![SMMS](https://i.loli.net/2020/06/11/ckl9wgV7Bh5A6pS.png)
 
 实际修改或者添加时也按照上述规则即可
+
+
 
 ## 自动配置
 
