@@ -14,7 +14,7 @@ tags:
 
 ## Foreword
 
-Maya 2017有一个固定流程点击workspaceControl导致maya crash
+Maya 2017有一个固定流程点击workspaceControl会导致maya crash
 
 
 
@@ -120,7 +120,7 @@ cmds.workspaceControl(dock_name, edit=True, uiScript="print 'open dock----------
 
 ## 解决
 
-之前一直想办法如何可以强制刷新maya  ui，但是苦于找不到api，只好探寻其他路子了，智伤帝说他update4不会崩溃（实际也会），我就升级试验了一下。然后找到现在的避开的办法。
+之前一直想如何可以强制刷新maya  ui，但是苦于找不到api，只好探寻其他路子了，智伤帝说他update4不会崩溃（实际也会），我就升级试验了一下。然后找到现在的规避办法。
 
 如果是maya 2017 无update的版本，这个问题基本无解，除非你能保证你不会这样操作，但是只要一不小心有上面的操作顺序就会导致崩溃。
 

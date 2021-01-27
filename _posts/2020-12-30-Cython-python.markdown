@@ -1,8 +1,9 @@
 ---
 layout:     post
-title:      "Cython的坑"
+title:      "Cython可能会遇到的坑"
 subtitle:   "python，加密，混淆"
 date:       2020-12-30
+update:     2021-01-27
 author:     "elmagnifico"
 header-img: "img/bg6.jpg"
 catalog:    true

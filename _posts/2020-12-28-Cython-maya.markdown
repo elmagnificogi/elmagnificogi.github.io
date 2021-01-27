@@ -3,6 +3,7 @@ layout:     post
 title:      "Maya python转Cython"
 subtitle:   "pyd，c"
 date:       2020-12-28
+update:     2021-01-27
 author:     "elmagnifico"
 header-img: "img/bg7.jpg"
 catalog:    true
@@ -313,6 +314,58 @@ maya 2014 cython 的帖子，他是反向操作，把maya python给拷进了正�
 #### MSC VS 版本对应
 
 > https://www.cnblogs.com/ibingshan/p/10343037.html
+
+
+
+## maya不支持动态卸载
+
+如果只是python程序本身可能可以动态加载pyd之类的扩展库，但是在maya这里当你引用了pyd之后，在windows系统这里pyd文件就直接被占用了，是无法直接删除替换的，一般想做到热更新或者不关闭maya的情况下替换已经import的pyd，基本是不可能的
+
+
+
+#### 尝试如下
+
+首先foo是pyd的模块，先加了路径 ，然后导入模块测试。
+
+删除foo，尝试删除foo.pyd，占用
+
+查看sys.modules.keys，可以看到foo依然还在
+
+再次删除sys.modules中的foo，再次查看，foo不见了，尝试删除foo.pyd，占用
+
+再次怀疑可能内存没有回收，先把内存回收gc.collect，尝试删除foo.pyd，占用
+
+```
+#!/usr/bin/env python
+# -*- coding: UTF-8 -*-
+import sys
+import maya.cmds as cmds
+import maya.mel as mel
+
+plugin_paths = mel.eval("getenv MAYA_PLUG_IN_PATH")
+plugin_path = plugin_paths.split(';')[0]
+path = plugin_path + '/Dmd_drama_editor_py'
+if not path in sys.path:
+    sys.path.append(path)
+
+import foo
+foo.foo()
+
+del foo
+
+sys.modules.keys()
+
+if 'foo' in sys.modules:  
+    del sys.modules["foo"]
+sys.modules.keys()
+
+import gc
+gc.collect()
+```
+
+这样基本不可能实现当时的动态加载了，也就必须要重启maya，释放文件。
+
+当然也可以通过建立多个文件夹来规避文件不能替换删除的问题，然后重新加载新目录下的文件
 
 
 
