@@ -263,6 +263,20 @@ MStatus rename_nodes(MObject transform, MString baseName)
 }
 ```
 
+
+
+### 卸载插件
+
+卸载插件的时候提示插件服务正在被使用，应该说不是bug，只是很多时候没有提到这个细节。
+
+![image-20210127105413278](https://i.loli.net/2021/01/27/zfDZUnOH7KAX3Ve.png)
+
+只要你写的Cmd命令中允许了undo，那么当用了这个命令以后，maya会将这个命令的对象存入UndoList中，而当你卸载的时候，如果不把他从UndoList中清除出去就会导致使用撤销以后访问到一个空指针，从而导致maya崩溃。
+
+那么为了防止发生这种情况，他就要求在卸载插件的时候要新建一个场景或者是你手动清空UndoList，这样插件就能正常卸载了。
+
+
+
 ## 总结
 
 还有一个非常难用的东西就是Mstring还有executePythonCommand(),返回值是用char组成的unicode编码的中文或者什么其他的东西，还要单独写一个转换函数，把其中非unicode和uncidoe的东西分离然后都转成string才能正常使用。
