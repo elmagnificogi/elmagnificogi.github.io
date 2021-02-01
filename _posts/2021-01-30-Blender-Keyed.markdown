@@ -16,6 +16,47 @@ Blender中也有类似于maya goal的功能，叫做keyed，中文叫键控，�
 
 
 
+## Blender Dev
+
+Blender本身内部功能都是用c开发的，音乐物理效果、游戏引擎和渲染是靠c++，插件和一些导入导出功能是python完成的。
+
+
+
+blender的编译需要两个部分
+
+一个部分是由svn来版本控制的预编译lib，在下图为pre-compiled libraries部分
+
+![img](https://i.loli.net/2021/02/01/IPCyFcKf9grqR5d.jpg)
+
+另外一个部分是由git来版本控制的源码，其中有三种，分为intern、extern和source三种，intern是blender开发的较为底层的一些源码，extern是非blender开发（如物理引擎bullet）的源码，source是较为上层的源码。这也能从图片左侧的路径看得出，source为blender/source路径，intern为blender/intern，extern为blender/extern。
+
+
+
+## 缩写
+
+一些常见的缩写，blender本身的wiki内容还是太少了，很多东西都搜不到，要不就是缩写
+
+- **GEN**: General stuff (c++)
+- **SM**: SuMo (Solid Uses Moto), the physics engine (c++)
+- **KX**: Ketsji, the game engine (c++)
+- **MT**: MaTh, mathematics module (c++)
+- **RE**: Render, static rendering (c)
+- **PR**: Portable Runtime, a Netscape library (external code, c)
+- **PRB**: PR-Blender, our own extensions to PR (c)
+- **SND**: SouND, our (currently OpenAL) wrapper and extensions (c)
+- **RAS**: RASterizer, our low level 3D polygon abstraction layer (c++)
+- **NET**: NETworking. Currently our Terraplay CNI wrapper.
+- **BLI**: Blender low-level LIbrary.
+- **BKE**: Blender KErnel.
+- **BIF**: Blender Interface Framework.
+- **BSE**: Blender Space Editor.
+- **BDR**: Blender DRawing.
+- **DNA**: struct DNA, the types definitions of serializable data, and the construction of DNA.o, which encodes this data.
+- **AVI**: conversion of AVI format files.
+- **IMB**: IMage Buffer, all kind of operations on images.
+
+
+
 ## ID Datablocks
 
 简单说由于代码是C写的，所以所有数据结构都是struct，并且规定了一些通用类型命名查询的方式和数据结构的排布
@@ -71,6 +112,20 @@ IDTypeInfo IDType_ID_OB = {
 1. 在相关的文件中定义一个IDTypeInfo，比如 mesh.c 与 ID_ME
 2. 在BKE_idtype.h中添加新类型的extern 声明
 3. 在idtype.c中的id_type_init()函数注册新类型
+
+
+
+## RNA & DNA
+
+Blender中的RNA和DNA就是生物中的RNA和DNA的含义（不得不吐槽，非常容易让人费解，我还以为什么是什么Data xxx access）。
+
+Blender中各种基础数据类可以说就是DNA（不同版本的DNA自然就不同了，对应显示出来的Blender这个个体就不一样了）
+
+RNA则是对各种数据类进行二次操作或者翻译，RNA主要将DNA中的数据解释给用户或者是直接给到Blender内部使用。我是看的一脸懵逼，后面看明白了再说吧。
+
+![img](https://i.loli.net/2021/02/01/G7dFQnS6wcMT3Zh.png)
+
+![image-20210201112617702](https://i.loli.net/2021/02/01/GZKHWXy9QRFejgE.png)
 
 
 
@@ -183,7 +238,7 @@ StepDescription 中包含了粒子发射器和粒子类型，这里粒子类型�
 
 ## Summary
 
-还没写完，还会继续补充
+见了鬼，keyed的时候粒子不支持自碰撞，那keyed的功能就非常简单了，直接从原点移动到目标点就结束了，复杂一点就是中间加一个路径，然后按照路径移动而已，但是这过程中粒子是会重叠的，这就和我预期有区别了。
 
 
 
@@ -194,4 +249,8 @@ StepDescription 中包含了粒子发射器和粒子类型，这里粒子类型�
 > https://wiki.blender.org/wiki/Source/Nodes/SimulationArchitectureProposal
 >
 > https://wiki.blender.org/wiki/Source/Architecture/ID
+>
+> https://zhuanlan.zhihu.com/p/97210861
+>
+> https://zhuanlan.zhihu.com/p/157316153
 
