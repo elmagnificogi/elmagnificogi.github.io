@@ -1,0 +1,434 @@
+---
+layout:     post
+title:      "RVO2 3d实际应用"
+subtitle:   "碰撞，路径规划"
+date:       2021-02-04
+author:     "elmagnifico"
+header-img: "img/Embedded-head-bg.png"
+catalog:    true
+tags:
+    - pathfinding
+---
+
+## Foreword
+
+前面用了Molecular，然后具体算法没看明白，也有很多幻数藏在其中，不适合实际使用。然后就尝试了一下RVO2，发现异常好用。
+
+
+
+## 介绍
+
+> https://gamma.cs.unc.edu/RVO2/
+
+RVO2之前介绍过了，这里说一下平常RVO2都是二维的
+
+> https://github.com/snape/RVO2
+
+但是我这次用的是RVO2 3d版本，基于三维的RVO2，试了一下也非常好用。
+
+> https://github.com/snape/RVO2-3D
+
+
+
+## RVO2实测
+
+#### 准备
+
+需要注意一下，3d项目是基于vs2010的，所以需要v100的平台工具集支持，必须得装vs2010，而2d的库本身不需要，直接vs2017还是19就能打开编译了。
+
+
+
+![image-20210204155714013](https://i.loli.net/2021/02/04/OuFU2WlSmCjazhR.png)
+
+3d版本结构是这样的：
+
+- RVODLL，就是release版本，直接调动态库
+- RVOStatic，是debug版本，调lib的
+- Sphere，是一个实测demo
+
+
+
+文件夹中的doc，index.html可以直接打开本地文档，这个是基于代码生成的，代码上注释比较多，只是有些含义说不清楚得实测试试看。
+
+
+
+#### demo结构
+
+```c++
+// 这里是初始化，其实就是设置模拟器的各种输入参数以及初始了这个球的各个点的位置和目标位置
+void setupScenario(RVO::RVOSimulator *sim)
+
+// 这玩意最坑，主要是用来显示当前计算的结果输出
+void updateVisualization(RVO::RVOSimulator *sim)
+
+// 重新计算方向向量并更新给粒子
+void setPreferredVelocities(RVO::RVOSimulator *sim)
+
+int main()
+```
+
+
+
+开始的时候，直接拿默认参数，直接就跑，发现要好久才能出结果，然后改了改输入的参数，发现还是很慢，要么就是精度很差，然后发现有点问题，这个输出直接把整体解锁给带慢了，把这里输出全部取消，变成输出到文件以后，立马速度就提起来了（之前20分钟跑完，现在只要5秒钟了）
+
+```c++
+void updateVisualization(RVO::RVOSimulator *sim)
+{
+	/* Output the current global time. */
+	std::cout << sim->getGlobalTime();
+
+	/* Output the position for all the agents. */
+	for (size_t i = 0; i < sim->getNumAgents(); ++i) {
+		std::cout << " " << sim->getAgentPosition(i);
+	}
+
+	std::cout << std::endl;
+}
+```
+
+
+
+#### 参数含义
+
+```c++
+	/* Specify the default parameters for agents that are subsequently added. */
+	//                     dis  dis num   timeHorizon       radius     maxspeed
+	sim->setAgentDefaults(15.0f,     10,    10.0f,          1.5f,      2.0f);
+```
+
+这里模拟的粒子参数需要注意一下，其表示的含义或者说单位是什么。 
+
+```c++
+	void RVOSimulator::setAgentDefaults(float neighborDist, size_t maxNeighbors, float timeHorizon, float radius, float maxSpeed, const Vector3 &velocity)
+	{
+		if (defaultAgent_ == NULL) {
+			defaultAgent_ = new Agent(this);
+		}
+
+		defaultAgent_->maxNeighbors_ = maxNeighbors;
+		defaultAgent_->maxSpeed_ = maxSpeed;
+		defaultAgent_->neighborDist_ = neighborDist;
+		defaultAgent_->radius_ = radius;
+		defaultAgent_->timeHorizon_ = timeHorizon;
+		defaultAgent_->velocity_ = velocity;
+	}
+```
+
+
+
+- neighborDist，就是表示多少范围内算作近邻
+- maxNeighbors，是该范围内最多计算多少个近邻
+- timeHorizon，这个理解为预测提前规避时间，他与速度有关系，你预测的越早的话，提前就会做出速度修改（但是原文说会限制速度，不是很明白怎么限制的）
+- maxSpeed，这个是最大速度，由于RVO中不考虑加速度，他是直接变速的，所以最大能变的速度是多少会和这个提前规避时间一起作用得到规避时的动作幅度。
+
+
+
+还有一个变量就是这个时间精度，RVO2同样也是离散基于时间同步的。
+
+```
+sim->setTimeStep(0.1f);
+```
+
+有时候也需要将RVO2的这些参数对应到实际的物理量，这里说一下我映射到实际以后他们的单位对应，方便换算理解。
+
+```
+setTimeStep，你可以当作单位是秒，0.1就代表0.1秒
+maxSpeed，由于他是直接限制一个合速度，所以这里就可以直接理解为m/s，最后得到的结果在精度合适的情况下应该是可以控制到位的
+timeHorizon，同理提前预测时间也就变成了秒
+```
+
+当然如果转换成其他单位也是没问题的。
+
+
+
+#### json输出
+
+由于他输出是直接输出粒子位置，但是实际上不可视，为了可视化，我把他输出成了json，然后再用maya读取json可视化刚才的整个粒子动画。
+
+```c++
+/*
+ * Sphere.cpp
+ * RVO2-3D Library
+ *
+ * Copyright 2008 University of North Carolina at Chapel Hill
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * Please send all bug reports to <geom@cs.unc.edu>.
+ *
+ * The authors may be contacted via:
+ *
+ * Jur van den Berg, Stephen J. Guy, Jamie Snape, Ming C. Lin, Dinesh Manocha
+ * Dept. of Computer Science
+ * 201 S. Columbia St.
+ * Frederick P. Brooks, Jr. Computer Science Bldg.
+ * Chapel Hill, N.C. 27599-3175
+ * United States of America
+ *
+ * <http://gamma.cs.unc.edu/RVO2/>
+ */
+
+/* Example file showing a demo with 812 agents initially positioned evenly distributed on a sphere attempting to move to the antipodal position on the sphere. */
+
+#ifndef RVO_OUTPUT_TIME_AND_POSITIONS
+#define RVO_OUTPUT_TIME_AND_POSITIONS 1
+#endif
+
+#include <cmath>
+#include <cstddef>
+#include <vector>
+
+#if RVO_OUTPUT_TIME_AND_POSITIONS
+#include <iostream>
+#endif
+
+#include <RVO.h>
+
+#ifndef M_PI
+const float M_PI = 3.14159265358979323846f;
+#endif
+
+/* Store the goals of the agents. */
+std::vector<RVO::Vector3> goals;
+
+void setupScenario(RVO::RVOSimulator *sim)
+{
+	/* Specify the global time step of the simulation. */
+	//sim->setTimeStep(0.01f);
+	sim->setTimeStep(0.1f);
+	//sim->setTimeStep(0.01f);
+
+	/* Specify the default parameters for agents that are subsequently added. */
+	//                     dis  dis num   timeHorizon       radius     maxspeed
+	sim->setAgentDefaults(15.0f,     10,    10.0f,          1.5f,      2.0f);
+
+	// 这里是建立一个球形，大概用了781个球的样子
+	/* Add agents, specifying their start position, and store their goals on the opposite side of the environment. */
+	double size = 100;
+	double desity = 0.1f;
+	for (float a = 0; a < M_PI; a += desity) {
+		const float z = size * std::cos(a);
+		const float r = size * std::sin(a);
+
+		for (size_t i = 0; i < r / 2.5f; ++i) {
+			const float x = r * std::cos(i * 2.0f * M_PI / (r / 2.5f));
+			const float y = r * std::sin(i * 2.0f * M_PI / (r / 2.5f));
+
+			// 初始化位置
+			sim->addAgent(RVO::Vector3(x, y, z));
+			// 设置目标位置就是对侧的另一个
+			goals.push_back(-sim->getAgentPosition(sim->getNumAgents() - 1));
+		}
+	}
+}
+
+
+#include <fstream>
+std::ofstream ofile;
+
+#if RVO_OUTPUT_TIME_AND_POSITIONS
+void updateVisualization(RVO::RVOSimulator *sim)
+{
+	/* Output the current global time. */
+	//std::cout << sim->getGlobalTime();
+	ofile << "[" << std::endl;
+	/* Output the position for all the agents. */
+	for (size_t i = 0; i < sim->getNumAgents(); ++i) {
+		if (i < sim->getNumAgents() - 1)
+			ofile << sim->getAgentPosition(i).x() << ","<< sim->getAgentPosition(i).y() <<","<< sim->getAgentPosition(i).z() << ",";
+		else
+			ofile << sim->getAgentPosition(i).x() << "," << sim->getAgentPosition(i).y() << "," << sim->getAgentPosition(i).z() << std::endl;
+		///ofile<<sim->getAgentPosition(i);
+	}
+
+	ofile << "]" << std::endl;
+	//std::cout << std::endl;
+}
+#endif
+
+void setPreferredVelocities(RVO::RVOSimulator *sim)
+{
+	/* Set the preferred velocity to be a vector of unit magnitude (speed) in the direction of the goal. */
+	// 换句话说这里就是将每一步时，飞机的偏向速度修改成指向目标的方向，并且进行了归一化，归一化以后，这样就变成了一个速度矢量
+	// 应该是没有用做速度值，只是用来当方向使用，指明运动的方向更应该倾向于哪里
+	for (size_t i = 0; i < sim->getNumAgents(); ++i) {
+		RVO::Vector3 goalVector = goals[i] - sim->getAgentPosition(i);
+
+		if (RVO::absSq(goalVector) > 1.0f) {
+			goalVector = RVO::normalize(goalVector);
+		}
+
+		sim->setAgentPrefVelocity(i, goalVector);
+	}
+}
+
+bool reachedGoal(RVO::RVOSimulator *sim)
+{
+	/* Check if all agents have reached their goals. */
+	int arrived_num = 0;
+	for (size_t i = 0; i < sim->getNumAgents(); ++i) {
+		if (RVO::absSq(sim->getAgentPosition(i) - goals[i]) > 4.0f * sim->getAgentRadius(i) * sim->getAgentRadius(i)) {
+			//std::cout << "Arrived：" << arrived_num << std::endl;
+			return false;
+		}
+		arrived_num++;
+	}
+	std::cout << "all arrived" <<  std::endl;
+	return true;
+}
+
+#include <windows.h>
+#include <ctime>
+#include "atltime.h"   
+
+int TimeDiff(SYSTEMTIME t1, SYSTEMTIME t2)
+{
+	CTimeSpan			sp;
+	int					s1, s2;
+
+	CTime tm1(t1.wYear, t1.wMonth, t1.wDay, 0, 0, 0);
+	CTime tm2(t2.wYear, t2.wMonth, t2.wDay, 0, 0, 0);
+
+	sp = tm1 - tm2;
+
+	s1 = t1.wHour * 3600 + t1.wMinute * 60 + t1.wSecond;
+	s2 = t2.wHour * 3600 + t2.wMinute * 60 + t2.wSecond;
+
+	return  (int)(sp.GetDays() * 86400 + (s1 - s2));
+}
+#include <string> 
+int main()
+{
+
+	/* Create a new simulator instance. */
+	RVO::RVOSimulator *sim = new RVO::RVOSimulator();
+
+	/* Set up the scenario. */
+	setupScenario(sim);
+	SYSTEMTIME st = { 0 };
+	SYSTEMTIME dt = { 0 };
+	GetLocalTime(&st);  //获取当前时间 可精确到ms
+	std::string now = std::to_string(_ULONGLONG(st.wMilliseconds));
+	printf("%d-%02d-%02d %02d:%02d:%02d\n",
+		st.wYear,
+		st.wMonth,
+		st.wDay,
+		st.wHour,
+		st.wMinute,
+		st.wSecond);
+
+	ofile.open(now+".txt", std::ios::out);
+	ofile << "[" << std::endl;
+
+
+	/* Perform (and manipulate) the simulation. */
+	do {
+#if RVO_OUTPUT_TIME_AND_POSITIONS
+		// 这里就是输出当前位置信息而已
+		updateVisualization(sim);
+		ofile << ",";
+#endif
+		// 更新目标速度方向
+		setPreferredVelocities(sim);
+		// 开始跑模拟
+		sim->doStep();
+	}
+	// 判定是否到达了
+	while (!reachedGoal(sim));
+	updateVisualization(sim);
+
+	GetLocalTime(&dt);  //获取当前时间 可精确到ms
+	printf("%d-%02d-%02d %02d:%02d:%02d\n",
+		dt.wYear,
+		dt.wMonth,
+		dt.wDay,
+		dt.wHour,
+		dt.wMinute,
+		dt.wSecond);
+
+
+	std::cout << "time:" << TimeDiff(dt, st) <<std::endl;
+	ofile << "]" << std::endl;
+	ofile.close();
+
+	delete sim;
+
+	return 0;
+}
+```
+
+之后输出一个毫秒命名的json文件
+
+
+
+#### maya显示
+
+直接变成一个k帧动画，可能数量大了有点慢，剩下就还好
+
+```python
+f = open(r"F:\Github\RVO2-3D\examples\86.txt","r")
+import json
+data = json.load(f)
+
+spheres_num = len(data[0])/3
+print "spheres num:"+str(spheres_num)
+
+base_name = "dmd"
+
+for i in range(spheres_num):
+    cmds.polySphere(name=base_name+'#')
+
+cur_time = 1
+
+sum_frames = len(data)
+print sum_frames
+
+for cur in range(sum_frames):
+    cmds.currentTime(cur +1)
+    for i in range(0,len(data[cur]),3):
+        pos = [data[cur][i],data[cur][i+1],data[cur][i+2]]
+        name = base_name + str((i/3)+1)
+        cmds.move(pos[0] + 2, pos[1], pos[2], name, ws=True)
+        cmds.setKeyframe(name, attribute='translate')
+
+```
+
+
+
+#### 精度
+
+| 时间精度 | 半径 | 实际最小碰撞 | 解算速度 |
+| -------- | ---- | ------------ | -------- |
+| 1.0      | 1.5  | 2.43         | 1s       |
+| 0.5      | 1.5  | 2.57         | 1s       |
+| 0.25     | 1.5  | 2.88         | 3s       |
+| 0.1      | 1.5  | 2.9          | 5s       |
+| 0.01     | 1.5  | 2.9          | 21s      |
+
+精度进一步提高会发现，碰撞没有提升了，可能是因为预测规避时间和给的最大速度不合适，这个就需要多试一试了
+
+解算速度比较粗，大概参考一下就行了。
+
+总体来说这个速度和精度完全够用，我需要模拟的物理效果够了，所以需要空中或者小范围内无寻路的避障，可以用。
+
+
+
+## Summary
+
+RVO2，不得不说yyds，4年前就是神了，太强了。
+
+
+
+## Quote
+
+> https://gamma.cs.unc.edu/RVO2/
