@@ -52,6 +52,14 @@ RVO2之前介绍过了，这里说一下平常RVO2都是二维的
 
 
 
+#### 源码结构
+
+![image-20210204172727686](https://i.loli.net/2021/02/04/R1SXaeBlGQ2iThb.png)
+
+可以看到Agent，就是实际的粒子，KdTree就不用说了用来保存邻近结构的，之前说过了，RVOSimulator就是具体的算法模拟器了。
+
+
+
 #### demo结构
 
 ```c++
@@ -138,6 +146,41 @@ timeHorizon，同理提前预测时间也就变成了秒
 ```
 
 当然如果转换成其他单位也是没问题的。
+
+
+
+#### 多线程加速
+
+可以看到模拟每一步的时候，源码中有加速使用OpenMP的宏，本身没有开启，需要定义一下开启这个宏。然后速度就更快一些了。
+
+```c++
+#define _OPENMP 1
+
+#ifdef _OPENMP
+#include <omp.h>
+#endif
+void RVOSimulator::doStep()
+	{
+		kdTree_->buildAgentTree();
+
+#ifdef _OPENMP
+#pragma omp parallel for
+#endif
+		for (int i = 0; i < static_cast<int>(agents_.size()); ++i) {
+			agents_[i]->computeNeighbors();
+			agents_[i]->computeNewVelocity();
+		}
+
+#ifdef _OPENMP
+#pragma omp parallel for
+#endif
+		for (int i = 0; i < static_cast<int>(agents_.size()); ++i) {
+			agents_[i]->update();
+		}
+
+		globalTime_ += timeStep_;
+	}
+```
 
 
 
@@ -420,6 +463,14 @@ for cur in range(sum_frames):
 解算速度比较粗，大概参考一下就行了。
 
 总体来说这个速度和精度完全够用，我需要模拟的物理效果够了，所以需要空中或者小范围内无寻路的避障，可以用。
+
+
+
+## 其他RVO库
+
+这是一个cython版本的RV2的库，有人好像用在blender上面
+
+> https://github.com/sybrenstuvel/Python-RVO2
 
 
 
