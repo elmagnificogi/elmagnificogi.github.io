@@ -1,0 +1,185 @@
+---
+layout:     post
+title:      "Valheim维京神殿服务器搭建"
+subtitle:   "steam，百万"
+date:       2021-02-16
+author:     "elmagnifico"
+header-img: "img/pen-head-bg.jpg"
+catalog:    true
+tags:
+    - game
+---
+
+## Foreword
+
+Valheim维京神殿，过年肝了一周多，发售短短十三天就超过了200w，游戏本身还处于ea阶段，完成度比较高，虽然还有不少小bug，但是不影响主要流程。
+
+这里记录一下服务器搭建流程，使用的是腾讯云，广州，轻量，2c，4g，6m，centos，平常大概cpu占用60-70左右，内存占用50%,这只是一个10人小服，单人数据流量大概在50Kbps。
+
+
+
+## setup
+
+首先安装环境，下载steamcmd
+
+```
+yum install -y xulrunner.i686
+mkdir ./steamcmd
+cd ./steamcmd
+wget https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz
+tar -xvzf steamcmd_linux.tar.gz
+```
+
+安装steam
+
+```
+./steamcmd.sh
+```
+
+steam匿名登陆，安装游戏服务器
+
+```
+login anonymous anonymous
+force_install_dir /root/steamcmd/valheim
+app_update 896660
+```
+
+修改服务器配置
+
+```
+vi /root/steamcmd/valheim/start_server.sh
+```
+
+服务器内容如下：
+
+```bash
+export templdpath=$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=./linux64:$LD_LIBRARY_PATH
+export SteamAppId=892970
+
+
+echo "Starting server PRESS CTRL-C to exit"
+
+# Tip: Make a local copy of this script to avoid it being overwritten by steam.
+# NOTE: Minimum password length is 5 characters & Password cant be in the server name.
+# NOTE: You need to make sure the ports 2456-2458 is being forwarded to your server through your local router & firewall.
+./valheim_server.x86_64 -name "服务器名称" -port 2456 -world "Dedicated" -password "password"
+
+export LD_LIBRARY_PATH=$templdpath
+```
+
+- 游戏服务器可以是中文名
+- 游戏的密码一定要超过5位
+- Dedicated 这个是世界名称，也就是创建的世界叫这个，同时存档也是这个名字对应的数据（如果是本地存档拿过来，需要把这个名字改得和本地一样）
+
+
+
+**注意，如果是云服务器，记得安全组开启端口2456-2458，我是把udp和tcp都开启了**
+
+
+
+## deploy
+
+安装screen
+
+```
+yum install -y screen
+```
+
+开启screen，启动服务器，启动以后就能进游戏里搜索到了
+
+```
+screen -S valheim
+cd /root/steamcmd/valheim
+./start_server.sh
+```
+
+关闭服务器，直接切回到对应的screen
+
+```
+scrren -r name
+然后ctrl+c结束服务器，等他自动保存一下即可
+```
+
+
+
+#### screen相关操作
+
+```
+显示screen
+screen -ls
+切换到某个screen
+screen -r name
+后台运行某个screen
+screen -d yourname
+结束某个screen
+screen -X -S yourname quit
+```
+
+
+
+## 其他问题
+
+服务器存档所在：
+
+```
+/root/.config/unity3d/IronGate/Valheim
+```
+
+其中world就是世界的存档，对应替换或者保存即可
+
+本地存档所在：
+
+```
+C:\Users\你的用户名\AppData\LocalLow\IronGate\Valheim
+```
+
+以下三个文件顾名思义，adminlist就是管理员steamid填入的地方
+
+```
+adminlist.txt
+bannedlist.txt
+permittedlist.txt
+```
+
+管理员权限，将steam64位id填入其中，也可以在游戏中通过按F2，看到对应的用户id
+
+```
+/root/.config/unity3d/IronGate/Valheim/adminlist.txt
+```
+
+steam id在这里查询
+
+> https://steamid.facheme.com/
+
+
+
+#### 更新
+
+steam匿名登陆以后，使用下面的命令更新服务端
+
+```
+app_update 896660 validate
+```
+
+
+
+可能会提示SDL缺失，无视即可
+
+
+
+## Summary
+
+这游戏突然就火了，类似的游戏，比如dayz，七日杀，方舟，rust我都玩过，他们某些地方都非常像，但是都缺少了一个主线流程，而Valheim更硬核一些，难度也更高一些，所有的东西都需要一步步解锁，冒险的感觉更加浓厚一些，不能一步登天，即使到了顶级科技依然需要小心翼翼，没了装备你就啥也不是。
+
+其中Valheim中pve的难度更高，而其他游戏中pvp的占比更高一些，或许当生存难度远高于pvp的时候，人更倾向于抱团吧，而当吃喝不愁的时候这个游戏可能又会转变成pvp吧。
+
+游戏目前内容还不完整，5本科技基本还没有任何内容，期待作者更新吧，游戏有一些机制还不完善，比如玩家自己可以带装备去别的服，传送门不允许传送矿（估计是减弱pvp或者说增加生产成本）
+
+服务器的数量从我开完的100多个，到今天已经是4800多个了，中文服务器数量多的吓人。
+
+
+
+## Quote
+
+> https://docs.qq.com/doc/DRXVpTmdoc1ZiYVBv
