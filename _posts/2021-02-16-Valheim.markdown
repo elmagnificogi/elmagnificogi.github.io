@@ -3,6 +3,7 @@ layout:     post
 title:      "Valheim维京神殿服务器搭建"
 subtitle:   "steam，百万"
 date:       2021-02-16
+update:     2021-02-17
 author:     "elmagnifico"
 header-img: "img/pen-head-bg.jpg"
 catalog:    true
@@ -156,10 +157,18 @@ steam id在这里查询
 
 #### 更新
 
-steam匿名登陆以后，使用下面的命令更新服务端
+先删除之前的服务端
 
 ```
-app_update 896660 validate
+rm -rf ./valheim/ 
+```
+
+steam匿名登陆以后，使用下面的命令更新服务端(由于游戏更新命令有问题，所以每次更新就是重下服务端)
+
+```
+login anonymous anonymous
+force_install_dir /root/steamcmd/valheim
+app_update 896660
 ```
 
 
