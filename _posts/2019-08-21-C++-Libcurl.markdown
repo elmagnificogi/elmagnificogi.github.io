@@ -3,6 +3,7 @@ layout:     post
 title:      "Visual Studio2017 编译使用libcurl"
 subtitle:   "C++,http"
 date:       2019-08-21
+update:     2021-02-23
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"
 catalog:    true

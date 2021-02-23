@@ -3,8 +3,10 @@ layout:     post
 title:      "git的自动化以及快捷设置"
 subtitle:   "git，自动push，一键上传"
 date:       2015-11-03
+update:     2021-02-23
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"
+catalog:    true
 tags:
     - git
     - blog
@@ -88,7 +90,7 @@ Win10下
 先去看看自己的 %HOME% 是在哪里 然后再用下面的命令不然就无效
 
     touch .git-credentials
-
+    
     vim .git-credentials
 
 文本内容为：
@@ -107,8 +109,8 @@ Win10下
 每次都得输入
 
     git add .
-	git commit -m "update-post"
-	git push origin master
+    git commit -m "update-post"
+    git push origin master
 
 好麻烦，得弄个什么一键完成比较快，刚好也不用输入账号密码，省事
 
@@ -143,9 +145,9 @@ Win10下
 
 	git clone <版本库地址>
 	git clone <版本库的网址> <本地目录名>
-
+	
 	我自己用的：
-
+	
 	git clone https://github.com/elmagnificogi/elmagnificogi.github.io
 
 直接克隆一个当前最新的版本的blog下来。
@@ -263,6 +265,18 @@ Win10下
     gitk
 
 图形化上面的各种命令和对比，更加直观。
+
+
+
+## git中文乱码
+
+```
+git config --global gui.encoding utf-8
+```
+
+修改编码模式即可
+
+
 
 ## Quote
 
