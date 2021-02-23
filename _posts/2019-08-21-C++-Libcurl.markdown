@@ -235,7 +235,7 @@ nmake -version
 如果你是VS2017且未更新到最新版，VC=15建议改为VC=14
 更详细的编译指令及说明可以打开winbuild文件夹中的BUILD.WINDOWS.txt查看或者直接从Makefile.vc查看也可以得到更详细的解释
 
-```
+```makefile
 !MESSAGE Usage: nmake /f Makefile.vc mode=<static or dll> <options>
 !MESSAGE where <options> is one or many of:
 !MESSAGE   VC=<6,7,8,9,10,11,12,14,15>    - VC versions
@@ -362,7 +362,7 @@ curl_easy_init()
 还没完，上面有一个奇怪的地方，基本所有人的教程都是这样的，明明是用的静态编译，但是为什么最后编译出来以后是在/MD模式下进行的编译
 
 - /MD 这个模式下，所有库使用的都是动态链接库，也就是DLL文件，这样依赖的情况下，就需要各种DLL，但是我们这里只有LIB文件，并没有一个DLL，可以却使用了/MD，这就很奇怪了，我查过以后基本所有人都是这么操作的，但是我的程序里是全部/MT,我本身程序是想生成一个DLL文件，是不想额外依赖一堆DLL
-- /MD 这种模式下，在生成代码时使用的是静态链接库，也就是直接将所使用的非我所写的code的定义直接拿过来用，而不是去依赖其他文件，讲道理前面对libcurl选择了一堆静态编译，实际上使用的时候却用了动态，这就很维和
+- /MT 这种模式下，在生成代码时使用的是静态链接库，也就是直接将所使用的非我所写的code的定义直接拿过来用，而不是去依赖其他文件，讲道理前面对libcurl选择了一堆静态编译，实际上使用的时候却用了动态，这就很维和
 
 这里如果直接修改第四步为/MT，那么编译会报错
 
@@ -408,7 +408,7 @@ msvcrt.lib
 - Makefile.vc 其实只是用来解析处理命令行传过去的参数的，当其处理完参数以后调用的是MakefileBuild.vc
 - MakefileBuild.vc 则是根据参数来决定到底该如何处理这些参数，实际应该调用什么程序 带什么样的参数来编译 连接
 
-```
+```makefile
 # Runtime library configuration
 
 !IF "$(RTLIBCFG)"=="static"
@@ -438,7 +438,7 @@ RTLIBCFG这个参数在Makefile.vc中完全没有提及，我是反向往下找�
 
 其实呢，在BUILD.WINDOWS.txt中有提到这个参数，但是是不推荐使用的，因为这个使用的人很少，而且使用的不确定性比较大
 
-```
+```makefile
 # Static linking of Microsoft's C RunTime (CRT):
 
 If you are using mode=static nmake will create and link to the static build of
@@ -454,7 +454,7 @@ so that nmake can build it from scratch.
 
 然后使用的时候要注意，每次把builds文件夹都删掉，确保每次编译的时候都是使用的当前参数进行编译的，否则有可能参数不起作用。
 
-```
+```makefile
 nmake /f Makefile.vc mode=static VC=11 ENABLE_IDN=no ENABLE_SSPI=no DEBUG=no MACHINE=x64 RTLIBCFG=static
 ```
 
