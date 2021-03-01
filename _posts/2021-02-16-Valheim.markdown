@@ -3,7 +3,7 @@ layout:     post
 title:      "Valheim维京神殿服务器搭建"
 subtitle:   "steam，百万"
 date:       2021-02-16
-update:     2021-02-17
+update:     2021-03-01
 author:     "elmagnifico"
 header-img: "img/pen-head-bg.jpg"
 catalog:    true
@@ -16,6 +16,10 @@ tags:
 Valheim维京神殿，过年肝了一周多，发售短短十三天就超过了200w，游戏本身还处于ea阶段，完成度比较高，虽然还有不少小bug，但是不影响主要流程。
 
 这里记录一下服务器搭建流程，使用的是腾讯云，广州，轻量，2c，4g，6m，centos，平常大概cpu占用60-70左右，内存占用50%,这只是一个10人小服，单人数据流量大概在50Kbps。
+
+2021.3.1更新：
+
+服务器优化以后没人的情况下cpu占用10%以下吧，每多一个人多8-10%左右，内存空载就1.9g了，所以至少要3g的服务器开起来才正常
 
 
 
@@ -157,7 +161,7 @@ steam id在这里查询
 
 #### 更新
 
-先删除之前的服务端
+先删除之前的服务端，删之前记得备份一下start_server.sh，不然一会更新以后还得重新设置一下
 
 ```
 rm -rf ./valheim/ 
@@ -166,14 +170,15 @@ rm -rf ./valheim/
 steam匿名登陆以后，使用下面的命令更新服务端(由于游戏更新命令有问题，所以每次更新就是重下服务端)
 
 ```
+./steamcmd.sh
 login anonymous anonymous
 force_install_dir /root/steamcmd/valheim
 app_update 896660
 ```
 
-
-
 可能会提示SDL缺失，无视即可
+
+然后重新把start_server.sh拷贝回来
 
 
 
