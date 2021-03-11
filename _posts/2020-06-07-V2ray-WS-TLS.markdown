@@ -115,7 +115,6 @@ BASH_ENV=/root/.bashrc
 
 0 3 1 * * service nginx stop
 1 3 1 * * /root/certbot-auto renew --renew-hook "sudo nginx -s reload" && service nginx start
-*/1 * * * * /root/elmagnificogi.github.io/deploy.sh  >> /root/cronblogpull.log
 ```
 
 这个表示每月1号.凌晨3点自动执行renew,自动续期,并且重新加载nginx
