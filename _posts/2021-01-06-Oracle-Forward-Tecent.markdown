@@ -230,7 +230,11 @@ chmod +x v2ray_ws_tls1.3.sh
 
 BBR加速脚本
 
-> wget -N --no-check-certificate "https://raw.githubusercontent.com/chiakge/Linux-NetSpeed/master/tcp.sh" && chmod +x tcp.sh && ./tcp.sh
+```bash
+wget -N --no-check-certificate "https://raw.githubusercontent.com/chiakge/Linux-NetSpeed/master/tcp.sh" 
+chmod +x tcp.sh 
+./tcp.sh
+```
 
 **这个脚本也有一个bug，就是偶尔如果你卸载已有的多余内核，大概率会导致引导失败，所以建议不要卸载内核，可以的情况下直接安装新内核就行了**
 

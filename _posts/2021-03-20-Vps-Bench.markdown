@@ -1,0 +1,337 @@
+---
+layout:     post
+title:      "VPS 性能测试"
+subtitle:   "centos,pacificrack"
+date:       2021-03-20
+author:     "elmagnifico"
+header-img: "img/cap-head-bg.jpg"
+catalog:    true
+tags:
+    - vps
+---
+
+## Foreword
+
+最近又上了一趟贼车，pacificrack的4c，6g，1g带宽，15T流量，1快照，1完整备份，只需要20刀，最长可以3年。但是基于pacificrack的名声，可能会翻车，由于我是paypal支付，所以出了问题就争议退款。
+
+
+
+鉴于多人说实际性能不怎么样，我通过各种bench，测试了一下（我这个送了80g硬盘+快照）
+
+
+
+## Unix Bench
+
+```bash
+wget --no-check-certificate https://github.com/teddysun/across/raw/master/unixbench.sh
+chmod +x unixbench.sh
+./unixbench.sh
+```
+
+结果：
+
+```bash
+Benchmark Run: Fri Mar 19 2021 23:39:24 - 00:07:45
+4 CPUs in system; running 1 parallel copy of tests
+
+Dhrystone 2 using register variables       32769571.0 lps   (10.0 s, 7 samples)
+Double-Precision Whetstone                     4147.0 MWIPS (9.9 s, 7 samples)
+Execl Throughput                               1930.7 lps   (30.0 s, 2 samples)
+File Copy 1024 bufsize 2000 maxblocks        396952.7 KBps  (30.0 s, 2 samples)
+File Copy 256 bufsize 500 maxblocks          103971.2 KBps  (30.0 s, 2 samples)
+File Copy 4096 bufsize 8000 maxblocks       1103305.1 KBps  (30.0 s, 2 samples)
+Pipe Throughput                              595502.3 lps   (10.0 s, 7 samples)
+Pipe-based Context Switching                  55771.5 lps   (10.0 s, 7 samples)
+Process Creation                               6604.0 lps   (30.0 s, 2 samples)
+Shell Scripts (1 concurrent)                   4182.4 lpm   (60.0 s, 2 samples)
+Shell Scripts (8 concurrent)                   1408.4 lpm   (60.3 s, 2 samples)
+System Call Overhead                         479262.4 lps   (10.0 s, 7 samples)
+
+System Benchmarks Index Values               BASELINE       RESULT    INDEX
+Dhrystone 2 using register variables         116700.0   32769571.0   2808.0
+Double-Precision Whetstone                       55.0       4147.0    754.0
+Execl Throughput                                 43.0       1930.7    449.0
+File Copy 1024 bufsize 2000 maxblocks          3960.0     396952.7   1002.4
+File Copy 256 bufsize 500 maxblocks            1655.0     103971.2    628.2
+File Copy 4096 bufsize 8000 maxblocks          5800.0    1103305.1   1902.3
+Pipe Throughput                               12440.0     595502.3    478.7
+Pipe-based Context Switching                   4000.0      55771.5    139.4
+Process Creation                                126.0       6604.0    524.1
+Shell Scripts (1 concurrent)                     42.4       4182.4    986.4
+Shell Scripts (8 concurrent)                      6.0       1408.4   2347.4
+System Call Overhead                          15000.0     479262.4    319.5
+                                                                   ========
+System Benchmarks Index Score                                         745.5
+
+------------------------------------------------------------------------
+Benchmark Run: Sat Mar 20 2021 00:07:45 - 00:36:02
+4 CPUs in system; running 4 parallel copies of tests
+
+Dhrystone 2 using register variables       94679036.7 lps   (10.0 s, 7 samples)
+Double-Precision Whetstone                    15287.7 MWIPS (10.1 s, 7 samples)
+Execl Throughput                               7155.2 lps   (29.9 s, 2 samples)
+File Copy 1024 bufsize 2000 maxblocks        641809.0 KBps  (30.0 s, 2 samples)
+File Copy 256 bufsize 500 maxblocks          141514.9 KBps  (30.0 s, 2 samples)
+File Copy 4096 bufsize 8000 maxblocks       1864143.6 KBps  (30.0 s, 2 samples)
+Pipe Throughput                             1591971.6 lps   (10.0 s, 7 samples)
+Pipe-based Context Switching                 256414.5 lps   (10.0 s, 7 samples)
+Process Creation                              18777.3 lps   (30.0 s, 2 samples)
+Shell Scripts (1 concurrent)                  10464.2 lpm   (60.0 s, 2 samples)
+Shell Scripts (8 concurrent)                   1603.2 lpm   (60.1 s, 2 samples)
+System Call Overhead                        1451512.8 lps   (10.0 s, 7 samples)
+
+System Benchmarks Index Values               BASELINE       RESULT    INDEX
+Dhrystone 2 using register variables         116700.0   94679036.7   8113.0
+Double-Precision Whetstone                       55.0      15287.7   2779.6
+Execl Throughput                                 43.0       7155.2   1664.0
+File Copy 1024 bufsize 2000 maxblocks          3960.0     641809.0   1620.7
+File Copy 256 bufsize 500 maxblocks            1655.0     141514.9    855.1
+File Copy 4096 bufsize 8000 maxblocks          5800.0    1864143.6   3214.0
+Pipe Throughput                               12440.0    1591971.6   1279.7
+Pipe-based Context Switching                   4000.0     256414.5    641.0
+Process Creation                                126.0      18777.3   1490.3
+Shell Scripts (1 concurrent)                     42.4      10464.2   2468.0
+Shell Scripts (8 concurrent)                      6.0       1603.2   2672.0
+System Call Overhead                          15000.0    1451512.8    967.7
+                                                                   ========
+System Benchmarks Index Score                                        1818.0
+```
+
+
+
+
+
+## Yet-Another-Bench-Script
+
+这个本质上还是Geek Bench测试的
+
+```bash
+curl -sL yabs.sh | bash
+```
+
+结果：
+
+```
+# ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## #
+#              Yet-Another-Bench-Script              #
+#                     v2020-12-29                    #
+# https://github.com/masonr/yet-another-bench-script #
+# ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## #
+
+Sat Mar 20 17:20:52 HKT 2021
+
+Basic System Information:
+---------------------------------
+Processor  : Intel(R) Xeon(R) CPU E5-2650 v2 @ 2.60GHz
+CPU cores  : 4 @ 2599.998 MHz
+AES-NI     : ✔ Enabled
+VM-x/AMD-V : ✔ Enabled
+RAM        : 5.7 GiB
+Swap       : 0.0 KiB
+Disk       : 78.7 GiB
+
+fio Disk Speed Tests (Mixed R/W 50/50):
+---------------------------------
+Block Size | 4k            (IOPS) | 64k           (IOPS)
+  ------   | ---            ----  | ----           ---- 
+Read       | 88.68 MB/s   (22.1k) | 403.71 MB/s   (6.3k)
+Write      | 88.92 MB/s   (22.2k) | 405.83 MB/s   (6.3k)
+Total      | 177.61 MB/s  (44.4k) | 809.55 MB/s  (12.6k)
+           |                      |                     
+Block Size | 512k          (IOPS) | 1m            (IOPS)
+  ------   | ---            ----  | ----           ---- 
+Read       | 407.35 MB/s    (795) | 324.99 MB/s    (317)
+Write      | 428.99 MB/s    (837) | 346.63 MB/s    (338)
+Total      | 836.35 MB/s   (1.6k) | 671.62 MB/s    (655)
+
+iperf3 Network Speed Tests (IPv4):
+---------------------------------
+Provider        | Location (Link)           | Send Speed      | Recv Speed     
+                |                           |                 |                
+Clouvider       | London, UK (10G)          | 851 Mbits/sec   | 248 Mbits/sec  
+Online.net      | Paris, FR (10G)           | 811 Mbits/sec   | 67.9 Mbits/sec 
+WorldStream     | The Netherlands (10G)     | busy            | 356 Mbits/sec  
+Biznet          | Jakarta, Indonesia (1G)   | 724 Mbits/sec   | 120 Mbits/sec  
+Clouvider       | NYC, NY, US (10G)         | 904 Mbits/sec   | 353 Mbits/sec  
+Velocity Online | Tallahassee, FL, US (10G) | 853 Mbits/sec   | 588 Mbits/sec  
+Clouvider       | Los Angeles, CA, US (10G) | 950 Mbits/sec   | 828 Mbits/sec  
+Iveloz Telecom  | Sao Paulo, BR (2G)        | 754 Mbits/sec   | 20.4 Mbits/sec 
+
+Running GB5 benchmark test... *cue elevator music*
+Geekbench 5 Benchmark Test:
+---------------------------------
+Test            | Value                         
+                |                               
+Single Core     | 528                           
+Multi Core      | 1521                          
+Full Test       | https://browser.geekbench.com/v5/cpu/7035562
+```
+
+
+
+![image-20210320173245408](https://i.loli.net/2021/03/20/8nps4IENQChrqUV.png)
+
+
+
+## Geek Bench
+
+```bash
+wget http://cdn.geekbench.com/Geekbench-5.1.0-Linux.tar.gz
+tar -xzvf Geekbench-5.1.0-Linux.tar.gz
+cd Geekbench-5.1.0-Linux
+./geekbench5
+```
+
+
+
+```
+Geekbench 5.1.0 Tryout : https://www.geekbench.com/
+
+Geekbench 5 is in tryout mode.
+
+Geekbench 5 requires an active Internet connection when in tryout mode, and 
+automatically uploads test results to the Geekbench Browser. Other features 
+are unavailable in tryout mode.
+
+Buy a Geekbench 5 license to enable offline use and remove the limitations of 
+tryout mode.
+
+If you would like to purchase Geekbench you can do so online:
+
+  https://store.primatelabs.com/v5
+
+If you have already purchased Geekbench, enter your email address and license 
+key from your email receipt with the following command line:
+
+  ./geekbench5 -r <email address> <license key>
+
+  Running Gathering system information
+System Information
+  Operating System              Linux 3.10.0-1127.el7.x86_64 x86_64
+  Model                         Red Hat KVM
+  Motherboard                   N/A
+  BIOS                          SeaBIOS 1.11.0-2.el7
+
+Processor Information
+  Name                          Intel Xeon E5-2650 v2
+  Topology                      1 Processor, 4 Cores
+  Identifier                    GenuineIntel Family 6 Model 62 Stepping 4
+  Base Frequency                2.60 GHz
+  L1 Instruction Cache          32.0 KB x 4
+  L1 Data Cache                 32.0 KB x 4
+  L2 Cache                      4.00 MB x 4
+  L3 Cache                      16.0 MB
+
+Memory Information
+  Size                          5.67 GB
+Single-Core
+  Running AES-XTS
+  Running Text Compression
+  Running Image Compression
+  Running Navigation
+  Running HTML5
+  Running SQLite
+  Running PDF Rendering
+  Running Text Rendering
+  Running Clang
+  Running Camera
+  Running N-Body Physics
+  Running Rigid Body Physics
+  Running Gaussian Blur
+  Running Face Detection
+  Running Horizon Detection
+  Running Image Inpainting
+  Running HDR
+  Running Ray Tracing
+  Running Structure from Motion
+  Running Speech Recognition
+  Running Machine Learning
+
+Multi-Core
+  Running AES-XTS
+  Running Text Compression
+  Running Image Compression
+  Running Navigation
+  Running HTML5
+  Running SQLite
+  Running PDF Rendering
+  Running Text Rendering
+  Running Clang
+  Running Camera
+  Running N-Body Physics
+  Running Rigid Body Physics
+  Running Gaussian Blur
+  Running Face Detection
+  Running Horizon Detection
+  Running Image Inpainting
+  Running HDR
+  Running Ray Tracing
+  Running Structure from Motion
+  Running Speech Recognition
+  Running Machine Learning
+
+
+Uploading results to the Geekbench Browser. This could take a minute or two 
+depending on the speed of your internet connection.
+
+Upload succeeded. Visit the following link and view your results online:
+
+  https://browser.geekbench.com/v5/cpu/7035402
+
+Visit the following link and add this result to your profile:
+
+  https://browser.geekbench.com/v5/cpu/7035402/claim?key=543203
+
+```
+
+![image-20210320173316125](https://i.loli.net/2021/03/20/1wBI4Rtx8L9n7ZA.png)
+
+![image-20210320173401114](https://i.loli.net/2021/03/20/1usbKVpHh82CAJD.png)
+
+![image-20210320173424233](https://i.loli.net/2021/03/20/bI3dSMaHWNA8BzX.png)
+
+![image-20210320173506697](https://i.loli.net/2021/03/20/6Dap47ZFiAXC5YJ.png)
+
+![image-20210320173446675](https://i.loli.net/2021/03/20/SflIjUeiAF8uvqk.png)
+
+
+
+## 内存测试
+
+看看是否可以真实获取到对应大小的内存
+
+```bash
+yum install wget -y
+yum groupinstall "Development Tools" -y
+wget https://raw.githubusercontent.com/FunctionClub/Memtester/master/memtester.cpp
+gcc -l stdc++ memtester.cpp
+./a.out
+```
+
+结果
+
+```bash
+....
+5500MB allocated
+5510MB allocated
+5520MB allocated
+5530MB allocated
+5540MB allocated
+5550MB allocated
+5560MB allocated
+Killed
+```
+
+
+
+## Summary
+
+就这样吧，日后坑了再说，不坑的话就拿来挂个游戏服务器好了
+
+
+
+## Quote
+
+> https://zhuanlan.zhihu.com/p/105635097
+>
+> https://zhuanlan.zhihu.com/p/117547388
