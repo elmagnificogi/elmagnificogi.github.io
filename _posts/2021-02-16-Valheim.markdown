@@ -3,7 +3,7 @@ layout:     post
 title:      "Valheim维京神殿服务器搭建"
 subtitle:   "steam，百万"
 date:       2021-02-16
-update:     2021-03-01
+update:     2021-03-27
 author:     "elmagnifico"
 header-img: "img/pen-head-bg.jpg"
 catalog:    true
@@ -68,7 +68,7 @@ echo "Starting server PRESS CTRL-C to exit"
 # Tip: Make a local copy of this script to avoid it being overwritten by steam.
 # NOTE: Minimum password length is 5 characters & Password cant be in the server name.
 # NOTE: You need to make sure the ports 2456-2458 is being forwarded to your server through your local router & firewall.
-./valheim_server.x86_64 -name "服务器名称" -port 2456 -world "Dedicated" -password "password"
+./valheim_server.x86_64 -name "服务器名称" -port 2456 -world "Dedicated" -password "password"  -public 1
 
 export LD_LIBRARY_PATH=$templdpath
 ```
@@ -76,6 +76,7 @@ export LD_LIBRARY_PATH=$templdpath
 - 游戏服务器可以是中文名
 - 游戏的密码一定要超过5位
 - Dedicated 这个是世界名称，也就是创建的世界叫这个，同时存档也是这个名字对应的数据（如果是本地存档拿过来，需要把这个名字改得和本地一样）
+- public 1 表示可以从社区服务器中搜索到，如果0的话就是只能ip连接，搜索不到
 
 
 
@@ -191,6 +192,10 @@ app_update 896660
 游戏目前内容还不完整，5本科技基本还没有任何内容，期待作者更新吧，游戏有一些机制还不完善，比如玩家自己可以带装备去别的服，传送门不允许传送矿（估计是减弱pvp或者说增加生产成本）
 
 服务器的数量从我开完的100多个，到今天已经是4800多个了，中文服务器数量多的吓人。
+
+
+
+2021.3.27更新：服务器目前有8000+，而游戏卖出了六百万份，真的牛皮，倒是一点内容都没有更新，全都是修复问题的。
 
 
 
