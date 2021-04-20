@@ -124,17 +124,25 @@ RVO在VO的基础上，将可行速度区域按照VO的两侧分成了左可行�
 
 - Optimal Reciprocal Collision Avoidance
 
+简单说就是基于RVO理论的调优，将计算复杂度降低成低维度的线性规划问题。可以把论文作为RVO算法的一次理论实践，对实现细节给出了具体说明和调优等。
 
+由于这里是具体的实践，所以又增加了一部分定义
+
+- rA，A的半径，可以认为A是个球，这是他的安全半径
+- VA_pref，A的目标速度或者期望速度矢量
+- VA_max，A的最大速度
+
+结合之前的PA和VA，这些量被认为是一个智能的内部具有的状态。
+
+在考虑u的时候，由于所有智能体都算法一致，所以认为每个人都只需要考虑1/2 u即可。
+
+![image-20210420162557239](https://i.loli.net/2021/04/20/ZJiCNhcWbkevztq.png)
+
+![image-20210420162525979](https://i.loli.net/2021/04/20/i4YMlJcn7sKytWL.png)
 
 #### AVO2
 
 - Reciprocal Collision Avoidance with Acceleration-Velocity Obstacles
-
-
-
-
-
-
 
 
 
