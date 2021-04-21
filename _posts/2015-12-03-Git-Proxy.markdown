@@ -3,6 +3,7 @@ layout:     post
 title:      "Shadowsocks与git的代理设置"
 subtitle:   "proxy，SocksCap64，pac"
 date:       2015-12-03
+update:     2021-04-21
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"
 tags:
@@ -174,19 +175,19 @@ PAC规则分为两种，一种是可以直接应用官方的规则比如GFWlist�
 同时由于新疆上不去github，但是内地可以上去，所以在这个基础上又加上了github的全站过滤。
 
 	function FindProxyForURL(url, host) {
-
-    if (shExpMatch(url,"http://elmagnificogi.github.io./")) {
-        return direct;
-    }
-
-    if (shExpMatch(url,"*github.com*")) {
-        return proxy;
-    }
-
-    if (defaultMatcher.matchesAny(url, host) instanceof BlockingFilter) {
-        return proxy;
-    }
-    return direct;
+	
+	if (shExpMatch(url,"http://elmagnificogi.github.io./")) {
+	    return direct;
+	}
+	
+	if (shExpMatch(url,"*github.com*")) {
+	    return proxy;
+	}
+	
+	if (defaultMatcher.matchesAny(url, host) instanceof BlockingFilter) {
+	    return proxy;
+	}
+	return direct;
 }
 
 经过这样的折腾，总算是上网什么的没问题了
@@ -209,13 +210,18 @@ PAC规则分为两种，一种是可以直接应用官方的规则比如GFWlist�
 
 可以在~/.profile或~/.bashrc里加上：
 
-(这两个文件在git目录中windows中叫profile或bash.bashrc)
+(这两个文件在windows的git安装路径中叫profile或bash.bashrc)
 
+	enable_proxy() {
+	    export http_proxy="127.0.0.1:1081"
+	    export https_proxy="127.0.0.1:1081"
+	}
+	或者
 	enable_proxy() {
 	    export http_proxy="127.0.0.1:1080"
 	    export https_proxy="127.0.0.1:1080"
 	}
-
+	
 	disable_proxy() {
 	    unset http_proxy
 	    unset https_proxy
