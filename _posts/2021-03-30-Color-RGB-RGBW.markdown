@@ -3,7 +3,7 @@ layout:     post
 title:      "RGB转换到RGBW"
 subtitle:   "HDR,色域"
 date:       2021-03-30
-update:     2021-04-14
+update:     2021-04-22
 author:     "elmagnifico"
 header-img: "img/led.jpg"
 catalog:    true
@@ -118,6 +118,38 @@ tags:
 平常3D LUT，一般都是用4x4x4的矩阵，相当于是步进64（0-255），这样可以做一个粗校准。也有用17x17x17的，我这里直接用的是64x64x64的，这样得到的更加准确，只是建表时间比较长而已。
 
 3D LUT 除了可以拿来校准，实际上很多相机或者图片，视频编辑软件也会拿来做滤镜或者调色。
+
+
+
+## python 画出CIE分布
+
+首先需要安装colour-science 的库
+
+```bash
+pip install --user colour-science 
+# 走代理
+pip --proxy 127.0.0.1:1081 install --user colour-science 
+```
+
+然后用个np的数组或者list都可以直接输出，得到对应的颜色分布
+
+```python
+import colour
+import numpy as np
+
+# RGB = colour.read_image('F://temp//ACES2065-1_ColorChecker2014.exr')
+# RGB = colour.read_image(r'ACES2065-1_ColorChecker2014.exr')
+# RGB = np.array([[[1, 1, 1], [0.5, 0.5, 0.5], [0.2, 0.2, 0.2], [0.3, 0.3, 0.3]],[[1, 1, 1], [0.5, 0.5, 0.5], [0.2, 0.2, 0.2], [0.3, 0.3, 0.3]],[[1, 1, 1], [0.5, 0.5, 0.5], [0.2, 0.2, 0.2], [0.3, 0.3, 0.3]],[[1, 1, 1], [0.5, 0.5, 0.5], [0.2, 0.2, 0.2], [0.3, 0.3, 0.3]]])
+RGB = np.array([[0.36653649, 0.07554075, 0.28952463], [0.69990608,0.53677301,0.61425992],[0.99,0.99,0.99]])
+#RGB = np.random.random((2, 1, 3))
+print(RGB)
+colour.plotting.plot_RGB_chromaticities_in_chromaticity_diagram_CIE1931(
+    RGB, colourspace='ACES2065-1', colourspaces=['sRGB'], scatter_kwargs={'c': 'RGB'})
+```
+
+更复杂一些的应用可以看我blog对应的代码仓库，一些小工具，小脚本就都直接写在这个里面了。
+
+> https://github.com/elmagnificogi/MyTools
 
 
 

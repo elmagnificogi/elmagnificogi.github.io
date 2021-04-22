@@ -118,6 +118,30 @@ journalctl | grep ss-server
 
 
 
+##  问题
+
+中间还遇到一个ss莫名其妙block了一个内网，主要是由于握手失败，导致ss直接屏蔽了来源ip。然后由于所有来源都是来自于内网，等于直接把所有信息都屏蔽了。
+
+```
+Apr 21 00:38:14 qianxue2333 ss-server[1750]: 2021-04-21 00:38:14 ERROR: failed to handshake with 172.24.1.224: authentication error
+Apr 21 00:38:14 qianxue2333 ss-server[1750]: 2021-04-21 00:38:14 ERROR: failed to handshake with 172.24.1.224: authentication error
+Apr 21 00:38:14 qianxue2333 ss-server[1750]: 2021-04-21 00:38:14 ERROR: failed to handshake with 172.24.1.224: authentication error
+Apr 21 00:38:14 qianxue2333 ss-server[1750]: 2021-04-21 00:38:14 ERROR: failed to handshake with 172.24.1.224: authentication error
+Apr 21 00:38:14 qianxue2333 ss-server[1750]: 2021-04-21 00:38:14 ERROR: failed to handshake with 172.24.1.224: authentication error
+Apr 21 00:38:15 qianxue2333 ss-server[1750]: 2021-04-21 00:38:15 ERROR: failed to handshake with 172.24.1.224: authentication error
+Apr 21 00:38:15 qianxue2333 ss-server[1750]: 2021-04-21 00:38:15 ERROR: failed to handshake with 172.24.1.224: authentication error
+...
+Apr 21 00:38:15 qianxue2333 ss-server[1750]: 2021-04-21 00:38:15 ERROR: block all requests from 172.24.1.224
+Apr 21 00:38:15 qianxue2333 ss-server[1750]: 2021-04-21 00:38:15 ERROR: block all requests from 172.24.1.224
+Apr 21 00:38:15 qianxue2333 ss-server[1750]: 2021-04-21 00:38:15 ERROR: block all requests from 172.24.1.224
+Apr 21 00:38:15 qianxue2333 ss-server[1750]: 2021-04-21 00:38:15 ERROR: block all requests from 172.24.1.224
+Apr 21 00:38:18 qianxue2333 ss-server[1750]: 2021-04-21 00:38:18 ERROR: block all requests from 172.24.1.224
+```
+
+这个问题很好解决，直接重启一下机器就好了。重启ss可能并不行。
+
+
+
 ## Summary
 
 如果可以的话尽量还是加一个落地vps然后IPLC转发流量，这样的话更快一些
