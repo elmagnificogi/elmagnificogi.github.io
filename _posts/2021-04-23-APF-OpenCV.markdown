@@ -7,7 +7,8 @@ author:     "elmagnifico"
 header-img: "img/bg3.jpg"
 catalog:    true
 tags:
-    - vps
+    - python
+    - pathfinding
 ---
 
 ## Foreword
