@@ -88,6 +88,7 @@ sudo apt-get install python-pip
 ```bash
 sudo apt-get curl
 curl https://bootstrap.pypa.io/pip/2.7/get-pip.py --output get-pip.py
+python2.7 ./get-pip.py
 ```
 
 - 注意这里不要从这里拉pip.py，这里以后只有pip21以上的版本了，对应至少也是python3.6
@@ -132,6 +133,14 @@ python2.7 -m pip install xlrd
 
 ```bash
 python2.7 -m pip install numpy
+```
+
+
+
+#### libcanberra-gtk-module
+
+```
+sudo apt-get install libcanberra-gtk-module -y
 ```
 
 
@@ -203,62 +212,40 @@ make
 如果提示缺少CODEC_FLAG_GLOBAL_HEADER，AVFMT_RAWPICTURE，CODEC_FLAG_GLOBAL_HEADER之类的声明，那是为什么你现在的ffmpeg的库太新了，这几个老定义已经移除了，这就导致他找到不了。
 
 ```bash
-In file included from /data/user1/Downloads/opencv31/opencv-2.4.13/modules/videoio/src/cap_ffmpeg.cpp:45:0:
-/data/user1/Downloads/opencv31/opencv-2.4.13/modules/videoio/src/cap_ffmpeg_impl.hpp: In function ‘AVStream* icv_add_video_stream_FFMPEG(AVFormatContext*, AVCodecID, int, int, int, double, int)’:
-/data/user1/Downloads/opencv31/opencv-2.4.13/modules/videoio/src/cap_ffmpeg_impl.hpp:1313:21: error: ‘CODEC_FLAG_GLOBAL_HEADER’ was not declared in this scope
-         c->flags |= CODEC_FLAG_GLOBAL_HEADER;
-                     ^~~~~~~~~~~~~~~~~~~~~~~~
-/data/user1/Downloads/opencv31/opencv-2.4.13/modules/videoio/src/cap_ffmpeg_impl.hpp:1313:21: note: suggested alternative: ‘AV_CODEC_FLAG_GLOBAL_HEADER’
-         c->flags |= CODEC_FLAG_GLOBAL_HEADER;
-                     ^~~~~~~~~~~~~~~~~~~~~~~~
-                     AV_CODEC_FLAG_GLOBAL_HEADER
-/data/user1/Downloads/opencv31/opencv-2.4.13/modules/videoio/src/cap_ffmpeg_impl.hpp: In function ‘int icv_av_write_frame_FFMPEG(AVFormatContext*, AVStream*, uint8_t*, uint32_t, AVFrame*)’:
-/data/user1/Downloads/opencv31/opencv-2.4.13/modules/videoio/src/cap_ffmpeg_impl.hpp:1337:30: error: ‘AVFMT_RAWPICTURE’ was not declared in this scope
-     if (oc->oformat->flags & AVFMT_RAWPICTURE) {
-                              ^~~~~~~~~~~~~~~~
-/data/user1/Downloads/opencv31/opencv-2.4.13/modules/videoio/src/cap_ffmpeg_impl.hpp:1337:30: note: suggested alternative: ‘AVFMT_NOFILE’
-     if (oc->oformat->flags & AVFMT_RAWPICTURE) {
-                              ^~~~~~~~~~~~~~~~
-                              AVFMT_NOFILE
-/data/user1/Downloads/opencv31/opencv-2.4.13/modules/videoio/src/cap_ffmpeg_impl.hpp: In member function ‘void CvVideoWriter_FFMPEG::close()’:
-/data/user1/Downloads/opencv31/opencv-2.4.13/modules/videoio/src/cap_ffmpeg_impl.hpp:1525:35: error: ‘AVFMT_RAWPICTURE’ was not declared in this scope
-         if( (oc->oformat->flags & AVFMT_RAWPICTURE) == 0 )
-                                   ^~~~~~~~~~~~~~~~
-/data/user1/Downloads/opencv31/opencv-2.4.13/modules/videoio/src/cap_ffmpeg_impl.hpp:1525:35: note: suggested alternative: ‘AVFMT_NOFILE’
-         if( (oc->oformat->flags & AVFMT_RAWPICTURE) == 0 )
-                                   ^~~~~~~~~~~~~~~~
-                                   AVFMT_NOFILE
-In file included from /data/user1/Downloads/opencv31/opencv-2.4.13/modules/videoio/src/cap_ffmpeg.cpp:45:0:
-/data/user1/Downloads/opencv31/opencv-2.4.13/modules/videoio/src/cap_ffmpeg_impl.hpp: In member function ‘bool CvVideoWriter_FFMPEG::open(const char*, int, double, int, int, bool)’:
-/data/user1/Downloads/opencv31/opencv-2.4.13/modules/videoio/src/cap_ffmpeg_impl.hpp:1825:32: error: ‘AVFMT_RAWPICTURE’ was not declared in this scope
-     if (!(oc->oformat->flags & AVFMT_RAWPICTURE)) {
-                                ^~~~~~~~~~~~~~~~
-/data/user1/Downloads/opencv31/opencv-2.4.13/modules/videoio/src/cap_ffmpeg_impl.hpp:1825:32: note: suggested alternative: ‘AVFMT_NOFILE’
-     if (!(oc->oformat->flags & AVFMT_RAWPICTURE)) {
-                                ^~~~~~~~~~~~~~~~
-                                AVFMT_NOFILE
-/data/user1/Downloads/opencv31/opencv-2.4.13/modules/videoio/src/cap_ffmpeg_impl.hpp: In static member function ‘static AVStream* OutputMediaStream_FFMPEG::addVideoStream(AVFormatContext*, AVCodecID, int, int, int, double, AVPixelFormat)’:
-/data/user1/Downloads/opencv31/opencv-2.4.13/modules/videoio/src/cap_ffmpeg_impl.hpp:2124:25: error: ‘CODEC_FLAG_GLOBAL_HEADER’ was not declared in this scope
-             c->flags |= CODEC_FLAG_GLOBAL_HEADER;
-                         ^~~~~~~~~~~~~~~~~~~~~~~~
-/data/user1/Downloads/opencv31/opencv-2.4.13/modules/videoio/src/cap_ffmpeg_impl.hpp:2124:25: note: suggested alternative: ‘AV_CODEC_FLAG_GLOBAL_HEADER’
-             c->flags |= CODEC_FLAG_GLOBAL_HEADER;
-                         ^~~~~~~~~~~~~~~~~~~~~~~~
-                         AV_CODEC_FLAG_GLOBAL_HEADER
-error: ‘CODEC_FLAG_GLOBAL_HEADER’ was not declared in this scope
+In file included from /home/elmagnifico/stm32eclipseguide/opencv/modules/highgui/src/cap_ffmpeg.cpp:45:
+/home/elmagnifico/stm32eclipseguide/opencv/modules/highgui/src/cap_ffmpeg_impl.hpp: In function ‘AVStream* icv_add_video_stream_FFMPEG(AVFormatContext*, AVCodecID, int, int, int, double, int)’:
+/home/elmagnifico/stm32eclipseguide/opencv/modules/highgui/src/cap_ffmpeg_impl.hpp:1484:21: error: ‘CODEC_FLAG_GLOBAL_HEADER’ was not declared in this scope; did you mean ‘AV_CODEC_FLAG_GLOBAL_HEADER’?
+ 1484 |         c->flags |= CODEC_FLAG_GLOBAL_HEADER;
+      |                     ^~~~~~~~~~~~~~~~~~~~~~~~
+      |                     AV_CODEC_FLAG_GLOBAL_HEADER
+/home/elmagnifico/stm32eclipseguide/opencv/modules/highgui/src/cap_ffmpeg_impl.hpp: In function ‘int icv_av_write_frame_FFMPEG(AVFormatContext*, AVStream*, uint8_t*, uint32_t, AVFrame*)’:
+/home/elmagnifico/stm32eclipseguide/opencv/modules/highgui/src/cap_ffmpeg_impl.hpp:1512:30: error: ‘AVFMT_RAWPICTURE’ was not declared in this scope
+ 1512 |     if (oc->oformat->flags & AVFMT_RAWPICTURE) {
+      |                              ^~~~~~~~~~~~~~~~
+/home/elmagnifico/stm32eclipseguide/opencv/modules/highgui/src/cap_ffmpeg_impl.hpp: In member function ‘void CvVideoWriter_FFMPEG::close()’:
+/home/elmagnifico/stm32eclipseguide/opencv/modules/highgui/src/cap_ffmpeg_impl.hpp:1686:35: error: ‘AVFMT_RAWPICTURE’ was not declared in this scope
+ 1686 |         if( (oc->oformat->flags & AVFMT_RAWPICTURE) == 0 )
+      |                                   ^~~~~~~~~~~~~~~~
+/home/elmagnifico/stm32eclipseguide/opencv/modules/highgui/src/cap_ffmpeg_impl.hpp: In member function ‘bool CvVideoWriter_FFMPEG::open(const char*, int, double, int, int, bool)’:
+/home/elmagnifico/stm32eclipseguide/opencv/modules/highgui/src/cap_ffmpeg_impl.hpp:1920:32: error: ‘AVFMT_RAWPICTURE’ was not declared in this scope
+ 1920 |     if (!(oc->oformat->flags & AVFMT_RAWPICTURE)) {
+      |                                ^~~~~~~~~~~~~~~~
+In file included from /home/elmagnifico/stm32eclipseguide/opencv/modules/highgui/src/cap_ffmpeg.cpp:45:
+/home/elmagnifico/stm32eclipseguide/opencv/modules/highgui/src/cap_ffmpeg_impl.hpp: In static member function ‘static AVStream* OutputMediaStream_FFMPEG::addVideoStream(AVFormatContext*, AVCodecID, int, int, int, double, AVPixelFormat)’:
+/home/elmagnifico/stm32eclipseguide/opencv/modules/highgui/src/cap_ffmpeg_impl.hpp:2214:25: error: ‘CODEC_FLAG_GLOBAL_HEADER’ was not declared in this scope; did you mean ‘AV_CODEC_FLAG_GLOBAL_HEADER’?
+ 2214 |             c->flags |= CODEC_FLAG_GLOBAL_HEADER;
+      |                         ^~~~~~~~~~~~~~~~~~~~~~~~
+      |                         AV_CODEC_FLAG_GLOBAL_HEADER
+make[2]: *** [modules/highgui/CMakeFiles/opencv_highgui.dir/build.make:154: modules/highgui/CMakeFiles/opencv_highgui.dir/src/cap_ffmpeg.cpp.o] Error 1
+make[1]: *** [CMakeFiles/Makefile2:2651: modules/highgui/CMakeFiles/opencv_highgui.dir/all] Error 2
+make: *** [Makefile:163: all] Error 2
 
-error: ‘AVFMT_RAWPICTURE’ was not declared in this scope
-
-error: ‘CODEC_FLAG_GLOBAL_HEADER’ was not declared in this scope
-
-for target 'modules/highgui/CMakeFiles/opencv_highgui.dir/src/cap_ffmpeg.cpp.o' failed
-make[2]: *** [modules/highgui/CMakeFiles/opencv_highgui.dir/src/cap_ffmpeg.cpp.o] Error 1
 ```
 
 要解决这个问题就得修改一下对应的头文件
 
 ```
-/modules/videoio/src/cap_ffmpeg_impl.hpp
+/opencv/modules/highgui/src/cap_ffmpeg_impl.hpp
 ```
 
 在上面的头文件中增加宏定义：
@@ -320,8 +307,29 @@ IndexError: only integers, slices (`:`), ellipsis (`...`), numpy.newaxis (`None`
 
 ```
 cd APF-Simulator/PythonCode
-python simulator.py
+python2.7 ./simulation.py
 ```
+
+
+
+![image-20210424123327316](https://i.loli.net/2021/04/24/pGKcOnzlr9jQ5gs.png)
+
+
+
+```python
+Traceback (most recent call last):
+  File "./simulation.py", line 96, in <module>
+    simulation('Book1.xlsx')
+  File "./simulation.py", line 85, in simulation
+    filter_waypoint(points,Map,map_sx,map_sy)
+  File "/home/elmagnifico/APF-Simulator/PythonCode/filter_waypoint.py", line 13, in filter_waypoint
+    if(Map[mid[0],mid[1],2] < Map[A[i+1][0],A[i+1][1],2] ) :
+IndexError: only integers, slices (`:`), ellipsis (`...`), numpy.newaxis (`None`) and integer or boolean arrays are valid indices
+```
+
+执行结束以后可能还会有这个问题，继续把filter_waypoint中的增加int()，修改完以后就可以看到平滑后的另一个图
+
+![image-20210424123708997](https://i.loli.net/2021/04/24/a185ztxKoD47Zsf.png)
 
 
 
