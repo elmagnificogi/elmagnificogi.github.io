@@ -24,6 +24,9 @@ tags:
 
 - ubuntu 20.04，最终成功了
 - ubuntu 16.04，依赖混乱，直接失败了
+- OpenCV 2.4.13.6
+- python2.7
+- pip 20.3.4
 
 
 
