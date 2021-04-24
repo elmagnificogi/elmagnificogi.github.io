@@ -4,7 +4,7 @@ title:      "Ubuntu安装gcc_arm_none_eabi"
 subtitle:   "eclipse,gnu arm plugin"
 date:       2021-04-23
 author:     "elmagnifico"
-header-img: "img/bg3.jpg"
+header-img: "img/bg1.jpg"
 catalog:    true
 tags:
     - stm32
