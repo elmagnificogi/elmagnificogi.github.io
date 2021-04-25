@@ -2,7 +2,7 @@
 layout:     post
 title:      "Ubuntu安装gcc_arm_none_eabi"
 subtitle:   "eclipse,gnu arm plugin"
-date:       2021-04-23
+date:       2021-04-24
 author:     "elmagnifico"
 header-img: "img/bg1.jpg"
 catalog:    true
