@@ -3,6 +3,7 @@ layout:     post
 title:      "Ubuntu安装OpenCV,Python2.7,测试APF"
 subtitle:   "pip,软件源,xlrd"
 date:       2021-04-23
+update:     2021-04-27
 author:     "elmagnifico"
 header-img: "img/bg3.jpg"
 catalog:    true
@@ -338,6 +339,12 @@ IndexError: only integers, slices (`:`), ellipsis (`...`), numpy.newaxis (`None`
 > https://github.com/elmagnificogi/MyTools/tree/master/APF-Simulator
 
 修改后的源码在这里
+
+
+
+#### 吐槽
+
+这个代码来自于IIT Kharagpur，著名的印度理工学院，但是实际上代码我看了一下，非常简单，然后有很多幻数，基本是为了结果调出来的，实际意义不大。我又参考了一下他们实验室的其他仓库，基本就是这一套源码或者说一套逻辑，幻数都一模一样，各种搬过来用一用。估计也就是大二大三水平拿出来用用，填补一下学校开源不足的情况吧。粗糙的很。
 
 
 
