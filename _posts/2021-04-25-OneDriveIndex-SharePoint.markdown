@@ -1,8 +1,9 @@
 ---
 layout:     post
-title:      "搭建OneDriveIndex、挂载SharePoint"
-subtitle:   "同济,世纪互联"
+title:      "搭建Cloudreve、挂载SharePoint"
+subtitle:   "同济,世纪互联,Oneindex"
 date:       2021-04-25
+update:     2021-04-27
 author:     "elmagnifico"
 header-img: "img/bg5.jpg"
 catalog:    true
@@ -439,9 +440,22 @@ https://microsoftgraph.chinacloudapi.cn/v1.0/sites/universitytongji.sharepoint.c
 
 
 
+#### 小问题
+
+实际用了一下之后感觉偶尔会遇到一些小问题：
+
+- 网页端偶尔会bug，上传失败
+- 前端里视频/图片等分类，都是相当于一个搜索页面，在搜索页面不可以直接拖拽上传。而其他网盘给你的是一个文件的操作互动，他这里这个逻辑就非常奇怪，要么你去点+号上传，要么就要回到根目录去上传
+- 集成度还是稍微低了一点，如果要离线下载，如果要自动发邮件，其实都得单独再去搞每个模块，没有集成在一起，做不到开箱即用。
+- 这里安装只是一个编译好的版本，但是如果你稍微想改一些东西，就会发现就得用源码重新编译，直接跑的版本只能当个demo演示站。
+
+
+
 ## Summary
 
 大概就是这样，挺麻烦的，但是总算是可以正常工作了，白嫖了一个超大网盘，而且世纪互联到国内的速度比较好。Onedrive比较稳定一些，多数情况下都不会出问题，国际的更是稳，而校友之类的有概率翻车。Sharepoint和校友Onedrive由于其稳定性和私密性不够高，本质上管理员可以审核你上传的文件，所以要长久用还是多掂量掂量。
+
+当然实际上也可以不挂在OneDrive，直接挂载本地硬盘也可以，或者是其他比较稳定的网盘，会更好一些。
 
 
 
