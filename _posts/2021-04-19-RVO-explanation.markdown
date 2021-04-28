@@ -131,6 +131,7 @@ RVO在VO的基础上，将可行速度区域按照VO的两侧分成了左可行�
 - rA，A的半径，可以认为A是个球，这是他的安全半径
 - VA_pref，A的目标速度或者期望速度矢量
 - VA_max，A的最大速度
+- 碰撞时间，可以理解为视野，只考虑在碰撞时间内的发生的情况
 
 结合之前的PA和VA，这些量被认为是一个智能的内部具有的状态。
 
@@ -162,6 +163,11 @@ VO是通过选择速度来避障，AO则是通过选择加速度来避障，但�
 >
 > https://gamma.cs.unc.edu/RVO2/
 >
-> Reciprocal Velocity Obstacles for Real-Time Multi-Agent Navigation
+> Paper:Reciprocal Velocity Obstacles for Real-Time Multi-Agent Navigation
 >
+> http://www.meltycriss.com/2017/01/13/paper-rvo/
+>
+> https://zsummer.github.io/2019/06/08/2019-06-08-rvo/
+>
+> http://www.meltycriss.com/2017/01/14/paper-orca/
 
