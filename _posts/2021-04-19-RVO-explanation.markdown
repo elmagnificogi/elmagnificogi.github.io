@@ -3,6 +3,7 @@ layout:     post
 title:      "RVO算法详解"
 subtitle:   "RVO2,OV"
 date:       2021-04-19
+update:     2021-04-28
 author:     "elmagnifico"
 header-img: "img/zerotier.jpg"
 catalog:    true
@@ -146,6 +147,97 @@ RVO在VO的基础上，将可行速度区域按照VO的两侧分成了左可行�
 - Reciprocal Collision Avoidance with Acceleration-Velocity Obstacles
 
 VO是通过选择速度来避障，AO则是通过选择加速度来避障，但是单纯的选择加速度没法保证不碰撞。而AVO就是结合加速度对速度进行约束，从而让最后给出的路径更加平滑，符合实际。
+
+
+
+## 代码详解
+
+整体结构比较简单，每个对象都叫做agent，然后他们有对应的属性，首先给他们初始化然后将其加入到模拟器中即可。
+
+接着就是整体大循环，每次可以更新每个agent的目标位置，然后更加rvo理论，更新agent的属性，最终到达目的地。
+
+这部分代码是基于RVO2D的版本
+
+
+
+#### RVOSimulator更新逻辑
+
+RVOSimulator也很简单，首先是创建KDtree，然后每个agent更新自己的邻近点，并且更新自己的速度。
+
+然后就是所有agent根据新速度更新位置，关键主要是在更新速度中
+
+```c++
+	void RVOSimulator::doStep()
+	{
+		kdTree_->buildAgentTree();
+
+#ifdef _OPENMP
+#pragma omp parallel for
+#endif
+		for (int i = 0; i < static_cast<int>(agents_.size()); ++i) {
+			agents_[i]->computeNeighbors();
+			agents_[i]->computeNewVelocity();
+		}
+
+#ifdef _OPENMP
+#pragma omp parallel for
+#endif
+		for (int i = 0; i < static_cast<int>(agents_.size()); ++i) {
+			agents_[i]->update();
+		}
+
+		globalTime_ += timeStep_;
+	}
+```
+
+
+
+#### computeNewVelocity
+
+agent速度计算逻辑，这部分逻辑比较复杂，比较多，我们先看整体
+
+整体上是先计算邻近的所有静态的障碍物，得到障碍物的边，或者说障碍线。
+
+然后就是统一计算邻近的每个agent的障碍线，最后将这些障碍性和agent的一些属性带进去求线性规划的解
+
+```c++
+	/* Search for the best new velocity. */
+	void Agent::computeNewVelocity()
+	{
+		// 这是一个线的集合
+		orcaLines_.clear();
+
+		// 将timehorizon倒数
+		const float invTimeHorizonObst = 1.0f / timeHorizonObst_;
+		
+		// 这里主要是处理静态的障碍物
+		/* Create obstacle ORCA lines. */
+		for (size_t i = 0; i < obstacleNeighbors_.size(); ++i)
+		
+		const size_t numObstLines = orcaLines_.size();
+
+		// 将timehorizon倒数
+		const float invTimeHorizon = 1.0f / timeHorizon_;
+
+		/* Create agent ORCA lines. */
+		for (size_t i = 0; i < agentNeighbors_.size(); ++i)
+		
+		size_t lineFail = linearProgram2(orcaLines_, maxSpeed_, prefVelocity_, false, newVelocity_);
+
+		if (lineFail < orcaLines_.size()) {
+			linearProgram3(orcaLines_, numObstLines, lineFail, maxSpeed_, newVelocity_);
+		}
+	}
+
+```
+
+
+
+#### 障碍物
+
+
+
+#### 其他agent
 
 
 
