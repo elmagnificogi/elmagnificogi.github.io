@@ -239,6 +239,123 @@ agent速度计算逻辑，这部分逻辑比较复杂，比较多，我们先看
 
 #### 其他agent
 
+这个里面有些地方我也没看明白，希望有人能解答就好了。
+
+```c++
+		// timehorizon 是个不明确的含义，具体是什么意思要从代码里探究
+		// 我的理解是它是指视野，相当于是观测预判多少范围的含义
+		// 将timehorizon倒数
+		const float invTimeHorizon = 1.0f / timeHorizon_;
+
+		/* Create agent ORCA lines. */
+		for (size_t i = 0; i < agentNeighbors_.size(); ++i) {
+			// 拿到其相邻的agent
+			const Agent *const other = agentNeighbors_[i].second;
+
+			// 相对位置
+			const Vector2 relativePosition = other->position_ - position_;
+
+			// 相对速度
+			const Vector2 relativeVelocity = velocity_ - other->velocity_;
+
+			// 当前距离的平方
+			const float distSq = absSq(relativePosition);
+			
+			// 碰撞最小距离
+			const float combinedRadius = radius_ + other->radius_;
+			// 碰撞最小距离的平方
+			const float combinedRadiusSq = sqr(combinedRadius);
+
+			Line line;
+			Vector2 u;
+
+
+			if (distSq > combinedRadiusSq) {
+				// 如果二者还未碰撞
+				/* No collision. */
+
+				// 相对速度 - 相对位置/视野时间
+				// 或者说 相对速度 - 相对位置/最大容忍的碰撞时间 = 就可以直到相对于预期碰撞来说，这个速度是大了还是小了
+				/// 感觉这个值应该就是表示当前速度和预期碰撞的速度的差=我们这里简称为碰撞速度差
+				const Vector2 w = relativeVelocity - invTimeHorizon * relativePosition;
+
+				/* Vector from cutoff center to relative velocity. */
+				// 速度值的平方
+				const float wLengthSq = absSq(w);
+
+				// 内积1 = 碰撞速度差*相对位置 其实就可以用来计算角度差
+				const float dotProduct1 = w * relativePosition;
+
+				// 内积1小于0 并且 内积的值 > 最小距离*碰撞速度差
+				// 其实就是夹角的大小 小于0 表示是钝角 其实也就是不容易碰撞
+				if (dotProduct1 < 0.0f && sqr(dotProduct1) > combinedRadiusSq * wLengthSq) {
+					/* Project on cut-off circle. */
+					const float wLength = std::sqrt(wLengthSq);
+					// 归一化
+					const Vector2 unitW = w / wLength;
+
+					// 方向，不知道为什么 这里x取了反方向
+					line.direction = Vector2(unitW.y(), -unitW.x());
+					// 预期碰撞速度 - 碰撞速度差）* 方向向量 = 可选速度？ 或者说这个是不可选速度
+					// 应该选择的速度都需要避开这个u，才能让新速度不会往碰撞的方向走
+					u = (combinedRadius * invTimeHorizon - wLength) * unitW;
+				}
+				else {
+					// 这里对应的就是锐角，可能碰撞
+					/* Project on legs. */
+					// 得到距离差
+					const float leg = std::sqrt(distSq - combinedRadiusSq);
+
+					// 这里就看不懂了，求了这两个东西的一个行列式
+					// 感觉就是区分是在RVO的左侧还是右侧？
+					if (det(relativePosition, w) > 0.0f) {
+						/* Project on left leg. */
+						line.direction = Vector2(relativePosition.x() * leg - relativePosition.y() * combinedRadius, relativePosition.x() * combinedRadius + relativePosition.y() * leg) / distSq;
+					}
+					else {
+						// 在右侧
+						/* Project on right leg. */
+						line.direction = -Vector2(relativePosition.x() * leg + relativePosition.y() * combinedRadius, -relativePosition.x() * combinedRadius + relativePosition.y() * leg) / distSq;
+					}
+
+					// 内积2 = 相对速度  投影 到这条线上的长度
+					const float dotProduct2 = relativeVelocity * line.direction;
+					// 这个长度*线的方向 - 相对速度 = 不可选速度 类似上面的u
+					u = dotProduct2 * line.direction - relativeVelocity;
+				}
+			}
+			else {
+				// 二者已经碰撞了 这里比较奇怪，结合之前别人的说明，就是碰撞了，也会计算计算？
+				// 直接就无视了碰撞
+				/* Collision. Project on cut-off circle of time timeStep. */
+				// 这个直接变成了 1 / 模拟步长了 ，相当于是10
+				const float invTimeStep = 1.0f / sim_->timeStep_;
+
+				// 得到速度差？
+				/* Vector from cutoff center to relative velocity. */
+				const Vector2 w = relativeVelocity - invTimeStep * relativePosition;
+
+				const float wLength = abs(w);
+				const Vector2 unitW = w / wLength;
+
+				// 反正又得到了一个速度 x 然后 u也得到了
+				line.direction = Vector2(unitW.y(), -unitW.x());
+				u = (combinedRadius * invTimeStep - wLength) * unitW;
+			}
+
+			// 然后这条线的起始点 = 老速度+0.5*新速度
+			line.point = velocity_ + 0.5f * u;
+			// 加入求解队列
+			orcaLines_.push_back(line);
+		}
+
+		size_t lineFail = linearProgram2(orcaLines_, maxSpeed_, prefVelocity_, false, newVelocity_);
+		// 求解失败了，选择用规划3
+		if (lineFail < orcaLines_.size()) {
+			linearProgram3(orcaLines_, numObstLines, lineFail, maxSpeed_, newVelocity_);
+		}
+```
+
 
 
 ## Summary
