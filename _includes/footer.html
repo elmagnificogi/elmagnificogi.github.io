@@ -133,7 +133,7 @@
 
 <!--fastClick.js -->
 <script>
-    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    async('{{ "/js/fastclick.min_4.js" | prepend: site.baseurl }}', function(){
         var $nav = document.querySelector("nav");
         if($nav) FastClick.attach($nav);
     })
