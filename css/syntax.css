@@ -24,9 +24,9 @@
 .highlight .err { color: #a61717; background-color: #e3d2d2; }
 .highlight .k { font-weight: bold; }
 .highlight .o { font-weight: bold; }
-.highlight .cm { color: #999988; font-style: italic; }
+.highlight .cm { color: #14b3ec; font-style: normal; }
 .highlight .cp { color: #999999; font-weight: bold; }
-.highlight .c1 { color: #999988; font-style: italic; }
+.highlight .c1 { color: #14b3ec; font-style: normal; }
 .highlight .cs { color: #999999; font-weight: bold; font-style: italic; }
 .highlight .gd { color: #000000; background-color: #ffdddd; }
 .highlight .gd .x { color: #000000; background-color: #ffaaaa; }
