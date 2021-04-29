@@ -17,6 +17,8 @@ RVO已经实际应用了，但是基于RVO的论理，还是做了进一步修�
 
 或者说实际上模拟了一个小型物理系统，来追踪和获取路径点信息。
 
+本文会长期更新，直到所有未明问题得到解。
+
 
 
 ## 先说一下实际应用的坑
@@ -611,9 +613,62 @@ agent速度计算逻辑，这部分逻辑比较复杂，比较多，我们先看
 
 #### 线性规划1
 
+```
+
+```
+
 
 
 #### 线性规划2
+
+```c++
+	size_t linearProgram2(const std::vector<Line> &lines, float radius, const Vector2 &optVelocity, bool directionOpt, Vector2 &result)
+	{                        //linearProgram2(orcaLines_,    maxSpeed_,              prefVelocity_,             false, newVelocity_);
+		// 如果优化方向的话，其实应该是没有障碍的情况，直接输出
+		if (directionOpt) {
+			/*
+			 * Optimize direction. Note that the optimization velocity is of unit
+			 * length in this case.
+			 */
+			// 速度结果就是目标方向*最大速度
+			result = optVelocity * radius;
+		}
+
+		// 如果目标速度比最大速度要大
+		else if (absSq(optVelocity) > sqr(radius)) {
+			// 直接归一化
+			// 但是实际上目标速度在外部被归一化过了，相当于是只有一个方向的含义，并没有实际上的物理意义
+			// 而代码里却在这里比较大小，相当于是有实际的物理意义
+			// 所以实际用的时候目标速度应该想办法换算成具有物理意义的速度，而不是单独的一个方向含义
+			// 不过只取方向含义，有简化复杂度的想法吧，相当于不用考虑每个循环后应该取一个什么样的速度
+			// 相当于做了一个解耦处理，把速度和方向控制给到了更上层去处理吧
+			/* Optimize closest point and outside circle. */
+			result = normalize(optVelocity) * radius;
+		}
+		else {
+			// 新速度就等于目标速度
+			/* Optimize closest point and inside circle. */
+			result = optVelocity;
+		}
+
+		for (size_t i = 0; i < lines.size(); ++i) {
+			if (det(lines[i].direction, lines[i].point - result) > 0.0f) {
+				// 当前速度不满足约束，所以要重新计算这个速度
+				/* Result does not satisfy constraint i. Compute new optimal result. */
+				const Vector2 tempResult = result;
+				// 用当前的约束和参数，用线性规划1来处理
+				if (!linearProgram1(lines, i, radius, optVelocity, directionOpt, result)) {
+					// 如果线性规划1也无法处理，那就返回交给线性规划3去处理
+					result = tempResult;
+					return i;
+				}
+			}
+		}
+
+		// 返回满足约束的数量
+		return lines.size();
+	}
+```
 
 
 
