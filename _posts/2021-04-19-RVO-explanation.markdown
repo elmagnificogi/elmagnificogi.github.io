@@ -3,7 +3,7 @@ layout:     post
 title:      "RVO算法详解"
 subtitle:   "RVO2,OV"
 date:       2021-04-19
-update:     2021-04-28
+update:     2021-04-29
 author:     "elmagnifico"
 header-img: "img/zerotier.jpg"
 catalog:    true
@@ -152,6 +152,10 @@ VO是通过选择速度来避障，AO则是通过选择加速度来避障，但�
 
 ## 代码详解
 
+先说代码和实际论坛有挺大区别得，有很多东西都没有详细解释，而且是做过一定程度上计算优化的，所以好多都是直接得到结果，所以有些地方看不懂。
+
+
+
 整体结构比较简单，每个对象都叫做agent，然后他们有对应的属性，首先给他们初始化然后将其加入到模拟器中即可。
 
 接着就是整体大循环，每次可以更新每个agent的目标位置，然后更加rvo理论，更新agent的属性，最终到达目的地。
@@ -234,6 +238,253 @@ agent速度计算逻辑，这部分逻辑比较复杂，比较多，我们先看
 
 
 #### 障碍物
+
+这个障碍物的处理，实话实说没看懂，原论文中根本没说这个。根据我看的我猜测大概意思是障碍物由于是静态的，所以比较容易计算出来对应的RVO的区域。由于那个障碍物可能存在大的遮挡小的之类的问题，为了得到准确的范围，所以下面写的非常复杂？
+
+```c++
+		// 这是一个线的集合
+		orcaLines_.clear();
+
+		// 将timehorizon倒数
+		const float invTimeHorizonObst = 1.0f / timeHorizonObst_;
+
+
+		// 这里主要是处理静态的障碍物
+		/* Create obstacle ORCA lines. */
+		for (size_t i = 0; i < obstacleNeighbors_.size(); ++i) {
+
+			//拿到邻近的障碍物
+			const Obstacle *obstacle1 = obstacleNeighbors_[i].second;
+			// 拿到障碍物旁的障碍物？
+			const Obstacle *obstacle2 = obstacle1->nextObstacle_;
+
+			// 获取2个障碍物的相对位置
+			const Vector2 relativePosition1 = obstacle1->point_ - position_;
+			const Vector2 relativePosition2 = obstacle2->point_ - position_;
+
+			/*
+			 * Check if velocity obstacle of obstacle is already taken care of by
+			 * previously constructed obstacle ORCA lines.
+			 */
+			bool alreadyCovered = false;
+
+			// 大概就是有可能有一个大障碍物，挡在一个小障碍物前面，而大障碍物已经处理过了，这个时候小障碍物再处理的时候，就会发现没必要了？
+			for (size_t j = 0; j < orcaLines_.size(); ++j) {
+				if (det(invTimeHorizonObst * relativePosition1 - orcaLines_[j].point, orcaLines_[j].direction) - invTimeHorizonObst * radius_ >= -RVO_EPSILON && det(invTimeHorizonObst * relativePosition2 - orcaLines_[j].point, orcaLines_[j].direction) - invTimeHorizonObst * radius_ >=  -RVO_EPSILON) {
+					alreadyCovered = true;
+					break;
+				}
+			}
+
+			if (alreadyCovered) {
+				continue;
+			}
+
+			/* Not yet covered. Check for collisions. */
+			// 没处理过，计算距离的平方
+			const float distSq1 = absSq(relativePosition1);
+			const float distSq2 = absSq(relativePosition2);
+
+			const float radiusSq = sqr(radius_);
+
+			// 两个障碍物之间的方向向量
+			const Vector2 obstacleVector = obstacle2->point_ - obstacle1->point_;
+			const float s = (-relativePosition1 * obstacleVector) / absSq(obstacleVector);
+			const float distSqLine = absSq(-relativePosition1 - s * obstacleVector);
+
+			Line line;
+			// 从代码里看这里障碍物只能处理凸多边形，非凸会有问题
+
+			// 与左侧碰撞
+			if (s < 0.0f && distSq1 <= radiusSq) {
+				/* Collision with left vertex. Ignore if non-convex. */
+				if (obstacle1->isConvex_) {
+					// 线是0 方向与碰撞1相反
+					line.point = Vector2(0.0f, 0.0f);
+					line.direction = normalize(Vector2(-relativePosition1.y(), relativePosition1.x()));
+					orcaLines_.push_back(line);
+				}
+
+				continue;
+			}
+			else if (s > 1.0f && distSq2 <= radiusSq) {
+				// 与右侧碰撞
+				/* Collision with right vertex. Ignore if non-convex
+				 * or if it will be taken care of by neighoring obstace */
+				// 方向与碰撞2相反
+				if (obstacle2->isConvex_ && det(relativePosition2, obstacle2->unitDir_) >= 0.0f) {
+					line.point = Vector2(0.0f, 0.0f);
+					line.direction = normalize(Vector2(-relativePosition2.y(), relativePosition2.x()));
+					orcaLines_.push_back(line);
+				}
+
+				continue;
+			}
+			else if (s >= 0.0f && s < 1.0f && distSqLine <= radiusSq) {
+				/* Collision with obstacle segment. */
+				// 已经碰上了，方向直接与1相反即可
+				line.point = Vector2(0.0f, 0.0f);
+				line.direction = -obstacle1->unitDir_;
+				orcaLines_.push_back(line);
+				continue;
+			}
+
+			/*
+			 * No collision.
+			 * Compute legs. When obliquely viewed, both legs can come from a single
+			 * vertex. Legs extend cut-off line when nonconvex vertex.
+			 */
+
+			Vector2 leftLegDirection, rightLegDirection;
+			// 没看懂，大概就是在区分到底是障碍物1起作用还是障碍物2起作用
+			if (s < 0.0f && distSqLine <= radiusSq) {
+				/*
+				 * Obstacle viewed obliquely so that left vertex
+				 * defines velocity obstacle.
+				 */
+				if (!obstacle1->isConvex_) {
+					/* Ignore obstacle. */
+					continue;
+				}
+
+				obstacle2 = obstacle1;
+
+				const float leg1 = std::sqrt(distSq1 - radiusSq);
+				leftLegDirection = Vector2(relativePosition1.x() * leg1 - relativePosition1.y() * radius_, relativePosition1.x() * radius_ + relativePosition1.y() * leg1) / distSq1;
+				rightLegDirection = Vector2(relativePosition1.x() * leg1 + relativePosition1.y() * radius_, -relativePosition1.x() * radius_ + relativePosition1.y() * leg1) / distSq1;
+			}
+			else if (s > 1.0f && distSqLine <= radiusSq) {
+				/*
+				 * Obstacle viewed obliquely so that
+				 * right vertex defines velocity obstacle.
+				 */
+				if (!obstacle2->isConvex_) {
+					/* Ignore obstacle. */
+					continue;
+				}
+
+				obstacle1 = obstacle2;
+
+				const float leg2 = std::sqrt(distSq2 - radiusSq);
+				leftLegDirection = Vector2(relativePosition2.x() * leg2 - relativePosition2.y() * radius_, relativePosition2.x() * radius_ + relativePosition2.y() * leg2) / distSq2;
+				rightLegDirection = Vector2(relativePosition2.x() * leg2 + relativePosition2.y() * radius_, -relativePosition2.x() * radius_ + relativePosition2.y() * leg2) / distSq2;
+			}
+			else {
+				/* Usual situation. */
+				if (obstacle1->isConvex_) {
+					const float leg1 = std::sqrt(distSq1 - radiusSq);
+					leftLegDirection = Vector2(relativePosition1.x() * leg1 - relativePosition1.y() * radius_, relativePosition1.x() * radius_ + relativePosition1.y() * leg1) / distSq1;
+				}
+				else {
+					/* Left vertex non-convex; left leg extends cut-off line. */
+					leftLegDirection = -obstacle1->unitDir_;
+				}
+
+				if (obstacle2->isConvex_) {
+					const float leg2 = std::sqrt(distSq2 - radiusSq);
+					rightLegDirection = Vector2(relativePosition2.x() * leg2 + relativePosition2.y() * radius_, -relativePosition2.x() * radius_ + relativePosition2.y() * leg2) / distSq2;
+				}
+				else {
+					/* Right vertex non-convex; right leg extends cut-off line. */
+					rightLegDirection = obstacle1->unitDir_;
+				}
+			}
+
+			/*
+			 * Legs can never point into neighboring edge when convex vertex,
+			 * take cutoff-line of neighboring edge instead. If velocity projected on
+			 * "foreign" leg, no constraint is added.
+			 */
+
+			// 寻找上一个障碍物
+			const Obstacle *const leftNeighbor = obstacle1->prevObstacle_;
+
+			bool isLeftLegForeign = false;
+			bool isRightLegForeign = false;
+
+			if (obstacle1->isConvex_ && det(leftLegDirection, -leftNeighbor->unitDir_) >= 0.0f) {
+				/* Left leg points into obstacle. */
+				leftLegDirection = -leftNeighbor->unitDir_;
+				isLeftLegForeign = true;
+			}
+
+			if (obstacle2->isConvex_ && det(rightLegDirection, obstacle2->unitDir_) <= 0.0f) {
+				/* Right leg points into obstacle. */
+				rightLegDirection = obstacle2->unitDir_;
+				isRightLegForeign = true;
+			}
+
+			/* Compute cut-off centers. */
+			const Vector2 leftCutoff = invTimeHorizonObst * (obstacle1->point_ - position_);
+			const Vector2 rightCutoff = invTimeHorizonObst * (obstacle2->point_ - position_);
+			const Vector2 cutoffVec = rightCutoff - leftCutoff;
+
+			/* Project current velocity on velocity obstacle. */
+
+			/* Check if current velocity is projected on cutoff circles. */
+			const float t = (obstacle1 == obstacle2 ? 0.5f : ((velocity_ - leftCutoff) * cutoffVec) / absSq(cutoffVec));
+			const float tLeft = ((velocity_ - leftCutoff) * leftLegDirection);
+			const float tRight = ((velocity_ - rightCutoff) * rightLegDirection);
+
+			if ((t < 0.0f && tLeft < 0.0f) || (obstacle1 == obstacle2 && tLeft < 0.0f && tRight < 0.0f)) {
+				/* Project on left cut-off circle. */
+				const Vector2 unitW = normalize(velocity_ - leftCutoff);
+
+				line.direction = Vector2(unitW.y(), -unitW.x());
+				line.point = leftCutoff + radius_ * invTimeHorizonObst * unitW;
+				orcaLines_.push_back(line);
+				continue;
+			}
+			else if (t > 1.0f && tRight < 0.0f) {
+				/* Project on right cut-off circle. */
+				const Vector2 unitW = normalize(velocity_ - rightCutoff);
+
+				line.direction = Vector2(unitW.y(), -unitW.x());
+				line.point = rightCutoff + radius_ * invTimeHorizonObst * unitW;
+				orcaLines_.push_back(line);
+				continue;
+			}
+
+			// 不知道在干嘛，感觉前面是在计算障碍物是在左侧还是右侧，这里就根据这个来确定project
+			/*
+			 * Project on left leg, right leg, or cut-off line, whichever is closest
+			 * to velocity.
+			 */
+			const float distSqCutoff = ((t < 0.0f || t > 1.0f || obstacle1 == obstacle2) ? std::numeric_limits<float>::infinity() : absSq(velocity_ - (leftCutoff + t * cutoffVec)));
+			const float distSqLeft = ((tLeft < 0.0f) ? std::numeric_limits<float>::infinity() : absSq(velocity_ - (leftCutoff + tLeft * leftLegDirection)));
+			const float distSqRight = ((tRight < 0.0f) ? std::numeric_limits<float>::infinity() : absSq(velocity_ - (rightCutoff + tRight * rightLegDirection)));
+
+			if (distSqCutoff <= distSqLeft && distSqCutoff <= distSqRight) {
+				/* Project on cut-off line. */
+				line.direction = -obstacle1->unitDir_;
+				line.point = leftCutoff + radius_ * invTimeHorizonObst * Vector2(-line.direction.y(), line.direction.x());
+				orcaLines_.push_back(line);
+				continue;
+			}
+			else if (distSqLeft <= distSqRight) {
+				/* Project on left leg. */
+				if (isLeftLegForeign) {
+					continue;
+				}
+
+				line.direction = leftLegDirection;
+				line.point = leftCutoff + radius_ * invTimeHorizonObst * Vector2(-line.direction.y(), line.direction.x());
+				orcaLines_.push_back(line);
+				continue;
+			}
+			else {
+				/* Project on right leg. */
+				if (isRightLegForeign) {
+					continue;
+				}
+
+				line.direction = -rightLegDirection;
+				line.point = rightCutoff + radius_ * invTimeHorizonObst * Vector2(-line.direction.y(), line.direction.x());
+				orcaLines_.push_back(line);
+				continue;
+			}
+		}
+```
 
 
 
@@ -358,9 +609,21 @@ agent速度计算逻辑，这部分逻辑比较复杂，比较多，我们先看
 
 
 
+#### 线性规划1
+
+
+
+#### 线性规划2
+
+
+
+#### 线性规划3
+
+
+
 ## Summary
 
-大概就这么多
+大概就这么多，我看得有点云里雾里得。
 
 
 
