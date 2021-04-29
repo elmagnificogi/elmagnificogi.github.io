@@ -32,7 +32,7 @@ Tobe全栈工程师，目前c/c++，python，java，c#都能写，STM32，FreeRT
 
 我的一些社区，欢迎来玩：
 
-- NS宝可梦怪猎等游戏交流群  <a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=W1Jva7Zab2Xowhg1zd0Tuqbj9hByiiFc&jump_from=webapi"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="NS狩猎阿尔宙斯群" title="NS狩猎阿尔宙斯群"></a>
-- Steam 游戏联机群 <a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=nx9DfE-t3LpqqgR4hyIV3AVq_4JVa8Rz&jump_from=webapi"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="steam游戏联机群" title="steam游戏联机群"></a>
-- 语音联机开黑 [冲，冲，冲](https://kaihei.co/0NYx2T)
+- NS宝可梦怪猎等游戏交流群  [GTMD](https://qm.qq.com/cgi-bin/qm/qr?k=W1Jva7Zab2Xowhg1zd0Tuqbj9hByiiFc&jump_from=webapi)
+- Steam 游戏联机群  [GQL](https://qm.qq.com/cgi-bin/qm/qr?k=nx9DfE-t3LpqqgR4hyIV3AVq_4JVa8Rz&jump_from=webapi)
+- 语音联机开黑  [冲，冲，冲](https://kaihei.co/0NYx2T)
 

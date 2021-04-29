@@ -13,6 +13,16 @@ ps:黄玄的blog有点对不起这么多star，长期不更新，而且讲道理
 
 
 
+黄玄的head.html中有一个
+
+```html
+<meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+```
+
+注意替换这个谷歌网站管理员的识别标签，会影响收录
+
+
+
 #### 2021.4.28
 
 长期不更新，黄玄用的js的cdn基本国内都挂了（导致网页加载时间极长），所以将部分link转成bootcdn部分直接作为本地文件存储了
