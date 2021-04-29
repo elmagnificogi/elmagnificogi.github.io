@@ -1,12 +1,27 @@
 # 注意
 
-2021.4.28
+ps:黄玄的blog有点对不起这么多star，长期不更新，而且讲道理某种程度上说他就是startbootstrap-clean-blog的中国化，而现在由于他肉身在国外了，所以blog也抛弃了很多中文特性吧，和开始的易用性相比，反而变差了。所以如果是新人建议就别看他的blog了，很容易撞blog，还有很多更好看，同时也简洁的blog可以参考。
+
+说的再难听一点，黄玄blog自己都没写几篇，很多问题都没有解决，看issue就知道了。
+
+
+
+#### 已知问题
+
+- tab和空格，typora中显示正确，blog中显示有问题
+- 由于js中使用了一些原站link，但是写法却是带原站的访问方式，导致chrome会报csrf问题，日后有可能导致带原站的访问链接被全屏蔽
+
+
+
+#### 2021.4.28
 
 长期不更新，黄玄用的js的cdn基本国内都挂了（导致网页加载时间极长），所以将部分link转成bootcdn部分直接作为本地文件存储了
 
+修改代码中注释的渲染方式，看起来更明显了(之前的灰色斜体中文简直不是给人看的)
 
 
-2018.2.9. 13:45:39
+
+#### 2018.2.9
 
 首先黄玄自己的blog有问题:
 1. c与c++代码,与注释相关的地方会出现不换行的情况
@@ -35,11 +50,9 @@ disqus在国内基本加载不出来.所以想要国内使用可以使用gitment
 
 从今开始不再跟随黄玄更新,由我自己更新.
 
-###### 待解决问题:
 
-- c/c++代码注释问题
 
-2017年1月9日 15:22:46
+#### 2017.1.9
 
 我的blog来自于Hux的博客,但是下面Hux说的稳定模板,由于更新不及时,显示有问题,建议直接fork他的原本的就行了.
 
@@ -68,41 +81,14 @@ disqus在国内基本加载不出来.所以想要国内使用可以使用gitment
 
 但是这个大概功能就是在about里面,由于其页面没有什么可评论的,所以他在这里放了一个其他文章的热评(猜测),实际我的里面我把他删除了
 
-# Hux blog 模板
-
-### [我的博客在这里 &rarr;](http://huxpro.github.io)
 
 
-### 关于收到"Page Build Warning"的email
+## ref
 
-由于jekyll升级到3.0.x,对原来的pygments代码高亮不再支持，现只支持一种-rouge，所以你需要在 `_config.yml`文件中修改`highlighter: rouge`.另外还需要在`_config.yml`文件中加上`gems: [jekyll-paginate]`.
+黄玄的博客
 
-同时,你需要更新你的本地jekyll环境.
+> http://huxpro.github.io
 
-使用`jekyll server`的同学需要这样：
+黄玄参考的博客
 
-1. `gem update jekyll` # 更新jekyll
-2. `gem update github-pages` #更新依赖的包
-
-使用`bundle exec jekyll server`的同学在更新jekyll后，需要输入`bundle update`来更新依赖的包.
-
-参考文档：[using jekyll with pages](https://help.github.com/articles/using-jekyll-with-pages/) & [Upgrading from 2.x to 3.x](http://jekyllrb.com/docs/upgrading/2-to-3/)
-
-
-## 关于模板(beta)
-
-我的博客仓库——`huxpro.github.io`，是经常修改的，而且还会有人乱提交代码，因此给大家做了一个稳定版的模板。大家可以直接fork模板——`huxblog-boilerplate`,要改的地方我都说明了。或者可以直接下载zip到本地自己去修改。
-
-```
-$ git clone git@github.com:Huxpro/huxblog-boilerplate.git
-```
-
-**[在这里预览模板 &rarr;](http://huangxuan.me/huxblog-boilerplate/)**
-
-
-## 致谢
-
-1. 这个模板是从这里[IronSummitMedia/startbootstrap-clean-blog-jekyll](https://github.com/IronSummitMedia/startbootstrap-clean-blog-jekyll)  fork 的。 感谢这个作者
-2. 感谢[@BrucZhaoR](https://github.com/BruceZhaoR)的中文翻译
-
-3. 感谢 Jekyll、Github Pages 和 Bootstrap!
+>https://github.com/StartBootstrap/startbootstrap-clean-blog-jekyll

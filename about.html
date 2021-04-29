@@ -1,25 +1,25 @@
 ---
 layout: page
 title: "About"
-description: "Hey, this is elmagnifico."
+description: "Love the girl in the pic,hope to carry her forever,but it just became a dream"
 header-img: "img/about-bg.jpg"
 multilingual: true
 ---
 
 <div class="zh post-container">
-    {% capture about_zh %}{% include about/zh.md %}{% endcapture %}
+    {% capture about_zh %}{% include about/about.md %}{% endcapture %}
     {{ about_zh | markdownify }}
 </div>
 
 
-    {% if site.disqus_username %}
-    <!-- disqus 评论框 start -->
-    <div class="comment">
-        <div id="disqus_thread" class="disqus-thread">
+{% if site.disqus_username %}
+<!-- disqus 评论框 start -->
+<div class="comment">
+    <div id="disqus_thread" class="disqus-thread">
 
-        </div>
     </div>
-    <!-- disqus 评论框 end -->
+</div>
+<!-- disqus 评论框 end -->
 
 
 <!-- disqus 公共JS代码 start (一个网页只需插入一次) -->

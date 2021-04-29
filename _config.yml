@@ -3,8 +3,8 @@ title: Elmagnifico's Blog
 SEOTitle: elmagnifico's blog
 header-img: "img/home-bg.jpg"
 email: elmagnificogg@gmail.com
-description: "关于后端与嵌入式、现实主义者 | elmagnifico， Back-end engineer & Embedded System Lover， Realist | 这里是elmagnifico的个人博客，君子之交淡如水。"
-keyword: " elmagnifico, elmagnifico's blog, elmagnificogi, 嵌入式, C, Python, C#, 后端, 四轴, Raspberry Pi, 树莓派, 路径规划,maya,无人机,集群"
+description: "后端与嵌入式、maya与游戏 | elmagnifico， Back-end engineer & Embedded System Lover | 这里是elmagnifico的个人博客，君子之交淡如水。"
+keyword: "elmagnifico,嵌入式,C,Python,C#,后端,四轴,Raspberry Pi,树莓派,路径规划,maya,无人机,集群,vps,blog,java,springboot,c++,stm32,nintendo switch,硬件,game"
 url: "http://elmagnifico.tech"
 baseurl: ""
 
@@ -25,7 +25,7 @@ facebook_username:  magnificofa.el
 highlighter: rouge
 permalink: pretty
 paginate: 10
-exclude: ["less","node_modules","Gruntfile.js","package.json","README.md","README.zh.md"]
+exclude: ["less","node_modules","Gruntfile.js","package.json","README.md"]
 anchorjs: true                          # if you want to customize anchor. check out line:181 of `post.html`
 
 
@@ -50,11 +50,6 @@ kramdown:
 # Disqus settings
 disqus_username: elmagnifico-1
 
-# Netease setttings
-netease_comment: false
-
-
-
 
 
 # Analytics settings
@@ -69,7 +64,7 @@ ga_domain: elmagnifico.tech
 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
-sidebar-about-description: "人生就是这样，且行且过，君子之交淡如水"
+sidebar-about-description: "君子之交淡如水"
 sidebar-avatar: /img/avatar.jpg     # use absolute URL.
 
 
