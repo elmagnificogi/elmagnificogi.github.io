@@ -144,7 +144,7 @@ tags:
 
 {% raw %}
 
-```
+```html
 {% raw %}
 
 xxx...
