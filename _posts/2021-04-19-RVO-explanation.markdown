@@ -99,7 +99,13 @@ A = \{ \langle G \rangle \vert G \text{ is a connected undirected graph}\}
 $$
 
 
-test $\{000, 010\}$ 
+test $\{000, 010\}$
+
+
+
+ $$ dp[i][j] = dp[i+1][j-1], if(s[i]==s[j]) $$$
+
+
 
 {% endraw %}
 
