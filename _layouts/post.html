@@ -145,6 +145,10 @@ layout: default
         </div>
     </div>
 </article>
+<!-- add support for mathjax by voleking-->
+{% if page.mathjax %}
+  {% include mathjax_support.html %}
+{% endif %}
 
 
 {% if site.disqus_username %}
