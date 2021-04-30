@@ -105,13 +105,13 @@ A = \{ \langle G \rangle \vert G \text{ is a connected undirected graph}\}
 
 对应的最好再添加一个开关，如果文章里用了公式，多添加一笔即可。
 
-{% raw %}
-
 ```html
 <!-- add support for mathjax by voleking-->
+{% raw %}
 {% if page.mathjax %}
   {% include mathjax_support.html %}
 {% endif %}
+{% endraw %}
 ```
 
 
@@ -145,14 +145,14 @@ tags:
 
 
 ```html
-{% raw %}
+{ % raw % }
 
 xxx...
 
-{% endraw %}
+{ % endraw % }
 ```
 
-{% endraw %}
+
 
 但是当jekyll遇到markdown，又遇到latex的时候，这个花括号就非常复杂了
 
