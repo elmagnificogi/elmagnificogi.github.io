@@ -95,6 +95,8 @@ A = \{ \langle G \rangle \vert G \text{ is a connected undirected graph}\}
 <script src="https://cdn.bootcdn.net/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 ```
 
+这样嵌入的公式可以右键，有很多选项和操作
+
 
 
 #### page.mathjax
@@ -103,12 +105,18 @@ A = \{ \langle G \rangle \vert G \text{ is a connected undirected graph}\}
 
 对应的最好再添加一个开关，如果文章里用了公式，多添加一笔即可。
 
-```
+{% raw %}
+
+```html
 <!-- add support for mathjax by voleking-->
 {% if page.mathjax %}
   {% include mathjax_support.html %}
 {% endif %}
 ```
+
+{% endraw %}
+
+
 
 文章开头添加上mathjax:    true即可，如下：
 
@@ -134,6 +142,8 @@ tags:
 
 由于是jekyll，他要优先解析post的内容，而定位又是通过花括号来完成的，如果正文或者哪里带有花括号，容易出现报错的情况，一般这种情况下就要用下面的方式来强制不解析。
 
+{% raw %}
+
 ```
 {% raw %}
 
@@ -141,6 +151,8 @@ xxx...
 
 {% endraw %}
 ```
+
+{% endraw %}
 
 但是当jekyll遇到markdown，又遇到latex的时候，这个花括号就非常复杂了
 
@@ -156,7 +168,7 @@ $ \Sigma= \lbrace 0, 1 \rbrace $
 $ \Sigma= \{ 0, 1 \} $
 ```
 
-显示：$ \Sigma= \{ 0, 1 \} $
+显示：$ \Sigma= \lbrace 0, 1 \rbrace $
 
 
 
@@ -178,7 +190,7 @@ $ \Sigma= \\{ 0, 1 \\} $
 
 要解决这个问题，也很简单
 
-使用 `/brace` 代替花括号，还是上面的公式，我们写出下面这样：
+使用 `\brace` 代替花括号，还是上面的公式，我们写出下面这样：
 
 ```
 $ \Sigma= \lbrace 0, 1 \rbrace $
