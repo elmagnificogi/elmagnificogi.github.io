@@ -7,6 +7,7 @@ update:     2021-04-29
 author:     "elmagnifico"
 header-img: "img/zerotier.jpg"
 catalog:    true
+mathjax:    true
 tags:
     - pathfinding
 ---
@@ -72,13 +73,26 @@ RVO已经实际应用了，但是基于RVO的论理，还是做了进一步修�
 
 ## RVO理论基础
 
-要说RVO需要先理解VO的理论基础
+要说RVO需要先理解VO的理论基础$$ V_B$$
+
+
 
 
 
 ### VO
 
 - Velocity Obstacles
+
+
+$$
+VO\frac{A}{B}（{V_B}）
+$$
+这个表示当B以
+
+
+
+
+
 
 
 
