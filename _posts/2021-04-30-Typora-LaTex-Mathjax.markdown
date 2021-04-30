@@ -114,7 +114,7 @@ A = \{ \langle G \rangle \vert G \text{ is a connected undirected graph}\}
 {% endif %}
 ```
 
-{% endraw %}
+
 
 
 
@@ -142,7 +142,7 @@ tags:
 
 由于是jekyll，他要优先解析post的内容，而定位又是通过花括号来完成的，如果正文或者哪里带有花括号，容易出现报错的情况，一般这种情况下就要用下面的方式来强制不解析。
 
-{% raw %}
+
 
 ```html
 {% raw %}
