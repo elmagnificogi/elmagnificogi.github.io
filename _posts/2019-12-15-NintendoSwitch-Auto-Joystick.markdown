@@ -3,6 +3,7 @@ layout:     post
 title:      "Nintendo Switch 自动手柄"
 subtitle:   "Switch-Fightstick，auto，AVR USB"
 date:       2019-12-15
+update:     2021-04-30
 author:     "elmagnifico"
 header-img: "img/Raspberrypi-head-bg.png"
 catalog:    true
@@ -567,6 +568,12 @@ void GetNextReport(USB_JoystickReport_Input_t* const ReportData) {
 > https://github.com/elmagnificogi/nintendo_switch_auto_ctrl_script
 
 我的项目地址，后面有空再继续完善一下，或者转而使用树莓派来做这个事情也可以，可以直接通过网络或者usb连接，然后传输多个脚本，并且能通过按钮什么的选择执行的脚本，那样会更方便一些吧
+
+
+
+**最后是我的NS群：**
+
+NS宝可梦剑盾 一群 490570154 二群车主群27775142 三群伊机控单片机群946057081 四群乱数讨论群 755843002 五群动森岛主群383218664 六群不思议的皇冠1158816209，七群宝可梦大集结300155660
 
 
 

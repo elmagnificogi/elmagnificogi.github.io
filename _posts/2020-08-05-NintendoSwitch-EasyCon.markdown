@@ -3,6 +3,7 @@ layout:     post
 title:      "伊机控使用教程"
 subtitle:   "宝可梦，单片机"
 date:       2020-08-05
+update:     2021-04-30
 author:     "elmagnifico"
 header-img: "img/Raspberrypi-head-bg.png"
 catalog:    true
@@ -355,5 +356,7 @@ NEXT
 
 
 
+**最后是我的NS群：**
 
+NS宝可梦剑盾 一群 490570154 二群车主群27775142 三群伊机控单片机群946057081 四群乱数讨论群 755843002 五群动森岛主群383218664 六群不思议的皇冠1158816209，七群宝可梦大集结300155660
 

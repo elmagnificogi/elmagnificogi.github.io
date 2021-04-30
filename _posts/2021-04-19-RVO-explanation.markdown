@@ -611,10 +611,94 @@ agent速度计算逻辑，这部分逻辑比较复杂，比较多，我们先看
 
 
 
+接下来就是3个线性规划，默认是先2，再1，如果都失败了就用3，3调整以后继续调2，直到得到一个解
+
+
+
 #### 线性规划1
 
-```
+线性规划1比较难看懂
 
+```c++
+	bool linearProgram1(const std::vector<Line> &lines, size_t lineNo, float radius, const Vector2 &optVelocity, bool directionOpt, Vector2 &result)
+	{//                      if (!linearProgram1(lines,             i,       radius,                optVelocity,      directionOpt, result)) {
+
+		// 这个点乘很奇怪
+		const float dotProduct = lines[lineNo].point * lines[lineNo].direction;
+		// 判别式
+		const float discriminant = sqr(dotProduct) + sqr(radius) - absSq(lines[lineNo].point);
+
+		if (discriminant < 0.0f) {
+			// 直接求解无效
+			/* Max speed circle fully invalidates line lineNo. */
+			return false;
+		}
+
+		const float sqrtDiscriminant = std::sqrt(discriminant);
+		float tLeft = -dotProduct - sqrtDiscriminant;
+		float tRight = -dotProduct + sqrtDiscriminant;
+
+		for (size_t i = 0; i < lineNo; ++i) {
+			// 分母 分子
+			const float denominator = det(lines[lineNo].direction, lines[i].direction);
+			const float numerator = det(lines[i].direction, lines[lineNo].point - lines[i].point);
+
+			// 判0
+			if (std::fabs(denominator) <= RVO_EPSILON) {
+				// 认定二者平行
+				/* Lines lineNo and i are (almost) parallel. */
+				if (numerator < 0.0f) {
+					return false;
+				}
+				else {
+					continue;
+				}
+			}
+
+			const float t = numerator / denominator;
+
+			if (denominator >= 0.0f) {
+				/* Line i bounds line lineNo on the right. */
+				tRight = std::min(tRight, t);
+			}
+			else {
+				/* Line i bounds line lineNo on the left. */
+				tLeft = std::max(tLeft, t);
+			}
+
+			if (tLeft > tRight) {
+				return false;
+			}
+		}
+
+		if (directionOpt) {
+			/* Optimize direction. */
+			if (optVelocity * lines[lineNo].direction > 0.0f) {
+				/* Take right extreme. */
+				result = lines[lineNo].point + tRight * lines[lineNo].direction;
+			}
+			else {
+				/* Take left extreme. */
+				result = lines[lineNo].point + tLeft * lines[lineNo].direction;
+			}
+		}
+		else {
+			/* Optimize closest point. */
+			const float t = lines[lineNo].direction * (optVelocity - lines[lineNo].point);
+
+			if (t < tLeft) {
+				result = lines[lineNo].point + tLeft * lines[lineNo].direction;
+			}
+			else if (t > tRight) {
+				result = lines[lineNo].point + tRight * lines[lineNo].direction;
+			}
+			else {
+				result = lines[lineNo].point + t * lines[lineNo].direction;
+			}
+		}
+
+		return true;
+	}
 ```
 
 
@@ -674,6 +758,65 @@ agent速度计算逻辑，这部分逻辑比较复杂，比较多，我们先看
 
 #### 线性规划3
 
+这个3就更看不懂了
+
+```c++
+	void linearProgram3(const std::vector<Line> &lines, size_t numObstLines, size_t beginLine, float radius, Vector2 &result)
+	{//                      linearProgram3(orcaLines_,        numObstLines,         lineFail,    maxSpeed_, newVelocity_);
+		float distance = 0.0f;
+
+		for (size_t i = beginLine; i < lines.size(); ++i) {
+			if (det(lines[i].direction, lines[i].point - result) > distance) {
+				/* Result does not satisfy constraint of line i. */
+				std::vector<Line> projLines(lines.begin(), lines.begin() + static_cast<ptrdiff_t>(numObstLines));
+
+				for (size_t j = numObstLines; j < i; ++j) {
+					Line line;
+
+					float determinant = det(lines[i].direction, lines[j].direction);
+
+					if (std::fabs(determinant) <= RVO_EPSILON) {
+						/* Line i and line j are parallel. */
+						if (lines[i].direction * lines[j].direction > 0.0f) {
+							/* Line i and line j point in the same direction. */
+							continue;
+						}
+						else {
+							/* Line i and line j point in opposite direction. */
+							line.point = 0.5f * (lines[i].point + lines[j].point);
+						}
+					}
+					else {
+						line.point = lines[i].point + (det(lines[j].direction, lines[i].point - lines[j].point) / determinant) * lines[i].direction;
+					}
+
+					line.direction = normalize(lines[j].direction - lines[i].direction);
+					projLines.push_back(line);
+				}
+
+				const Vector2 tempResult = result;
+
+				if (linearProgram2(projLines, radius, Vector2(-lines[i].direction.y(), lines[i].direction.x()), true, result) < projLines.size()) {
+					/* This should in principle not happen.  The result is by definition
+					 * already in the feasible region of this linear program. If it fails,
+					 * it is due to small floating point error, and the current result is
+					 * kept.
+					 */
+					result = tempResult;
+				}
+
+				distance = det(lines[i].direction, lines[i].point - result);
+			}
+		}
+	}
+```
+
+
+
+#### RVO3D
+
+同理RVO3D，代码结构非常像，但是2d求解的时候是用线，3d的时候就上升到面了，相同问题解算的部分都看不懂。
+
 
 
 ## Summary
@@ -681,6 +824,8 @@ agent速度计算逻辑，这部分逻辑比较复杂，比较多，我们先看
 大概就这么多，我看得有点云里雾里得。
 
 
+
+能找到的参考都在下面了，有2个blog写的还是比较简单易懂的
 
 ## Quote
 
