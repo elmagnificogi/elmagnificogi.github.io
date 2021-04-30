@@ -1259,3 +1259,10 @@ img::-moz-selection {
 .page-fullscreen footer .copyright a:hover {
   color: #ddd;
 }
+.MathJax_SVG_Display {
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.no-scroll {
+  overflow-y: hidden;
+}
