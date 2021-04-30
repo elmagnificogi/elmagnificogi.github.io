@@ -75,7 +75,9 @@ RVO已经实际应用了，但是基于RVO的论理，还是做了进一步修�
 
 要说RVO需要先理解VO的理论基础$$ V_B$$
 
-{% raw %}
+
+
+
 
 ### VO
 
@@ -87,7 +89,7 @@ VO\frac {A } {B }（ { V_B }）
 $$
 
 
-$ \Sigma= \{ 0, 1 \} $
+$ \Sigma= \lbrace 0, 1 \rbrace $
 
 先试试看
 
@@ -97,7 +99,7 @@ A = \{ \langle G \rangle \vert G \text{ is a connected undirected graph}\}
 $$
 
 
-test $ \{ 000, 010 \} $
+test $ \lbrace 000, 010 \rbrace $
 
 
 
@@ -107,9 +109,15 @@ test $ \{ 000, 010 \} $
 
 这个表示当B以
 
-$overbrace{a+b+c} = underbrace{a+b+c}$
+$overbrace \lbrace a+b+c \rbrace = underbrace \lbrace a+b+c \rbrace$ 
 
-{% endraw %}
+
+
+
+
+$\lbrace$
+
+
 
 
 
