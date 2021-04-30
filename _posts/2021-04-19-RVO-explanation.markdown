@@ -85,11 +85,11 @@ RVO已经实际应用了，但是基于RVO的论理，还是做了进一步修�
 
 
 $$
-VO\frac \\{A \\} \\{B \\}（ \\{ V_B \\}）
+VO\frac {A } {B }（ { V_B }）
 $$
 
 
-$\Sigma=\\{0, 1\\}$
+$ \Sigma=\{0, 1\}$
 
 先试试看
 
@@ -99,7 +99,7 @@ A = \{ \langle G \rangle \vert G \text{ is a connected undirected graph}\}
 $$
 
 
-test
+test $\{000, 010\}$ 
 
 {% endraw %}
 
