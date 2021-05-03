@@ -1,0 +1,92 @@
+---
+layout:     post
+title:      "Paypal争议PacificRack-成功下车"
+subtitle:   "Markdown,blog"
+date:       2021-05-03
+update:     2021-05-03
+author:     "elmagnifico"
+header-img: "img/balance.jpg"
+catalog:    true
+mathjax:    true
+tags:
+    - blog
+---
+
+## Foreword
+
+之前说上了PacificRack的4c 6g的灵车，之前想着开valheim的服务器，然后发现不但cpu占用率高，而且经常连不上机器，莫名其妙就给你关机或者重启了，工单不给退款，重启关机问题不给解决。
+
+由于是用paypal买的，看到之前别人都说可以直接争议下车，于是试了试，果然成功了。
+
+
+
+## Paypal争议
+
+#### 发起争议
+
+首先paypal找到当时的订单，然后选择报告问题
+
+![image-20210503130740804](https://i.loli.net/2021/05/03/oX9MTrZuAQiB3xy.png)
+
+
+
+然后选择报告问题类型，我收到的物品与描述显著不符
+
+![2.jpg](https://i.loli.net/2021/05/03/mh5vxFu6je3kd4G.jpg)
+
+剩下就是填写具体购买内容和描述问题，可以直接中文描述，paypal会有专人审核负责的，不用担心别人看不懂。
+
+如果物品完全不可用，比如跑路，可以选择已损坏，如果是服务有问题但不给退款，可以选其他，然后详细描述有什么问题即可。接着是申请全额退还是部分，一般都是全额。
+
+剩下就等和商家扯皮就行了
+
+
+
+#### 扯皮过程
+
+简单说你发起以后，paypal会要商家先回应，如果商家不回应会直接判负，退款的。
+
+然后就是商家回应你一次，你再回应一次。
+
+![image-20210503131644911](https://i.loli.net/2021/05/03/MJg5wx3AuVtB1s6.png)
+
+当你回应结束以后，就可以直接问题上报（其实就是让paypal当店小二，直接仲裁），然后paypal会自动切换成补偿申请。然后paypal会自己去联系商家后续问题，最终告诉你结果。
+
+
+
+这里有可能会有其他情况，比如商家积极联系，并且答应退款，让你取消争议，这种情况建议还是直接二次上报，让paypal仲裁，指不定他人工退款还能拖你几个月。
+
+- 一个订单paypal只能仲裁争议一次，你一旦放弃了就再也没机会了，那时候商家想咋样就咋样了
+
+
+
+![image-20210503131809385](https://i.loli.net/2021/05/03/13K7mzTq2B4YPni.png)
+
+![image-20210503131909809](https://i.loli.net/2021/05/03/KalfSQrt6g7NWJd.png)
+
+当时发的工单，不给退款就算了，你还成天失联，然后给我说切换到不会关机重启的母鸡上，依然关机
+
+![image-20210503131437046](https://i.loli.net/2021/05/03/xE2NlcPrGvHwC5i.png)
+
+
+
+#### 最终
+
+历时13或者14天，也就2周时间，成功退款。
+
+![image-20210503132411602](https://i.loli.net/2021/05/03/GRV29vNteTz6juM.png)
+
+
+
+## Summary
+
+不得不说，paypal永远的神，当初如果我其他家也都用paypal买，估计就不会被坑了。
+
+所以建议小白如果买这些不稳定的东西，能用paypal就paypal吧，支付宝都不支持你发起争议。
+
+
+
+## Quote
+
+> http://www.138vps.com/ot/1874.html
+
