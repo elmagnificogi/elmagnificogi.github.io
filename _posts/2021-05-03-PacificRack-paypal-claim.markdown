@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "Paypal争议PacificRack-成功下车"
-subtitle:   "Markdown,blog"
+subtitle:   "失联,关机"
 date:       2021-05-03
 update:     2021-05-03
 author:     "elmagnifico"
@@ -9,7 +9,7 @@ header-img: "img/balance.jpg"
 catalog:    true
 mathjax:    true
 tags:
-    - blog
+    - vps
 ---
 
 ## Foreword
@@ -17,6 +17,12 @@ tags:
 之前说上了PacificRack的4c 6g的灵车，之前想着开valheim的服务器，然后发现不但cpu占用率高，而且经常连不上机器，莫名其妙就给你关机或者重启了，工单不给退款，重启关机问题不给解决。
 
 由于是用paypal买的，看到之前别人都说可以直接争议下车，于是试了试，果然成功了。
+
+
+
+pr最恶心的就是你失联就失联吧，但是你别老关机啊，重启人好歹啥服务都还能重新启动，他家倒好，直接给你关机，你必须得手动面板上点开机，才能启动，这不就离谱嘛。
+
+ToS不写清楚，模模糊糊，该你被争议，各种无法退款的活动机，都是非法条约，都可以被争议
 
 
 
