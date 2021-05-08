@@ -51,7 +51,8 @@ tags:
 独行公式
 
 ```
-VO\frac {A } {B }（ { V_B }）
+$$ VO\frac {A } {B }（ { V_B }） $$
+
 ```
 
 $$
@@ -61,7 +62,7 @@ $$
 同行公式
 
 ```
-A = \{ \langle G \rangle \vert G \text{ is a connected undirected graph}\}
+$ A = \{ \langle G \rangle \vert G \text{ is a connected undirected graph}\} $
 ```
 
 比如   $ A = \{ \langle G \rangle \vert G \text{ is a connected undirected graph}\} $  
