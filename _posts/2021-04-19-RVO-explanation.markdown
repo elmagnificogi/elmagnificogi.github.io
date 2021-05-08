@@ -73,9 +73,7 @@ RVO已经实际应用了，但是基于RVO的论理，还是做了进一步修�
 
 ## RVO理论基础
 
-要说RVO需要先理解VO的理论基础$$ V_B$$
-
-
+要说RVO需要先理解VO的理论基础
 
 
 
@@ -83,43 +81,11 @@ RVO已经实际应用了，但是基于RVO的论理，还是做了进一步修�
 
 - Velocity Obstacles
 
+VO简单理解，只要两个点本身在未碰撞的情况下，将其中一个点化作质点，其每次速度更新，都选择不会与另一点相交的速度方向，那么二者即不会碰撞。
 
 $$
 VO\frac {A } {B }（ { V_B }）
 $$
-
-
-$ \Sigma= \lbrace 0, 1 \rbrace $
-
-先试试看
-
-
-$$
-A = \{ \langle G \rangle \vert G \text{ is a connected undirected graph}\}
-$$
-
-
-test $ \lbrace 000, 010 \rbrace $
-
-
-
- $$ dp[i][j] = dp[i+1][j-1], if(s[i]==s[j]) $$
-
-
-
-这个表示当B以
-
-$overbrace \lbrace a+b+c \rbrace = underbrace \lbrace a+b+c \rbrace$ 
-
-
-
-
-
-$\lbrace$
-
-
-
-
 
 
 
@@ -127,22 +93,23 @@ $\lbrace$
 ![image-20210420094746255](https://i.loli.net/2021/04/20/miSKpZfb2Unw7he.png)
 
 - 这里所有速度都单纯的指二维平面，矢量速度
-
 - A，B是一个智能体
-- PA是A的当前位置，PB是B的当前位置
-- VOAB（VB）是指当B以VB的速度运动时，会与A发生碰撞的，所有A速度的集合，其实这个集合就是VA-VB的闵可夫斯基和
+- $$P_A$$是A的当前位置，$$P_B$$是B的当前位置
+- $$ VO_A^B（ { V_B }）$$是指当B以$$V_B$$的速度运动时，会与A发生碰撞的，所有A的速度的集合，其实这个集合就是$$V_B - V_A$$的闵可夫斯基和，写作$$B\bigoplus A$$
 -  λ(p,v) 是一个以p为原点，v为方向的射线
 
-![image-20210420111349374](https://i.loli.net/2021/04/20/RLS6MZV2inrKjhk.png)
-
+所以总的公式就是
+$$
+VO_A^B(V_B)=\lbrace V_A| \lambda (p_A,V_A-V_B) \bigcap B \bigoplus -A \neq 0  \rbrace
+$$
 这样定义出来的就是AB碰撞的速度区域集合，而只要速度不属于这个区间，那么就可以保证不会碰撞。
 
 
 
 其他解释
 
-- Minkowski sum，闵可夫斯基和，**官方定义**：两个图形A,BA,B的闵可夫斯基和C={a+b|a∈A,b∈B}C={a+b|a∈A,b∈B}
-  **通俗一点**：从原点向图形A内部的每一个点做向量，将图形BB沿每个向量移动，所有的最终位置的并便是闵可夫斯基和（具有交换律），一般都是指凸包
+- Minkowski sum，闵可夫斯基和，**官方定义**：两个图形A,B的闵可夫斯基和 C={a+b|a∈A,b∈B}C={a+b|a∈A,b∈B}
+  **通俗一点**：从原点向图形A内部的每一个点做向量，将图形B沿这个向量移动，所有移动后的B所形成的图形便是闵可夫斯基和（具有交换律），一般都是指凸包
 - 部分数学基础，https://www.cnblogs.com/xzyxzy/p/10033130.html
 
 
