@@ -205,8 +205,8 @@ $$
 首先是引入了类时间定义，即可以知道速度大小或者说路程大小了，同时碰撞也变成了两个球体碰撞，而不是之前的质点和球体碰撞，如图a所示。图b中显示了，当质点A达到红线时会发生碰撞，而此时速度值为绿色弧线上对应的点。
 
 - $D(p,r)$ ,表示以p为圆心，r为半径的圆
-- $VO^\tau_{A|B} = \lbrace v|\exists t \in [0,\tau],tv \in D(p_B - p_A,r_A+r_B) \rbrace $ 表示的就是绿弧和红弧以及左右两条边组成的图形，这个区域的速度就是会碰撞的速度
-- $CA_{A|B}^\tau(V_B) = \lbrace v|v \notin VO_{A|B}^\tau \bigoplus V_B \rbrace$   ORCA就是要从这里选择一个最优的速度，并且其不是在碰撞区域内的
+- $VO^\tau_{A \vert B} = \lbrace v \vert\exists t \in [0,\tau],tv \in D(p_B - p_A,r_A+r_B) \rbrace $ 表示的就是绿弧和红弧以及左右两条边组成的图形，这个区域的速度就是会碰撞的速度
+- $CA_{A\vert B}^\tau(V_B) = \lbrace v\vert v \notin VO_{A\vert B}^\tau \bigoplus V_B \rbrace$   ORCA就是要从这里选择一个最优的速度，并且其不是在碰撞区域内的
 
 
 
@@ -214,7 +214,7 @@ $$
 
 最优的速度是怎么选呢：
 
-$V_A^{opt}$ 和 $V_B^{opt}$  首先都满足$CA_{A|B}^\tau(V_B)$ , 同时最好他们又能满足$D(v^{opt},r^{opt})$ ，其中$v^{opt}$ 是最接近目标方向的速度，即V_pref ，$^{opt}$则是这个速度的允许的接近范围。最好的情况下A和B都能在范围内找到合适的并且接近目标速度的速度。
+$V_A^{opt}$ 和 $V_B^{opt}$  首先都满足$CA_{A\vert B}^\tau(V_B)$ , 同时最好他们又能满足$D(v^{opt},r^{opt})$ ，其中$v^{opt}$ 是最接近目标方向的速度，即V_pref ，$^{opt}$则是这个速度的允许的接近范围。最好的情况下A和B都能在范围内找到合适的并且接近目标速度的速度。
 
 ![image-20210420162525979](https://i.loli.net/2021/04/20/i4YMlJcn7sKytWL.png)
 
