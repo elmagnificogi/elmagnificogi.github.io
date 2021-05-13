@@ -1,0 +1,56 @@
+---
+layout:     post
+title:      "第一次被DDOS攻击"
+subtitle:   "失联,PacificRack"
+date:       2021-05-13
+update:     2021-05-13
+author:     "elmagnifico"
+header-img: "img/web.jpg"
+catalog:    true
+mathjax:    true
+tags:
+    - vps
+---
+
+## Foreword
+
+第一次被DDOS攻击了，然后立马我这小blog就被打挂了，还是大意了。
+
+能攻击我这小blog的，除了PacificRack，还能有谁？
+
+
+
+## Paypal争议
+
+> http://elmagnifico.tech/2021/05/03/PacificRack-paypal-claim/
+
+
+
+## DDOS 记录
+
+第一次攻击
+
+![image-20210513100226821](https://i.loli.net/2021/05/13/I4sHu1Ek7ZTVDeq.png)
+
+第一次被攻击，小激动了一下，然后就被腾讯云提示拉进黑洞了，刚开始被攻击的时候还能连上ssh，后面就直接没了。等他攻击结束以后，我手动恢复了。
+
+
+
+然后没多久立马第二次又开始了。
+
+![image-20210513100314263](https://i.loli.net/2021/05/13/ul9YAXVJPjLxMGW.png)
+
+腾讯云的轻量防御只有2G，攻击带宽比较大30g，直接给我打死了了，只是实际流量才这么点为什么就直接给我拉黑洞了。他这个2G防御是累计2G嘛，只要满了2G，下次稍微有一点就给打死了？懵逼中。
+
+然后我又手动解封了一次，就上床了
+
+![image-20210513100339145](https://i.loli.net/2021/05/13/JHEWdbYyth2j7GS.png)
+
+没多久，又提示我被打了，nmd，我就睡了，随你打。
+
+
+
+## Summary
+
+真有你的，PacificRack，垃圾厂家，垃圾人
+
