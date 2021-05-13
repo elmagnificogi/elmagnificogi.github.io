@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "免费开源获取JetBrains全家桶"
+title:      "开源项目免费获取JetBrains全家桶"
 subtitle:   "github,license"
 date:       2021-05-14
 update:     2021-05-14
