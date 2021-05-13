@@ -50,6 +50,12 @@ tags:
 
 
 
+当我把防御弄好了以后，再次解封我的vps，然后我又被打了，基本是秒被打，所以估计我要换个vps了
+
+![image-20210513112700440](https://i.loli.net/2021/05/13/etZXsGr6wjuIpa1.png)
+
+
+
 ## 防御
 
 简单说由于我太大意，blog域名直接连到腾讯云了，导致被打的时候直接打了我源ip，而腾讯云又防御不住。
@@ -90,7 +96,53 @@ tags:
 
 
 
+简单说，可以直接复制一份当前的github pages的仓库（主要是为了保住git pages的样式），然后删除index.html 并且修改404.html即可
+
+```html
+---
+layout: default
+description: "链接失效了,如果非常想看的话,选择下面的方式联系我修改 :>"
+header-img: "img/404-bg.jpg"
+permalink: /404.html
+---
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>主站elmagnifico.tech正在被DDOS攻击，正在重定向…… - walterlv</title>
+</head>
+<script language="javascript">
+	var domain = "github.elmagnifico.tech";
+	var current = window.location.href;
+	var target = current.substring(current.indexOf('/', current.indexOf(':') + 3));
+	window.location.href = "//" + domain + target;
+	location.href = "//" + domain + target;
+</script>
+<body>
+正在重定向……
+</body>
+</html>
+
+<script>
+	document.body.classList.add('page-fullscreen');
+</script>
+```
+
+通过这样的方式就可以直接跳转到对应的域名下的连接了
+
+
+
 ## Summary
 
 真有你的，PacificRack，垃圾厂家，垃圾人
 
+
+
+还好我是个小blog，没啥特殊服务要跑，随你攻击
+
+
+
+## Quote
+
+> https://blog.csdn.net/WPwalter/article/details/106335200
