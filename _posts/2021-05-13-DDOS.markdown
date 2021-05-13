@@ -50,6 +50,46 @@ tags:
 
 
 
+## 防御
+
+简单说由于我太大意，blog域名直接连到腾讯云了，导致被打的时候直接打了我源ip，而腾讯云又防御不住。
+
+这里建议上cloudflare，只要源站ip不暴露的情况下，cloudflare可以无限抗DDOS攻击，yyds。
+
+
+
+而我现在源ip暴露了，相当于我vps肯定扛不住，还好我是github pages，本来github就和源站的内容一模一样。于是我直接套上cloudflare然后修改源ip为github pages的ip。我不相信套2层，你还能给我打挂了。
+
+
+
+#### 具体操作
+
+首先是去笨牛网CDN，把当前域名全都解析到github pages的ip
+
+> https://cdn.bnxb.com/index.html
+
+![image-20210513103602220](https://i.loli.net/2021/05/13/oQaNqx9bYLv8R3S.png)
+
+
+
+然后把DNS服务商的域名全都解析到cloudflare给的cdn域名
+
+![image-20210513103653842](https://i.loli.net/2021/05/13/qkHKs7Bz9uo8hxG.png)
+
+这个时候我的blog就可以正常访问了。
+
+
+
+## github pages 多域名支持 
+
+然后这里还遇到个问题，刚开始我是想github.elmagnifico.tech和elmagnifico.tech都能直接访问到github pages的页面，然后发现github pages只能允许一个cname的域名进来，另外一个访问必然是404 **There isn't a GitHub Pages site here.** 
+
+然后就查了一下如何让2个域名支持同一个pages，于是看到了下面的方法，其实就是再建一个页面，让他跳转一下。
+
+> https://blog.csdn.net/WPwalter/article/details/106335200
+
+
+
 ## Summary
 
 真有你的，PacificRack，垃圾厂家，垃圾人
