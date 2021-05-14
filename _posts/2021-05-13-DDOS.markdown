@@ -3,7 +3,7 @@ layout:     post
 title:      "第一次被DDOS攻击"
 subtitle:   "失联,PacificRack"
 date:       2021-05-13
-update:     2021-05-13
+update:     2021-05-14
 author:     "elmagnifico"
 header-img: "img/web.jpg"
 catalog:    true
@@ -99,18 +99,11 @@ tags:
 简单说，可以直接复制一份当前的github pages的仓库（主要是为了保住git pages的样式），然后删除index.html 并且修改404.html即可
 
 ```html
----
-layout: default
-description: "链接失效了,如果非常想看的话,选择下面的方式联系我修改 :>"
-header-img: "img/404-bg.jpg"
-permalink: /404.html
----
-
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>主站elmagnifico.tech正在被DDOS攻击，正在重定向…… - walterlv</title>
+	<title>主站elmagnifico.tech正在被DDOS攻击，正在重定向……</title>
 </head>
 <script language="javascript">
 	var domain = "github.elmagnifico.tech";
@@ -130,6 +123,44 @@ permalink: /404.html
 ```
 
 通过这样的方式就可以直接跳转到对应的域名下的连接了，然后该访问的都能访问了。
+
+当然基于我现在的blog的模板要修改一下
+
+```html
+---
+layout: 404
+description: "链接失效了,如果非常想看的话,选择下面的方式联系我修改 :>"
+header-img: "img/404-bg.jpg"
+permalink: /404.html
+---
+
+<!-- Page Header -->
+<header class="intro-header" style="background-image: url('{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}')">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+				<div class="site-heading" id="tag-heading">
+					<h1>主站elmagnifico.tech正在被DDOS攻击，正在重定向……</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+</header>
+
+<script language="javascript">
+	var domain = "github.elmagnifico.tech";
+	var current = window.location.href;
+	var target = current.substring(current.indexOf('/', current.indexOf(':') + 3));
+	window.location.href = "//" + domain + target;
+	location.href = "//" + domain + target;
+</script>
+
+<script>
+	document.body.classList.add('page-fullscreen');
+</script>
+```
+
+
 
 
 
