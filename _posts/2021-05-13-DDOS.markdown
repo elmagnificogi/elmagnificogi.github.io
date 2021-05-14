@@ -76,9 +76,9 @@ tags:
 
 ![image-20210513103602220](https://i.loli.net/2021/05/13/oQaNqx9bYLv8R3S.png)
 
-
-
 然后把DNS服务商的域名全都解析到cloudflare给的cdn域名
+
+
 
 ![image-20210513103653842](https://i.loli.net/2021/05/13/qkHKs7Bz9uo8hxG.png)
 
