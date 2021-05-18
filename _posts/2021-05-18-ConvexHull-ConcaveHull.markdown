@@ -94,7 +94,7 @@ tags:
 
 ### Delaunay三角化
 
-![img](https://images.cnblogs.com/cnblogs_com/chnhideyoshi/556930/o_QQ截图20140302154307.png)
+![o_QQ截图20140302154307](https://i.loli.net/2021/05/18/P7RlCrIi2XvKJOa.png)
 
 Delaunay三角化可以让点集形成如图所示的三角网络，如果不删边，这个时候这个图就是一个凸包。通过选择性删边，可以得到一个凹包的效果。
 
