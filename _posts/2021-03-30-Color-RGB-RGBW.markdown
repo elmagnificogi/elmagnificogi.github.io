@@ -3,7 +3,7 @@ layout:     post
 title:      "RGB转换到RGBW"
 subtitle:   "HDR,色域"
 date:       2021-03-30
-update:     2021-04-22
+update:     2021-05-20
 author:     "elmagnifico"
 header-img: "img/led.jpg"
 catalog:    true
@@ -169,7 +169,7 @@ W =（饱和度max-当前饱和度）/ 饱和度max * （R+G+B）/ 3
 
 这个是按照HSV的颜色模型计算的
 
-```
+```c++
 struct colorRgbw {
   unsigned int   red;
   unsigned int   green;
@@ -190,7 +190,7 @@ unsigned int saturation(colorRgbw rgbw) {
  
 // Returns the value of White
 unsigned int getWhite(colorRgbw rgbw) {
-    return (255 - saturation(rgbw)) / 255 * (rgbw.red + rgbw.green + rgbw.blue) / 3;
+    return (100 - saturation(rgbw)) / 100 * (rgbw.red + rgbw.green + rgbw.blue) / 3;
 }
  
 // Use this function for too bright emitters. It corrects the highest possible value.
@@ -199,8 +199,7 @@ unsigned int getWhite(colorRgbw rgbw, int redMax, int greenMax, int blueMax) {
     rgbw.red = (float)rgbw.red / 255.0 * (float)redMax;
     rgbw.green = (float)rgbw.green / 255.0 * (float)greenMax;
     rgbw.blue = (float)rgbw.blue / 255.0 * (float)blueMax;
-    return (255 - saturation(rgbw)) / 255 * (rgbw.red + rgbw.green + rgbw.blue) / 3;
-    return 0;
+    return (100 - saturation(rgbw)) / 100.0 * (rgbw.red + rgbw.green + rgbw.blue) / 3;
 }
  
 // Example function.
@@ -226,7 +225,15 @@ colorRgbw rgbToRgbw(unsigned int red, unsigned int redMax,
 
 #### 有色温算法
 
-这里色温是4500，对应RGB 255，219，186
+这里w的白光色温是4500，对应RGB 255，219，186.
+
+这种算法可以当作W灯是公共色光，用来做补偿用的，比较特殊。
+
+假设w的白光色温是刚好，255，255，255，而要输出的是，250，150，120，那么这里w就可以直接输出120，然后对应的rgb输出，130，30，0就行了。相当于是拿白光做为一个公共颜色光来用了。这样好处是保证了至少不会有明显色偏，不好的地方是这样w并没有带来明显的亮度提升。
+
+还有一种办法，是基于当前的rgb的比例。如果我给rgb每个通道都增加一点，但是同时让他们的比例失调的比较小，这样就能做到即保证了rgb的色偏又提高了rgb的亮度。
+
+下面的这种算法是前者，简单的用来保证色偏，而不额外提升亮度。
 
 ```cs
 const uint8_t kWhiteRedChannel = 255;
