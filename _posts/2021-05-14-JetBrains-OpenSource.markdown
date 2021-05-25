@@ -7,7 +7,7 @@ update:     2021-05-14
 author:     "elmagnifico"
 header-img: "img/welding2.jpg"
 catalog:    true
-mathjax:    true
+mathjax:    false
 tags:
     - OpenSource
 ---

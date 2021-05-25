@@ -7,7 +7,7 @@ update:     2021-05-03
 author:     "elmagnifico"
 header-img: "img/balance.jpg"
 catalog:    true
-mathjax:    true
+mathjax:    false
 tags:
     - vps
 ---
