@@ -3,7 +3,7 @@ layout:     post
 title:      "开源项目免费获取JetBrains全家桶"
 subtitle:   "github,license"
 date:       2021-05-14
-update:     2021-05-14
+update:     2021-05-26
 author:     "elmagnifico"
 header-img: "img/welding2.jpg"
 catalog:    true
@@ -28,7 +28,7 @@ tags:
 
 如实填写就行了，要注意开源的项目至少要建立了3个月，并且最近3个月有一些commit，并且commit的内容是code而不是类似文本或者非代码内容。
 
-这里可以申请多个激活权限，具体多了不知道能不能通过。
+这里可以申请多个激活权限，具体多了不知道能不能通过。（目前已知我申请了一个激活次数，但是我在多个pc上都能激活）
 
 ![image-20210514003212552](https://i.loli.net/2021/05/14/3J1VvLCNn2ZTXga.png)
 
@@ -122,6 +122,28 @@ tags:
 
 
 
+#### 可能会遇到的问题
+
+登陆账号的时候提示以下内容
+
+```
+Certificate used to sign the license is not signed by JetBrains root certifi
+```
+
+出现这个情况是因为之前用了破解工具，然后导致没取消破解，正版激活失败了。
+
+
+
+简单说用everything搜索`jetbrains-agent`，然后删除对应的包即可
+
+彻底一些，搜索 `.vmoptions` 然后将文件内容中的关于jetbrains的都注释了
+
+![image-20210526144017149](https://i.loli.net/2021/05/26/lTyD93cvtdUOL8b.png)
+
+然后重启一下ide，再激活就正常了。
+
+
+
 ## Summary
 
 开源yyds
@@ -131,3 +153,5 @@ tags:
 ## Quote
 
 > https://www.cnblogs.com/evenyao/p/10290482.html
+>
+> https://blog.csdn.net/guangmo0123/article/details/109039456
