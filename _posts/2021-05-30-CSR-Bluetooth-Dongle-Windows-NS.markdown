@@ -127,6 +127,12 @@ NX Macro Controller Installer 比较像伊机控，可以自己编写脚本，�
 
 
 
+## 视频流程
+
+<iframe src="//player.bilibili.com/player.html?aid=803291072&bvid=BV1Ry4y1g7FT&cid=346268975&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="640px" height="480px"> </iframe>
+
+
+
 ## Summary
 
 总体来说还是挺有意思的，后面会反编译一下看看源码和驱动是什么，有可能的话直接集成到伊机控那边去。
