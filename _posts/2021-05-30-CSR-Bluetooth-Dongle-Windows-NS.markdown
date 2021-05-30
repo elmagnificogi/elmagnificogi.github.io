@@ -5,7 +5,7 @@ subtitle:   "controller,bluetooth dongle"
 date:       2021-05-30
 update:     2021-05-30
 author:     "elmagnifico"
-header-img: "img/pen-head-bg.jpg"e
+header-img: "img/pen-head-bg.jpg"
 catalog:    true
 mathjax:    false
 tags:
