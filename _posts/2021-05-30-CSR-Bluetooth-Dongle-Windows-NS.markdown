@@ -40,6 +40,8 @@ tags:
 
 #### AutoTalismanMelding
 
+> https://drive.google.com/drive/folders/1iMORqLJzt35WOH1e5-2FpvnDm5JzgY-a
+
 这个其实是给怪物猎人崛起（后面简称mhr）融珠子用的，但是作为使用入门足够了。
 
 ![image-20210530144148473](https://i.loli.net/2021/05/30/M6XyDJAeazY41KO.png)
@@ -75,6 +77,8 @@ tags:
 
 
 #### NX Macro Controller Installer
+
+> https://drive.google.com/drive/folders/199gVtGI1NMfFpoC-vtvXJju_KeUUtf_l
 
 AutoTalismanMelding只能给mhr用，而想像伊机控一样，任何游戏都能用，就得用到NX Macro Controller Installer了。
 
@@ -112,6 +116,14 @@ NX Macro Controller Installer 比较像伊机控，可以自己编写脚本，�
 - 标准，只要你是同款蓝牙适配器都可以用
 - 便宜，不会被奸商哄抬物价
 - 多用途，就算不拿来当ns手柄用了，也可以当个普通蓝牙用
+
+
+
+## 恢复
+
+如果要恢复CSR蓝牙适配器的功能，直接卸载驱动即可，然后重新插入或者扫描一下即可
+
+![image-20210530151513361](https://i.loli.net/2021/05/30/N4Sg1JEPbMp8wTW.png)
 
 
 
