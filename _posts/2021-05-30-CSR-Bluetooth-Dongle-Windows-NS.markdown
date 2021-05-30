@@ -1,11 +1,11 @@
 ---
 layout:     post
 title:      "CSR蓝牙适配器在windows上模拟NS手柄"
-subtitle:   "controllor,bluetooth dongle"
+subtitle:   "controller,bluetooth dongle"
 date:       2021-05-30
 update:     2021-05-30
 author:     "elmagnifico"
-header-img: "img/pen-head-bg.jpg"
+header-img: "img/pen-head-bg.jpg"e
 catalog:    true
 mathjax:    false
 tags:
