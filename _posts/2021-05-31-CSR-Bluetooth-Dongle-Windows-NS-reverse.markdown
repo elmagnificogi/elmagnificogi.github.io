@@ -479,13 +479,98 @@ num == 0x8000 0000 时 h2=0
 
 num是特定值的时候，表示此时需要控制摇杆，左右摇杆可以同时控制，不过他控制摇杆是直接控制到极值，只是每次控制只给了16ms，算下来也就是60hz的控制频率。
 
+还有问题就是按键和摇杆api中，对应的参数值应该给多少的问题，比如什么值是按A，什么是按B，这个暂时还看不出来。
+
+
+
+## 提取文件
+
+#### dll
+
+由于他是一个exe，单文件，猜一下他用了Costura.[Fody](https://github.com/Fody/Home/)来打包（之前他的sw用了Fody）
+
+![image-20210531232946983](https://i.loli.net/2021/05/31/uzMTRUDOxXSCwGf.png)
+
+通过搜索Fody关键字，也确实验证了我的猜测。
+
+然后将我们需要的btkeylib.dll和libwdi.dll单独保存
+
+![image-20210531233817794](https://i.loli.net/2021/05/31/4gBY39sjXOvJNFH.png)
+
+
+
+#### 脚本
+
+由于之前看到几个按钮都是直接读文件然后运行，类似于这样，很明显这几个文件也一起打包在了一起。
+
+```c#
+private void button4_Click(object sender, EventArgs e)
+{
+	this.RISEMARA.Enabled = false;
+	this.OMAMORISHEET.Enabled = false;
+	this.RISEMARA_STOP.Enabled = false;
+	this.OMAMORITABLE.Enabled = false;
+	this.MACROSTOP.Enabled = true;
+	byte[] rise_r = Resources.RISE_r;
+	this.nmc.NMCRead(rise_r);
+	this.nmc.NmcExecution();
+}
+```
+
+![image-20210531234715774](https://i.loli.net/2021/05/31/hPkeJO8Up3Nfdlo.png)
+
+资源文件中，看到这种01的文件，名字又很像，那就都单独提取出来吧。
+
+光是有了文件还不够，这个文件内容到底是啥，看代码似乎有解析流程，而我这里直接看二进制翻译看到了.png，大胆猜测一下这其实就是怪猎融珠子的脚本。
+
+![image-20210531235107601](https://i.loli.net/2021/05/31/MQx1A6faHINv4yo.png)
+
+而AutoTalismanMelding是NX Macro Controller的儿子，那么这个脚本必然NX Macro Controller也能正常加载。
+
+试验一下，把保存的文件都改名成`.nxc`，然后用NX Macro Controller加载一下看看。
+
+![image-20210531235420671](https://i.loli.net/2021/05/31/WL4wdpDf68bHNnJ.png)
+
+直接正确了，看到的png图片也在这里加载出来了，这个是他用opencv搜图的目标。
+
+这样的话我大概就能确定了NMCRead主要是用来解析这个nxc的脚本，从中拿出来命令、参数、搜图目标
+
+```c#
+public void NMCRead(byte[] data)
+{
+	this.Code = "";
+	this.ResourcesImages.Clear();
+```
+
+然后这个NmcExecution负责将命令转换成对应的操作元数据
+
+```c#
+// AutoTalismanMelding.NMC
+// Token: 0x06000084 RID: 132 RVA: 0x0000A910 File Offset: 0x00008B10
+public void NmcExecution()
+{
+	string text = Regex.Replace(this.Code, "//.*", "").Replace("\n", "\r\n").Replace("\r\r", "\r");
+	Match match = Regex.Match(text, "/\\*(?s:.*?)\\*/");
+	while (match.Success)
+	{
+		string text2 = match.Value;
+		Console.WriteLine(text2);
+		text2 = Regex.Replace(text2, "[^\r\n]", "");
+		Console.WriteLine(text2);
+		text = text.Substring(0, match.Index) + text2 + text.Substring(match.Index + match.Length);
+		match = Regex.Match(text, "/\\*(?s:.*?)\\*/");
+	}
+```
+
+NmcExecution同时还是他的语法解释器，不过比其伊机控的这个语法解释器有点菜，基本上就是靠字符串解析和写好的解析流程来用的，比起利用编译原理，通过前缀、中缀、后缀表达式这种解析原始多了。
+
 
 
 ## Summary
 
-还有问题就是按键和摇杆api中，对应的参数值应该给多少的问题。
 
-未完待续....
+
+未完待续...
 
 
 
