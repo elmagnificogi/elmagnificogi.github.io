@@ -256,10 +256,10 @@ echo $now
 now_seconds=$(date --date="$now" +%s);
 echo $now_seconds
 
-int1=$(($now_seconds%65535))
-int2=$(($now_seconds/65535))
-int3=$(($int2/65535))
-int4=$(($int3/65535))
+int1=$(($now_seconds%65536))
+int2=$(($now_seconds/65536))
+int3=$(($int2/65536))
+int4=$(($int3/65536))
 
 echo $int1,$int2,$int3,$int4
 
@@ -291,13 +291,17 @@ sed -i '/VALUE \"ProductName\"/a\            VALUE \"ProductVersion\",  \"'$git_
 
 ```
 
-简单说`FILEVERSION`与`PRODUCTVERSION`我使用当前时间秒数作为版本号，所以上面有除65535的操作，因为实际上版本号一位是int16，不能超过这个数，这个版本号可以快速通过比大小来判定新旧。
+简单说`FILEVERSION`与`PRODUCTVERSION`我使用当前时间秒数作为版本号，所以上面有除65536的操作，因为实际上版本号一位是int16，不能超过这个数，这个版本号可以快速通过比大小来判定新旧。
 
 而`FileVersion`和`ProductVersion`使用git commit id来作为最终的版本号，这样可以追溯编译版本。
 
 ![image-20210601200920441](https://i.loli.net/2021/06/01/nFAGw6QX5Iqcj8J.png)
 
 最终结果如图所示，这样整个dll的自动版本控制就算完成了，在windows和linux下都可以正常工作。
+
+剩下的就是在每次编译之前调用这个sh脚本，然后就能正常工作了。
+
+不过这里有个小问题，就是每次编译后的版本号其实都是对应的已经提交的commit，如果没有提交的话，那就是错误的了。所以最好再跟一个sh脚本自动commit，并且自动tag，这样无论何时这个release都是可以追溯到的。
 
 
 
@@ -319,13 +323,9 @@ sed -i '/VALUE \"ProductName\"/a\            VALUE \"ProductVersion\",  \"'$git_
 
 
 
-
-
-
-
 ## Summary
 
-
+脚本里用sed来写是真的麻烦，查了半天sed怎么用。如果是python或者其他语言可能几下就写好了，只是为了通用性选择了shell。
 
 
 
