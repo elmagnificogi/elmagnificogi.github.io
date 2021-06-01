@@ -566,9 +566,112 @@ NmcExecution同时还是他的语法解释器，不过比其伊机控的这个�
 
 
 
+## 重制
+
+![image-20210602005720194](https://i.loli.net/2021/06/02/gUuaH4vyfxVJTqn.png)
+
+将提取到的两个dll连同部分类代码一起重构了一下，然后简单做了一个窗口实验了一下是否可行。
+
+这里有几个小问题
+
+- 两个dll都是64位的，所以32位程序是不支持的，他也没给32位的
+
+
+
+#### 按键映射
+
+还是NMC中，有按键映射，之前我漏掉了这里。
+
+```c#
+// AutoTalismanMelding.NMC
+// Token: 0x0600008B RID: 139 RVA: 0x0000B448 File Offset: 0x00009648
+public void ScrPress(string[] args)
+{
+	if (this.scrTimer.IsRunning)
+	{
+		this.scrTimer.Reset();
+	}
+	this.scrTimer.Start();
+	int num = (int)(1000m * decimal.Parse(decimal.Parse(args[args.Length - 1]).ToString("F2")));
+	uint num2 = 0U;
+	for (int i = 1; i < args.Length - 1; i++)
+	{
+		if (args[i] == "A")
+		{
+			num2 |= 8U;
+		}
+        ...
+		else if (args[i] == "DOWNRIGHT_R")
+		{
+			num2 |= 1610612736U;
+		}
+		this.NmcKeyFlag = num2;
+	}
+	while (this.scrTimer.ElapsedMilliseconds < (long)num && !this.Cancel)
+	{
+		Thread.Sleep(1);
+	}
+}
+```
+
+
+
+简单总结一下就是这样
+
+| 数值        | 含义                   |
+| ----------- | ---------------------- |
+| 0x8         | A                      |
+| 0x4         | B                      |
+| 0x2         | X                      |
+| 0x1         | Y                      |
+| 0x80 0000   | ZL                     |
+| 0x80        | ZR                     |
+| 0x40 0000   | L                      |
+| 0x40        | R                      |
+| 0x1 0000    | Hat down               |
+| 0x2 0000    | Hat up                 |
+| 0x4 0000    | Hat right              |
+| 0x5 0000    | Hat down right         |
+| 0x6 0000    | Hat up right           |
+| 0x8 0000    | Hat left               |
+| 0x9 0000    | Hat down left          |
+| 0xA 0000    | Hat up left            |
+| 0x200       | +                      |
+| 0x100       | -                      |
+| 0x1000      | home                   |
+| 0x2000      | capture                |
+| 0x800       | left stick click       |
+| 0x400       | right stick click      |
+| 0x100 0000  | left stick up          |
+| 0x200 0000  | left stick down        |
+| 0x800 0000  | left stick left        |
+| 0x900 0000  | left stick up left     |
+| 0xA00 0000  | left stick down left   |
+| 0x1000 0000 | left stick right       |
+| 0x500 0000  | left stick up right    |
+| 0x600 0000  | right stick down right |
+| 0x1000 0000 | right stick up         |
+| 0x2000 0000 | right stick down       |
+| 0x8000 0000 | right stick left       |
+| 0x9000 0000 | right stick up left    |
+| 0xA000 0000 | right stick down left  |
+| 0x4000 0000 | right stick right      |
+| 0x5000 0000 | right stick up right   |
+| 0x6000 0000 | right stick down right |
+
+
+
+到这里基本就结束了，我的demo也放在我的仓库里，可以直接使用
+
+![image-20210602021714708](https://i.loli.net/2021/06/02/JBWLrzdj9RYk4FU.png)
+
+> https://github.com/elmagnificogi/CSR_Bluetooth_Dongle_Simulate_NS_Pro_Controller
+
+
+
 ## Summary
 
-未完待续...
+下一步就是直接集成进伊机控了，如果作者能透露更多api，而且能支持joycon就更好了，可惜作者直接不理人，就很烦。
 
 
 
