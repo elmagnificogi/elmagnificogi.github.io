@@ -3,7 +3,7 @@ layout:     post
 title:      "CSR蓝牙适配器在windows上模拟NS手柄之逆向工程"
 subtitle:   "crack,bluetooth dongle"
 date:       2021-05-31
-update:     2021-05-31
+update:     2021-06-02
 author:     "elmagnifico"
 header-img: "img/mqtt.jpg"
 catalog:    true
