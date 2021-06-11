@@ -5,7 +5,7 @@ subtitle:   "GD32F450"
 date:       2021-06-11
 update:     2021-06-11
 author:     "elmagnifico"
-header-img: "img/maze.jpg"
+header-img: "img/line-head-bg.jpg"
 catalog:    true
 mathjax:    false
 tags:
