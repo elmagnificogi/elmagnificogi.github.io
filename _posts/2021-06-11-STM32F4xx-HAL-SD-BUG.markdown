@@ -334,6 +334,10 @@ F4的HAL中打开SD时钟没有任何等待，立马开始后面所有命令操�
 
 
 
+单独提高SDMMC_PowerState_ON的内延迟，实际上还是会初始化失败，所以最终造成影响的肯定是SDMMC Clock的时钟，而不是Power没起来的问题
+
+
+
 ## 解决
 
 开启时钟后增加2ms延迟，或者是将SDIO_PowerState_ON移动到__HAL_SD_ENABLE的后面都可以正常工作。
