@@ -464,7 +464,7 @@ static uint32_t SD_PowerON(SD_HandleTypeDef *hsd)
 
 ## HAL_SD_Init 缺失
 
-有个别情况，比如开启了FreeRTOS和FATFS以后，SD的初始化函数会缺少对应的初始化函数的调用，很奇怪。
+有个别情况，比如开启了FreeRTOS和FATFS以后，SD的初始化函数会缺少对应的初始化函数的调用。
 
 ```c
 static void MX_SDIO_SD_Init(void)
@@ -491,7 +491,7 @@ static void MX_SDIO_SD_Init(void)
 
 ```
 
-这里需要自己补充上
+有些人可能会自己补充上。
 
 ```c
   if (HAL_SD_Init(&hsd) != HAL_OK)
@@ -503,6 +503,36 @@ static void MX_SDIO_SD_Init(void)
     Error_Handler();
   }
 ```
+
+实际上这里的HAL_SD_Init是在FATFS的bsp_driver_sd.c中被直接调用了，所以初始的main里面没有自动生成。
+
+```c
+extern SD_HandleTypeDef hsd;
+__weak uint8_t BSP_SD_Init(void)
+{
+  uint8_t sd_state = MSD_OK;
+  /* Check if the SD card is plugged in the slot */
+  if (BSP_SD_IsDetected() != SD_PRESENT)
+  {
+    return MSD_ERROR;
+  }
+  /* HAL SD initialization */
+  sd_state = HAL_SD_Init(&hsd);
+  /* Configure SD Bus width (4 bits mode selected) */
+  if (sd_state == MSD_OK)
+  {
+    /* Enable wide operation */
+    if (HAL_SD_ConfigWideBusOperation(&hsd, SDIO_BUS_WIDE_4B) != HAL_OK)
+    {
+      sd_state = MSD_ERROR;
+    }
+  }
+
+  return sd_state;
+}
+```
+
+不过这种分开的写法确实有点奇怪。
 
 
 
