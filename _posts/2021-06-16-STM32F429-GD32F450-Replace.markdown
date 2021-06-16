@@ -303,8 +303,6 @@ ST的BIT27：24是PLLI2SQ的，而GD由于没有SAI1直接保留了。同理造�
 
 ![image-20210616170121386](https://i.loli.net/2021/06/16/wM23q94RI5LNkoP.png)
 
-![image-20210616171840562](https://i.loli.net/2021/06/16/qhxusY8lkHz9bPV.png)
-
 这里可以看到，CK_PPLSAIVCO是来自于CK_ PLLSAIVCOSRC × PLLSAIN
 
 ```
