@@ -416,6 +416,10 @@ ErrStatus rcu_pllsai_config(uint32_t pllsai_n, uint32_t pllsai_p, uint32_t pllsa
     /* check the function parameter */
 ```
 
+这部分配置我看了官方的固件库或者例程，都找不到任何一个在200MHz下使用的情况，全都是直接配好了PLL48M，不存在这种单独配置的情况。
+
+
+
 
 
 ...To Be Continue
@@ -429,6 +433,7 @@ ErrStatus rcu_pllsai_config(uint32_t pllsai_n, uint32_t pllsai_p, uint32_t pllsa
 1. SD时钟开启响应延迟较高
 2. USB和SDIO的48M时钟源配置有错
 3. 中文文档中存在错误，据说中文是从英文翻译过来的（我之前不确定他们优先中文还是英文，一起看的）
+4. 固件库例程真的不行（用个I2C还是GPIO模拟的，丢人不丢人？各种你想用的驱动例程里都是最菜的那种，就不能发挥一下硬件的作用嘛）
 
 
 
