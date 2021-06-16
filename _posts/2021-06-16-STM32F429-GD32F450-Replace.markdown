@@ -443,6 +443,10 @@ ErrStatus rcu_pllsai_config(uint32_t pllsai_n, uint32_t pllsai_p, uint32_t pllsa
 
 
 
+还是想吐槽一下，GD还是不行，F4的固件库上次更新是2019年3月，2年了没有任何更新，从某种程度上说这个系列的产品也快淘汰了。
+
+反观ST，F4最近一次更新是20年9月，F7最近一次更新是20年12月，人一年至少更新一次，虽然不是啥大更新，但是说明这玩意还有人维护啊。
+
 ## Quote
 
 > https://www.cirmall.com/bbs/thread-95530-1-1.html
