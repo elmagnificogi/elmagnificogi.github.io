@@ -448,4 +448,6 @@ ErrStatus rcu_pllsai_config(uint32_t pllsai_n, uint32_t pllsai_p, uint32_t pllsa
 ## Quote
 
 > https://www.cirmall.com/bbs/thread-95530-1-1.html
+>
+> https://www.cnblogs.com/zwj412/p/10026393.html
 
