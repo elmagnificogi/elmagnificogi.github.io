@@ -3,7 +3,7 @@ layout:     post
 title:      "无线网络唤醒，从入门到放弃"
 subtitle:   "wol,PCI Express WAKE"
 date:       2021-05-25
-update:     2021-05-25
+update:     2021-06-18
 author:     "elmagnifico"
 header-img: "img/springboot.jpg"
 catalog:    true
@@ -227,6 +227,10 @@ S5，全部断电
 
 
 但总体来说远程启动电脑不再是问题了
+
+（这里发现一个新问题，如果断电了，但是主板灯没灭，电容还有电，此时直接重新供电，这时无法启动。一定要主板耗尽电容里的电，然后再供电才能自动启动）
+
+同时还发现一个坑点，小米排插断电以后不能恢复供电，一定要手动按开关，简直废物。
 
 
 
