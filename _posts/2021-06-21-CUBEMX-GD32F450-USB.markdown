@@ -1,0 +1,602 @@
+---
+layout:     post
+title:      "GD32F450使用CubeMX的USB库无法正常工作"
+subtitle:   "HID，CDC，VCP"
+date:       2021-06-21
+update:     2021-06-21
+author:     "elmagnifico"
+header-img: "img/freertos.jpg"
+catalog:    true
+mathjax:    false
+tags:
+    - 嵌入式
+    - STM32
+---
+
+## Foreword
+
+GD32F450使用官方的库的时候USB可以正常使用，但是使用CubeMX的时候USB无法正常工作。
+
+
+
+## 现象
+
+使用CubeMX，STM32F429直接生成USB Device设备，比如HID或者虚拟串口，都无法直接工作，连电脑直接没反应。
+
+但是如果使用GD官方库的usb例程，比如键盘啊，u盘啊什么的，都可以正常工作。那肯定不是硬件问题了。
+
+
+
+## 时钟不同
+
+首先怀疑时钟有问题，由于GD本身多给了USB一个可选时钟源，如果是STM32F429直接跑180M，那USB肯定不能正常工作，但是这种不正常USB连接电脑时会有提示，而现在是任何提示都没有，感觉就像没连接一样。
+
+```c
+/*!
+    \brief      configure USB clock
+    \param[in]  none
+    \param[out] none
+    \retval     none
+*/
+void usb_rcu_config(void)
+{
+#ifdef USE_USB_FS
+
+    #ifndef USE_IRC48M
+        rcu_pll48m_clock_config(RCU_PLL48MSRC_PLLQ);
+
+        rcu_ck48m_clock_config(RCU_CK48MSRC_PLL48M);
+    #else
+        /* enable IRC48M clock */
+        rcu_osci_on(RCU_IRC48M);
+
+        /* wait till IRC48M is ready */
+        while (SUCCESS != rcu_osci_stab_wait(RCU_IRC48M)) {
+        }
+
+        rcu_ck48m_clock_config(RCU_CK48MSRC_IRC48M);
+    #endif /* USE_IRC48M */
+
+    rcu_periph_clock_enable(RCU_USBFS);
+
+#elif defined(USE_USB_HS)
+
+    #ifdef USE_EMBEDDED_PHY
+
+        #ifndef USE_IRC48M
+            rcu_pll48m_clock_config(RCU_PLL48MSRC_PLLQ);
+
+            rcu_ck48m_clock_config(RCU_CK48MSRC_PLL48M);
+        #else
+            /* enable IRC48M clock */
+            rcu_osci_on(RCU_IRC48M);
+
+            /* wait till IRC48M is ready */
+            while (SUCCESS != rcu_osci_stab_wait(RCU_IRC48M)) {
+            }
+
+            rcu_ck48m_clock_config(RCU_CK48MSRC_IRC48M);
+        #endif /* USE_IRC48M */
+
+    #elif defined(USE_ULPI_PHY)
+        rcu_periph_clock_enable(RCU_USBHSULPI);
+    #endif /* USE_EMBEDDED_PHY */
+
+    rcu_periph_clock_enable(RCU_USBHS);
+#endif /* USB_USBFS */
+}
+```
+
+时钟上主要是这里设置一下时钟源和频率，但是如果不设置其实默认就是这样的，那也没错。
+
+其实分析到这里就卡壳了，发现USB直接就不工作，如果不仔细分析GD库的底层代码根本不可能发现这里的问题。
+
+不过我是看到了别人的帖子，遇到了一样的问题，直接拿到了答案，所以还是记录一下这里的问题。
+
+> https://bbs.21ic.com/forum.php?mod=viewthread&tid=3122092&highlight=gd32%2Busb
+
+
+
+## USBFS_GCCFG
+
+```c
+usb_status usb_core_init (usb_core_basic usb_basic, usb_core_regs *usb_regs)
+{
+    if (USB_ULPI_PHY == usb_basic.phy_itf) {
+        usb_regs->gr->GCCFG &= ~GCCFG_PWRON;
+
+        if (usb_basic.sof_enable) {
+            usb_regs->gr->GCCFG |= GCCFG_SOFOEN;
+        }
+
+        /* initialize the ULPI interface */
+        usb_regs->gr->GUSBCS &= ~(GUSBCS_EMBPHY | GUSBCS_ULPIEOI);
+
+#ifdef USBHS_EXTERNAL_VBUS_ENABLED
+        /* use external VBUS driver */
+        usb_regs->gr->GUSBCS |= GUSBCS_ULPIEVD;
+#else
+        /* use internal VBUS driver */
+        usb_regs->gr->GUSBCS &= ~GUSBCS_ULPIEVD;
+#endif /* USBHS_EXTERNAL_VBUS_ENABLED */
+
+        /* soft reset the core */
+        usb_core_reset (usb_regs);
+    } else {
+        usb_regs->gr->GUSBCS |= GUSBCS_EMBPHY;
+
+        /* soft reset the core */
+        usb_core_reset (usb_regs);
+
+        /* active the transceiver and enable VBUS sensing */
+        usb_regs->gr->GCCFG |= GCCFG_PWRON | GCCFG_VBUSACEN | GCCFG_VBUSBCEN;
+
+#ifndef VBUS_SENSING_ENABLED
+        usb_regs->gr->GCCFG |= GCCFG_VBUSIG;
+#endif /* VBUS_SENSING_ENABLED */
+```
+
+从GD的库里可以看到，虽然没有用VBUS，但是他却把VBUS给使能了。
+
+对应到ST的HAL库这里
+
+```c
+HAL_StatusTypeDef USB_DevInit(USB_OTG_GlobalTypeDef *USBx, USB_OTG_CfgTypeDef cfg)
+{
+  HAL_StatusTypeDef ret = HAL_OK;
+  uint32_t USBx_BASE = (uint32_t)USBx;
+  uint32_t i;
+
+  for (i = 0U; i < 15U; i++)
+  {
+    USBx->DIEPTXF[i] = 0U;
+  }
+
+#if defined(STM32F446xx) || defined(STM32F469xx) || defined(STM32F479xx) || defined(STM32F412Zx) || defined(STM32F412Vx) || defined(STM32F412Rx) || defined(STM32F412Cx) || defined(STM32F413xx) || defined(STM32F423xx)
+  /* VBUS Sensing setup */
+  if (cfg.vbus_sensing_enable == 0U)
+  {
+    USBx_DEVICE->DCTL |= USB_OTG_DCTL_SDIS;
+
+    /* Deactivate VBUS Sensing B */
+    USBx->GCCFG &= ~USB_OTG_GCCFG_VBDEN;
+
+    /* B-peripheral session valid override enable */
+    USBx->GOTGCTL |= USB_OTG_GOTGCTL_BVALOEN;
+    USBx->GOTGCTL |= USB_OTG_GOTGCTL_BVALOVAL;
+  }
+  else
+  {
+    /* Enable HW VBUS sensing */
+    USBx->GCCFG |= USB_OTG_GCCFG_VBDEN;
+  }
+#else
+  /* VBUS Sensing setup */
+  if (cfg.vbus_sensing_enable == 0U)
+  {
+    /*
+     * Disable HW VBUS sensing. VBUS is internally considered to be always
+     * at VBUS-Valid level (5V).
+     */
+    USBx_DEVICE->DCTL |= USB_OTG_DCTL_SDIS;
+    USBx->GCCFG |= USB_OTG_GCCFG_NOVBUSSENS;
+    USBx->GCCFG &= ~USB_OTG_GCCFG_VBUSBSEN;
+    USBx->GCCFG &= ~USB_OTG_GCCFG_VBUSASEN;
+  }
+  else
+  {
+    /* Enable HW VBUS sensing */
+    USBx->GCCFG &= ~USB_OTG_GCCFG_NOVBUSSENS;
+    USBx->GCCFG |= USB_OTG_GCCFG_VBUSBSEN;
+  }
+#endif /* defined(STM32F446xx) || defined(STM32F469xx) || defined(STM32F479xx) || defined(STM32F412Zx) || defined(STM32F412Vx) || defined(STM32F412Rx) || defined(STM32F412Cx) || defined(STM32F413xx) || defined(STM32F423xx) */
+
+    // 我后加的这两句
+    USBx->GCCFG |= USB_OTG_GCCFG_VBUSBSEN;
+    USBx->GCCFG |= USB_OTG_GCCFG_VBUSASEN;
+	
+  /* Restart the Phy Clock */
+  USBx_PCGCCTL = 0U;
+
+  /* Device mode configuration */
+  USBx_DEVICE->DCFG |= DCFG_FRAME_INTERVAL_80;
+
+  if (cfg.phy_itface == USB_OTG_ULPI_PHY)
+  {
+    if (cfg.speed == USBD_HS_SPEED)
+    {
+      /* Set Core speed to High speed mode */
+      (void)USB_SetDevSpeed(USBx, USB_OTG_SPEED_HIGH);
+    }
+    else
+    {
+      /* Set Core speed to Full speed mode */
+      (void)USB_SetDevSpeed(USBx, USB_OTG_SPEED_HIGH_IN_FULL);
+    }
+  }
+  else
+  {
+    /* Set Core speed to Full speed mode */
+    (void)USB_SetDevSpeed(USBx, USB_OTG_SPEED_FULL);
+  }
+
+  /* Flush the FIFOs */
+  if (USB_FlushTxFifo(USBx, 0x10U) != HAL_OK) /* all Tx FIFOs */
+  {
+    ret = HAL_ERROR;
+  }
+
+  if (USB_FlushRxFifo(USBx) != HAL_OK)
+  {
+    ret = HAL_ERROR;
+  }
+
+  /* Clear all pending Device Interrupts */
+  USBx_DEVICE->DIEPMSK = 0U;
+  USBx_DEVICE->DOEPMSK = 0U;
+  USBx_DEVICE->DAINTMSK = 0U;
+
+  for (i = 0U; i < cfg.dev_endpoints; i++)
+  {
+    if ((USBx_INEP(i)->DIEPCTL & USB_OTG_DIEPCTL_EPENA) == USB_OTG_DIEPCTL_EPENA)
+    {
+      if (i == 0U)
+      {
+        USBx_INEP(i)->DIEPCTL = USB_OTG_DIEPCTL_SNAK;
+      }
+      else
+      {
+        USBx_INEP(i)->DIEPCTL = USB_OTG_DIEPCTL_EPDIS | USB_OTG_DIEPCTL_SNAK;
+      }
+    }
+    else
+    {
+      USBx_INEP(i)->DIEPCTL = 0U;
+    }
+
+    USBx_INEP(i)->DIEPTSIZ = 0U;
+    USBx_INEP(i)->DIEPINT  = 0xFB7FU;
+  }
+
+  for (i = 0U; i < cfg.dev_endpoints; i++)
+  {
+    if ((USBx_OUTEP(i)->DOEPCTL & USB_OTG_DOEPCTL_EPENA) == USB_OTG_DOEPCTL_EPENA)
+    {
+      if (i == 0U)
+      {
+        USBx_OUTEP(i)->DOEPCTL = USB_OTG_DOEPCTL_SNAK;
+      }
+      else
+      {
+        USBx_OUTEP(i)->DOEPCTL = USB_OTG_DOEPCTL_EPDIS | USB_OTG_DOEPCTL_SNAK;
+      }
+    }
+    else
+    {
+      USBx_OUTEP(i)->DOEPCTL = 0U;
+    }
+
+    USBx_OUTEP(i)->DOEPTSIZ = 0U;
+    USBx_OUTEP(i)->DOEPINT  = 0xFB7FU;
+  }
+
+  USBx_DEVICE->DIEPMSK &= ~(USB_OTG_DIEPMSK_TXFURM);
+
+  /* Disable all interrupts. */
+  USBx->GINTMSK = 0U;
+
+  /* Clear any pending interrupts */
+  USBx->GINTSTS = 0xBFFFFFFFU;
+
+  /* Enable the common interrupts */
+  if (cfg.dma_enable == 0U)
+  {
+    USBx->GINTMSK |= USB_OTG_GINTMSK_RXFLVLM;
+  }
+
+  /* Enable interrupts matching to the Device mode ONLY */
+  USBx->GINTMSK |= USB_OTG_GINTMSK_USBSUSPM | USB_OTG_GINTMSK_USBRST |
+                   USB_OTG_GINTMSK_ENUMDNEM | USB_OTG_GINTMSK_IEPINT |
+                   USB_OTG_GINTMSK_OEPINT   | USB_OTG_GINTMSK_IISOIXFRM |
+                   USB_OTG_GINTMSK_PXFRM_IISOOXFRM | USB_OTG_GINTMSK_WUIM;
+
+  if (cfg.Sof_enable != 0U)
+  {
+    USBx->GINTMSK |= USB_OTG_GINTMSK_SOFM;
+  }
+
+  if (cfg.vbus_sensing_enable == 1U)
+  {
+    USBx->GINTMSK |= (USB_OTG_GINTMSK_SRQIM | USB_OTG_GINTMSK_OTGINT);
+  }
+
+  return ret;
+}
+```
+
+st正常情况下不适用VUBS自然也不可能设置这两位，但是为了适配GD需要强行使能。
+
+
+
+## USBFS_DSTAT
+
+| 地址偏移 | ST          | GD          |
+| -------- | ----------- | ----------- |
+| 0x808    | OTG_FS_DSTS | USBFS_DSTAT |
+
+BIT3在ST中不稳定误差的显示，而GD中保留
+
+BIT0 在ST中没有明确说到底0是挂起还是非挂起，但是从代码里看到，1是挂起，0是没挂起
+
+```c
+void HAL_PCD_SuspendCallback(PCD_HandleTypeDef *hpcd)
+#endif /* USE_HAL_PCD_REGISTER_CALLBACKS */
+{
+    // 这个回调说明，是等于1的时候是suspend mode
+  /* Inform USB library that core enters in suspend Mode. */
+  USBD_LL_Suspend((USBD_HandleTypeDef*)hpcd->pData);
+  __HAL_PCD_GATE_PHYCLOCK(hpcd);
+  /* Enter in STOP mode. */
+```
+
+
+
+而**GD这里是相反的，GD明确说了0是挂起状态，1是非挂起状态** 一定要注意，库里这个地方设置的是相反的。
+
+![image-20210621192359571](https://i.loli.net/2021/06/21/3naA5oV8gxIjfLH.png)
+
+
+
+```c
+void HAL_PCD_IRQHandler(PCD_HandleTypeDef *hpcd)
+{
+  USB_OTG_GlobalTypeDef *USBx = hpcd->Instance;
+  uint32_t USBx_BASE = (uint32_t)USBx;
+  uint32_t i, ep_intr, epint, epnum;
+  uint32_t fifoemptymsk, temp;
+  USB_OTG_EPTypeDef *ep;
+
+  /* ensure that we are in device mode */
+  if (USB_GetMode(hpcd->Instance) == USB_OTG_MODE_DEVICE)
+  {
+    /* avoid spurious interrupt */
+    if (__HAL_PCD_IS_INVALID_INTERRUPT(hpcd))
+    {
+      return;
+    }
+
+    if (__HAL_PCD_GET_FLAG(hpcd, USB_OTG_GINTSTS_MMIS))
+    {
+      /* incorrect mode, acknowledge the interrupt */
+      __HAL_PCD_CLEAR_FLAG(hpcd, USB_OTG_GINTSTS_MMIS);
+    }
+
+    /* Handle RxQLevel Interrupt */
+    if (__HAL_PCD_GET_FLAG(hpcd, USB_OTG_GINTSTS_RXFLVL))
+    {
+      USB_MASK_INTERRUPT(hpcd->Instance, USB_OTG_GINTSTS_RXFLVL);
+
+      temp = USBx->GRXSTSP;
+
+      ep = &hpcd->OUT_ep[temp & USB_OTG_GRXSTSP_EPNUM];
+
+      if (((temp & USB_OTG_GRXSTSP_PKTSTS) >> 17) ==  STS_DATA_UPDT)
+      {
+        if ((temp & USB_OTG_GRXSTSP_BCNT) != 0U)
+        {
+          (void)USB_ReadPacket(USBx, ep->xfer_buff,
+                               (uint16_t)((temp & USB_OTG_GRXSTSP_BCNT) >> 4));
+
+          ep->xfer_buff += (temp & USB_OTG_GRXSTSP_BCNT) >> 4;
+          ep->xfer_count += (temp & USB_OTG_GRXSTSP_BCNT) >> 4;
+        }
+      }
+      else if (((temp & USB_OTG_GRXSTSP_PKTSTS) >> 17) ==  STS_SETUP_UPDT)
+      {
+        (void)USB_ReadPacket(USBx, (uint8_t *)hpcd->Setup, 8U);
+        ep->xfer_count += (temp & USB_OTG_GRXSTSP_BCNT) >> 4;
+      }
+      else
+      {
+        /* ... */
+      }
+      USB_UNMASK_INTERRUPT(hpcd->Instance, USB_OTG_GINTSTS_RXFLVL);
+    }
+
+    if (__HAL_PCD_GET_FLAG(hpcd, USB_OTG_GINTSTS_OEPINT))
+    {
+      epnum = 0U;
+
+      /* Read in the device interrupt bits */
+      ep_intr = USB_ReadDevAllOutEpInterrupt(hpcd->Instance);
+
+      while (ep_intr != 0U)
+      {
+        if ((ep_intr & 0x1U) != 0U)
+        {
+          epint = USB_ReadDevOutEPInterrupt(hpcd->Instance, (uint8_t)epnum);
+
+          if ((epint & USB_OTG_DOEPINT_XFRC) == USB_OTG_DOEPINT_XFRC)
+          {
+            CLEAR_OUT_EP_INTR(epnum, USB_OTG_DOEPINT_XFRC);
+            (void)PCD_EP_OutXfrComplete_int(hpcd, epnum);
+          }
+
+          if ((epint & USB_OTG_DOEPINT_STUP) == USB_OTG_DOEPINT_STUP)
+          {
+            CLEAR_OUT_EP_INTR(epnum, USB_OTG_DOEPINT_STUP);
+            /* Class B setup phase done for previous decoded setup */
+            (void)PCD_EP_OutSetupPacket_int(hpcd, epnum);
+          }
+
+          if ((epint & USB_OTG_DOEPINT_OTEPDIS) == USB_OTG_DOEPINT_OTEPDIS)
+          {
+            CLEAR_OUT_EP_INTR(epnum, USB_OTG_DOEPINT_OTEPDIS);
+          }
+
+          /* Clear Status Phase Received interrupt */
+          if ((epint & USB_OTG_DOEPINT_OTEPSPR) == USB_OTG_DOEPINT_OTEPSPR)
+          {
+            CLEAR_OUT_EP_INTR(epnum, USB_OTG_DOEPINT_OTEPSPR);
+          }
+
+          /* Clear OUT NAK interrupt */
+          if ((epint & USB_OTG_DOEPINT_NAK) == USB_OTG_DOEPINT_NAK)
+          {
+            CLEAR_OUT_EP_INTR(epnum, USB_OTG_DOEPINT_NAK);
+          }
+        }
+        epnum++;
+        ep_intr >>= 1U;
+      }
+    }
+
+    if (__HAL_PCD_GET_FLAG(hpcd, USB_OTG_GINTSTS_IEPINT))
+    {
+      /* Read in the device interrupt bits */
+      ep_intr = USB_ReadDevAllInEpInterrupt(hpcd->Instance);
+
+      epnum = 0U;
+
+      while (ep_intr != 0U)
+      {
+        if ((ep_intr & 0x1U) != 0U) /* In ITR */
+        {
+          epint = USB_ReadDevInEPInterrupt(hpcd->Instance, (uint8_t)epnum);
+
+          if ((epint & USB_OTG_DIEPINT_XFRC) == USB_OTG_DIEPINT_XFRC)
+          {
+            fifoemptymsk = (uint32_t)(0x1UL << (epnum & EP_ADDR_MSK));
+            USBx_DEVICE->DIEPEMPMSK &= ~fifoemptymsk;
+
+            CLEAR_IN_EP_INTR(epnum, USB_OTG_DIEPINT_XFRC);
+
+            if (hpcd->Init.dma_enable == 1U)
+            {
+              hpcd->IN_ep[epnum].xfer_buff += hpcd->IN_ep[epnum].maxpacket;
+
+              /* this is ZLP, so prepare EP0 for next setup */
+              if ((epnum == 0U) && (hpcd->IN_ep[epnum].xfer_len == 0U))
+              {
+                /* prepare to rx more setup packets */
+                (void)USB_EP0_OutStart(hpcd->Instance, 1U, (uint8_t *)hpcd->Setup);
+              }
+            }
+
+#if (USE_HAL_PCD_REGISTER_CALLBACKS == 1U)
+            hpcd->DataInStageCallback(hpcd, (uint8_t)epnum);
+#else
+            HAL_PCD_DataInStageCallback(hpcd, (uint8_t)epnum);
+#endif /* USE_HAL_PCD_REGISTER_CALLBACKS */
+          }
+          if ((epint & USB_OTG_DIEPINT_TOC) == USB_OTG_DIEPINT_TOC)
+          {
+            CLEAR_IN_EP_INTR(epnum, USB_OTG_DIEPINT_TOC);
+          }
+          if ((epint & USB_OTG_DIEPINT_ITTXFE) == USB_OTG_DIEPINT_ITTXFE)
+          {
+            CLEAR_IN_EP_INTR(epnum, USB_OTG_DIEPINT_ITTXFE);
+          }
+          if ((epint & USB_OTG_DIEPINT_INEPNE) == USB_OTG_DIEPINT_INEPNE)
+          {
+            CLEAR_IN_EP_INTR(epnum, USB_OTG_DIEPINT_INEPNE);
+          }
+          if ((epint & USB_OTG_DIEPINT_EPDISD) == USB_OTG_DIEPINT_EPDISD)
+          {
+            CLEAR_IN_EP_INTR(epnum, USB_OTG_DIEPINT_EPDISD);
+          }
+          if ((epint & USB_OTG_DIEPINT_TXFE) == USB_OTG_DIEPINT_TXFE)
+          {
+            (void)PCD_WriteEmptyTxFifo(hpcd, epnum);
+          }
+        }
+        epnum++;
+        ep_intr >>= 1U;
+      }
+    }
+
+    /* Handle Resume Interrupt */
+    if (__HAL_PCD_GET_FLAG(hpcd, USB_OTG_GINTSTS_WKUINT))
+    {
+      /* Clear the Remote Wake-up Signaling */
+      USBx_DEVICE->DCTL &= ~USB_OTG_DCTL_RWUSIG;
+
+      if (hpcd->LPM_State == LPM_L1)
+      {
+        hpcd->LPM_State = LPM_L0;
+
+#if (USE_HAL_PCD_REGISTER_CALLBACKS == 1U)
+        hpcd->LPMCallback(hpcd, PCD_LPM_L0_ACTIVE);
+#else
+        HAL_PCDEx_LPM_Callback(hpcd, PCD_LPM_L0_ACTIVE);
+#endif /* USE_HAL_PCD_REGISTER_CALLBACKS */
+      }
+      else
+      {
+#if (USE_HAL_PCD_REGISTER_CALLBACKS == 1U)
+        hpcd->ResumeCallback(hpcd);
+#else
+        HAL_PCD_ResumeCallback(hpcd);
+#endif /* USE_HAL_PCD_REGISTER_CALLBACKS */
+      }
+
+      __HAL_PCD_CLEAR_FLAG(hpcd, USB_OTG_GINTSTS_WKUINT);
+    }
+
+    /* Handle Suspend Interrupt */
+    if (__HAL_PCD_GET_FLAG(hpcd, USB_OTG_GINTSTS_USBSUSP))
+    {
+      // 这里是我修改后的
+      if ((USBx_DEVICE->DSTS & USB_OTG_DSTS_SUSPSTS) != USB_OTG_DSTS_SUSPSTS)
+      {
+#if (USE_HAL_PCD_REGISTER_CALLBACKS == 1U)
+        hpcd->SuspendCallback(hpcd);
+#else
+        HAL_PCD_SuspendCallback(hpcd);
+#endif /* USE_HAL_PCD_REGISTER_CALLBACKS */
+      }
+      __HAL_PCD_CLEAR_FLAG(hpcd, USB_OTG_GINTSTS_USBSUSP);
+    }
+```
+
+除了这个地方还有一个也需要改，唤醒这里也需要修改为不相等，否则会出现USB插电脑有反应，但是获取描述符失败。
+
+```c
+/**
+  * @brief  USB_ActivateRemoteWakeup active remote wakeup signalling
+  * @param  USBx Selected device
+  * @retval HAL status
+  */
+HAL_StatusTypeDef USB_ActivateRemoteWakeup(USB_OTG_GlobalTypeDef *USBx)
+{
+  uint32_t USBx_BASE = (uint32_t)USBx;
+
+  if ((USBx_DEVICE->DSTS & USB_OTG_DSTS_SUSPSTS) != USB_OTG_DSTS_SUSPSTS)
+  {
+    /* active Remote wakeup signalling */
+    USBx_DEVICE->DCTL |= USB_OTG_DCTL_RWUSIG;
+  }
+
+  return HAL_OK;
+}
+```
+
+
+
+## Summary
+
+这个问题直接搜还搜不到，必须得论坛内搜，才能看到这个帖子，我之前已经调了2天，没找到原因。
+
+论坛里随手搜了一下，没想到竟然遇到了一模一样的问题，省了好多功夫。
+
+如果不知道的情况下，就得去GD底层库一点点看，一点点对比了，那花的时间可就太多了。
+
+而且看贴子里基本都是说不兼容，不能用，如果不坚持看下去肯定就放弃，转而使用GD自己的库了。
+
+
+
+## Quote
+
+>https://bbs.21ic.com/forum.php?mod=viewthread&tid=3122092&highlight=gd32%2Busb
+>
+

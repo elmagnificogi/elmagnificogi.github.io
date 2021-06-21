@@ -418,6 +418,154 @@ ErrStatus rcu_pllsai_config(uint32_t pllsai_n, uint32_t pllsai_p, uint32_t pllsa
 
 
 
+#### USB
+
+由于USB一直出错，所以这里先对比一下看看是否有不同，USB太复杂了，里面这么多不同，最终影响库的使用到底有多少谁也不知道。
+
+
+
+| 地址偏移 | ST             | GD           |
+| -------- | -------------- | ------------ |
+| 0x0C     | OTG_FS_GUSBCFG | USBFS_GUSBCS |
+
+BIT31 在ST这边是用来debug，GD则是保留
+
+BIT6 在ST这里是总是1，用来，USB全速发送，但是GD保留
+
+
+
+| 地址偏移 | ST             | GD            |
+| -------- | -------------- | ------------- |
+| 0x010    | OTG_FS_GRSTCTL | USBFS_GRSTCTL |
+
+BIT31 在ST这边是AHB的状态，GD是保留
+
+
+
+| 地址偏移 | ST             | GD                          |
+| -------- | -------------- | --------------------------- |
+| 0x01C    | OTG_FS_GRSTCTL | USBFS_GRSTATR/USBFS_GRSTATP |
+
+这个寄存器分为Host模式和Device模式，在Device模式中有所不同
+
+BIT24-21在ST中是帧个数，而GD直接没有，这个位是只有同步输出才有用
+
+
+
+| 地址偏移 | ST              | GD                         |
+| -------- | --------------- | -------------------------- |
+| 0x024    | OTG_FS_GRXFSIZ  | USBFS_GRFLEN               |
+| 0x028    | OTG_FS_DIEPTXF0 | USBFS_HNPTFLEN _DIEP0TFLEN |
+
+这个里面Rx的FIFO最大深度在ST中是256，而GD中则是1024
+
+同理，发送深度也是这种情况。不过在Device模式中，GD发送最大是140，而ST是256
+
+
+
+| 地址偏移 | ST           | GD          |
+| -------- | ------------ | ----------- |
+| 0x038    | OTG_FS_GCCFG | USBFS_GCCFG |
+
+BIT19和18 是Vbus比较使能的位，在ST这边是如果使用了就用，没用就没用。但是GD这里是不管你用没用都得置位，否则直接无法正常工作，代码如下
+
+```c
+    USBx->GCCFG |= USB_OTG_GCCFG_VBUSBSEN;
+    USBx->GCCFG |= USB_OTG_GCCFG_VBUSASEN;
+```
+
+
+
+| 地址偏移 | ST          | GD         |
+| -------- | ----------- | ---------- |
+| 0x804    | OTG_FS_DCTL | USBFS_DCTL |
+
+BIT6-4里ST是测试模式，而GD保留
+
+
+
+| 地址偏移 | ST          | GD          |
+| -------- | ----------- | ----------- |
+| 0x808    | OTG_FS_DSTS | USBFS_DSTAT |
+
+BIT3在ST中不稳定误差的显示，而GD中保留
+
+BIT0 在ST中没有明确说到底0是挂起还是非挂起，但是从代码里看到，1是挂起，0是没挂起
+
+而**GD这里是相反的，GD明确说了0是挂起状态，1是非挂起状态** 一定要注意，库里这个地方设置的是相反的。
+
+
+
+| 地址偏移 | ST             | GD              |
+| -------- | -------------- | --------------- |
+| 0x810    | OTG_FS_DIEPMSK | USBFS_DIEPINTEN |
+
+BIT5 ST中是EP不匹配错误，GD保留
+
+BIT13 ST中是NAK中断，而GD直接没有
+
+
+
+| 地址偏移 | ST             | GD              |
+| -------- | -------------- | --------------- |
+| 0x814    | OTG_FS_DOEPMSK | USBFS_DOEPINTEN |
+
+BIT5 ST中状态解析，而GD保留
+
+BIT6 GD是连续setup包的中断，而ST中没有
+
+BIT8-13 ST有而GD保留
+
+
+
+| 地址偏移 | ST                | GD                |
+| -------- | ----------------- | ----------------- |
+| 0x818    | OTG_FS_DAINT      | USBFS_DAEPINT     |
+| 0x81C    | OTG_FS_DAINTMSK   | USBFS_DAEPINTEN   |
+| 0x0834   | OTG_FS_DIEPEMPMSK | USBFS_DIEPFEINTEN |
+
+这里ST无保留，而GD保留了一部分端点的中断位
+
+
+
+| 地址偏移     | ST              | GD              |
+| ------------ | --------------- | --------------- |
+| 0x908+x*0x20 | OTG_FS_DIEPINTx | USBFS_DIEPxINTF |
+
+这里BIT13在ST是NAK，11是丢包状态，而GD则没有这几位
+
+
+
+| 地址偏移     | ST              | GD              |
+| ------------ | --------------- | --------------- |
+| 0xB08+x*0x20 | OTG_FS_DOEPINTx | USBFS_DOEPxINTF |
+
+BIT5在ST是状态解析，而GD保留
+
+BIT6在ST保留，GD中式连续setup包
+
+BIT13在ST是NAK，而GD则没有
+
+BIT11是丢包状态，而GD则没有
+
+
+
+| 地址偏移     | ST               | GD             |
+| ------------ | ---------------- | -------------- |
+| 0x910+x*0x20 | OTG_FS_DIEPTSIZx | USBFS_DIEPxLEN |
+
+BIT30-29在GD中是每帧多包数目，而ST没有
+
+
+
+
+
+| 地址偏移 | ST             | GD              |
+| -------- | -------------- | --------------- |
+| 0xE00    | OTG_FS_PCGCCTL | USBFS_PWRCLKCTL |
+
+BIT4 ST中多了物理挂起的选项，但是GD中没有
+
 
 
 ...To Be Continue
@@ -432,6 +580,7 @@ ErrStatus rcu_pllsai_config(uint32_t pllsai_n, uint32_t pllsai_p, uint32_t pllsa
 2. USB和SDIO的48M时钟源配置有错
 3. 中文文档中存在错误，据说中文是从英文翻译过来的（我之前不确定他们优先中文还是英文，一起看的）
 4. 固件库例程真的不行（用个I2C还是GPIO模拟的，丢人不丢人？各种你想用的驱动例程里都是最菜的那种，就不能发挥一下硬件的作用嘛）
+5. USB中的DSTAT和GCCFG寄存器和预期的不相同，直接影响了usb设备能否正常工作。
 
 
 
