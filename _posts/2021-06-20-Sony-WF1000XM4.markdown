@@ -3,7 +3,7 @@ layout:     post
 title:      "Sony-WF1000XM4 开箱测评"
 subtitle:   "Sony-WH1000XM3"
 date:       2021-06-20
-update:     2021-06-20
+update:     2021-06-21
 author:     "elmagnifico"
 header-img: "img/play.jpg"
 catalog:    true
