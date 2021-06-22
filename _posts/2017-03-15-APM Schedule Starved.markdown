@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "Pixhawk中的Schedule Starved"
+title:      "APM中的Schedule Starved"
 subtitle:   "嵌入式，驱动，Timeout"
 date:       2017-03-15
 author:     "elmagnifico"
@@ -8,7 +8,7 @@ header-img: "img/Embedded-head-bg.png"
 catalog:    true
 tags:
     - 嵌入式
-    - Pixhawk
+    - APM
 ---
 
 ## 相关代码
@@ -128,7 +128,7 @@ update_spare_ticks:
 ```
 ## 分析
 
-Pixhawk中的loop()也是main函数中的主循环函数了。
+APM中的loop()也是main函数中的主循环函数了。
 
 其中fast_loop()是快速循环，用来做快速积分，解算姿态使用。许多关键的任务都是由这里完成。
 
