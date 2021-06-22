@@ -314,7 +314,7 @@ HAL_StatusTypeDef USB_DevInit(USB_OTG_GlobalTypeDef *USBx, USB_OTG_CfgTypeDef cf
 }
 ```
 
-st正常情况下不适用VUBS自然也不可能设置这两位，但是为了适配GD需要强行使能。
+st正常情况下不使用VUBS自然也不可能设置这两位，但是为了适配GD需要强行使能。
 
 
 
