@@ -568,6 +568,23 @@ BIT4 ST中多了物理挂起的选项，但是GD中没有
 
 
 
+#### 时钟问题
+
+如果GD32使用8，400，2，USB就能正常工作，时钟也正确。
+
+但是如果使用4，200，2，本质上应该是一样的，但是USB此时无法正常工作。
+
+```c
+    /* Configure the main PLL, PLL_M = 8, PLL_N = 400, PLL_P = 2, PLL_Q = 9 */ 
+    RCU_PLL = (8U | (400U << 6U) | (((2U >> 1U) - 1U) << 16U) |
+    				(RCU_PLLSRC_HXTAL) | (9U << 24U));
+    /* Configure the main PLL, PLL_M = 8, PLL_N = 400, PLL_P = 2, PLL_Q = 9 */ 
+    RCU_PLL = (4U | (200U << 6U) | (((2U >> 1U) - 1U) << 16U) |
+                   (RCU_PLLSRC_HXTAL) | (9U << 24U));
+```
+
+
+
 ...To Be Continue
 
 
