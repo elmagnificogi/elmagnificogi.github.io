@@ -583,25 +583,6 @@ HAL_StatusTypeDef USB_ActivateRemoteWakeup(USB_OTG_GlobalTypeDef *USBx)
 
 
 
-## 基础时钟问题
-
-如果GD32使用8，400，2，USB就能正常工作，时钟也正确。
-
-但是如果使用4，200，2，本质上应该是一样的，但是USB此时无法正常工作，描述符获取失败。
-
-```c
-    /* Configure the main PLL, PLL_M = 8, PLL_N = 400, PLL_P = 2, PLL_Q = 9 */ 
-    RCU_PLL = (8U | (400U << 6U) | (((2U >> 1U) - 1U) << 16U) |
-    				(RCU_PLLSRC_HXTAL) | (9U << 24U));
-    /* Configure the main PLL, PLL_M = 8, PLL_N = 400, PLL_P = 2, PLL_Q = 9 */ 
-    RCU_PLL = (4U | (200U << 6U) | (((2U >> 1U) - 1U) << 16U) |
-                   (RCU_PLLSRC_HXTAL) | (9U << 24U));
-```
-
-这个原因一直没找到，只能说如果要用200MHz，那就把PPL_M这里弄到1MHz，否则一直USB异常。
-
-
-
 ## Summary
 
 这个问题直接搜还搜不到，必须得论坛内搜，才能看到这个帖子，我之前已经调了2天，没找到原因。
