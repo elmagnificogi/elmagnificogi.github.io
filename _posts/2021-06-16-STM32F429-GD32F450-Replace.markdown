@@ -102,6 +102,22 @@ ST的FSMC在GD这里直接没有，所以这部分地址就保留了
 
 
 
+## SRAM对比
+
+| 地址                      | ST    | GD      | 大小  | 说明 |
+| ------------------------- | ----- | ------- | ----- | ---- |
+| 0x2000 0000 - 0x2001 BFFF | SRAM1 | SRAM0   | 112KB |      |
+| 0x2001 C000 - 0x2001 FFFF | SRAM2 | SRAM1   | 16KB  |      |
+| 0x2002 0000 - 0x2002 FFFF | SRAM3 | SRAM2   | 64KB  |      |
+| 0x2003 0000 - 0x2006 FFFF | 无    | ADDSRAM | 256KB |      |
+| 0x2007 0000 - 0x3FFF FFFF |       | 保留    |       |      |
+
+需要注意GD比ST多了256KB的内存
+
+
+
+GD的TCMSRAM在ST中叫CCM，64KB，这块内存只能被DBUS访问。
+
 ## boot 对比
 
 boot上基本保持了一致

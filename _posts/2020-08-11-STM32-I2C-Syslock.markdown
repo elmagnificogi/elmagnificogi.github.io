@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "STM32 I2C 在FreeRTOS中造成的死锁"
-subtitle:   "HAL，DSHOT1200"
+subtitle:   "HAL"
 date:       2020-08-11
 author:     "elmagnifico"
 header-img: "img/freertos.jpg"
