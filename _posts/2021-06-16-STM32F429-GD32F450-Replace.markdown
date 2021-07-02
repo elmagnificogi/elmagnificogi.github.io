@@ -3,7 +3,7 @@ layout:     post
 title:      "GD32F450替代STM32F429，详细对比"
 subtitle:   "GD32F450"
 date:       2021-06-16
-update:     2021-06-16
+update:     2021-07-02
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"
 catalog:    true
@@ -597,6 +597,39 @@ BIT4 ST中多了物理挂起的选项，但是GD中没有
 3. 中文文档中存在错误，据说中文是从英文翻译过来的（我之前不确定他们优先中文还是英文，一起看的）
 4. 固件库例程真的不行（用个I2C还是GPIO模拟的，丢人不丢人？各种你想用的驱动例程里都是最菜的那种，就不能发挥一下硬件的作用嘛）
 5. USB中的DSTAT和GCCFG寄存器和预期的不相同，直接影响了usb设备能否正常工作。
+
+
+
+## 其他
+
+之前有说过F7中的Timer DMA PWM中有bug，只能同时启动一路。
+
+> http://elmagnifico.tech/2020/06/03/Dshot-STM32-PWM-HAL/
+
+这次看F4的库，发现这里这个判断修改了，之前F7这里判定的是Timer本身的状态，而这里则是判定每个channel的状态。
+
+```c
+HAL_StatusTypeDef HAL_TIM_PWM_Start_DMA(TIM_HandleTypeDef *htim, uint32_t Channel, uint32_t *pData, uint16_t Length)
+{
+  uint32_t tmpsmcr;
+
+  /* Check the parameters */
+  assert_param(IS_TIM_CCX_INSTANCE(htim->Instance, Channel));
+
+  /* Set the TIM channel state */
+  if (TIM_CHANNEL_STATE_GET(htim, Channel) == HAL_TIM_CHANNEL_STATE_BUSY)
+  {
+    return HAL_BUSY;
+  }
+  else if (TIM_CHANNEL_STATE_GET(htim, Channel) == HAL_TIM_CHANNEL_STATE_READY)
+  {
+```
+
+
+
+GD可以高达200MHz，但是实际使用的时候就会发现有些情况这个200MHz有点坑爹。比如DSHOT的频率和GD的时钟频率就匹配不上（3和10互质），怎么用都会出现时钟频率不理想。这种情况下只好降频，降到192MHz，这样各种时钟频率都处于一个比较ok的状态。
+
+有时候想想，发现这些板子的总时钟频率还真不能瞎选，可能你选的不合适，一味追求高，导致实际上有些地方分频怎么分也得不到合适的值，这时候就只能降频了。
 
 
 

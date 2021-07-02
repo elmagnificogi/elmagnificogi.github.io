@@ -3,7 +3,7 @@ layout:     post
 title:      "斐讯K3改散热"
 subtitle:   "PHICOMM，DIY"
 date:       2021-06-24
-update:     2021-06-24
+update:     2021-07-01
 author:     "elmagnifico"
 header-img: "img/welding3.jpg"
 catalog:    true
