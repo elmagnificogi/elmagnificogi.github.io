@@ -1,213 +1,77 @@
 ---
 layout:     post
-title:      "STM32 CubeMX HAL_Init与SystemClock_Config的矛盾"
-subtitle:   "HID，CDC，VCP"
-date:       2021-07-02
-update:     2021-07-02
+title:      "广播与多播对WIFI网络的影响"
+subtitle:   "Multicast，Broadcast"
+date:       2021-07-03
+update:     2021-07-03
 author:     "elmagnifico"
 header-img: "img/Embedded-head-bg.png"
 catalog:    true
 mathjax:    false
 tags:
-    - 嵌入式
-    - STM32
+    - WIFI
 ---
 
 ## Foreword
 
-最近突然发现CubeMX生成的HAL_Init和SystemClock_Config有矛盾，可能会导致时钟不对。
+本文是翻译，原文于此，结合我的实际使用略有改动
+
+> https://wyebot.com/2019/02/13/multicast-broadcast-traffic-worry-part1/
 
 
 
-## CubeMX
+## 多播与广播介绍
 
-```c
-
-/**
-  * @brief  The application entry point.
-  * @retval int
-  */
-int main(void)
-{
-  /* USER CODE BEGIN 1 */
-
-  /* USER CODE END 1 */
-
-  /* MCU Configuration--------------------------------------------------------*/
-
-  /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
-  HAL_Init();
-
-  /* USER CODE BEGIN Init */
-
-  /* USER CODE END Init */
-
-  /* Configure the system clock */
-  SystemClock_Config();
-
-  /* USER CODE BEGIN SysInit */
-
-  /* USER CODE END SysInit */
-
-  /* Initialize all configured peripherals */
-  MX_GPIO_Init();
-  MX_DMA_Init();
-  MX_I2C2_Init();
-  MX_SDIO_SD_Init();
-  MX_SPI1_Init();
-```
-
-平常Cube生成的代码都是这种顺序的，都是先HAL_Init之后才有SystemClock_Config，但是HAL内部也需要一个定时器来计时，也是在HAL_Init的时候进行初始化的，但是后面时钟重新初始化了，这就可能会导致HAL内的定时器实际计时并不正确。
+​		多播和广播已经非常常见了，许多设备也会用多播或者广播来发布或者发现服务或者其他设备。类似家庭环境中使用的串流服务，像Bonjour、MDNS的协议，让流媒体传输变得更加简单了。但这样的简单是有代价的，当无线网络上有很多设备进行组播或者广播的时候，很容易引起网络阻塞。按理说基于现在的生成树协议等等手段，应该不至于，但是无线网络与有线网络对于组播和广播的处理并不相同，所以导致了这个问题。
 
 
 
-## HAL_Init
+## 详解多播与广播
 
-HAL的初始化比较简单，大部和常用的外设其实没啥关系，只是注释看着好像有大关系。
-
-```c
-HAL_StatusTypeDef HAL_Init(void)
-{
-  /* Configure Flash prefetch, Instruction cache, Data cache */ 
-#if (INSTRUCTION_CACHE_ENABLE != 0U)
-  __HAL_FLASH_INSTRUCTION_CACHE_ENABLE();
-#endif /* INSTRUCTION_CACHE_ENABLE */
-
-#if (DATA_CACHE_ENABLE != 0U)
-  __HAL_FLASH_DATA_CACHE_ENABLE();
-#endif /* DATA_CACHE_ENABLE */
-
-#if (PREFETCH_ENABLE != 0U)
-  __HAL_FLASH_PREFETCH_BUFFER_ENABLE();
-#endif /* PREFETCH_ENABLE */
-
-  /* Set Interrupt Group Priority */
-  HAL_NVIC_SetPriorityGrouping(NVIC_PRIORITYGROUP_4);
-
-  /* Use systick as time base source and configure 1ms tick (default clock after Reset is HSI) */
-  HAL_InitTick(TICK_INT_PRIORITY);
-
-  /* Init the low level hardware */
-  HAL_MspInit();
-
-  /* Return function status */
-  return HAL_OK;
-}
-```
-
-而HAL的时钟是在HAL_InitTick中进行初始化的，这里注释说是用systick，实际上我修改成了TIM6，但是自动生成的注释不会跟着变而已
+​		在有线网络中，每个设备基本都是全双工连接到交换机的，差一点100M，好一点基本都是G口，有线连接不需要和其他设备分享带宽，基本每个人都相对独立，瓶颈一般都在交换机或者路由这里。但是WIFI就不一样了，他扮演的角色不像交换机，而是像一个HUB，所有连接到他的设备需要共享带宽，这里自然就是指无线带宽了。因此只要是使用同一个信道的设备，就一定会影响该信道的其他设备。这也是为啥经常2.4g的信道基本都卡爆，而5.8g就好一些，多数人都挤在一条路上，能不卡嘛。
 
 
 
-```c
-HAL_StatusTypeDef HAL_InitTick(uint32_t TickPriority)
-{
-  RCC_ClkInitTypeDef    clkconfig;
-  uint32_t              uwTimclock = 0;
-  uint32_t              uwPrescalerValue = 0;
-  uint32_t              pFLatency;
-  /*Configure the TIM6 IRQ priority */
-  HAL_NVIC_SetPriority(TIM6_DAC_IRQn, TickPriority ,0);
+#### 多播与广播的处理
 
-  /* Enable the TIM6 global Interrupt */
-  HAL_NVIC_EnableIRQ(TIM6_DAC_IRQn);
-  /* Enable TIM6 clock */
-  __HAL_RCC_TIM6_CLK_ENABLE();
-
-  /* Get clock configuration */
-  HAL_RCC_GetClockConfig(&clkconfig, &pFLatency);
-
-  /* Compute TIM6 clock */
-  uwTimclock = 2*HAL_RCC_GetPCLK1Freq();
-  /* Compute the prescaler value to have TIM6 counter clock equal to 1MHz */
-  uwPrescalerValue = (uint32_t) ((uwTimclock / 1000000U) - 1U);
-
-  /* Initialize TIM6 */
-  htim6.Instance = TIM6;
-
-  /* Initialize TIMx peripheral as follow:
-  + Period = [(TIM6CLK/1000) - 1]. to have a (1/1000) s time base.
-  + Prescaler = (uwTimclock/1000000 - 1) to have a 1MHz counter clock.
-  + ClockDivision = 0
-  + Counter direction = Up
-  */
-  htim6.Init.Period = (1000000U / 1000U) - 1U;
-  htim6.Init.Prescaler = uwPrescalerValue;
-  htim6.Init.ClockDivision = 0;
-  htim6.Init.CounterMode = TIM_COUNTERMODE_UP;
-  if(HAL_TIM_Base_Init(&htim6) == HAL_OK)
-  {
-    /* Start the TIM time Base generation in interrupt mode */
-    return HAL_TIM_Base_Start_IT(&htim6);
-  }
-
-  /* Return function status */
-  return HAL_ERROR;
-}
-```
-
-关键的地方在于这里获取PCLK1的时钟频率，可以看到最终这个频率是来自于SystemCoreClock这个变量的。
-
-```c
-uint32_t HAL_RCC_GetHCLKFreq(void)
-{
-  return SystemCoreClock;
-}
-
-uint32_t HAL_RCC_GetPCLK1Freq(void)
-{
-  /* Get HCLK source and Compute PCLK1 frequency ---------------------------*/
-  return (HAL_RCC_GetHCLKFreq() >> APBPrescTable[(RCC->CFGR & RCC_CFGR_PPRE1)>> RCC_CFGR_PPRE1_Pos]);
-}
-```
-
-再看SystemCoreClock变量是怎么被更新的。
-
-```c
-/** @addtogroup STM32F4xx_System_Private_Variables
-  * @{
-  */
-  /* This variable is updated in three ways:
-      1) by calling CMSIS function SystemCoreClockUpdate()
-      2) by calling HAL API function HAL_RCC_GetHCLKFreq()
-      3) each time HAL_RCC_ClockConfig() is called to configure the system clock frequency 
-         Note: If you use this function to configure the system clock; then there
-               is no need to call the 2 first functions listed above, since SystemCoreClock
-               variable is updated automatically.
-  */
-uint32_t SystemCoreClock = 16000000;
-const uint8_t AHBPrescTable[16] = {0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 3, 4, 6, 7, 8, 9};
-const uint8_t APBPrescTable[8]  = {0, 0, 0, 0, 1, 2, 3, 4};
-```
-
-他只有3种情况下更新。
-
-1. 调用SystemCoreClockUpdate，更新系统时钟
-2. 调用HAL_RCC_GetHCLKFreq 更新系统时钟，这种方式应该是无效的，只能获取不能更新
-3. 调用HAL_RCC_ClockConfig 来更新
-
-所以实际上就只有2种更新方式。
-
-而Cube生成代码的时候SystemCoreClock并不会自动修改成你时钟配置的速度
-
-![image-20210702182855169](https://i.loli.net/2021/07/02/aUL2xG1qgvzleyK.png)
-
-此时我时钟是168，调试也能看到是160
-
-![image-20210702182803586](https://i.loli.net/2021/07/02/wHJtZmLp59jVnxP.png)
-
-所以这个时候直接就把Timer6分频为了32，这都是基于160M的基础做的。
+​		如果只是信道问题，那还好解决，大家避开就好了。但是在对于广播和多播帧的处理上实际也有所不同。首先是兼容性的问题，为了保证每个SSID的设备都能正常收到多播和广播数据，AP必须以兼容性的速率来发送这部分数据，而这个兼容速率来自于802.11a/b/g协议（1，2，5.5，6，9，11，12，18，24，36，48，56Mbps）。而我们当前运行的协议可能是802.11n或者ac，相比而言实在是太慢了。本身速率就低，占用的空中时间就够多了，他们还得额外占用更多的连接时间，而在WIFI环境中，就会导致其他设备可用带宽减少，增加了信道拥挤程度。而协议中对于这种情况又是必须得兼容的。
 
 
+
+#### 多播与广播的高优先级
+
+​		这里需要提到另一个情况，如果有客户端此时处于省电状态，AP需要缓存多播和广播数据，直到符合发送的时机才能发送。和这里相关的就是DTIM，AP以DTIM的周期来发送多播和广播数据，而这部分数据相当于是一种突发性流量。与此同时，AP发送缓存数据时的优先级还是明显高于普通单播的数据的，这时会造成单播数据短暂阻塞。
+
+
+
+​		接着之前说的速率问题，可以看到最高时54Mbps，如果任何时候都是以较高的速度发送的话就还好，但是实际上要兼顾各种客户端的信号质量的情况，WIFI速率和距离成反比，一旦有客户端信号比较差，那么为了保证他能收到，必须用最低的速度来发送。这个速率也可以通过AP设置来配置，但是总归是会选择尽可能满足更多的客户端的。
+
+
+
+​		总而言之，广播和多播完成一些特定任务时非常简单，但是当网络条件不够好或者出现了许多测试时没遇到过的问题时，广播和多播可能并不能提升整体的稳定性，反而会带来坏处。
+
+
+
+## 多播与广播的解
+
+依然使用多播与广播，但是某些方法来缓解他带来的问题
+
+1. 将每个广播域限制得更小，不能解决本质问题，但是受影响的客户端更少而已
+2. 某些AP支持直接将多播转换成广播帧进行转发
+3. 强行提高多播速率
+4. 某些AP支持动态多播速率，而不是强行限制在某个值
+5. 动态信道宽度，这基本也必须AP和客户端同时支持，否则也很难弄
+6. 启用ARP代理，并且主动抑制ARP，ARP众所周知是广播大户
+7. 某些定制网关专门抑制这种广播或者多播流量的，需要AP支持
+8. 弃用WIFI，使用有线连接这些需要广播多播的客户端
+9. 禁用点对点通信，说白了不允许单播
+
+
+
+没有完美的办法，这些方法多数会降低某方面的网络性能，但是提高最终的客户端的体验
 
 
 
 ## Summary
 
-
-
-## Quote
-
->
->
-
+无线网络终究还是脆弱一些，不能像有线那样瓶颈都在交换机这里。
