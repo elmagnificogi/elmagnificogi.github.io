@@ -23,7 +23,11 @@ tags:
 
 ## 查壳
 
-第一步是查壳，看看BLH到底是啥写的
+第一步是查壳，看看BLH到底是啥写的。
+
+这里出现了问号，说明这个东西可能不准确，还要再查
+
+![image-20210708174454402](https://i.loli.net/2021/07/08/sg8rfFEcya5IbeU.png)
 
 通过DIE查壳，发现BLH这个exe是Delphi写的，Delphi我没接触过，只是听闻很多老程序或者病毒木马之类的都是出自Delphi。
 
@@ -85,6 +89,7 @@ _Unit141.TfrmBLHeliSuiteMain.actReadSetupExecute
 0081C408        mov         dword ptr [ebp-4],eax
 0081C40B        xor         edx,edx
 0081C40D        mov         eax,dword ptr [ebp-4]
+# 这里应该是一些ui的设置
 0081C410        call        00821718
 0081C415        xor         eax,eax
 0081C417        push        ebp
@@ -122,12 +127,15 @@ _Unit141.TfrmBLHeliSuiteMain.actReadSetupExecute
 
 
 
+继续追
+
 ```assembly
 _Unit139.TBLHeliInterfaceManager.DoBtnReadSetup
 007CA1F8        push        ebx
 007CA1F9        mov         ebx,eax
 007CA1FB        mov         dl,1
 007CA1FD        mov         eax,ebx
+# 这里是开始连接
 007CA1FF        call        TBLHeliInterfaceManager.DoConnectInterface
 007CA204        test        al,al
 007CA206>       je          007CA250
@@ -141,6 +149,7 @@ _Unit139.TBLHeliInterfaceManager.DoBtnReadSetup
 007CA21C>       je          007CA22B
 007CA21E        mov         dl,1
 007CA220        mov         eax,ebx
+# 这里面检测了是否连接，并且保持连接
 007CA222        call        TBLHeliInterfaceManager.DoCheckDeviceIsPresent
 007CA227        test        al,al
 007CA229>       jne         007CA236
@@ -194,6 +203,7 @@ _Unit139.TBLHeliInterfaceManager.ReadSetupAll
 007D5A63        call        006DB734
 007D5A68        test        al,al
 007D5A6A>       je          007D5A80
+# 这里是log的显示内容 在拼字符串
 007D5A6C        mov         eax,7D5CBC;'Reading Setup for'
 007D5A71        call        006DC004
 007D5A76        mov         eax,1
@@ -410,6 +420,7 @@ _Unit139.TBLHeliInterfaceManager.ReadDeviceSetupSection
 007D8599        call        006DB734
 007D859E        test        al,al
 007D85A0>       je          007D85B6
+# 这里符合log的显示
 007D85A2        mov         eax,7D8820;'DeviceReadSetup:'
 007D85A7        call        006DBF8C
 007D85AC        mov         eax,1
@@ -441,7 +452,7 @@ _Unit139.TBLHeliInterfaceManager.ReadDeviceSetupSection
 [eax+32C];TBLHeliInterfaceManager.FLastReadSetupMem:TArray<System.Byte>
 007D85F2        mov         eax,dword ptr [ebp-8]
 007D85F5        mov         eax,dword ptr [eax+50];TBLHeliInterfaceManager.FUniSerialInterf:TUniSerialInterface
-# 这里应该是选择通过单线读取电调配置
+# 这里不知道是什么口，可能是4way-if
 007D85F8        call        TUniSerialInterface.Send_cmd_DeviceReadBLHeliSetupSection
 007D85FD        mov         byte ptr [ebp-9],al
 007D8600>       jmp         007D8632
@@ -449,7 +460,8 @@ _Unit139.TBLHeliInterfaceManager.ReadDeviceSetupSection
 007D8605        lea         edx,[eax+32C];TBLHeliInterfaceManager.FLastReadSetupMem:TArray<System.Byte>
 007D860B        mov         eax,dword ptr [ebp-8]
 007D860E        mov         eax,dword ptr [eax+48];TBLHeliInterfaceManager.FBLBInterf:TBLBInterface
-# 这里BLB其实就是指对应的电调类型，对应的就是BetaFlight或者CleanFlight之类的实现
+# 由于log显示我的esc是BLB Connect to ESC，所以这里应该走的是下面这个调用
+# 这里BLB其实就是指对应的电调类型，对应的就是BetaFlight或者CleanFlight之类的实现，实际上平常的也是这种方式
 007D8611        call        TBLBInterface.Send_cmd_DeviceReadBLHeliSetupSection
 007D8616        mov         byte ptr [ebp-9],al
 007D8619>       jmp         007D8632
@@ -457,7 +469,7 @@ _Unit139.TBLHeliInterfaceManager.ReadDeviceSetupSection
 007D861E        lea         edx,[eax+32C];TBLHeliInterfaceManager.FLastReadSetupMem:TArray<System.Byte>
 007D8624        mov         eax,dword ptr [ebp-8]
 007D8627        mov         eax,dword ptr [eax+4C];TBLHeliInterfaceManager.FCfIntf:TFlightCtrlIntf
-# 最后这个FlightCtr 估计是直接控制电调的那种接口方式了，类似4way-if
+# 最后这个FlightCtr 估计是直接控制电调的那种接口方式了
 007D862A        call        TFlightCtrlIntf.Send_cmd_DeviceReadBLHeliSetupSection
 007D862F        mov         byte ptr [ebp-9],al
 007D8632        cmp         byte ptr [ebp-9],0
@@ -478,7 +490,9 @@ _Unit139.TBLHeliInterfaceManager.ReadDeviceSetupSection
 007D8665        mov         ecx,ebx
 #从bin中直接读取string？
 007D8667        call        TBLHeli.ReadSetupFromBinString
+# al中是返回值
 007D866C        cmp         al,4
+# 大于等于4就跳转到007D87AD
 007D866E>       jae         007D87AD
 007D8674        mov         eax,dword ptr [ebp-8]
 007D8677        call        TBLHeliInterfaceManager.BLHeliStored
@@ -612,335 +626,899 @@ _Unit139.TBLHeliInterfaceManager.ReadDeviceSetupSection
 
 
 
-##### TUniSerialInterface.Send_cmd_DeviceReadBLHeliSetupSection
+##### Send_cmd_DeviceReadFlash
+
+追一下BLB的读flash操作
 
 ```assembly
-_Unit109.TUniSerialInterface.Send_cmd_DeviceReadBLHeliSetupSection
-0070E4DC        push        ebx
-0070E4DD        push        esi
-0070E4DE        push        edi
-0070E4DF        mov         esi,edx
-0070E4E1        mov         edi,eax
-0070E4E3        xor         ebx,ebx
-0070E4E5        mov         eax,esi
-0070E4E7        mov         edx,dword ptr ds:[404B48];TArray<System.Byte>
-0070E4ED        call        @DynArrayClear
-0070E4F2        movzx       eax,byte ptr [edi+0E0];TUniSerialInterface.FInterfaceMode:TUniInterfaceMode
-0070E4F9        sub         al,4
-0070E4FB>       jne         0070E51B
-0070E4FD        push        100
-0070E502        mov         eax,edi
-0070E504        call        00712910
-0070E509        call        006D7C34
-0070E50E        mov         ecx,eax
-0070E510        mov         edx,esi
-0070E512        mov         eax,edi
-# 所以变成了读取Flash
-0070E514        call        TUniSerialInterface.Send_cmd_DeviceReadFlash
-0070E519        mov         ebx,eax
-0070E51B        mov         eax,ebx
-0070E51D        pop         edi
-0070E51E        pop         esi
-0070E51F        pop         ebx
-0070E520        ret
+_Unit108.TBLBInterface.Send_cmd_DeviceReadFlash
+007081AC        push        ebp
+007081AD        mov         ebp,esp
+007081AF        push        ecx
+007081B0        mov         ecx,4
+007081B5        push        0
+007081B7        push        0
+007081B9        dec         ecx
+007081BA>       jne         007081B5
+007081BC        xchg        ecx,dword ptr [ebp-4]
+007081BF        push        ebx
+007081C0        push        esi
+007081C1        mov         esi,ecx
+007081C3        mov         dword ptr [ebp-8],edx
+007081C6        mov         dword ptr [ebp-4],eax
+007081C9        mov         ebx,dword ptr [ebp+8]
+007081CC        xor         eax,eax
+007081CE        push        ebp
+007081CF        push        708383
+007081D4        push        dword ptr fs:[eax]
+007081D7        mov         dword ptr fs:[eax],esp
+007081DA        mov         eax,dword ptr [ebp-8]
+007081DD        mov         edx,dword ptr ds:[404B48];TArray<System.Byte>
+007081E3        call        @DynArrayClear
+007081E8        mov         byte ptr [ebp-9],0
+007081EC        mov         eax,dword ptr [ebp-4]
+007081EF        call        00709B68
+007081F4        test        al,al
+007081F6>       je          00708345
+007081FC        call        006DB734
+00708201        test        al,al
+00708203>       je          00708219
+# 依然符合log的显示
+00708205        mov         eax,7083A4;'cmd_DeviceReadFlash:'
+0070820A        call        006DBF8C
+0070820F        mov         eax,1
+00708214        call        006DBF4C
+00708219        xor         edx,edx
+0070821B        push        ebp
+0070821C        push        70833B
+00708221        push        dword ptr fs:[edx]
+00708224        mov         dword ptr fs:[edx],esp
+00708227        mov         eax,dword ptr [ebp-4]
+0070822A        call        00709C84
+0070822F        lea         eax,[ebp-10]
+00708232        push        eax
+00708233        mov         eax,dword ptr [ebp-4]
+00708236        mov         eax,dword ptr [eax+40];TBLBInterface.FBootloader:TBootloader
+00708239        mov         ecx,ebx
+0070823B        mov         edx,esi
+# 主要是这里读flash
+0070823D        call        TBootloader.ReadFlash
+00708242        mov         edx,dword ptr [ebp-10]
+00708245        mov         eax,dword ptr [ebp-8]
+00708248        mov         ecx,dword ptr ds:[404B48];TArray<System.Byte>
+0070824E        call        @DynArrayAsg
+00708253        mov         eax,dword ptr [ebp-4]
+00708256        call        00709C6C
+0070825B        mov         eax,dword ptr [ebp-8]
+0070825E        mov         eax,dword ptr [eax]
+00708260        test        eax,eax
+00708262>       je          00708269
+00708264        sub         eax,4
+00708267        mov         eax,dword ptr [eax]
+00708269        movzx       edx,bx
+0070826C        cmp         eax,edx
+0070826E        sete        byte ptr [ebp-9]
+00708272        xor         eax,eax
+00708274        pop         edx
+00708275        pop         ecx
+00708276        pop         ecx
+00708277        mov         dword ptr fs:[eax],edx
+0070827A        push        70835A
+0070827F        call        006DB734
+00708284        test        al,al
+00708286>       je          0070833A
+0070828C        mov         eax,[0084158C];^gvar_0085C668
+00708291        cmp         dword ptr [eax],1
+00708294>       jle         007082E5
+00708296        mov         eax,dword ptr [ebp-4]
+00708299        mov         eax,dword ptr [eax+40];TBLBInterface.FBootloader:TBootloader
+0070829C        call        TBootloader.AllowLog
+007082A1        test        al,al
+007082A3>       je          007082E5
+007082A5        push        7083DC;'"'
+007082AA        lea         edx,[ebp-18]
+007082AD        mov         eax,dword ptr [ebp-8]
+007082B0        mov         eax,dword ptr [eax]
+007082B2        call        006D5B9C
+007082B7        push        dword ptr [ebp-18]
+007082BA        push        7083DC;'"'
+007082BF        lea         eax,[ebp-14]
+007082C2        mov         edx,3
+007082C7        call        @UStrCatN
+007082CC        mov         eax,dword ptr [ebp-14]
+007082CF        call        006DBFDC
+007082D4        mov         eax,dword ptr [ebp-8]
+007082D7        mov         eax,dword ptr [eax]
+007082D9        mov         ecx,800
+007082DE        mov         dl,1
+007082E0        call        006DC174
+007082E5        mov         eax,1
+007082EA        call        006DBF64
+007082EF        mov         ebx,dword ptr [ebp-8]
+007082F2        mov         ebx,dword ptr [ebx]
+007082F4        test        ebx,ebx
+007082F6>       je          007082FD
+007082F8        sub         ebx,4
+007082FB        mov         ebx,dword ptr [ebx]
+007082FD        push        7083EC;'('
+00708302        lea         edx,[ebp-20]
+00708305        mov         eax,ebx
+00708307        call        IntToStr
+0070830C        push        dword ptr [ebp-20]
+0070830F        push        7083FC;' Bytes)'
+00708314        lea         eax,[ebp-1C]
+00708317        mov         edx,3
+0070831C        call        @UStrCatN
+00708321        mov         eax,dword ptr [ebp-1C]
+00708324        or          ecx,0FFFFFFFF
+00708327        mov         edx,0FF0000
+0070832C        call        006DBD18
+00708331        movzx       eax,byte ptr [ebp-9]
+00708335        call        006DBE1C
+0070833A        ret
+0070833B>       jmp         @HandleFinally
+00708340>       jmp         0070827F
+00708345        lea         edx,[ebp-24]
+00708348        mov         eax,708418;'Bootloader version does not support reading of flash memory!'
+0070834D        call        006D5894
+00708352        mov         eax,dword ptr [ebp-24]
+00708355        call        006DF5E4
+0070835A        xor         eax,eax
+0070835C        pop         edx
+0070835D        pop         ecx
+0070835E        pop         ecx
+0070835F        mov         dword ptr fs:[eax],edx
+00708362        push        70838A
+00708367        lea         eax,[ebp-24]
+0070836A        mov         edx,5
+0070836F        call        @UStrArrayClr
+00708374        lea         eax,[ebp-10]
+00708377        mov         edx,dword ptr ds:[404B48];TArray<System.Byte>
+0070837D        call        @DynArrayClear
+00708382        ret
+00708383>       jmp         @HandleFinally
+00708388>       jmp         00708367
+0070838A        movzx       eax,byte ptr [ebp-9]
+0070838E        pop         esi
+0070838F        pop         ebx
+00708390        mov         esp,ebp
+00708392        pop         ebp
+00708393        ret         4
 
 ```
 
-看一下单线串口读取信息是怎么读的，TUniSerialInterface.Send_cmd_DeviceReadBLHeliSetupSection
+
+
+TBootloader.ReadFlash，接着就是读Flash的操作了
 
 ```assembly
-_Unit109.TUniSerialInterface.Send_cmd_DeviceReadBLHeliSetupSection
-0070E4DC        push        ebx
-0070E4DD        push        esi
-0070E4DE        push        edi
-0070E4DF        mov         esi,edx
-0070E4E1        mov         edi,eax
-0070E4E3        xor         ebx,ebx
-0070E4E5        mov         eax,esi
-0070E4E7        mov         edx,dword ptr ds:[404B48];TArray<System.Byte>
-0070E4ED        call        @DynArrayClear
-0070E4F2        movzx       eax,byte ptr [edi+0E0];TUniSerialInterface.FInterfaceMode:TUniInterfaceMode
-0070E4F9        sub         al,4
-0070E4FB>       jne         0070E51B
-0070E4FD        push        100
-0070E502        mov         eax,edi
-0070E504        call        00712910
-0070E509        call        006D7C34
-0070E50E        mov         ecx,eax
-0070E510        mov         edx,esi
-0070E512        mov         eax,edi
-# 所以变成了读取Flash
-0070E514        call        TUniSerialInterface.Send_cmd_DeviceReadFlash
-0070E519        mov         ebx,eax
-0070E51B        mov         eax,ebx
-0070E51D        pop         edi
-0070E51E        pop         esi
-0070E51F        pop         ebx
-0070E520        ret
+_Unit108.TBootloader.ReadFlash
+00702C04        push        ebp
+00702C05        mov         ebp,esp
+00702C07        add         esp,0FFFFFFC4
+00702C0A        push        ebx
+00702C0B        push        esi
+00702C0C        push        edi
+00702C0D        xor         ebx,ebx
+00702C0F        mov         dword ptr [ebp-30],ebx
+00702C12        mov         dword ptr [ebp-3C],ebx
+00702C15        mov         dword ptr [ebp-2C],ebx
+00702C18        mov         dword ptr [ebp-24],ebx
+00702C1B        mov         dword ptr [ebp-28],ebx
+00702C1E        mov         dword ptr [ebp-20],ebx
+00702C21        mov         dword ptr [ebp-4],ebx
+00702C24        mov         esi,ecx
+00702C26        mov         ebx,edx
+00702C28        mov         dword ptr [ebp-8],eax
+00702C2B        xor         eax,eax
+00702C2D        push        ebp
+00702C2E        push        702EB0
+00702C33        push        dword ptr fs:[eax]
+00702C36        mov         dword ptr fs:[eax],esp
+00702C39        mov         eax,dword ptr [ebp+8]
+00702C3C        mov         edx,dword ptr ds:[404B48];TArray<System.Byte>
+00702C42        call        @DynArrayClear
+00702C47        mov         eax,dword ptr [ebp-8]
+00702C4A        call        00703D94
+00702C4F        test        al,al
+00702C51>       je          00702E69
+00702C57        mov         dword ptr [ebp-14],100
+00702C5E        mov         eax,dword ptr [ebp-8]
+00702C61        call        007040E8
+00702C66        movzx       eax,si
+00702C69        mov         dword ptr [ebp-10],eax
+00702C6C        cmp         dword ptr [ebp-10],0
+00702C70>       jne         00702C7B
+00702C72        mov         eax,dword ptr [ebp-8]
+00702C75        mov         eax,dword ptr [eax+70];TBootloader.FDeviceInfo:TDeviceInfo
+00702C78        mov         dword ptr [ebp-10],eax
+00702C7B        push        0
+00702C7D        push        0
+00702C7F        push        1
+00702C81        cmp         dword ptr [ebp-10],100
+00702C88        setg        dl
+00702C8B        xor         ecx,ecx
+00702C8D        mov         eax,dword ptr [ebp-10]
+00702C90        call        006F5090
+00702C95        mov         byte ptr [ebp-15],al
+00702C98        xor         eax,eax
+00702C9A        mov         dword ptr [ebp-0C],eax
+00702C9D        xor         eax,eax
+00702C9F        push        ebp
+00702CA0        push        702E62
+00702CA5        push        dword ptr fs:[eax]
+00702CA8        mov         dword ptr fs:[eax],esp
+00702CAB        lea         edx,[ebp-20]
+00702CAE        mov         eax,702ECC;'Reading Flash...'
+00702CB3        call        006D5894
+00702CB8        mov         eax,dword ptr [ebp-20]
+00702CBB        call        006F5154
+00702CC0        mov         word ptr [ebp-18],bx
+00702CC4        mov         edi,dword ptr [ebp-10]
+00702CC7        cmp         edi,dword ptr [ebp-14]
+00702CCA>       jle         00702CCF
+00702CCC        mov         edi,dword ptr [ebp-14]
+00702CCF        cmp         edi,100
+00702CD5>       jne         00702CDB
+00702CD7        xor         ebx,ebx
+00702CD9>       jmp         00702CDD
+00702CDB        mov         ebx,edi
+00702CDD        xor         esi,esi
+00702CDF        xor         eax,eax
+00702CE1        mov         dword ptr [ebp-0C],eax
+00702CE4        movzx       edx,word ptr [ebp-18]
+00702CE8        mov         eax,dword ptr [ebp-8]
+# 设置地址
+00702CEB        call        TBootloader.SendCMDSetAddress
+00702CF0        test        al,al
+00702CF2>       je          00702D8A
+00702CF8        mov         edx,ebx
+00702CFA        mov         eax,dword ptr [ebp-8]
+# 开始读
+00702CFD        call        TBootloader.SendCMDFlashRead
+00702D02        test        al,al
+00702D04>       je          00702D8A
+00702D0A        push        1
+00702D0C        lea         ecx,[edi+3]
+00702D0F        lea         edx,[ebp-4]
+00702D12        mov         eax,dword ptr [ebp-8]
+# 检测是否有ack
+00702D15        call        TBootloader.CheckStrACK
+00702D1A        test        al,al
+00702D1C>       je          00702D8A
+00702D1E        inc         dword ptr [ebp-0C]
+00702D21        call        006DB734
+00702D26        test        al,al
+00702D28>       je          00702DA6
+00702D2A        mov         eax,dword ptr [ebp-4]
+00702D2D        mov         dword ptr [ebp-1C],eax
+00702D30        cmp         dword ptr [ebp-1C],0
+00702D34>       je          00702D41
+00702D36        mov         eax,dword ptr [ebp-1C]
+00702D39        sub         eax,4
+00702D3C        mov         eax,dword ptr [eax]
+00702D3E        mov         dword ptr [ebp-1C],eax
+# 应该是log 显示读了多少字节内容
+00702D41        push        702EFC;'('
+00702D46        lea         edx,[ebp-28]
+00702D49        mov         eax,dword ptr [ebp-1C]
+00702D4C        call        IntToStr
+00702D51        push        dword ptr [ebp-28]
+00702D54        push        702F0C;' Bytes)'
+00702D59        lea         eax,[ebp-24]
+00702D5C        mov         edx,3
+00702D61        call        @UStrCatN
+00702D66        mov         eax,dword ptr [ebp-24]
+00702D69        or          ecx,0FFFFFFFF
+00702D6C        mov         edx,0FF0000
+00702D71        call        006DBD18
+00702D76        or          ecx,0FFFFFFFF
+00702D79        mov         edx,8000
+# 依然是log显示ok
+00702D7E        mov         eax,702F28;'OK'
+00702D83        call        006DBD18
+00702D88>       jmp         00702DA6
+00702D8A        inc         esi
+00702D8B        call        006DB734
+00702D90        test        al,al
+00702D92>       je          00702DA6
+00702D94        or          ecx,0FFFFFFFF
+00702D97        mov         edx,0FF
+00702D9C        mov         eax,702F3C;'FAILED'
+00702DA1        call        006DBD18
+00702DA6        cmp         dword ptr [ebp-0C],0
+00702DAA>       jg          00702DB5
+00702DAC        cmp         esi,3
+00702DAF>       jle         00702CE4
+00702DB5        cmp         dword ptr [ebp-0C],0
+00702DB9>       jle         00702DEA
+00702DBB        lea         ecx,[ebp-2C]
+00702DBE        mov         eax,dword ptr [ebp+8]
+00702DC1        mov         eax,dword ptr [eax]
+00702DC3        mov         edx,dword ptr [ebp-4]
+00702DC6        call        006D5954
+00702DCB        mov         edx,dword ptr [ebp-2C]
+00702DCE        mov         eax,dword ptr [ebp+8]
+00702DD1        mov         ecx,dword ptr ds:[404B48];TArray<System.Byte>
+00702DD7        call        @DynArrayAsg
+00702DDC        add         word ptr [ebp-18],di
+00702DE0        sub         dword ptr [ebp-10],edi
+00702DE3        mov         eax,edi
+00702DE5        call        006F50FC
+00702DEA        cmp         dword ptr [ebp-10],0
+00702DEE>       je          00702DFA
+00702DF0        cmp         dword ptr [ebp-0C],1
+00702DF4>       jge         00702CC4
+00702DFA        xor         eax,eax
+00702DFC        pop         edx
+00702DFD        pop         ecx
+00702DFE        pop         ecx
+00702DFF        mov         dword ptr fs:[eax],edx
+00702E02        push        702E69
+00702E07        movzx       eax,byte ptr [ebp-15]
+00702E0B        call        006F5204
+00702E10        cmp         dword ptr [ebp-10],0
+00702E14>       jne         00702E1C
+00702E16        cmp         dword ptr [ebp-0C],1
+00702E1A>       jge         00702E59
+00702E1C        lea         eax,[ebp-30]
+00702E1F        push        eax
+00702E20        lea         eax,[ebp-3C]
+00702E23        push        eax
+00702E24        mov         eax,dword ptr [ebp-8]
+00702E27        movzx       edx,byte ptr [eax+0A1];TBootloader.FLastACK:byte
+00702E2E        mov         cl,1
+00702E30        mov         eax,dword ptr [ebp-8]
+00702E33        call        00705B90
+00702E38        mov         eax,dword ptr [ebp-3C]
+00702E3B        mov         dword ptr [ebp-38],eax
+00702E3E        mov         byte ptr [ebp-34],11
+00702E42        lea         edx,[ebp-38]
+00702E45        xor         ecx,ecx
+00702E47        mov         eax,702F58;'Error reading from Flash!\n(%s)'
+00702E4C        call        006D5800
+00702E51        mov         eax,dword ptr [ebp-30]
+00702E54        call        006DF680
+00702E59        mov         eax,dword ptr [ebp-8]
+00702E5C        call        00704114
+00702E61        ret
+00702E62>       jmp         @HandleFinally
+00702E67>       jmp         00702E07
+00702E69        xor         eax,eax
+00702E6B        pop         edx
+00702E6C        pop         ecx
+00702E6D        pop         ecx
+00702E6E        mov         dword ptr fs:[eax],edx
+00702E71        push        702EB7
+00702E76        lea         eax,[ebp-3C]
+00702E79        call        @UStrClr
+00702E7E        lea         eax,[ebp-30]
+00702E81        call        @UStrClr
+00702E86        lea         eax,[ebp-2C]
+00702E89        mov         edx,dword ptr ds:[404B48];TArray<System.Byte>
+00702E8F        call        @DynArrayClear
+00702E94        lea         eax,[ebp-28]
+00702E97        mov         edx,3
+00702E9C        call        @UStrArrayClr
+00702EA1        lea         eax,[ebp-4]
+00702EA4        mov         edx,dword ptr ds:[404B48];TArray<System.Byte>
+00702EAA        call        @DynArrayClear
+00702EAF        ret
+00702EB0>       jmp         @HandleFinally
+00702EB5>       jmp         00702E76
+00702EB7        pop         edi
+00702EB8        pop         esi
+00702EB9        pop         ebx
+00702EBA        mov         esp,ebp
+00702EBC        pop         ebp
+00702EBD        ret         4
 
 ```
 
 
 
-TUniSerialInterface.Send_cmd_DeviceReadFlash，再看下flash是怎么读的
+###### SendCMDSetAddress
+
+继续追
 
 ```assembly
-_Unit109.TUniSerialInterface.Send_cmd_DeviceReadFlash
-0070DF30        push        ebp
-0070DF31        mov         ebp,esp
-0070DF33        push        ebx
-0070DF34        movzx       ebx,word ptr [ebp+8]
-0070DF38        push        ebx
-0070DF39        call        TUniSerialInterface.Send_cmd_DeviceRead
-0070DF3E        pop         ebx
-0070DF3F        pop         ebp
-0070DF40        ret         4
+_Unit108.TBootloader.SendCMDSetAddress
+00705A44        push        ebp
+00705A45        mov         ebp,esp
+00705A47        xor         ecx,ecx
+00705A49        push        ecx
+00705A4A        push        ecx
+00705A4B        push        ecx
+00705A4C        push        ecx
+00705A4D        push        ecx
+00705A4E        push        ebx
+00705A4F        push        esi
+00705A50        mov         esi,edx
+00705A52        mov         ebx,eax
+00705A54        xor         eax,eax
+00705A56        push        ebp
+00705A57        push        705B54
+00705A5C        push        dword ptr fs:[eax]
+00705A5F        mov         dword ptr fs:[eax],esp
+00705A62        call        006DB734
+00705A67        test        al,al
+00705A69>       je          00705ABA
+00705A6B        lea         ecx,[ebp-4]
+00705A6E        mov         dl,0FF
+00705A70        mov         eax,ebx
+00705A72        call        0070608C
+00705A77        mov         eax,dword ptr [ebp-4]
+00705A7A        call        006DC040
+# 这里是在拼字符串，显示设置的地址是什么
+00705A7F        push        705B70;' ($'
+00705A84        lea         ecx,[ebp-0C]
+00705A87        mov         edx,4
+00705A8C        mov         eax,esi
+00705A8E        call        IntToHex
+00705A93        push        dword ptr [ebp-0C]
+00705A96        push        705B84;') : '
+00705A9B        lea         eax,[ebp-8]
+00705A9E        mov         edx,3
+00705AA3        call        @UStrCatN
+00705AA8        mov         eax,dword ptr [ebp-8]
+00705AAB        call        006DC004
+00705AB0        mov         eax,1
+00705AB5        call        006DBF4C
+00705ABA        mov         byte ptr [ebx+0B4],0FF;TBootloader.FLastCMD:byte
+00705AC1        movzx       eax,byte ptr [ebx+0B4];TBootloader.FLastCMD:byte
+00705AC8        mov         byte ptr [ebp-14],al
+00705ACB        mov         eax,esi
+00705ACD        shr         eax,10
+00705AD0        mov         byte ptr [ebp-13],al
+00705AD3        mov         eax,esi
+00705AD5        shr         eax,8
+00705AD8        mov         byte ptr [ebp-12],al
+00705ADB        mov         eax,esi
+00705ADD        mov         byte ptr [ebp-11],al
+00705AE0        lea         eax,[ebp-14]
+00705AE3        lea         ecx,[ebp-10]
+00705AE6        mov         edx,3
+00705AEB        call        006D59C4
+00705AF0        mov         edx,dword ptr [ebp-10]
+00705AF3        mov         eax,ebx
+# 发送CRC
+00705AF5        call        TBootloader.SendStrCRC
+00705AFA        test        al,al
+00705AFC>       je          00705B09
+00705AFE        mov         eax,ebx
+# 等待ACK
+00705B00        call        TBootloader.CheckAck
+00705B05        test        al,al
+00705B07>       jne         00705B0D
+00705B09        xor         eax,eax
+00705B0B>       jmp         00705B0F
+00705B0D        mov         al,1
+00705B0F        mov         ebx,eax
+00705B11        call        006DB734
+00705B16        test        al,al
+00705B18>       je          00705B2B
+00705B1A        mov         eax,1
+00705B1F        call        006DBF64
+00705B24        mov         eax,ebx
+00705B26        call        006DBE1C
+00705B2B        xor         eax,eax
+00705B2D        pop         edx
+00705B2E        pop         ecx
+00705B2F        pop         ecx
+00705B30        mov         dword ptr fs:[eax],edx
+00705B33        push        705B5B
+00705B38        lea         eax,[ebp-10]
+00705B3B        mov         edx,dword ptr ds:[404B48];TArray<System.Byte>
+00705B41        call        @DynArrayClear
+00705B46        lea         eax,[ebp-0C]
+00705B49        mov         edx,3
+00705B4E        call        @UStrArrayClr
+00705B53        ret
+00705B54>       jmp         @HandleFinally
+00705B59>       jmp         00705B38
+00705B5B        mov         eax,ebx
+00705B5D        pop         esi
+00705B5E        pop         ebx
+00705B5F        mov         esp,ebp
+00705B61        pop         ebp
+00705B62        ret
 
 ```
 
 
 
-##### TUniSerialInterface.Send_cmd_DeviceRead
+###### SendCMDFlashRead
 
-继续追TUniSerialInterface.Send_cmd_DeviceRead，这里应该是具体的实现了，这么长
+flash读
 
 ```assembly
-_Unit109.TUniSerialInterface.Send_cmd_DeviceRead
-0070D798        push        ebp
-0070D799        mov         ebp,esp
-0070D79B        push        ecx
-0070D79C        mov         ecx,7
-0070D7A1        push        0
-0070D7A3        push        0
-0070D7A5        dec         ecx
-0070D7A6>       jne         0070D7A1
-0070D7A8        xchg        ecx,dword ptr [ebp-4]
-0070D7AB        push        ebx
-0070D7AC        push        esi
-0070D7AD        push        edi
-0070D7AE        mov         ebx,ecx
-0070D7B0        mov         dword ptr [ebp-8],edx
-0070D7B3        mov         dword ptr [ebp-4],eax
-0070D7B6        xor         eax,eax
-0070D7B8        push        ebp
-0070D7B9        push        70DA7F
-0070D7BE        push        dword ptr fs:[eax]
-0070D7C1        mov         dword ptr fs:[eax],esp
-0070D7C4        mov         eax,dword ptr [ebp-8]
-0070D7C7        mov         edx,dword ptr ds:[404B48];TArray<System.Byte>
-0070D7CD        call        @DynArrayClear
-0070D7D2        mov         byte ptr [ebp-9],0
-0070D7D6        mov         eax,dword ptr [ebp-4]
-0070D7D9        cmp         byte ptr [eax+4C],0;TUniSerialInterface.FDeviceConnected:Boolean
-0070D7DD>       je          0070DA3C
-0070D7E3        call        006DB734
-0070D7E8        test        al,al
-0070D7EA>       je          0070D80B
-0070D7EC        lea         edx,[ebp-18]
-0070D7EF        mov         eax,70DAA0;'Send_cmd_DeviceRead:'
-0070D7F4        call        006D5894
-0070D7F9        mov         eax,dword ptr [ebp-18]
-0070D7FC        call        006DBF8C
-0070D801        mov         eax,1
-0070D806        call        006DBF4C
-0070D80B        xor         edx,edx
-0070D80D        push        ebp
-0070D80E        push        70DA17
-0070D813        push        dword ptr fs:[edx]
-0070D816        mov         dword ptr fs:[edx],esp
-0070D819        movzx       eax,word ptr [ebp+8]
-0070D81D        mov         dword ptr [ebp-10],eax
-0070D820        push        0
-0070D822        push        0
-0070D824        push        1
-0070D826        cmp         dword ptr [ebp-10],100
-0070D82D        setg        dl
-0070D830        xor         ecx,ecx
-0070D832        mov         eax,dword ptr [ebp-10]
-0070D835        call        006F5090
-0070D83A        mov         byte ptr [ebp-12],al
-0070D83D        xor         edx,edx
-0070D83F        push        ebp
-0070D840        push        70D94A
-0070D845        push        dword ptr fs:[edx]
-0070D848        mov         dword ptr fs:[edx],esp
-0070D84B        lea         edx,[ebp-1C]
-0070D84E        mov         eax,70DAD8;'Reading Flash ...'
-0070D853        call        006D5894
-0070D858        mov         eax,dword ptr [ebp-1C]
-0070D85B        call        006F5154
-0070D860        mov         eax,dword ptr [ebp-4]
-0070D863        add         eax,90;TUniSerialInterface.FLastUniSerErr:string
-0070D868        call        @UStrClr
-0070D86D        mov         word ptr [ebp-14],bx
-0070D871        mov         edi,dword ptr [ebp-10]
-0070D874        mov         eax,dword ptr [ebp-4]
-0070D877        mov         eax,dword ptr [eax+0F8];TUniSerialInterface.FMaxRXByteCount:Integer
-0070D87D        cmp         edi,eax
-0070D87F>       jle         0070D883
-0070D881        mov         edi,eax
-0070D883        cmp         edi,100
-0070D889>       jne         0070D891
-0070D88B        mov         byte ptr [ebp-11],0
-0070D88F>       jmp         0070D896
-0070D891        mov         eax,edi
-0070D893        mov         byte ptr [ebp-11],al
-0070D896        xor         esi,esi
-0070D898        xor         ebx,ebx
-0070D89A        movzx       eax,word ptr [ebp-14]
-0070D89E        push        eax
-0070D89F        lea         edx,[ebp-20]
-0070D8A2        movzx       eax,byte ptr [ebp-11]
-0070D8A6        call        006D59F4
-0070D8AB        mov         ecx,dword ptr [ebp-20]
-0070D8AE        mov         dl,0D
-0070D8B0        mov         eax,dword ptr [ebp-4]
-0070D8B3        call        0070C7AC
-0070D8B8        test        al,al
-0070D8BA>       je          0070D8BF
-0070D8BC        inc         ebx
-0070D8BD>       jmp         0070D8C0
-0070D8BF        inc         esi
-0070D8C0        test        ebx,ebx
-0070D8C2>       jg          0070D8C9
-0070D8C4        cmp         esi,1
-0070D8C7>       jle         0070D89A
-0070D8C9        test        ebx,ebx
-0070D8CB>       jle         0070D902
-0070D8CD        lea         ecx,[ebp-24]
-0070D8D0        mov         eax,dword ptr [ebp-4]
-0070D8D3        mov         edx,dword ptr [eax+0BC];TUniSerialInterface.I_PARAM:TArray<System.Byte>
-0070D8D9        mov         eax,dword ptr [ebp-8]
-0070D8DC        mov         eax,dword ptr [eax]
-0070D8DE        call        006D5954
-0070D8E3        mov         edx,dword ptr [ebp-24]
-0070D8E6        mov         eax,dword ptr [ebp-8]
-0070D8E9        mov         ecx,dword ptr ds:[404B48];TArray<System.Byte>
-0070D8EF        call        @DynArrayAsg
-0070D8F4        add         word ptr [ebp-14],di
-0070D8F8        sub         dword ptr [ebp-10],edi
-0070D8FB        mov         eax,edi
-0070D8FD        call        006F50FC
-0070D902        cmp         dword ptr [ebp-10],0
-0070D906>       je          0070D911
-0070D908        cmp         ebx,1
-0070D90B>       jge         0070D871
-0070D911        cmp         dword ptr [ebp-10],0
-0070D915>       jne         0070D921
-0070D917        test        ebx,ebx
-0070D919>       jle         0070D921
-0070D91B        mov         byte ptr [ebp-9],1
-0070D91F>       jmp         0070D933
-0070D921        mov         eax,dword ptr [ebp-4]
-0070D924        add         eax,90;TUniSerialInterface.FLastUniSerErr:string
-0070D929        mov         edx,70DB08;'Error verifying flash!'
-0070D92E        call        @UStrAsg
-0070D933        xor         eax,eax
-0070D935        pop         edx
-0070D936        pop         ecx
-0070D937        pop         ecx
-0070D938        mov         dword ptr fs:[eax],edx
-0070D93B        push        70D951
-0070D940        movzx       eax,byte ptr [ebp-12]
-0070D944        call        006F5204
-0070D949        ret
-0070D94A>       jmp         @HandleFinally
-0070D94F>       jmp         0070D940
-0070D951        xor         eax,eax
-0070D953        pop         edx
-0070D954        pop         ecx
-0070D955        pop         ecx
-0070D956        mov         dword ptr fs:[eax],edx
-0070D959        push        70DA21
-0070D95E        call        006DB734
-0070D963        test        al,al
-0070D965>       je          0070DA16
-0070D96B        mov         eax,dword ptr [ebp-4]
-0070D96E        movzx       edx,byte ptr [eax+0B8];TUniSerialInterface.I_CMD_ID:TSerialInterfaceCmd_ID
-0070D975        mov         eax,dword ptr [ebp-4]
-0070D978        call        00710D24
-0070D97D        test        al,al
-0070D97F>       je          0070D9CB
-0070D981        mov         eax,[0084158C];^gvar_0085C668
-0070D986        cmp         dword ptr [eax],1
-0070D989>       jle         0070D9CB
-0070D98B        push        70DB44;'"'
-0070D990        lea         edx,[ebp-2C]
-0070D993        mov         eax,dword ptr [ebp-8]
-0070D996        mov         eax,dword ptr [eax]
-0070D998        call        006D5B9C
-0070D99D        push        dword ptr [ebp-2C]
-0070D9A0        push        70DB44;'"'
-0070D9A5        lea         eax,[ebp-28]
-0070D9A8        mov         edx,3
-0070D9AD        call        @UStrCatN
-0070D9B2        mov         eax,dword ptr [ebp-28]
-0070D9B5        call        006DBFDC
-0070D9BA        mov         eax,dword ptr [ebp-8]
-0070D9BD        mov         eax,dword ptr [eax]
-0070D9BF        mov         ecx,800
-0070D9C4        mov         dl,1
-0070D9C6        call        006DC174
-0070D9CB        mov         eax,1
-0070D9D0        call        006DBF64
-0070D9D5        mov         ebx,dword ptr [ebp-8]
-0070D9D8        mov         ebx,dword ptr [ebx]
-0070D9DA        test        ebx,ebx
-0070D9DC>       je          0070D9E3
-0070D9DE        sub         ebx,4
-0070D9E1        mov         ebx,dword ptr [ebx]
-0070D9E3        lea         eax,[ebp-30]
-0070D9E6        push        eax
-0070D9E7        mov         dword ptr [ebp-38],ebx
-0070D9EA        mov         byte ptr [ebp-34],0
-0070D9EE        lea         edx,[ebp-38]
-0070D9F1        xor         ecx,ecx
-0070D9F3        mov         eax,70DB54;'(%d Bytes)'
-0070D9F8        call        006D5800
-0070D9FD        mov         eax,dword ptr [ebp-30]
-0070DA00        or          ecx,0FFFFFFFF
-0070DA03        mov         edx,0FF0000
-0070DA08        call        006DBD18
-0070DA0D        movzx       eax,byte ptr [ebp-9]
-0070DA11        call        006DBE1C
-0070DA16        ret
-0070DA17>       jmp         @HandleFinally
-0070DA1C>       jmp         0070D95E
-0070DA21        cmp         byte ptr [ebp-9],0
-0070DA25>       jne         0070DA3C
-0070DA27        lea         edx,[ebp-3C]
-0070DA2A        mov         eax,70DB78;'Failed to read Flash!'
-0070DA2F        call        006D5894
-0070DA34        mov         eax,dword ptr [ebp-3C]
-0070DA37        call        006DF680
-0070DA3C        xor         eax,eax
-0070DA3E        pop         edx
-0070DA3F        pop         ecx
-0070DA40        pop         ecx
-0070DA41        mov         dword ptr fs:[eax],edx
-0070DA44        push        70DA86
-0070DA49        lea         eax,[ebp-3C]
-0070DA4C        call        @UStrClr
-0070DA51        lea         eax,[ebp-30]
-0070DA54        mov         edx,3
-0070DA59        call        @UStrArrayClr
-0070DA5E        lea         eax,[ebp-24]
-0070DA61        mov         edx,dword ptr ds:[404B48];TArray<System.Byte>
-0070DA67        mov         ecx,2
-0070DA6C        call        @FinalizeArray
-0070DA71        lea         eax,[ebp-1C]
-0070DA74        mov         edx,2
-0070DA79        call        @UStrArrayClr
-0070DA7E        ret
-0070DA7F>       jmp         @HandleFinally
-0070DA84>       jmp         0070DA49
-0070DA86        movzx       eax,byte ptr [ebp-9]
-0070DA8A        pop         edi
-0070DA8B        pop         esi
-0070DA8C        pop         ebx
-0070DA8D        mov         esp,ebp
-0070DA8F        pop         ebp
-0070DA90        ret         4
+_Unit108.TBootloader.SendCMDFlashRead
+007051BC        push        ebx
+007051BD        xor         ecx,ecx
+007051BF        movzx       ebx,byte ptr [eax+0DC];TBootloader.FDeviceBrand:TFirmwareBrand
+007051C6        cmp         bl,3
+007051C9>       jne         007051D8
+007051CB        mov         ecx,edx
+007051CD        mov         dl,3
+# 先发送读命令，这里应该是根据传入的参数，决定如何传参给发送参数命令
+007051CF        call        TBootloader.SendCMD_Param
+007051D4        mov         ecx,eax
+007051D6>       jmp         007051FA
+007051D8        cmp         bl,1
+007051DB>       jne         007051EA
+007051DD        mov         ecx,edx
+007051DF        mov         dl,3
+007051E1        call        TBootloader.SendCMD_Param
+007051E6        mov         ecx,eax
+007051E8>       jmp         007051FA
+007051EA        cmp         bl,2
+007051ED>       jne         007051FA
+007051EF        mov         ecx,edx
+007051F1        mov         dl,7
+007051F3        call        TBootloader.SendCMD_Param
+007051F8        mov         ecx,eax
+007051FA        mov         eax,ecx
+007051FC        pop         ebx
+007051FD        ret
+
+
+```
+
+
+
+###### SendCMD_Param
+
+```assembly
+_Unit108.TBootloader.SendCMD_Param
+00704D80        push        ebp
+00704D81        mov         ebp,esp
+00704D83        push        0
+00704D85        push        0
+00704D87        push        0
+00704D89        push        0
+00704D8B        push        0
+00704D8D        push        0
+00704D8F        push        0
+00704D91        push        ebx
+00704D92        push        esi
+00704D93        push        edi
+00704D94        mov         ebx,ecx
+00704D96        mov         byte ptr [ebp-5],dl
+00704D99        mov         dword ptr [ebp-4],eax
+00704D9C        xor         eax,eax
+00704D9E        push        ebp
+00704D9F        push        704F66
+00704DA4        push        dword ptr fs:[eax]
+00704DA7        mov         dword ptr fs:[eax],esp
+00704DAA        call        006DB734
+00704DAF        test        al,al
+00704DB1>       je          00704E06
+00704DB3        lea         ecx,[ebp-0C]
+00704DB6        movzx       edx,byte ptr [ebp-5]
+00704DBA        mov         eax,dword ptr [ebp-4]
+00704DBD        call        0070608C
+00704DC2        mov         eax,dword ptr [ebp-0C]
+00704DC5        call        006DC040
+# 这里是在拼地址
+00704DCA        push        704F84;'[$'
+00704DCF        lea         ecx,[ebp-14]
+00704DD2        movzx       eax,bl
+00704DD5        mov         edx,2
+00704DDA        call        IntToHex
+00704DDF        push        dword ptr [ebp-14]
+00704DE2        push        704F98;']'
+00704DE7        lea         eax,[ebp-10]
+00704DEA        mov         edx,3
+00704DEF        call        @UStrCatN
+00704DF4        mov         eax,dword ptr [ebp-10]
+00704DF7        call        006DC054
+00704DFC        mov         eax,1
+00704E01        call        006DBF4C
+00704E06        xor         eax,eax
+00704E08        push        ebp
+00704E09        push        704E61
+00704E0E        push        dword ptr fs:[eax]
+00704E11        mov         dword ptr fs:[eax],esp
+00704E14        mov         eax,dword ptr [ebp-4]
+00704E17        movzx       edx,byte ptr [ebp-5]
+00704E1B        mov         byte ptr [eax+0B4],dl;TBootloader.FLastCMD:byte
+00704E21        mov         eax,dword ptr [ebp-4]
+00704E24        mov         byte ptr [eax+0B5],bl;TBootloader.FLastCMDParam:Byte
+00704E2A        lea         ecx,[ebp-18]
+00704E2D        mov         eax,dword ptr [ebp-4]
+00704E30        movzx       eax,byte ptr [eax+0B4];TBootloader.FLastCMD:byte
+00704E37        mov         byte ptr [ebp-1C],al
+00704E3A        mov         byte ptr [ebp-1B],bl
+00704E3D        lea         eax,[ebp-1C]
+00704E40        mov         edx,1
+00704E45        call        006D59C4
+00704E4A        mov         edx,dword ptr [ebp-18]
+00704E4D        mov         eax,dword ptr [ebp-4]
+# 发送crc
+00704E50        call        TBootloader.SendStrCRC
+00704E55        mov         ebx,eax
+00704E57        xor         eax,eax
+00704E59        pop         edx
+00704E5A        pop         ecx
+00704E5B        pop         ecx
+00704E5C        mov         dword ptr fs:[eax],edx
+00704E5F>       jmp         00704E6D
+00704E61>       jmp         @HandleAnyException
+00704E66        xor         ebx,ebx
+00704E68        call        @DoneExcept
+00704E6D        test        bl,bl
+00704E6F>       jne         00704E9F
+00704E71        call        006DB734
+00704E76        test        al,al
+00704E78>       je          00704F3D
+00704E7E        mov         eax,1
+00704E83        call        006DBF64
+00704E88        or          ecx,0FFFFFFFF
+00704E8B        mov         edx,0FF
+00704E90        mov         eax,704FA8;'FAILED'
+00704E95        call        006DBD18
+00704E9A>       jmp         00704F3D
+00704E9F        movzx       edx,byte ptr [ebp-5]
+00704EA3        mov         eax,dword ptr [ebp-4]
+# 这里应该是根据命令区分了到底需不需要ack，有的不需要等ack
+00704EA6        call        TBootloader.CMDNeedsNoACK
+00704EAB        test        al,al
+00704EAD>       je          00704EDA
+00704EAF        call        006DB734
+00704EB4        test        al,al
+00704EB6>       je          00704F3D
+00704EBC        mov         eax,1
+00704EC1        call        006DBF64
+00704EC6        or          ecx,0FFFFFFFF
+00704EC9        mov         edx,8000
+00704ECE        mov         eax,704FC4;'OK'
+00704ED3        call        006DBD18
+00704ED8>       jmp         00704F3D
+00704EDA        movzx       edx,byte ptr [ebp-5]
+00704EDE        mov         eax,dword ptr [ebp-4]
+00704EE1        call        TBootloader.CMDNeedsSimpleACK
+00704EE6        test        al,al
+00704EE8>       je          00704F33
+00704EEA        mov         eax,dword ptr [ebp-4]
+# 需要ack的这里进行检测
+00704EED        call        TBootloader.CheckAck
+00704EF2        mov         ebx,eax
+00704EF4        call        006DB734
+00704EF9        test        al,al
+00704EFB>       je          00704F3D
+00704EFD        mov         eax,1
+00704F02        call        006DBF64
+00704F07        test        bl,bl
+00704F09>       je          00704F1F
+00704F0B        or          ecx,0FFFFFFFF
+00704F0E        mov         edx,8000
+00704F13        mov         eax,704FC4;'OK'
+00704F18        call        006DBD18
+00704F1D>       jmp         00704F3D
+00704F1F        or          ecx,0FFFFFFFF
+00704F22        mov         edx,0FF
+00704F27        mov         eax,704FA8;'FAILED'
+00704F2C        call        006DBD18
+00704F31>       jmp         00704F3D
+00704F33        mov         eax,1
+00704F38        call        006DBF64
+00704F3D        xor         eax,eax
+00704F3F        pop         edx
+00704F40        pop         ecx
+00704F41        pop         ecx
+00704F42        mov         dword ptr fs:[eax],edx
+00704F45        push        704F6D
+00704F4A        lea         eax,[ebp-18]
+00704F4D        mov         edx,dword ptr ds:[404B48];TArray<System.Byte>
+00704F53        call        @DynArrayClear
+00704F58        lea         eax,[ebp-14]
+00704F5B        mov         edx,3
+00704F60        call        @UStrArrayClr
+00704F65        ret
+00704F66>       jmp         @HandleFinally
+00704F6B>       jmp         00704F4A
+00704F6D        mov         eax,ebx
+00704F6F        pop         edi
+00704F70        pop         esi
+00704F71        pop         ebx
+00704F72        mov         esp,ebp
+00704F74        pop         ebp
+00704F75        ret
+
+```
+
+
+
+#### TBLHeliInterfaceManager.ReadDeviceActivationStatus
+
+```assembly
+_Unit139.TBLHeliInterfaceManager.ReadDeviceActivationStatus
+007D809C        push        ebp
+007D809D        mov         ebp,esp
+007D809F        add         esp,0FFFFFFD0
+007D80A2        push        ebx
+007D80A3        xor         ecx,ecx
+007D80A5        mov         dword ptr [ebp-20],ecx
+007D80A8        mov         dword ptr [ebp-1C],ecx
+007D80AB        mov         dword ptr [ebp-10],ecx
+007D80AE        mov         dword ptr [ebp-4],ecx
+007D80B1        mov         dword ptr [ebp-8],edx
+007D80B4        mov         ebx,eax
+007D80B6        xor         eax,eax
+007D80B8        push        ebp
+007D80B9        push        7D8309
+007D80BE        push        dword ptr fs:[eax]
+007D80C1        mov         dword ptr fs:[eax],esp
+007D80C4        mov         eax,dword ptr [ebp-8]
+007D80C7        mov         byte ptr [eax+0B9],5;TBLHeli.FActivationStatus:TActivationStatus
+007D80CE        mov         eax,dword ptr [ebp-8]
+007D80D1        xor         edx,edx
+007D80D3        mov         dword ptr [eax+0C4],edx;TBLHeli.FDshotGoodFrames:Cardinal
+007D80D9        mov         eax,dword ptr [ebp-8]
+007D80DC        xor         edx,edx
+007D80DE        mov         dword ptr [eax+0C8],edx;TBLHeli.FDshotBadFrames:Cardinal
+007D80E4        mov         byte ptr [ebp-9],0
+007D80E8        call        006DB734
+007D80ED        test        al,al
+007D80EF>       je          007D8105
+007D80F1        mov         eax,7D8328;'ReadActivationStat:'
+007D80F6        call        006DBF8C
+007D80FB        mov         eax,1
+007D8100        call        006DBF4C
+007D8105        xor         edx,edx
+007D8107        push        ebp
+007D8108        push        7D82CE
+007D810D        push        dword ptr fs:[edx]
+007D8110        mov         dword ptr fs:[edx],esp
+007D8113        push        10
+007D8115        lea         edx,[ebp-4]
+007D8118        xor         ecx,ecx
+007D811A        mov         eax,ebx
+007D811C        call        TBLHeliInterfaceManager.ReadDeviceRam
+007D8121        test        al,al
+007D8123>       je          007D81DE
+007D8129        mov         eax,dword ptr [ebp-4]
+007D812C        movzx       eax,byte ptr [eax]
+007D812F        cmp         al,3
+007D8131>       ja          007D813D
+007D8133        inc         eax
+007D8134        mov         edx,dword ptr [ebp-8]
+007D8137        mov         byte ptr [edx+0B9],al;TBLHeli.FActivationStatus:TActivationStatus
+007D813D        mov         eax,dword ptr [ebp-8]
+007D8140        cmp         byte ptr [eax+0B9],1;TBLHeli.FActivationStatus:TActivationStatus
+007D8147        sete        byte ptr [ebp-9]
+007D814B        mov         eax,dword ptr [ebp-8]
+007D814E        cmp         byte ptr [eax+6],29;TBLHeli.FEep_Layout_Revision:byte
+007D8152>       jb          007D81DE
+007D8158        mov         eax,dword ptr [ebp-4]
+007D815B        movzx       eax,byte ptr [eax+3]
+007D815F        mov         edx,dword ptr [ebp-8]
+007D8162        mov         byte ptr [edx+0D0],al;TBLHeli.FInputProtocol:byte
+007D8168        cmp         al,7
+007D816A>       jbe         007D8176
+007D816C        mov         eax,dword ptr [ebp-8]
+007D816F        mov         byte ptr [eax+0D0],0;TBLHeli.FInputProtocol:byte
+007D8176        mov         eax,dword ptr [ebp-4]
+007D8179        movzx       eax,byte ptr [eax+4]
+007D817D        mov         edx,dword ptr [ebp-4]
+007D8180        movzx       edx,byte ptr [edx+5]
+007D8184        shl         edx,8
+007D8187        add         eax,edx
+007D8189        mov         edx,dword ptr [ebp-4]
+007D818C        movzx       edx,byte ptr [edx+6]
+007D8190        shl         edx,10
+007D8193        add         eax,edx
+007D8195        mov         edx,dword ptr [ebp-4]
+007D8198        movzx       edx,byte ptr [edx+7]
+007D819C        shl         edx,18
+007D819F        add         eax,edx
+007D81A1        mov         edx,dword ptr [ebp-8]
+007D81A4        mov         dword ptr [edx+0C4],eax;TBLHeli.FDshotGoodFrames:Cardinal
+007D81AA        mov         eax,dword ptr [ebp-4]
+007D81AD        movzx       eax,byte ptr [eax+8]
+007D81B1        mov         edx,dword ptr [ebp-4]
+007D81B4        movzx       edx,byte ptr [edx+9]
+007D81B8        shl         edx,8
+007D81BB        add         eax,edx
+007D81BD        mov         edx,dword ptr [ebp-4]
+007D81C0        movzx       edx,byte ptr [edx+0A]
+007D81C4        shl         edx,10
+007D81C7        add         eax,edx
+007D81C9        mov         edx,dword ptr [ebp-4]
+007D81CC        movzx       edx,byte ptr [edx+0B]
+007D81D0        shl         edx,18
+007D81D3        add         eax,edx
+007D81D5        mov         edx,dword ptr [ebp-8]
+007D81D8        mov         dword ptr [edx+0C8],eax;TBLHeli.FDshotBadFrames:Cardinal
+007D81DE        xor         eax,eax
+007D81E0        pop         edx
+007D81E1        pop         ecx
+007D81E2        pop         ecx
+007D81E3        mov         dword ptr fs:[eax],edx
+007D81E6        push        7D82D8
+007D81EB        call        006DB734
+007D81F0        test        al,al
+007D81F2>       je          007D82CD
+007D81F8        mov         eax,1
+007D81FD        call        006DBF64
+007D8202        lea         eax,[ebp-10]
+007D8205        push        eax
+007D8206        mov         eax,dword ptr [ebp-8]
+007D8209        movzx       eax,byte ptr [eax+0B9];TBLHeli.FActivationStatus:TActivationStatus
+007D8210        mov         edx,dword ptr ds:[841D18];^gvar_00839110
+007D8216        mov         eax,dword ptr [edx+eax*4]
+007D8219        mov         dword ptr [ebp-18],eax
+007D821C        mov         byte ptr [ebp-14],11
+007D8220        lea         edx,[ebp-18]
+007D8223        xor         ecx,ecx
+007D8225        mov         eax,7D835C;'Activation: %s'
+007D822A        call        006D5800
+007D822F        mov         eax,dword ptr [ebp-10]
+007D8232        or          ecx,0FFFFFFFF
+007D8235        mov         edx,0FF0000
+007D823A        call        006DBD18
+007D823F        mov         eax,dword ptr [ebp-8]
+007D8242        cmp         byte ptr [eax+0B9],5;TBLHeli.FActivationStatus:TActivationStatus
+007D8249        setb        al
+007D824C        call        006DBE1C
+007D8251        mov         eax,dword ptr [ebp-8]
+007D8254        cmp         byte ptr [eax+6],29;TBLHeli.FEep_Layout_Revision:byte
+007D8258>       jb          007D82CD
+007D825A        lea         eax,[ebp-1C]
+007D825D        push        eax
+007D825E        mov         eax,dword ptr [ebp-8]
+007D8261        movzx       eax,byte ptr [eax+0D0];TBLHeli.FInputProtocol:byte
+007D8268        mov         edx,dword ptr ds:[840E60];^gvar_0083920C
+007D826E        mov         eax,dword ptr [edx+eax*4]
+007D8271        mov         dword ptr [ebp-18],eax
+007D8274        mov         byte ptr [ebp-14],11
+007D8278        lea         edx,[ebp-18]
+007D827B        xor         ecx,ecx
+007D827D        mov         eax,7D8388;'Input Protocol: %s'
+007D8282        call        006D5800
+007D8287        mov         eax,dword ptr [ebp-1C]
+007D828A        call        006DBF8C
+007D828F        lea         eax,[ebp-20]
+007D8292        push        eax
+007D8293        mov         eax,dword ptr [ebp-8]
+007D8296        mov         eax,dword ptr [eax+0C4];TBLHeli.FDshotGoodFrames:Cardinal
+007D829C        mov         dword ptr [ebp-30],eax
+007D829F        mov         byte ptr [ebp-2C],0
+007D82A3        mov         eax,dword ptr [ebp-8]
+007D82A6        mov         eax,dword ptr [eax+0C8];TBLHeli.FDshotBadFrames:Cardinal
+007D82AC        mov         dword ptr [ebp-28],eax
+007D82AF        mov         byte ptr [ebp-24],0
+007D82B3        lea         edx,[ebp-30]
+007D82B6        mov         ecx,1
+007D82BB        mov         eax,7D83BC;'Input Frames Good: %u / Bad: %u'
+007D82C0        call        006D5800
+007D82C5        mov         eax,dword ptr [ebp-20]
+007D82C8        call        006DBF8C
+007D82CD        ret
+007D82CE>       jmp         @HandleFinally
+007D82D3>       jmp         007D81EB
+007D82D8        xor         eax,eax
+007D82DA        pop         edx
+007D82DB        pop         ecx
+007D82DC        pop         ecx
+007D82DD        mov         dword ptr fs:[eax],edx
+007D82E0        push        7D8310
+007D82E5        lea         eax,[ebp-20]
+007D82E8        mov         edx,2
+007D82ED        call        @UStrArrayClr
+007D82F2        lea         eax,[ebp-10]
+007D82F5        call        @UStrClr
+007D82FA        lea         eax,[ebp-4]
+007D82FD        mov         edx,dword ptr ds:[404B48];TArray<System.Byte>
+007D8303        call        @DynArrayClear
+007D8308        ret
+007D8309>       jmp         @HandleFinally
+007D830E>       jmp         007D82E5
+007D8310        movzx       eax,byte ptr [ebp-9]
+007D8314        pop         ebx
+007D8315        mov         esp,ebp
+007D8317        pop         ebp
+007D8318        ret
 
 ```
 
@@ -1453,6 +2031,356 @@ _Unit102.TBLHeli.ReadSetupFromBinString
 006EA9B0        ret
 
 ```
+
+
+
+#### TBLHeliInterfaceManager.DeviceBootloaderRev
+
+这里没看出有啥特殊的地方
+
+```assembly
+_Unit139.TBLHeliInterfaceManager.DeviceBootloaderRev
+007CCC60        push        ebx
+007CCC61        push        esi
+007CCC62        mov         esi,eax
+007CCC64        mov         bl,20
+007CCC66        mov         eax,esi
+007CCC68        call        TBLHeliInterfaceManager.DeviceConnected
+007CCC6D        test        al,al
+007CCC6F>       je          007CCCAB
+007CCC71        movzx       eax,byte ptr [esi+55];TBLHeliInterfaceManager.FESCInterfaceType:TESCInterfaceType
+007CCC75        sub         al,0C
+007CCC77>       je          007CCC83
+007CCC79        dec         al
+007CCC7B>       je          007CCC8F
+007CCC7D        dec         al
+007CCC7F>       je          007CCC9B
+007CCC81>       jmp         007CCCA5
+007CCC83        mov         eax,dword ptr [esi+50];TBLHeliInterfaceManager.FUniSerialInterf:TUniSerialInterface
+007CCC86        movzx       ebx,byte ptr [eax+0EA];TUniSerialInterface.FBootloaderRev:byte
+007CCC8D>       jmp         007CCCA5
+007CCC8F        mov         eax,dword ptr [esi+48];TBLHeliInterfaceManager.FBLBInterf:TBLBInterface
+007CCC92        call        0070991C
+007CCC97        mov         ebx,eax
+007CCC99>       jmp         007CCCA5
+007CCC9B        mov         eax,dword ptr [esi+4C];TBLHeliInterfaceManager.FCfIntf:TFlightCtrlIntf
+007CCC9E        call        00716620
+007CCCA3        mov         ebx,eax
+007CCCA5        test        bl,bl
+007CCCA7>       jne         007CCCAB
+007CCCA9        mov         bl,20
+007CCCAB        mov         eax,ebx
+007CCCAD        pop         esi
+007CCCAE        pop         ebx
+007CCCAF        ret
+
+```
+
+
+
+### 心跳维持
+
+TBLHeliInterfaceManager.DeviceConnected 这个函数被调用的太频繁了，猜测这个是用来维持心跳的
+
+```assembly
+_Unit139.TBLHeliInterfaceManager.DeviceConnected
+007CCCB0        xor         edx,edx
+007CCCB2        movzx       ecx,byte ptr [eax+55];TBLHeliInterfaceManager.FESCInterfaceType:TESCInterfaceType
+007CCCB6        sub         cl,0C
+007CCCB9>       je          007CCCC5
+007CCCBB        dec         cl
+007CCCBD>       je          007CCCCF
+007CCCBF        dec         cl
+007CCCC1>       je          007CCCDC
+007CCCC3>       jmp         007CCCE6
+007CCCC5        mov         eax,dword ptr [eax+50];TBLHeliInterfaceManager.FUniSerialInterf:TUniSerialInterface
+007CCCC8        movzx       edx,byte ptr [eax+4C];TUniSerialInterface.FDeviceConnected:Boolean
+007CCCCC        mov         eax,edx
+007CCCCE        ret
+007CCCCF        mov         eax,dword ptr [eax+48];TBLHeliInterfaceManager.FBLBInterf:TBLBInterface
+007CCCD2        call        00709A58
+007CCCD7        mov         edx,eax
+007CCCD9        mov         eax,edx
+007CCCDB        ret
+007CCCDC        mov         eax,dword ptr [eax+4C];TBLHeliInterfaceManager.FCfIntf:TFlightCtrlIntf
+007CCCDF        call        007166E4
+007CCCE4        mov         edx,eax
+007CCCE6        mov         eax,edx
+007CCCE8        ret
+
+```
+
+可以看到这里应该是判定具体是啥接口，然后对应接口发送
+
+
+
+DeviceConnectionAlive 这个明显就是发送命令，维持在线了
+
+```assembly
+_Unit108.TBLBInterface.DeviceConnectionAlive
+00709108        push        ebx
+00709109        push        esi
+0070910A        mov         esi,eax
+0070910C        mov         eax,dword ptr [esi+40];TBLBInterface.FBootloader:TBootloader
+0070910F        call        00703D94
+00709114        test        al,al
+00709116>       je          00709132
+00709118        mov         eax,esi
+0070911A        call        00709C84
+0070911F        mov         eax,dword ptr [esi+40];TBLBInterface.FBootloader:TBootloader
+00709122        call        TBootloader.SendCMDKeepAlive
+00709127        mov         ebx,eax
+00709129        mov         eax,esi
+0070912B        call        00709C6C
+00709130>       jmp         00709134
+00709132        xor         ebx,ebx
+00709134        mov         eax,ebx
+00709136        pop         esi
+00709137        pop         ebx
+00709138        ret
+
+```
+
+SendCMDKeepAlive 这里完全是底层TBootloader的实现了
+
+```assembly
+_Unit108.TBootloader.SendCMDKeepAlive
+# ebx 入栈
+0070559C        push        ebx
+# ebx = eax
+0070559D        mov         ebx,eax
+# 这里实际上是从内存85C678读了一个什么东西到eax
+0070559F        call        006DB734
+# test = al & al 这里应该是一个断言检测
+007055A4        test        al,al
+# 根据test导致的ZF标记决定跳转，这个跳转应该是退出函数了
+007055A6>       je          007055D5
+007055A8        mov         eax,[0084158C];^gvar_0085C668
+007055AD        cmp         dword ptr [eax],4
+007055B0>       jge         007055B7
+007055B2        call        006DB87C
+007055B7        xor         ecx,ecx
+# 看到这个FD 这不就是保持在线的FD00嘛，下面的发送参数应该是自动做了一个CRC，把校验加到了后面
+007055B9        mov         dl,0FD
+007055BB        mov         eax,ebx
+007055BD        call        TBootloader.SendCMD_Param
+007055C2        mov         ebx,eax
+007055C4        mov         eax,[0084158C];^gvar_0085C668
+007055C9        cmp         dword ptr [eax],4
+007055CC>       jge         007055E2
+007055CE        call        006DB89C
+007055D3>       jmp         007055E2
+# ecx 异或 ecx 直接=0
+007055D5        xor         ecx,ecx
+# dl = 0xFD
+007055D7        mov         dl,0FD
+# eax = ebx 这里应该是恢复了eax的值，之前由ebx存着
+007055D9        mov         eax,ebx
+# 调用发送参数
+007055DB        call        TBootloader.SendCMD_Param
+# 这两句感觉好像没用
+007055E0        mov         ebx,eax
+007055E2        mov         eax,ebx
+# 把ebx给恢复回来
+007055E4        pop         ebx
+007055E5        ret
+
+```
+
+
+
+### SendCMD_Param
+
+看一下这个底层，到底是怎么实现的
+
+```assembly
+_Unit108.TBootloader.SendCMD_Param
+00704D80        push        ebp
+00704D81        mov         ebp,esp
+00704D83        push        0
+00704D85        push        0
+00704D87        push        0
+00704D89        push        0
+00704D8B        push        0
+00704D8D        push        0
+00704D8F        push        0
+00704D91        push        ebx
+00704D92        push        esi
+00704D93        push        edi
+00704D94        mov         ebx,ecx
+00704D96        mov         byte ptr [ebp-5],dl
+00704D99        mov         dword ptr [ebp-4],eax
+00704D9C        xor         eax,eax
+00704D9E        push        ebp
+00704D9F        push        704F66
+00704DA4        push        dword ptr fs:[eax]
+00704DA7        mov         dword ptr fs:[eax],esp
+00704DAA        call        006DB734
+00704DAF        test        al,al
+00704DB1>       je          00704E06
+00704DB3        lea         ecx,[ebp-0C]
+00704DB6        movzx       edx,byte ptr [ebp-5]
+00704DBA        mov         eax,dword ptr [ebp-4]
+00704DBD        call        0070608C
+00704DC2        mov         eax,dword ptr [ebp-0C]
+00704DC5        call        006DC040
+00704DCA        push        704F84;'[$'
+00704DCF        lea         ecx,[ebp-14]
+00704DD2        movzx       eax,bl
+00704DD5        mov         edx,2
+00704DDA        call        IntToHex
+00704DDF        push        dword ptr [ebp-14]
+00704DE2        push        704F98;']'
+00704DE7        lea         eax,[ebp-10]
+00704DEA        mov         edx,3
+00704DEF        call        @UStrCatN
+00704DF4        mov         eax,dword ptr [ebp-10]
+00704DF7        call        006DC054
+00704DFC        mov         eax,1
+00704E01        call        006DBF4C
+00704E06        xor         eax,eax
+00704E08        push        ebp
+00704E09        push        704E61
+00704E0E        push        dword ptr fs:[eax]
+00704E11        mov         dword ptr fs:[eax],esp
+00704E14        mov         eax,dword ptr [ebp-4]
+00704E17        movzx       edx,byte ptr [ebp-5]
+00704E1B        mov         byte ptr [eax+0B4],dl;TBootloader.FLastCMD:byte
+00704E21        mov         eax,dword ptr [ebp-4]
+00704E24        mov         byte ptr [eax+0B5],bl;TBootloader.FLastCMDParam:Byte
+00704E2A        lea         ecx,[ebp-18]
+00704E2D        mov         eax,dword ptr [ebp-4]
+00704E30        movzx       eax,byte ptr [eax+0B4];TBootloader.FLastCMD:byte
+00704E37        mov         byte ptr [ebp-1C],al
+00704E3A        mov         byte ptr [ebp-1B],bl
+00704E3D        lea         eax,[ebp-1C]
+00704E40        mov         edx,1
+00704E45        call        006D59C4
+00704E4A        mov         edx,dword ptr [ebp-18]
+00704E4D        mov         eax,dword ptr [ebp-4]
+00704E50        call        TBootloader.SendStrCRC
+00704E55        mov         ebx,eax
+00704E57        xor         eax,eax
+00704E59        pop         edx
+00704E5A        pop         ecx
+00704E5B        pop         ecx
+00704E5C        mov         dword ptr fs:[eax],edx
+00704E5F>       jmp         00704E6D
+00704E61>       jmp         @HandleAnyException
+00704E66        xor         ebx,ebx
+00704E68        call        @DoneExcept
+00704E6D        test        bl,bl
+00704E6F>       jne         00704E9F
+00704E71        call        006DB734
+00704E76        test        al,al
+00704E78>       je          00704F3D
+00704E7E        mov         eax,1
+00704E83        call        006DBF64
+00704E88        or          ecx,0FFFFFFFF
+00704E8B        mov         edx,0FF
+00704E90        mov         eax,704FA8;'FAILED'
+00704E95        call        006DBD18
+00704E9A>       jmp         00704F3D
+00704E9F        movzx       edx,byte ptr [ebp-5]
+00704EA3        mov         eax,dword ptr [ebp-4]
+00704EA6        call        TBootloader.CMDNeedsNoACK
+00704EAB        test        al,al
+00704EAD>       je          00704EDA
+00704EAF        call        006DB734
+00704EB4        test        al,al
+00704EB6>       je          00704F3D
+00704EBC        mov         eax,1
+00704EC1        call        006DBF64
+00704EC6        or          ecx,0FFFFFFFF
+00704EC9        mov         edx,8000
+00704ECE        mov         eax,704FC4;'OK'
+00704ED3        call        006DBD18
+00704ED8>       jmp         00704F3D
+00704EDA        movzx       edx,byte ptr [ebp-5]
+00704EDE        mov         eax,dword ptr [ebp-4]
+00704EE1        call        TBootloader.CMDNeedsSimpleACK
+00704EE6        test        al,al
+00704EE8>       je          00704F33
+00704EEA        mov         eax,dword ptr [ebp-4]
+00704EED        call        TBootloader.CheckAck
+00704EF2        mov         ebx,eax
+00704EF4        call        006DB734
+00704EF9        test        al,al
+00704EFB>       je          00704F3D
+00704EFD        mov         eax,1
+00704F02        call        006DBF64
+00704F07        test        bl,bl
+00704F09>       je          00704F1F
+00704F0B        or          ecx,0FFFFFFFF
+00704F0E        mov         edx,8000
+00704F13        mov         eax,704FC4;'OK'
+00704F18        call        006DBD18
+00704F1D>       jmp         00704F3D
+00704F1F        or          ecx,0FFFFFFFF
+00704F22        mov         edx,0FF
+00704F27        mov         eax,704FA8;'FAILED'
+00704F2C        call        006DBD18
+00704F31>       jmp         00704F3D
+00704F33        mov         eax,1
+00704F38        call        006DBF64
+00704F3D        xor         eax,eax
+00704F3F        pop         edx
+00704F40        pop         ecx
+00704F41        pop         ecx
+00704F42        mov         dword ptr fs:[eax],edx
+00704F45        push        704F6D
+00704F4A        lea         eax,[ebp-18]
+00704F4D        mov         edx,dword ptr ds:[404B48];TArray<System.Byte>
+00704F53        call        @DynArrayClear
+00704F58        lea         eax,[ebp-14]
+00704F5B        mov         edx,3
+00704F60        call        @UStrArrayClr
+00704F65        ret
+00704F66>       jmp         @HandleFinally
+00704F6B>       jmp         00704F4A
+00704F6D        mov         eax,ebx
+00704F6F        pop         edi
+00704F70        pop         esi
+00704F71        pop         ebx
+00704F72        mov         esp,ebp
+00704F74        pop         ebp
+00704F75        ret
+
+```
+
+到这里基本走不下去了，已经越来越复杂了，关键还是看不到最终实现加密的逻辑，很迷惑
+
+
+
+## 框架
+
+边反编译，边看一下程序的框架。
+
+
+
+TBootloader 是各种接口下，最底层的协议，主要是读写Flash和E2PROM
+
+
+
+## Logged Messages
+
+把BLH的log功能打开
+
+![image-20210708194723871](https://i.loli.net/2021/07/08/5jQ9DUfCwYgr3t1.png)
+
+
+
+然后就能看到右侧窗口的日志了，不得不说这个日志有点东西，这个树状结构挺好的
+
+![image-20210708194624122](https://i.loli.net/2021/07/08/vBVFR2uGHo5ltxP.png)
+
+![image-20210708194648621](https://i.loli.net/2021/07/08/VZ1JP7CNiX3Ub4Y.png)
+
+仔细一看这里实际上走的是BLB的模式，而不是UniSerial（我第一次追错地方了），也就是说我前面追的代码不太对。特别好的是这个树状结构其实和我从汇编里看到的调用层次是一致的。
+
+然后这里还能看到对应的地址信息，第一次读的地址是0x7C00，第二次是0xEB00，第三次是0xF7AC。
+
+之前的文章里说过只有第一次读取的信息有用，而后两次信息基本不包括设置参数，从这里就能看到，第二次读取的是激活状态信息，第三次是又读了一次Flash信息，只是具体有啥用没有说明。
 
 
 
