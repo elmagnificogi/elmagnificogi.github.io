@@ -1588,16 +1588,20 @@ _Unit102.TBLHeli.WriteSetupToString
 006EAA08        mov         edi,dword ptr [esp]
 006EAA0B        mov         edi,dword ptr [edi]
 # 这里是版本修订号 可以看到数据是来自于esi的，而转换就是把数据转存到edi对应的地址里
+# 实际上显示只有一个修订好， BLHeli Rev:32.6
+# 这里不明确，猜测Main有可能是32
 006EAA0D        movzx       eax,byte ptr [esi+4];TBLHeli.FEep_FW_Main_Revision:byte
 006EAA11        mov         byte ptr [edi],al
+# 猜测这个Sub是.6，二者组合起来形成了32.6的修订号
 006EAA13        movzx       eax,byte ptr [esi+5];TBLHeli.FEep_FW_Sub_Revision:byte
 006EAA17        mov         byte ptr [edi+1],al
+# FEep_Layout_Revision 对应的显示是 HAKRC_35A
 006EAA1A        movzx       eax,byte ptr [esi+6];TBLHeli.FEep_Layout_Revision:byte
 006EAA1E        mov         byte ptr [edi+2],al
-# 电压检测
+# 电压检测，对应的应该是low voltage protectin
 006EAA21        movzx       eax,byte ptr [esi+26];TBLHeli.FEep_Hw_Voltage_Sense_Capable:byte
 006EAA25        mov         byte ptr [edi+30],al
-# 电流检测
+# 电流检测 这个没找到对应的数据
 006EAA28        movzx       eax,byte ptr [esi+27];TBLHeli.FEep_Hw_Current_Sense_Capable:byte
 006EAA2C        mov         byte ptr [edi+31],al
 006EAA2F        mov         dl,15
@@ -1624,34 +1628,40 @@ _Unit102.TBLHeli.WriteSetupToString
 006EAA5E        mov         byte ptr [edi+33],0
 006EAA62        mov         byte ptr [edi+34],0
 006EAA66        mov         byte ptr [edi+35],0
+# 这里是判定版本号，如果和29相等，就跳过这里的Note的配置，其实就是不支持音乐
 006EAA6A        cmp         byte ptr [esi+6],29;TBLHeli.FEep_Layout_Revision:byte
 006EAA6E>       jb          006EAA94
-# 无阻尼
+# 无阻尼模式
 006EAA70        movzx       eax,byte ptr [esi+2F];TBLHeli.FEep_Nondamped_Capable:byte
 006EAA74        mov         byte ptr [edi+3F],al
-# 这个不知道是什么
+# 这里是音乐的节拍速率 对应 Music Note Config
 006EAA77        movzx       eax,byte ptr [esi+20];TBLHeli.FEep_Note_Config:byte
 006EAA7B        mov         byte ptr [edi+1C],al
 006EAA7E        lea         edx,[edi+90]
+# 这里的这个是音乐节拍的速度 对应 Startup Music Data
 006EAA84        lea         eax,[esi+80];TBLHeli.FEep_Note_Array:TEep_Note_Array
 006EAA8A        mov         ecx,30
 # 很奇怪的函数，先标注一下
 006EAA8F        call        Move
+# 这里判定FEep_Layout_Revision<2C,所以跳转了
 006EAA94        cmp         byte ptr [esi+6],2C;TBLHeli.FEep_Layout_Revision:byte
 # 1.这里跳转了
 006EAA98>       jb          006EAAB4
+# 这里判断pwm频率是否大于最大或者小于最小值，是的话就不会设置这个值，不是的话才会读取这个pwm频率
 006EAA9A        cmp         byte ptr [esi+2C],0FF;TBLHeli.FEep_Hw_Pwm_Freq_Min:byte
 006EAA9E>       jae         006EAAB4
 006EAAA0        cmp         byte ptr [esi+2D],0FF;TBLHeli.FEep_Hw_Pwm_Freq_Max:byte
 006EAAA4>       jae         006EAAB4
+# 读取pwm的最大最小频率
 006EAAA6        movzx       eax,byte ptr [esi+2C];TBLHeli.FEep_Hw_Pwm_Freq_Min:byte
 006EAAAA        mov         byte ptr [edi+36],al
 006EAAAD        movzx       eax,byte ptr [esi+2D];TBLHeli.FEep_Hw_Pwm_Freq_Max:byte
 006EAAB1        mov         byte ptr [edi+37],al
-# 1.跳到这里 感觉像是一个if else if 的判断
+# 1.跳到这里 感觉像是一个if else if 的判断，这里FEep_Layout_Revision<2D 所以继续
 006EAAB4        cmp         byte ptr [esi+6],2D;TBLHeli.FEep_Layout_Revision:byte
 # 2.继续跳转
 006EAAB8>       jb          006EAAC1
+# 说白了这个电调就没有运动模式，所以这个设置不存在
 006EAABA        movzx       eax,byte ptr [esi+2E];TBLHeli.FEep_SPORT_Capable:byte
 006EAABE        mov         byte ptr [edi+3E],al
 # 2.跳到这里继续
@@ -1659,11 +1669,15 @@ _Unit102.TBLHeli.WriteSetupToString
 006EAAC4        lea         eax,[esi+30];TBLHeli.FEep_ESC_Layout:TESC_Layout
 006EAAC7        mov         ecx,20
 006EAACC        call        Move
+# 把对应地址写入
 006EAAD1        lea         edx,[edi+60]
+# 这里加载了MCU的类型还是什么？
 006EAAD4        lea         eax,[esi+50];TBLHeli.FEep_ESC_MCU:TESC_MCU
 006EAAD7        mov         ecx,20
 006EAADC        call        Move
+# 这里应该是循环初始化 bl一开始等于4，后续结束循环需要看bl<0x1F
 006EAAE1        mov         bl,4
+# 感觉这里应该是有一个公用参数表，这里依次对各个参数进行初始化的样子
 # 5.跳转到这里，下一步走到3，继续跳转
 006EAAE3        mov         eax,ebx
 006EAAE5        call        006DEB4C
@@ -1674,11 +1688,13 @@ _Unit102.TBLHeli.WriteSetupToString
 006EAAFF        mov         bp,0FFFF
 006EAB03        mov         edx,ebx
 006EAB05        mov         eax,esi
+# 检测是否是有效参数
 006EAB07        call        TBLHeli.IsParameterValid
 006EAB0C        test        al,al
 006EAB0E>       je          006EAB2B
 006EAB10        mov         edx,ebx
 006EAB12        mov         eax,esi
+# 如果有效，那么获取参数的值
 006EAB14        call        TBLHeli.GetParameterValue
 006EAB19        mov         ebp,eax
 006EAB1B        cmp         bl,0E
@@ -1690,6 +1706,7 @@ _Unit102.TBLHeli.WriteSetupToString
 006EAB29>       jmp         006EAB62
 006EAB2B        mov         edx,ebx
 006EAB2D        mov         eax,esi
+# 这里判定参数是否存在，不是很明白什么意思
 006EAB2F        call        TBLHeli.IsParameterExisting
 006EAB34        test        al,al
 006EAB36>       je          006EAB62
@@ -1702,6 +1719,7 @@ _Unit102.TBLHeli.WriteSetupToString
 006EAB44>       je          006EAB57
 006EAB46>       jmp         006EAB62
 006EAB48        mov         eax,esi
+# 这里理解为 为了保护而故意强制使能某个参数，看了一眼里面的实现还是和电流相关的，这里应该没有这个问题，跳过吧。
 006EAB4A        call        TBLHeli.IsCurrentProtectionFalselyHardEnabled
 006EAB4F        test        al,al
 006EAB51>       je          006EAB62
@@ -1709,6 +1727,7 @@ _Unit102.TBLHeli.WriteSetupToString
 006EAB55>       jmp         006EAB62
 006EAB57        mov         edx,ebx
 006EAB59        mov         eax,esi
+# 相当于是说获取这个参数的默认值
 006EAB5B        call        TBLHeli.GetParameterValueDefault
 006EAB60        mov         ebp,eax
 # 3.跳到这里继续
@@ -1740,6 +1759,7 @@ _Unit102.TBLHeli.WriteSetupToString
 006EABA5        mov         edx,10
 006EABAA        call        @FillChar
 006EABAF        lea         edx,[edi+80]
+# 这里才是ESC Name的赋值
 006EABB5        lea         eax,[esi+70];TBLHeli.FEep_Name:TESC_Name
 006EABB8        mov         ecx,10
 006EABBD        call        Move
