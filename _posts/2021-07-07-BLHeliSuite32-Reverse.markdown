@@ -1476,6 +1476,14 @@ _Unit139.TBLHeliInterfaceManager.BLHeliStored
 
 ![image-20210713115712289](https://i.loli.net/2021/07/13/u5OabnvVyYQC3wF.png)
 
+额外发现这个CopyTo是经常被调用的，当
+
+![image-20210713154615425](https://i.loli.net/2021/07/13/uk8pNzfZ2RdV7Ov.png)
+
+这两个Tab页面切换的时候，就会自动调用CopyTo.
+
+我仔细对比了这两个Tab的内容，发现其实他们是一模一样的，只是在Setup页面可以设置，而Overview只能查看而已
+
 ```assembly
 _Unit102.TBLHeli.CopyTo
 006E5490        push        ebp
@@ -1503,7 +1511,7 @@ _Unit102.TBLHeli.CopyTo
 006E54CF>       ja          006E5534
 006E54D1        lea         edx,[ebp-4]
 006E54D4        mov         eax,ebx
-# 这里比较可疑
+# 这里比较可疑，通过上面的分析，大概指导了这里变成String，其实就是给overview去显示的
 006E54D6        call        TBLHeli.WriteSetupToString
 006E54DB        test        byte ptr [ebp-5],2
 006E54DF>       je          006E54EE
@@ -1512,7 +1520,7 @@ _Unit102.TBLHeli.CopyTo
 006E54EE        xor         ecx,ecx
 006E54F0        mov         edx,dword ptr [ebp-4]
 006E54F3        mov         eax,esi
-# 同理这里
+# 这里也比较可疑，这里的ReadSetup自然就是给Setup UI界面去显示用的，所以二者是相同的，只需要分析一个即可
 006E54F5        call        TBLHeli.ReadSetupFromBinString
 006E54FA        test        byte ptr [ebp-5],1
 006E54FE>       je          006E553B
@@ -1579,45 +1587,58 @@ _Unit102.TBLHeli.WriteSetupToString
 006EAA03        call        @FillChar
 006EAA08        mov         edi,dword ptr [esp]
 006EAA0B        mov         edi,dword ptr [edi]
+# 这里是版本修订号 可以看到数据是来自于esi的，而转换就是把数据转存到edi对应的地址里
 006EAA0D        movzx       eax,byte ptr [esi+4];TBLHeli.FEep_FW_Main_Revision:byte
 006EAA11        mov         byte ptr [edi],al
 006EAA13        movzx       eax,byte ptr [esi+5];TBLHeli.FEep_FW_Sub_Revision:byte
 006EAA17        mov         byte ptr [edi+1],al
 006EAA1A        movzx       eax,byte ptr [esi+6];TBLHeli.FEep_Layout_Revision:byte
 006EAA1E        mov         byte ptr [edi+2],al
+# 电压检测
 006EAA21        movzx       eax,byte ptr [esi+26];TBLHeli.FEep_Hw_Voltage_Sense_Capable:byte
 006EAA25        mov         byte ptr [edi+30],al
+# 电流检测
 006EAA28        movzx       eax,byte ptr [esi+27];TBLHeli.FEep_Hw_Current_Sense_Capable:byte
 006EAA2C        mov         byte ptr [edi+31],al
 006EAA2F        mov         dl,15
 006EAA31        mov         eax,esi
+# 这个不知道是干嘛的
 006EAA33        call        TBLHeli.IsParameterHardEnabled
 006EAA38        test        al,al
 006EAA3A>       je          006EAA5A
+# led 0
 006EAA3C        movzx       eax,byte ptr [esi+28];TBLHeli.FEep_Hw_LED_Capable_0:byte
 006EAA40        mov         byte ptr [edi+32],al
+# led 1
 006EAA43        movzx       eax,byte ptr [esi+29];TBLHeli.FEep_Hw_LED_Capable_1:byte
 006EAA47        mov         byte ptr [edi+33],al
+# led 2
 006EAA4A        movzx       eax,byte ptr [esi+2A];TBLHeli.FEep_Hw_LED_Capable_2:byte
 006EAA4E        mov         byte ptr [edi+34],al
+# led 3
 006EAA51        movzx       eax,byte ptr [esi+2B];TBLHeli.FEep_Hw_LED_Capable_3:byte
 006EAA55        mov         byte ptr [edi+35],al
 006EAA58>       jmp         006EAA6A
+# 不知道是什么全设置为了0
 006EAA5A        mov         byte ptr [edi+32],0
 006EAA5E        mov         byte ptr [edi+33],0
 006EAA62        mov         byte ptr [edi+34],0
 006EAA66        mov         byte ptr [edi+35],0
 006EAA6A        cmp         byte ptr [esi+6],29;TBLHeli.FEep_Layout_Revision:byte
 006EAA6E>       jb          006EAA94
+# 无阻尼
 006EAA70        movzx       eax,byte ptr [esi+2F];TBLHeli.FEep_Nondamped_Capable:byte
 006EAA74        mov         byte ptr [edi+3F],al
+# 这个不知道是什么
 006EAA77        movzx       eax,byte ptr [esi+20];TBLHeli.FEep_Note_Config:byte
 006EAA7B        mov         byte ptr [edi+1C],al
 006EAA7E        lea         edx,[edi+90]
 006EAA84        lea         eax,[esi+80];TBLHeli.FEep_Note_Array:TEep_Note_Array
 006EAA8A        mov         ecx,30
+# 很奇怪的函数，先标注一下
 006EAA8F        call        Move
 006EAA94        cmp         byte ptr [esi+6],2C;TBLHeli.FEep_Layout_Revision:byte
+# 1.这里跳转了
 006EAA98>       jb          006EAAB4
 006EAA9A        cmp         byte ptr [esi+2C],0FF;TBLHeli.FEep_Hw_Pwm_Freq_Min:byte
 006EAA9E>       jae         006EAAB4
@@ -1627,10 +1648,13 @@ _Unit102.TBLHeli.WriteSetupToString
 006EAAAA        mov         byte ptr [edi+36],al
 006EAAAD        movzx       eax,byte ptr [esi+2D];TBLHeli.FEep_Hw_Pwm_Freq_Max:byte
 006EAAB1        mov         byte ptr [edi+37],al
+# 1.跳到这里 感觉像是一个if else if 的判断
 006EAAB4        cmp         byte ptr [esi+6],2D;TBLHeli.FEep_Layout_Revision:byte
+# 2.继续跳转
 006EAAB8>       jb          006EAAC1
 006EAABA        movzx       eax,byte ptr [esi+2E];TBLHeli.FEep_SPORT_Capable:byte
 006EAABE        mov         byte ptr [edi+3E],al
+# 2.跳到这里继续
 006EAAC1        lea         edx,[edi+40]
 006EAAC4        lea         eax,[esi+30];TBLHeli.FEep_ESC_Layout:TESC_Layout
 006EAAC7        mov         ecx,20
@@ -1640,6 +1664,7 @@ _Unit102.TBLHeli.WriteSetupToString
 006EAAD7        mov         ecx,20
 006EAADC        call        Move
 006EAAE1        mov         bl,4
+# 5.跳转到这里，下一步走到3，继续跳转
 006EAAE3        mov         eax,ebx
 006EAAE5        call        006DEB4C
 006EAAEA        movzx       eax,al
@@ -1657,6 +1682,7 @@ _Unit102.TBLHeli.WriteSetupToString
 006EAB14        call        TBLHeli.GetParameterValue
 006EAB19        mov         ebp,eax
 006EAB1B        cmp         bl,0E
+# 3.这里跳转
 006EAB1E>       jne         006EAB62
 006EAB20        test        bp,bp
 006EAB23>       jbe         006EAB62
@@ -1685,6 +1711,7 @@ _Unit102.TBLHeli.WriteSetupToString
 006EAB59        mov         eax,esi
 006EAB5B        call        TBLHeli.GetParameterValueDefault
 006EAB60        mov         ebp,eax
+# 3.跳到这里继续
 006EAB62        mov         eax,dword ptr [esp]
 006EAB65        mov         eax,dword ptr [eax]
 006EAB67        mov         edx,dword ptr [esp+4]
@@ -1694,6 +1721,7 @@ _Unit102.TBLHeli.WriteSetupToString
 006EAB73        mov         eax,ebx
 006EAB75        call        006DEB58
 006EAB7A        cmp         al,1
+# 4.这里跳转
 006EAB7C>       jbe         006EAB91
 006EAB7E        mov         eax,dword ptr [esp]
 006EAB81        mov         eax,dword ptr [eax]
@@ -1701,9 +1729,12 @@ _Unit102.TBLHeli.WriteSetupToString
 006EAB87        mov         ecx,ebp
 006EAB89        shr         cx,8
 006EAB8D        mov         byte ptr [eax+edx+1],cl
+# 4.这里继续
 006EAB91        inc         ebx
 006EAB92        cmp         bl,1F
+# 5.这里继续跳
 006EAB95>       jne         006EAAE3
+# 当上面3-5的循环完成以后，继续往下走
 006EAB9B        lea         eax,[edi+80]
 006EABA1        mov         cx,20
 006EABA5        mov         edx,10
@@ -1726,6 +1757,8 @@ _Unit102.TBLHeli.WriteSetupToString
 
 
 ##### ReadSetupFromBinString
+
+读取配置信息给Setup From来显示，不做具体分析了，实际上类似于上面的ToString
 
 ```assembly
 _Unit102.TBLHeli.ReadSetupFromBinString
@@ -1967,6 +2000,7 @@ _Unit102.TBLHeli.ReadSetupFromBinString
 006EA654>       jae         006EA66C
 006EA656        movzx       eax,byte ptr [ebx+36]
 006EA65A        mov         edx,dword ptr [ebp-8]
+# 这里对pwm的频率进行了解释
 006EA65D        mov         byte ptr [edx+2C],al;TBLHeli.FEep_Hw_Pwm_Freq_Min:byte
 006EA660        movzx       eax,byte ptr [ebx+37]
 006EA664        mov         edx,dword ptr [ebp-8]
@@ -1985,6 +2019,7 @@ _Unit102.TBLHeli.ReadSetupFromBinString
 006EA68F>       jb          006EA69D
 006EA691        movzx       eax,byte ptr [ebx+3E]
 006EA695        mov         edx,dword ptr [ebp-8]
+# 运动模式？
 006EA698        mov         byte ptr [edx+2E],al;TBLHeli.FEep_SPORT_Capable:byte
 006EA69B>       jmp         006EA6AB
 006EA69D        mov         eax,[00841290];^gvar_00839100
@@ -1992,6 +2027,7 @@ _Unit102.TBLHeli.ReadSetupFromBinString
 006EA6A5        mov         edx,dword ptr [ebp-8]
 006EA6A8        mov         byte ptr [edx+2E],al;TBLHeli.FEep_SPORT_Capable:byte
 006EA6AB        mov         bl,4
+# 1. 循环
 006EA6AD        mov         eax,ebx
 006EA6AF        call        006DEB4C
 006EA6B4        movzx       edi,al
@@ -2047,6 +2083,7 @@ _Unit102.TBLHeli.ReadSetupFromBinString
 006EA74F        call        TBLHeli.SetParameterValueOrDefault
 006EA754        inc         ebx
 006EA755        cmp         bl,1F
+# 1.这里是个大循环
 006EA758>       jne         006EA6AD
 006EA75E        mov         byte ptr [ebp-0E],0
 006EA762        xor         eax,eax
@@ -2142,6 +2179,7 @@ _Unit102.TBLHeli.ReadSetupFromBinString
 006EA8B1        mov         eax,dword ptr [ebp-8]
 006EA8B4        add         eax,0BC;TBLHeli.FErrMsg:string
 006EA8B9        call        @UStrAsg
+# 2. 这里跳转
 006EA8BE>       jmp         006EA905
 006EA8C0        lea         eax,[ebp-50]
 006EA8C3        push        eax
@@ -2164,7 +2202,9 @@ _Unit102.TBLHeli.ReadSetupFromBinString
 006EA8F8        mov         eax,dword ptr [ebp-8]
 006EA8FB        add         eax,0BC;TBLHeli.FErrMsg:string
 006EA900        call        @UStrAsg
+# 2. 这里继续
 006EA905        cmp         byte ptr [ebp-0E],4
+# 3. 跳转
 006EA909>       jb          006EA936
 006EA90B        call        006DB734
 006EA910        test        al,al
@@ -2177,6 +2217,7 @@ _Unit102.TBLHeli.ReadSetupFromBinString
 006EA928        mov         eax,dword ptr [ebp-8]
 006EA92B        mov         eax,dword ptr [eax+0BC];TBLHeli.FErrMsg:string
 006EA931        call        006DF680
+# 3. 继续
 006EA936        cmp         byte ptr [ebp-0E],4
 006EA93A>       jb          006EA944
 006EA93C        mov         eax,dword ptr [ebp-8]
