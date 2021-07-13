@@ -3,7 +3,7 @@ layout:     post
 title:      "BLHeliSuite32逆向"
 subtitle:   "Crack，Reverse"
 date:       2021-07-07
-update:     2021-07-07
+update:     2021-07-13
 author:     "elmagnifico"
 header-img: "img/drone-head-bg.jpg"
 catalog:    true
@@ -277,7 +277,8 @@ _Unit139.TBLHeliInterfaceManager.ReadSetupAll
 007D5B4E        movzx       ecx,byte ptr ds:[7D5CE0];0x3 gvar_007D5CE0
 007D5B55        call        TBLHeli.CopyTo
 007D5B5A        mov         eax,dword ptr [ebp-4]
-# 将信息显示到控件？
+# 将信息显示到控件
+# 经过OD调试，发现拿到数据以后，在运行了TBLHeliInterfaceManager.SetupToControls之后UI就更新了，所以数据解析就在这个里面
 007D5B5D        call        TBLHeliInterfaceManager.SetupToControls
 007D5B62        mov         eax,dword ptr [ebp-4]
 # 检测电调内部的Flash状态
@@ -456,6 +457,7 @@ _Unit139.TBLHeliInterfaceManager.ReadDeviceSetupSection
 007D85F8        call        TUniSerialInterface.Send_cmd_DeviceReadBLHeliSetupSection
 007D85FD        mov         byte ptr [ebp-9],al
 007D8600>       jmp         007D8632
+# OD动态调试，发现走到了这里，也就是按照BLB类型进行读取了
 007D8602        mov         eax,dword ptr [ebp-8]
 007D8605        lea         edx,[eax+32C];TBLHeliInterfaceManager.FLastReadSetupMem:TArray<System.Byte>
 007D860B        mov         eax,dword ptr [ebp-8]
@@ -463,6 +465,7 @@ _Unit139.TBLHeliInterfaceManager.ReadDeviceSetupSection
 # 由于log显示我的esc是BLB Connect to ESC，所以这里应该走的是下面这个调用
 # 这里BLB其实就是指对应的电调类型，对应的就是BetaFlight或者CleanFlight之类的实现，实际上平常的也是这种方式
 007D8611        call        TBLBInterface.Send_cmd_DeviceReadBLHeliSetupSection
+# OD调试，发现当Send_cmd_DeviceReadBLHeliSetupSection执行完成以后，256字节就读取上来了，所以要追他
 007D8616        mov         byte ptr [ebp-9],al
 007D8619>       jmp         007D8632
 007D861B        mov         eax,dword ptr [ebp-8]
@@ -621,6 +624,31 @@ _Unit139.TBLHeliInterfaceManager.ReadDeviceSetupSection
 007D8810        mov         esp,ebp
 007D8812        pop         ebp
 007D8813        ret
+
+```
+
+
+
+##### Send_cmd_DeviceReadBLHeliSetupSection
+
+```assembly
+_Unit108.TBLBInterface.Send_cmd_DeviceReadBLHeliSetupSection
+00708184        push        ebx
+00708185        push        esi
+00708186        mov         esi,edx
+00708188        mov         ebx,eax
+0070818A        push        100
+0070818F        mov         eax,ebx
+00708191        call        00709B08
+00708196        call        006D7C34
+0070819B        mov         ecx,eax
+0070819D        mov         edx,esi
+0070819F        mov         eax,ebx
+# 所以还是追他的TBLBInterface.Send_cmd_DeviceReadFlash
+007081A1        call        TBLBInterface.Send_cmd_DeviceReadFlash
+007081A6        pop         esi
+007081A7        pop         ebx
+007081A8        ret
 
 ```
 
@@ -1141,6 +1169,7 @@ _Unit108.TBootloader.SendCMDFlashRead
 007051CB        mov         ecx,edx
 007051CD        mov         dl,3
 # 先发送读命令，这里应该是根据传入的参数，决定如何传参给发送参数命令
+# 经过OD动态调试，发现实际上调用的就是第一个TBootloader.SendCMD_Param
 007051CF        call        TBootloader.SendCMD_Param
 007051D4        mov         ecx,eax
 007051D6>       jmp         007051FA
@@ -1329,752 +1358,32 @@ _Unit108.TBootloader.SendCMD_Param
 
 
 
-#### TBLHeliInterfaceManager.ReadDeviceActivationStatus
+### SetupToControls
+
+这里就比较关键了，找到了数据来源，这里理论上就是数据解析了
 
 ```assembly
-_Unit139.TBLHeliInterfaceManager.ReadDeviceActivationStatus
-007D809C        push        ebp
-007D809D        mov         ebp,esp
-007D809F        add         esp,0FFFFFFD0
-007D80A2        push        ebx
-007D80A3        xor         ecx,ecx
-007D80A5        mov         dword ptr [ebp-20],ecx
-007D80A8        mov         dword ptr [ebp-1C],ecx
-007D80AB        mov         dword ptr [ebp-10],ecx
-007D80AE        mov         dword ptr [ebp-4],ecx
-007D80B1        mov         dword ptr [ebp-8],edx
-007D80B4        mov         ebx,eax
-007D80B6        xor         eax,eax
-007D80B8        push        ebp
-007D80B9        push        7D8309
-007D80BE        push        dword ptr fs:[eax]
-007D80C1        mov         dword ptr fs:[eax],esp
-007D80C4        mov         eax,dword ptr [ebp-8]
-007D80C7        mov         byte ptr [eax+0B9],5;TBLHeli.FActivationStatus:TActivationStatus
-007D80CE        mov         eax,dword ptr [ebp-8]
-007D80D1        xor         edx,edx
-007D80D3        mov         dword ptr [eax+0C4],edx;TBLHeli.FDshotGoodFrames:Cardinal
-007D80D9        mov         eax,dword ptr [ebp-8]
-007D80DC        xor         edx,edx
-007D80DE        mov         dword ptr [eax+0C8],edx;TBLHeli.FDshotBadFrames:Cardinal
-007D80E4        mov         byte ptr [ebp-9],0
-007D80E8        call        006DB734
-007D80ED        test        al,al
-007D80EF>       je          007D8105
-007D80F1        mov         eax,7D8328;'ReadActivationStat:'
-007D80F6        call        006DBF8C
-007D80FB        mov         eax,1
-007D8100        call        006DBF4C
-007D8105        xor         edx,edx
-007D8107        push        ebp
-007D8108        push        7D82CE
-007D810D        push        dword ptr fs:[edx]
-007D8110        mov         dword ptr fs:[edx],esp
-007D8113        push        10
-007D8115        lea         edx,[ebp-4]
-007D8118        xor         ecx,ecx
-007D811A        mov         eax,ebx
-007D811C        call        TBLHeliInterfaceManager.ReadDeviceRam
-007D8121        test        al,al
-007D8123>       je          007D81DE
-007D8129        mov         eax,dword ptr [ebp-4]
-007D812C        movzx       eax,byte ptr [eax]
-007D812F        cmp         al,3
-007D8131>       ja          007D813D
-007D8133        inc         eax
-007D8134        mov         edx,dword ptr [ebp-8]
-007D8137        mov         byte ptr [edx+0B9],al;TBLHeli.FActivationStatus:TActivationStatus
-007D813D        mov         eax,dword ptr [ebp-8]
-007D8140        cmp         byte ptr [eax+0B9],1;TBLHeli.FActivationStatus:TActivationStatus
-007D8147        sete        byte ptr [ebp-9]
-007D814B        mov         eax,dword ptr [ebp-8]
-007D814E        cmp         byte ptr [eax+6],29;TBLHeli.FEep_Layout_Revision:byte
-007D8152>       jb          007D81DE
-007D8158        mov         eax,dword ptr [ebp-4]
-007D815B        movzx       eax,byte ptr [eax+3]
-007D815F        mov         edx,dword ptr [ebp-8]
-007D8162        mov         byte ptr [edx+0D0],al;TBLHeli.FInputProtocol:byte
-007D8168        cmp         al,7
-007D816A>       jbe         007D8176
-007D816C        mov         eax,dword ptr [ebp-8]
-007D816F        mov         byte ptr [eax+0D0],0;TBLHeli.FInputProtocol:byte
-007D8176        mov         eax,dword ptr [ebp-4]
-007D8179        movzx       eax,byte ptr [eax+4]
-007D817D        mov         edx,dword ptr [ebp-4]
-007D8180        movzx       edx,byte ptr [edx+5]
-007D8184        shl         edx,8
-007D8187        add         eax,edx
-007D8189        mov         edx,dword ptr [ebp-4]
-007D818C        movzx       edx,byte ptr [edx+6]
-007D8190        shl         edx,10
-007D8193        add         eax,edx
-007D8195        mov         edx,dword ptr [ebp-4]
-007D8198        movzx       edx,byte ptr [edx+7]
-007D819C        shl         edx,18
-007D819F        add         eax,edx
-007D81A1        mov         edx,dword ptr [ebp-8]
-007D81A4        mov         dword ptr [edx+0C4],eax;TBLHeli.FDshotGoodFrames:Cardinal
-007D81AA        mov         eax,dword ptr [ebp-4]
-007D81AD        movzx       eax,byte ptr [eax+8]
-007D81B1        mov         edx,dword ptr [ebp-4]
-007D81B4        movzx       edx,byte ptr [edx+9]
-007D81B8        shl         edx,8
-007D81BB        add         eax,edx
-007D81BD        mov         edx,dword ptr [ebp-4]
-007D81C0        movzx       edx,byte ptr [edx+0A]
-007D81C4        shl         edx,10
-007D81C7        add         eax,edx
-007D81C9        mov         edx,dword ptr [ebp-4]
-007D81CC        movzx       edx,byte ptr [edx+0B]
-007D81D0        shl         edx,18
-007D81D3        add         eax,edx
-007D81D5        mov         edx,dword ptr [ebp-8]
-007D81D8        mov         dword ptr [edx+0C8],eax;TBLHeli.FDshotBadFrames:Cardinal
-007D81DE        xor         eax,eax
-007D81E0        pop         edx
-007D81E1        pop         ecx
-007D81E2        pop         ecx
-007D81E3        mov         dword ptr fs:[eax],edx
-007D81E6        push        7D82D8
-007D81EB        call        006DB734
-007D81F0        test        al,al
-007D81F2>       je          007D82CD
-007D81F8        mov         eax,1
-007D81FD        call        006DBF64
-007D8202        lea         eax,[ebp-10]
-007D8205        push        eax
-007D8206        mov         eax,dword ptr [ebp-8]
-007D8209        movzx       eax,byte ptr [eax+0B9];TBLHeli.FActivationStatus:TActivationStatus
-007D8210        mov         edx,dword ptr ds:[841D18];^gvar_00839110
-007D8216        mov         eax,dword ptr [edx+eax*4]
-007D8219        mov         dword ptr [ebp-18],eax
-007D821C        mov         byte ptr [ebp-14],11
-007D8220        lea         edx,[ebp-18]
-007D8223        xor         ecx,ecx
-007D8225        mov         eax,7D835C;'Activation: %s'
-007D822A        call        006D5800
-007D822F        mov         eax,dword ptr [ebp-10]
-007D8232        or          ecx,0FFFFFFFF
-007D8235        mov         edx,0FF0000
-007D823A        call        006DBD18
-007D823F        mov         eax,dword ptr [ebp-8]
-007D8242        cmp         byte ptr [eax+0B9],5;TBLHeli.FActivationStatus:TActivationStatus
-007D8249        setb        al
-007D824C        call        006DBE1C
-007D8251        mov         eax,dword ptr [ebp-8]
-007D8254        cmp         byte ptr [eax+6],29;TBLHeli.FEep_Layout_Revision:byte
-007D8258>       jb          007D82CD
-007D825A        lea         eax,[ebp-1C]
-007D825D        push        eax
-007D825E        mov         eax,dword ptr [ebp-8]
-007D8261        movzx       eax,byte ptr [eax+0D0];TBLHeli.FInputProtocol:byte
-007D8268        mov         edx,dword ptr ds:[840E60];^gvar_0083920C
-007D826E        mov         eax,dword ptr [edx+eax*4]
-007D8271        mov         dword ptr [ebp-18],eax
-007D8274        mov         byte ptr [ebp-14],11
-007D8278        lea         edx,[ebp-18]
-007D827B        xor         ecx,ecx
-007D827D        mov         eax,7D8388;'Input Protocol: %s'
-007D8282        call        006D5800
-007D8287        mov         eax,dword ptr [ebp-1C]
-007D828A        call        006DBF8C
-007D828F        lea         eax,[ebp-20]
-007D8292        push        eax
-007D8293        mov         eax,dword ptr [ebp-8]
-007D8296        mov         eax,dword ptr [eax+0C4];TBLHeli.FDshotGoodFrames:Cardinal
-007D829C        mov         dword ptr [ebp-30],eax
-007D829F        mov         byte ptr [ebp-2C],0
-007D82A3        mov         eax,dword ptr [ebp-8]
-007D82A6        mov         eax,dword ptr [eax+0C8];TBLHeli.FDshotBadFrames:Cardinal
-007D82AC        mov         dword ptr [ebp-28],eax
-007D82AF        mov         byte ptr [ebp-24],0
-007D82B3        lea         edx,[ebp-30]
-007D82B6        mov         ecx,1
-007D82BB        mov         eax,7D83BC;'Input Frames Good: %u / Bad: %u'
-007D82C0        call        006D5800
-007D82C5        mov         eax,dword ptr [ebp-20]
-007D82C8        call        006DBF8C
-007D82CD        ret
-007D82CE>       jmp         @HandleFinally
-007D82D3>       jmp         007D81EB
-007D82D8        xor         eax,eax
-007D82DA        pop         edx
-007D82DB        pop         ecx
-007D82DC        pop         ecx
-007D82DD        mov         dword ptr fs:[eax],edx
-007D82E0        push        7D8310
-007D82E5        lea         eax,[ebp-20]
-007D82E8        mov         edx,2
-007D82ED        call        @UStrArrayClr
-007D82F2        lea         eax,[ebp-10]
-007D82F5        call        @UStrClr
-007D82FA        lea         eax,[ebp-4]
-007D82FD        mov         edx,dword ptr ds:[404B48];TArray<System.Byte>
-007D8303        call        @DynArrayClear
-007D8308        ret
-007D8309>       jmp         @HandleFinally
-007D830E>       jmp         007D82E5
-007D8310        movzx       eax,byte ptr [ebp-9]
-007D8314        pop         ebx
-007D8315        mov         esp,ebp
-007D8317        pop         ebp
-007D8318        ret
+_Unit139.TBLHeliInterfaceManager.SetupToControls
+007D2C78        push        ebx
+007D2C79        cmp         word ptr [eax+35A],0;TBLHeliInterfaceManager.?f35A:word
+007D2C81>       je          007D2C91
+007D2C83        mov         ebx,eax
+007D2C85        mov         eax,dword ptr [ebx+35C];TBLHeliInterfaceManager.?f35C:dword
+007D2C8B        call        dword ptr [ebx+358];TBLHeliInterfaceManager.FOnSetupToControls
+007D2C91        pop         ebx
+007D2C92        ret
 
 ```
 
+看到这么几句代码，当场自闭，显然这么几句不足以解释清楚这个数据是怎么显示到UI的。
 
-
-#### TBLHeli.ReadSetupFromBinString
-
-看一下这里是怎么读的，感觉接近解读参数了，可是参数又不全，部分也对不上
+猜测这里有点类似于C#的委托，这里只是允许UI进行更新，实际上UI在另一个线程里已经拿到了数据，并且进行了解析。
 
 ```assembly
-_Unit102.TBLHeli.ReadSetupFromBinString
-006EA350        push        ebp
-006EA351        mov         ebp,esp
-006EA353        push        ecx
-006EA354        mov         ecx,0A
-006EA359        push        0
-006EA35B        push        0
-006EA35D        dec         ecx
-006EA35E>       jne         006EA359
-006EA360        push        ecx
-006EA361        xchg        ecx,dword ptr [ebp-4]
-006EA364        push        ebx
-006EA365        push        esi
-006EA366        push        edi
-006EA367        mov         byte ptr [ebp-0D],cl
-006EA36A        mov         ebx,edx
-006EA36C        mov         dword ptr [ebp-8],eax
-006EA36F        xor         eax,eax
-006EA371        push        ebp
-006EA372        push        6EA99F
-006EA377        push        dword ptr fs:[eax]
-006EA37A        mov         dword ptr fs:[eax],esp
-006EA37D        mov         eax,dword ptr [ebp-8]
-006EA380        call        TBLHeli.Init
-006EA385        mov         byte ptr [ebp-0E],4
-006EA389        xor         ecx,ecx
-006EA38B        push        ebp
-006EA38C        push        6EA952
-006EA391        push        dword ptr fs:[ecx]
-006EA394        mov         dword ptr fs:[ecx],esp
-006EA397        mov         edx,ebx
-006EA399        mov         eax,edx
-006EA39B        test        eax,eax
-006EA39D>       je          006EA3A4
-006EA39F        sub         eax,4
-006EA3A2        mov         eax,dword ptr [eax]
-006EA3A4        mov         dword ptr [ebp-0C],eax
-006EA3A7        cmp         dword ptr [ebp-0C],0F800
-006EA3AE>       jle         006EA3DF
-006EA3B0        mov         eax,edx
-006EA3B2        test        eax,eax
-006EA3B4>       je          006EA3BB
-006EA3B6        sub         eax,4
-006EA3B9        mov         eax,dword ptr [eax]
-006EA3BB        sub         eax,0F800
-006EA3C0        mov         dword ptr [ebp-0C],eax
-006EA3C3        mov         eax,dword ptr [ebp-0C]
-006EA3C6        push        eax
-006EA3C7        lea         eax,[ebp-4]
-006EA3CA        push        eax
-006EA3CB        mov         ecx,0F800
-006EA3D0        mov         edx,dword ptr ds:[404B48];TArray<System.Byte>
-006EA3D6        mov         eax,ebx
-006EA3D8        call        @DynArrayCopyRange
-006EA3DD>       jmp         006EA42E
-006EA3DF        cmp         dword ptr [ebp-0C],7C00
-006EA3E6>       jle         006EA417
-006EA3E8        mov         eax,edx
-006EA3EA        test        eax,eax
-006EA3EC>       je          006EA3F3
-006EA3EE        sub         eax,4
-006EA3F1        mov         eax,dword ptr [eax]
-006EA3F3        sub         eax,7C00
-006EA3F8        mov         dword ptr [ebp-0C],eax
-006EA3FB        mov         eax,dword ptr [ebp-0C]
-006EA3FE        push        eax
-006EA3FF        lea         eax,[ebp-4]
-006EA402        push        eax
-006EA403        mov         ecx,7C00
-006EA408        mov         edx,dword ptr ds:[404B48];TArray<System.Byte>
-006EA40E        mov         eax,ebx
-006EA410        call        @DynArrayCopyRange
-006EA415>       jmp         006EA42E
-006EA417        mov         eax,dword ptr [ebp-0C]
-006EA41A        push        eax
-006EA41B        lea         eax,[ebp-4]
-006EA41E        push        eax
-006EA41F        xor         ecx,ecx
-006EA421        mov         edx,dword ptr ds:[404B48];TArray<System.Byte>
-006EA427        mov         eax,ebx
-006EA429        call        @DynArrayCopyRange
-006EA42E        cmp         dword ptr [ebp-0C],90
-006EA435>       jge         006EA445
-006EA437        mov         byte ptr [ebp-0E],6
-006EA43B        call        @TryFinallyExit
-006EA440>       jmp         006EA95C
-006EA445        mov         edx,dword ptr ds:[841290];^gvar_00839100
-006EA44B        movzx       edx,byte ptr [edx]
-006EA44E        mov         eax,dword ptr [ebp-4]
-006EA451        call        006D5CE4
-006EA456        test        al,al
-006EA458>       je          006EA468
-006EA45A        mov         byte ptr [ebp-0E],5
-006EA45E        call        @TryFinallyExit
-006EA463>       jmp         006EA95C
-006EA468        push        ebp
-006EA469        call        006EA090
-006EA46E        pop         ecx
-006EA46F        mov         byte ptr [ebp-0E],al
-006EA472        cmp         byte ptr [ebp-0E],4
-006EA476>       jb          006EA482
-006EA478        call        @TryFinallyExit
-006EA47D>       jmp         006EA95C
-006EA482        mov         eax,dword ptr [ebp-8]
-006EA485        lea         edx,[eax+30];TBLHeli.FEep_ESC_Layout:TESC_Layout
-006EA488        mov         eax,dword ptr [ebp-4]
-006EA48B        add         eax,40
-006EA48E        mov         ecx,20
-006EA493        call        Move
-006EA498        lea         edx,[ebp-14]
-006EA49B        mov         eax,dword ptr [ebp-8]
-006EA49E        call        006E6554
-006EA4A3        mov         edx,dword ptr [ebp-14]
-006EA4A6        mov         eax,dword ptr [ebp-8]
-006EA4A9        add         eax,0B0;TBLHeli.FESC_Layout_Org_Str:string
-006EA4AE        call        @UStrAsg
-006EA4B3        cmp         byte ptr [ebp-0E],1
-006EA4B7>       jbe         006EA4C3
-006EA4B9        call        @TryFinallyExit
-006EA4BE>       jmp         006EA95C
-006EA4C3        mov         eax,dword ptr [ebp-4]
-006EA4C6        movzx       eax,byte ptr [eax]
-006EA4C9        mov         edx,dword ptr [ebp-8]
-# 这里是版本号
-006EA4CC        mov         byte ptr [edx+4],al;TBLHeli.FEep_FW_Main_Revision:byte
-006EA4CF        mov         eax,dword ptr [ebp-4]
-006EA4D2        movzx       eax,byte ptr [eax+1]
-006EA4D6        mov         edx,dword ptr [ebp-8]
-006EA4D9        mov         byte ptr [edx+5],al;TBLHeli.FEep_FW_Sub_Revision:byte
-006EA4DC        cmp         byte ptr [ebp-0E],1
-006EA4E0>       je          006EA4EE
-006EA4E2        mov         eax,dword ptr [ebp-8]
-006EA4E5        call        006E7280
-006EA4EA        test        al,al
-006EA4EC>       je          006EA502
-006EA4EE        mov         eax,dword ptr [ebp-8]
-006EA4F1        mov         byte ptr [eax+0BA],1;TBLHeli.FIsAlternateSettingsKey:Boolean
-006EA4F8        call        @TryFinallyExit
-006EA4FD>       jmp         006EA95C
-006EA502        mov         ebx,dword ptr [ebp-4]
-006EA505        movzx       eax,byte ptr [ebx+2]
-006EA509        mov         edx,dword ptr [ebp-8]
-006EA50C        mov         byte ptr [edx+6],al;TBLHeli.FEep_Layout_Revision:byte
-006EA50F        mov         eax,dword ptr [ebp-8]
-006EA512        movzx       eax,byte ptr [eax+4];TBLHeli.FEep_FW_Main_Revision:byte
-006EA516        cmp         al,28
-006EA518>       ja          006EA527
-006EA51A        cmp         al,1F
-006EA51C>       jb          006EA527
-006EA51E        mov         eax,dword ptr [ebp-8]
-# 子版本号
-006EA521        cmp         byte ptr [eax+5],63;TBLHeli.FEep_FW_Sub_Revision:byte
-006EA525>       jbe         006EA535
-006EA527        mov         byte ptr [ebp-0E],4
-006EA52B        call        @TryFinallyExit
-006EA530>       jmp         006EA95C
-006EA535        mov         eax,dword ptr [ebp-8]
-006EA538        call        006E71CC
-006EA53D        test        al,al
-006EA53F>       jne         006EA54F
-006EA541        mov         byte ptr [ebp-0E],4
-006EA545        call        @TryFinallyExit
-006EA54A>       jmp         006EA95C
-006EA54F        mov         eax,dword ptr [ebp-8]
-006EA552        call        006E724C
-006EA557        test        al,al
-006EA559>       je          006EA569
-006EA55B        mov         byte ptr [ebp-0E],2
-006EA55F        call        @TryFinallyExit
-006EA564>       jmp         006EA95C
-006EA569        mov         eax,dword ptr [ebp-8]
-# ESC名字，说明这里就是实际显示的参数了
-006EA56C        lea         edx,[eax+70];TBLHeli.FEep_Name:TESC_Name
-006EA56F        lea         eax,[ebx+80]
-006EA575        mov         ecx,10
-006EA57A        call        Move
-006EA57F        movzx       eax,byte ptr [ebx+32]
-006EA583        mov         edx,dword ptr [ebp-8]
-# LED的使能
-006EA586        mov         byte ptr [edx+28],al;TBLHeli.FEep_Hw_LED_Capable_0:byte
-006EA589        movzx       eax,byte ptr [ebx+33]
-006EA58D        mov         edx,dword ptr [ebp-8]
-006EA590        mov         byte ptr [edx+29],al;TBLHeli.FEep_Hw_LED_Capable_1:byte
-006EA593        movzx       eax,byte ptr [ebx+34]
-006EA597        mov         edx,dword ptr [ebp-8]
-006EA59A        mov         byte ptr [edx+2A],al;TBLHeli.FEep_Hw_LED_Capable_2:byte
-006EA59D        movzx       eax,byte ptr [ebx+35]
-006EA5A1        mov         edx,dword ptr [ebp-8]
-006EA5A4        mov         byte ptr [edx+2B],al;TBLHeli.FEep_Hw_LED_Capable_3:byte
-006EA5A7        mov         eax,dword ptr [ebp-8]
-006EA5AA        cmp         byte ptr [eax+28],0FF;TBLHeli.FEep_Hw_LED_Capable_0:byte
-006EA5AE>       jne         006EA5B7
-006EA5B0        mov         eax,dword ptr [ebp-8]
-006EA5B3        mov         byte ptr [eax+28],0;TBLHeli.FEep_Hw_LED_Capable_0:byte
-006EA5B7        mov         eax,dword ptr [ebp-8]
-006EA5BA        cmp         byte ptr [eax+29],0FF;TBLHeli.FEep_Hw_LED_Capable_1:byte
-006EA5BE>       jne         006EA5C7
-006EA5C0        mov         eax,dword ptr [ebp-8]
-006EA5C3        mov         byte ptr [eax+29],0;TBLHeli.FEep_Hw_LED_Capable_1:byte
-006EA5C7        mov         eax,dword ptr [ebp-8]
-006EA5CA        cmp         byte ptr [eax+2A],0FF;TBLHeli.FEep_Hw_LED_Capable_2:byte
-006EA5CE>       jne         006EA5D7
-006EA5D0        mov         eax,dword ptr [ebp-8]
-006EA5D3        mov         byte ptr [eax+2A],0;TBLHeli.FEep_Hw_LED_Capable_2:byte
-006EA5D7        mov         eax,dword ptr [ebp-8]
-006EA5DA        cmp         byte ptr [eax+2B],0FF;TBLHeli.FEep_Hw_LED_Capable_3:byte
-006EA5DE>       jne         006EA5E7
-006EA5E0        mov         eax,dword ptr [ebp-8]
-006EA5E3        mov         byte ptr [eax+2B],0;TBLHeli.FEep_Hw_LED_Capable_3:byte
-006EA5E7        movzx       eax,byte ptr [ebx+30]
-006EA5EB        mov         edx,dword ptr [ebp-8]
-# 电压
-006EA5EE        mov         byte ptr [edx+26],al;TBLHeli.FEep_Hw_Voltage_Sense_Capable:byte
-006EA5F1        movzx       eax,byte ptr [ebx+31]
-006EA5F5        mov         edx,dword ptr [ebp-8]
-# 电流
-006EA5F8        mov         byte ptr [edx+27],al;TBLHeli.FEep_Hw_Current_Sense_Capable:byte
-006EA5FB        mov         eax,dword ptr [ebp-8]
-006EA5FE        cmp         byte ptr [eax+6],29;TBLHeli.FEep_Layout_Revision:byte
-006EA602>       jb          006EA633
-006EA604        movzx       eax,byte ptr [ebx+3F]
-006EA608        mov         edx,dword ptr [ebp-8]
-# e2p 无阻尼？
-006EA60B        mov         byte ptr [edx+2F],al;TBLHeli.FEep_Nondamped_Capable:byte
-006EA60E        movzx       eax,byte ptr [ebx+1C]
-006EA612        mov         edx,dword ptr [ebp-8]
-# e2p note 配置？
-006EA615        mov         byte ptr [edx+20],al;TBLHeli.FEep_Note_Config:byte
-006EA618        mov         eax,dword ptr [ebp-8]
-006EA61B        lea         edx,[eax+80];TBLHeli.FEep_Note_Array:TEep_Note_Array
-006EA621        lea         eax,[ebx+90]
-006EA627        mov         ecx,30
-006EA62C        call        Move
-006EA631>       jmp         006EA641
-006EA633        mov         eax,[00841290];^gvar_00839100
-006EA638        movzx       eax,byte ptr [eax]
-006EA63B        mov         edx,dword ptr [ebp-8]
-006EA63E        mov         byte ptr [edx+2F],al;TBLHeli.FEep_Nondamped_Capable:byte
-006EA641        mov         eax,dword ptr [ebp-8]
-# e2p 版本号
-006EA644        cmp         byte ptr [eax+6],2C;TBLHeli.FEep_Layout_Revision:byte
-006EA648>       jb          006EA66C
-006EA64A        cmp         byte ptr [ebx+36],0FF
-006EA64E>       jae         006EA66C
-006EA650        cmp         byte ptr [ebx+37],0FF
-006EA654>       jae         006EA66C
-006EA656        movzx       eax,byte ptr [ebx+36]
-006EA65A        mov         edx,dword ptr [ebp-8]
-# 最大最小PWM 频率
-006EA65D        mov         byte ptr [edx+2C],al;TBLHeli.FEep_Hw_Pwm_Freq_Min:byte
-006EA660        movzx       eax,byte ptr [ebx+37]
-006EA664        mov         edx,dword ptr [ebp-8]
-006EA667        mov         byte ptr [edx+2D],al;TBLHeli.FEep_Hw_Pwm_Freq_Max:byte
-006EA66A>       jmp         006EA688
-006EA66C        mov         eax,[00841290];^gvar_00839100
-006EA671        movzx       eax,byte ptr [eax]
-006EA674        mov         edx,dword ptr [ebp-8]
-006EA677        mov         byte ptr [edx+2C],al;TBLHeli.FEep_Hw_Pwm_Freq_Min:byte
-006EA67A        mov         eax,[00841290];^gvar_00839100
-006EA67F        movzx       eax,byte ptr [eax]
-006EA682        mov         edx,dword ptr [ebp-8]
-006EA685        mov         byte ptr [edx+2D],al;TBLHeli.FEep_Hw_Pwm_Freq_Max:byte
-006EA688        mov         eax,dword ptr [ebp-8]
-006EA68B        cmp         byte ptr [eax+6],2D;TBLHeli.FEep_Layout_Revision:byte
-006EA68F>       jb          006EA69D
-006EA691        movzx       eax,byte ptr [ebx+3E]
-006EA695        mov         edx,dword ptr [ebp-8]
-# 运动模式？
-006EA698        mov         byte ptr [edx+2E],al;TBLHeli.FEep_SPORT_Capable:byte
-006EA69B>       jmp         006EA6AB
-006EA69D        mov         eax,[00841290];^gvar_00839100
-006EA6A2        movzx       eax,byte ptr [eax]
-006EA6A5        mov         edx,dword ptr [ebp-8]
-006EA6A8        mov         byte ptr [edx+2E],al;TBLHeli.FEep_SPORT_Capable:byte
-006EA6AB        mov         bl,4
-006EA6AD        mov         eax,ebx
-006EA6AF        call        006DEB4C
-006EA6B4        movzx       edi,al
-006EA6B7        cmp         edi,0FF
-006EA6BD>       je          006EA754
-006EA6C3        mov         si,0FFFF
-006EA6C7        mov         edx,ebx
-006EA6C9        mov         eax,dword ptr [ebp-8]
-006EA6CC        call        TBLHeli.IsParameterValid
-006EA6D1        test        al,al
-006EA6D3>       jne         006EA6E6
-006EA6D5        cmp         bl,0F
-006EA6D8>       jne         006EA748
-006EA6DA        mov         eax,dword ptr [ebp-8]
-006EA6DD        call        TBLHeli.IsCurrentProtectionFalselyHardEnabled
-006EA6E2        test        al,al
-006EA6E4>       je          006EA748
-006EA6E6        mov         eax,dword ptr [ebp-4]
-006EA6E9        movzx       esi,byte ptr [eax+edi]
-006EA6ED        cmp         bl,0E
-006EA6F0>       jne         006EA703
-006EA6F2        cmp         si,0FF
-006EA6F7>       jae         006EA703
-006EA6F9        cmp         si,18
-006EA6FD>       jb          006EA703
-006EA6FF        sub         si,18
-006EA703        mov         eax,ebx
-006EA705        call        006DEB58
-006EA70A        cmp         al,1
-006EA70C>       jbe         006EA71C
-006EA70E        mov         eax,dword ptr [ebp-4]
-006EA711        movzx       eax,byte ptr [eax+edi+1]
-006EA716        shl         eax,8
-006EA719        add         si,ax
-006EA71C        cmp         bl,11
-006EA71F>       jne         006EA748
-006EA721        mov         eax,dword ptr [ebp-8]
-# 刹车
-006EA724        call        TBLHeli.IsProgrammableBrakeForceCapable
-006EA729        test        al,al
-006EA72B>       jne         006EA748
-006EA72D        mov         dl,11
-006EA72F        mov         eax,dword ptr [ebp-8]
-# 获取最小参数
-006EA732        call        TBLHeli.GetParameterMin
-006EA737        cmp         si,ax
-006EA73A>       jbe         006EA748
-006EA73C        mov         dl,11
-006EA73E        mov         eax,dword ptr [ebp-8]
-006EA741        call        TBLHeli.GetParameterMax
-006EA746        mov         esi,eax
-006EA748        mov         edx,ebx
-006EA74A        mov         ecx,esi
-006EA74C        mov         eax,dword ptr [ebp-8]
-006EA74F        call        TBLHeli.SetParameterValueOrDefault
-006EA754        inc         ebx
-006EA755        cmp         bl,1F
-006EA758>       jne         006EA6AD
-006EA75E        mov         byte ptr [ebp-0E],0
-006EA762        xor         eax,eax
-006EA764        pop         edx
-006EA765        pop         ecx
-006EA766        pop         ecx
-006EA767        mov         dword ptr fs:[eax],edx
-006EA76A        push        6EA95C
-006EA76F        movzx       eax,byte ptr [ebp-0E]
-006EA773        cmp         eax,6
-006EA776>       ja          006EA905
-006EA77C        jmp         dword ptr [eax*4+6EA783]
-006EA783        dd          006EA79F
-006EA787        dd          006EA7B1
-006EA78B        dd          006EA7C3
-006EA78F        dd          006EA8C0
-006EA793        dd          006EA859
-006EA797        dd          006EA871
-006EA79B        dd          006EA886
-006EA79F        mov         eax,dword ptr [ebp-8]
-006EA7A2        add         eax,0BC;TBLHeli.FErrMsg:string
-006EA7A7        call        @UStrClr
-006EA7AC>       jmp         006EA905
-006EA7B1        mov         eax,dword ptr [ebp-8]
-006EA7B4        add         eax,0BC;TBLHeli.FErrMsg:string
-006EA7B9        call        @UStrClr
-006EA7BE>       jmp         006EA905
-006EA7C3        lea         eax,[ebp-18]
-006EA7C6        push        eax
-006EA7C7        lea         edx,[ebp-24]
-006EA7CA        mov         eax,dword ptr [ebp-8]
-006EA7CD        call        006E678C
-006EA7D2        mov         eax,dword ptr [ebp-24]
-006EA7D5        mov         dword ptr [ebp-20],eax
-006EA7D8        mov         byte ptr [ebp-1C],11
-006EA7DC        lea         eax,[ebp-20]
-006EA7DF        push        eax
-006EA7E0        lea         edx,[ebp-2C]
-006EA7E3        mov         eax,[0084135C];^SResString428:TResStringRec
-006EA7E8        call        LoadResString
-006EA7ED        mov         ecx,dword ptr [ebp-2C]
-006EA7F0        lea         eax,[ebp-28]
-006EA7F3        mov         edx,6EA9C0;'\n'
-006EA7F8        call        @UStrCat3
-006EA7FD        mov         eax,dword ptr [ebp-28]
-006EA800        xor         ecx,ecx
-006EA802        pop         edx
-006EA803        call        006D5800
-006EA808        mov         eax,dword ptr [ebp-18]
-006EA80B        push        eax
-006EA80C        lea         eax,[ebp-30]
-006EA80F        push        eax
-006EA810        lea         edx,[ebp-34]
-006EA813        mov         eax,[00840EA4];^SResString427:TResStringRec
-006EA818        call        LoadResString
-006EA81D        mov         eax,dword ptr [ebp-34]
-006EA820        mov         dword ptr [ebp-44],20
-006EA827        mov         byte ptr [ebp-40],0
-006EA82B        mov         dword ptr [ebp-3C],46
-006EA832        mov         byte ptr [ebp-38],0
-006EA836        lea         edx,[ebp-44]
-006EA839        mov         ecx,1
-006EA83E        call        006D5800
-006EA843        mov         edx,dword ptr [ebp-30]
-006EA846        mov         eax,dword ptr [ebp-8]
-006EA849        add         eax,0BC;TBLHeli.FErrMsg:string
-006EA84E        pop         ecx
-006EA84F        call        @UStrCat3
-006EA854>       jmp         006EA905
-006EA859        mov         eax,dword ptr [ebp-8]
-006EA85C        lea         edx,[eax+0BC];TBLHeli.FErrMsg:string
-006EA862        mov         eax,[00840BFC];^SResString434:TResStringRec
-006EA867        call        LoadResString
-006EA86C>       jmp         006EA905
-006EA871        mov         eax,dword ptr [ebp-8]
-006EA874        lea         edx,[eax+0BC];TBLHeli.FErrMsg:string
-006EA87A        mov         eax,[00841438];^SResString433:TResStringRec
-006EA87F        call        LoadResString
-006EA884>       jmp         006EA905
-006EA886        lea         eax,[ebp-48]
-006EA889        push        eax
-006EA88A        lea         edx,[ebp-4C]
-006EA88D        mov         eax,[00841824];^SResString432:TResStringRec
-006EA892        call        LoadResString
-006EA897        mov         eax,dword ptr [ebp-4C]
-006EA89A        mov         edx,dword ptr [ebp-0C]
-006EA89D        mov         dword ptr [ebp-20],edx
-006EA8A0        mov         byte ptr [ebp-1C],0
-006EA8A4        lea         edx,[ebp-20]
-006EA8A7        xor         ecx,ecx
-006EA8A9        call        006D5800
-006EA8AE        mov         edx,dword ptr [ebp-48]
-006EA8B1        mov         eax,dword ptr [ebp-8]
-006EA8B4        add         eax,0BC;TBLHeli.FErrMsg:string
-006EA8B9        call        @UStrAsg
-006EA8BE>       jmp         006EA905
-006EA8C0        lea         eax,[ebp-50]
-006EA8C3        push        eax
-006EA8C4        lea         edx,[ebp-54]
-006EA8C7        mov         eax,dword ptr [ebp-8]
-006EA8CA        call        006E6634
-006EA8CF        mov         eax,dword ptr [ebp-54]
-006EA8D2        mov         dword ptr [ebp-20],eax
-006EA8D5        mov         byte ptr [ebp-1C],11
-006EA8D9        lea         eax,[ebp-20]
-006EA8DC        push        eax
-006EA8DD        lea         edx,[ebp-58]
-006EA8E0        mov         eax,[00840EF0];^SResString426:TResStringRec
-006EA8E5        call        LoadResString
-006EA8EA        mov         eax,dword ptr [ebp-58]
-006EA8ED        xor         ecx,ecx
-006EA8EF        pop         edx
-006EA8F0        call        006D5800
-006EA8F5        mov         edx,dword ptr [ebp-50]
-006EA8F8        mov         eax,dword ptr [ebp-8]
-006EA8FB        add         eax,0BC;TBLHeli.FErrMsg:string
-006EA900        call        @UStrAsg
-006EA905        cmp         byte ptr [ebp-0E],4
-006EA909>       jb          006EA936
-006EA90B        call        006DB734
-006EA910        test        al,al
-006EA912>       je          006EA922
-006EA914        mov         eax,dword ptr [ebp-8]
-006EA917        mov         eax,dword ptr [eax+0BC];TBLHeli.FErrMsg:string
-006EA91D        call        006DBFB4
-006EA922        cmp         byte ptr [ebp-0D],0
-006EA926>       je          006EA936
-006EA928        mov         eax,dword ptr [ebp-8]
-006EA92B        mov         eax,dword ptr [eax+0BC];TBLHeli.FErrMsg:string
-006EA931        call        006DF680
-006EA936        cmp         byte ptr [ebp-0E],4
-006EA93A>       jb          006EA944
-006EA93C        mov         eax,dword ptr [ebp-8]
-006EA93F        call        TBLHeli.Init
-006EA944        movzx       eax,byte ptr [ebp-0E]
-006EA948        mov         edx,dword ptr [ebp-8]
-006EA94B        mov         byte ptr [edx+0C0],al;TBLHeli.FStatus:TSetupStatus
-006EA951        ret
-006EA952>       jmp         @HandleFinally
-006EA957>       jmp         006EA76F
-006EA95C        xor         eax,eax
-006EA95E        pop         edx
-006EA95F        pop         ecx
-006EA960        pop         ecx
-006EA961        mov         dword ptr fs:[eax],edx
-006EA964        push        6EA9A6
-006EA969        lea         eax,[ebp-58]
-006EA96C        mov         edx,5
-006EA971        call        @UStrArrayClr
-006EA976        lea         eax,[ebp-34]
-006EA979        mov         edx,5
-006EA97E        call        @UStrArrayClr
-006EA983        lea         eax,[ebp-18]
-006EA986        mov         edx,2
-006EA98B        call        @UStrArrayClr
-006EA990        lea         eax,[ebp-4]
-006EA993        mov         edx,dword ptr ds:[404B48];TArray<System.Byte>
-006EA999        call        @DynArrayClear
-006EA99E        ret
-006EA99F>       jmp         @HandleFinally
-006EA9A4>       jmp         006EA969
-006EA9A6        movzx       eax,byte ptr [ebp-0E]
-006EA9AA        pop         edi
-006EA9AB        pop         esi
-006EA9AC        pop         ebx
-006EA9AD        mov         esp,ebp
-006EA9AF        pop         ebp
-006EA9B0        ret
-
+007D2C8B        call        dword ptr [ebx+358];TBLHeliInterfaceManager.FOnSetupToControls
 ```
 
-
-
-#### TBLHeliInterfaceManager.DeviceBootloaderRev
-
-这里没看出有啥特殊的地方
-
-```assembly
-_Unit139.TBLHeliInterfaceManager.DeviceBootloaderRev
-007CCC60        push        ebx
-007CCC61        push        esi
-007CCC62        mov         esi,eax
-007CCC64        mov         bl,20
-007CCC66        mov         eax,esi
-007CCC68        call        TBLHeliInterfaceManager.DeviceConnected
-007CCC6D        test        al,al
-007CCC6F>       je          007CCCAB
-007CCC71        movzx       eax,byte ptr [esi+55];TBLHeliInterfaceManager.FESCInterfaceType:TESCInterfaceType
-007CCC75        sub         al,0C
-007CCC77>       je          007CCC83
-007CCC79        dec         al
-007CCC7B>       je          007CCC8F
-007CCC7D        dec         al
-007CCC7F>       je          007CCC9B
-007CCC81>       jmp         007CCCA5
-007CCC83        mov         eax,dword ptr [esi+50];TBLHeliInterfaceManager.FUniSerialInterf:TUniSerialInterface
-007CCC86        movzx       ebx,byte ptr [eax+0EA];TUniSerialInterface.FBootloaderRev:byte
-007CCC8D>       jmp         007CCCA5
-007CCC8F        mov         eax,dword ptr [esi+48];TBLHeliInterfaceManager.FBLBInterf:TBLBInterface
-007CCC92        call        0070991C
-007CCC97        mov         ebx,eax
-007CCC99>       jmp         007CCCA5
-007CCC9B        mov         eax,dword ptr [esi+4C];TBLHeliInterfaceManager.FCfIntf:TFlightCtrlIntf
-007CCC9E        call        00716620
-007CCCA3        mov         ebx,eax
-007CCCA5        test        bl,bl
-007CCCA7>       jne         007CCCAB
-007CCCA9        mov         bl,20
-007CCCAB        mov         eax,ebx
-007CCCAD        pop         esi
-007CCCAE        pop         ebx
-007CCCAF        ret
-
-```
+关键是这一句，运行以后，UI才会真的更新，但是这里这是啥意思，我不知道，追的话，基本就看到了各个UI的控件的库函数好像被调用了。
 
 
 
