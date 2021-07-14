@@ -3,6 +3,7 @@ layout:     post
 title:      "BLHeli 自定义音乐与乐理常识"
 subtitle:   "esc"
 date:       2020-06-12
+udpate:     2021-07-13
 author:     "elmagnifico"
 header-img: "img/drone-head-bg.jpg"
 catalog:    true
@@ -253,6 +254,25 @@ Ninja Sause
 而相邻的音相差了一个全音，所以C# 就等于 Db
 
 这之中有两个特殊的，E与F只相差了半音，所以没有E# Fb，同理B与C也相差半音，所以也没有
+
+所以所有音名就是：
+
+```
+C
+C#(Db)
+D
+D#(Eb)
+E
+F
+F#(Gb)
+G
+G#(Ab)
+A
+A#(Bb)
+B
+```
+
+
 
 #### 音符
 

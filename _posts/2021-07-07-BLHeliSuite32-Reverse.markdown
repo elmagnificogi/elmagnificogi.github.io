@@ -1564,6 +1564,10 @@ _Unit102.TBLHeli.CopyTo
 
 ##### WriteSetupToString
 
+此时寄存器为：
+
+![image-20210713194856526](https://i.loli.net/2021/07/13/dqiIkw8MULOKNCP.png)
+
 ```assembly
 _Unit102.TBLHeli.WriteSetupToString
 006EA9C8        push        ebx
@@ -1595,18 +1599,29 @@ _Unit102.TBLHeli.WriteSetupToString
 # 猜测这个Sub是.6，二者组合起来形成了32.6的修订号
 006EAA13        movzx       eax,byte ptr [esi+5];TBLHeli.FEep_FW_Sub_Revision:byte
 006EAA17        mov         byte ptr [edi+1],al
-# FEep_Layout_Revision 对应的显示是 HAKRC_35A
+```
+
+![image-20210713171311227](https://i.loli.net/2021/07/13/dsWjTn3G1kqNFOR.png)
+
+OD动态调试看到，esi+4对应的地址值是20，那么也就是32
+
+esi+5，对应的值也就是3C，对应的也就是60，所以版本号应该是32.60,只是UI显示的时候去掉了尾巴的0
+
+
+
+```assembly
+# 猜测FEep_Layout_Revision 对应的显示是 HAKRC_35A，但是实际上这个值是2A
 006EAA1A        movzx       eax,byte ptr [esi+6];TBLHeli.FEep_Layout_Revision:byte
 006EAA1E        mov         byte ptr [edi+2],al
-# 电压检测，对应的应该是low voltage protectin
+# 电压检测，对应的应该是low voltage protectin，这里读取到的是00
 006EAA21        movzx       eax,byte ptr [esi+26];TBLHeli.FEep_Hw_Voltage_Sense_Capable:byte
 006EAA25        mov         byte ptr [edi+30],al
-# 电流检测 这个没找到对应的数据
+# 电流检测 这个没找到对应的数据，这里读到的实际上是FF
 006EAA28        movzx       eax,byte ptr [esi+27];TBLHeli.FEep_Hw_Current_Sense_Capable:byte
 006EAA2C        mov         byte ptr [edi+31],al
 006EAA2F        mov         dl,15
 006EAA31        mov         eax,esi
-# 这个不知道是干嘛的
+# 这个不知道是干嘛的，看里面实现好像也是和电流有关系的
 006EAA33        call        TBLHeli.IsParameterHardEnabled
 006EAA38        test        al,al
 006EAA3A>       je          006EAA5A
@@ -1624,6 +1639,13 @@ _Unit102.TBLHeli.WriteSetupToString
 006EAA55        mov         byte ptr [edi+35],al
 006EAA58>       jmp         006EAA6A
 # 不知道是什么全设置为了0
+```
+
+![image-20210713172521627](https://i.loli.net/2021/07/13/tyWd2vlFI5J93SL.png)
+
+这里是led是否存在，00表示不存在，最多可以支持4个led，我这里只有3个，所以是01，02，03，00
+
+```assembly
 006EAA5A        mov         byte ptr [edi+32],0
 006EAA5E        mov         byte ptr [edi+33],0
 006EAA62        mov         byte ptr [edi+34],0
@@ -1631,10 +1653,10 @@ _Unit102.TBLHeli.WriteSetupToString
 # 这里是判定版本号，如果和29相等，就跳过这里的Note的配置，其实就是不支持音乐
 006EAA6A        cmp         byte ptr [esi+6],29;TBLHeli.FEep_Layout_Revision:byte
 006EAA6E>       jb          006EAA94
-# 无阻尼模式
+# 无阻尼模式，实际值01
 006EAA70        movzx       eax,byte ptr [esi+2F];TBLHeli.FEep_Nondamped_Capable:byte
 006EAA74        mov         byte ptr [edi+3F],al
-# 这里是音乐的节拍速率 对应 Music Note Config
+# 这里是音乐的节拍速率 对应 Music Note Config，实际值为50，而我选的是长度为5，interval为0
 006EAA77        movzx       eax,byte ptr [esi+20];TBLHeli.FEep_Note_Config:byte
 006EAA7B        mov         byte ptr [edi+1C],al
 006EAA7E        lea         edx,[edi+90]
@@ -1643,6 +1665,20 @@ _Unit102.TBLHeli.WriteSetupToString
 006EAA8A        mov         ecx,30
 # 很奇怪的函数，先标注一下
 006EAA8F        call        Move
+```
+
+这里应该是edx和eax，ecx都作为参数传入到Move里面，然后Move就是把eax地址的值搬运到edx中，搬运长度为ecx个，也就是0x30个字节
+
+![image-20210713174328881](https://i.loli.net/2021/07/13/omGb87KYdqzkT9P.png)
+
+那么图中的高亮部分，就是实际音乐的节拍数组，下面是我的实际节拍，就会发现他是一一对应的，剩余的FF是没使用到的
+
+![image-20210713175101811](https://i.loli.net/2021/07/13/QhOYsw4RFSzimqp.png)
+
+但是分析到这里，我又对了一下发送的256数据，发现hex的内容和实际接收发送的数据对不上，而ESI地址中的数值又是谁赋进去的，需要找到这个，发现ESI是在CopyTo时EDX给进来的，然后edx又是ebp给进来的，实际上又是来自于ebp，从堆栈中取出来的。
+
+```assembly
+
 # 这里判定FEep_Layout_Revision<2C,所以跳转了
 006EAA94        cmp         byte ptr [esi+6],2C;TBLHeli.FEep_Layout_Revision:byte
 # 1.这里跳转了
