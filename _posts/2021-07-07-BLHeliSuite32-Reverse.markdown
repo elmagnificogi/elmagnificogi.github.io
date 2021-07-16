@@ -742,6 +742,7 @@ _Unit108.TBLBInterface.Send_cmd_DeviceReadFlash
 00708286>       je          0070833A
 0070828C        mov         eax,[0084158C];^gvar_0085C668
 00708291        cmp         dword ptr [eax],1
+# 1.这里跳转
 00708294>       jle         007082E5
 00708296        mov         eax,dword ptr [ebp-4]
 00708299        mov         eax,dword ptr [eax+40];TBLBInterface.FBootloader:TBootloader
@@ -765,6 +766,7 @@ _Unit108.TBLBInterface.Send_cmd_DeviceReadFlash
 007082D9        mov         ecx,800
 007082DE        mov         dl,1
 007082E0        call        006DC174
+# 1.这里继续
 007082E5        mov         eax,1
 007082EA        call        006DBF64
 007082EF        mov         ebx,dword ptr [ebp-8]
@@ -821,6 +823,8 @@ _Unit108.TBLBInterface.Send_cmd_DeviceReadFlash
 ```
 
 
+
+##### ReadFlash
 
 TBootloader.ReadFlash，接着就是读Flash的操作了
 
@@ -915,7 +919,7 @@ _Unit108.TBootloader.ReadFlash
 00702D0C        lea         ecx,[edi+3]
 00702D0F        lea         edx,[ebp-4]
 00702D12        mov         eax,dword ptr [ebp-8]
-# 检测是否有ack
+# 检测是否有ack,这里之前漏掉了，实际上这里非常重要
 00702D15        call        TBootloader.CheckStrACK
 00702D1A        test        al,al
 00702D1C>       je          00702D8A
@@ -950,6 +954,7 @@ _Unit108.TBootloader.ReadFlash
 # 依然是log显示ok
 00702D7E        mov         eax,702F28;'OK'
 00702D83        call        006DBD18
+# 1.这里跳转
 00702D88>       jmp         00702DA6
 00702D8A        inc         esi
 00702D8B        call        006DB734
@@ -959,6 +964,7 @@ _Unit108.TBootloader.ReadFlash
 00702D97        mov         edx,0FF
 00702D9C        mov         eax,702F3C;'FAILED'
 00702DA1        call        006DBD18
+# 1.这里继续
 00702DA6        cmp         dword ptr [ebp-0C],0
 00702DAA>       jg          00702DB5
 00702DAC        cmp         esi,3
@@ -993,6 +999,7 @@ _Unit108.TBootloader.ReadFlash
 00702E10        cmp         dword ptr [ebp-10],0
 00702E14>       jne         00702E1C
 00702E16        cmp         dword ptr [ebp-0C],1
+# 2.这里跳转
 00702E1A>       jge         00702E59
 00702E1C        lea         eax,[ebp-30]
 00702E1F        push        eax
@@ -1012,6 +1019,7 @@ _Unit108.TBootloader.ReadFlash
 00702E4C        call        006D5800
 00702E51        mov         eax,dword ptr [ebp-30]
 00702E54        call        006DF680
+# 2.这里继续
 00702E59        mov         eax,dword ptr [ebp-8]
 00702E5C        call        00704114
 00702E61        ret
@@ -1276,11 +1284,14 @@ _Unit108.TBootloader.SendCMD_Param
 00704E5A        pop         ecx
 00704E5B        pop         ecx
 00704E5C        mov         dword ptr fs:[eax],edx
+# 1.跳转
 00704E5F>       jmp         00704E6D
 00704E61>       jmp         @HandleAnyException
 00704E66        xor         ebx,ebx
 00704E68        call        @DoneExcept
+# 1.继续
 00704E6D        test        bl,bl
+# 2.跳转
 00704E6F>       jne         00704E9F
 00704E71        call        006DB734
 00704E76        test        al,al
@@ -1292,11 +1303,13 @@ _Unit108.TBootloader.SendCMD_Param
 00704E90        mov         eax,704FA8;'FAILED'
 00704E95        call        006DBD18
 00704E9A>       jmp         00704F3D
+# 2.继续
 00704E9F        movzx       edx,byte ptr [ebp-5]
 00704EA3        mov         eax,dword ptr [ebp-4]
 # 这里应该是根据命令区分了到底需不需要ack，有的不需要等ack
 00704EA6        call        TBootloader.CMDNeedsNoACK
 00704EAB        test        al,al
+# 3.跳转
 00704EAD>       je          00704EDA
 00704EAF        call        006DB734
 00704EB4        test        al,al
@@ -1308,10 +1321,12 @@ _Unit108.TBootloader.SendCMD_Param
 00704ECE        mov         eax,704FC4;'OK'
 00704ED3        call        006DBD18
 00704ED8>       jmp         00704F3D
+# 3.继续
 00704EDA        movzx       edx,byte ptr [ebp-5]
 00704EDE        mov         eax,dword ptr [ebp-4]
 00704EE1        call        TBootloader.CMDNeedsSimpleACK
 00704EE6        test        al,al
+# 4.跳转
 00704EE8>       je          00704F33
 00704EEA        mov         eax,dword ptr [ebp-4]
 # 需要ack的这里进行检测
@@ -1334,6 +1349,7 @@ _Unit108.TBootloader.SendCMD_Param
 00704F27        mov         eax,704FA8;'FAILED'
 00704F2C        call        006DBD18
 00704F31>       jmp         00704F3D
+# 4.继续
 00704F33        mov         eax,1
 00704F38        call        006DBF64
 00704F3D        xor         eax,eax
@@ -1358,6 +1374,1005 @@ _Unit108.TBootloader.SendCMD_Param
 00704F72        mov         esp,ebp
 00704F74        pop         ebp
 00704F75        ret
+
+```
+
+
+
+##### SendStrCRC
+
+```assembly
+_Unit108.TBootloader.SendStrCRC
+0070673C        push        ebp
+0070673D        mov         ebp,esp
+0070673F        push        ecx
+00706740        push        ebx
+00706741        mov         dword ptr [ebp-4],edx
+00706744        mov         ebx,eax
+00706746        mov         eax,dword ptr [ebp-4]
+00706749        call        @DynArrayAddRef
+0070674E        xor         eax,eax
+00706750        push        ebp
+00706751        push        706786
+00706756        push        dword ptr fs:[eax]
+00706759        mov         dword ptr fs:[eax],esp
+0070675C        mov         cl,1
+0070675E        mov         edx,dword ptr [ebp-4]
+00706761        mov         eax,ebx
+00706763        call        TBootloader.SendStr
+00706768        mov         ebx,eax
+0070676A        xor         eax,eax
+0070676C        pop         edx
+0070676D        pop         ecx
+0070676E        pop         ecx
+0070676F        mov         dword ptr fs:[eax],edx
+00706772        push        70678D
+00706777        lea         eax,[ebp-4]
+0070677A        mov         edx,dword ptr ds:[404B48];TArray<System.Byte>
+00706780        call        @DynArrayClear
+00706785        ret
+00706786>       jmp         @HandleFinally
+0070678B>       jmp         00706777
+0070678D        mov         eax,ebx
+0070678F        pop         ebx
+00706790        pop         ecx
+00706791        pop         ebp
+00706792        ret
+
+```
+
+
+
+###### SendStr
+
+```assembly
+_Unit108.TBootloader.SendStr
+00706794        push        ebp
+00706795        mov         ebp,esp
+00706797        push        ecx
+00706798        mov         ecx,6
+0070679D        push        0
+0070679F        push        0
+007067A1        dec         ecx
+007067A2>       jne         0070679D
+007067A4        xchg        ecx,dword ptr [ebp-4]
+007067A7        push        ebx
+007067A8        push        esi
+007067A9        push        edi
+007067AA        mov         byte ptr [ebp-0D],cl
+007067AD        mov         dword ptr [ebp-4],edx
+007067B0        mov         esi,eax
+007067B2        mov         eax,dword ptr [ebp-4]
+007067B5        call        @DynArrayAddRef
+007067BA        xor         eax,eax
+007067BC        push        ebp
+007067BD        push        706C8A
+007067C2        push        dword ptr fs:[eax]
+007067C5        mov         dword ptr fs:[eax],esp
+007067C8        xor         ebx,ebx
+007067CA        mov         eax,dword ptr [ebp-4]
+007067CD        test        eax,eax
+007067CF>       je          007067D6
+007067D1        sub         eax,4
+007067D4        mov         eax,dword ptr [eax]
+007067D6        test        eax,eax
+007067D8>       jle         00706C2B
+007067DE        cmp         byte ptr [esi+0E4],0;TBootloader.FFVTLinkerMode:Boolean
+007067E5>       je          007067F6
+007067E7        mov         eax,dword ptr [esi+0E0];TBootloader.FLinker:TFVT_USBLinker
+007067ED        call        006EF740
+007067F2        test        al,al
+007067F4>       jne         00706813
+007067F6        cmp         byte ptr [esi+0E4],0;TBootloader.FFVTLinkerMode:Boolean
+007067FD>       jne         00706C2B
+00706803        mov         eax,dword ptr [esi+48];TBootloader.FComPort:TSerialPort
+00706806        call        006FE934
+0070680B        test        al,al
+0070680D>       je          00706C2B
+00706813        cmp         byte ptr [esi+0B4],0FD;TBootloader.FLastCMD:byte
+0070681A>       je          00706823
+0070681C        mov         eax,esi
+0070681E        call        00704198
+00706823        call        006DB734
+00706828        test        al,al
+0070682A>       je          0070685B
+0070682C        push        706CA8;'>'
+00706831        push        dword ptr [esi+0E8];TBootloader.FInfName:string
+00706837        push        706CB8;': '
+0070683C        lea         eax,[ebp-14]
+0070683F        mov         edx,3
+00706844        call        @UStrCatN
+00706849        mov         eax,dword ptr [ebp-14]
+0070684C        call        006DC004
+00706851        mov         eax,1
+00706856        call        006DBF4C
+0070685B        cmp         byte ptr [esi+0E4],0;TBootloader.FFVTLinkerMode:Boolean
+00706862>       jne         0070686C
+00706864        mov         eax,dword ptr [esi+48];TBootloader.FComPort:TSerialPort
+00706867        call        TSerialPort.Clear
+0070686C        cmp         byte ptr [ebp-0D],0
+00706870>       je          007068B8
+00706872        mov         edx,dword ptr [ebp-4]
+00706875        mov         eax,esi
+00706877        call        TBootloader.StringCrc
+0070687C        mov         ebx,eax
+0070687E        mov         word ptr [esi+0BC],bx;TBootloader.LastOutCRC:word
+00706885        movzx       eax,byte ptr [esi+0BC];TBootloader.LastOutCRC:word
+0070688C        and         al,0FF
+0070688E        mov         byte ptr [ebp-18],al
+00706891        shr         bx,8
+00706895        mov         byte ptr [ebp-17],bl
+00706898        lea         eax,[ebp-18]
+0070689B        lea         ecx,[ebp-0C]
+0070689E        mov         edx,1
+007068A3        call        006D59C4
+007068A8        lea         ecx,[ebp-8]
+007068AB        mov         edx,dword ptr [ebp-0C]
+007068AE        mov         eax,dword ptr [ebp-4]
+007068B1        call        006D5954
+007068B6>       jmp         007068C9
+007068B8        lea         eax,[ebp-8]
+007068BB        mov         edx,dword ptr [ebp-4]
+007068BE        mov         ecx,dword ptr ds:[404B48];TArray<System.Byte>
+007068C4        call        @DynArrayAsg
+007068C9        cmp         byte ptr [esi+0E4],0;TBootloader.FFVTLinkerMode:Boolean
+007068D0>       je          0070691E
+007068D2        mov         eax,dword ptr [ebp-8]
+007068D5        test        eax,eax
+007068D7>       je          007068DE
+007068D9        sub         eax,4
+007068DC        mov         eax,dword ptr [eax]
+007068DE        mov         edx,dword ptr [esi+0E0];TBootloader.FLinker:TFVT_USBLinker
+007068E4        mov         ecx,eax
+007068E6        mov         eax,dword ptr [ebp-8]
+007068E9        xchg        eax,edx
+007068EA        call        TFVT_USBLinker.Write
+007068EF        mov         edx,eax
+007068F1        mov         eax,dword ptr [ebp-8]
+007068F4        test        eax,eax
+007068F6>       je          007068FD
+007068F8        sub         eax,4
+007068FB        mov         eax,dword ptr [eax]
+007068FD        cmp         eax,edx
+007068FF        sete        bl
+00706902        test        bl,bl
+00706904>       je          00706912
+00706906        mov         byte ptr [esi+0A1],30;TBootloader.FLastACK:byte
+0070690D>       jmp         00706A37
+00706912        mov         byte ptr [esi+0A1],0C7;TBootloader.FLastACK:byte
+00706919>       jmp         00706A37
+0070691E        mov         eax,dword ptr [esi+48];TBootloader.FComPort:TSerialPort
+# 跳到这里开始
+00706921        call        TSerialPort.ClearInput
+00706926        mov         eax,dword ptr [esi+48];TBootloader.FComPort:TSerialPort
+00706929        mov         edx,dword ptr [ebp-8]
+# 这里就发送了最后的crc内容
+0070692C        call        TSerialPort.WriteBytes
+00706931        mov         ebx,eax
+00706933        test        bl,bl
+00706935>       je          00706A30
+0070693B        cmp         byte ptr [esi+0D0],0;TBootloader.FOneWire:Boolean
+00706942>       je          00706A27
+00706948        mov         eax,esi
+# 获取读的超时时间
+0070694A        call        TBootloader.GetReadTimeOut
+0070694F        mov         edi,eax
+00706951        mov         eax,dword ptr [ebp-8]
+00706954        test        eax,eax
+00706956>       je          0070695D
+00706958        sub         eax,4
+0070695B        mov         eax,dword ptr [eax]
+0070695D        mov         edx,eax
+0070695F        add         edx,edx
+00706961        add         edx,0FA
+00706967        mov         eax,esi
+# 设置读超时
+00706969        call        TBootloader.SetReadTimeOut
+0070696E        call        006D91CC
+# 这里应该是开了个线程还是啥东西的，用来记录读开始时间的
+00706973        mov         dword ptr [esi+108],eax;TBootloader.FStartTime:Int64
+00706979        mov         dword ptr [esi+10C],edx;TBootloader.?f10C:Integer
+0070697F        mov         ebx,dword ptr [ebp-8]
+00706982        test        ebx,ebx
+00706984>       je          0070698B
+00706986        sub         ebx,4
+00706989        mov         ebx,dword ptr [ebx]
+0070698B        lea         ecx,[ebp-1C]
+0070698E        mov         edx,ebx
+00706990        mov         eax,esi
+# 开始接收串口数据
+00706992        call        TBootloader.RecvString
+00706997        mov         edx,dword ptr [ebp-1C]
+0070699A        lea         eax,[esi+100];TBootloader.FLastEcho:TArray<System.Byte>
+007069A0        mov         ecx,dword ptr ds:[404B48];TArray<System.Byte>
+007069A6        call        @DynArrayAsg
+007069AB        call        006DB734
+007069B0        test        al,al
+007069B2>       je          007069C5
+007069B4        call        006D91CC
+007069B9        mov         dword ptr [esi+110],eax;TBootloader.FEndTime:Int64
+007069BF        mov         dword ptr [esi+114],edx;TBootloader.?f114:Pointer
+007069C5        mov         edx,edi
+007069C7        mov         eax,esi
+007069C9        call        TBootloader.SetReadTimeOut
+007069CE        mov         eax,dword ptr [esi+100];TBootloader.FLastEcho:TArray<System.Byte>
+007069D4        test        eax,eax
+007069D6>       je          007069DD
+007069D8        sub         eax,4
+007069DB        mov         eax,dword ptr [eax]
+007069DD        mov         ecx,dword ptr [ebp-8]
+007069E0        mov         edx,ecx
+007069E2        test        edx,edx
+007069E4>       je          007069EB
+007069E6        sub         edx,4
+007069E9        mov         edx,dword ptr [edx]
+007069EB        cmp         edx,eax
+007069ED>       jne         00706A0D
+007069EF        mov         eax,ecx
+007069F1        test        eax,eax
+007069F3>       je          007069FA
+007069F5        sub         eax,4
+007069F8        mov         eax,dword ptr [eax]
+007069FA        mov         edx,dword ptr [esi+100];TBootloader.FLastEcho:TArray<System.Byte>
+00706A00        mov         ecx,eax
+00706A02        mov         eax,dword ptr [ebp-8]
+00706A05        xchg        eax,edx
+00706A06        call        CompareMem
+00706A0B>       jmp         00706A0F
+00706A0D        xor         eax,eax
+00706A0F        mov         ebx,eax
+00706A11        test        bl,bl
+00706A13>       jne         00706A1E
+00706A15        mov         byte ptr [esi+0A1],0C9;TBootloader.FLastACK:byte
+00706A1C>       jmp         00706A37
+00706A1E        mov         byte ptr [esi+0A1],30;TBootloader.FLastACK:byte
+00706A25>       jmp         00706A37
+00706A27        mov         byte ptr [esi+0A1],30;TBootloader.FLastACK:byte
+00706A2E>       jmp         00706A37
+00706A30        mov         byte ptr [esi+0A1],0C7;TBootloader.FLastACK:byte
+00706A37        call        006DB734
+00706A3C        test        al,al
+00706A3E>       je          00706C1B
+00706A44        test        bl,bl
+00706A46>       je          00706AB3
+00706A48        mov         eax,706CA8;'>'
+00706A4D        call        006DC018
+00706A52        mov         eax,esi
+00706A54        call        TBootloader.AllowLog
+00706A59        mov         edx,eax
+00706A5B        mov         ecx,800
+00706A60        mov         eax,dword ptr [ebp-8]
+00706A63        call        006DC174
+00706A68        cmp         byte ptr [ebp-0D],0
+00706A6C>       je          00706A80
+00706A6E        push        0
+00706A70        movzx       edx,word ptr [esi+0BC];TBootloader.LastOutCRC:word
+00706A77        xor         ecx,ecx
+00706A79        mov         eax,esi
+00706A7B        call        00706584
+00706A80        mov         eax,1
+00706A85        call        006DBF64
+00706A8A        lea         eax,[ebp-20]
+00706A8D        push        eax
+00706A8E        movzx       edx,byte ptr [esi+0A1];TBootloader.FLastACK:byte
+00706A95        mov         cl,1
+00706A97        mov         eax,esi
+00706A99        call        00705B90
+00706A9E        mov         eax,dword ptr [ebp-20]
+00706AA1        or          ecx,0FFFFFFFF
+00706AA4        mov         edx,8000
+00706AA9        call        006DBD18
+00706AAE>       jmp         00706C1B
+00706AB3        mov         eax,706CCC;'>: '
+00706AB8        call        006DC018
+00706ABD        mov         edi,dword ptr [ebp-8]
+00706AC0        test        edi,edi
+00706AC2>       je          00706AC9
+00706AC4        sub         edi,4
+00706AC7        mov         edi,dword ptr [edi]
+00706AC9        lea         edx,[ebp-24]
+00706ACC        mov         eax,edi
+00706ACE        call        IntToStr
+00706AD3        mov         eax,dword ptr [ebp-24]
+00706AD6        call        006DBFC8
+00706ADB        mov         eax,706CE0;' Bytes = '
+00706AE0        call        006DC018
+00706AE5        mov         eax,esi
+00706AE7        call        TBootloader.AllowLog
+00706AEC        mov         edx,eax
+00706AEE        mov         ecx,800
+00706AF3        mov         eax,dword ptr [ebp-8]
+00706AF6        call        006DC174
+00706AFB        cmp         byte ptr [ebp-0D],0
+00706AFF>       je          00706B13
+00706B01        push        0
+00706B03        movzx       edx,word ptr [esi+0BC];TBootloader.LastOutCRC:word
+00706B0A        xor         ecx,ecx
+00706B0C        mov         eax,esi
+00706B0E        call        00706584
+00706B13        cmp         byte ptr [esi+0A1],0C9;TBootloader.FLastACK:byte
+00706B1A>       jne         00706BED
+00706B20        mov         eax,706D00;'E: '
+00706B25        call        006DC068
+00706B2A        mov         eax,dword ptr [esi+100];TBootloader.FLastEcho:TArray<System.Byte>
+00706B30        mov         edi,eax
+00706B32        test        edi,edi
+00706B34>       je          00706B3B
+00706B36        sub         edi,4
+00706B39        mov         edi,dword ptr [edi]
+00706B3B        lea         edx,[ebp-28]
+00706B3E        mov         eax,edi
+00706B40        call        IntToStr
+00706B45        mov         eax,dword ptr [ebp-28]
+00706B48        call        006DBFC8
+00706B4D        mov         eax,706CE0;' Bytes = '
+00706B52        call        006DC018
+00706B57        mov         eax,esi
+00706B59        call        TBootloader.AllowLog
+00706B5E        mov         edx,eax
+00706B60        mov         eax,dword ptr [esi+100];TBootloader.FLastEcho:TArray<System.Byte>
+00706B66        mov         ecx,800
+00706B6B        call        006DC174
+00706B70        cmp         byte ptr [ebp-0D],0
+00706B74>       je          00706BB9
+00706B76        mov         eax,dword ptr [esi+100];TBootloader.FLastEcho:TArray<System.Byte>
+00706B7C        mov         edi,eax
+00706B7E        test        edi,edi
+00706B80>       je          00706B87
+00706B82        sub         edi,4
+00706B85        mov         edi,dword ptr [edi]
+00706B87        push        0
+00706B89        sub         edi,2
+00706B8C        push        edi
+00706B8D        lea         eax,[ebp-2C]
+00706B90        push        eax
+00706B91        mov         eax,dword ptr [esi+100];TBootloader.FLastEcho:TArray<System.Byte>
+00706B97        xor         ecx,ecx
+00706B99        mov         edx,dword ptr ds:[404B48];TArray<System.Byte>
+00706B9F        call        @DynArrayCopyRange
+00706BA4        mov         edx,dword ptr [ebp-2C]
+00706BA7        mov         eax,esi
+00706BA9        call        TBootloader.StringCrc
+00706BAE        mov         edx,eax
+00706BB0        xor         ecx,ecx
+00706BB2        mov         eax,esi
+00706BB4        call        00706584
+00706BB9        mov         eax,706D14;'Time elapsed (ms): '
+00706BBE        call        006DBFA0
+00706BC3        mov         eax,dword ptr [esi+110];TBootloader.FEndTime:Int64
+00706BC9        mov         edx,dword ptr [esi+114];TBootloader.?f114:Pointer
+00706BCF        sub         eax,dword ptr [esi+108]
+00706BD5        sbb         edx,dword ptr [esi+10C]
+00706BDB        push        edx
+00706BDC        push        eax
+00706BDD        lea         eax,[ebp-30]
+00706BE0        call        IntToStr
+00706BE5        mov         eax,dword ptr [ebp-30]
+00706BE8        call        006DC004
+00706BED        mov         eax,1
+00706BF2        call        006DBF64
+00706BF7        lea         eax,[ebp-34]
+00706BFA        push        eax
+00706BFB        movzx       edx,byte ptr [esi+0A1];TBootloader.FLastACK:byte
+00706C02        xor         ecx,ecx
+00706C04        mov         eax,esi
+00706C06        call        00705B90
+00706C0B        mov         eax,dword ptr [ebp-34]
+00706C0E        or          ecx,0FFFFFFFF
+00706C11        mov         edx,0FF
+00706C16        call        006DBD18
+00706C1B        cmp         byte ptr [esi+0B4],0FD;TBootloader.FLastCMD:byte
+# 最后直接到这里
+00706C22>       je          00706C2B
+00706C24        mov         eax,esi
+00706C26        call        00704154
+00706C2B        xor         eax,eax
+00706C2D        pop         edx
+00706C2E        pop         ecx
+00706C2F        pop         ecx
+00706C30        mov         dword ptr fs:[eax],edx
+00706C33        push        706C91
+00706C38        lea         eax,[ebp-34]
+00706C3B        mov         edx,2
+00706C40        call        @UStrArrayClr
+00706C45        lea         eax,[ebp-2C]
+00706C48        mov         edx,dword ptr ds:[404B48];TArray<System.Byte>
+00706C4E        call        @DynArrayClear
+00706C53        lea         eax,[ebp-28]
+00706C56        mov         edx,3
+00706C5B        call        @UStrArrayClr
+00706C60        lea         eax,[ebp-1C]
+00706C63        mov         edx,dword ptr ds:[404B48];TArray<System.Byte>
+00706C69        call        @DynArrayClear
+00706C6E        lea         eax,[ebp-14]
+00706C71        call        @UStrClr
+00706C76        lea         eax,[ebp-0C]
+00706C79        mov         edx,dword ptr ds:[404B48];TArray<System.Byte>
+00706C7F        mov         ecx,3
+00706C84        call        @FinalizeArray
+00706C89        ret
+00706C8A>       jmp         @HandleFinally
+00706C8F>       jmp         00706C38
+00706C91        mov         eax,ebx
+00706C93        pop         edi
+00706C94        pop         esi
+00706C95        pop         ebx
+00706C96        mov         esp,ebp
+00706C98        pop         ebp
+00706C99        ret
+
+```
+
+这里追了半天，都找不到对应串口返回时的读取操作，看起来有，实际上并不是。
+
+
+
+##### CheckStrACK
+
+最后通过类中成员函数，看到这个ReadByte，发现log中对应的读取都是来自于这里，猜测这个应该是实际的读，只是不知道是谁调用的
+
+```assembly
+_Unit108.TBootloader.CheckStrACK
+00704390        push        ebp
+00704391        mov         ebp,esp
+00704393        push        ecx
+00704394        mov         ecx,0B
+00704399        push        0
+0070439B        push        0
+0070439D        dec         ecx
+0070439E>       jne         00704399
+007043A0        xchg        ecx,dword ptr [ebp-4]
+007043A3        push        ebx
+007043A4        push        esi
+007043A5        push        edi
+007043A6        mov         dword ptr [ebp-10],ecx
+007043A9        mov         esi,edx
+007043AB        mov         ebx,eax
+007043AD        xor         eax,eax
+007043AF        push        ebp
+007043B0        push        704AF9
+007043B5        push        dword ptr fs:[eax]
+007043B8        mov         dword ptr fs:[eax],esp
+007043BB        mov         byte ptr [ebp-11],0
+007043BF        mov         byte ptr [ebp-17],0
+007043C3        lea         eax,[ebp-4]
+007043C6        mov         edx,dword ptr ds:[404B48];TArray<System.Byte>
+007043CC        call        @DynArrayClear
+007043D1        mov         word ptr [ebp-16],0
+007043D7        mov         byte ptr [ebx+0A1],0FF;TBootloader.FLastACK:byte
+007043DE        cmp         byte ptr [ebx+0B4],0FD;TBootloader.FLastCMD:byte
+007043E5>       je          007043EE
+007043E7        mov         eax,ebx
+007043E9        call        00704198
+007043EE        call        006DB734
+007043F3        test        al,al
+007043F5>       je          0070445C
+007043F7        call        006D91CC
+007043FC        mov         dword ptr [ebx+108],eax;TBootloader.FStartTime:Int64
+00704402        mov         dword ptr [ebx+10C],edx;TBootloader.?f10C:Integer
+00704408        cmp         byte ptr [ebp+8],0
+0070440C>       je          00704418
+0070440E        mov         eax,1
+00704413        call        006DBF4C
+00704418        cmp         byte ptr [ebx+0B4],0B;TBootloader.FLastCMD:byte
+# 1.跳转
+0070441F>       je          00704448
+00704421        push        704B1C;'<'
+00704426        push        dword ptr [ebx+0E8];TBootloader.FInfName:string
+0070442C        push        704B2C;': '
+00704431        lea         eax,[ebp-28]
+00704434        mov         edx,3
+00704439        call        @UStrCatN
+0070443E        mov         eax,dword ptr [ebp-28]
+00704441        call        006DC07C
+00704446>       jmp         00704452
+# 1.继续
+00704448        mov         eax,704B40;'<BOOLOADER ANSWER: '
+0070444D        call        006DC07C
+00704452        mov         eax,1
+00704457        call        006DBF4C
+0070445C        mov         eax,ebx
+0070445E        call        TBootloader.GetReadTimeOut
+00704463        mov         word ptr [ebp-14],ax
+00704467        cmp         byte ptr [ebx+0B4],0B;TBootloader.FLastCMD:byte
+# 2.跳转
+0070446E>       jne         007044ED
+00704470        cmp         byte ptr [ebx+0E4],0;TBootloader.FFVTLinkerMode:Boolean
+00704477>       jne         007044ED
+00704479        mov         edx,32
+0070447E        mov         eax,ebx
+00704480        call        TBootloader.SetReadTimeOut
+00704485        lea         ecx,[ebp-2C]
+00704488        mov         edx,1
+0070448D        mov         eax,ebx
+0070448F        call        TBootloader.RecvString
+00704494        mov         edx,dword ptr [ebp-2C]
+00704497        mov         eax,esi
+00704499        mov         ecx,dword ptr ds:[404B48];TArray<System.Byte>
+0070449F        call        @DynArrayAsg
+007044A4        mov         eax,dword ptr [esi]
+007044A6        test        eax,eax
+007044A8>       je          007044AF
+007044AA        sub         eax,4
+007044AD        mov         eax,dword ptr [eax]
+007044AF        test        eax,eax
+007044B1>       jle         0070451D
+007044B3        mov         edx,dword ptr [ebp-10]
+007044B6        add         edx,32
+007044B9        mov         eax,ebx
+007044BB        call        TBootloader.SetReadTimeOut
+007044C0        lea         ecx,[ebp-34]
+007044C3        mov         edx,dword ptr [ebp-10]
+007044C6        dec         edx
+007044C7        mov         eax,ebx
+007044C9        call        TBootloader.RecvString
+007044CE        mov         edx,dword ptr [ebp-34]
+007044D1        lea         ecx,[ebp-30]
+007044D4        mov         eax,dword ptr [esi]
+007044D6        call        006D5954
+007044DB        mov         edx,dword ptr [ebp-30]
+007044DE        mov         eax,esi
+007044E0        mov         ecx,dword ptr ds:[404B48];TArray<System.Byte>
+007044E6        call        @DynArrayAsg
+007044EB>       jmp         0070451D
+# 2.继续
+007044ED        mov         edx,dword ptr [ebp-10]
+007044F0        mov         eax,ebx
+007044F2        call        TBootloader.CalcCMDAckTimeOut
+007044F7        mov         edx,eax
+007044F9        mov         eax,ebx
+007044FB        call        TBootloader.SetReadTimeOut
+00704500        lea         ecx,[ebp-38]
+00704503        mov         edx,dword ptr [ebp-10]
+00704506        mov         eax,ebx
+00704508        call        TBootloader.RecvString
+0070450D        mov         edx,dword ptr [ebp-38]
+00704510        mov         eax,esi
+00704512        mov         ecx,dword ptr ds:[404B48];TArray<System.Byte>
+00704518        call        @DynArrayAsg
+0070451D        call        006DB734
+00704522        test        al,al
+00704524>       je          00704537
+00704526        call        006D91CC
+0070452B        mov         dword ptr [ebx+110],eax;TBootloader.FEndTime:Int64
+00704531        mov         dword ptr [ebx+114],edx;TBootloader.?f114:Pointer
+00704537        mov         edx,dword ptr [esi]
+00704539        mov         eax,edx
+0070453B        test        eax,eax
+0070453D>       je          00704544
+0070453F        sub         eax,4
+00704542        mov         eax,dword ptr [eax]
+00704544        test        eax,eax
+00704546>       jle         00704681
+0070454C        mov         eax,edx
+0070454E        test        eax,eax
+00704550>       je          00704557
+00704552        sub         eax,4
+00704555        mov         eax,dword ptr [eax]
+00704557        cmp         eax,dword ptr [ebp-10]
+# 3.跳转
+0070455A>       jge         0070461A
+00704560        lea         ecx,[ebp-8]
+00704563        mov         edx,0A
+00704568        mov         eax,ebx
+0070456A        call        TBootloader.RecvString
+0070456F        mov         eax,dword ptr [ebp-8]
+00704572        test        eax,eax
+00704574>       je          0070457B
+00704576        sub         eax,4
+00704579        mov         eax,dword ptr [eax]
+0070457B        test        eax,eax
+0070457D>       jle         007045D3
+0070457F        lea         ecx,[ebp-3C]
+00704582        mov         eax,dword ptr [esi]
+00704584        mov         edx,dword ptr [ebp-8]
+00704587        call        006D5954
+0070458C        mov         edx,dword ptr [ebp-3C]
+0070458F        mov         eax,esi
+00704591        mov         ecx,dword ptr ds:[404B48];TArray<System.Byte>
+00704597        call        @DynArrayAsg
+0070459C        call        006DB734
+007045A1        test        al,al
+007045A3>       je          007045D3
+007045A5        mov         edi,dword ptr [ebp-8]
+007045A8        test        edi,edi
+007045AA>       je          007045B1
+007045AC        sub         edi,4
+007045AF        mov         edi,dword ptr [edi]
+007045B1        lea         edx,[ebp-44]
+007045B4        mov         eax,edi
+007045B6        call        IntToStr
+007045BB        mov         ecx,dword ptr [ebp-44]
+007045BE        lea         eax,[ebp-40]
+007045C1        mov         edx,704B74;'Repeated Read: '
+007045C6        call        @UStrCat3
+007045CB        mov         eax,dword ptr [ebp-40]
+007045CE        call        006DBFB4
+007045D3        mov         eax,dword ptr [esi]
+007045D5        test        eax,eax
+007045D7>       je          007045DE
+007045D9        sub         eax,4
+007045DC        mov         eax,dword ptr [eax]
+007045DE        cmp         eax,dword ptr [ebp-10]
+007045E1>       jl          007045E7
+007045E3        mov         al,1
+007045E5>       jmp         007045F8
+007045E7        mov         eax,dword ptr [ebp-8]
+007045EA        test        eax,eax
+007045EC>       je          007045F3
+007045EE        sub         eax,4
+007045F1        mov         eax,dword ptr [eax]
+007045F3        test        eax,eax
+007045F5        sete        al
+007045F8        test        al,al
+007045FA>       je          00704560
+00704600        call        006DB734
+00704605        test        al,al
+00704607>       je          0070461A
+00704609        call        006D91CC
+0070460E        mov         dword ptr [ebx+110],eax;TBootloader.FEndTime:Int64
+00704614        mov         dword ptr [ebx+114],edx;TBootloader.?f114:Pointer
+# 3.继续
+0070461A        mov         eax,dword ptr [esi]
+0070461C        test        eax,eax
+0070461E>       je          00704625
+00704620        sub         eax,4
+00704623        mov         eax,dword ptr [eax]
+00704625        dec         eax
+00704626        mov         edx,dword ptr [esi]
+00704628        movzx       eax,byte ptr [edx+eax]
+0070462C        mov         byte ptr [ebx+0A1],al;TBootloader.FLastACK:byte
+00704632        cmp         byte ptr [ebx+0A0],0;TBootloader.FbrOK:byte
+# 4.跳转
+00704639>       jne         00704656
+0070463B        movzx       eax,byte ptr [ebx+0A1];TBootloader.FLastACK:byte
+00704642        cmp         al,30
+00704644>       jb          00704681
+00704646        cmp         al,3F
+00704648>       ja          00704681
+0070464A        mov         byte ptr [ebx+0A0],al;TBootloader.FbrOK:byte
+00704650        mov         byte ptr [ebp-11],1
+00704654>       jmp         00704681
+# 4.继续
+00704656        movzx       eax,byte ptr [ebx+0A1];TBootloader.FLastACK:byte
+0070465D        cmp         al,byte ptr [ebx+0A0];TBootloader.FbrOK:byte
+00704663>       jne         0070466B
+00704665        mov         byte ptr [ebp-11],1
+00704669>       jmp         00704681
+0070466B        cmp         byte ptr [ebx+0A1],0C1;TBootloader.FLastACK:byte
+00704672>       jne         00704681
+00704674        cmp         byte ptr [ebx+0B4],0FD;TBootloader.FLastCMD:byte
+0070467B>       jne         00704681
+0070467D        mov         byte ptr [ebp-11],1
+00704681        mov         edx,dword ptr [esi]
+00704683        mov         eax,edx
+00704685        test        eax,eax
+00704687>       je          0070468E
+00704689        sub         eax,4
+0070468C        mov         eax,dword ptr [eax]
+0070468E        cmp         eax,3
+00704691>       jle         00704889
+00704697        cmp         byte ptr [ebx+0B4],0B;TBootloader.FLastCMD:byte
+0070469E>       je          0070478D
+007046A4        mov         byte ptr [ebp-17],1
+007046A8        mov         edi,edx
+007046AA        test        edi,edi
+007046AC>       je          007046B3
+007046AE        sub         edi,4
+007046B1        mov         edi,dword ptr [edi]
+007046B3        mov         dword ptr [ebp-1C],edx
+007046B6        cmp         dword ptr [ebp-1C],0
+007046BA>       je          007046C7
+007046BC        mov         eax,dword ptr [ebp-1C]
+007046BF        sub         eax,4
+007046C2        mov         eax,dword ptr [eax]
+007046C4        mov         dword ptr [ebp-1C],eax
+007046C7        dec         edi
+007046C8        mov         eax,dword ptr [esi]
+007046CA        movzx       eax,byte ptr [eax+edi-2]
+007046CF        mov         byte ptr [ebp-48],al
+007046D2        mov         eax,dword ptr [ebp-1C]
+007046D5        dec         eax
+007046D6        mov         edx,dword ptr [esi]
+007046D8        movzx       eax,byte ptr [edx+eax-1]
+007046DD        mov         byte ptr [ebp-47],al
+007046E0        lea         eax,[ebp-48]
+007046E3        lea         ecx,[ebp-4]
+007046E6        mov         edx,1
+007046EB        call        006D59C4
+007046F0        mov         eax,dword ptr [esi]
+007046F2        test        eax,eax
+007046F4>       je          007046FB
+007046F6        sub         eax,4
+007046F9        mov         eax,dword ptr [eax]
+007046FB        mov         edx,dword ptr [esi]
+007046FD        mov         dword ptr [ebp-20],edx
+00704700        cmp         dword ptr [ebp-20],0
+00704704>       je          00704711
+00704706        mov         edx,dword ptr [ebp-20]
+00704709        sub         edx,4
+0070470C        mov         edx,dword ptr [edx]
+0070470E        mov         dword ptr [ebp-20],edx
+00704711        dec         eax
+00704712        mov         edx,dword ptr [esi]
+00704714        movzx       eax,byte ptr [edx+eax-1]
+00704719        shl         eax,8
+0070471C        mov         edx,dword ptr [ebp-20]
+0070471F        dec         edx
+00704720        mov         ecx,dword ptr [esi]
+00704722        movzx       edx,byte ptr [ecx+edx-2]
+00704727        add         ax,dx
+0070472A        mov         word ptr [ebp-16],ax
+0070472E        mov         edi,dword ptr [esi]
+00704730        test        edi,edi
+00704732>       je          00704739
+00704734        sub         edi,4
+00704737        mov         edi,dword ptr [edi]
+00704739        sub         edi,3
+0070473C        push        edi
+0070473D        mov         eax,esi
+0070473F        mov         ecx,1
+00704744        mov         edx,dword ptr ds:[404B48];TArray<System.Byte>
+0070474A        call        @DynArraySetLength
+0070474F        add         esp,4
+00704752        mov         edx,dword ptr [esi]
+00704754        mov         eax,ebx
+00704756        call        TBootloader.StringCrc
+0070475B        mov         word ptr [ebx+0BE],ax;TBootloader.LastInCRC:word
+00704762        movzx       eax,word ptr [ebx+0BE];TBootloader.LastInCRC:word
+00704769        cmp         ax,word ptr [ebp-16]
+# 5.跳转
+0070476D>       je          0070478D
+0070476F        mov         byte ptr [ebp-11],0
+00704773        mov         byte ptr [ebx+0A1],0CA;TBootloader.FLastACK:byte
+0070477A        call        006DB734
+0070477F        test        al,al
+00704781>       je          0070478D
+00704783        mov         eax,704BA0;'Wrong CRC of received String'
+00704788        call        006DBFB4
+# 5.继续
+0070478D        call        006DB734
+00704792        test        al,al
+00704794>       je          00704A51
+0070479A        lea         ecx,[ebp-4C]
+0070479D        mov         eax,dword ptr [esi]
+0070479F        mov         edx,dword ptr [ebp-4]
+007047A2        call        006D5954
+007047A7        mov         eax,dword ptr [ebp-4C]
+007047AA        push        eax
+007047AB        mov         eax,ebx
+007047AD        call        TBootloader.AllowLog
+007047B2        mov         edx,eax
+007047B4        mov         ecx,800
+007047B9        pop         eax
+007047BA        call        006DC174
+007047BF        cmp         byte ptr [ebp-17],0
+007047C3>       je          007047D9
+007047C5        push        1
+007047C7        movzx       ecx,word ptr [ebx+0BE];TBootloader.LastInCRC:word
+007047CE        movzx       edx,word ptr [ebp-16]
+007047D2        mov         eax,ebx
+007047D4        call        00706584
+007047D9        lea         eax,[ebp-0C]
+007047DC        push        eax
+007047DD        movzx       edx,byte ptr [ebx+0A1];TBootloader.FLastACK:byte
+007047E4        xor         ecx,ecx
+007047E6        mov         eax,ebx
+007047E8        call        00705B90
+007047ED        mov         eax,704BE8;'ACK: '
+007047F2        call        006DC090
+007047F7        mov         eax,dword ptr [ebp-0C]
+007047FA        call        006DC0A4
+007047FF        mov         eax,704C00;'Time elapsed (ms): '
+00704804        call        006DBFA0
+00704809        mov         eax,dword ptr [ebx+110];TBootloader.FEndTime:Int64
+0070480F        mov         edx,dword ptr [ebx+114];TBootloader.?f114:Pointer
+00704815        sub         eax,dword ptr [ebx+108]
+0070481B        sbb         edx,dword ptr [ebx+10C]
+00704821        push        edx
+00704822        push        eax
+00704823        lea         eax,[ebp-50]
+00704826        call        IntToStr
+0070482B        mov         eax,dword ptr [ebp-50]
+0070482E        call        006DC004
+00704833        mov         eax,1
+00704838        call        006DBF64
+0070483D        mov         esi,dword ptr [esi]
+0070483F        test        esi,esi
+00704841>       je          00704848
+00704843        sub         esi,4
+00704846        mov         esi,dword ptr [esi]
+00704848        lea         edx,[ebp-54]
+0070484B        mov         eax,esi
+0070484D        call        IntToStr
+00704852        mov         eax,dword ptr [ebp-54]
+00704855        or          ecx,0FFFFFFFF
+00704858        mov         edx,0FF
+0070485D        call        006DBD18
+00704862        or          ecx,0FFFFFFFF
+00704865        mov         edx,0FF0000
+0070486A        mov         eax,704C34;' Bytes '
+0070486F        call        006DBD18
+00704874        or          ecx,0FFFFFFFF
+00704877        mov         edx,0FF00FF
+0070487C        mov         eax,dword ptr [ebp-0C]
+0070487F        call        006DBD18
+# 6.跳转
+00704884>       jmp         00704A51
+00704889        mov         eax,edx
+0070488B        test        eax,eax
+0070488D>       je          00704894
+0070488F        sub         eax,4
+00704892        mov         eax,dword ptr [eax]
+00704894        dec         eax
+00704895>       jle         007048C0
+00704897        mov         byte ptr [ebp-11],0
+0070489B        call        006DB734
+007048A0        test        al,al
+007048A2>       je          007048AE
+007048A4        mov         eax,704C50;'Wrong Size of received String'
+007048A9        call        006DBFB4
+007048AE        mov         eax,esi
+007048B0        mov         edx,dword ptr ds:[404B48];TArray<System.Byte>
+007048B6        call        @DynArrayClear
+007048BB>       jmp         00704A51
+007048C0        mov         eax,edx
+007048C2        test        eax,eax
+007048C4>       je          007048CB
+007048C6        sub         eax,4
+007048C9        mov         eax,dword ptr [eax]
+007048CB        dec         eax
+007048CC>       jne         0070499F
+007048D2        call        006DB734
+007048D7        test        al,al
+007048D9>       je          00704A51
+007048DF        mov         eax,[0084158C];^gvar_0085C668
+007048E4        cmp         dword ptr [eax],4
+007048E7>       jge         007048FF
+007048E9        cmp         byte ptr [ebx+0A1],0C1;TBootloader.FLastACK:byte
+007048F0>       jne         007048FF
+007048F2        cmp         byte ptr [ebx+0B4],0FD;TBootloader.FLastCMD:byte
+007048F9>       je          00704A51
+007048FF        mov         eax,ebx
+00704901        call        TBootloader.AllowLog
+00704906        mov         edx,eax
+00704908        mov         eax,dword ptr [esi]
+0070490A        mov         ecx,800
+0070490F        call        006DC174
+00704914        lea         eax,[ebp-0C]
+00704917        push        eax
+00704918        movzx       edx,byte ptr [ebx+0A1];TBootloader.FLastACK:byte
+0070491F        xor         ecx,ecx
+00704921        mov         eax,ebx
+00704923        call        00705B90
+00704928        mov         eax,704BE8;'ACK: '
+0070492D        call        006DC090
+00704932        mov         eax,dword ptr [ebp-0C]
+00704935        call        006DC0A4
+0070493A        mov         eax,704C00;'Time elapsed (ms): '
+0070493F        call        006DBFA0
+00704944        mov         eax,dword ptr [ebx+110];TBootloader.FEndTime:Int64
+0070494A        mov         edx,dword ptr [ebx+114];TBootloader.?f114:Pointer
+00704950        sub         eax,dword ptr [ebx+108]
+00704956        sbb         edx,dword ptr [ebx+10C]
+0070495C        push        edx
+0070495D        push        eax
+0070495E        lea         eax,[ebp-58]
+00704961        call        IntToStr
+00704966        mov         eax,dword ptr [ebp-58]
+00704969        call        006DC004
+0070496E        mov         eax,1
+00704973        call        006DBF64
+00704978        or          ecx,0FFFFFFFF
+0070497B        mov         edx,80
+00704980        mov         eax,704C98;' ACK: '
+00704985        call        006DBD18
+0070498A        or          ecx,0FFFFFFFF
+0070498D        mov         edx,0FF00FF
+00704992        mov         eax,dword ptr [ebp-0C]
+00704995        call        006DBD18
+0070499A>       jmp         00704A51
+0070499F        mov         dword ptr [ebp-24],edx
+007049A2        cmp         dword ptr [ebp-24],0
+007049A6>       je          007049B3
+007049A8        mov         eax,dword ptr [ebp-24]
+007049AB        sub         eax,4
+007049AE        mov         eax,dword ptr [eax]
+007049B0        mov         dword ptr [ebp-24],eax
+007049B3        cmp         dword ptr [ebp-24],0
+007049B7>       jne         00704A51
+007049BD        call        006DB734
+007049C2        test        al,al
+007049C4>       je          00704A51
+007049CA        mov         eax,[0084158C];^gvar_0085C668
+007049CF        cmp         dword ptr [eax],3
+007049D2>       jge         007049DD
+007049D4        cmp         byte ptr [ebx+0B4],0B;TBootloader.FLastCMD:byte
+007049DB>       je          00704A51
+007049DD        mov         eax,704C00;'Time elapsed (ms): '
+007049E2        call        006DBFA0
+007049E7        mov         eax,dword ptr [ebx+110];TBootloader.FEndTime:Int64
+007049ED        mov         edx,dword ptr [ebx+114];TBootloader.?f114:Pointer
+007049F3        sub         eax,dword ptr [ebx+108]
+007049F9        sbb         edx,dword ptr [ebx+10C]
+007049FF        push        edx
+00704A00        push        eax
+00704A01        lea         eax,[ebp-5C]
+00704A04        call        IntToStr
+00704A09        mov         eax,dword ptr [ebp-5C]
+00704A0C        call        006DC004
+00704A11        mov         eax,1
+00704A16        call        006DBF64
+00704A1B        lea         eax,[ebp-0C]
+00704A1E        push        eax
+00704A1F        movzx       edx,byte ptr [ebx+0A1];TBootloader.FLastACK:byte
+00704A26        xor         ecx,ecx
+00704A28        mov         eax,ebx
+00704A2A        call        00705B90
+00704A2F        or          ecx,0FFFFFFFF
+00704A32        mov         edx,80
+00704A37        mov         eax,704C98;' ACK: '
+00704A3C        call        006DBD18
+00704A41        or          ecx,0FFFFFFFF
+00704A44        mov         edx,0FF00FF
+00704A49        mov         eax,dword ptr [ebp-0C]
+00704A4C        call        006DBD18
+# 6.继续
+00704A51        call        006DB734
+00704A56        and         al,byte ptr [ebp+8]
+00704A59>       je          00704A65
+00704A5B        mov         eax,1
+00704A60        call        006DBF64
+00704A65        cmp         byte ptr [ebx+0B4],0FD;TBootloader.FLastCMD:byte
+00704A6C>       je          00704A75
+00704A6E        mov         eax,ebx
+00704A70        call        00704154
+00704A75        mov         eax,ebx
+00704A77        call        TBootloader.GetReadTimeOut
+00704A7C        movzx       esi,word ptr [ebp-14]
+00704A80        cmp         eax,esi
+00704A82>       je          00704A8D
+00704A84        mov         edx,esi
+00704A86        mov         eax,ebx
+00704A88        call        TBootloader.SetReadTimeOut
+00704A8D        xor         eax,eax
+00704A8F        pop         edx
+00704A90        pop         ecx
+00704A91        pop         ecx
+00704A92        mov         dword ptr fs:[eax],edx
+00704A95        push        704B00
+00704A9A        lea         eax,[ebp-5C]
+00704A9D        mov         edx,4
+00704AA2        call        @UStrArrayClr
+00704AA7        lea         eax,[ebp-4C]
+00704AAA        mov         edx,dword ptr ds:[404B48];TArray<System.Byte>
+00704AB0        call        @DynArrayClear
+00704AB5        lea         eax,[ebp-44]
+00704AB8        mov         edx,2
+00704ABD        call        @UStrArrayClr
+00704AC2        lea         eax,[ebp-3C]
+00704AC5        mov         edx,dword ptr ds:[404B48];TArray<System.Byte>
+00704ACB        mov         ecx,5
+00704AD0        call        @FinalizeArray
+00704AD5        lea         eax,[ebp-28]
+00704AD8        call        @UStrClr
+00704ADD        lea         eax,[ebp-0C]
+00704AE0        call        @UStrClr
+00704AE5        lea         eax,[ebp-8]
+00704AE8        mov         edx,dword ptr ds:[404B48];TArray<System.Byte>
+00704AEE        mov         ecx,2
+00704AF3        call        @FinalizeArray
+00704AF8        ret
+00704AF9>       jmp         @HandleFinally
+00704AFE>       jmp         00704A9A
+00704B00        movzx       eax,byte ptr [ebp-11]
+00704B04        pop         edi
+00704B05        pop         esi
+00704B06        pop         ebx
+00704B07        mov         esp,ebp
+00704B09        pop         ebp
+00704B0A        ret         4
+
 
 ```
 
@@ -1421,6 +2436,7 @@ _Unit139.TBLHeliInterfaceManager.SetupToControls
 # 此时eax=0x289D380 ebp=19F288  19F284中存储的是2864D00
 007D5B48        mov         edx,dword ptr [ebp-4]
 # edx=2864D00 处理后变成2864D44 再次变成0289D000
+# 这里理论上应该就是把TBLHeli对象给进去了
 007D5B4B        mov         edx,dword ptr [edx+44];TBLHeliInterfaceManager.FBLHeliWork:TBLHeli
 # 这里已经写了7D5CE0这里是3，ecx=3
 007D5B4E        movzx       ecx,byte ptr ds:[7D5CE0];0x3 gvar_007D5CE0
@@ -1455,6 +2471,7 @@ _Unit139.TBLHeliInterfaceManager.BLHeliStored
 # 执行完以后edx直接变成1了，所以这里对应注释就是当前esc数量 1
 # eax=2864D00 edx=1
 # 这里应该是返回值，[eax+edx*4+174]的值是2864E78
+# 这里仔细一看其实不就是对象内存大小和ESC的数量有关系，每多一个那么对应大小就要多4个字节
 007CC5E0        mov         eax,dword ptr [eax+edx*4+174]
 # 执行完以后eax是0x289D380
 007CC5E7        ret
@@ -1675,7 +2692,7 @@ esi+5，对应的值也就是3C，对应的也就是60，所以版本号应该�
 
 ![image-20210713175101811](https://i.loli.net/2021/07/13/QhOYsw4RFSzimqp.png)
 
-但是分析到这里，我又对了一下发送的256数据，发现hex的内容和实际接收发送的数据对不上，而ESI地址中的数值又是谁赋进去的，需要找到这个，发现ESI是在CopyTo时EDX给进来的，然后edx又是ebp给进来的，实际上又是来自于ebp，从堆栈中取出来的。
+但是分析到这里，我又对了一下发送的256数据，发现hex的内容和实际接收发送的数据对不上，而ESI地址中的数值又是谁赋进去的，需要找到这个，发现ESI是在CopyTo时EDX给进来的，然后edx又是ebp给进来的，实际上又是来自于ebp，从堆栈中取出来的。到这里就发现虽然数据可以解析了，但是解析的数据并不是原生的256字节，所以又要回去找读取的时候数据是怎么处理的（关键变成谁给0x2864D00或者0x289D000地址赋得值）
 
 ```assembly
 
@@ -2456,6 +3473,576 @@ TFlightCtrlIntf
 
 
 
+`TBLHeliInterfaceManager.FBLHeliWork`的数据类型是 `TBLHeli` 也就是电调设置对象
+
+
+
+### TBLHeli
+
+TBLHeli中记录的就是所有配置的参数什么的，显示或者操作的时候，他就是真正的后端对象。
+
+从`TBLHeli.Init`就能看出他初始化了什么东西。
+
+```assembly
+_Unit102.TBLHeli.Init
+006E5044        push        ebx
+006E5045        push        esi
+006E5046        mov         esi,eax
+006E5048        lea         eax,[esi+0BC];TBLHeli.FErrMsg:string
+006E504E        call        @UStrClr
+006E5053        mov         byte ptr [esi+0C0],4;TBLHeli.FStatus:TSetupStatus
+006E505A        mov         byte ptr [esi+0BA],0;TBLHeli.FIsAlternateSettingsKey:Boolean
+006E5061        mov         byte ptr [esi+0D1],0;TBLHeli.FIs_64k:Boolean
+006E5068        mov         byte ptr [esi+0B9],0;TBLHeli.FActivationStatus:TActivationStatus
+006E506F        xor         eax,eax
+006E5071        mov         dword ptr [esi+0C4],eax;TBLHeli.FDshotGoodFrames:Cardinal
+006E5077        xor         eax,eax
+006E5079        mov         dword ptr [esi+0C8],eax;TBLHeli.FDshotBadFrames:Cardinal
+006E507F        xor         eax,eax
+# mcu类型
+006E5081        mov         dword ptr [esi+0B4],eax;TBLHeli.FMCU_DeviceID:Integer
+006E5087        mov         byte ptr [esi+0D2],0;TBLHeli.FMCUManufacturer:TMCUManufacturer
+006E508E        lea         eax,[esi+0CC];TBLHeli.FUUID:string
+006E5094        call        @UStrClr
+006E5099        lea         eax,[esi+0B0];TBLHeli.FESC_Layout_Org_Str:string
+006E509F        call        @UStrClr
+006E50A4        lea         eax,[esi+30];TBLHeli.FEep_ESC_Layout:TESC_Layout
+006E50A7        mov         ecx,0FF
+006E50AC        mov         edx,20
+006E50B1        call        @FillChar
+# esc name
+006E50B6        lea         eax,[esi+70];TBLHeli.FEep_Name:TESC_Name
+006E50B9        mov         ecx,20
+006E50BE        mov         edx,10
+006E50C3        call        @FillChar
+# 版本号
+006E50C8        mov         byte ptr [esi+6],2C;TBLHeli.FEep_Layout_Revision:byte
+006E50CC        mov         byte ptr [esi+4],20;TBLHeli.FEep_FW_Main_Revision:byte
+006E50D0        mov         byte ptr [esi+5],46;TBLHeli.FEep_FW_Sub_Revision:byte
+006E50D4        lea         eax,[esi+50];TBLHeli.FEep_ESC_MCU:TESC_MCU
+006E50D7        mov         ecx,0FF
+006E50DC        mov         edx,20
+006E50E1        call        @FillChar
+# 这里就是音乐的配置了
+006E50E6        lea         eax,[esi+80];TBLHeli.FEep_Note_Array:TEep_Note_Array
+006E50EC        mov         ecx,0FF
+006E50F1        mov         edx,30
+006E50F6        call        @FillChar
+006E50FB        mov         bl,4
+006E50FD        cmp         bl,1F
+006E5100>       je          006E510B
+006E5102        mov         edx,ebx
+006E5104        mov         eax,esi
+# 这里很关键，他把通用的部分设置作为了parameter，初始化这里就是给这些参数一个默认值
+006E5106        call        TBLHeli.SetParameterValueToDefault
+006E510B        inc         ebx
+006E510C        cmp         bl,2A
+006E510F>       jne         006E50FD
+006E5111        pop         esi
+006E5112        pop         ebx
+006E5113        ret
+
+```
+
+
+
+#### SetParameterValueToDefault
+
+这里比较简单就是获取参数，然后设置参数值
+
+```assembly
+_Unit102.TBLHeli.SetParameterValueToDefault
+006E5954        push        ebx
+006E5955        push        esi
+006E5956        mov         ebx,edx
+006E5958        mov         esi,eax
+006E595A        mov         edx,ebx
+006E595C        mov         eax,esi
+006E595E        call        TBLHeli.GetParameterValueDefault
+006E5963        mov         edx,ebx
+006E5965        mov         ecx,eax
+006E5967        mov         eax,esi
+006E5969        call        TBLHeli.SetParameterValue
+006E596E        pop         esi
+006E596F        pop         ebx
+006E5970        ret
+
+```
+
+
+
+获取默认值这里参数显示的还是比较少，这里应该只是枚举类型或者和版本有关系的参数才会在这里
+
+```assembly
+_Unit102.TBLHeli.GetParameterValueDefault
+006E7430        push        ebx
+006E7431        push        esi
+006E7432        push        edi
+006E7433        push        ebp
+006E7434        mov         ebx,edx
+006E7436        mov         esi,eax
+006E7438        mov         edi,dword ptr ds:[840DF4];^gvar_00839102
+006E743E        movzx       edi,word ptr [edi]
+006E7441        mov         edx,ebx
+006E7443        mov         eax,esi
+# 这里应该是枚举那个Layout Rev的版本号
+006E7445        call        TBLHeli.IsParameterExisting
+006E744A        test        al,al
+006E744C>       je          006E7817
+006E7452        movzx       eax,bl
+006E7455        cmp         eax,2D
+006E7458>       ja          006E7812
+006E745E        jmp         dword ptr [eax*4+6E7465]
+006E7465        dd          006E7812
+006E7469        dd          006E7817
+006E746D        dd          006E7817
+006E7471        dd          006E7817
+006E7475        dd          006E7522
+006E7479        dd          006E752B
+006E747D        dd          006E7534
+006E7481        dd          006E75B8
+006E7485        dd          006E761E
+006E7489        dd          006E7627
+006E748D        dd          006E7647
+006E7491        dd          006E7650
+006E7495        dd          006E7670
+006E7499        dd          006E7679
+006E749D        dd          006E76C4
+006E74A1        dd          006E76EA
+006E74A5        dd          006E7701
+006E74A9        dd          006E775D
+006E74AD        dd          006E7764
+006E74B1        dd          006E776D
+006E74B5        dd          006E7776
+006E74B9        dd          006E777F
+006E74BD        dd          006E7786
+006E74C1        dd          006E778D
+006E74C5        dd          006E77BD
+006E74C9        dd          006E77C3
+006E74CD        dd          006E77CE
+006E74D1        dd          006E77D2
+006E74D5        dd          006E7802
+006E74D9        dd          006E7808
+006E74DD        dd          006E780E
+006E74E1        dd          006E7812
+006E74E5        dd          006E7817
+006E74E9        dd          006E7817
+006E74ED        dd          006E7817
+006E74F1        dd          006E7817
+006E74F5        dd          006E7817
+006E74F9        dd          006E7817
+006E74FD        dd          006E7817
+006E7501        dd          006E7817
+006E7505        dd          006E7817
+006E7509        dd          006E7817
+006E750D        dd          006E7812
+006E7511        dd          006E7812
+006E7515        dd          006E7812
+006E7519        dd          006E7817
+006E751D>       jmp         006E7817
+006E7522        mov         di,1
+006E7526>       jmp         006E7817
+006E752B        mov         di,32
+006E752F>       jmp         006E7817
+006E7534        mov         eax,esi
+006E7536        call        TBLHeli.IsProgrammablePwmFreqMinMaxCapable
+006E753B        test        al,al
+006E753D>       je          006E7545
+006E753F        movzx       edi,byte ptr [esi+2C];TBLHeli.FEep_Hw_Pwm_Freq_Min:byte
+006E7543>       jmp         006E7549
+006E7545        mov         di,18
+006E7549        mov         eax,dword ptr [esi+0B0];TBLHeli.FESC_Layout_Org_Str:string
+006E754F        mov         edx,dword ptr ds:[8396A4];^'RF1'
+006E7555        call        @UStrEqual
+006E755A>       jne         006E7565
+006E755C        mov         di,20
+006E7560>       jmp         006E7817
+006E7565        mov         eax,dword ptr [esi+0B0];TBLHeli.FESC_Layout_Org_Str:string
+006E756B        mov         edx,dword ptr ds:[8396A8];^'XILO_ESC'
+006E7571        call        @UStrEqual
+006E7576>       jne         006E7581
+006E7578        mov         di,30
+006E757C>       jmp         006E7817
+006E7581        cmp         byte ptr [esi+6],2C;TBLHeli.FEep_Layout_Revision:byte
+006E7585>       jb          006E7817
+006E758B        mov         ebp,18
+006E7590        mov         ebx,8396AC;^'FL1_Afterburner'
+006E7595        mov         eax,dword ptr [esi+0B0];TBLHeli.FESC_Layout_Org_Str:string
+006E759B        mov         edx,dword ptr [ebx]
+006E759D        call        @UStrEqual
+006E75A2>       jne         006E75AD
+006E75A4        movzx       edi,word ptr [ebx+4]
+006E75A8>       jmp         006E7817
+006E75AD        add         ebx,8
+006E75B0        dec         ebp
+006E75B1>       jne         006E7595
+006E75B3>       jmp         006E7817
+006E75B8        mov         di,10
+006E75BC        mov         eax,dword ptr [esi+0B0];TBLHeli.FESC_Layout_Org_Str:string
+006E75C2        mov         edx,dword ptr ds:[839668];^'Hobbywing_XRotor_BLHeli32'
+006E75C8        call        @UStrEqual
+006E75CD>       je          006E75E2
+006E75CF        mov         eax,dword ptr [esi+0B0];TBLHeli.FESC_Layout_Org_Str:string
+006E75D5        mov         edx,dword ptr ds:[839664];^'Hobbywing_XRotor_40A_BLHeli32'
+006E75DB        call        @UStrEqual
+006E75E0>       jne         006E75E9
+006E75E2        xor         edi,edi
+006E75E4>       jmp         006E7817
+006E75E9        cmp         byte ptr [esi+6],2C;TBLHeli.FEep_Layout_Revision:byte
+006E75ED>       jb          006E7817
+006E75F3        mov         ebp,15
+006E75F8        mov         ebx,839778;^'FL1_Afterburner'
+006E75FD        mov         eax,dword ptr [esi+0B0];TBLHeli.FESC_Layout_Org_Str:string
+006E7603        mov         edx,dword ptr [ebx]
+006E7605        call        @UStrEqual
+006E760A>       jne         006E7613
+006E760C        xor         edi,edi
+006E760E>       jmp         006E7817
+006E7613        add         ebx,4
+006E7616        dec         ebp
+006E7617>       jne         006E75FD
+006E7619>       jmp         006E7817
+006E761E        mov         di,2
+006E7622>       jmp         006E7817
+006E7627        mov         eax,esi
+006E7629        call        006E677C
+006E762E        cmp         eax,0CA8
+006E7633>       jl          006E763E
+006E7635        mov         di,410
+006E7639>       jmp         006E7817
+006E763E        mov         di,3E8
+006E7642>       jmp         006E7817
+006E7647        mov         di,5DC
+006E764B>       jmp         006E7817
+006E7650        mov         eax,esi
+006E7652        call        006E677C
+006E7657        cmp         eax,0CA8
+006E765C>       jl          006E7667
+006E765E        mov         di,7A8
+006E7662>       jmp         006E7817
+006E7667        mov         di,7D0
+006E766B>       jmp         006E7817
+006E7670        mov         di,1
+006E7674>       jmp         006E7817
+006E7679        mov         eax,dword ptr [esi+0B0];TBLHeli.FESC_Layout_Org_Str:string
+006E767F        mov         edx,dword ptr ds:[839698];^'HAKRC_45A'
+006E7685        call        @UStrEqual
+006E768A>       je          006E76B2
+006E768C        mov         eax,dword ptr [esi+0B0];TBLHeli.FESC_Layout_Org_Str:string
+006E7692        mov         edx,dword ptr ds:[83969C];^'HAKRC_E45A'
+006E7698        call        @UStrEqual
+006E769D>       je          006E76B2
+006E769F        mov         eax,dword ptr [esi+0B0];TBLHeli.FESC_Layout_Org_Str:string
+006E76A5        mov         edx,dword ptr ds:[8396A0];^'HAKRC_E50A'
+006E76AB        call        @UStrEqual
+006E76B0>       jne         006E76BB
+006E76B2        mov         di,78
+006E76B6>       jmp         006E7817
+006E76BB        mov         di,8C
+006E76BF>       jmp         006E7817
+006E76C4        movzx       eax,byte ptr [esi+26];TBLHeli.FEep_Hw_Voltage_Sense_Capable:byte
+006E76C8        cmp         al,0FF
+006E76CA>       jae         006E76E3
+006E76CC        test        al,al
+006E76CE>       jbe         006E76DC
+006E76D0        movzx       edi,al
+006E76D3        sub         di,18
+006E76D7>       jmp         006E7817
+006E76DC        xor         edi,edi
+006E76DE>       jmp         006E7817
+006E76E3        xor         edi,edi
+006E76E5>       jmp         006E7817
+006E76EA        movzx       eax,byte ptr [esi+27];TBLHeli.FEep_Hw_Current_Sense_Capable:byte
+006E76EE        cmp         al,0FF
+006E76F0>       jae         006E76FA
+006E76F2        movzx       edi,al
+006E76F5>       jmp         006E7817
+006E76FA        xor         edi,edi
+006E76FC>       jmp         006E7817
+006E7701        mov         eax,dword ptr [esi+0B0];TBLHeli.FESC_Layout_Org_Str:string
+006E7707        mov         edx,dword ptr ds:[839680];^'Sunrise_DHCrop_ST'
+006E770D        call        @UStrEqual
+006E7712>       je          006E774D
+006E7714        mov         eax,dword ptr [esi+0B0];TBLHeli.FESC_Layout_Org_Str:string
+006E771A        mov         edx,dword ptr ds:[839684];^'Sunrise_DHCrop_GD'
+006E7720        call        @UStrEqual
+006E7725>       je          006E774D
+006E7727        mov         eax,dword ptr [esi+0B0];TBLHeli.FESC_Layout_Org_Str:string
+006E772D        mov         edx,dword ptr ds:[839688];^'Empire_ST'
+006E7733        call        @UStrEqual
+006E7738>       je          006E774D
+006E773A        mov         eax,dword ptr [esi+0B0];TBLHeli.FESC_Layout_Org_Str:string
+006E7740        mov         edx,dword ptr ds:[83968C];^'Empire_GD'
+006E7746        call        @UStrEqual
+006E774B>       jne         006E7754
+006E774D        xor         edi,edi
+006E774F>       jmp         006E7817
+006E7754        mov         di,1
+006E7758>       jmp         006E7817
+006E775D        xor         edi,edi
+006E775F>       jmp         006E7817
+006E7764        mov         di,28
+006E7768>       jmp         006E7817
+006E776D        mov         di,50
+006E7771>       jmp         006E7817
+006E7776        mov         di,258
+006E777A>       jmp         006E7817
+006E777F        xor         edi,edi
+006E7781>       jmp         006E7817
+006E7786        xor         edi,edi
+006E7788>       jmp         006E7817
+006E778D        mov         eax,dword ptr [esi+0B0];TBLHeli.FESC_Layout_Org_Str:string
+006E7793        mov         edx,dword ptr ds:[839688];^'Empire_ST'
+006E7799        call        @UStrEqual
+006E779E>       je          006E77B3
+006E77A0        mov         eax,dword ptr [esi+0B0];TBLHeli.FESC_Layout_Org_Str:string
+006E77A6        mov         edx,dword ptr ds:[83968C];^'Empire_GD'
+006E77AC        call        @UStrEqual
+006E77B1>       jne         006E77B9
+006E77B3        mov         di,1
+006E77B7>       jmp         006E7817
+006E77B9        xor         edi,edi
+006E77BB>       jmp         006E7817
+006E77BD        mov         di,64
+006E77C1>       jmp         006E7817
+006E77C3        mov         edi,dword ptr ds:[841854];^gvar_0083922C
+006E77C9        movzx       edi,byte ptr [edi]
+006E77CC>       jmp         006E7817
+006E77CE        xor         edi,edi
+006E77D0>       jmp         006E7817
+006E77D2        mov         eax,dword ptr [esi+0B0];TBLHeli.FESC_Layout_Org_Str:string
+006E77D8        mov         edx,dword ptr ds:[83967C];^'FrESC_80A'
+006E77DE        call        @UStrEqual
+006E77E3>       je          006E77F8
+006E77E5        mov         eax,dword ptr [esi+0B0];TBLHeli.FESC_Layout_Org_Str:string
+006E77EB        mov         edx,dword ptr ds:[839774];^'WINGTRA'
+006E77F1        call        @UStrEqual
+006E77F6>       jne         006E77FE
+006E77F8        mov         di,1
+006E77FC>       jmp         006E7817
+006E77FE        xor         edi,edi
+006E7800>       jmp         006E7817
+006E7802        mov         di,1
+006E7806>       jmp         006E7817
+006E7808        mov         di,11
+006E780C>       jmp         006E7817
+006E780E        xor         edi,edi
+006E7810>       jmp         006E7817
+006E7812        call        0042E5A8
+006E7817        mov         eax,edi
+006E7819        pop         ebp
+006E781A        pop         edi
+006E781B        pop         esi
+006E781C        pop         ebx
+006E781D        ret
+
+```
+
+
+
+设置参数的值就能看到基本所有UI上的参数了
+
+```assembly
+_Unit102.TBLHeli.SetParameterValue
+006E56B8        push        ebx
+006E56B9        push        esi
+006E56BA        push        edi
+006E56BB        push        ecx
+006E56BC        mov         esi,ecx
+006E56BE        mov         ebx,edx
+006E56C0        mov         edi,eax
+006E56C2        mov         byte ptr [esp],1
+006E56C6        mov         eax,ebx
+006E56C8        call        006DEB58
+006E56CD        cmp         al,2
+006E56CF>       jae         006E56D8
+006E56D1        mov         eax,esi
+006E56D3        movzx       eax,al
+006E56D6        mov         esi,eax
+006E56D8        movzx       eax,bl
+006E56DB        cmp         eax,29
+006E56DE>       ja          006E5904
+006E56E4        jmp         dword ptr [eax*4+6E56EB]
+006E56EB        dd          006E5904
+006E56EF        dd          006E5793
+006E56F3        dd          006E579D
+006E56F7        dd          006E57A7
+006E56FB        dd          006E57B1
+006E56FF        dd          006E57BB
+006E5703        dd          006E57C5
+006E5707        dd          006E57CF
+006E570B        dd          006E57D9
+006E570F        dd          006E57E3
+006E5713        dd          006E57EC
+006E5717        dd          006E57F5
+006E571B        dd          006E57FE
+006E571F        dd          006E5808
+006E5723        dd          006E5812
+006E5727        dd          006E581C
+006E572B        dd          006E5826
+006E572F        dd          006E5830
+006E5733        dd          006E5855
+006E5737        dd          006E585F
+006E573B        dd          006E5869
+006E573F        dd          006E5872
+006E5743        dd          006E587C
+006E5747        dd          006E5886
+006E574B        dd          006E588D
+006E574F        dd          006E5894
+006E5753        dd          006E589B
+006E5757        dd          006E58A2
+006E575B        dd          006E58A9
+006E575F        dd          006E58B0
+006E5763        dd          006E58B7
+006E5767        dd          006E5904
+006E576B        dd          006E58BE
+006E576F        dd          006E58C5
+006E5773        dd          006E58CC
+006E5777        dd          006E58D3
+006E577B        dd          006E58DA
+006E577F        dd          006E58E1
+006E5783        dd          006E58E8
+006E5787        dd          006E58EF
+006E578B        dd          006E58F6
+006E578F        dd          006E58FD
+006E5793        mov         eax,esi
+006E5795        mov         byte ptr [edi+4],al;TBLHeli.FEep_FW_Main_Revision:byte
+006E5798>       jmp         006E5908
+006E579D        mov         eax,esi
+006E579F        mov         byte ptr [edi+5],al;TBLHeli.FEep_FW_Sub_Revision:byte
+006E57A2>       jmp         006E5908
+006E57A7        mov         eax,esi
+006E57A9        mov         byte ptr [edi+6],al;TBLHeli.FEep_Layout_Revision:byte
+006E57AC>       jmp         006E5908
+006E57B1        mov         eax,esi
+006E57B3        mov         byte ptr [edi+7],al;TBLHeli.FEep_Pgm_Direction:byte
+006E57B6>       jmp         006E5908
+006E57BB        mov         eax,esi
+006E57BD        mov         byte ptr [edi+8],al;TBLHeli.FEep_Pgm_Rampup_Pwr:byte
+006E57C0>       jmp         006E5908
+006E57C5        mov         eax,esi
+006E57C7        mov         byte ptr [edi+9],al;TBLHeli.FEep_Pgm_Pwm_Frequency:byte
+006E57CA>       jmp         006E5908
+006E57CF        mov         eax,esi
+006E57D1        mov         byte ptr [edi+0A],al;TBLHeli.FEep_Pgm_Comm_Timing:byte
+006E57D4>       jmp         006E5908
+006E57D9        mov         eax,esi
+006E57DB        mov         byte ptr [edi+0B],al;TBLHeli.FEep_Pgm_Demag_Comp:byte
+006E57DE>       jmp         006E5908
+006E57E3        mov         word ptr [edi+0C],si;TBLHeli.FEep_Pgm_Min_Throttle:word
+006E57E7>       jmp         006E5908
+006E57EC        mov         word ptr [edi+0E],si;TBLHeli.FEep_Pgm_Center_Throttle:word
+006E57F0>       jmp         006E5908
+006E57F5        mov         word ptr [edi+10],si;TBLHeli.FEep_Pgm_Max_Throttle:word
+006E57F9>       jmp         006E5908
+006E57FE        mov         eax,esi
+006E5800        mov         byte ptr [edi+12],al;TBLHeli.FEep_Pgm_Enable_Throttle_Cal:Boolean
+006E5803>       jmp         006E5908
+006E5808        mov         eax,esi
+006E580A        mov         byte ptr [edi+13],al;TBLHeli.FEep_Pgm_Temp_Prot:byte
+006E580D>       jmp         006E5908
+006E5812        mov         eax,esi
+006E5814        mov         byte ptr [edi+14],al;TBLHeli.FEep_Pgm_Volt_Prot:byte
+006E5817>       jmp         006E5908
+006E581C        mov         eax,esi
+006E581E        mov         byte ptr [edi+15],al;TBLHeli.FEep_Pgm_Curr_Prot:byte
+006E5821>       jmp         006E5908
+006E5826        mov         eax,esi
+006E5828        mov         byte ptr [edi+16],al;TBLHeli.FEep_Pgm_Enable_Power_Prot:byte
+006E582B>       jmp         006E5908
+006E5830        mov         eax,edi
+006E5832        call        TBLHeli.IsProgrammableBrakeForceCapable
+006E5837        test        al,al
+006E5839>       jne         006E584B
+006E583B        test        si,si
+006E583E>       jbe         006E584B
+006E5840        mov         dl,11
+006E5842        mov         eax,edi
+006E5844        call        TBLHeli.GetParameterMax
+006E5849        mov         esi,eax
+006E584B        mov         eax,esi
+006E584D        mov         byte ptr [edi+17],al;TBLHeli.FEep_Pgm_Brake_On_Stop:byte
+006E5850>       jmp         006E5908
+006E5855        mov         eax,esi
+006E5857        mov         byte ptr [edi+18],al;TBLHeli.FEep_Pgm_Beep_Strength:byte
+006E585A>       jmp         006E5908
+006E585F        mov         eax,esi
+006E5861        mov         byte ptr [edi+19],al;TBLHeli.FEep_Pgm_Beacon_Strength:byte
+006E5864>       jmp         006E5908
+006E5869        mov         word ptr [edi+1A],si;TBLHeli.FEep_Pgm_Beacon_Delay:word
+006E586D>       jmp         006E5908
+006E5872        mov         eax,esi
+006E5874        mov         byte ptr [edi+1C],al;TBLHeli.FEep_Pgm_LED_Control:byte
+006E5877>       jmp         006E5908
+006E587C        mov         eax,esi
+006E587E        mov         byte ptr [edi+1D],al;TBLHeli.FEep_Pgm_Max_Acceleration:byte
+006E5881>       jmp         006E5908
+006E5886        mov         eax,esi
+006E5888        mov         byte ptr [edi+1E],al;TBLHeli.FEep_Pgm_Nondamped_Mode:byte
+006E588B>       jmp         006E5908
+006E588D        mov         eax,esi
+006E588F        mov         byte ptr [edi+1F],al;TBLHeli.FEep_Pgm_Curr_Sense_Cal:byte
+006E5892>       jmp         006E5908
+006E5894        mov         eax,esi
+006E5896        mov         byte ptr [edi+20],al;TBLHeli.FEep_Note_Config:byte
+006E5899>       jmp         006E5908
+006E589B        mov         eax,esi
+006E589D        mov         byte ptr [edi+21],al;TBLHeli.FEep_Pgm_Sine_Mode:byte
+006E58A0>       jmp         006E5908
+006E58A2        mov         eax,esi
+006E58A4        mov         byte ptr [edi+22],al;TBLHeli.FEep_Pgm_Auto_Tlm_Mode:byte
+006E58A7>       jmp         006E5908
+006E58A9        mov         eax,esi
+006E58AB        mov         byte ptr [edi+23],al;TBLHeli.FEep_Pgm_Stall_Prot:byte
+006E58AE>       jmp         006E5908
+006E58B0        mov         eax,esi
+006E58B2        mov         byte ptr [edi+24],al;TBLHeli.FEep_Pgm_SBUS_Channel:byte
+006E58B5>       jmp         006E5908
+006E58B7        mov         eax,esi
+006E58B9        mov         byte ptr [edi+25],al;TBLHeli.FEep_Pgm_SPORT_Physical_ID:byte
+006E58BC>       jmp         006E5908
+006E58BE        mov         eax,esi
+006E58C0        mov         byte ptr [edi+26],al;TBLHeli.FEep_Hw_Voltage_Sense_Capable:byte
+006E58C3>       jmp         006E5908
+006E58C5        mov         eax,esi
+006E58C7        mov         byte ptr [edi+27],al;TBLHeli.FEep_Hw_Current_Sense_Capable:byte
+006E58CA>       jmp         006E5908
+006E58CC        mov         eax,esi
+006E58CE        mov         byte ptr [edi+28],al;TBLHeli.FEep_Hw_LED_Capable_0:byte
+006E58D1>       jmp         006E5908
+006E58D3        mov         eax,esi
+006E58D5        mov         byte ptr [edi+29],al;TBLHeli.FEep_Hw_LED_Capable_1:byte
+006E58D8>       jmp         006E5908
+006E58DA        mov         eax,esi
+006E58DC        mov         byte ptr [edi+2A],al;TBLHeli.FEep_Hw_LED_Capable_2:byte
+006E58DF>       jmp         006E5908
+006E58E1        mov         eax,esi
+006E58E3        mov         byte ptr [edi+2B],al;TBLHeli.FEep_Hw_LED_Capable_3:byte
+006E58E6>       jmp         006E5908
+006E58E8        mov         eax,esi
+006E58EA        mov         byte ptr [edi+2C],al;TBLHeli.FEep_Hw_Pwm_Freq_Min:byte
+006E58ED>       jmp         006E5908
+006E58EF        mov         eax,esi
+006E58F1        mov         byte ptr [edi+2D],al;TBLHeli.FEep_Hw_Pwm_Freq_Max:byte
+006E58F4>       jmp         006E5908
+006E58F6        mov         eax,esi
+006E58F8        mov         byte ptr [edi+2E],al;TBLHeli.FEep_SPORT_Capable:byte
+006E58FB>       jmp         006E5908
+006E58FD        mov         eax,esi
+006E58FF        mov         byte ptr [edi+2F],al;TBLHeli.FEep_Nondamped_Capable:byte
+006E5902>       jmp         006E5908
+006E5904        mov         byte ptr [esp],0
+006E5908        movzx       eax,byte ptr [esp]
+006E590C        pop         edx
+006E590D        pop         edi
+006E590E        pop         esi
+006E590F        pop         ebx
+006E5910        ret
+
+```
+
+
+
 ## Logged Messages
 
 把BLH的log功能打开
@@ -2482,9 +4069,9 @@ TFlightCtrlIntf
 
 走了好多弯路，先是看完了IDR逆向后的代码，然后发现根本找不到具体的数据解析，只好选择用动态调试。然后动态调试，发现代码位置和IDR对不上，导致我根本断点断不住读取配置的地方。后来发现是IDR逆向的客户端和OD调试的不是一个，弄成同一个之后代码地址啥的都一样了。
 
-
-
 然后追代码发现有些地方走向和我之前想的不一样，我之前追的太过底层了，陷入其中出不来，动态调试以后发现关键的不是读，而是读以后的处理流程。
+
+追踪处理流程，又发现整个数据的来源并不是当初读上来的原数据而是被加工后的数据，又得退回到读取得地方再去找raw数据的处理
 
 
 
