@@ -1523,7 +1523,7 @@ _Unit102.sub_006E1B48
 006E1BCC>       jmp         006E1C80
 # 5.here 双循环，这里是最外侧
 006E1BD1        mov         ebx,dword ptr ds:[839634];0x9E3779B9* gvar_00839634
-# 这里很奇怪 ebx = 0x9E3779B9*0x20 = 0xC6EF3720
+# 这里很奇怪 ebx = 0x9E3779B9*0x20 = 0xC6EF3720 这个很重要后面要考
 006E1BD7        imul        ebx,dword ptr ds:[839630];0x20 gvar_00839630
 # 这里eax又等于buff地址了
 006E1BDE        mov         eax,dword ptr [ebp-4]
@@ -1569,6 +1569,7 @@ _Unit102.sub_006E1B48
 006E1C24        add         edx,ecx
 # 还有一个异或
 006E1C26        xor         eax,edx
+# 这里把eax给回写了 整个计算的结果1存在这里
 006E1C28        sub         dword ptr [ebp-0C],eax
 006E1C2B        sub         ebx,dword ptr ds:[839634];gvar_00839634
 006E1C31        mov         edi,dword ptr [ebp-0C]
@@ -1585,17 +1586,21 @@ _Unit102.sub_006E1B48
 006E1C4F        movzx       ecx,word ptr [ebp-6]
 006E1C53        add         edx,ecx
 006E1C55        xor         eax,edx
+# 上面的计算类似，结果2存储在这里
 006E1C57        sub         dword ptr [ebp-10],eax
 006E1C5A        dec         dword ptr [ebp-20]
 # 7.jump
 006E1C5D>       jne         006E1C01
+# 当一轮循环结束以后
 006E1C5F        mov         eax,dword ptr [ebp-4]
 006E1C62        mov         eax,dword ptr [eax]
 006E1C64        mov         edx,dword ptr [ebp-14]
 006E1C67        lea         edx,[eax+edx]
 006E1C6A        lea         eax,[ebp-10]
 006E1C6D        mov         ecx,8
+# 这里就是重新加载前两个字符
 006E1C72        call        Move
+# 这里让这两个变量+8了
 006E1C77        add         dword ptr [ebp-14],8
 006E1C7B        add         word ptr [ebp-6],8
 # 4.here
@@ -1604,6 +1609,7 @@ _Unit102.sub_006E1B48
 006E1C83        mov         eax,dword ptr [eax]
 006E1C85        mov         dword ptr [ebp-24],eax
 # 这里是判定是否串口地址为0，也就是指针为空的情况
+[ebp-24] 是buff的长度 0x100
 006E1C88        cmp         dword ptr [ebp-24],0
 006E1C8C>       je          006E1C99
 006E1C8E        mov         eax,dword ptr [ebp-24]
@@ -1614,7 +1620,7 @@ _Unit102.sub_006E1B48
 # 不知道为什么这里长度先-1，再-7，其实也就是减了8，但是这里没看到处理数据啊，怎么就减了呢
 006E1C9C        dec         eax
 006E1C9D        sub         eax,7
-# 然后判定是否把buff遍历完了，没有就跳转
+# 然后判定是否把buff遍历完了，没有就跳转 这里每次都是0x100-8和[ebp-14]比较，好奇怪，虽然[ebp-14]每次循环结束以后都会自动+8
 006E1CA0        cmp         eax,dword ptr [ebp-14]
 # 5.jump
 006E1CA3>       jge         006E1BD1
@@ -1635,6 +1641,43 @@ _Unit102.sub_006E1B48
 006E1CD0        mov         esp,ebp
 006E1CD2        pop         ebp
 006E1CD3        ret         4
+
+```
+
+这里还有一个问题，就是解算出来的数据存储到了哪里，没看到有具体的存储操作，怎么传递给下一个函数的
+
+
+
+##### sub_006E1960
+
+那就看一下他是怎么做的
+
+```
+_Unit102.sub_006E1960
+006E1960        push        ebx
+006E1961        push        esi
+006E1962        push        edi
+006E1963        mov         edi,eax
+006E1965        xor         esi,esi
+006E1967>       jmp         006E197A
+006E1969        mov         eax,edi
+006E196B        mov         ecx,2
+006E1970        mov         edx,esi
+006E1972        call        006D5A78
+006E1977        add         esi,6
+006E197A        mov         ebx,dword ptr [edi]
+006E197C        test        ebx,ebx
+006E197E>       je          006E1985
+006E1980        sub         ebx,4
+006E1983        mov         ebx,dword ptr [ebx]
+006E1985        dec         ebx
+006E1986        dec         ebx
+006E1987        cmp         esi,ebx
+006E1989>       jl          006E1969
+006E198B        pop         edi
+006E198C        pop         esi
+006E198D        pop         ebx
+006E198E        ret
 
 ```
 
@@ -2155,19 +2198,210 @@ TBLHeli 基址为0x287D380
 ```
 解密逻辑
 原值为A，以4字节为单位
-( (A<<4) xor (A>>5) ）+ A
+I = ( (A<<4) xor (A>>5) ）+ A = eax
 
-外部密钥设为B = 0xC6EF3720 每次在循环开头更新
+外部密钥设为 B = 0xC6EF3720=ebx 每次在循环开头更新
 C = ( (B>>11) & 0x3 ) 这样拿到的C只是一个偏移量
 
+ebp是什么呢？ 应该是个变量基址，从外部传进来的，主要是存储堆栈地址
 D = [ebp+C*4-34]的值
 
-E = D + A
+E = D + B
 
-E = E + 0x7C00
+设 F = 0x7C00
 
-F = A 
+G = E + F = edx
+
+H = I  xor G
+
+更新基址内容
+
+外部变量 J=0x9E3779B9
+local.3 -=H
+B -= J = ebx
+
+K = local.3
+eax = L = (K<<4) xor (K>>5) + K
+M = 3 & B
+N = [ebp+M*4-0x34]
+O = N + B
+O += F
+L = L xor O
+local.4 -= L 
 ```
+
+
+
+将核心循环转换成python就是这样了
+
+```python
+import os
+import sys
+
+ds = {}
+ds[0x839634] = 0x9E3779B9
+ds[0x839630] = 0x20
+local0 = 0x19F168
+local1 = 0x19F164
+local2 = 0x19F160  # [ebp-0x6]
+local3 = 0x19F15C
+local4 = 0x19F158
+local5 = 0x19F154
+local6 = 0x19F150
+local7 = 0x19F14C
+local8 = 0x19F148
+local9 = 0x19F144
+local10 = 0x19F140
+local11 = 0x19F13C  # [ebp+edx*4-0x34]
+local12 = 0x19F138
+local13 = 0x19F134
+local14 = 0x19F130
+local15 = 0x19F12C
+mem = {}
+# uart buff addr
+mem[local1] = 0x19F20C
+mem[local2] = 0x7C00A1C8
+mem[local3] = 0xD3617DCA  # buff 前4字节
+mem[local4] = 0x154369FC  # buff 后4字节
+mem[local5] = 0 # 这个值每次也+8
+mem[local6] = 0x4
+mem[local7] = 0x1513F8C
+mem[local8] = 0x20  # count 
+mem[local9] = 0x100
+mem[local10] = 0x318234B4
+# 这个值来源不明
+mem[local11] = 0x29A1FA54  # [ebp+edx*4-0x34]
+mem[local12] = 0x9E81C901
+mem[local13] = 0x81FBC617
+mem[local14] = 0x4
+mem[local15] = 0x513F8C
+mem[0x19F168 - 6] = 0x7C00  # [ebp-0x6] 这个值每次+8
+
+mem[0x19F20C] = 0x4FEA1C8
+
+ebp = 0x19F168
+
+ebx = ds[0x839634]
+ebx = ebx * ds[0x839630] & 0xFFFFFFFF
+eax = mem[local1]
+eax = mem[eax]  # 0x4FEA1C8
+edx = mem[local5]
+eax = eax + edx
+edx = mem[local4]
+ecx = 0x8
+# move 准备工作
+# mem[local4] = 0x7EAB1EA0
+# mem[local5] = 0x625214C8
+eax = ds[0x839630]  # 20
+
+# uart buff
+uart_buff = []
+f = open(os.path.dirname(__file__) + "/rawdata.txt")
+hex_data = f.read()
+print(hex_data)
+start = None
+end = None
+
+state = 0
+for i in range(0, len(hex_data), 3):
+    if (hex_data[i] + hex_data[i + 1]) == "03" and state == 0:
+        state = 1
+    elif (hex_data[i] + hex_data[i + 1]) == "00" and state == 1:
+        state = 2
+    elif (hex_data[i] + hex_data[i + 1]) == "00" and state == 2:
+        state = 3
+    elif (hex_data[i] + hex_data[i + 1]) == "F0" and state == 3:
+        state = 4
+        start = i + 3
+        break
+    else:
+        state = 0
+if start == None:
+    print("no start,exit")
+    sys.exit(0)
+
+print(len(hex_data))
+output_data = ""
+
+
+def str_to_hex(s):
+    return ' '.join([hex(ord(c)).replace('0x', '') for c in s])
+
+
+n = 4
+for i in range(start, start + 256 * 3, 3):
+    print(hex_data[i], hex_data[i + 1])
+    uart_buff.append("" + hex_data[i] + hex_data[i + 1])
+    # uart_buff.append(int(""+hex_data[i] + hex_data[i + 1],base=16))
+
+f.close()
+
+print(uart_buff)
+
+# loop1
+mem[local8] = eax
+for i in range(0, 0x100, 8):
+    mem[local4] = int(uart_buff[i + 3] + uart_buff[i + 2] + uart_buff[i + 1] + uart_buff[i + 0],base=16)
+    mem[local3] = int(uart_buff[i + 7] + uart_buff[i + 6] + uart_buff[i + 5] + uart_buff[i + 4],base=16)
+    ebx = ds[0x839634]
+    ebx = ebx * ds[0x839630] & 0xFFFFFFFF
+    eax = mem[local1]
+    eax = mem[eax]  # 0x4FEA1C8
+    edx = mem[local5]
+    eax = eax + edx
+    edx = mem[local4]
+    ecx = 0x8
+
+    for i in range(32):
+        # loop2
+        esi = mem[local4]
+        eax = esi
+        eax = eax << 4 & 0xFFFFFFFF
+        edx = esi
+        edx = edx >> 5 & 0xFFFFFFFF
+        eax = eax ^ edx
+        eax = (eax + esi) & 0xFFFFFFFF
+        edx = ebx
+        edx = edx >> 0xB & 0xFFFFFFFF
+        edx = edx & 0x3
+        edx = mem[ebp + edx * 4 - 0x34]
+        edx = (edx + ebx) & 0xFFFFFFFF
+        ecx = mem[ebp - 0x6]
+        edx = (edx + ecx) & 0xFFFFFFFF
+        eax = eax ^ edx
+        mem[local3] = (mem[local3] - eax) & 0xFFFFFFFF
+        ebx = (ebx - ds[0x839634]) & 0xFFFFFFFF
+        edi = mem[local3]
+        eax = edi
+        eax = eax << 4 & 0xFFFFFFFF
+        edx = edi
+        edx = edx >> 5 & 0xFFFFFFFF
+        eax = eax ^ edx
+        eax = (eax + edi) & 0xFFFFFFFF
+        edx = 0x3
+        edx = edx & ebx
+        edx = mem[ebp + edx * 4 - 0x34]
+        edx = (edx + ebx) & 0xFFFFFFFF
+        ecx = mem[ebp - 0x6]
+        edx = (edx + ecx) & 0xFFFFFFFF
+        eax = eax ^ edx
+        mem[local4] = (mem[local4] - eax) & 0xFFFFFFFF
+        mem[local8] -= 1
+        # loop2 end
+    mem[local5] +=8
+    mem[0x19F168 - 6]+=8
+        
+    print(hex(mem[local3]))
+    print(hex(mem[local4]))
+end = True
+
+```
+
+rawdata.txt中是本次读取的数据，类似于这样就行，可以自动解析出来正确的256字节配置
+
+![image-20210719184659222](https://i.loli.net/2021/07/19/mtyoDsR8fNIEKF9.png)
+
+目前每次解出来的数据是和反汇编看到的一模一样
 
 
 
