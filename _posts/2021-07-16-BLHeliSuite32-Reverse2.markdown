@@ -3,7 +3,7 @@ layout:     post
 title:      "BLHeliSuite32逆向（二）"
 subtitle:   "Crack，Reverse"
 date:       2021-07-16
-update:     2021-07-16
+update:     2021-07-19
 author:     "elmagnifico"
 header-img: "img/drone.jpg"
 catalog:    true
