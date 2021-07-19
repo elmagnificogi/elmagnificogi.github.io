@@ -1024,6 +1024,709 @@ _Unit102.TBLHeli.ReadSetupFromBinString
 
 
 
+#### 解析函数sub_006EA090
+
+看一下这里是怎么解析的
+
+```assembly
+_Unit102.sub_006EA090
+006EA090        push        ebp
+006EA091        mov         ebp,esp
+006EA093        push        0
+006EA095        push        ebx
+006EA096        xor         eax,eax
+006EA098        push        ebp
+006EA099        push        6EA340
+006EA09E        push        dword ptr fs:[eax]
+006EA0A1        mov         dword ptr fs:[eax],esp
+006EA0A4        mov         eax,dword ptr [ebp+8]
+006EA0A7        mov         eax,dword ptr [eax-8]
+006EA0AA        mov         byte ptr [eax+0B8],0
+006EA0B1        mov         eax,dword ptr [ebp+8]
+006EA0B4        mov         eax,dword ptr [eax-4]
+006EA0B7        lea         edx,[eax+60]
+006EA0BA        mov         eax,dword ptr [ebp+8]
+006EA0BD        mov         eax,dword ptr [eax-8]
+# 这里先跳过，不知道是干嘛
+006EA0C0        call        TBLHeli.ReadMCU
+```
+
+
+
+##### ReadMCU
+
+```assembly
+_Unit102.TBLHeli.ReadMCU
+006E9BF4        push        ebp
+006E9BF5        mov         ebp,esp
+006E9BF7        add         esp,0FFFFFFB4
+006E9BFA        push        esi
+006E9BFB        push        edi
+006E9BFC        xor         ecx,ecx
+# 这里就是清空内容
+006E9BFE        mov         dword ptr [ebp-4],ecx
+006E9C01        mov         dword ptr [ebp-8],ecx
+006E9C04        mov         dword ptr [ebp-0C],ecx
+006E9C07        mov         dword ptr [ebp-10],ecx
+006E9C0A        mov         dword ptr [ebp-14],ecx
+006E9C0D        mov         dword ptr [ebp-18],ecx
+006E9C10        mov         dword ptr [ebp-1C],ecx
+006E9C13        mov         dword ptr [ebp-20],ecx
+# 这里esi=buff[96]
+006E9C16        mov         esi,edx
+006E9C18        lea         edi,[ebp-4C]
+006E9C1B        mov         ecx,8
+# 这里就是在赋值，把buff内容移动到堆栈里，重复8次，符合上面的清空操作
+# 具体为堆栈的19f120-19f13c中
+006E9C20        rep movs    dword ptr [edi],dword ptr [esi]
+006E9C22        mov         dword ptr [ebp-24],eax
+006E9C25        xor         eax,eax
+006E9C27        push        ebp
+006E9C28        push        6EA07D
+006E9C2D        push        dword ptr fs:[eax]
+006E9C30        mov         dword ptr fs:[eax],esp
+006E9C33        mov         byte ptr [ebp-25],4
+006E9C37        mov         eax,dword ptr [ebp-24]
+# 287d380 这里理论上是BLHeli的基址
+# +50 就变成了ESC_MCU的变量位置
+006E9C3A        add         eax,50;TBLHeli.FEep_ESC_MCU:TESC_MCU
+006E9C3D        mov         ecx,0FF
+006E9C42        mov         edx,20
+# 这里就是用FF填充0x20个字节，说白了就是在给ESC_MUC的string初始化
+006E9C47        call        @FillChar
+006E9C4C        mov         eax,dword ptr [ebp-24]
+006E9C4F        lea         edx,[eax+50];TBLHeli.FEep_ESC_MCU:TESC_MCU
+006E9C52        lea         eax,[ebp-4C]
+006E9C55        mov         ecx,20
+# 这里就是把堆栈里刚才拿到的8个字节 又给放回到了ESC_MUC的位置上
+006E9C5A        call        Move
+```
+
+这部分数据是直接平移过来的
+
+![image-20210717162449070](https://i.loli.net/2021/07/17/ph4F5uVWXUgIKbm.png)
+
+
+
+```assembly
+
+006E9C5F        push        20
+006E9C61        lea         eax,[ebp-4]
+006E9C64        mov         ecx,1
+006E9C69        mov         edx,dword ptr ds:[404B48];TArray<System.Byte>
+006E9C6F        call        @DynArraySetLength
+006E9C74        add         esp,4
+006E9C77        lea         eax,[ebp-4C]
+006E9C7A        mov         ecx,20
+006E9C7F        mov         edx,dword ptr [ebp-4]
+# 这里大概就是又申请了一个空间，然后把刚才的32个字节又传进去了
+006E9C82        call        Move
+006E9C87        mov         eax,dword ptr [ebp-24]
+006E9C8A        xor         edx,edx
+# 这里进行初始化 edx=0
+006E9C8C        mov         dword ptr [eax+0B4],edx;TBLHeli.FMCU_DeviceID:Integer
+006E9C92        mov         eax,dword ptr [ebp-24]
+006E9C95        mov         byte ptr [eax+0D2],0;TBLHeli.FMCUManufacturer:TMCUManufacturer
+006E9C9C        mov         eax,dword ptr [ebp-24]
+006E9C9F        mov         byte ptr [eax+0D1],0;TBLHeli.FIs_64k:Boolean
+006E9CA6        xor         edx,edx
+006E9CA8        push        ebp
+006E9CA9        push        6E9D00
+006E9CAE        push        dword ptr fs:[edx]
+006E9CB1        mov         dword ptr fs:[edx],esp
+006E9CB4        xor         eax,eax
+006E9CB6        mov         dword ptr [ebp-8],eax
+006E9CB9        lea         edx,[ebp-8]
+006E9CBC        mov         eax,[00839640];^'#BLHeli_32*'
+006E9CC1        call        0043691C
+006E9CC6        mov         eax,[00839640];^'#BLHeli_32*'
+006E9CCB        test        eax,eax
+006E9CCD>       je          006E9CD4
+006E9CCF        sub         eax,4
+006E9CD2        mov         eax,dword ptr [eax]
+006E9CD4        mov         ecx,eax
+006E9CD6        mov         edx,dword ptr [ebp-8]
+006E9CD9        mov         eax,dword ptr [ebp-4]
+006E9CDC        call        CompareMem
+006E9CE1        mov         byte ptr [ebp-26],al
+006E9CE4        xor         eax,eax
+006E9CE6        pop         edx
+006E9CE7        pop         ecx
+006E9CE8        pop         ecx
+006E9CE9        mov         dword ptr fs:[eax],edx
+006E9CEC        push        6E9D07
+006E9CF1        lea         eax,[ebp-8]
+006E9CF4        mov         edx,dword ptr ds:[404B48];TArray<System.Byte>
+# 这里是又把这个变量清空了
+006E9CFA        call        @DynArrayClear
+006E9CFF        ret
+006E9D00>       jmp         @HandleFinally
+006E9D05>       jmp         006E9CF1
+# 这里判定相同了，所以跳转
+006E9D07        cmp         byte ptr [ebp-26],0
+# 跳转
+006E9D0B>       je          006EA061
+006E9D11        mov         byte ptr [ebp-25],3
+006E9D15        mov         eax,[00839640];^'#BLHeli_32*'
+006E9D1A        test        eax,eax
+006E9D1C>       je          006E9D23
+006E9D1E        sub         eax,4
+006E9D21        mov         eax,dword ptr [eax]
+006E9D23        lea         edx,[ebp-4]
+006E9D26        mov         ecx,eax
+006E9D28        xor         eax,eax
+006E9D2A        xchg        eax,edx
+006E9D2B        call        006D5A78
+006E9D30        xor         edx,edx
+006E9D32        push        ebp
+006E9D33        push        6E9D8A
+006E9D38        push        dword ptr fs:[edx]
+006E9D3B        mov         dword ptr fs:[edx],esp
+006E9D3E        xor         eax,eax
+006E9D40        mov         dword ptr [ebp-0C],eax
+006E9D43        lea         edx,[ebp-0C]
+006E9D46        mov         eax,[00839644];^'STM32F051x6#'
+006E9D4B        call        0043691C
+006E9D50        mov         eax,[00839644];^'STM32F051x6#'
+006E9D55        test        eax,eax
+006E9D57>       je          006E9D5E
+006E9D59        sub         eax,4
+006E9D5C        mov         eax,dword ptr [eax]
+006E9D5E        mov         ecx,eax
+006E9D60        mov         edx,dword ptr [ebp-0C]
+006E9D63        mov         eax,dword ptr [ebp-4]
+006E9D66        call        CompareMem
+006E9D6B        mov         byte ptr [ebp-27],al
+006E9D6E        xor         eax,eax
+006E9D70        pop         edx
+006E9D71        pop         ecx
+006E9D72        pop         ecx
+006E9D73        mov         dword ptr fs:[eax],edx
+006E9D76        push        6E9D91
+006E9D7B        lea         eax,[ebp-0C]
+006E9D7E        mov         edx,dword ptr ds:[404B48];TArray<System.Byte>
+006E9D84        call        @DynArrayClear
+006E9D89        ret
+006E9D8A>       jmp         @HandleFinally
+006E9D8F>       jmp         006E9D7B
+006E9D91        cmp         byte ptr [ebp-27],0
+006E9D95>       je          006E9DB3
+006E9D97        mov         eax,dword ptr [ebp-24]
+006E9D9A        mov         dword ptr [eax+0B4],3306;TBLHeli.FMCU_DeviceID:Integer
+006E9DA4        mov         eax,dword ptr [ebp-24]
+006E9DA7        mov         byte ptr [eax+0D2],1;TBLHeli.FMCUManufacturer:TMCUManufacturer
+006E9DAE>       jmp         006EA051
+006E9DB3        xor         edx,edx
+006E9DB5        push        ebp
+006E9DB6        push        6E9E0D
+006E9DBB        push        dword ptr fs:[edx]
+006E9DBE        mov         dword ptr fs:[edx],esp
+006E9DC1        xor         eax,eax
+006E9DC3        mov         dword ptr [ebp-10],eax
+006E9DC6        lea         edx,[ebp-10]
+006E9DC9        mov         eax,[00839648];^'STM32F031x6#'
+006E9DCE        call        0043691C
+006E9DD3        mov         eax,[00839648];^'STM32F031x6#'
+006E9DD8        test        eax,eax
+006E9DDA>       je          006E9DE1
+006E9DDC        sub         eax,4
+006E9DDF        mov         eax,dword ptr [eax]
+006E9DE1        mov         ecx,eax
+006E9DE3        mov         edx,dword ptr [ebp-10]
+006E9DE6        mov         eax,dword ptr [ebp-4]
+006E9DE9        call        CompareMem
+006E9DEE        mov         byte ptr [ebp-28],al
+006E9DF1        xor         eax,eax
+006E9DF3        pop         edx
+006E9DF4        pop         ecx
+006E9DF5        pop         ecx
+006E9DF6        mov         dword ptr fs:[eax],edx
+006E9DF9        push        6E9E14
+006E9DFE        lea         eax,[ebp-10]
+006E9E01        mov         edx,dword ptr ds:[404B48];TArray<System.Byte>
+006E9E07        call        @DynArrayClear
+006E9E0C        ret
+006E9E0D>       jmp         @HandleFinally
+006E9E12>       jmp         006E9DFE
+006E9E14        cmp         byte ptr [ebp-28],0
+006E9E18>       je          006E9E36
+006E9E1A        mov         eax,dword ptr [ebp-24]
+006E9E1D        mov         dword ptr [eax+0B4],1F06;TBLHeli.FMCU_DeviceID:Integer
+006E9E27        mov         eax,dword ptr [ebp-24]
+006E9E2A        mov         byte ptr [eax+0D2],1;TBLHeli.FMCUManufacturer:TMCUManufacturer
+006E9E31>       jmp         006EA051
+006E9E36        xor         edx,edx
+006E9E38        push        ebp
+006E9E39        push        6E9E90
+006E9E3E        push        dword ptr fs:[edx]
+006E9E41        mov         dword ptr fs:[edx],esp
+006E9E44        xor         eax,eax
+006E9E46        mov         dword ptr [ebp-14],eax
+006E9E49        lea         edx,[ebp-14]
+006E9E4C        mov         eax,[00839650];^'GD32F150x6#'
+006E9E51        call        0043691C
+006E9E56        mov         eax,[00839650];^'GD32F150x6#'
+006E9E5B        test        eax,eax
+006E9E5D>       je          006E9E64
+006E9E5F        sub         eax,4
+006E9E62        mov         eax,dword ptr [eax]
+006E9E64        mov         ecx,eax
+006E9E66        mov         edx,dword ptr [ebp-14]
+006E9E69        mov         eax,dword ptr [ebp-4]
+006E9E6C        call        CompareMem
+006E9E71        mov         byte ptr [ebp-29],al
+006E9E74        xor         eax,eax
+006E9E76        pop         edx
+006E9E77        pop         ecx
+006E9E78        pop         ecx
+006E9E79        mov         dword ptr fs:[eax],edx
+006E9E7C        push        6E9E97
+006E9E81        lea         eax,[ebp-14]
+006E9E84        mov         edx,dword ptr ds:[404B48];TArray<System.Byte>
+006E9E8A        call        @DynArrayClear
+006E9E8F        ret
+006E9E90>       jmp         @HandleFinally
+006E9E95>       jmp         006E9E81
+006E9E97        cmp         byte ptr [ebp-29],0
+006E9E9B>       je          006E9EB9
+006E9E9D        mov         eax,dword ptr [ebp-24]
+006E9EA0        mov         dword ptr [eax+0B4],3406;TBLHeli.FMCU_DeviceID:Integer
+006E9EAA        mov         eax,dword ptr [ebp-24]
+006E9EAD        mov         byte ptr [eax+0D2],2;TBLHeli.FMCUManufacturer:TMCUManufacturer
+006E9EB4>       jmp         006EA051
+006E9EB9        xor         edx,edx
+006E9EBB        push        ebp
+006E9EBC        push        6E9F13
+006E9EC1        push        dword ptr fs:[edx]
+006E9EC4        mov         dword ptr fs:[edx],esp
+006E9EC7        xor         eax,eax
+006E9EC9        mov         dword ptr [ebp-18],eax
+006E9ECC        lea         edx,[ebp-18]
+006E9ECF        mov         eax,[00839654];^'GD32F350x6#'
+006E9ED4        call        0043691C
+006E9ED9        mov         eax,[00839654];^'GD32F350x6#'
+006E9EDE        test        eax,eax
+006E9EE0>       je          006E9EE7
+006E9EE2        sub         eax,4
+006E9EE5        mov         eax,dword ptr [eax]
+006E9EE7        mov         ecx,eax
+006E9EE9        mov         edx,dword ptr [ebp-18]
+006E9EEC        mov         eax,dword ptr [ebp-4]
+006E9EEF        call        CompareMem
+006E9EF4        mov         byte ptr [ebp-2A],al
+006E9EF7        xor         eax,eax
+006E9EF9        pop         edx
+006E9EFA        pop         ecx
+006E9EFB        pop         ecx
+006E9EFC        mov         dword ptr fs:[eax],edx
+006E9EFF        push        6E9F1A
+006E9F04        lea         eax,[ebp-18]
+006E9F07        mov         edx,dword ptr ds:[404B48];TArray<System.Byte>
+006E9F0D        call        @DynArrayClear
+006E9F12        ret
+006E9F13>       jmp         @HandleFinally
+006E9F18>       jmp         006E9F04
+006E9F1A        cmp         byte ptr [ebp-2A],0
+006E9F1E>       je          006E9F3C
+006E9F20        mov         eax,dword ptr [ebp-24]
+006E9F23        mov         dword ptr [eax+0B4],3506;TBLHeli.FMCU_DeviceID:Integer
+006E9F2D        mov         eax,dword ptr [ebp-24]
+006E9F30        mov         byte ptr [eax+0D2],2;TBLHeli.FMCUManufacturer:TMCUManufacturer
+006E9F37>       jmp         006EA051
+006E9F3C        xor         edx,edx
+006E9F3E        push        ebp
+006E9F3F        push        6E9F96
+006E9F44        push        dword ptr fs:[edx]
+006E9F47        mov         dword ptr fs:[edx],esp
+006E9F4A        xor         eax,eax
+006E9F4C        mov         dword ptr [ebp-1C],eax
+006E9F4F        lea         edx,[ebp-1C]
+006E9F52        mov         eax,[0083964C];^'STM32L431x6#'
+006E9F57        call        0043691C
+006E9F5C        mov         eax,[0083964C];^'STM32L431x6#'
+006E9F61        test        eax,eax
+006E9F63>       je          006E9F6A
+006E9F65        sub         eax,4
+006E9F68        mov         eax,dword ptr [eax]
+006E9F6A        mov         ecx,eax
+006E9F6C        mov         edx,dword ptr [ebp-1C]
+006E9F6F        mov         eax,dword ptr [ebp-4]
+006E9F72        call        CompareMem
+006E9F77        mov         byte ptr [ebp-2B],al
+006E9F7A        xor         eax,eax
+006E9F7C        pop         edx
+006E9F7D        pop         ecx
+006E9F7E        pop         ecx
+006E9F7F        mov         dword ptr fs:[eax],edx
+006E9F82        push        6E9F9D
+006E9F87        lea         eax,[ebp-1C]
+006E9F8A        mov         edx,dword ptr ds:[404B48];TArray<System.Byte>
+006E9F90        call        @DynArrayClear
+006E9F95        ret
+006E9F96>       jmp         @HandleFinally
+006E9F9B>       jmp         006E9F87
+006E9F9D        cmp         byte ptr [ebp-2B],0
+006E9FA1>       je          006E9FC9
+006E9FA3        mov         eax,dword ptr [ebp-24]
+006E9FA6        mov         dword ptr [eax+0B4],2B06;TBLHeli.FMCU_DeviceID:Integer
+006E9FB0        mov         eax,dword ptr [ebp-24]
+006E9FB3        mov         byte ptr [eax+0D2],1;TBLHeli.FMCUManufacturer:TMCUManufacturer
+006E9FBA        mov         eax,dword ptr [ebp-24]
+006E9FBD        mov         byte ptr [eax+0D1],1;TBLHeli.FIs_64k:Boolean
+006E9FC4>       jmp         006EA051
+006E9FC9        xor         edx,edx
+006E9FCB        push        ebp
+006E9FCC        push        6EA023
+006E9FD1        push        dword ptr fs:[edx]
+006E9FD4        mov         dword ptr fs:[edx],esp
+006E9FD7        xor         eax,eax
+006E9FD9        mov         dword ptr [ebp-20],eax
+006E9FDC        lea         edx,[ebp-20]
+006E9FDF        mov         eax,[00839658];^'STM32G071x6#'
+006E9FE4        call        0043691C
+006E9FE9        mov         eax,[00839658];^'STM32G071x6#'
+006E9FEE        test        eax,eax
+006E9FF0>       je          006E9FF7
+006E9FF2        sub         eax,4
+006E9FF5        mov         eax,dword ptr [eax]
+006E9FF7        mov         ecx,eax
+006E9FF9        mov         edx,dword ptr [ebp-20]
+006E9FFC        mov         eax,dword ptr [ebp-4]
+006E9FFF        call        CompareMem
+006EA004        mov         byte ptr [ebp-2C],al
+006EA007        xor         eax,eax
+006EA009        pop         edx
+006EA00A        pop         ecx
+006EA00B        pop         ecx
+006EA00C        mov         dword ptr fs:[eax],edx
+006EA00F        push        6EA02A
+006EA014        lea         eax,[ebp-20]
+006EA017        mov         edx,dword ptr ds:[404B48];TArray<System.Byte>
+006EA01D        call        @DynArrayClear
+006EA022        ret
+006EA023>       jmp         @HandleFinally
+006EA028>       jmp         006EA014
+006EA02A        cmp         byte ptr [ebp-2C],0
+006EA02E>       je          006EA051
+006EA030        mov         eax,dword ptr [ebp-24]
+006EA033        mov         dword ptr [eax+0B4],4706;TBLHeli.FMCU_DeviceID:Integer
+006EA03D        mov         eax,dword ptr [ebp-24]
+006EA040        mov         byte ptr [eax+0D2],1;TBLHeli.FMCUManufacturer:TMCUManufacturer
+006EA047        mov         eax,dword ptr [ebp-24]
+006EA04A        mov         byte ptr [eax+0D1],1;TBLHeli.FIs_64k:Boolean
+006EA051        mov         eax,dword ptr [ebp-24]
+006EA054        cmp         dword ptr [eax+0B4],0;TBLHeli.FMCU_DeviceID:Integer
+006EA05B>       jle         006EA061
+006EA05D        mov         byte ptr [ebp-25],0
+# 继续
+006EA061        xor         eax,eax
+006EA063        pop         edx
+006EA064        pop         ecx
+006EA065        pop         ecx
+006EA066        mov         dword ptr fs:[eax],edx
+006EA069        push        6EA084
+006EA06E        lea         eax,[ebp-4]
+006EA071        mov         edx,dword ptr ds:[404B48];TArray<System.Byte>
+006EA077        call        @DynArrayClear
+006EA07C        ret
+006EA07D>       jmp         @HandleFinally
+006EA082>       jmp         006EA06E
+006EA084        movzx       eax,byte ptr [ebp-25]
+006EA088        pop         edi
+006EA089        pop         esi
+006EA08A        mov         esp,ebp
+006EA08C        pop         ebp
+006EA08D        ret
+
+```
+
+这个ReadMCU，就这么没头没尾的结束了，也就赋值了一下，初始化了一下变量，然后没有任何判定就出去。
+
+
+
+#### 继续 sub_006EA090
+
+```assembly
+
+006EA0C5        mov         ebx,eax
+006EA0C7        cmp         bl,4
+006EA0CA>       jne         006EA324
+006EA0D0        mov         eax,dword ptr [ebp+8]
+006EA0D3        cmp         dword ptr [eax-0C],0C0
+006EA0DA>       jl          006EA324
+006EA0E0        mov         eax,dword ptr [ebp+8]
+006EA0E3        mov         eax,dword ptr [eax-0C]
+006EA0E6        push        eax
+006EA0E7        lea         eax,[ebp-4]
+006EA0EA        push        eax
+006EA0EB        mov         eax,dword ptr [ebp+8]
+006EA0EE        mov         eax,dword ptr [eax-4]
+006EA0F1        xor         ecx,ecx
+006EA0F3        mov         edx,dword ptr ds:[404B48];TArray<System.Byte>
+006EA0F9        call        @DynArrayCopyRange
+006EA0FE        push        0
+# 这个是传入的变量 串口buff地址
+006EA100        mov         eax,dword ptr [ebp+8]
+006EA103        add         eax,0FFFFFFFC
+006EA106        xor         ecx,ecx
+# edx=0x407C00 应该是某个变量地址或者返回的变量地址 
+006EA108        mov         dx,7C00
+# 这里面是整个内存就解析完成了
+# 这里eax传入的buff地址，edx应该是新申请的地址
+006EA10C        call        006E1B48
+```
+
+
+
+##### 006E1B48
+
+```assembly
+_Unit102.sub_006E1B48
+006E1B48        push        ebp
+006E1B49        mov         ebp,esp
+006E1B4B        add         esp,0FFFFFFCC
+006E1B4E        push        ebx
+006E1B4F        push        esi
+006E1B50        push        edi
+006E1B51        mov         ebx,ecx
+006E1B53        mov         word ptr [ebp-6],dx
+006E1B57        mov         dword ptr [ebp-4],eax
+006E1B5A        movzx       edx,byte ptr [ebp+8]
+006E1B5E        movzx       eax,word ptr [ebp-6]
+006E1B62        call        006E1CF4
+006E1B67        mov         byte ptr [ebp-19],al
+006E1B6A        movzx       eax,byte ptr [ebp-19]
+# od这里提示是switch case，al这里就是1，所以继续
+006E1B6E        sub         al,1
+006E1B70>       jb          006E1B7D
+# 1.跳转
+006E1B72>       je          006E1B89
+...
+# 1.继续 case 1
+006E1B89        test        bl,bl
+# 2.跳转
+006E1B8B>       je          006E1BA1
+...
+# 2.继续
+006E1BA1        lea         edx,[ebp-34]
+006E1BA4        mov         eax,839620
+006E1BA9        mov         ecx,10
+# 这里是把一个内容给移动过来了，不知道有什么用
+006E1BAE        call        Move
+# 3.jump
+006E1BB3>       jmp         006E1BC7
+...
+# 3.here
+006E1BC7        xor         eax,eax
+006E1BC9        mov         dword ptr [ebp-14],eax
+# 4.jump
+006E1BCC>       jmp         006E1C80
+# 5.here 双循环，这里是最外侧
+006E1BD1        mov         ebx,dword ptr ds:[839634];0x9E3779B9* gvar_00839634
+# 这里很奇怪 ebx = 0x9E3779B9*0x20 = 0xC6EF3720
+006E1BD7        imul        ebx,dword ptr ds:[839630];0x20 gvar_00839630
+# 这里eax又等于buff地址了
+006E1BDE        mov         eax,dword ptr [ebp-4]
+006E1BE1        mov         eax,dword ptr [eax]
+# edx=0 当个计数器？
+006E1BE3        mov         edx,dword ptr [ebp-14]
+# 这里其实就是eax地址往前走，应该是在遍历了
+006E1BE6        add         eax,edx
+006E1BE8        lea         edx,[ebp-10]
+006E1BEB        mov         ecx,8
+# 这里是把eax中的8字节 赋值到edx的堆栈中，edx的堆栈是19f158，固定的
+006E1BF0        call        Move
+006E1BF5        mov         eax,[00839630];0x20 gvar_00839630
+# 这句很迷啊，这个外部变量一定是20，然后这个与操作，必然成立啊
+006E1BFA        test        eax,eax
+006E1BFC>       jle         006E1C5F
+006E1BFE        mov         dword ptr [ebp-20],eax
+# 7.here 这里是内循环
+
+# 这里第一步就是把前面赋值的8字节中，前4字节给了esi 也就是buff的前4个字节
+006E1C01        mov         esi,dword ptr [ebp-10]
+006E1C04        mov         eax,esi
+# 这里eax就是前4字节，然后左移4位
+006E1C06        shl         eax,4
+006E1C09        mov         edx,esi
+# edx右移5位
+006E1C0B        shr         edx,5
+# 然后eax和edx取异或
+006E1C0E        xor         eax,edx
+#再加回原来的值
+006E1C10        add         eax,esi
+# 这里ebx = C6EF3720 这个ebx就是前面从外部拿出来的值
+006E1C12        mov         edx,ebx
+006E1C14        shr         edx,0B
+006E1C17        and         edx,3
+# 这里突然来了ebp ，这个ebp之前没注意是什么
+006E1C1A        mov         edx,dword ptr [ebp+edx*4-34]
+# 这里又让原始值加上了这个新得到的值
+006E1C1E        add         edx,ebx
+# ecx=0x7c00
+006E1C20        movzx       ecx,word ptr [ebp-6]
+# edx 又加上了这个值
+006E1C24        add         edx,ecx
+# 还有一个异或
+006E1C26        xor         eax,edx
+006E1C28        sub         dword ptr [ebp-0C],eax
+006E1C2B        sub         ebx,dword ptr ds:[839634];gvar_00839634
+006E1C31        mov         edi,dword ptr [ebp-0C]
+006E1C34        mov         eax,edi
+006E1C36        shl         eax,4
+006E1C39        mov         edx,edi
+006E1C3B        shr         edx,5
+006E1C3E        xor         eax,edx
+006E1C40        add         eax,edi
+006E1C42        mov         edx,3
+006E1C47        and         edx,ebx
+006E1C49        mov         edx,dword ptr [ebp+edx*4-34]
+006E1C4D        add         edx,ebx
+006E1C4F        movzx       ecx,word ptr [ebp-6]
+006E1C53        add         edx,ecx
+006E1C55        xor         eax,edx
+006E1C57        sub         dword ptr [ebp-10],eax
+006E1C5A        dec         dword ptr [ebp-20]
+# 7.jump
+006E1C5D>       jne         006E1C01
+006E1C5F        mov         eax,dword ptr [ebp-4]
+006E1C62        mov         eax,dword ptr [eax]
+006E1C64        mov         edx,dword ptr [ebp-14]
+006E1C67        lea         edx,[eax+edx]
+006E1C6A        lea         eax,[ebp-10]
+006E1C6D        mov         ecx,8
+006E1C72        call        Move
+006E1C77        add         dword ptr [ebp-14],8
+006E1C7B        add         word ptr [ebp-6],8
+# 4.here
+# 重新读出来buff的地址
+006E1C80        mov         eax,dword ptr [ebp-4]
+006E1C83        mov         eax,dword ptr [eax]
+006E1C85        mov         dword ptr [ebp-24],eax
+# 这里是判定是否串口地址为0，也就是指针为空的情况
+006E1C88        cmp         dword ptr [ebp-24],0
+006E1C8C>       je          006E1C99
+006E1C8E        mov         eax,dword ptr [ebp-24]
+006E1C91        sub         eax,4
+006E1C94        mov         eax,dword ptr [eax]
+006E1C96        mov         dword ptr [ebp-24],eax
+006E1C99        mov         eax,dword ptr [ebp-24]
+# 不知道为什么这里长度先-1，再-7，其实也就是减了8，但是这里没看到处理数据啊，怎么就减了呢
+006E1C9C        dec         eax
+006E1C9D        sub         eax,7
+# 然后判定是否把buff遍历完了，没有就跳转
+006E1CA0        cmp         eax,dword ptr [ebp-14]
+# 5.jump
+006E1CA3>       jge         006E1BD1
+006E1CA9        lea         eax,[ebp-34]
+006E1CAC        xor         ecx,ecx
+006E1CAE        mov         edx,10
+006E1CB3        call        @FillChar
+006E1CB8        movzx       eax,byte ptr [ebp-19]
+006E1CBC        call        006E1D40
+006E1CC1        test        al,al
+006E1CC3>       je          006E1CCD
+006E1CC5        mov         eax,dword ptr [ebp-4]
+# 这个函数也很关键，他直接把内存给变得可读了，前面的循环内存还不太能读的样子
+006E1CC8        call        006E1960
+006E1CCD        pop         edi
+006E1CCE        pop         esi
+006E1CCF        pop         ebx
+006E1CD0        mov         esp,ebp
+006E1CD2        pop         ebp
+006E1CD3        ret         4
+
+```
+
+
+
+#### 继续sub_006EA090
+
+```assembly
+
+006EA111        mov         edx,dword ptr ds:[841290];^gvar_00839100
+006EA117        movzx       edx,byte ptr [edx]
+006EA11A        mov         eax,dword ptr [ebp+8]
+006EA11D        mov         eax,dword ptr [eax-4]
+006EA120        call        006D5CE4
+006EA125        test        al,al
+006EA127>       je          006EA130
+006EA129        mov         bl,5
+006EA12B>       jmp         006EA324
+006EA130        mov         eax,dword ptr [ebp+8]
+006EA133        mov         eax,dword ptr [eax-4]
+006EA136        lea         edx,[eax+60]
+006EA139        mov         eax,dword ptr [ebp+8]
+006EA13C        mov         eax,dword ptr [eax-8]
+# 这里又调用了一次读
+006EA13F        call        TBLHeli.ReadMCU
+006EA144        mov         ebx,eax
+006EA146        cmp         bl,4
+006EA149>       je          006EA172
+006EA14B        mov         eax,dword ptr [ebp+8]
+006EA14E        mov         eax,dword ptr [eax-8]
+006EA151        mov         byte ptr [eax+0B8],1
+006EA158        mov         eax,dword ptr [ebp+8]
+006EA15B        mov         eax,dword ptr [eax-4]
+006EA15E        test        eax,eax
+006EA160>       je          006EA167
+006EA162        sub         eax,4
+006EA165        mov         eax,dword ptr [eax]
+006EA167        mov         edx,dword ptr [ebp+8]
+006EA16A        mov         dword ptr [edx-0C],eax
+006EA16D>       jmp         006EA324
+006EA172        mov         eax,dword ptr [ebp+8]
+006EA175        mov         eax,dword ptr [eax-0C]
+006EA178        push        eax
+006EA179        mov         eax,dword ptr [ebp+8]
+006EA17C        add         eax,0FFFFFFFC
+006EA17F        push        eax
+006EA180        xor         ecx,ecx
+006EA182        mov         edx,dword ptr ds:[404B48];TArray<System.Byte>
+006EA188        mov         eax,dword ptr [ebp-4]
+006EA18B        call        @DynArrayCopyRange
+006EA190        push        1
+006EA192        mov         eax,dword ptr [ebp+8]
+006EA195        add         eax,0FFFFFFFC
+006EA198        xor         ecx,ecx
+006EA19A        mov         dx,0F800
+006EA19E        call        006E1B48
+006EA1A3        mov         edx,dword ptr ds:[841290];^gvar_00839100
+006EA1A9        movzx       edx,byte ptr [edx]
+006EA1AC        mov         eax,dword ptr [ebp+8]
+006EA1AF        mov         eax,dword ptr [eax-4]
+006EA1B2        call        006D5CE4
+006EA1B7        test        al,al
+006EA1B9>       je          006EA1C2
+006EA1BB        mov         bl,5
+# 1.跳转
+006EA1BD>       jmp         006EA324
+...
+# 1.继续 基本就结束了
+006EA324        xor         eax,eax
+006EA326        pop         edx
+006EA327        pop         ecx
+006EA328        pop         ecx
+006EA329        mov         dword ptr fs:[eax],edx
+006EA32C        push        6EA347
+006EA331        lea         eax,[ebp-4]
+006EA334        mov         edx,dword ptr ds:[404B48];TArray<System.Byte>
+006EA33A        call        @DynArrayClear
+006EA33F        ret
+006EA340>       jmp         @HandleFinally
+006EA345>       jmp         006EA331
+006EA347        mov         eax,ebx
+006EA349        pop         ebx
+006EA34A        pop         ecx
+006EA34B        pop         ebp
+006EA34C        ret
+
+```
+
+
+
+#### 继续ReadSetupFromBinString
+
 ```assembly
 
 006EA46E        pop         ecx
@@ -1429,11 +2132,48 @@ actReadSetupExecute 按键act
 
 
 
+## 变量内存表
+
+```
+TBLHeli 基址为0x287D380
+偏移
+0xB4 MCU_DeviceID:Integer
+0xD2 MCU_Manufacturer:
+0xD1 Is_64K:Boolean
+0x18 MCU:string 应该是名字之类的东西
+
+串口buff 基址为 4FEA1C8或者   
+他的上4个字节是长度00 01 00 00 256字节
+
+
+```
+
+
+
+## 数据解密流程
+
+```
+解密逻辑
+原值为A，以4字节为单位
+( (A<<4) xor (A>>5) ）+ A
+
+外部密钥设为B = 0xC6EF3720 每次在循环开头更新
+C = ( (B>>11) & 0x3 ) 这样拿到的C只是一个偏移量
+
+D = [ebp+C*4-34]的值
+
+E = D + A
+
+E = E + 0x7C00
+
+F = A 
+```
+
 
 
 ## Summary
 
-
+总算是看到了解密流程，但是这个解密算法真的好复杂啊，看的我一脸懵逼
 
 未完待续....
 
