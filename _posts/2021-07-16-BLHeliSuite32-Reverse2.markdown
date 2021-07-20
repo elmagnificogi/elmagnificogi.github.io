@@ -3,7 +3,7 @@ layout:     post
 title:      "BLHeliSuite32逆向（二）"
 subtitle:   "Crack，Reverse"
 date:       2021-07-16
-update:     2021-07-19
+update:     2021-07-20
 author:     "elmagnifico"
 header-img: "img/drone.jpg"
 catalog:    true
@@ -1598,8 +1598,9 @@ _Unit102.sub_006E1B48
 006E1C67        lea         edx,[eax+edx]
 006E1C6A        lea         eax,[ebp-10]
 006E1C6D        mov         ecx,8
-# 这里就是重新加载前两个字符
+# 这里是将刚才计算完成的数据给移动到新地方 其实就在原buff数据的上面一点就是
 006E1C72        call        Move
+# 每次移动8个字节，刚好
 # 这里让这两个变量+8了
 006E1C77        add         dword ptr [ebp-14],8
 006E1C7B        add         word ptr [ebp-6],8
@@ -1644,35 +1645,43 @@ _Unit102.sub_006E1B48
 
 ```
 
-这里还有一个问题，就是解算出来的数据存储到了哪里，没看到有具体的存储操作，怎么传递给下一个函数的
+这里基本就把所有数据解密完成了，但是解密只是解开了，但是后面还有一个流程把数据又整理了一下，整理之后数据的可读性一下就变强了很多很多，主要就是靠下面的函数实现的。
 
 
 
 ##### sub_006E1960
 
-那就看一下他是怎么做的
+那就看一下他是怎么做的，发现核心好像是在这里啊
 
-```
+```assembly
 _Unit102.sub_006E1960
 006E1960        push        ebx
 006E1961        push        esi
 006E1962        push        edi
 006E1963        mov         edi,eax
 006E1965        xor         esi,esi
+# 1.跳转
 006E1967>       jmp         006E197A
+# 2.继续
 006E1969        mov         eax,edi
 006E196B        mov         ecx,2
 006E1970        mov         edx,esi
+# 这里应该是每次给定削减2个字节
 006E1972        call        006D5A78
+# 这里是字节指针+=6，他是基于给进去的指针+6，相当于是原字符的每8字节
 006E1977        add         esi,6
+# 1.继续
 006E197A        mov         ebx,dword ptr [edi]
 006E197C        test        ebx,ebx
 006E197E>       je          006E1985
 006E1980        sub         ebx,4
 006E1983        mov         ebx,dword ptr [ebx]
+# ebx只是一个计数器
 006E1985        dec         ebx
 006E1986        dec         ebx
+# 判断结尾的
 006E1987        cmp         esi,ebx
+# 2.跳转
 006E1989>       jl          006E1969
 006E198B        pop         edi
 006E198C        pop         esi
@@ -1680,6 +1689,136 @@ _Unit102.sub_006E1960
 006E198E        ret
 
 ```
+
+
+
+##### sub_006D5A78
+
+这个比较短小
+
+```assembly
+_Unit96.sub_006D5A78
+006D5A78        push        ebx
+006D5A79        mov         ebx,dword ptr ds:[404B48];TArray<System.Byte>
+006D5A7F        push        ebx
+# 只是单纯的把 404B48这个数组给进去了
+006D5A80        call        0040D0EC
+006D5A85        pop         ebx
+006D5A86        ret
+
+```
+
+主要是下面这个函数，这个函数基本全程在赋值粘贴
+
+```assembly
+System.sub_0040D0EC
+0040D0EC        push        ebp
+0040D0ED        mov         ebp,esp
+0040D0EF        add         esp,0FFFFFFE4
+0040D0F2        push        ebx
+0040D0F3        push        esi
+0040D0F4        push        edi
+0040D0F5        mov         dword ptr [ebp-8],ecx
+0040D0F8        mov         dword ptr [ebp-4],edx
+0040D0FB        mov         ebx,eax
+0040D0FD        cmp         dword ptr [ebx],0
+# 判0，继续
+0040D100>       je          0040D1D2
+0040D106        mov         eax,dword ptr [ebx]
+0040D108        sub         eax,8
+# 拿到数组长度
+0040D10B        mov         eax,dword ptr [eax+4]
+0040D10E        cmp         dword ptr [ebp-4],0
+0040D112>       jl          0040D1D2
+0040D118        cmp         eax,dword ptr [ebp-4]
+0040D11B>       jle         0040D1D2
+0040D121        cmp         dword ptr [ebp-8],0
+0040D125>       jle         0040D1D2
+0040D12B        mov         edx,eax
+0040D12D        sub         edx,dword ptr [ebp-4]
+0040D130        sub         edx,dword ptr [ebp-8]
+0040D133        mov         dword ptr [ebp-0C],edx
+0040D136        cmp         dword ptr [ebp-0C],0
+# 1.跳转
+0040D13A>       jge         0040D141
+0040D13C        xor         edx,edx
+0040D13E        mov         dword ptr [ebp-0C],edx
+# 1.继续
+0040D141        mov         edx,dword ptr [ebp+8]
+0040D144        movzx       edi,byte ptr [edx+1]
+0040D148        add         edi,edx
+0040D14A        mov         edx,edi
+0040D14C        mov         esi,dword ptr [edx+2]
+0040D14F        cmp         dword ptr [edx+6],
+# 2.跳转
+0040D153>       je          0040D15C
+0040D155        mov         edx,dword ptr [edx+6]
+0040D158        mov         edi,dword ptr [edx]
+0040D15A>       jmp         0040D15E
+# 2.继续
+0040D15C        xor         edi,edi
+0040D15E        mov         edx,dword ptr [ebp-4]
+0040D161        imul        edx,esi
+0040D164        mov         ecx,dword ptr [ebx]
+0040D166        lea         edx,[ecx+edx]
+0040D169        mov         dword ptr [ebp-18],edx
+0040D16C        sub         eax,dword ptr [ebp-0C]
+0040D16F        imul        esi
+0040D171        mov         edx,dword ptr [ebx]
+0040D173        lea         eax,[edx+eax]
+0040D176        mov         dword ptr [ebp-14],eax
+0040D179        test        edi,edi
+# 3.跳转
+0040D17B>       je          0040D1A5
+0040D17D        mov         eax,dword ptr [ebp-0C]
+0040D180        test        eax,eax
+0040D182>       jle         0040D1B6
+0040D184        mov         dword ptr [ebp-1C],eax
+0040D187        push        1
+0040D189        mov         ecx,edi
+0040D18B        mov         edx,dword ptr [ebp-14]
+0040D18E        mov         eax,dword ptr [ebp-18]
+0040D191        call        CopyArray
+0040D196        mov         eax,esi
+0040D198        add         dword ptr [ebp-18],eax
+0040D19B        add         dword ptr [ebp-14],eax
+0040D19E        dec         dword ptr [ebp-1C]
+0040D1A1>       jne         0040D187
+0040D1A3>       jmp         0040D1B6
+# 3.继续
+0040D1A5        mov         ecx,dword ptr [ebp-0C]
+0040D1A8        imul        ecx,esi
+0040D1AB        mov         edx,dword ptr [ebp-18]
+0040D1AE        mov         eax,dword ptr [ebp-14]
+# 其实这里就是把整体256个字节，往左集体移动2个字节，后面不够的字符自动补0xFF
+0040D1B1        call        Move
+0040D1B6        mov         eax,dword ptr [ebp-4]
+0040D1B9        add         eax,dword ptr [ebp-0C]
+0040D1BC        mov         dword ptr [ebp-10],eax
+0040D1BF        lea         eax,[ebp-10]
+0040D1C2        push        eax
+0040D1C3        mov         eax,ebx
+0040D1C5        mov         ecx,1
+0040D1CA        mov         edx,dword ptr [ebp+8]
+0040D1CD        call        DynArraySetLength
+0040D1D2        pop         edi
+0040D1D3        pop         esi
+0040D1D4        pop         ebx
+0040D1D5        mov         esp,ebp
+0040D1D7        pop         ebp
+0040D1D8        ret         4
+
+```
+
+最后实现的结果就是，将原本解析出来的256字节，每8字节的前2字节给抛弃了，然后用剩下的字节重新对齐，拼成一个新的256字节，不够的字节用0xFF补齐
+
+
+
+![image-20210720165559845](https://i.loli.net/2021/07/20/yLN16TCoRMYdVBb.png)
+
+内存对比，完全符合，我就懒得看具体代码了。唯一这里担心一点，那就是他把抛弃的前2个字节重新在某个地方又拼接了一下，然后又合成了一个新信息，如果有这样的话就坑爹了。
+
+
 
 
 
@@ -2185,9 +2324,8 @@ TBLHeli 基址为0x287D380
 0xD1 Is_64K:Boolean
 0x18 MCU:string 应该是名字之类的东西
 
-串口buff 基址为 4FEA1C8或者   
+串口buff 基址为 4FEA1C8或者52FA2D8 这片内存中有非常多的副本
 他的上4个字节是长度00 01 00 00 256字节
-
 
 ```
 
@@ -2205,13 +2343,9 @@ C = ( (B>>11) & 0x3 ) 这样拿到的C只是一个偏移量
 
 ebp是什么呢？ 应该是个变量基址，从外部传进来的，主要是存储堆栈地址
 D = [ebp+C*4-34]的值
-
 E = D + B
-
 设 F = 0x7C00
-
 G = E + F = edx
-
 H = I  xor G
 
 更新基址内容
@@ -2228,6 +2362,10 @@ O = N + B
 O += F
 L = L xor O
 local.4 -= L 
+
+这样每次计算的内容都存储在local.3和local.4中了
+每轮计算结束以后，将他们转存到了另一个地方，然后继续下8个字节计算。
+当256字节全部计算完成以后，每8字节去掉前2字节后将其余字节拼在一起，然后形成可读配置
 ```
 
 
@@ -2263,7 +2401,7 @@ mem[local1] = 0x19F20C
 mem[local2] = 0x7C00A1C8
 mem[local3] = 0xD3617DCA  # buff 前4字节
 mem[local4] = 0x154369FC  # buff 后4字节
-mem[local5] = 0 # 这个值每次也+8
+mem[local5] = 0  # 这个值每次也+8
 mem[local6] = 0x4
 mem[local7] = 0x1513F8C
 mem[local8] = 0x20  # count 
@@ -2323,11 +2461,6 @@ if start == None:
 print(len(hex_data))
 output_data = ""
 
-
-def str_to_hex(s):
-    return ' '.join([hex(ord(c)).replace('0x', '') for c in s])
-
-
 n = 4
 for i in range(start, start + 256 * 3, 3):
     print(hex_data[i], hex_data[i + 1])
@@ -2338,11 +2471,13 @@ f.close()
 
 print(uart_buff)
 
+decrypt_mem = []
+
 # loop1
 mem[local8] = eax
 for i in range(0, 0x100, 8):
-    mem[local4] = int(uart_buff[i + 3] + uart_buff[i + 2] + uart_buff[i + 1] + uart_buff[i + 0],base=16)
-    mem[local3] = int(uart_buff[i + 7] + uart_buff[i + 6] + uart_buff[i + 5] + uart_buff[i + 4],base=16)
+    mem[local4] = int(uart_buff[i + 3] + uart_buff[i + 2] + uart_buff[i + 1] + uart_buff[i + 0], base=16)
+    mem[local3] = int(uart_buff[i + 7] + uart_buff[i + 6] + uart_buff[i + 5] + uart_buff[i + 4], base=16)
     ebx = ds[0x839634]
     ebx = ebx * ds[0x839630] & 0xFFFFFFFF
     eax = mem[local1]
@@ -2388,12 +2523,29 @@ for i in range(0, 0x100, 8):
         mem[local4] = (mem[local4] - eax) & 0xFFFFFFFF
         mem[local8] -= 1
         # loop2 end
-    mem[local5] +=8
-    mem[0x19F168 - 6]+=8
-        
-    print(hex(mem[local3]))
-    print(hex(mem[local4]))
+    mem[local5] += 8
+    mem[0x19F168 - 6] += 8
+
+    decrypt_mem.append(mem[local4])
+    decrypt_mem.append(mem[local3])
+
+    # print(hex(mem[local4]))
+    # print(hex(mem[local3]))
+
+print(decrypt_mem)
+
+def bytes2hex(data):
+    lin = ['%02X' % i for i in data]
+    return "".join(lin)
+
+for i in range(0, 64, 2):
+    print(hex((decrypt_mem[i + 0] & 0x00FF0000) >> 16).zfill(4) + hex((decrypt_mem[i + 0] & 0xFF000000) >> 24).replace("0x",'').zfill(2))
+
+    print(hex((decrypt_mem[i + 1] & 0x000000FF)).zfill(4) + hex((decrypt_mem[i + 1] & 0x0000FF00) >> 8).replace("0x",'').zfill(2) + hex(
+        (decrypt_mem[i + 1] & 0x00FF0000) >> 16).replace("0x",'').zfill(2) + hex((decrypt_mem[i + 1] & 0xFF000000) >> 24).replace("0x",'').zfill(2))
+
 end = True
+
 
 ```
 
@@ -2401,15 +2553,15 @@ rawdata.txt中是本次读取的数据，类似于这样就行，可以自动解
 
 ![image-20210719184659222](https://i.loli.net/2021/07/19/mtyoDsR8fNIEKF9.png)
 
-目前每次解出来的数据是和反汇编看到的一模一样
+目前每次解出来的数据是和反汇编看到的一模一样。最后的输出我将每8字节的前2字节去掉，然后就变成可读的字符串了，和内存的排布是一样的。
+
+![image-20210720200104954](https://i.loli.net/2021/07/20/IKRnv1Ab9li4FBz.png)
 
 
 
 ## Summary
 
-总算是看到了解密流程，但是这个解密算法真的好复杂啊，看的我一脸懵逼
-
-未完待续....
+总算是看到了解密流程，但是这个解密算法真的好复杂啊，看的我一脸懵逼，还好是找到了，也成功破解了加密的算法。剩下的就是把明文转换成对应的实际配置参数了。
 
 
 
