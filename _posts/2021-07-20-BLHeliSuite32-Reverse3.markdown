@@ -21,8 +21,6 @@ tags:
 
 ## 配置解读
 
-
-
 ### ReadSetupFromBinString
 
 继续接着解密后看他是怎么赋值的
@@ -323,8 +321,11 @@ tags:
 006EA6A5        mov         edx,dword ptr [ebp-8]
 006EA6A8        mov         byte ptr [edx+2E],al;TBLHeli.FEep_SPORT_Capable:byte
 006EA6AB        mov         bl,4
-# 1. 循环
+# 1. 循环 这里edi本质上来自于ebx
 006EA6AD        mov         eax,ebx
+# 这里这个函数会改变eax的值，所以edi来自于下面这个函数
+# 这里edi由于是每次决定参数跳转几个字节，说白了就是从变量里读了一下占用了几个字节而已，然后对应赋值过去
+# 相当于是偏移的一样的存在
 006EA6AF        call        006DEB4C
 006EA6B4        movzx       edi,al
 006EA6B7        cmp         edi,0FF
@@ -336,14 +337,18 @@ tags:
 006EA6D1        test        al,al
 # 2.跳转 应该是参数有效
 006EA6D3>       jne         006EA6E6
+# 这里也有可能会不跳，继续走，继续走应该是参数无效了
+# Pgm_Curr_Port 这个比较特殊，他的值是0xff，但是直接判定无效了
+# 这就导致他后续走了设置默认值的分支
 006EA6D5        cmp         bl,0F
 006EA6D8>       jne         006EA748
 006EA6DA        mov         eax,dword ptr [ebp-8]
 006EA6DD        call        TBLHeli.IsCurrentProtectionFalselyHardEnabled
 006EA6E2        test        al,al
 006EA6E4>       je          006EA748
-# 2.继续
+# 2.继续 这里的[ebp-4]刚好就是解密之后的buff首地址，所以关键就直接转变成了edi的来源
 006EA6E6        mov         eax,dword ptr [ebp-4]
+# 这里esi 是来自于eax+edi的
 006EA6E9        movzx       esi,byte ptr [eax+edi]
 006EA6ED        cmp         bl,0E
 # 3.跳转
@@ -382,165 +387,320 @@ tags:
 006EA746        mov         esi,eax
 # 5.继续
 006EA748        mov         edx,ebx
+# ecx来自于esi 反向找esi
 006EA74A        mov         ecx,esi
 006EA74C        mov         eax,dword ptr [ebp-8]
+# 由于找了一遍全流程以后，发现剩余设置完全看不到，于是挨个函数里看到底是什么
+# 这里就发现 SetParameterValueOrDefault 内有剩余所有参数的判定，怀疑是在这里进行的赋值，虽然名字不对
+# 逆回来追踪ecx的值来自于哪里 
 006EA74F        call        TBLHeli.SetParameterValueOrDefault
 006EA754        inc         ebx
 # 这里大概是要循环 0x1F-0x04个
 006EA755        cmp         bl,1F 
 # 1.这里是个大循环结尾
 006EA758>       jne         006EA6AD
-006EA75E        mov         byte ptr [ebp-0E],0
-006EA762        xor         eax,eax
-006EA764        pop         edx
-006EA765        pop         ecx
-006EA766        pop         ecx
-006EA767        mov         dword ptr fs:[eax],edx
-006EA76A        push        6EA95C
-006EA76F        movzx       eax,byte ptr [ebp-0E]
-006EA773        cmp         eax,6
-006EA776>       ja          006EA905
-006EA77C        jmp         dword ptr [eax*4+6EA783]
-006EA783        dd          006EA79F
-006EA787        dd          006EA7B1
-006EA78B        dd          006EA7C3
-006EA78F        dd          006EA8C0
-006EA793        dd          006EA859
-006EA797        dd          006EA871
-006EA79B        dd          006EA886
-006EA79F        mov         eax,dword ptr [ebp-8]
-006EA7A2        add         eax,0BC;TBLHeli.FErrMsg:string
-006EA7A7        call        @UStrClr
-006EA7AC>       jmp         006EA905
-006EA7B1        mov         eax,dword ptr [ebp-8]
-006EA7B4        add         eax,0BC;TBLHeli.FErrMsg:string
-006EA7B9        call        @UStrClr
-006EA7BE>       jmp         006EA905
-006EA7C3        lea         eax,[ebp-18]
-006EA7C6        push        eax
-006EA7C7        lea         edx,[ebp-24]
-006EA7CA        mov         eax,dword ptr [ebp-8]
-006EA7CD        call        006E678C
-006EA7D2        mov         eax,dword ptr [ebp-24]
-006EA7D5        mov         dword ptr [ebp-20],eax
-006EA7D8        mov         byte ptr [ebp-1C],11
-006EA7DC        lea         eax,[ebp-20]
-006EA7DF        push        eax
-006EA7E0        lea         edx,[ebp-2C]
-006EA7E3        mov         eax,[0084135C];^SResString428:TResStringRec
-006EA7E8        call        LoadResString
-006EA7ED        mov         ecx,dword ptr [ebp-2C]
-006EA7F0        lea         eax,[ebp-28]
-006EA7F3        mov         edx,6EA9C0;'\n'
-006EA7F8        call        @UStrCat3
-006EA7FD        mov         eax,dword ptr [ebp-28]
-006EA800        xor         ecx,ecx
-006EA802        pop         edx
-006EA803        call        006D5800
-006EA808        mov         eax,dword ptr [ebp-18]
-006EA80B        push        eax
-006EA80C        lea         eax,[ebp-30]
-006EA80F        push        eax
-006EA810        lea         edx,[ebp-34]
-006EA813        mov         eax,[00840EA4];^SResString427:TResStringRec
-006EA818        call        LoadResString
-006EA81D        mov         eax,dword ptr [ebp-34]
-006EA820        mov         dword ptr [ebp-44],20
-006EA827        mov         byte ptr [ebp-40],0
-006EA82B        mov         dword ptr [ebp-3C],46
-006EA832        mov         byte ptr [ebp-38],0
-006EA836        lea         edx,[ebp-44]
-006EA839        mov         ecx,1
-006EA83E        call        006D5800
-006EA843        mov         edx,dword ptr [ebp-30]
-006EA846        mov         eax,dword ptr [ebp-8]
-006EA849        add         eax,0BC;TBLHeli.FErrMsg:string
-006EA84E        pop         ecx
-006EA84F        call        @UStrCat3
-006EA854>       jmp         006EA905
-006EA859        mov         eax,dword ptr [ebp-8]
-006EA85C        lea         edx,[eax+0BC];TBLHeli.FErrMsg:string
-006EA862        mov         eax,[00840BFC];^SResString434:TResStringRec
-006EA867        call        LoadResString
-006EA86C>       jmp         006EA905
-006EA871        mov         eax,dword ptr [ebp-8]
-006EA874        lea         edx,[eax+0BC];TBLHeli.FErrMsg:string
-006EA87A        mov         eax,[00841438];^SResString433:TResStringRec
-006EA87F        call        LoadResString
-006EA884>       jmp         006EA905
-006EA886        lea         eax,[ebp-48]
-006EA889        push        eax
-006EA88A        lea         edx,[ebp-4C]
-006EA88D        mov         eax,[00841824];^SResString432:TResStringRec
-006EA892        call        LoadResString
-006EA897        mov         eax,dword ptr [ebp-4C]
-006EA89A        mov         edx,dword ptr [ebp-0C]
-006EA89D        mov         dword ptr [ebp-20],edx
-006EA8A0        mov         byte ptr [ebp-1C],0
-006EA8A4        lea         edx,[ebp-20]
-006EA8A7        xor         ecx,ecx
-006EA8A9        call        006D5800
-006EA8AE        mov         edx,dword ptr [ebp-48]
-006EA8B1        mov         eax,dword ptr [ebp-8]
-006EA8B4        add         eax,0BC;TBLHeli.FErrMsg:string
-006EA8B9        call        @UStrAsg
-# 2. 这里跳转
-006EA8BE>       jmp         006EA905
 ...
-# 2. 这里继续
-006EA905        cmp         byte ptr [ebp-0E],4
-# 3. 跳转
-006EA909>       jb          006EA936
-# 3. 继续
-006EA936        cmp         byte ptr [ebp-0E],4
-006EA93A>       jb          006EA944
-006EA93C        mov         eax,dword ptr [ebp-8]
-006EA93F        call        TBLHeli.Init
-006EA944        movzx       eax,byte ptr [ebp-0E]
-006EA948        mov         edx,dword ptr [ebp-8]
-006EA94B        mov         byte ptr [edx+0C0],al;TBLHeli.FStatus:TSetupStatus
-006EA951        ret
-006EA952>       jmp         @HandleFinally
-006EA957>       jmp         006EA76F
-006EA95C        xor         eax,eax
-006EA95E        pop         edx
-006EA95F        pop         ecx
-006EA960        pop         ecx
-006EA961        mov         dword ptr fs:[eax],edx
-006EA964        push        6EA9A6
-006EA969        lea         eax,[ebp-58]
-006EA96C        mov         edx,5
-006EA971        call        @UStrArrayClr
-006EA976        lea         eax,[ebp-34]
-006EA979        mov         edx,5
-006EA97E        call        @UStrArrayClr
-006EA983        lea         eax,[ebp-18]
-006EA986        mov         edx,2
-006EA98B        call        @UStrArrayClr
-006EA990        lea         eax,[ebp-4]
-006EA993        mov         edx,dword ptr ds:[404B48];TArray<System.Byte>
-006EA999        call        @DynArrayClear
-006EA99E        ret
-006EA99F>       jmp         @HandleFinally
-006EA9A4>       jmp         006EA969
-006EA9A6        movzx       eax,byte ptr [ebp-0E]
-006EA9AA        pop         edi
-006EA9AB        pop         esi
-006EA9AC        pop         ebx
-006EA9AD        mov         esp,ebp
-006EA9AF        pop         ebp
-006EA9B0        ret
+```
+
+到这里基本所有参数含义就都可以确定了
+
+
+
+#### 核心配置参数
+
+这里继续一下循环中依次处理的参数和其对应字节
+
+| 偏移 | 字节 | 参数名称                | 参数值(大端)            | 实际参数对应名称       |
+| ---- | ---- | ----------------------- | ----------------------- | ---------------------- |
+| 0x3  | 1    | Pgm_Direction           | 0x01                    | Motor Direction        |
+| 0x4  | 1    | Pgm_Rampup_Pwr          | 0x32                    | Rampup Power           |
+| 0x5  | 1    | Pgm_Pwm_Frequency       | 0x18                    | PWM Frequency          |
+| 0x6  | 1    | Pgm_Comm_Timing         | 0x10                    | Motor Timing           |
+| 0x7  | 1    | Pgm_Demag_Comp          | 0x02                    | Demag Compensation     |
+| 0x8  | 2    | Pgm_Min_Throttle        | 0x410                   | Minimum Throttle       |
+| 0xA  | 2    | Pgm_Center_Throttle     | 0x5DC                   | Throttle Cal Enable    |
+| 0xC  | 2    | Pgm_Max_Throttle        | 0x7A8                   | Maximum Throttle       |
+| 0xE  | 1    | Pgm_Enable_Throttle_Cal | 0x0                     | Throttle Cal Enable    |
+| 0xF  | 1    | Pgm_Temp_Prot           | 0x0                     | Temperature Protection |
+| 0x10 | 1    | Pgm_Volt_Prot           | 0x0                     | Low Voltage Protection |
+| 0x11 | 1    | Pgm_Curr_Prot           | 0x0 这个参数也是无效的  | ?                      |
+| 0x12 | 1    | Pgm_Enable_Power_Prot   | 0x1                     | Low RPM Power Protect  |
+| 0x13 | 1    | Pgm_Brake_On_Stop       | 0x0                     | Brake On Stop          |
+| 0x14 | 1    | Pgm_Beep_Strength       | 0x28                    | Startup Beep Volume    |
+| 0x15 | 1    | Pgm_Beacon_Strength     | 0x50                    | Beacon/Signal Volume   |
+| 0x16 | 2    | Pgm_Beacon_Delay        | 0x0000                  | Beacon Delay           |
+| 0x18 | 1    | Pgm_LED_Control         | 0x0                     | LED Control            |
+| 0x19 | 1    | Pgm_Max_Acceleration    | 0x0                     | Maximum Acceleration   |
+| 0x1A | 1    | Pgm_Nondamped_Mode      | 0x0                     | Non Damped Mode        |
+| 0x1B | 1    | Pgm_Curr_Sense_Cal      | 0x64 这个参数也是无效的 |                        |
+| 0x1C | 1    | Note_Config             | 0x50                    | Music Note Config      |
+| 0x1D | 1    | Pgm_Sine_Mode           | 0x0                     | Sine Modulation Mode   |
+| 0x1E | 1    | Pgm_Auto_Tlm_Mode       | 0x0                     | Auto Telemetry         |
+| 0x1F | 1    | Pgm_Stall_Prot          | 0xFF 这个参数也是无效的 |                        |
+| 0x20 | 1    | Pgm_SBUS_Channel        | 0xFF 这个参数也是无效的 |                        |
+| 0x21 | 1    | Pgm_SPORT_Physical      | 0xFF 这个参数也是无效的 |                        |
+
+再结合一下之前的Layout和Rev以及Music Data，基本上日常需要配置的信息就全了
+
+
+
+#### SetParameterValueOrDefault
+
+```assembly
+_Unit102.TBLHeli.SetParameterValueOrDefault
+006E5914        push        ebx
+006E5915        push        esi
+006E5916        push        edi
+# ecx来自于edi，而edi又来自于ecx，还要逆回去 看 ReadSetupFromBinString
+006E5917        mov         edi,ecx
+006E5919        mov         ebx,edx
+006E591B        mov         esi,eax
+006E591D        mov         edx,ebx
+006E591F        mov         eax,esi
+006E5921        call        TBLHeli.IsParameterValid
+006E5926        test        al,al
+006E5928>       je          006E5946
+006E592A        mov         edx,ebx
+006E592C        mov         ecx,edi
+006E592E        mov         eax,esi
+006E5930        call        TBLHeli.IsParameterValueInRange
+006E5935        test        al,al
+006E5937>       je          006E5946
+006E5939        mov         edx,ebx
+006E593B        mov         ecx,edi
+006E593D        mov         eax,esi
+# 果然名字和实际内容不一样，说是设置默认值，实际上是只有超过值范围的时候才会设置默认值，否则就是正常值
+006E593F        call        TBLHeli.SetParameterValue
+006E5944>       jmp         006E594F
+006E5946        mov         edx,ebx
+006E5948        mov         eax,esi
+# 这里是设置默认值的
+# Pgm_Curr_Port 这个比较特殊，他的值是0xff，但是上面直接判定无效了
+# 这就导致他后续走了设置默认值的分支
+006E594A        call        TBLHeli.SetParameterValueToDefault
+006E594F        pop         edi
+006E5950        pop         esi
+006E5951        pop         ebx
+006E5952        ret
+
 ```
 
 
 
-参数解析
+#### SetParameterValue
+
+这个函数基本就能看到剩余所有参数值，全都在这里了，是谁就设置谁。现在只要分析一下他数据具体是从哪个字节拿的就行了
+
+```assembly
+_Unit102.TBLHeli.SetParameterValue
+006E56B8        push        ebx
+006E56B9        push        esi
+006E56BA        push        edi
+006E56BB        push        ecx
+# esi刚开始来自于ecx，所以还要往外再追一层，倒回去看 SetParameterValueOrDefault
+006E56BC        mov         esi,ecx
+006E56BE        mov         ebx,edx
+006E56C0        mov         edi,eax
+006E56C2        mov         byte ptr [esp],1
+006E56C6        mov         eax,ebx
+006E56C8        call        006DEB58
+006E56CD        cmp         al,2
+006E56CF>       jae         006E56D8
+# 又回来了，esi来自于esi
+006E56D1        mov         eax,esi
+006E56D3        movzx       eax,al
+# esi来自于eax
+006E56D6        mov         esi,eax
+006E56D8        movzx       eax,bl
+006E56DB        cmp         eax,29
+006E56DE>       ja          006E5904
+006E56E4        jmp         dword ptr [eax*4+6E56EB]
+006E56EB        dd          006E5904
+006E56EF        dd          006E5793
+006E56F3        dd          006E579D
+006E56F7        dd          006E57A7
+006E56FB        dd          006E57B1
+006E56FF        dd          006E57BB
+006E5703        dd          006E57C5
+006E5707        dd          006E57CF
+006E570B        dd          006E57D9
+006E570F        dd          006E57E3
+006E5713        dd          006E57EC
+006E5717        dd          006E57F5
+006E571B        dd          006E57FE
+006E571F        dd          006E5808
+006E5723        dd          006E5812
+006E5727        dd          006E581C
+006E572B        dd          006E5826
+006E572F        dd          006E5830
+006E5733        dd          006E5855
+006E5737        dd          006E585F
+006E573B        dd          006E5869
+006E573F        dd          006E5872
+006E5743        dd          006E587C
+006E5747        dd          006E5886
+006E574B        dd          006E588D
+006E574F        dd          006E5894
+006E5753        dd          006E589B
+006E5757        dd          006E58A2
+006E575B        dd          006E58A9
+006E575F        dd          006E58B0
+006E5763        dd          006E58B7
+006E5767        dd          006E5904
+006E576B        dd          006E58BE
+006E576F        dd          006E58C5
+006E5773        dd          006E58CC
+006E5777        dd          006E58D3
+006E577B        dd          006E58DA
+006E577F        dd          006E58E1
+006E5783        dd          006E58E8
+006E5787        dd          006E58EF
+006E578B        dd          006E58F6
+006E578F        dd          006E58FD
+006E5793        mov         eax,esi
+# 这里基本就是大型switch 但是问题是这里数据是来自于哪里
+# 可以看到数值都是al的 al又是来自于esi
+006E5795        mov         byte ptr [edi+4],al;TBLHeli.FEep_FW_Main_Revision:byte
+006E5798>       jmp         006E5908
+006E579D        mov         eax,esi
+006E579F        mov         byte ptr [edi+5],al;TBLHeli.FEep_FW_Sub_Revision:byte
+006E57A2>       jmp         006E5908
+006E57A7        mov         eax,esi
+006E57A9        mov         byte ptr [edi+6],al;TBLHeli.FEep_Layout_Revision:byte
+006E57AC>       jmp         006E5908
+006E57B1        mov         eax,esi
+006E57B3        mov         byte ptr [edi+7],al;TBLHeli.FEep_Pgm_Direction:byte
+006E57B6>       jmp         006E5908
+006E57BB        mov         eax,esi
+006E57BD        mov         byte ptr [edi+8],al;TBLHeli.FEep_Pgm_Rampup_Pwr:byte
+006E57C0>       jmp         006E5908
+006E57C5        mov         eax,esi
+006E57C7        mov         byte ptr [edi+9],al;TBLHeli.FEep_Pgm_Pwm_Frequency:byte
+006E57CA>       jmp         006E5908
+006E57CF        mov         eax,esi
+006E57D1        mov         byte ptr [edi+0A],al;TBLHeli.FEep_Pgm_Comm_Timing:byte
+006E57D4>       jmp         006E5908
+006E57D9        mov         eax,esi
+006E57DB        mov         byte ptr [edi+0B],al;TBLHeli.FEep_Pgm_Demag_Comp:byte
+006E57DE>       jmp         006E5908
+# 由于有部分参数是需要2字节来完成的，所以这里是si赋值，本来al就来自于si，所以区别不大
+006E57E3        mov         word ptr [edi+0C],si;TBLHeli.FEep_Pgm_Min_Throttle:word
+006E57E7>       jmp         006E5908
+006E57EC        mov         word ptr [edi+0E],si;TBLHeli.FEep_Pgm_Center_Throttle:word
+006E57F0>       jmp         006E5908
+006E57F5        mov         word ptr [edi+10],si;TBLHeli.FEep_Pgm_Max_Throttle:word
+006E57F9>       jmp         006E5908
+006E57FE        mov         eax,esi
+006E5800        mov         byte ptr [edi+12],al;TBLHeli.FEep_Pgm_Enable_Throttle_Cal:Boolean
+006E5803>       jmp         006E5908
+006E5808        mov         eax,esi
+006E580A        mov         byte ptr [edi+13],al;TBLHeli.FEep_Pgm_Temp_Prot:byte
+006E580D>       jmp         006E5908
+006E5812        mov         eax,esi
+006E5814        mov         byte ptr [edi+14],al;TBLHeli.FEep_Pgm_Volt_Prot:byte
+006E5817>       jmp         006E5908
+006E581C        mov         eax,esi
+006E581E        mov         byte ptr [edi+15],al;TBLHeli.FEep_Pgm_Curr_Prot:byte
+006E5821>       jmp         006E5908
+006E5826        mov         eax,esi
+006E5828        mov         byte ptr [edi+16],al;TBLHeli.FEep_Pgm_Enable_Power_Prot:byte
+006E582B>       jmp         006E5908
+006E5830        mov         eax,edi
+006E5832        call        TBLHeli.IsProgrammableBrakeForceCapable
+006E5837        test        al,al
+006E5839>       jne         006E584B
+006E583B        test        si,si
+006E583E>       jbe         006E584B
+006E5840        mov         dl,11
+006E5842        mov         eax,edi
+006E5844        call        TBLHeli.GetParameterMax
+006E5849        mov         esi,eax
+006E584B        mov         eax,esi
+006E584D        mov         byte ptr [edi+17],al;TBLHeli.FEep_Pgm_Brake_On_Stop:byte
+006E5850>       jmp         006E5908
+006E5855        mov         eax,esi
+006E5857        mov         byte ptr [edi+18],al;TBLHeli.FEep_Pgm_Beep_Strength:byte
+006E585A>       jmp         006E5908
+006E585F        mov         eax,esi
+006E5861        mov         byte ptr [edi+19],al;TBLHeli.FEep_Pgm_Beacon_Strength:byte
+006E5864>       jmp         006E5908
+006E5869        mov         word ptr [edi+1A],si;TBLHeli.FEep_Pgm_Beacon_Delay:word
+006E586D>       jmp         006E5908
+006E5872        mov         eax,esi
+006E5874        mov         byte ptr [edi+1C],al;TBLHeli.FEep_Pgm_LED_Control:byte
+006E5877>       jmp         006E5908
+006E587C        mov         eax,esi
+006E587E        mov         byte ptr [edi+1D],al;TBLHeli.FEep_Pgm_Max_Acceleration:byte
+006E5881>       jmp         006E5908
+006E5886        mov         eax,esi
+006E5888        mov         byte ptr [edi+1E],al;TBLHeli.FEep_Pgm_Nondamped_Mode:byte
+006E588B>       jmp         006E5908
+006E588D        mov         eax,esi
+006E588F        mov         byte ptr [edi+1F],al;TBLHeli.FEep_Pgm_Curr_Sense_Cal:byte
+006E5892>       jmp         006E5908
+006E5894        mov         eax,esi
+006E5896        mov         byte ptr [edi+20],al;TBLHeli.FEep_Note_Config:byte
+006E5899>       jmp         006E5908
+006E589B        mov         eax,esi
+006E589D        mov         byte ptr [edi+21],al;TBLHeli.FEep_Pgm_Sine_Mode:byte
+006E58A0>       jmp         006E5908
+006E58A2        mov         eax,esi
+006E58A4        mov         byte ptr [edi+22],al;TBLHeli.FEep_Pgm_Auto_Tlm_Mode:byte
+006E58A7>       jmp         006E5908
+006E58A9        mov         eax,esi
+006E58AB        mov         byte ptr [edi+23],al;TBLHeli.FEep_Pgm_Stall_Prot:byte
+006E58AE>       jmp         006E5908
+006E58B0        mov         eax,esi
+006E58B2        mov         byte ptr [edi+24],al;TBLHeli.FEep_Pgm_SBUS_Channel:byte
+006E58B5>       jmp         006E5908
+006E58B7        mov         eax,esi
+006E58B9        mov         byte ptr [edi+25],al;TBLHeli.FEep_Pgm_SPORT_Physical_ID:byte
+006E58BC>       jmp         006E5908
+006E58BE        mov         eax,esi
+006E58C0        mov         byte ptr [edi+26],al;TBLHeli.FEep_Hw_Voltage_Sense_Capable:byte
+006E58C3>       jmp         006E5908
+006E58C5        mov         eax,esi
+006E58C7        mov         byte ptr [edi+27],al;TBLHeli.FEep_Hw_Current_Sense_Capable:byte
+006E58CA>       jmp         006E5908
+006E58CC        mov         eax,esi
+006E58CE        mov         byte ptr [edi+28],al;TBLHeli.FEep_Hw_LED_Capable_0:byte
+006E58D1>       jmp         006E5908
+006E58D3        mov         eax,esi
+006E58D5        mov         byte ptr [edi+29],al;TBLHeli.FEep_Hw_LED_Capable_1:byte
+006E58D8>       jmp         006E5908
+006E58DA        mov         eax,esi
+006E58DC        mov         byte ptr [edi+2A],al;TBLHeli.FEep_Hw_LED_Capable_2:byte
+006E58DF>       jmp         006E5908
+006E58E1        mov         eax,esi
+006E58E3        mov         byte ptr [edi+2B],al;TBLHeli.FEep_Hw_LED_Capable_3:byte
+006E58E6>       jmp         006E5908
+006E58E8        mov         eax,esi
+006E58EA        mov         byte ptr [edi+2C],al;TBLHeli.FEep_Hw_Pwm_Freq_Min:byte
+006E58ED>       jmp         006E5908
+006E58EF        mov         eax,esi
+006E58F1        mov         byte ptr [edi+2D],al;TBLHeli.FEep_Hw_Pwm_Freq_Max:byte
+006E58F4>       jmp         006E5908
+006E58F6        mov         eax,esi
+006E58F8        mov         byte ptr [edi+2E],al;TBLHeli.FEep_SPORT_Capable:byte
+006E58FB>       jmp         006E5908
+006E58FD        mov         eax,esi
+006E58FF        mov         byte ptr [edi+2F],al;TBLHeli.FEep_Nondamped_Capable:byte
+006E5902>       jmp         006E5908
+006E5904        mov         byte ptr [esp],0
+006E5908        movzx       eax,byte ptr [esp]
+006E590C        pop         edx
+006E590D        pop         edi
+006E590E        pop         esi
+006E590F        pop         ebx
+006E5910        ret
 
 ```
-第一个参数偏移 0x3
-```
 
 
+
+## 后续UI更新
+
+下面的内容其实是之前探索时记录的，这里也贴出来了。当时是顺序看一些，逆序看一些，然后互相印证，当然后来找到突破口以后，后续的这部分其实就不那么关键了。
 
 
 
@@ -776,10 +936,10 @@ _Unit102.TBLHeli.WriteSetupToString
 006EAA0B        mov         edi,dword ptr [edi]
 # 这里是版本修订号 可以看到数据是来自于esi的，而转换就是把数据转存到edi对应的地址里
 # 实际上显示只有一个修订好， BLHeli Rev:32.6
-# 这里不明确，猜测Main有可能是32
+# Main是32
 006EAA0D        movzx       eax,byte ptr [esi+4];TBLHeli.FEep_FW_Main_Revision:byte
 006EAA11        mov         byte ptr [edi],al
-# 猜测这个Sub是.6，二者组合起来形成了32.6的修订号
+# 这个Sub是.6，二者组合起来形成了32.6的修订号
 006EAA13        movzx       eax,byte ptr [esi+5];TBLHeli.FEep_FW_Sub_Revision:byte
 006EAA17        mov         byte ptr [edi+1],al
 ```
@@ -793,7 +953,7 @@ esi+5，对应的值也就是3C，对应的也就是60，所以版本号应该�
 
 
 ```assembly
-# 猜测FEep_Layout_Revision 对应的显示是 HAKRC_35A，但是实际上这个值是2A
+# FEep_Layout_Revision 对应的显示是 HAKRC_35A，但是实际上这个值是2A
 006EAA1A        movzx       eax,byte ptr [esi+6];TBLHeli.FEep_Layout_Revision:byte
 006EAA1E        mov         byte ptr [edi+2],al
 # 电压检测，对应的应该是low voltage protectin，这里读取到的是00
@@ -846,7 +1006,6 @@ esi+5，对应的值也就是3C，对应的也就是60，所以版本号应该�
 # 这里的这个是音乐节拍的速度 对应 Startup Music Data
 006EAA84        lea         eax,[esi+80];TBLHeli.FEep_Note_Array:TEep_Note_Array
 006EAA8A        mov         ecx,30
-# 很奇怪的函数，先标注一下
 006EAA8F        call        Move
 ```
 
@@ -994,6 +1153,54 @@ esi+5，对应的值也就是3C，对应的也就是60，所以版本号应该�
 
 
 
+## 密文详解
+
+| 偏移      | 字节 | 参数名称                 | 参数值(大端) | 实际参数对应名称                   |
+| --------- | ---- | ------------------------ | ------------ | ---------------------------------- |
+| 0x0       | 1    | FW_Main_Revision         | 0x20         | BLHeli Rev 前缀                    |
+| 0x1       | 1    | FW_Sub_Revision          | 0x3C         | BLHeli Rev 后缀                    |
+| 0x2       | 1    | Layout_Revision          | 0x2A         | 没有实际对应的，但是作为内部识别码 |
+| 0x3       | 1    | Pgm_Direction            | 0x01         | Motor Direction                    |
+| 0x4       | 1    | Pgm_Rampup_Pwr           | 0x32         | Rampup Power                       |
+| 0x5       | 1    | Pgm_Pwm_Frequency        | 0x18         | PWM Frequency                      |
+| 0x6       | 1    | Pgm_Comm_Timing          | 0x10         | Motor Timing                       |
+| 0x7       | 1    | Pgm_Demag_Comp           | 0x02         | Demag Compensation                 |
+| 0x8       | 2    | Pgm_Min_Throttle         | 0x410        | Minimum Throttle                   |
+| 0xA       | 2    | Pgm_Center_Throttle      | 0x5DC        | Throttle Cal Enable                |
+| 0xC       | 2    | Pgm_Max_Throttle         | 0x7A8        | Maximum Throttle                   |
+| 0xE       | 1    | Pgm_Enable_Throttle_Cal  | 0x0          | Throttle Cal Enable                |
+| 0xF       | 1    | Pgm_Temp_Prot            | 0x0          | Temperature Protection             |
+| 0x10      | 1    | Pgm_Volt_Prot            | 0x0          | Low Voltage Protection             |
+| 0x11      | 1    | Pgm_Curr_Prot            | 0x0          | 无效的                             |
+| 0x12      | 1    | Pgm_Enable_Power_Prot    | 0x1          | Low RPM Power Protect              |
+| 0x13      | 1    | Pgm_Brake_On_Stop        | 0x0          | Brake On Stop                      |
+| 0x14      | 1    | Pgm_Beep_Strength        | 0x28         | Startup Beep Volume                |
+| 0x15      | 1    | Pgm_Beacon_Strength      | 0x50         | Beacon/Signal Volume               |
+| 0x16      | 2    | Pgm_Beacon_Delay         | 0x0000       | Beacon Delay                       |
+| 0x18      | 1    | Pgm_LED_Control          | 0x0          | LED Control                        |
+| 0x19      | 1    | Pgm_Max_Acceleration     | 0x0          | Maximum Acceleration               |
+| 0x1A      | 1    | Pgm_Nondamped_Mode       | 0x0          | Non Damped Mode                    |
+| 0x1B      | 1    | Pgm_Curr_Sense_Cal       | 0x64         | 无效的                             |
+| 0x1C      | 1    | Note_Config              | 0x50         | Music Note Config                  |
+| 0x1D      | 1    | Pgm_Sine_Mode            | 0x0          | Sine Modulation Mode               |
+| 0x1E      | 1    | Pgm_Auto_Tlm_Mode        | 0x0          | Auto Telemetry                     |
+| 0x1F      | 1    | Pgm_Stall_Prot           | 0xFF         | 无效的                             |
+| 0x20      | 1    | Pgm_SBUS_Channel         | 0xFF         | 无效的                             |
+| 0x21      | 1    | Pgm_SPORT_Physical       | 0xFF         | 无效的                             |
+| 0x30      | 1    | Hw_Voltage_Sense_Capable | 0x0          |                                    |
+| 0x31      | 1    | Hw_Current_Sense_Capable | 0x0          |                                    |
+| 0x32-0x35 | 4    | Hw_LED_Capable_x         | 0-3          | LED存在和顺序                      |
+| 0x3F      | 1    | Nondamped_Capable        | 0x01         |                                    |
+| 0x21      | 1    | Pgm_SPORT_Physical       | 0xFF         | 无效的                             |
+| 0x21      | 1    | Pgm_SPORT_Physical       | 0xFF         | 无效的                             |
+| 0x40      | 32   | ESC_Layout               | ...          | ESC Layout                         |
+| 0x80      | 10   | ESC_Name                 | ...          | Name                               |
+| 0x90      | 48   | Note_Array               | ...          | Startup Music Data                 |
+
+到这里整体协议内容基本就都有了。还有几个相关的比如主控是什么型号，其实解密中也有，只是没用到所以没提
+
+
+
 ## 总体调用流程
 
 ```
@@ -1022,13 +1229,23 @@ actReadSetupExecute 按键act
 
 
 
-## 变量内
-
-
-
 ## Summary
 
-未完待续...
+到此基本上BLH的加密就算可以正常破解了，其内容我也可以通过解析，拿到具体的配置了，工程中的问题已经可以解决了。
+
+
+
+由于没有啥x86的汇编经验，相当于是纯新手直接打boss，花了好几天，走了不少弯路才把这个解决。
+
+现在再想一下，如果IDR的信息可以导入OD，可以节省很多反复横跳的时间。
+
+由于先入为主，觉得没名字的那种函数都不太重要所以没注意，就导致我前期找了好久解密函数。
+
+总体大致花了十天左右才算是整个解决，前面卡住就卡了5天，基本没啥进度的程度。
+
+如果后面还要再反编译什么，上手就更简单了，不会被这些东西迷惑了。
+
+反编译的文章有点不好读，由于我全程都在反复对照，写的时候也是混在一起，比之前的顺序流程，这里经常逆序写注释，就很别扭，下次换个方式吧
 
 
 
