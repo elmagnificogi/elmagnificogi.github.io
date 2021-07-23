@@ -1191,10 +1191,8 @@ esi+5，对应的值也就是3C，对应的也就是60，所以版本号应该�
 | 0x31      | 1    | Hw_Current_Sense_Capable | 0x0          |                                    |
 | 0x32-0x35 | 4    | Hw_LED_Capable_x         | 0-3          | LED存在和顺序                      |
 | 0x3F      | 1    | Nondamped_Capable        | 0x01         |                                    |
-| 0x21      | 1    | Pgm_SPORT_Physical       | 0xFF         | 无效的                             |
-| 0x21      | 1    | Pgm_SPORT_Physical       | 0xFF         | 无效的                             |
 | 0x40      | 32   | ESC_Layout               | ...          | ESC Layout                         |
-| 0x80      | 10   | ESC_Name                 | ...          | Name                               |
+| 0x80      | 16   | ESC_Name                 | ...          | Name                               |
 | 0x90      | 48   | Note_Array               | ...          | Startup Music Data                 |
 
 到这里整体协议内容基本就都有了。还有几个相关的比如主控是什么型号，其实解密中也有，只是没用到所以没提

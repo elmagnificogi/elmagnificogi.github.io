@@ -3,7 +3,7 @@ layout:     post
 title:      "BLHeli-Uart-Usb-Protocol"
 subtitle:   "4way-if，ardupilot"
 date:       2020-06-03
-update:     2021-07-13
+update:     2021-07-23
 author:     "elmagnifico"
 header-img: "img/drone-head-bg.jpg"
 catalog:    true
@@ -384,6 +384,35 @@ C0 50 是crc
 
 核心协议就是这些了，可能还有刷固件或者校验固件还有一些杂七杂八的命令，但是知道了上面的这些，其他的问题就不大了。要不要实现就取决于实际需不需要了。
 
+
+
+#### CRC16
+
+记录一下他的CRC16的计算方式
+
+```c
+    // cal crc 16 IBM
+    uint16_t crc = 0;
+    uint8_t data_t;
+    int i=0,j=0;
+    for (j = 0; j < sizeof(reply_settings); j++){
+        data_t = reply_settings.bytes[j];
+        crc = (data_t ^ (crc));
+        for (i = 0; i < 8; i++){
+            if ((crc & 0x1) == 1){
+                crc = (crc >> 1) ^ 0xA001;
+            }else{
+                crc >>= 1;
+            }
+        }
+    }
+
+    uint8_t crc1 = crc & 0x00FF;
+    uint8_t crc2 = (crc & 0xFF00)>>8;
+```
+
+
+
 ## 解密配置信息
 
 先说一下目前我已经测试过的东西
@@ -391,9 +420,11 @@ C0 50 是crc
 - 首先这个不是非对称加密，二者不存在什么沟通密钥的过程
 - 密钥本身是存储在256配置字节中的
 - 加密方式不是简单的凯撒密码，这个我用相同值测试过了，找不到对应的特征
-- 配置信息每次请求都会发生改变并且完全不同，密钥存储在其中基本是肯定的
+- 配置信息每次请求都会发生改变并且完全不同
 
-暂时不知道还有啥办法可以解密这个具体内容
+解密看我BLH破解的文章吧
+
+
 
 ## 自动dump配置信息
 
