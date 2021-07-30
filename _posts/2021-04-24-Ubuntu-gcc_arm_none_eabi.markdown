@@ -187,6 +187,26 @@ config debug
 
 
 
+## 安装qv2ray
+
+由于是老ubuntu 16.04 所以实际上qv2ray的官方教程根本不顶用。
+
+所以简单起见，直接用现成的，而不是通过包管理安装。
+
+>https://github.com/Qv2ray/Qv2ray/releases
+>
+>https://github.com/v2fly/v2ray-core/releases
+
+先下一个[Qv2ray.v2.7.0-pre2.linux-x64.AppImage](https://github.com/Qv2ray/Qv2ray/releases/download/v2.7.0-pre2/Qv2ray.v2.7.0-pre2.linux-x64.AppImage)
+
+然后再搞一个v2ray的core就行了[v2ray-linux-64.zip](https://github.com/v2fly/v2ray-core/releases/download/v4.41.0/v2ray-linux-64.zip)
+
+解压以后，修改qv2ray的配置为刚才下的v2raycore即可
+
+![image-20210730154517432](https://i.loli.net/2021/07/30/mp17O48BbnAcatF.png)
+
+
+
 ## Summary
 
 ...
@@ -198,5 +218,4 @@ config debug
 > https://acassis.wordpress.com/2018/12/27/adding-arm-none-eabi-gdb-to-ubuntu-18-04/
 >
 > https://zhuanlan.zhihu.com/p/134031693
->
 
