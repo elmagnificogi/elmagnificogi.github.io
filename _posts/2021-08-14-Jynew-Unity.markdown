@@ -3,7 +3,7 @@ layout:     post
 title:      "unity入门与金庸群侠传"
 subtitle:   "cg，jynew"
 date:       2021-08-14
-update:     2021-08-14
+update:     2021-08-17
 author:     "elmagnifico"
 header-img: "img/blackboard.jpg"
 catalog:    true
@@ -73,6 +73,12 @@ tags:
 
 - jyx2，这里就是主要的unity工程目录
   - Assets
+  
+    - XLua，主要用来对Lua封装一次
+  
+    - Scripts
+      - LuaCore，lua的核心，每个api也在这里实现
+  
   - data
     - Cache
     - data
@@ -80,16 +86,26 @@ tags:
     - HSConfig Table
     - lua，主要的lua脚本存放在这里
       - jygame，存放游戏内的每个事件脚本，命名规则为ka[事件id]
+      - main.lua  这里进行新脚本api的注册
     - Scripts
     - Translate
+    
   - excel，简单说游戏里的一些静态信息，比如人物位置，场景位置，词条，属性等等，他们多数都是通过一个excel配置而成的，每个都有各自的格式，只需要模仿对应的格式就可以增删改查了，类似数据库的概念。只是游戏这里常常用excel，方便策划等非专业的进行修改。更高级一些可能会用一些高级工具来修改属性，最后导出excel或者其他格式的数据来给游戏使用。(这里发现个小疑问，游戏里柜子宝箱中的物品是在哪里配置的)
+  
   - Library
+  
   - Logs
+  
   - Packages
+  
   - ProjectSettings
+  
   - reg
+  
   - Temp
+  
   - Tools
+  
   - UserSettings
 
 
@@ -126,7 +142,21 @@ DOS版的触发器基本是基于人物位置，而3D版本重置后，触发器
 
 > https://www.zhihu.com/question/21717567
 
-jyx2\data\lua\jygame目录中就是每个对应事件的lua脚本
+jyx2\data\lua\jygame目录中就是每个对应事件的lua脚本，同时游戏的控制台中可以直接使用lua指令进行调试，比如获取物品，瞬移之类的操作。
+
+
+
+- 蓝图，快速可视化脚本编辑，看起来就比较简单
+
+`项目快速导航/游戏事件脚本/蓝图脚本` 打开对应目录，在空白处右键选择 `Create > Jyx2 Node Graph` 进行新建，文件名即对应脚本id。
+
+
+
+蓝图也好，lua脚本也好，他们的每个操作可能都需要游戏支持，这就是lua api，游戏内的指令。需要自定义指令的时候也可以看看有没有已经有的，或者可以通过组合完成。
+
+详细指令看连接
+
+> https://github.com/jynew/jynew/wiki/%E6%B8%B8%E6%88%8F%E4%BA%8B%E4%BB%B6%E6%8C%87%E4%BB%A4
 
 
 
@@ -144,26 +174,125 @@ C#编程及不说了，基础，其他的我看看是啥
 
 ### Unity的资源加载机制
 
+> 例如纹理转变为Texture2D或Sprite，音效文件转变为AudioClip，预制体变成了GameObject等等。这个由Asset(资源文件)转变为Object(对象)，从磁盘进入内存的过程，就是实例化。而对资源进行的管理，本质上是对Object的管理。
+
+为了实现资源管理和加载，unity的Assets文件夹中的每个文件都会有一个同名的*.meta的文件，其内容主要就是记录这个文件的File GUID和他的相关属性。文件所映射的对象，也是通过这个File GUID来进行引用的。这里的文件自然包括文件夹自己。
+
+而由于对象众多，很多时候一个文件也并不是只有一个对象，可能会有很多个对象，这个时候就通过Local ID进行文件内对象的引用。
 
 
-### 基础的场景管理
+
+又由于他们都是对象，为了方便引用，同时对内存进行管理，File GUID和Local ID又生成了 **Instance ID** ，方便在内存中进行管理。
+
+
+
+对于资源文件，Assets，最好是直接在unity中进行操作，这样unity会自动生产对应的GUID等索引文件。同理删除的时候也最好这样，unity才会更新其他引用到这个文件的文件。
+
+
+
+> 1.卸载上一个场景的ab资源（可选）
+>
+> 2.打开场景过渡界面或过渡场景
+>
+> 3.通知ui退出当前场景的界面，关闭场景ui，回收资源（缓存的gameobject，正在加载的资源）
+>
+> 4.加载当前场景的ab包（可选）
+>
+> 5.加载场景（调用unity的SceneManager.LoadScene或SceneManager.LoadSceneAsync接口）
+>
+> 6.预加载资源（可选）
+>
+> 7.清理gc，清除无用的资源
+>
+> 8.通知ui进入新的场景，打开场景ui
+>
+> 9.关闭场景过渡界面或过渡场景
+
+
+
+#### AssetBundle
+
+这个比较关键，但是平时又不太需要关注他。简单说面对庞杂的资源，不可能启动时就全部加载到内存中，所以会先加载一个Header，或者说加载一个目录列表，记录了都有些啥资源，他们的依赖关系。当真的需要用到这个资源的时候，再去实例化到内存中，否则他们都默默躺在硬盘就行了。而对于已经加载过的资源，会对应有缓存机制，从而减少加载的时间，节约内
+
+
+
+以上的资源概念都是针对，编译前来说的，编译之后他们会被打包，使用更快更方便的映射方式。
+
+
+
+### 场景管理
+
+Scene Manager，主要是提供了一个通用的场景管理的接口。
+
+有2种场景概念，一个是Screen，一个是Level。
+
+- Screen，相当于是一个单独的界面，或者相对独立的场景，不与其他场景有严格的以来关系。
+
+- Level，则是一个有依赖约束关系的场景。
+
+
+
+简单说有了场景还不够，还有场景之间的问题。
+
+SMSceneManager，主要是负责切换场景之间的接口
+
+SMLevelProgress，保存场景之间的关系和属性
+
+SMTransition，切换场景的方式，动画效果等
 
 
 
 ### Unity面向组件的设计模式
 
+简单说，就是设计模式，只是拿到了Unity，如何实践而已。
+
+按我的原则，非性能相关只做最小子集功能，剩下的去排列组合。
+
+没有必要不进行抽象，只会凭空多几个文件，功能又不实现，不如没有。
+
 
 
 ### Monobehavior的生命周期
 
+0. Reset ：组件首次加载成对象时
 
+1. Awake 函数 :在加载场景时运行 , 即在游戏开始之前初始化变量或者游戏状态 . 只执行一次
+
+2. OnEnable 函数 :在激活当前脚本时调用 , 每激活一次就调用一次该方法
+
+3. Start 函数 :在第一次启动时执行 , 用于游戏对象的初始化 , 在Awake 函数之后执行,只执行一次
+
+4. Fixed Update : 固定频率调用 , 与硬件无关, 可以在 Edit -> Project Setting -> Time -> Fixed Time Step 修改
+
+5. Update : 几乎每一帧都在调用 , 取决于实际的fps
+
+6. LateUpdate : 在Update函数之后调用 , 一般用作摄像机跟随
+7. OnWillRenderObject：一个对象将要被显示时调用。
+
+7. OnGUI 函数 : 一般来说至少会又两次调用，一次是layout设置布局，一次是repaint重绘
+
+8. OnDisable 函数 : 和 OnEnable 函数成对出现 , 只要从激活状态变为取消激活状态 , 就会执行一次 (和 OnEnable互斥)
+
+9. OnDestroy 函数 : 当前游戏对象或游戏组件被销毁时执行
+
+![img](https://i.loli.net/2021/08/17/uga7WeCX1xHnJPk.png)
 
 
 
 ## Summary
 
+今天大概就这么多，后续再添加吧。
+
 
 
 ## Quote
 
-> 
+> https://www.jianshu.com/p/2a7c4a48aaee
+>
+> https://blog.csdn.net/u012400885/article/details/80035492
+>
+> https://www.cnblogs.com/zhaoqingqing/p/4288454.html
+>
+> https://www.cnblogs.com/meteoric_cry/p/7373023.html
+>
+> https://www.cnblogs.com/wang-jin-fu/p/11128974.html
