@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "SEGGER_RTT调试"
+title:      "SEGGER_RTT当调试串口输出"
 subtitle:   "jlink，swd，Tracealyzer"
 date:       2021-09-03
 author:     "elmagnifico"
@@ -13,7 +13,7 @@ tags:
 
 ## Forward
 
-最近看到有人用jlink直接当串口用，发现还不错的样子。
+最近看到有人用 JLink 直接当串口用，发现还不错的样子。
 
 
 
