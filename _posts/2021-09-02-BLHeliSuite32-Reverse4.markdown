@@ -3,7 +3,7 @@ layout:     post
 title:      "BLHeliSuite32逆向（四）"
 subtitle:   "Crack，Reverse"
 date:       2021-09-02
-update:     2021-09-02
+update:     2021-09-06
 author:     "elmagnifico"
 header-img: "img/bg5.jpg"
 catalog:    true
@@ -523,13 +523,31 @@ _Unit109.sub_00718E7C
 00719007        ret         4
 ```
 
-到这里基本就算是破解ok了，看到了类似的流程，只是测试版可以读写正式版的参数也能读写测试版的参数。
-
-那么必然是这里通过某个参数，判断当前电调是测试的还是正式的，从而可以选择不同的解密流程。这也是为啥前面多了一个函数调用。
 
 
+#### 在线调试
 
-接下来只需要把sub_007191BC的流程用python重写一个解密即可解密之前无法识别的数据了
+通过在线调试看到了，实际上调用的是和之前一模一样的流程：sub_00718E7C，而这里有4个存储密钥或者解密的key与之前不同了。
+
+
+
+```
+正式版中：
+mem[local10] = 0x318234B4  # 需要
+mem[local11] = 0x29A1FA54  # [ebp+edx*4-0x34] 需要
+mem[local12] = 0x9E81C901  # 需要
+mem[local13] = 0x81FBC617  # 0x19F134 需要
+
+测试版中：
+mem[local10] = 0x315534B4  # need
+mem[local11] = 0x20A5F454  # [ebp+edx*4-0x34] need
+mem[local12] = 0x1E88C901  # need
+mem[local13] = 0x71F1C617  # 0x19F134 need
+
+这里的local对应的就是epb的值，10就是epb-10*4
+```
+
+更换这四个密钥以后就正常可以解析出测试版的配置了。
 
 
 
