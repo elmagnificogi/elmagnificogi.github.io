@@ -3,6 +3,7 @@ layout:     post
 title:      "Ubuntu安装gcc_arm_none_eabi"
 subtitle:   "eclipse,gnu arm plugin"
 date:       2021-04-24
+update:     2021-09-13
 author:     "elmagnifico"
 header-img: "img/bg1.jpg"
 catalog:    true
@@ -111,6 +112,10 @@ sudo dpkg -i gdb-arm-none-eabi_7.10-1ubuntu3+9_amd64.deb
 
 
 
+**不建议这样使用，还是退回到16.04以后吧，这样虽然安装成功了，也能用了。但是配合eclipse经常出现调试问题，什么无法断点，什么单步执行不正确，跳转错误之类的问题。但有的时候又是完全正常的，调试个几次才能正常使用一次，非常蛋疼，原因还找不到，建议退回**
+
+
+
 #### eclipse
 
 安装eclipse需要先安装java，然后才能安装eclipse
@@ -204,6 +209,8 @@ config debug
 解压以后，修改qv2ray的配置为刚才下的v2raycore即可
 
 ![image-20210730154517432](https://i.loli.net/2021/07/30/mp17O48BbnAcatF.png)
+
+**没想到没过多久，qv2ray就直接停止维护了，还搞了一堆破事。然后qv2ray确实也不够好用，只要用了一次就强行设置了系统代理，而退出却不能取消代理，这就很弱智了，所以还是别用了吧**
 
 
 
