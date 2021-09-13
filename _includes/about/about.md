@@ -12,7 +12,7 @@ Tobe全栈工程师，目前c/c++，python，java，c#都能写，STM32，FreeRT
 
 
 
-有问题欢迎交流，联系方式：
+有问题欢迎交流，联系方式(捉急请使用qq)：
 
 - email：elmagnificogg at gmail.com
 - QQ：叁6三5⑥2六7Ⅰ
