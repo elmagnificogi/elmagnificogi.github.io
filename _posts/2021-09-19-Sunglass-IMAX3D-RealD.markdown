@@ -16,7 +16,7 @@ tags:
 
 扔了一半，还剩下这么多，头疼(这里面有一支墨镜)
 
-![image-20210919213630183](https://i.loli.net/2021/09/19/vj6xo8wuE3iK5lZ.png)
+![image-20210919221603913](https://i.loli.net/2021/09/19/1uQyaMTOemXs6Nc.png)
 
 ## 显示器区分大法
 
