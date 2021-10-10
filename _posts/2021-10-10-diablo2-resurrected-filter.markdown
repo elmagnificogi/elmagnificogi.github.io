@@ -170,6 +170,12 @@ mod解压到暗黑2重置的目录中
 
 
 
+看了一下数据，下的人真多，这两天算上我群里的估计破千了
+
+![image-20211010221038012](https://i.loli.net/2021/10/10/g6HeDLJ1xOhSv4s.png)
+
+
+
 ## Quote
 
 >https://d2mods.info/forum/viewtopic.php?t=57429
