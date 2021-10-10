@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "暗黑2重置版物品过滤"
-subtitle:   "diablo2 resurrected loot filter
+subtitle:   "diablo2 resurrected loot filter"
 date:       2021-10-10
 author:     "elmagnifico"
 header-img: "img/baidu.jpg"
