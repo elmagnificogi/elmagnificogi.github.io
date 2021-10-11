@@ -62,6 +62,34 @@ tags:
 
 
 
+修改的json文件需要放在下面的目录中
+
+```
+\Data\local\lng\strings\
+```
+
+
+
+修改字体文件需要放置在以下目录：
+
+```
+Data\hd\ui\fonts\
+```
+
+
+
+这个是一个英文版本的，不过他也好几天没维护了，还处于最早期的阶段吧，还是那种解包整个游戏的级别
+
+> https://github.com/AlexisEvo/d2r-loot-filter
+
+
+
+更多的mod修改可以看这里，讲的非常详细了，除了基础的过滤，甚至修改物品等级合成表、物品属性等等都可以通过mod直接实现，只不过这些部分都是基于离线的，在线模式需要数据验证应该是通不过的。
+
+> https://github.com/HighTechLowIQ/ModdingDiablo2Resurrected
+
+
+
 ## 我的过滤
 
 我开源了一个我的过滤
