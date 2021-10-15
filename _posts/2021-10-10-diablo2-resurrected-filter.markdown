@@ -229,6 +229,12 @@ mod解压到暗黑2重置的目录中
 
 11号再看，1.8已经下载破千了。
 
+
+
+15号：猛增一堆人下载
+
+![image-20211015140900119](https://i.loli.net/2021/10/15/wTHRV3lNJQ9z2cY.png)
+
 ## Quote
 
 >https://d2mods.info/forum/viewtopic.php?t=57429
