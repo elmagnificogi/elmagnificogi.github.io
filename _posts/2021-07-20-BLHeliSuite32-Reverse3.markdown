@@ -3,7 +3,7 @@ layout:     post
 title:      "BLHeliSuite32逆向（三）"
 subtitle:   "Crack，Reverse"
 date:       2021-07-20
-update:     2021-07-20
+update:     2021-10-18
 author:     "elmagnifico"
 header-img: "img/docker-head-bg.jpg"
 catalog:    true
@@ -1155,45 +1155,46 @@ esi+5，对应的值也就是3C，对应的也就是60，所以版本号应该�
 
 ## 密文详解
 
-| 偏移      | 字节 | 参数名称                 | 参数值(大端) | 实际参数对应名称                   |
-| --------- | ---- | ------------------------ | ------------ | ---------------------------------- |
-| 0x0       | 1    | FW_Main_Revision         | 0x20         | BLHeli Rev 前缀                    |
-| 0x1       | 1    | FW_Sub_Revision          | 0x3C         | BLHeli Rev 后缀                    |
-| 0x2       | 1    | Layout_Revision          | 0x2A         | 没有实际对应的，但是作为内部识别码 |
-| 0x3       | 1    | Pgm_Direction            | 0x01         | Motor Direction                    |
-| 0x4       | 1    | Pgm_Rampup_Pwr           | 0x32         | Rampup Power                       |
-| 0x5       | 1    | Pgm_Pwm_Frequency        | 0x18         | PWM Frequency                      |
-| 0x6       | 1    | Pgm_Comm_Timing          | 0x10         | Motor Timing                       |
-| 0x7       | 1    | Pgm_Demag_Comp           | 0x02         | Demag Compensation                 |
-| 0x8       | 2    | Pgm_Min_Throttle         | 0x410        | Minimum Throttle                   |
-| 0xA       | 2    | Pgm_Center_Throttle      | 0x5DC        | Throttle Cal Enable                |
-| 0xC       | 2    | Pgm_Max_Throttle         | 0x7A8        | Maximum Throttle                   |
-| 0xE       | 1    | Pgm_Enable_Throttle_Cal  | 0x0          | Throttle Cal Enable                |
-| 0xF       | 1    | Pgm_Temp_Prot            | 0x0          | Temperature Protection             |
-| 0x10      | 1    | Pgm_Volt_Prot            | 0x0          | Low Voltage Protection             |
-| 0x11      | 1    | Pgm_Curr_Prot            | 0x0          | 无效的                             |
-| 0x12      | 1    | Pgm_Enable_Power_Prot    | 0x1          | Low RPM Power Protect              |
-| 0x13      | 1    | Pgm_Brake_On_Stop        | 0x0          | Brake On Stop                      |
-| 0x14      | 1    | Pgm_Beep_Strength        | 0x28         | Startup Beep Volume                |
-| 0x15      | 1    | Pgm_Beacon_Strength      | 0x50         | Beacon/Signal Volume               |
-| 0x16      | 2    | Pgm_Beacon_Delay         | 0x0000       | Beacon Delay                       |
-| 0x18      | 1    | Pgm_LED_Control          | 0x0          | LED Control                        |
-| 0x19      | 1    | Pgm_Max_Acceleration     | 0x0          | Maximum Acceleration               |
-| 0x1A      | 1    | Pgm_Nondamped_Mode       | 0x0          | Non Damped Mode                    |
-| 0x1B      | 1    | Pgm_Curr_Sense_Cal       | 0x64         | 无效的                             |
-| 0x1C      | 1    | Note_Config              | 0x50         | Music Note Config                  |
-| 0x1D      | 1    | Pgm_Sine_Mode            | 0x0          | Sine Modulation Mode               |
-| 0x1E      | 1    | Pgm_Auto_Tlm_Mode        | 0x0          | Auto Telemetry                     |
-| 0x1F      | 1    | Pgm_Stall_Prot           | 0xFF         | 无效的                             |
-| 0x20      | 1    | Pgm_SBUS_Channel         | 0xFF         | 无效的                             |
-| 0x21      | 1    | Pgm_SPORT_Physical       | 0xFF         | 无效的                             |
-| 0x30      | 1    | Hw_Voltage_Sense_Capable | 0x0          |                                    |
-| 0x31      | 1    | Hw_Current_Sense_Capable | 0x0          |                                    |
-| 0x32-0x35 | 4    | Hw_LED_Capable_x         | 0-3          | LED存在和顺序                      |
-| 0x3F      | 1    | Nondamped_Capable        | 0x01         |                                    |
-| 0x40      | 32   | ESC_Layout               | ...          | ESC Layout                         |
-| 0x80      | 16   | ESC_Name                 | ...          | Name                               |
-| 0x90      | 48   | Note_Array               | ...          | Startup Music Data                 |
+| 偏移      | 字节  | 参数名称                 | 参数值(大端)     | 实际参数对应名称                          |
+| --------- | ----- | ------------------------ | ---------------- | ----------------------------------------- |
+| 0x0       | 1     | FW_Main_Revision         | 0x20             | BLHeli Rev 前缀                           |
+| 0x1       | 1     | FW_Sub_Revision          | 0x3C             | BLHeli Rev 后缀                           |
+| 0x2       | 1     | Layout_Revision          | 0x2A             | 没有实际对应的，但是作为内部识别码        |
+| 0x3       | 1     | Pgm_Direction            | 0x01             | Motor Direction                           |
+| 0x4       | 1     | Pgm_Rampup_Pwr           | 0x32             | Rampup Power                              |
+| 0x5       | 1     | Pgm_Pwm_Frequency        | 0x18             | PWM Frequency                             |
+| 0x6       | 1     | Pgm_Comm_Timing          | 0x10             | Motor Timing                              |
+| 0x7       | 1     | Pgm_Demag_Comp           | 0x02             | Demag Compensation                        |
+| 0x8       | 2     | Pgm_Min_Throttle         | 0x410            | Minimum Throttle                          |
+| 0xA       | 2     | Pgm_Center_Throttle      | 0x5DC            | Throttle Cal Enable                       |
+| 0xC       | 2     | Pgm_Max_Throttle         | 0x7A8            | Maximum Throttle                          |
+| 0xE       | 1     | Pgm_Enable_Throttle_Cal  | 0x0              | Throttle Cal Enable                       |
+| 0xF       | 1     | Pgm_Temp_Prot            | 0x0              | Temperature Protection                    |
+| 0x10      | 1     | Pgm_Volt_Prot            | 0x0              | Low Voltage Protection                    |
+| 0x11      | 1     | Pgm_Curr_Prot            | 0x0              | 无效的                                    |
+| 0x12      | 1     | Pgm_Enable_Power_Prot    | 0x1              | Low RPM Power Protect                     |
+| 0x13      | 1     | Pgm_Brake_On_Stop        | 0x0              | Brake On Stop                             |
+| 0x14      | 1     | Pgm_Beep_Strength        | 0x28             | Startup Beep Volume                       |
+| 0x15      | 1     | Pgm_Beacon_Strength      | 0x50             | Beacon/Signal Volume                      |
+| 0x16      | 2     | Pgm_Beacon_Delay         | 0x0000           | Beacon Delay                              |
+| 0x18      | 1     | Pgm_LED_Control          | 0x0              | LED Control                               |
+| 0x19      | 1     | Pgm_Max_Acceleration     | 0x0              | Maximum Acceleration                      |
+| 0x1A      | 1     | Pgm_Nondamped_Mode       | 0x0              | Non Damped Mode                           |
+| 0x1B      | 1     | Pgm_Curr_Sense_Cal       | 0x64             | 无效的                                    |
+| 0x1C      | 1     | Note_Config              | 0x50             | Music Note Config                         |
+| 0x1D      | 1     | Pgm_Sine_Mode            | 0x0              | Sine Modulation Mode                      |
+| 0x1E      | 1     | Pgm_Auto_Tlm_Mode        | 0x0              | Auto Telemetry                            |
+| 0x1F      | 1     | Pgm_Stall_Prot           | 0xFF             | 无效的                                    |
+| 0x20      | 1     | Pgm_SBUS_Channel         | 0xFF             | 无效的                                    |
+| 0x21      | 1     | Pgm_SPORT_Physical       | 0xFF             | 无效的                                    |
+| 0x30      | 1     | Hw_Voltage_Sense_Capable | 0x0              |                                           |
+| 0x31      | 1     | Hw_Current_Sense_Capable | 0x0              |                                           |
+| 0x32-0x35 | 4     | Hw_LED_Capable_x         | 0-3              | LED存在和顺序                             |
+| 0x3F      | 1     | Nondamped_Capable        | 0x01             |                                           |
+| 0x40      | 32    | ESC_Layout               | ...              | ESC Layout                                |
+| 0x60      | 16/32 | ESC_CPU                  | i_32*STM32F051X6 | 这里是ESC的CPU型号,这个值好像会被用来检测 |
+| 0x80      | 16    | ESC_Name                 | ...              | Name                                      |
+| 0x90      | 48    | Note_Array               | ...              | Startup Music Data                        |
 
 到这里整体协议内容基本就都有了。还有几个相关的比如主控是什么型号，其实解密中也有，只是没用到所以没提
 

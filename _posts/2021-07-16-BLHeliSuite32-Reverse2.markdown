@@ -3,7 +3,7 @@ layout:     post
 title:      "BLHeliSuite32逆向（二）"
 subtitle:   "Crack，Reverse"
 date:       2021-07-16
-update:     2021-07-20
+update:     2021-10-18
 author:     "elmagnifico"
 header-img: "img/drone.jpg"
 catalog:    true
@@ -2042,11 +2042,11 @@ mem[local6] = 0x4
 mem[local7] = 0x1513F8C
 mem[local8] = 0x20  # count 
 mem[local9] = 0x100
-mem[local10] = 0x318234B4
+mem[local10] = 0x318234B4 # must need
 # 这个值来源不明
-mem[local11] = 0x29A1FA54  # [ebp+edx*4-0x34]
-mem[local12] = 0x9E81C901
-mem[local13] = 0x81FBC617
+mem[local11] = 0x29A1FA54 # [ebp+edx*4-0x34] # must need
+mem[local12] = 0x9E81C901 # must need
+mem[local13] = 0x81FBC617 # must need
 mem[local14] = 0x4
 mem[local15] = 0x513F8C
 mem[0x19F168 - 6] = 0x7C00  # [ebp-0x6] 这个值每次+8
@@ -2170,18 +2170,32 @@ for i in range(0, 0x100, 8):
 
 print(decrypt_mem)
 
-def bytes2hex(data):
-    lin = ['%02X' % i for i in data]
-    return "".join(lin)
+def byte2hex(data):
+    lin = '%02X' % data
+    return "0x"+"".join(lin)
 
+pd = ""
 for i in range(0, 64, 2):
-    print(hex((decrypt_mem[i + 0] & 0x00FF0000) >> 16).zfill(4) + hex((decrypt_mem[i + 0] & 0xFF000000) >> 24).replace("0x",'').zfill(2))
-
-    print(hex((decrypt_mem[i + 1] & 0x000000FF)).zfill(4) + hex((decrypt_mem[i + 1] & 0x0000FF00) >> 8).replace("0x",'').zfill(2) + hex(
-        (decrypt_mem[i + 1] & 0x00FF0000) >> 16).replace("0x",'').zfill(2) + hex((decrypt_mem[i + 1] & 0xFF000000) >> 24).replace("0x",'').zfill(2))
-
-end = True
-
+    #print ((decrypt_mem[i + 0] & 0x00FF0000) >> 16)
+    data = byte2hex((decrypt_mem[i + 0] & 0x00FF0000) >> 16)
+    pd = data+" "
+    #print(data)    
+    data = byte2hex((decrypt_mem[i + 0] & 0xFF000000) >> 24)
+    pd += data+" "
+    #print(data)
+    data = byte2hex((decrypt_mem[i + 1] & 0x000000FF) >> 0)
+    pd += data+" "
+    #print(data)
+    data = byte2hex((decrypt_mem[i + 1] & 0x0000FF00) >> 8)
+    pd += data+" "
+    #print(data)
+    data = byte2hex((decrypt_mem[i + 1] & 0x00FF0000) >> 16)
+    pd += data+" "
+    #print(data)
+    data = byte2hex((decrypt_mem[i + 1] & 0xFF000000) >> 24)
+    pd += data
+    #print(data)
+    print(pd)
 
 ```
 
@@ -2194,6 +2208,17 @@ rawdata.txt中是本次读取的数据，类似于这样就行，可以自动解
 ![image-20210720200104954](https://i.loli.net/2021/07/20/IKRnv1Ab9li4FBz.png)
 
 当解密完成以后，如果有相关经验的可能可以从算法推出来是用什么加密的。至于为什么每次加密后的密文都不同，那就不知道了，难道是每次随机给进来的前2个字节是随机的？所以加密以后导致密文每次都不同？加密的那一段代码由于我没啥需求，就不继续破解了
+
+
+
+这几个值是核心用来解密的密钥，不同版本可能密钥会出现不同，需要调试看
+
+```
+mem[local10] = 0x318234B4 # must need
+mem[local11] = 0x29A1FA54 # [ebp+edx*4-0x34] # must need
+mem[local12] = 0x9E81C901 # must need
+mem[local13] = 0x81FBC617 # must need
+```
 
 
 
