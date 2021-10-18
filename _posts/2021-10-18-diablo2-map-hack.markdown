@@ -38,9 +38,9 @@ Q. Is it safe?
 A. How this thing works in layman terms, is that it is giving you an overlay map(imagine the program sticking a live hand drawn transparency on your monitor right corner every 50ms) by reading your CLASSIC D2/LOD game file and matching it with your D2R game file. Nothing is written or injected to your actual D2R game.
 ```
 
+上面是作者原话，**无论作者怎么说，源代码我看过了，他读内存了，仅靠读文件是不可能实现的**
 
-
-上面已经解释了需要什么，所以安装必须要按照这个流程来，否则可能出的问题，我也解决不了。
+之前已经解释了需要什么，所以安装必须要按照这个流程来，否则可能出的问题，我也解决不了。
 
 
 
