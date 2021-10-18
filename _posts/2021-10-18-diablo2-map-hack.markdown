@@ -50,6 +50,8 @@ A. How this thing works in layman terms, is that it is giving you an overlay map
 
 > https://drive.google.com/u/0/uc?id=1r63wchtnWmuRbRBBIdeDvW5NMoa-lxle&export=download
 
+- 下不了的去群里下，我加上了key
+
 ![image-20211018131421070](https://i.loli.net/2021/10/18/i6F1t7uXVgQ34oJ.png)
 
 解压以后可以看到如图所示内容。
@@ -75,6 +77,8 @@ XM98CC7FTFD6PPB62RHNM726KD
 ### 第二步启动d2mapapi
 
 > https://github.com/OneXDeveloper/D2RAssist/releases/download/release%2F1.0.2/D2RAssist.1.0.2.zip
+
+- 下不了的去群里下，我编译的版本
 
 下载然后解压，看到下面的文件夹
 
