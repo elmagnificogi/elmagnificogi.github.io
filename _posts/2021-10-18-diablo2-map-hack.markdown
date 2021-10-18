@@ -15,7 +15,7 @@ tags:
 
 没想到短短几天，就有人弄出来了重制版地图显示，不得不说牛皮啊。
 
-![image-20211018132934320](https://i.loli.net/2021/10/18/zKL5kvdPVW8potG.png)
+![image-20211018132934320](C:\Users\elmagnifico\Pictures\zKL5kvdPVW8po23tG.png)
 
 
 
@@ -98,11 +98,11 @@ XM98CC7FTFD6PPB62RHNM726KD
 
 ### 第三步启动D2RAssist
 
-打开以后没有任何显示的，进游戏，然后切换地图 ，就能看到对应的提示了
+D2RAssist.exe打开以后没有任何显示的，进游戏，然后切换地图 ，就能看到对应的提示了
 
 - **在安全区不会显示地图**
 
-![image-20211018132549156](https://i.loli.net/2021/10/18/OXRbseyKhC92gV6.png)
+![image-20211018132549156](C:\Users\elmagnifico\Pictures\OXRbseyKhC92gV6.png)
 
 比如我这里是乱石旷野，红圈处的牛腿位置，一模一样
 
