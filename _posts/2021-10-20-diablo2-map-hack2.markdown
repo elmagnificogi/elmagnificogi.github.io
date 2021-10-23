@@ -3,7 +3,7 @@ layout:     post
 title:      "我的暗黑2重置版地图插件"
 subtitle:   "maphack,hackmap,D2RAssist"
 date:       2021-10-20
-update:     2021-10-20
+update:     2021-10-23
 author:     "elmagnifico"
 header-img: "img/zerotier.jpg"
 catalog:    true
@@ -135,6 +135,23 @@ tags:
 ## 已知问题
 
 - 后续会把地图整合到一起，开关也弄到一起
+- 打不开或者没反应的，**用管理员权限启动D2RAssist.exe**
+
+
+
+## 游戏更新无法使用
+
+由于内存自动扫描无法正常工作，所以游戏往往更新的时候没办法正常使用，想要偷用一下也是有方法的，但是**风险比较高，不推荐使用**。
+
+
+
+下载老客户的的exe，直接覆盖暗黑2源文件中的exe
+
+> https://github.com/elmagnificogi/D2RAssist/releases/tag/OLD_Client
+
+地图插件就直接用老的就行了。
+
+但是这个方法只是临时用一下，不要长期使用，**很容易被检测，被封禁**
 
 
 
