@@ -178,4 +178,8 @@ A.B.C.D
 >https://youtu.be/TbJOIMM5Ino
 >
 >https://forums.d2jsp.org/forum.php?f=240
+>
+>https://bbs.d.163.com/forum.php?mod=viewthread&tid=174025651&extra=
+>
+>https://bbs.d.163.com/forum.php?mod=viewthread&tid=174046865&extra=
 
