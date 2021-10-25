@@ -173,7 +173,7 @@ A.B.C.D
 
 >https://docs.google.com/spreadsheets/u/0/d/1pH08VGFoXII8gxNizv5Rtv-i1dkzv31Xl77iC6JAV_I/htmlview#
 >
->https://www.google.com/url?q=https://youtu.be/j8JNy1iD4YU&sa=D&source=editors&ust=1634987765390000&usg=AOvVaw0uH_bssXyUlQ3NyEtTsZAg
+>https://www.youtube.com/watch?v=j8JNy1iD4YU&ab_channel=LuckyLuciano
 >
 >https://youtu.be/TbJOIMM5Ino
 >
