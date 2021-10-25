@@ -1,0 +1,181 @@
+---
+layout:     post
+title:      "暗黑2重制版Diablo Clone Kill Event募集经历"
+subtitle:   "maphack,hackmap,D2RAssist"
+date:       2021-10-25
+update:     2021-10-25
+author:     "elmagnifico"
+header-img: "img/Raspberrypi-head-bg.png"
+catalog:    true
+tags:
+    - Game
+---
+
+## Forward
+
+简单说 Diablo Clone 需要将 SOJ 卖给 NPC 才能有概率召唤到，而 SOJ 的价格一直比较高，100左右，要卖估计至少75个以上才能有比较大概率召唤到，所以必须集资来搞一个。当然很多人是为了卖毁灭护符赚钱（净利润500以上），而不是自己拥有。
+
+
+
+最初的目的很简单，我想要一个，群友也有想要一个的，大家是处于自己拥有的目的来的，但是想要保险得凑够125个才有可能开车，那就至少125个人才行。发了很多征集贴，可惜人数还是太少了，与d2jsp他们比起来，人口基数太少了，他们短短2天就能募集够足够多的人开车，而且时间也能符合，国内想找合适时间的人很难，众口难调。
+
+
+
+由于kdc需要所有人进入同一个ip的服务器内，而d2r又是随机给你ip的，就很难进到正确的服务器里，这里不但需要有正确的查看IP的姿势，还需要屏蔽IP的工具。
+
+
+
+## TCPView
+
+> https://docs.microsoft.com/zh-cn/sysinternals/downloads/tcpview
+
+群文件里也有，我已经打包好了，可以直接打开，免安装
+
+![image-20211025134012903](https://i.loli.net/2021/10/25/qzQS4NLrXOdMGni.png)打开界面，首先修改过滤条件，过滤进程为d2r，并且过滤中不显示关闭的端口连接
+
+![image-20211025134007117](https://i.loli.net/2021/10/25/oayYLcZksirvz6O.png)
+
+### 确定你房间的IP
+
+首先退回到选择人物界面，等一会，等界面里的连接稳定下来。然后创建房间，创
+建的时候就可以看到有一条绿色的
+
+![image-20211025134217123](C:\Users\elmagnifico\AppData\Roaming\Typora\typora-user-images\image-20211025134217123.png)
+
+如图，图里的34.125.81.25 就是你房间的IP了
+
+一步到位，创建时间最新的这个，一般就是你的建房时间（偶尔有时候会额外冒出来一个24开头的ip，忽略即可）
+
+![image-20211025134226332](C:\Users\elmagnifico\AppData\Roaming\Typora\typora-user-images\image-20211025134226332.png)
+
+
+
+#### 排除选项
+
+```
+Port是1119的，肯定不是你的ip，这个是排队的端口
+port是443的，有可能是你的ip，只要从这里面找就行了，这样选项就只剩下几个（一般是2个）
+24.    开头的IP必然不是你的房间
+34.117 开头的IP也必然不是你的房间
+34.93  开头的IP也必然不是你的房间
+```
+
+
+
+### 加速器问题
+
+由于国内的特殊性，为了更好的体验，就得用加速器，这就导致有些加速器是通过本地代理、隧道之类的方式进行加速的，而TCPView是看不到这种方式下的IP地址的，一般都具有明显的标志性
+
+```
+比如ip全都是
+127.0.0.1
+10.xx.xx.xx
+172.xx.xx.xx
+192.xx.xx.xx
+```
+
+以上这几种都是加速器或者代理有可能使用的ip，看到这种情况，要么切换加速器的加速模式，要么就整个换加速器，否则无解。
+
+
+
+## ip_block
+
+为了方便的屏蔽IP，我还写了一个工具专门做这个事情，工具仅在我后台设置了ip屏蔽规则的情况下才能生效，需要实时联网。
+
+
+
+#### 注意事项
+
+**使用管理员权限启动ip_block.exe**
+
+**务必保证你的windows 安全中心的防火墙是打开状态，否则过滤无法生效**
+
+![image-20211025131647575](https://i.loli.net/2021/10/25/SuhWsCdlVIkArLa.png)
+
+![image-20211024103235432](https://i.loli.net/2021/10/24/OTQXjkoeuEUfbsq.png)
+
+打开ip_block.exe 就能看到下图，点击IP过滤，等待一会即可。然后重上游戏，检测你的IP，看IP的A和B段是否和目标一致，一致就开始建房，刷C和D段一致即可
+
+![image-20211024181725921](C:\Users\elmagnifico\Pictures\vjDIYtFVmyWu4d8.png)
+
+运行时是这样的：
+
+![image-20211024181811283](C:\Users\elmagnifico\Pictures\ghAcKNFMVouZzqn.png)
+
+**中间会有提示告诉你，当前屏蔽段是什么，随着上线的人变多，屏蔽的程度也会变。每次屏蔽改变会通知你，删除过滤，然后再点IP过滤，就能刷新屏蔽规则**
+
+当不需要使用的时候，点击删除过滤即可。
+
+任何时候上游戏有问题，点击删除过滤即可。
+
+
+
+### IP说明
+
+先科普一个常识
+
+```
+A.B.C.D
+34.125.85.141
+```
+
+如上所示，每个点前面分别是A段、B段、C段、D段
+
+过滤工具能做到的就是快速帮你过滤掉A和B段，建房的时候是随机在C和D段中随机一个。我的工具就是帮你屏蔽大量A和B段IP，让你只能进某个指定A.B段的。
+
+
+
+#### 示例
+
+假设我们kdc的ip是下面这个
+
+```
+34.125.85.141
+```
+
+你第一次重开游戏，查看ip是下面
+
+```
+34.199.147.112
+```
+
+这会直接退出游戏，再重开，这显然不对，再重开，得到了AB段相同，但是C段不同，这时依然需要大退游戏。
+
+```
+34.125.66.112
+```
+
+继续重开，这里A、B、C段就相同了，剩下就是别退出游戏了，重复建房，直到和34.125.85.141一模一样，然后等着就行了
+
+```
+34.125.85.174
+```
+
+
+
+有可能某些服C段是会来回跳的，这种服我们都会过滤出去，只在D段内随机，降低难度
+
+
+
+### 其他问题
+
+当然也有很多人说ABC对了就行了，D无所谓，但是在群里小伙伴的支持下我们已经测试过了必须ABCD全对才能上车，否则根本没有任何售卖信息。
+
+
+
+## Summary
+
+暗黑2会有这么个活动完全是因为当年SOJ复制，导致的SOJ溢出了，才会有这么个消耗SOJ的活动，但是现在实际上没有这么多SOJ的产出。想组织一次平民版的非常困难啊。
+
+
+
+## Quote
+
+>https://docs.google.com/spreadsheets/u/0/d/1pH08VGFoXII8gxNizv5Rtv-i1dkzv31Xl77iC6JAV_I/htmlview#
+>
+>https://www.google.com/url?q=https://youtu.be/j8JNy1iD4YU&sa=D&source=editors&ust=1634987765390000&usg=AOvVaw0uH_bssXyUlQ3NyEtTsZAg
+>
+>https://youtu.be/TbJOIMM5Ino
+>
+>https://forums.d2jsp.org/forum.php?f=240
+
