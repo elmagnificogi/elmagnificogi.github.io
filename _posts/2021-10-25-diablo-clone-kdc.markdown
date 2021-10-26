@@ -37,16 +37,15 @@ tags:
 
 ### 确定你房间的IP
 
-首先退回到选择人物界面，等一会，等界面里的连接稳定下来。然后创建房间，创
-建的时候就可以看到有一条绿色的
+首先退回到选择人物界面，等一会，等界面里的连接稳定下来。然后创建房间，创建的时候就可以看到有一条绿色的
 
-![image-20211025134217123](C:\Users\elmagnifico\AppData\Roaming\Typora\typora-user-images\image-20211025134217123.png)
+![image-20211023154804028](https://i.loli.net/2021/10/23/oGcPXNBZOl8ibrD.png)
 
-如图，图里的34.125.81.25 就是你房间的IP了
+如图，图里的**34.125.81.25** 就是你房间的IP了
 
 一步到位，创建时间最新的这个，一般就是你的建房时间（偶尔有时候会额外冒出来一个24开头的ip，忽略即可）
 
-![image-20211025134226332](C:\Users\elmagnifico\AppData\Roaming\Typora\typora-user-images\image-20211025134226332.png)
+![image-20211023161751966](https://i.loli.net/2021/10/23/WqhBlZzaGKjvIc1.png)
 
 
 
@@ -58,6 +57,8 @@ port是443的，有可能是你的ip，只要从这里面找就行了，这样�
 24.    开头的IP必然不是你的房间
 34.117 开头的IP也必然不是你的房间
 34.93  开头的IP也必然不是你的房间
+137.221开头的IP也必然不是你的房间
+117.52 开头的IP也必然不是你的房间
 ```
 
 
@@ -100,11 +101,15 @@ port是443的，有可能是你的ip，只要从这里面找就行了，这样�
 
 打开ip_block.exe 就能看到下图，点击IP过滤，等待一会即可。然后重上游戏，检测你的IP，看IP的A和B段是否和目标一致，一致就开始建房，刷C和D段一致即可
 
-![image-20211024181725921](C:\Users\elmagnifico\Pictures\vjDIYtFVmyWu4d8.png)
 
-运行时是这样的：
 
-![image-20211024181811283](C:\Users\elmagnifico\Pictures\ghAcKNFMVouZzqn.png)
+新增了显示当前房间IP的功能，但是有可能出错，如果错了的话还请以TCPView为准
+
+![image-20211025235227847](https://i.loli.net/2021/10/25/mZzKuyOeM9sVQPc.png)
+
+运行时是这样的：就算找不到你的ip，也不影响屏蔽工作
+
+![image-20211025235940092](https://i.loli.net/2021/10/25/qxUvKs71RZhe3Y4.png)
 
 **中间会有提示告诉你，当前屏蔽段是什么，随着上线的人变多，屏蔽的程度也会变。每次屏蔽改变会通知你，删除过滤，然后再点IP过滤，就能刷新屏蔽规则**
 
