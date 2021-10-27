@@ -3,6 +3,7 @@ layout:     post
 title:      "Oracle用腾讯云中转"
 subtitle:   "vps，v2ray，轻量云"
 date:       2021-01-06
+update:     2021-10-27
 author:     "elmagnifico"
 header-img: "img/drone-head-bg.jpg"
 catalog:    true
@@ -57,6 +58,12 @@ sudo iptables -F
 
 先说中转的目的，首先把所有包都发给一个中转机器，他连接国内比较快，同时连接到oracle的机器也比较快，然后他就作为一个跳板，帮我们跳到oracle来落地。
 
+```
+用户---（多线）--->中转机器（端口A）--->落地机器（端口B）--->目的地
+```
+
+
+
 开始我设想的是通过v2ray的配置直接配置中转，相当于是从某个inbound进来的全都从某个outbound出去，然后查了一下发现没有这种配置，只有一个多对多的配法，不是我想要的。
 
 > https://github.com/v2ray/v2ray-core/issues/507
@@ -69,7 +76,7 @@ sudo iptables -F
 
 
 
-#### 使用方法
+#### iptables 中转
 
 拉下来脚本
 
@@ -97,7 +104,48 @@ wget --no-check-certificate -qO natcfg.sh http://www.arloor.com/sh/iptablesUtils
 
 - 为了转发某些情况下：客户端不验证证书。
 
-转发设置完成了以后，v2ray客户端那边ip和端口都填中转机器的，就能正常工作了
+转发设置完成了以后，v2ray客户端那边**ip和端口都填中转机器**的，落地机器只要正常配置就行了，就能正常工作了
+
+
+
+##### 不生效
+
+有时候不生效，是因为iptables没有启用
+
+```
+service iptables status
+Redirecting to /bin/systemctl status iptables.service
+● iptables.service - IPv4 firewall with iptables
+   Loaded: loaded (/usr/lib/systemd/system/iptables.service; disabled; vendor preset: disabled)
+   Active: inactive (dead)
+   
+service iptables start
+```
+
+
+
+#### firewall 中转
+
+先检查运行状态，firewall不运行的时候是没用的
+
+```
+firewall-cmd --state
+```
+
+
+
+设置端口转发，并且重新加载防火墙配置
+
+```
+sudo firewall-cmd --zone=public --permanent --add-port 本机端口号/tcp
+sudo firewall-cmd --zone=public --permanent --add-port 本机端口号/udp
+sudo firewall-cmd --zone=public --permanent --add-forward-port=port=本机端口号:proto=tcp:toport=目标端口号:toaddr=目标地址
+sudo firewall-cmd --zone=public --permanent --add-forward-port=port=本机端口号:proto=udp:toport=目标端口号:toaddr=目标地址
+sudo firewall-cmd --zone=public --permanent --add-masquerade
+sudo firewall-cmd --reload
+```
+
+只要对方防火墙是放开的，那么就ok了
 
 
 
@@ -261,4 +309,6 @@ chmod +x tcp.sh
 > https://blog.51cto.com/lifeng/2564211
 >
 > https://stackoverflow.com/questions/53223914/issue-using-certbot-with-nginx
+>
+> https://blog.chaos.run/dreams/nat-vps-port-forwarding/
 
