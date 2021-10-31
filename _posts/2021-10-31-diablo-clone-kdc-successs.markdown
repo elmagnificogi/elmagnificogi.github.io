@@ -172,9 +172,25 @@ tags:
 
 当然这种模式还依赖于模式A，如果A不成立，那么B就没有地方可以吸血，没有便宜可以赚。最终受损的就是那些没有退款保证的玩家，让这些中间商赚了一个盆满钵满。
 
-当然对于只是要体验的玩家来说，模式B肯定是最好的选择，直接上车即可，其他什么都不用考虑。就算模式A由于被B搭车搭太多了，无非就是退费而已，根本不需要担心。因为A也会在无法执行的情况下退费，所以中间商没有任何成本的。
+当然对于只是要体验的玩家来说，模式B肯定是最好的选择，直接上车即可，其他什么都不用考虑。就算模式A由于被B搭车搭太多了，无非就是退费而已，根本不需要担心。因为A也会在无法执行的情况下退费，所以中间商没有任何成本和风险。
 
-​                                                                                                                                                                            
+
+
+English versin:
+
+```
+Mode A:the normal Youtuer or Dicordor will host a gmae but no guarantee about that people cant get in the right IP.The owner could get more than 20 SOJ profit
+
+Mode B:the one B,who join the A,payed 2 soj,then publish the IP to the team who try to join the right IP with VNP net or something else.one could get 1 soj if he can share his room.Then B sale it to the gamer with 2 soj.Every gamer join, B could get 1 soj profit.The one who share room,could get more than 5 soj one host(if he could create more than 5 room,in fact it's easy for him).
+
+The mode B is a greedy vampire,maybe the game who paid for him got a good service.But the one cant get in lose all SOJ.
+
+It's a bad mode,I think everyone should resist him
+```
+
+> https://forums.d2jsp.org/topic.php?t=88884335&f=240
+
+​                                                                                                                  
 
 ## Summary
 
