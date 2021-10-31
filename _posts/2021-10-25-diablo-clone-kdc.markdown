@@ -1,9 +1,9 @@
 ---
 layout:     post
 title:      "暗黑2重制版Diablo Clone Kill Event募集经历"
-subtitle:   "maphack,hackmap,D2RAssist"
+subtitle:   "ip,tcpview,kdc"
 date:       2021-10-25
-update:     2021-10-27
+update:     2021-10-31
 author:     "elmagnifico"
 header-img: "img/Raspberrypi-head-bg.png"
 catalog:    true
@@ -165,6 +165,11 @@ A.B.C.D
 有可能某些服C段是会来回跳的，这种服我们都会过滤出去，只在D段内随机，降低难度
 
 
+
+## 视频教程
+
+
+<iframe src="//player.bilibili.com/player.html?aid=548842122&bvid=BV1fq4y1G7xi&cid=432033318&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="640px" height="480px">  </iframe>
 
 
 
