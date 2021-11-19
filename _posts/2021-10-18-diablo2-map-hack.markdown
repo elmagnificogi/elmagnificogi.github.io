@@ -15,7 +15,7 @@ tags:
 
 没想到短短几天，就有人弄出来了重制版地图显示，不得不说牛皮啊。
 
-![image-20211018132934320](C:\Users\elmagnifico\Pictures\zKL5kvdPVW8po23tG.png)
+![image-20211018132934320](https://i.loli.net/2021/11/19/2Un4NxlSDjTABsz.png)
 
 
 
