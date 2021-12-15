@@ -1,0 +1,52 @@
+---
+layout:     post
+title:      "Fix Log4j 高危漏洞"
+subtitle:   "Apache,jndi,rmi"
+date:       2021-12-15
+update:     2021-12-15
+author:     "elmagnifico"
+header-img: "img/web.jpg"
+catalog:    true
+tags:
+    - Java
+    - Springboot
+---
+
+## Forward
+
+被Log4j的漏洞刷屏了，主要是这个破问题太严重了，而且使用的人实在是太多了。还好看了一眼，我的服务器基本的都是2.12的版本，集体中招。
+
+
+
+## Log4j漏洞介绍
+
+<iframe src="//player.bilibili.com/player.html?aid=464689876&bvid=BV1FL411E7g3&cid=458389126&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="640px" height="480px"></iframe>
+
+
+
+## 修复
+
+修复也比较简单，在pom.xml文件中指定版本重新打包启动就行了。
+
+```xml
+<dependency>
+    <groupId>org.apache.logging.log4j</groupId>
+    <artifactId>log4j-api</artifactId>
+    <version>2.15.0</version>
+</dependency>
+
+<dependency>
+    <groupId>org.apache.logging.log4j</groupId>
+    <artifactId>log4j-to-slf4j</artifactId>
+    <version>2.15.0</version>
+</dependency>
+
+```
+
+
+
+## Quote
+
+> https://www.bilibili.com/video/BV1FL411E7g3
+>
+> https://blog.csdn.net/qq_25580555/article/details/121875161
