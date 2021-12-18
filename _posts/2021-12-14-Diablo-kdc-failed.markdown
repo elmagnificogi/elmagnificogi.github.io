@@ -174,7 +174,7 @@ It's a bad mode,I think everyone should resist him
 
 
 
-配图-待补充
+![image-20211218154650365](https://s2.loli.net/2021/12/18/U7PkZRXVaYerWKO.png)![image-20211218154818609](https://s2.loli.net/2021/12/18/mFKCsMXncbWNV5O.png)![image-20211218154843352](https://s2.loli.net/2021/12/18/54OuM7GfgwNDj1V.png)
 
 
 
@@ -206,17 +206,13 @@ It's a bad mode,I think everyone should resist him
 
 由于一直忙不过来，收票流程每次都很长，也遇到有人没给票，但是强行截图混进来了。然后就遇到了这个奇葩，我已经反复提醒要截图了，还没截图，还好我留了一手，我帮他截图了，同时也录屏了。让他qq联系我，不联系我，游戏内强行撒泼，丢装备，最可笑的是丢的装备被路人捡走了。然后就要弃坑，还要把账号给我。
 
-
-
-配图-待补充
+![image-20211218155538132](https://s2.loli.net/2021/12/18/pk4EVPdya2wWsJR.png)
 
 
 
 等过了一天，我觉得他应该冷静了，喊他来开车，因为本质上收他的soj还没退给他，好家伙，刚开始还是个正常人，后面直接变成正义使者，逼着问我哪里错了，他一点错没有，问我是不是和捡装备的是一伙的，死活就觉得自己没错，最后实在忍不住了只好退他soj，他说不要，我就扔地上了，然后他跟狗一样的进房间来捡，被我嘲讽两句，又退了，hhhhhhhh。
 
-
-
-配图-待补充
+![image-20211218155605649](https://s2.loli.net/2021/12/18/8OUMgH7zIRWvk4b.png)![image-20211218155754655](https://s2.loli.net/2021/12/18/9cR6nGNvm1iFlCL.png)![image-20211218155845465](https://s2.loli.net/2021/12/18/9hqI2UoHV1xTwfj.png)
 
 
 
@@ -227,6 +223,14 @@ It's a bad mode,I think everyone should resist him
 然而人比我想象的多得多，一晚上就把1200多人的群，给撑爆了，虽然都是白嫖鬼，确实想上车的人暴增。然后带来的鬼就暴多。
 
 准备了130SOJ，满房以后，我只买了79就召唤出来了，欧到不行。
+
+
+
+#### 内鬼初识
+
+接到举报，有人找上车的人买ip，1soj买一个ip，然后他再找人帮他刷房间，他提供工具（我的）和ip，刷到的第一个房间需要给他，剩下多刷的都可以自己拿走。公然在各种交易群里拉人，然后给他打工，他拿到房间以后再以2soj卖给想上车的人。
+
+![image-20211218160411271](https://s2.loli.net/2021/12/18/W58SOEfGtYNqyIh.png)![image-20211218160837567](https://s2.loli.net/2021/12/18/4yvkjBtORS8nE2m.png)
 
 
 
