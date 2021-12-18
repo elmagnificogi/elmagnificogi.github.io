@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "暗黑2重制版Kill Diablo Clone 日记"
-subtitle:   "maphack,hackmap,D2RAssist"
+subtitle:   "diablo,d2r,kdc"
 date:       2021-12-14
 update:     2021-12-14
 author:     "elmagnifico"
