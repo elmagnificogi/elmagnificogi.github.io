@@ -384,6 +384,8 @@ pk工作室可以稳定刷到200房左右，同时为了缩短开车时间，不
 
 ![](https://s2.loli.net/2021/12/28/xqATnfjPtWEYdQ6.png)![img](https://s2.loli.net/2021/12/28/xkusDKFzLE3Jbt7.png)
 
+这个PK大概就是初中水平吧，一个word不会用，排版也不会，文字里前后矛盾，看着都别扭，但是断章取义竟然巧妙的会
+
 > https://bbs.d.163.com/forum.php?mod=viewthread&tid=174260185
 >
 > https://bbs.d.163.com/forum.php?mod=viewthread&tid=174270902
