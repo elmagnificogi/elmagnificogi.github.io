@@ -292,6 +292,14 @@ Fake客户端的方案用了一次基本就放弃了，后来就是写了一个s
 
 
 
+这里是教父的后续，由于擅长P图，而且对游戏内容又一概不懂，还喜欢装逼，最重要的是还装漏了，所以我就送了他一程。
+
+> https://bbs.d.163.com/forum.php?mod=viewthread&tid=174246779
+>
+> https://bbs.d.163.com/forum.php?mod=viewthread&tid=174251112&extra=
+
+
+
 #### 郁结-夫妻工作室
 
 在我不开车的时候，有人缺搞了一手大的。郁结，招人刷房，1房上交，其他可以自己留着，完全没有任何限制，招进去的人五花八门，什么人都有。虽然确实开成了1车，但是当天工作室网络就炸了，很多房间维护掉了，很多人贡献的房间也被人收回去打了，血亏。但是就这样的情况下还打算开第二次，只能说利润还是大的惊人，之后就再也没听过了。
@@ -367,6 +375,22 @@ pk工作室可以稳定刷到200房左右，同时为了缩短开车时间，不
 ![image-20211218152351462](https://s2.loli.net/2021/12/18/voFIfhyQjk1LKHx.png)![image-20211218152556465](https://s2.loli.net/2021/12/18/TmhLa2EF3yZsVW7.png)
 
 ![image-20211218152648327](https://s2.loli.net/2021/12/18/ndovkNYD5ViOJz9.png)![image-20211218152739688](https://s2.loli.net/2021/12/18/ryvM5RTJIKw21cq.png)
+
+
+
+#### 泼脏水
+
+由于我拒绝向工作室提供技术支持，接下来就是各种威胁，泼脏水了
+
+![](https://s2.loli.net/2021/12/28/xqATnfjPtWEYdQ6.png)![img](https://s2.loli.net/2021/12/28/xkusDKFzLE3Jbt7.png)
+
+> https://bbs.d.163.com/forum.php?mod=viewthread&tid=174260185
+>
+> https://bbs.d.163.com/forum.php?mod=viewthread&tid=174270902
+
+故意挂到了3个房间，拿出来卖，秀他一脸，hhhhhhhhh，还找人买我的聊天记录，血赚啊。
+
+凯恩的版规实在是太差了，这已经明显带节奏，加上工作室必然=外挂=bot，依然不能直接依靠版规封禁，带节奏者只要想就能带起来，所以导致只要我一说话立马工作室就追上来了，以后除了招人基本不会再去凯恩了。
 
 
 
