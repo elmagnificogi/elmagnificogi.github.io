@@ -274,6 +274,20 @@ chmod +x v2ray_ws_tls1.3.sh
 
 
 
+#### 233
+
+233的一键脚本，集成功能比较多，直接选择就行了，目前大部分情况下都ok，推荐使用
+
+> https://github.com/233boy/v2ray/wiki/V2Ray%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC
+
+安装
+
+```
+bash <(curl -s -L https://git.io/v2ray.sh)
+```
+
+
+
 #### BBR
 
 BBR加速脚本
