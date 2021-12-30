@@ -438,6 +438,10 @@ pk工作室可以稳定刷到200房左右，同时为了缩短开车时间，不
 
 实际上确实可以狙停工作室，小范围测试了一下，选中明显的工作室开车IP，我加入以后，拿到一百左右的房间，就把工作室抢光了，他们可能连平常一半水平都没达到，不得不停车。任何工作室都扛不住我的刷房速度，都会停止开车，所以不要随便招惹不该招惹的人，很容易没饭吃的。
 
+<iframe src="//player.bilibili.com/player.html?aid=592675567&bvid=BV1Xq4y1m75G&cid=471674586&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width=720 height=640> </iframe>
+
+以这样的效率，只要我开放授权，就可以阻断所有想开车的工作室
+
 
 
 ## 玩
