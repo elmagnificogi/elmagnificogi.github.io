@@ -1,0 +1,122 @@
+---
+layout:     post
+title:      "Log工具"
+subtitle:   "超大log查看,LogViewe,rmi"
+date:       2022-01-03
+update:     2022-01-03
+author:     "elmagnifico"
+header-img: "img/typora.jpg"
+catalog:    true
+tags:
+    - tools
+    - log
+---
+
+## Forward
+
+唔，明明记得写过一篇log工具来着，但是怎么找都找不到了，只好重新再写一篇。
+
+平常可能用各种ide或者txt直接看log，小log可能没问题，但是遇到大log，特别是几百M的log，甚至上G的log，那估计就不够用了
+
+
+
+## IDE
+
+vs，pycharm等等基本打开大文件都会卡死老半天，然后搜索可能也会非常卡，所以就不推荐了。
+
+如果是Vim之类的，倒是没啥压力，大部分都随便开。
+
+
+
+## UVviewsoft LogViewer
+
+> http://www.uvviewsoft.com/logviewer/
+
+![image-20220103150657092](https://s2.loli.net/2022/01/03/Lezvj4fSCkOUP6K.png)
+
+非常强大，上百M的log也能秒开，非商业无非就是打开的时候有一个固定弹窗，而商业注册表则没有这个问题。当然吾爱有学习版本。
+
+编码可以选择，中文不会乱码，同时也支持实时刷新显示。
+
+唯一的缺点就是选择文件的时候，用的是老式的打开框，输入路径要从文件名这里打开，非常蠢的对话框。
+
+![](https://s2.loli.net/2022/01/03/n92A3Fr1sECXWUB.png)
+
+
+
+## TextAnalysisTool
+
+> http://textanalysistool.github.io/
+
+![image-20220103151946441](https://s2.loli.net/2022/01/03/vOfGeSTW458gDHn.png)
+
+TextAnalysisTool 更偏向分析过滤一些，虽然秒开没啥压力，但是本身不支持修改编码，中文基本都似乎乱码。
+
+它可以写正则来过滤条码，而且还支持插件，只是没看到插件在哪里下载。
+
+
+
+## Tilipa
+
+> https://tilipa.zlsam.com/#/tool?id=199&name=%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7
+
+![image-20220103152551476](https://s2.loli.net/2022/01/03/ZvhYxnMPNTzArJB.png)
+
+Tilipa 日志分析工具，比较好的是他是在线的，不需要下载任何东西，直接打开就行了。
+
+下面会显示符合搜索的条目，但是有一点，打开稍微慢了点，然后搜索也是会卡一下。log比较大了还容易崩溃....
+
+
+
+## LogViewer
+
+> https://www.cnblogs.com/jpfss/p/9182636.html
+
+![27241-20160920090218762-733199152.gif](https://s2.loli.net/2022/01/03/hFT47YeS18vgnwk.gif)
+
+LogViewer 看着比较友好，但是也有问题，你的log必须符合他的格式，否则无法解析。然后由于他要解析所以打开的速度自然就很慢，同时没有任何打开的按钮，你得自己拖文件进去。
+
+同时他还支持查看对应的Json XML等等格式的信息。
+
+他的格式如下：
+
+```
+[2016-09-19 09:00:17.9785] - [Info] - [ImmediateLogger]
+您好，欢迎您使用 TaskHosting V1.19
+```
+
+
+
+## Large Text File Editor/Viewer/UtraEdit
+
+> https://www.ultraedit.com/support/tutorials-power-tips/ultraedit/large-file-handling.html
+
+![image-20220103154538865.png](https://s2.loli.net/2022/01/03/sG8oEMTXw5QAaY9.png)
+
+好像国内代理的就叫UtraEdit，他这个更像是编辑器，能打开4G以上的log
+
+
+
+## PilotEdit
+
+> https://www.pilotedit.com/
+
+![content-img-01.png](https://s2.loli.net/2022/01/03/iODPoAygBkMaxeZ.png)
+
+怎么说呢，虽然很强大，编码和打开速度都不错，但是这个UI类似以前的Office，实在是让人看着难受，特别还有主副窗口，套娃，就是太丑了。
+
+
+
+## Summary
+
+所以综上所述，还是UVviewsoft LogViewer 比较简洁好用一些。当然还有一些针对某种语言或者某种框架写的log viewer就没有考虑，这里说的都是比较通用的。
+
+
+
+## Quote
+
+> https://blog.csdn.net/lusing/article/details/68953273
+>
+> https://www.zhihu.com/question/28484616
+>
+> https://blog.csdn.net/baidu_36781744/article/details/88331683
