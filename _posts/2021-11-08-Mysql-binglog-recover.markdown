@@ -182,6 +182,10 @@ flush logs;
 
 
 
+然而后来遇到了一次，mysql直接崩溃，所有数据丢失，同时binlog也凭空消失了若干小时的
+
+
+
 ## Quote
 
 >https://www.cnblogs.com/YCcc/p/10825870.html

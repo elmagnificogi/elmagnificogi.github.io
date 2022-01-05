@@ -25,6 +25,10 @@ tags:
 
 > https://github.com/misterokaygo/D2RAssist
 
+ 原作者好像不维护了，所以项目换人了
+
+> https://github.com/OneXDeveloper/MapAssist
+
 
 
 ## 安装
@@ -123,6 +127,10 @@ D2RAssist的作者有数字货币收款，对于赞助者有特殊服务，目�
 先上我的仓库，是基于他的这个版本，不过优化了一部分内容，后续还会调整
 
 > https://github.com/elmagnificogi/D2RAssist
+
+上面失效了，下面才是新的
+
+> https://github.com/elmagnificogi/MapAssist
 
 
 
