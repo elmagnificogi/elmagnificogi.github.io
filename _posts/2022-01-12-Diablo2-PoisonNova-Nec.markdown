@@ -3,7 +3,7 @@ layout:     post
 title:      "暗黑2重置版终极毒男Build全攻略"
 subtitle:   "Diablo 2 Resurrected,剧毒新星,P Nec"
 date:       2022-01-12
-update:     2022-01-12
+update:     2022-01-13
 author:     "elmagnifico"
 header-img: "img/bg2.jpg"
 catalog:    true
