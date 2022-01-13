@@ -3,7 +3,7 @@ layout:     post
 title:      "BLHeli-Uart-Usb-Protocol"
 subtitle:   "4way-if，ardupilot"
 date:       2020-06-03
-update:     2021-09-06
+update:     2022-01-13
 author:     "elmagnifico"
 header-img: "img/drone-head-bg.jpg"
 catalog:    true
@@ -105,6 +105,14 @@ uint16_t esc_crc(const uint8_t *buf, uint16_t len)
     return crc;
 }
 ```
+
+
+
+#### 注意
+
+以下协议都是基于某一个或者一类电调来说的，如果电调类型不同，**有可能会出现读写的时候写入的寄存器地址不同**，但是总体流程是类似的。
+
+
 
 #### 屏蔽音
 
@@ -430,6 +438,8 @@ C0 50 是crc
 - 配置信息每次请求都会发生改变并且完全不同
 
 解密看我BLH破解的文章吧
+
+> http://elmagnifico.tech/2021/07/07/BLHeliSuite32-Reverse/
 
 
 
