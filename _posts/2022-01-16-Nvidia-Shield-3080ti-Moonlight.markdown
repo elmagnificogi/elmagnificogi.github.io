@@ -38,6 +38,14 @@ tags:
 
 
 
+## 远程桌面导致无法获取信息
+
+RPD远程桌面的时候会出现无法获取信息！的故障提示，这个问题只能通过其他远程桌面比如AnyDesk或者TeamView等方式打开，他们打开就不会提示了。
+
+![image-20220117132601123](https://s2.loli.net/2022/01/17/byvUKOC1Jd9rFqE.png)
+
+
+
 ## 国内联网问题
 
 如果以上进程和服务都没问题，那大概率是联网问题了
@@ -89,8 +97,6 @@ tags:
 或者是加速器代理指定ip也行，然后重启一下 NVIDIA LocalSystem Container 服务，就可以看到SHIELD 正常显示出来了
 
 只要SHIELD正常显示了，那么这个时候**断开他的代理也不会有问题**，这个服务只是做了一次验证，只要不重启就一直有效。
-
-
 
 
 
@@ -195,4 +201,6 @@ tags:
 > https://tieba.baidu.com/p/7447444245
 >
 > https://bbs.a9vg.com/thread-5365751-1-1.html
+>
+> https://nvidia.custhelp.com/app/answers/detail/a_id/4581
 
