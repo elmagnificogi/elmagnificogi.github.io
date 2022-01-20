@@ -36,14 +36,14 @@ Oracle cloud 开安全组，找了半天。Oracle cloud 有个问题，如果你
 实际通过下面方式找到的就是对应的
 
 ```
-实例 - 实力信息：xxxx - 子网：公告子网xxxx - 安全列表xxxxx -  入站规则
+实例 - 实例详细信息：xxxx - 子网：公告子网xxxx - 安全列表xxxxx -  入站规则
 ```
 
 
 
 除了安全组，可能还会出现根本没收到包的样子，主要是iptables和firewall都在工作，可能中间有谁没关闭或者没允许。
 
-大概率是iptables的问题，直接把iptables全开，可以直接解决问题，剩下都端口开启还是关闭都在firewall里配置就行了
+大概率是iptables的问题，直接把iptables全开，可以直接解决问题，剩下的端口开启还是关闭都在firewall里配置就行了
 
 ```
 sudo iptables -P INPUT ACCEPT
