@@ -206,6 +206,19 @@ JSON路径: src
 
 
 
+## 内存占用
+
+这里看到总体大概不超过200M内存就够了，还是非常不错的。
+
+```
+CONTAINER ID        NAME                CPU %               MEM USAGE / LIMIT     MEM %               NET I/O             BLOCK I/O           PIDS
+f0ac0b6072c5        sapic_webapp_1      0.05%               193.2MiB / 22.57GiB   0.84%               18.7MB / 13MB       0B / 2.7MB          16
+25c13fc42742        sapic_redis_1       0.08%               6.125MiB / 22.57GiB   0.03%               3.55MB / 3.16MB     0B / 2.05MB         6
+
+```
+
+
+
 ## Summary
 
 剩下就是我把整个blog的图片全都dump下来，然后转存到了我自己的服务器上，以后就不依赖SMMS了
