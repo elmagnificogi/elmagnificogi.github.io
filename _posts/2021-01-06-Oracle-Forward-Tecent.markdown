@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "Oracle用腾讯云中转"
-subtitle:   "vps，v2ray，轻量云"
+subtitle:   "轻量云，v2ray，安全组"
 date:       2021-01-06
 update:     2021-10-27
 author:     "elmagnifico"
@@ -9,6 +9,7 @@ header-img: "img/drone-head-bg.jpg"
 catalog:    true
 tags:
     - vps
+    - Oracle
 
 ---
 
