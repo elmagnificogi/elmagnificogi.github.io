@@ -120,13 +120,13 @@ maya的开发包必须要有
 
 
 
-#### ~~删除默认python路径~~
+#### 删除默认python路径
 
-~~![SMMS](https://i.loli.net/2019/10/14/kcgEW7uRAdaGLeB.png)~~
+![SMMS](https://i.loli.net/2019/10/14/kcgEW7uRAdaGLeB.png)
 
-~~将这一条选中，然后点减号，之后会自动将该路径排除，这样才能正确解析mayapy~~
+将这一条选中，然后点减号，之后会自动将该路径排除，这样才能正确解析mayapy
 
-- ~~一定要先删除，再增加，pycharm好像对这个顺序有bug，导致如果先增加再删除会导致自动补全非常卡或者说整个pycharm会很卡~~
+- 一定要先删除，再增加，pycharm好像对这个顺序有bug，导致如果先增加再删除会导致自动补全非常卡或者说整个pycharm会很卡
 
 
 
