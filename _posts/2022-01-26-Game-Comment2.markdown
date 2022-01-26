@@ -2,8 +2,8 @@
 layout:     post
 title:      "2021游戏短评"
 subtitle:   "国产游戏，宝可梦"
-date:       2021-01-26
-update:     2021-01-26
+date:       2022-01-26
+update:     2022-01-26
 author:     "elmagnifico"
 header-img: "img/play2.jpg"
 catalog:    true
