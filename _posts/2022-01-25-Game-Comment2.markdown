@@ -141,7 +141,7 @@ tags:
 
 又是一款非常魔性的游戏，类似于炉石酒馆下棋（弃坑太早了，没玩过），全平台，甚至可以网页游玩，本身也是免费的，轻量。竞技场是和其他人的数据对战，而在线房间则可以和路人朋友一起玩，各种魔性搭配。
 
->https://teamwood.itch.io/super-auto-pets
+> https://teamwood.itch.io/super-auto-pets
 
 
 
