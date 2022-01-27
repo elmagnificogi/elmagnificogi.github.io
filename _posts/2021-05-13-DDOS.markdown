@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "第一次被DDOS攻击"
-subtitle:   "失联,PacificRack"
+subtitle:   "失联,PacificRack,CloudFlare"
 date:       2021-05-13
 update:     2021-05-14
 author:     "elmagnifico"
@@ -10,6 +10,8 @@ catalog:    true
 mathjax:    false
 tags:
     - vps
+    - CDN
+    - CloudFlare
 ---
 
 ## Foreword
