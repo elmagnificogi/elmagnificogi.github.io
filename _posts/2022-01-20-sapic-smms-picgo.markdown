@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "继SMMS图床要求登陆后，使用sapic自建图床"
-subtitle:   "typora，picgo，图床"
+subtitle:   "typora，picgo，图床，更新docker"
 date:       2022-01-20
 update:     2022-01-20
 author:     "elmagnifico"
@@ -86,6 +86,36 @@ docker-compose up -d
 cd sapic
 docker-compose down
 docker-compose up -d -build
+```
+
+
+
+#### 更新docker
+
+有可能遇到docker没更新，版本太老了,会出现如下提示，会导致docker-compose无法正常build
+
+```
+Error parsing reference: "python:3.7-slim AS build" is not a valid repository/tag: invalid reference format”
+```
+
+更新docker
+
+```bash
+# 删除所有docker 不会删除镜像
+yum -y remove docker*
+# 更新docker
+curl -fsSL https://get.docker.com/ | sh
+```
+
+更新后，查看版本
+
+```bash
+# 启动docker
+systemctl enable docker
+systemctl start docker
+
+docker -v
+Docker version 20.10.12, build e91ed57
 ```
 
 
