@@ -106,7 +106,7 @@ D2RAssist.exe打开以后没有任何显示的，进游戏，然后切换地图 
 
 - **在安全区不会显示地图**
 
-![image-20211018132549156](C:\Users\elmagnifico\Pictures\OXRbseyKhC92gV6.png)
+![image-20220127150935792](https://s2.loli.net/2022/01/27/BFNJTv7jIgXwDcf.png)
 
 比如我这里是乱石旷野，红圈处的牛腿位置，一模一样
 
