@@ -24,11 +24,11 @@ tags:
 
 蓝牙适配器，最好直接买这个绿联的4.0，5.0可能不行，因为有驱动芯片的要求，有些芯片可能驱动不同，无法适配
 
-<img src="https://i.loli.net/2021/05/30/ihJtnwUuOx7WC9y.png" alt="image-20210530132407096" style="zoom:80%;" />
+![](https://i.loli.net/2021/05/30/ihJtnwUuOx7WC9y.png)
 
 芯片要求是CSR8510，也有可能叫CSR8510 a10（驱动对应a10的称呼）
 
-<img src="https://i.loli.net/2021/05/30/mcEnJljp864bu2L.jpg" alt="img" style="zoom:50%;" />
+![image-20220127153703592](https://s2.loli.net/2022/01/27/ezbHNIKgWhlAiwL.png)
 
 
 

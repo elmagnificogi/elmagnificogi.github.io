@@ -29,7 +29,7 @@ tags:
 
 然后打开任何一个要修改mpq，然后就能看到对应的文件了
 
-<img src="https://i.loli.net/2021/10/10/KYWVbecydG3MUFL.png" alt="image-20211010211708522" style="zoom:150%;" />
+![](https://i.loli.net/2021/10/10/KYWVbecydG3MUFL.png)
 
 里面的json使用任何一种编辑器进行编辑即可，但是这里要注意一下，mpq本身编辑以后，是在本地编辑的，不是里面的打包文件被修改了。
 
@@ -71,7 +71,7 @@ tags:
 
 对应下图种的13种颜色
 
-<img src="https://i.loli.net/2021/10/10/XF4oyU7OcuL156R.png" alt="image-20211010021408692" style="zoom:150%;" />
+![](https://i.loli.net/2021/10/10/XF4oyU7OcuL156R.png)
 
 - 需要注意在文本中`[]`中括号是一个特殊字符，他不能直接用来显示
 
@@ -146,9 +146,9 @@ elmagnifico，可以显示符文编号、装备是扩展还是精英，同时还
 
 ### 显示效果
 
-<img src="https://i.loli.net/2021/10/10/NvDhm48Kz1tEx36.png" alt="image-20211010022101036" style="zoom:150%;" />
+![](https://i.loli.net/2021/10/10/NvDhm48Kz1tEx36.png)
 
-<img src="https://i.loli.net/2021/10/10/WPdwvsZJ8Ux2aHe.png" alt="image-20211010023007005" style="zoom:150%;" />
+![](https://i.loli.net/2021/10/10/WPdwvsZJ8Ux2aHe.png)
 
 
 
@@ -187,11 +187,13 @@ elmagnifico，可以显示符文编号、装备是扩展还是精英，同时还
 
 mod解压到暗黑2重置的目录中
 
-<img src="https://i.loli.net/2021/10/10/juTn2VYGIJCgPdq.png" alt="image-20211003180519869" style="zoom:150%;" />
+![](https://i.loli.net/2021/10/10/juTn2VYGIJCgPdq.png)
+
+
 
 游戏设置中选择额外命令行，加载mod
 
-<img src="https://i.loli.net/2021/10/10/QI1C6jX7ArFZHPE.png" alt="image-20211008221018776" style="zoom:150%;" />
+![](https://i.loli.net/2021/10/10/QI1C6jX7ArFZHPE.png)
 
 
 

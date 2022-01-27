@@ -150,7 +150,7 @@ ping 的值未必准确，因为这只是你本地到代理服务器而非游戏
 
 这里以CSGO为例，只需添加CSGO游戏根目录即可
 
-<img src="https://s2.loli.net/2022/01/19/2pLnyGdVRFrTOHW.png" alt="image-20220119153413168" style="zoom:80%;" />
+![](https://s2.loli.net/2022/01/19/2pLnyGdVRFrTOHW.png)
 
 扫描时可能需要稍等片刻，扫描后记得填写备注
 

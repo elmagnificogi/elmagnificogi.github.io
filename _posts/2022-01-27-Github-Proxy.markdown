@@ -33,7 +33,7 @@ tags:
 
 然后进入快速编辑页面
 
-![image-20220127132425392](https://s2.loli.net/2022/01/27/6JjA15y4zX9betD.png)
+![](https://s2.loli.net/2022/01/27/6JjA15y4zX9betD.png)
 
 
 

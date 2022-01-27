@@ -146,7 +146,7 @@ powercfg -lastwake
 
 然后同时我还试了试，手机上的app wake on lan 来发送唤醒命令
 
-<img src="https://i.loli.net/2021/05/25/6JSzToavGc5brHM.png" alt="image-20210525224711808" style="zoom:33%;" />
+![image-20220127153456255](https://s2.loli.net/2022/01/27/iLfbgh3CaGD86MY.png)
 
 ![image-20210525224703660](https://i.loli.net/2021/05/25/TtwPzgEM3pJSnsR.png)
 
