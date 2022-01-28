@@ -34,5 +34,8 @@ Tobe全栈工程师，目前c/c++，python，java，c#都能写，STM32，FreeRT
 
 - NS宝可梦怪猎等游戏交流群  [GTMD](https://qm.qq.com/cgi-bin/qm/qr?k=W1Jva7Zab2Xowhg1zd0Tuqbj9hByiiFc&jump_from=webapi)
 - Steam 游戏联机群  [GQL](https://qm.qq.com/cgi-bin/qm/qr?k=nx9DfE-t3LpqqgR4hyIV3AVq_4JVa8Rz&jump_from=webapi)
-- 语音联机开黑  [冲，冲，冲](https://kaihei.co/0NYx2T)
+- 我的游戏屋（重点培养社区）[QQ群组](https://qun.qq.com/qqweb/qunpro/share?_wv=3&_wwv=128&inviteCode=1Sfn6V&from=246610&biz=ka)
 
+
+
+欢迎留下你的Blog，建立友链
