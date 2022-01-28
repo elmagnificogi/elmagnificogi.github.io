@@ -3,7 +3,7 @@ layout:     post
 title:      "继SMMS图床要求登陆后，使用sapic自建图床"
 subtitle:   "typora，picgo，图床，更新docker"
 date:       2022-01-20
-update:     2022-01-20
+update:     2022-01-28
 author:     "elmagnifico"
 header-img: "img/bg6.jpg"
 catalog:    true
@@ -214,6 +214,16 @@ JSON路径: src
 
 
 
+##### PicGo设置
+
+建议修改一下PicGo的设置
+
+把时间戳重命名打开，这样有助于某些图片的名称经常含义特殊字符会导致上传失败（说的就是你QQ截图）
+
+![image-20220128162506114](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202201281625154.png)
+
+
+
 #### Typora配合sapicli使用
 
 前面半天折腾不好Picgo，于是转而使用同项目的sapicli来配合Typora使用
@@ -249,9 +259,175 @@ f0ac0b6072c5        sapic_webapp_1      0.05%               193.2MiB / 22.57GiB 
 
 
 
+## 替换脚本
+
+由于以前图片都是上传到SMMS的，所以写了一个脚本用来批量查找以前的图片，还有一些非常规插入的图片。由于sapic支持直接上传url，所以blog里的图片都可以直接通过url上传，而不用把文件拉到本地，再上传，节省了一步。
+
+由于sapic不会去区分同名称图片或者说同样的图片，这就导致这个脚本最好不要运行第二次，否则，图片直接重复第二遍就很蠢了。
+
+```python
+import os
+import re
+import requests
+
+# use for find all pic in markdown doc and download or upload it
+
+# first get all file
+dir = r"E:\Github\elmagnificogi.github.io\_posts"
+dir = r"E:\elmagnificogi.github.io\_posts"
+
+# token
+token = "xxxxxxxxx"
+
+# sapic address
+sapic_url = "img.xxx.xxx:9514"
+
+def download(url):
+    print ("download:"+url)
+    header = {}
+    r = requests.get(url, headers=header, stream=True)
+    print(r.status_code)
+    file_name = url.split("/")[-1]
+    print("file:"+file_name)
+    if r.status_code == 200:
+        open('.\img\\'+file_name, 'wb').write(r.content)
+        print("done")
+    del r
+
+def uploadByUrl(url):
+    print ("upload:"+url)
+    headers = {"Authorization": "LinkToken "+token}
+    requests.post(
+        "http://"+sapic_url+"/api/upload",
+        data=dict(
+            picbed=url
+        ),
+        headers=headers,
+    ).json()
+
+all_img_url = []
+
+for file in os.listdir(dir):
+    # show file name
+    print(file)
+    file_path = dir + "\\" + file
+    f = open(file_path, encoding='utf-8')
+    content = f.readlines()
+    f.close()
+    for line in content:
+        new_line = line
+        # print(line)
+        if re.search(r'!\[(.*)\]\((.*)\)',line) != None:
+            # # check some not in SM.MS pic
+            # if "loli" in line:
+            #     continue
+            # else:
+            #     print(line)
+            # split imgs in one line
+            line = line.strip()
+            img_url = line.split("![")
+            #print(line)
+            for url in img_url:
+                if url != "":
+                    #print("!["+url)
+                    #print(url)
+                    #print(url.split("("))
+                    real_url = (url.split("("))[1]
+                    #print(real_url)
+                    real_url = real_url.split(")")[0]
+                    all_img_url.append(real_url)
+                    print(real_url)
+                    ##download(real_url)
+                    uploadByUrl(real_url)
+            continue
+        elif re.search(r'<img src',line) != None:
+            # check old img link
+            print(line)
+```
+
+接着就是保留原格式不动的情况下，替换所有SMMS的链接。
+
+```python
+import os
+import re
+import requests
+
+# use for replace old url
+
+# first get all file
+dir = r"E:\Github\elmagnificogi.github.io\_posts"
+dir = r"E:\elmagnificogi.github.io\_posts"
+
+# replace url
+replace_url = "http://img.xxx.xxx:9514/static/upload/elmagnifico/"
+
+all_img_url = []
+
+for file in os.listdir(dir):
+    # show file name
+    print(file)
+    file_path = dir + "\\" + file
+    f = open(file_path, 'r', encoding='utf-8')
+    content = f.readlines()
+    f.close()
+
+    lines = ""
+    for line in content:
+        new_line = ""
+        # print(line)
+        if re.search(r'!\[(.*)\]\((.*)\)',line) != None:
+            print(line)
+            pre = line.find("![")
+            #print(line[0:pre])
+            new_line += line[0:pre]
+
+            line = line.strip()
+            img_url = line.split("![")
+            #print(img_url)
+            find = False
+            for url in img_url:
+                if url != "":
+                    #print("!["+url)
+                    #print(url)
+                    #print(url.split("("))
+                    prefix = "![]("
+                    real_url = (url.split("("))[1]
+                    #print(real_url)
+                    real_url = real_url.split(")")[0]
+                    all_img_url.append(real_url)
+                    #print(real_url)
+                    file_name = real_url.split("/")[-1]
+                    file_name_index = url.find(file_name)
+                    new_line += prefix+replace_url+file_name+")"
+                    print(new_line)
+                    find = True
+                else:
+                    new_line+=url
+            if find:
+                new_line+="\n"
+        elif re.search(r'<img src',line) != None:
+            # check old img link
+            new_line = line
+            print(line)
+        else:
+            new_line = line
+
+        lines+=new_line
+
+    f = open(file_path, 'w', encoding='utf-8')
+    f.write(lines)
+    f.close()
+```
+
+两个脚本都运行完以后，我的blog所有图片就都替换完成了。
+
+
+
 ## Summary
 
-剩下就是我把整个blog的图片全都dump下来，然后转存到了我自己的服务器上，以后就不依赖SMMS了
+剩下就是我把整个blog的图片全都dump下来，然后转存到了我自己的服务器上，以后就不依赖SMMS了。
+
+现在看到的图片就都是在我自己图床上的图片了。
 
 
 
