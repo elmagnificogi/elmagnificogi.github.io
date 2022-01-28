@@ -65,7 +65,7 @@ tags:
 
 基于PRM的基础上，将整个图的结构变成树形的，然后基于树形进行扩展，最后得到一条路径，这种方法速率非常快，得到的线路也比PRM更合理一些
 
-![0 (1)](https://i.loli.net/2021/01/21/HMosyEAgpaf3NJI.gif)
+![](https://i.loli.net/2021/01/21/HMosyEAgpaf3NJI.gif)
 
 Road Maps还有一个问题就是得到的路径可能非常扭曲，不平滑，实际执行的时候需要再次进行平滑。
 
