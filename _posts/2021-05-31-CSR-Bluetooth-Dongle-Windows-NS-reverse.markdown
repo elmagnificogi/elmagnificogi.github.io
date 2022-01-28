@@ -23,7 +23,7 @@ tags:
 
 首先观察CSR8510 A10的驱动，可以看到驱动提供商是libwdi
 
-![image-20210530214053822](https://i.loli.net/2021/05/30/TvldUDxVf9NRgE8.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/TvldUDxVf9NRgE8.png)
 
 > https://github.com/pbatard/libwdi
 >
@@ -89,7 +89,7 @@ CSR8510 A10的驱动本质上是把蓝牙适配器变成了一个串口设备，
 
 #### 调试运行
 
-![image-20210530200456052](https://i.loli.net/2021/05/30/w1VeMqUyp2IQXRv.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/w1VeMqUyp2IQXRv.png)
 
 从入口点开始调试，看看有啥关键点，~~发现form的load并不能断点，只好跳过这一步~~，用管理员权限打开，并且dnSpy是64位的，否则会出现无法断点或者是无法附加到进程的问题。
 
@@ -103,7 +103,7 @@ private List<Bluetooth制御セットアップ.USBDeviceInfo> usbDevices = new L
 
 看一下Bluetooth制御セットアップ类，发现他是个form，也就是对应的第一次安装蓝牙驱动设备的面板
 
-![image-20210530201210581](https://i.loli.net/2021/05/30/fiK5keFQTwz6ME2.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/fiK5keFQTwz6ME2.png)
 
 这里就是加载各种usb设备
 
@@ -489,13 +489,13 @@ num是特定值的时候，表示此时需要控制摇杆，左右摇杆可以�
 
 由于他是一个exe，单文件，猜一下他用了Costura.[Fody](https://github.com/Fody/Home/)来打包（之前他的sw用了Fody）
 
-![image-20210531232946983](https://i.loli.net/2021/05/31/uzMTRUDOxXSCwGf.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/uzMTRUDOxXSCwGf.png)
 
 通过搜索Fody关键字，也确实验证了我的猜测。
 
 然后将我们需要的btkeylib.dll和libwdi.dll单独保存
 
-![image-20210531233817794](https://i.loli.net/2021/05/31/4gBY39sjXOvJNFH.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/4gBY39sjXOvJNFH.png)
 
 
 
@@ -517,19 +517,19 @@ private void button4_Click(object sender, EventArgs e)
 }
 ```
 
-![image-20210531234715774](https://i.loli.net/2021/05/31/hPkeJO8Up3Nfdlo.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/hPkeJO8Up3Nfdlo.png)
 
 资源文件中，看到这种01的文件，名字又很像，那就都单独提取出来吧。
 
 光是有了文件还不够，这个文件内容到底是啥，看代码似乎有解析流程，而我这里直接看二进制翻译看到了.png，大胆猜测一下这其实就是怪猎融珠子的脚本。
 
-![image-20210531235107601](https://i.loli.net/2021/05/31/MQx1A6faHINv4yo.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/MQx1A6faHINv4yo.png)
 
 而AutoTalismanMelding是NX Macro Controller的儿子，那么这个脚本必然NX Macro Controller也能正常加载。
 
 试验一下，把保存的文件都改名成`.nxc`，然后用NX Macro Controller加载一下看看。
 
-![image-20210531235420671](https://i.loli.net/2021/05/31/WL4wdpDf68bHNnJ.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/WL4wdpDf68bHNnJ.png)
 
 直接正确了，看到的png图片也在这里加载出来了，这个是他用opencv搜图的目标。
 
@@ -568,7 +568,7 @@ NmcExecution同时还是他的语法解释器，不过比其伊机控的这个�
 
 ## 重制
 
-![image-20210602005720194](https://i.loli.net/2021/06/02/gUuaH4vyfxVJTqn.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/gUuaH4vyfxVJTqn.png)
 
 将提取到的两个dll连同部分类代码一起重构了一下，然后简单做了一个窗口实验了一下是否可行。
 
@@ -663,7 +663,7 @@ public void ScrPress(string[] args)
 
 到这里基本就结束了，我的demo也放在我的仓库里，可以直接使用
 
-![image-20210602021714708](https://i.loli.net/2021/06/02/JBWLrzdj9RYk4FU.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/JBWLrzdj9RYk4FU.png)
 
 > https://github.com/elmagnificogi/CSR_Bluetooth_Dongle_Simulate_NS_Pro_Controller
 

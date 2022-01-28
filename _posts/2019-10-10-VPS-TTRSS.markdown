@@ -80,7 +80,7 @@ ali的二代一键套餐不推荐了，因为所有主机都是突发性能了�
 
 #### 误导
 
-![sm.ms](https://i.loli.net/2019/10/10/3Nrd6a8IHDQFLfG.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/3Nrd6a8IHDQFLfG.png)
 
 他的wiki中这里有一些误导，以前确实是可以直接拉docker-compose.yml，然后直接构建就行了，像下面这样
 
@@ -140,11 +140,11 @@ HenryQW的这个ttrss，好处就是他本身已经继承了mercury的服务，�
 
 首先在插件中启用mercury
 
-![sm.ms](https://i.loli.net/2019/10/10/PQIq1E9bZ82zhjg.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/PQIq1E9bZ82zhjg.png)
 
 然后在信息源中找到插件，并且填入服务器地址
 
-![sm.ms](https://i.loli.net/2019/10/10/qQrz981i4mHUpaW.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/qQrz981i4mHUpaW.png)
 
 这里要注意服务器地址，就是这样的写法，在docker-compose中有说明。
 
@@ -160,15 +160,15 @@ HenryQW的这个ttrss，好处就是他本身已经继承了mercury的服务，�
 
 总的来说效果还是非常好的。
 
-![sm.ms](https://i.loli.net/2019/10/10/2ls4r8gfHCBjhzm.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/2ls4r8gfHCBjhzm.png)
 
 #### 主题问题
 
-![sm.ms](https://i.loli.net/2019/10/10/Hqg6boUGpTduQMX.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/Hqg6boUGpTduQMX.png)
 
 主题这里，其实rsshub我觉得比较现代一些，看着比较好看，但是呢，这个有个bug，在我的带鱼屏下显示永远无法占满整个浏览器，就算用一些方法占满了，下次重开又回去了，其他主题就没有这个问题
 
-![sm.ms](https://i.loli.net/2019/10/10/LMs5SKpZrgBtbnf.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/LMs5SKpZrgBtbnf.png)
 
 这还不是浏览器全屏的情况下，如果全屏至少有70%的空间都是空的，其他主题都可以自动填满空白地方
 

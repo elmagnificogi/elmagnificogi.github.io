@@ -47,19 +47,19 @@ del /s/q xxx/*.*
 
 > https://www.v2ex.com/t/662493
 
-![image-20200818173205319.png](https://i.loli.net/2020/08/18/9ZLfFlx1Po6InCK.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/9ZLfFlx1Po6InCK.png)
 
 竟然还有IDE缓存这么一说？？感觉没见过，先看看，因为默认的.idea文件也早没了，我根本没抱期望
 
 第一次点开这个Local History，直接是灰色的，而且Show History 根本不能点。
 
-![image-20200818174534503](https://i.loli.net/2020/08/18/92fW5SP8GjXkHlN.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/92fW5SP8GjXkHlN.png)
 
 由于当时是PyCharm还是处于被删重加载状态，导致这里默认路径有问题，切到工程文件指定文件夹以后，这个ShowHistory就出来了，我猜测是根据路径来缓存的，如果你连路径都删了，可以尝试重建路径，然后用IDE打开（但是这个违反了上面说的不要建立任何文件继续污染磁盘，这个操作可能会导致数据恢复遇到某些其他问题）
 
 然后就能看到历史缓存的修改了，只要双击最近的这次，直接所有文件全部恢复！
 
-![image-20200818175204123](https://i.loli.net/2020/08/18/HZDeqW4cOw89igb.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/HZDeqW4cOw89igb.png)
 
 
 

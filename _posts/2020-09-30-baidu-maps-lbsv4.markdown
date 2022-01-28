@@ -33,7 +33,7 @@ tags:
 
 默认百度的数据管理平台是虎鲸数据管理平台，然后默认进入是v3版本的，坑就在这里了，首先从17年开始，就推出V4版本了，而V3与V4的接口并不相同，并且数据不互通。
 
-![image-20200930111828315](https://i.loli.net/2020/09/30/X5i4MWdLNbUAZek.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/X5i4MWdLNbUAZek.png)
 
 
 
@@ -43,7 +43,7 @@ tags:
 
 而这个信息在LBS云是看不到的，只有在云检索才能看到，然后云检索的V3与V4就对应数据平台的V3与V4，他们是捆绑在一起的。
 
-![image-20200930112140932](https://i.loli.net/2020/09/30/YO4dAwKXCRm18hZ.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/YO4dAwKXCRm18hZ.png)
 
 
 
@@ -69,7 +69,7 @@ V3的文档也要快没了，这非常坑爹啊。
 
 ## LBS API
 
-![image-20200930113300689](https://i.loli.net/2020/09/30/CIXDq8ZBbNPSsmr.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/CIXDq8ZBbNPSsmr.png)
 
 要用LBS云服务，首先肯定得建个表，这个表的基础字段是不能修改的，能改的只有自定义字段
 
@@ -82,19 +82,19 @@ V3的文档也要快没了，这非常坑爹啊。
 
 #### poi 查询指定条件数据
 
-![image-20200930114006978](https://i.loli.net/2020/09/30/XiqAcrCEUfNudFZ.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/XiqAcrCEUfNudFZ.png)
 
 虽然这里写的请求参数设置指定参数名，然后查询，实际上其他属性只要一查就返回所有数据，根本不过滤。
 
 而自定义属性默认的is_search_field可以通过UI设置，但是V4不支持云检索，所以设置其实没用，is_index_field属性默认是0，也就是不支持云存储查询
 
-![image-20200930114237599](https://i.loli.net/2020/09/30/5p8UqH63urTRlbF.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/5p8UqH63urTRlbF.png)
 
 而这个东西是在自定义列的属性里说明的，如果你没看到这个API，那你根本不会知道为啥不能poi查询自定义字段
 
 而要修改这个is_index_field字段，又必须先知道这个字段的id，而这个字段的id从管理平台里看不到，必须先用查询列把他查出来，真的坑爹，来回折腾人
 
-![image-20200930114448143](https://i.loli.net/2020/09/30/4OMLIGX1rbA5pCy.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/4OMLIGX1rbA5pCy.png)
 
 #### 正确使用云存储查询的办法
 

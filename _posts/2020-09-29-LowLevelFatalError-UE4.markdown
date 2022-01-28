@@ -20,7 +20,7 @@ tags:
 
 其中某次报错
 
-![image-20200929103045578](https://i.loli.net/2020/09/29/sFOB4eQdpwuASlh.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/sFOB4eQdpwuASlh.png)
 
 报错多种多样，但是每次提示的都差不多
 
@@ -150,7 +150,7 @@ dx12和dx11目前基本游戏里都支持，有的人可能dx11就出问题，�
 
 #### 同步垂直问题
 
-![image-20200929104625121](https://i.loli.net/2020/09/29/Az8WrkdGvBym5jK.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/Az8WrkdGvBym5jK.png)
 
 也有人说是显卡设置中没有开启垂直同步造成的，但是垂直同步其实默认是由游戏里选择的，而游戏里无论是开还是关其实都不影响这个东西。
 
@@ -164,7 +164,7 @@ dx12和dx11目前基本游戏里都支持，有的人可能dx11就出问题，�
 
 #### XPM超频问题
 
-![image-20200929111332096](https://i.loli.net/2020/09/29/RH78DSGfPLtKsQz.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/RH78DSGfPLtKsQz.png)
 
 超频问题比较多，可能是cpu超频问题，可能是gpu超频问题，也有可能是内存超频问题。
 

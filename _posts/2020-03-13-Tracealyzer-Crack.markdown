@@ -131,17 +131,17 @@ de4dot-x64.exe -r D:\Tracealyzer4 -ro D:\Tracealyzer4\cleaned
 
 从这里开始下面的图中的变量名字可能会与你操作的不同，但是程序结构是一模一样的，这个名字是反编译自动加的，不一定是什么
 
-![SMMS](https://i.loli.net/2020/03/13/vynV3Yg5lfTHGjx.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/vynV3Yg5lfTHGjx.png)
 
 
 
 然后我们直接搜索SignedLicense 就能找到读取License的入口位置，到了这个位置就可以
 
-![SMMS](https://i.loli.net/2020/03/13/cpD86JlOykeYHXA.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/cpD86JlOykeYHXA.png)
 
 到了这里就可以开始，启动调试，中断于入口点，然后就能单步调试了，不过我们在这个位置加个断点，直接让他跑过来。（这里直接跑会提示缺少p.ico,从原目录下复制粘贴一个过来就行了）
 
-![SMMS](https://i.loli.net/2020/03/13/lrnJxbeWPIq1XfQ.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/lrnJxbeWPIq1XfQ.png)
 
 下面带一点分析
 
@@ -232,7 +232,7 @@ xmlElement6.InnerText = b2;
 
 下图中的text就是b2，只是两次反编译时变量名不同而已
 
-![SMMS](https://i.loli.net/2020/03/13/hoOiNBzARYj2cWd.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/hoOiNBzARYj2cWd.png)
 
 然后编译，保存模块，重新加载所有模块，再跑一次，发现正常跑通了。
 
@@ -244,7 +244,7 @@ xmlElement6.InnerText = b2;
 
 最后再说一下版本信息是怎么获取到的，随便搜这里任何一个序列号，都能在代码中搜到对应的字符串
 
-![SMMS](https://i.loli.net/2020/03/13/GksJqgQnNOlrS2P.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/GksJqgQnNOlrS2P.png)
 
 然后你就可以看到这里写了各个版本的对应是什么。
 
@@ -260,7 +260,7 @@ Evaluation Edition - F5780CA8-1FC7-4AA4-9B1E-C7F7D6E19496
 
 既然版本信息找到了，程序也破解了，下面就是把License中的版本替换成你想要的版本，然后再启动程序，就能正确看到注册信息了
 
-![SMMS](https://i.loli.net/2020/03/13/BDPzNghfS7sL3E5.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/BDPzNghfS7sL3E5.png)
 
 ## The end
 

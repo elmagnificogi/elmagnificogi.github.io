@@ -18,7 +18,7 @@ tags:
 
 ## 2020年国产单机
 
-![b9180ef8b27428e5f46f73f07bbd233bbe3955bd](https://i.loli.net/2021/02/07/CrvTFyXGcq3Nw2I.jpg)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/CrvTFyXGcq3Nw2I.jpg)
 
 国产销量前20的游戏，我玩了枪火重生，部落与弯刀，不思议的皇冠，丸霸无双，云过的有：只只大冒险，传奇生物，全网公敌，我来自江湖。
 

@@ -26,7 +26,7 @@ blender的编译需要两个部分
 
 一个部分是由svn来版本控制的预编译lib，在下图为pre-compiled libraries部分
 
-![img](https://i.loli.net/2021/02/01/IPCyFcKf9grqR5d.jpg)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/IPCyFcKf9grqR5d.jpg)
 
 另外一个部分是由git来版本控制的源码，其中有三种，分为intern、extern和source三种，intern是blender开发的较为底层的一些源码，extern是非blender开发（如物理引擎bullet）的源码，source是较为上层的源码。这也能从图片左侧的路径看得出，source为blender/source路径，intern为blender/intern，extern为blender/extern。
 
@@ -123,9 +123,9 @@ Blender中各种基础数据类可以说就是DNA（不同版本的DNA自然就�
 
 RNA则是对各种数据类进行二次操作或者翻译，RNA主要将DNA中的数据解释给用户或者是直接给到Blender内部使用。我是看的一脸懵逼，后面看明白了再说吧。
 
-![img](https://i.loli.net/2021/02/01/G7dFQnS6wcMT3Zh.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/G7dFQnS6wcMT3Zh.png)
 
-![image-20210201112617702](https://i.loli.net/2021/02/01/GZKHWXy9QRFejgE.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/GZKHWXy9QRFejgE.png)
 
 
 

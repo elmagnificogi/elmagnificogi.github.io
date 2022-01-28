@@ -17,11 +17,11 @@ Qt Designer 中有一些基础控件，但是呢，一个非常常用的控件�
 
 如下图所示，Widget Box中的可折叠frame竟然不是一个一般控件，而自带的类似效果的Tool Box永远只能显示一个分页的内容，这就很尴尬，查了半天总算找到了两个可以实现这个效果的控件。
 
-![SMMS](https://i.loli.net/2018/12/20/5c1b4a21413c5.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/5c1b4a21413c5.png)
 
 我最终要实现的功能就类似于maya中frame的功能
 
-![SMMS](https://i.loli.net/2018/12/20/5c1b4ccf47a14.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/5c1b4ccf47a14.png)
 
 ## Qt-Collapsible-Section
 
@@ -33,7 +33,7 @@ Qt Designer 中有一些基础控件，但是呢，一个非常常用的控件�
 
 就像下图这样，基本就是我想要的一个效果了。
 
-![SMMS](https://i.loli.net/2018/12/20/5c1b4bb58bc85.gif)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/5c1b4bb58bc85.gif)
 
 然后看一下他的代码
 
@@ -173,11 +173,11 @@ MainWindow::MainWindow(QWidget *parent) :
 
 #### maya qt 与qt5.5.1 对比
 
-![SMMS](https://i.loli.net/2018/12/20/5c1b4b995b199.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/5c1b4b995b199.png)
 
 通过之前的方法，稍微修改一下 main 以及部分pro文件就能编译后变成插件的模式，使用maya调用得到下图
 
-![SMMS](https://i.loli.net/2018/12/20/5c1b4bec932e1.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/5c1b4bec932e1.png)
 
 
 #### 遗留问题
@@ -212,7 +212,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 如图所示，由于先展开了外部的section，导致内部获取大小的时候并没有通知上层的section，从而导致无法看到全貌，由这种嵌套的结构，其实可以想到实现这个还可以用tree来完成。
 
-![SMMS](https://i.loli.net/2018/12/20/5c1b5cbfda7a0.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/5c1b5cbfda7a0.png)
 
 ## WidgetBox
 
@@ -222,7 +222,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 > https://github.com/akontsevich/WidgetBox
 
-![SMMS](https://i.loli.net/2018/12/20/5c1b5da1bff50.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/5c1b5da1bff50.png)
 
 他的代码有点问题，编译以后添加到qt designer中会出现只要使用这个控件，就闪退的情况，具体原因未知。
 

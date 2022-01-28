@@ -15,7 +15,7 @@ tags:
 
 maya除了可以直接使用MEL和Python的脚本语言（Maya Commands）来开发，还可以使用C++ API或者python API，又或者C#
 
-![SMMS](https://i.loli.net/2018/11/29/5bffc6b4bebe1.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/5bffc6b4bebe1.png)
 
 从本质上说python API 是基于C++ API来的，而C#的API基本就是C++ API
 
@@ -71,19 +71,19 @@ Visual Studio的版本更新比较快，而maya自然不可能跟上最新版的
 
 然后重新打开一下VS和MAYA，基本就可以直接通过项目模板，建立一个简单的MAYA插件的工程了，其相关的所有配置都给你配置好了。
 
-![SMMS](https://i.loli.net/2018/12/26/5c22e9006b0a5.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/5c22e9006b0a5.png)
 
 然后选择maya版本，这里最好是使用 Custom location，不然一会还要手动设置maya的库文件路径什么的
 
-![SMMS](https://i.loli.net/2018/12/26/5c22e96760223.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/5c22e96760223.png)
 
 选择模板类型，是mel命令还是node节点等
 
-![SMMS](https://i.loli.net/2018/12/26/5c22e9849d0d9.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/5c22e9849d0d9.png)
 
 最后选择是要用的库都有哪些
 
-![SMMS](https://i.loli.net/2018/12/26/5c22e9b67bd31.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/5c22e9b67bd31.png)
 
 然后就能正常编译了,同时使用cout流输出也是会自动输出到 output window,都是正常的
 

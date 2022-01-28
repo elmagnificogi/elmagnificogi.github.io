@@ -58,7 +58,7 @@ Our total runtime has now improved to O(n1.5), which is slightly better. Is ther
 
 4.The Sieve of Eratosthenes is one of the most efficient ways to find all prime numbers up to n. But don't let that name scare you, I promise that the concept is surprisingly simple.
 
-![SMMS](https://i.loli.net/2018/11/30/5c00aaae780f1.gif)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/5c00aaae780f1.gif)
 
 Sieve of Eratosthenes: algorithm steps for primes below 121. "Sieve of Eratosthenes Animation" by SKopp is licensed under CC BY 2.0.
 

@@ -47,7 +47,7 @@ tags:
 
 如果是使用2.4网络，其网络容量比较小，协议比较老，干扰强，平常可以完全隔离的同时就只有三个频段。而且同时由于城市环境内2.4g wifi太多了，导致高峰期网络差到爆。
 
-![SMMS](https://i.loli.net/2021/03/13/6YpQidaZxPq5Uo4.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/6YpQidaZxPq5Uo4.png)
 
 
 
@@ -55,7 +55,7 @@ tags:
 
 
 
-![SMMS](https://i.loli.net/2019/04/01/5ca1c2e95773f.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/5ca1c2e95773f.png)
 
 
 
@@ -71,7 +71,7 @@ tags:
 
 
 
-![SMMS](https://i.loli.net/2019/04/01/5ca1c46d38904.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/5ca1c46d38904.png)
 
 
 
@@ -79,7 +79,7 @@ tags:
 
 
 
-![SMMS](https://i.loli.net/2019/04/01/5ca1c9e41ad0d.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/5ca1c9e41ad0d.png)
 
 
 

@@ -29,25 +29,25 @@ tags:
 
 > https://www.eembc.org/coremark/scores.php
 
-![image-20210731150536750](https://i.loli.net/2021/07/31/JT6Usb9iFPln5v4.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/JT6Usb9iFPln5v4.png)
 
 而现在基本新出的芯片大部分都会在详情页上标注自己的跑分
 
 比如，GDF450是673分
 
-![image-20210731151208696](https://i.loli.net/2021/07/31/OdI8EVhtDHCQmi3.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/OdI8EVhtDHCQmi3.png)
 
 
 
 STMF429是608分
 
-![image-20210731150904351](https://i.loli.net/2021/07/31/KiYO5wfhqr1etIj.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/KiYO5wfhqr1etIj.png)
 
 
 
 STMF743是2424分，F767大概1200分左右
 
-![image-20210731150848941](https://i.loli.net/2021/07/31/YlWvtpEFTNaMmf9.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/YlWvtpEFTNaMmf9.png)
 
 ### 局限
 
@@ -91,7 +91,7 @@ CoreMark说是让编译环境没影响，但是实际上很难做到，嵌入式
 
 架构上的领先，从跑分中也无法体现出来。特别是M7带Cache和不带Cache的M4，看起来跑分差距不大，实际应用的时候就会发现差距特别大。整体运行效率可能相差接近10倍。
 
-![image-20210731155412275](https://i.loli.net/2021/07/31/IiQZKgL4RAYXpHl.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/IiQZKgL4RAYXpHl.png)
 
 
 

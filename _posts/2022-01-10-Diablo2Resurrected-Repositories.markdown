@@ -192,7 +192,7 @@ hhhh，冰狐（冰蛙是你什么人）的角色培养表，其实我也有一�
 
 我接下来就想做一个库存记录的软件，这个软件实现的稍微有点傻，但是有意思。
 
-![image-20220110160803857.png](https://s2.loli.net/2022/01/10/ZSicarQYKJn3yX9.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/ZSicarQYKJn3yX9.png)
 
 
 

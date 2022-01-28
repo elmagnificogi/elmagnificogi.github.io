@@ -23,13 +23,13 @@ tags:
 
     last
 
-![SMMS](https://i.loli.net/2018/12/14/5c131004820f7.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/5c131004820f7.png)
 
 查看失败登陆的信息，这里面基本全都是来暴力破解的选手
 
     lastb
 
-![SMMS](https://i.loli.net/2018/12/14/5c131056b852a.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/5c131056b852a.png)
 
 查看每日登陆失败的次数
 
@@ -90,7 +90,7 @@ tags:
 
     fail2ban-client status sshd
 
-![SMMS](https://i.loli.net/2018/12/14/5c131433ebef0.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/5c131433ebef0.png)
 
 查看登陆失败日志
 

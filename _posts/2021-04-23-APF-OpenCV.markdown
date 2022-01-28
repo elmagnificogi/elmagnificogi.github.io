@@ -317,7 +317,7 @@ python2.7 ./simulation.py
 
 
 
-![image-20210424123327316](https://i.loli.net/2021/04/24/pGKcOnzlr9jQ5gs.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/pGKcOnzlr9jQ5gs.png)
 
 
 
@@ -334,7 +334,7 @@ IndexError: only integers, slices (`:`), ellipsis (`...`), numpy.newaxis (`None`
 
 执行结束以后可能还会有这个问题，继续把filter_waypoint中的增加int()，修改完以后就可以看到平滑后的另一个图
 
-![image-20210424123708997](https://i.loli.net/2021/04/24/a185ztxKoD47Zsf.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/a185ztxKoD47Zsf.png)
 
 > https://github.com/elmagnificogi/MyTools/tree/master/APF-Simulator
 

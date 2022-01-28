@@ -46,17 +46,17 @@ KD Tree的算法复杂度介于O(Log2(N))和O(N)之间，
 
 从几何意义上来讲，如果数据是落在一条线上的，那么显然，通过一个点就能将线二分。
 
-![image-20210202114236746](https://i.loli.net/2021/02/02/zCg6dHSjnaLJYsp.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/zCg6dHSjnaLJYsp.png)
 
 
 
 如果数据是落在二维平面上的，那么显然要通过一条线来二分，划分的依据自然就是点到直线的距离了
 
-![image-20210202114400481](https://i.loli.net/2021/02/02/vFc23uJlEn1p8NM.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/vFc23uJlEn1p8NM.png)
 
 同理，要想三维度空间中划分，数据显然是要靠一个面，然后点到面的距离。
 
-![image-20210202114730428](https://i.loli.net/2021/02/02/DCUYkLNwbz1qiSG.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/DCUYkLNwbz1qiSG.png)
 
 
 
@@ -81,9 +81,9 @@ KD Tree的算法复杂度介于O(Log2(N))和O(N)之间，
 
 简单说就是将一个立方体分割成8个小立方体，最终达到的效果最好是每一个小立方体中都只包含有一个搜索对象。通过这样的方式来加速空间搜索效率。
 
-![img](https://i.loli.net/2021/02/02/TOR9fxp7FlDy3NP.jpg)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/TOR9fxp7FlDy3NP.jpg)
 
-![img](https://i.loli.net/2021/02/02/WBHQMOkeg8dUurX.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/WBHQMOkeg8dUurX.png)
 
 平常在三维空间或者游戏内经常使用，用来判定是否碰撞之类的
 

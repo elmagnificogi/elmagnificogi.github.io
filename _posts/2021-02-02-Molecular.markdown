@@ -66,7 +66,7 @@ tags:
 
 ## Blender-Molecular-Script
 
-![image-20210202150907020](https://i.loli.net/2021/02/02/SKl9WBg7sdDzh1n.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/SKl9WBg7sdDzh1n.png)
 
 - molecular，是blender插件的部分
 - sources，这个部分比较关键，主要用来模拟重计算都靠这里，他是用cython来写的，为了提高效率，最后导出成pyd来给molecular调用

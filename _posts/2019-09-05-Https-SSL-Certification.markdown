@@ -70,7 +70,7 @@ server:
 tasklist|findstr 443
 ```
 
-![SMMS](https://i.loli.net/2019/09/05/alSiqIc9ZoY78A4.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/alSiqIc9ZoY78A4.png)
 
 这样找到对应的线程PID号，然后去任务管理器里找是谁占用的，一般都是vmhost.exe
 
@@ -80,7 +80,7 @@ tasklist|findstr 443
 
 通过虚拟机编辑-首选项-共享虚拟机-更改设置-禁用共享-修改端口
 
-![SMMS](https://i.loli.net/2019/09/05/ZzpwH6ctr714EFu.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/ZzpwH6ctr714EFu.png)
 
 然后在重新启动就发现不会提示端口占用了。
 
@@ -94,23 +94,23 @@ tasklist|findstr 443
 
 > https://www.aliyun.com/product/cas?spm=5176.12825654.eofdhaal5.19.5e052c4anZplci
 
-![SMMS](https://i.loli.net/2019/09/05/x6MvjAtoJie3T7p.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/x6MvjAtoJie3T7p.png)
 
 #### 申请
 
 绑定一个域名,比如dev.elmagnifico.me 这样的二级子域名
 
-![SMMS](https://i.loli.net/2019/09/05/zjQw1Hn4kG7sXRI.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/zjQw1Hn4kG7sXRI.png)
 
 由于选了DNS的验证方式,所以需要你进到域名管理里面添加一条,对应的信息,如果域名本身就是阿里云的就能自动完成,剩下等他通过就行了,但是如果域名本身不是阿里云的,需要手动添加这个内容到域名管理中
 
-![SMMS](https://i.loli.net/2019/09/05/ueBcOfVCQNitH38.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/ueBcOfVCQNitH38.png)
 
 #### 安装
 
 域名通过审核以后,可以就能下载对应的证书文件了.
 
-![SMMS](https://i.loli.net/2019/09/05/RBF74ItNn5QSxDd.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/RBF74ItNn5QSxDd.png)
 
 这里pfx的密码只对这个压缩包里的pfx生效,如果重新下载得到的就是另一个密码了,必须匹配使用
 
@@ -122,7 +122,7 @@ keytool -importkeystore -srckeystore D:\https\214215109110451.pfx -destkeystore 
 
 会提示输入密钥,密钥和压缩包内的相同即可
 
-![SMMS](https://i.loli.net/2019/09/05/HBjbtcrsXy2VT83.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/HBjbtcrsXy2VT83.png)
 
 需要留意这里的别名是 alias,配置的时候这里的别名也要填的相同
 

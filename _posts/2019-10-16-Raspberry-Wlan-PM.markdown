@@ -52,11 +52,11 @@ tags:
 netsh interface ipv4 show interfaces 1(这个值是对应的网口)
 ```
 
-![SMMS](https://i.loli.net/2019/10/16/lSfTFEJOu3rYZ7o.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/lSfTFEJOu3rYZ7o.png)
 
 可以看到这里是36s，所以arp这里有问题基本不可能，windows的arp更新时间大概是15-40s，是一个随机值，所以会出问题的可能性还是比较小的。
 
-![SMMS](https://i.loli.net/2019/10/16/jkhZDYIlge7QXor.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/jkhZDYIlge7QXor.png)
 
 然后从抓包中，也单独查看了arp包，arp在查询未知ip时发的是广播，但是当他需要维护当前arp表的时候，他是直接询问已经记录的mac地址，然后等ack，如果有ack了，这个mac时间就刷新，否则就失效或者是继续问。
 

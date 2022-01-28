@@ -38,7 +38,7 @@ RSSHub的部署，使用docker当然是最简单的方式，通过这里就能�
 
 https://rsshub.app/bilibili/user/coin/2267573?filterout=微小微|赤九玖|暴走大事件
 
-![SMMS](https://i.loli.net/2018/11/29/5bffc33b563ce.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/5bffc33b563ce.png)
 
 他支持的信息源非常多，具体去官网查询吧。
 

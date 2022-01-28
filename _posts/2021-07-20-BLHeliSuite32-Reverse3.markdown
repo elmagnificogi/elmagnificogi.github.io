@@ -49,7 +49,7 @@ tags:
 
 
 
-![image-20210721174338240](https://i.loli.net/2021/07/21/PIbCyT6QjzlvfYG.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/PIbCyT6QjzlvfYG.png)
 
 
 
@@ -74,7 +74,7 @@ tags:
 
 可以看到这里直接取解密后第一个字节作为了 主版本号，也就是0x20，对应字符串的显示其实他是用32
 
-![image-20210721174741578](https://i.loli.net/2021/07/21/R7i8NArMleY4DtJ.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/R7i8NArMleY4DtJ.png)
 
 ```assembly
 
@@ -110,7 +110,7 @@ tags:
 
 这里拿第三字节作为layout的版本号，0x2A
 
-![image-20210721175352324](https://i.loli.net/2021/07/21/SrVnxUg48DHfQEF.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/SrVnxUg48DHfQEF.png)
 
 
 
@@ -157,7 +157,7 @@ tags:
 
 可以看到偏移0x80个字节后的10个字节是ESC Name，由于我这里是没明名的，所以全空
 
-![image-20210721175912398](https://i.loli.net/2021/07/21/vwURXtEmZ7sLB25.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/vwURXtEmZ7sLB25.png)
 
 
 
@@ -183,7 +183,7 @@ tags:
 
 偏移0x32，0x33，0x34，0x35字节，他们都是LED使能字节，填入的LED的序号，我有3个，所以是123
 
-![image-20210721180133333](https://i.loli.net/2021/07/21/R5GZoQlx9vLwrfq.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/R5GZoQlx9vLwrfq.png)
 
 
 
@@ -262,7 +262,7 @@ tags:
 
 这里是音乐的编码，偏移0x90，然后之后0x30个字节都是乐谱，这个和我使用的音乐是完全可以对的上的，没有使用的字节就是0xFF
 
-![image-20210721181750911](https://i.loli.net/2021/07/21/HP1zU5TcrDJWfxh.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/HP1zU5TcrDJWfxh.png)
 
 
 
@@ -300,7 +300,7 @@ tags:
 
 但是我从解密后的buff中直接转换成短整型，就可以看到我pwm的设置，最低1040，中值1500，最高1960，但是没找到哪里调用了这部分数据
 
-![image-20210721185550996](https://i.loli.net/2021/07/21/iXg8pt1ThqlAzOm.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/iXg8pt1ThqlAzOm.png)
 
 
 
@@ -777,11 +777,11 @@ _Unit139.TBLHeliInterfaceManager.SetupToControls
 
 通过od，可以看到ebp此时的值其实是显示了一个字符串提示，这里应该不是关键
 
-![image-20210713111114465](https://i.loli.net/2021/07/13/LBXIxZ35zqDTHMA.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/LBXIxZ35zqDTHMA.png)
 
 0x2864D00地址的内容：
 
-![image-20210713111309919](https://i.loli.net/2021/07/13/ulMUQykG6fTcRSA.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/ulMUQykG6fTcRSA.png)
 
 
 
@@ -805,11 +805,11 @@ _Unit139.TBLHeliInterfaceManager.BLHeliStored
 
 
 
-![image-20210713113317443](https://i.loli.net/2021/07/13/KTCbFRLAny7wdOm.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/KTCbFRLAny7wdOm.png)
 
 这里数据是大端模式，80是低字节保存在内存的高地址上，而02是数据高字节，保存在内存低地址中
 
-![image-20210713113600249](https://i.loli.net/2021/07/13/ueVkv3TH9FswLmr.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/ueVkv3TH9FswLmr.png)
 
 
 
@@ -817,11 +817,11 @@ _Unit139.TBLHeliInterfaceManager.BLHeliStored
 
 进入的时候，此时寄存器的值为：
 
-![image-20210713115712289](https://i.loli.net/2021/07/13/u5OabnvVyYQC3wF.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/u5OabnvVyYQC3wF.png)
 
 额外发现这个CopyTo是经常被调用的，当
 
-![image-20210713154615425](https://i.loli.net/2021/07/13/uk8pNzfZ2RdV7Ov.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/uk8pNzfZ2RdV7Ov.png)
 
 这两个Tab页面切换的时候，就会自动调用CopyTo.
 
@@ -909,7 +909,7 @@ _Unit102.TBLHeli.CopyTo
 
 此时寄存器为：
 
-![image-20210713194856526](https://i.loli.net/2021/07/13/dqiIkw8MULOKNCP.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/dqiIkw8MULOKNCP.png)
 
 ```assembly
 _Unit102.TBLHeli.WriteSetupToString
@@ -944,7 +944,7 @@ _Unit102.TBLHeli.WriteSetupToString
 006EAA17        mov         byte ptr [edi+1],al
 ```
 
-![image-20210713171311227](https://i.loli.net/2021/07/13/dsWjTn3G1kqNFOR.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/dsWjTn3G1kqNFOR.png)
 
 OD动态调试看到，esi+4对应的地址值是20，那么也就是32
 
@@ -984,7 +984,7 @@ esi+5，对应的值也就是3C，对应的也就是60，所以版本号应该�
 # 不知道是什么全设置为了0
 ```
 
-![image-20210713172521627](https://i.loli.net/2021/07/13/tyWd2vlFI5J93SL.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/tyWd2vlFI5J93SL.png)
 
 这里是led是否存在，00表示不存在，最多可以支持4个led，我这里只有3个，所以是01，02，03，00
 
@@ -1011,11 +1011,11 @@ esi+5，对应的值也就是3C，对应的也就是60，所以版本号应该�
 
 这里应该是edx和eax，ecx都作为参数传入到Move里面，然后Move就是把eax地址的值搬运到edx中，搬运长度为ecx个，也就是0x30个字节
 
-![image-20210713174328881](https://i.loli.net/2021/07/13/omGb87KYdqzkT9P.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/omGb87KYdqzkT9P.png)
 
 那么图中的高亮部分，就是实际音乐的节拍数组，下面是我的实际节拍，就会发现他是一一对应的，剩余的FF是没使用到的
 
-![image-20210713175101811](https://i.loli.net/2021/07/13/QhOYsw4RFSzimqp.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/QhOYsw4RFSzimqp.png)
 
 但是分析到这里，我又对了一下发送的256数据，发现hex的内容和实际接收发送的数据对不上，而ESI地址中的数值又是谁赋进去的，需要找到这个，发现ESI是在CopyTo时EDX给进来的，然后edx又是ebp给进来的，实际上又是来自于ebp，从堆栈中取出来的。到这里就发现虽然数据可以解析了，但是解析的数据并不是原生的256字节，所以又要回去找读取的时候数据是怎么处理的（关键变成谁给0x2864D00或者0x289D000地址赋得值）
 

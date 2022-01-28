@@ -61,7 +61,7 @@ tags:
 
 最后补充一点，teensy系列支持全平台，烧录方便，驱动安装傻瓜化，连号线烧好就能用
 
-![SMMS](https://i.loli.net/2020/08/04/XuOarETMsIZnCp9.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/XuOarETMsIZnCp9.png)
 
 ## 串口
 
@@ -164,7 +164,7 @@ C-FROCE也是可以用的
 
 - 如果不想买拓展坞，可以用下面的usb-a转type-c的转接头,方便携带，就可以单片机自带线插入到switch了，缺点就是不能用单片机的时候充电
 
-![SMMS](https://i.loli.net/2020/08/05/C7Icau1Gm5oMkOq.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/C7Icau1Gm5oMkOq.png)
 
 ## 采集卡
 
@@ -176,7 +176,7 @@ C-FROCE也是可以用的
 
 - 采集卡品牌很多，伊机控这里无所谓什么牌子的，多少色偏，延迟，分辨率，基本都能支持
 
-![SMMS](https://i.loli.net/2020/08/05/vkSANeDmjI2PUC7.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/vkSANeDmjI2PUC7.png)
 
 ## 成品
 
@@ -190,7 +190,7 @@ C-FROCE也是可以用的
 
 > https://item.taobao.com/item.htm?spm=a230r.1.14.38.77a86bbat1M7FH&id=613383712791&ns=1&abbucket=5#detail
 
-![image-20200402220531301](https://i.loli.net/2020/08/12/EeQAwlIWxgvRS4M.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/EeQAwlIWxgvRS4M.png)
 
 
 
@@ -198,7 +198,7 @@ C-FROCE也是可以用的
 
 > https://item.taobao.com/item.htm?spm=a230r.1.14.28.77a86bbat1M7FH&id=611648312056&ns=1&abbucket=5#detail
 
-![image-20200402220711558](https://i.loli.net/2020/08/12/joqCOYnkZz7LpVP.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/joqCOYnkZz7LpVP.png)
 
 其他可能还有很多，不过是互相抄而已就不介绍了，咸鱼随便搜搜宝可梦单片机，一堆一堆收智商税的
 
@@ -210,21 +210,21 @@ C-FROCE也是可以用的
 
 使用单片机+串口+拓展坞+伊机控模式：
 
-![SMMS](https://i.loli.net/2020/08/05/sK2UB1hxzcH9ASI.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/sK2UB1hxzcH9ASI.png)
 
 仅使用单片机+拓展坞：
 
-![SMMS](https://i.loli.net/2020/08/05/1HhMPrl3jyUAEL2.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/1HhMPrl3jyUAEL2.png)
 
 
 
 teensy2.0 + USB-A转Type-C ，固件模式：
 
-![SMMS](https://i.loli.net/2020/08/05/O4nRY1uJHIzXgmP.jpg)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/O4nRY1uJHIzXgmP.jpg)
 
 teensy2.0 + 拓展坞模式：
 
-![SMMS](https://i.loli.net/2020/08/05/txKQw5eMITEpyXN.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/txKQw5eMITEpyXN.png)
 
 
 

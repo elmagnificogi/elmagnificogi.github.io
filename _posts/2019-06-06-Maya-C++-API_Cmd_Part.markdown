@@ -27,7 +27,7 @@ Transform节点中的是位置矩阵信息，包括位置、旋转、伸缩比�
 
 稍微复杂一点，这里会加上一个渲染的材质，就变成了，transform-shap-material
 
-![SMMS](https://i.loli.net/2019/06/06/5cf8bf11e241699738.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/5cf8bf11e241699738.png)
 
 类似于途中，描述几何信息的shape节点一定是叶结点
 

@@ -56,7 +56,7 @@ OpenCL本身是异构系统的一个标准接口，但是由于之前使用的�
 
 找到对应目录下的GPUSniffer程序，然后检测一下GPU。
 
-![SMMS](https://i.loli.net/2019/03/21/5c92f9c4e38ba.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/5c92f9c4e38ba.png)
 
 ## Quote
 

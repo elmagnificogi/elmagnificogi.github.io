@@ -38,7 +38,7 @@ RVO2之前介绍过了，这里说一下平常RVO2都是二维的
 
 
 
-![image-20210204155714013](https://i.loli.net/2021/02/04/OuFU2WlSmCjazhR.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/OuFU2WlSmCjazhR.png)
 
 3d版本结构是这样的：
 
@@ -54,7 +54,7 @@ RVO2之前介绍过了，这里说一下平常RVO2都是二维的
 
 #### 源码结构
 
-![image-20210204172727686](https://i.loli.net/2021/02/04/R1SXaeBlGQ2iThb.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/R1SXaeBlGQ2iThb.png)
 
 可以看到Agent，就是实际的粒子，KdTree就不用说了用来保存邻近结构的，之前说过了，RVOSimulator就是具体的算法模拟器了。
 

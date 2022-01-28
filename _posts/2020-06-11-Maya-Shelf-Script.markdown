@@ -161,7 +161,7 @@ hotkeyCtx -type "Tool" -addClient "SymmetrizeUVBrush";
 
 这里面就是各个面板上的shelf button的配置信息
 
-![SMMS](https://i.loli.net/2020/06/11/UFfEJncNe4sl3O1.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/UFfEJncNe4sl3O1.png)
 
 手动加上去的也好，还是原生的也好，都记录在各个对应的文件夹中，并且都是通过mel的方式进行加载记录的
 
@@ -271,7 +271,7 @@ optionVar
 
 我这里是一个mel，还有4个python窗口，对应上面的代码
 
-![SMMS](https://i.loli.net/2020/06/11/ckl9wgV7Bh5A6pS.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/ckl9wgV7Bh5A6pS.png)
 
 实际修改或者添加时也按照上述规则即可
 

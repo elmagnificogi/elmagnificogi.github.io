@@ -57,7 +57,7 @@ tags:
 
 如图所示:在maya的安装路径下的 include,lib/cmake,mkspecs中分别有qt打好包的头文件库文件,那我们需要的就是在这里把他们全都解压到他们当前的目录下.
 
-![SMMS](https://i.loli.net/2018/12/18/5c18531be0b19.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/5c18531be0b19.png)
 
 如果想要正常运行例程这里还需要设置一下环境变量
 

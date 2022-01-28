@@ -20,13 +20,13 @@ tags:
 
 首先时Typora，当前是0.9.93 beta版本
 
-![image-20200810214724742](https://i.loli.net/2020/08/10/ZUK1mA7W4ogYTay.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/ZUK1mA7W4ogYTay.png)
 
 可以看到在0.9.84版本，Typora支持了PicGo来上传图片！
 
 同时PicGo当前是2.3.0 beta3
 
-![image-20200810214957378](https://i.loli.net/2020/08/10/xqLmeNAujMOoFz9.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/xqLmeNAujMOoFz9.png)
 
 在2.2版本开始支持了，命令行或者后台server监听，进行图片上传
 
@@ -34,7 +34,7 @@ tags:
 
 只需要在Typora的偏好设置中，选择使用PicGo app，然后选择好实际的PicGo.exe路径就可以使用了，直接复制图片或者拖拽进Typora，图片会自动进行上传，会提示一个upload，上传结束以后会自动切换成实际的链接。
 
-![image-20200810215336486](https://i.loli.net/2020/08/10/ZSphjMO5DwAm4YR.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/ZSphjMO5DwAm4YR.png)
 
 
 
@@ -47,9 +47,9 @@ tags:
 这种自动上传的图片，不支持PicGo自定义格式了，就是上传返回替换的格式一定是
 
 ```
-![image-20200810215336486](https://i.loli.net/2020/08/10/ZSphjMO5DwAm4YR.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/ZSphjMO5DwAm4YR.png)
 而我之前为了区分SM.MS的图床的图片，都设置为了
-![SM.MS](xxxxx.xxxx)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/xxxxx.xxxx)
 ```
 
 如果这里的小细节能够改一下就好了。
@@ -72,7 +72,7 @@ tags:
 
 总体来说现在功能还是太简单了，不过对比notion来说，他现在功能还不全，但是他有一个页面关系的图，可以看到你的知识脉络，感觉挺有意思的。
 
-![image-20200810222352001](https://i.loli.net/2020/08/10/VxjOqnMUrcgBywh.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/VxjOqnMUrcgBywh.png)
 
 不过这个功能，其他类似软件也有支持，只不过当你的知识量超级多的时候，这个图会超级复杂，密集程度max，导致实际不是很好用。看wolai最后能优化到什么程度吧。最好是这个图也能多出几个层级，不同层级不同图，这样扩展下去可能才有可读性，否则都密密麻麻堆一起，不如没有。
 

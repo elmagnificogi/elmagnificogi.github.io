@@ -40,11 +40,11 @@ tags:
 
 
 
-![image-20210525165910354](https://i.loli.net/2021/05/25/3w4bGoMlWi1jnFc.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/3w4bGoMlWi1jnFc.png)
 
-![image-20210525170435479](https://i.loli.net/2021/05/25/UFuKh4Q5f89BcGz.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/UFuKh4Q5f89BcGz.png)
 
-![image-20210525170339078](https://i.loli.net/2021/05/25/LlQiGgP6sztOh2Z.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/LlQiGgP6sztOh2Z.png)
 
 
 
@@ -92,7 +92,7 @@ powercfg -lastwake
 
 对应的结果类似下图
 
-![image-20210525160423488](https://i.loli.net/2021/05/25/MgcJ6lavZ3r75q4.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/MgcJ6lavZ3r75q4.png)
 
 
 
@@ -108,7 +108,7 @@ powercfg -lastwake
 
 2. 注册表HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NativeWifiP\Parameters中添加EnableWoWLAN，类型是DWORD，值为1
 
-![image-20210525230013007](https://i.loli.net/2021/05/25/74ebEgatcmCnQU6.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/74ebEgatcmCnQU6.png)
 
 但是就算这些都做了，还是有大概率不能通过无线唤醒，具体原因嘛，我实在是找不到了。
 
@@ -138,7 +138,7 @@ powercfg -lastwake
 
 发现路由器有唤醒功能，直接用路由器的，还是不行，再怀疑我路由上发的幻数包实际上没发出来，然后装了个wireshark，分析
 
-![image-20210525003202590](https://i.loli.net/2021/05/25/KTEx2zcMGCHtmg1.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/KTEx2zcMGCHtmg1.png)
 
 可以看到，收到了，wireshark可以直接识别唤醒包，叫wol，实际上本质是个udp包，这说明没问题。
 
@@ -146,9 +146,9 @@ powercfg -lastwake
 
 然后同时我还试了试，手机上的app wake on lan 来发送唤醒命令
 
-![image-20220127153456255](https://s2.loli.net/2022/01/27/iLfbgh3CaGD86MY.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/iLfbgh3CaGD86MY.png)
 
-![image-20210525224703660](https://i.loli.net/2021/05/25/TtwPzgEM3pJSnsR.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/TtwPzgEM3pJSnsR.png)
 
 可以看到一样收到了wol包，同时这个包的大小还是不一样的，但是内容都是差不多的。我也试了试其他app，大同小异，都是发送144字节的幻数包。
 
@@ -162,7 +162,7 @@ powercfg -lastwake
 
 同时我在睡眠前开启了wireshark，睡眠后还使用手机发送了唤醒包，等待了十几秒以后又发了一次，依然无法唤醒
 
-![image-20210525225339931](https://i.loli.net/2021/05/25/zdrKEVu1s8GHZ4N.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/zdrKEVu1s8GHZ4N.png)
 
 可以看到我这里间隔了14秒，包是收到了，但是电脑没反应。
 
@@ -188,7 +188,7 @@ powercfg -lastwake
 
 比较常见的就是向日葵的开机插座，利用的方式比较简单，基本大多数主板都支持。主板中有一项上电检测的设置，相当于是说电源通电之后进行什么操作，可以是关机，可以是开机，也可以是断电前的状态。
 
-![image-20210525165931104](https://i.loli.net/2021/05/25/JbiUNwpf46Kuv2h.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/JbiUNwpf46Kuv2h.png)
 
 而基本上市面上多数唤醒都是利用这个功能，BIOS中可能叫做AC recovery或者中文叫断电恢复后电源状态。而要实现智能插座唤醒，就需要设置为断电恢复后-开机，这样每次关机是正常关机，但是本质上主板还没断电，而你通过操控智能插座断电-复电，从而让原本关机的状态切换为了开机。
 
@@ -216,7 +216,7 @@ S5，全部断电
 
 简单说用个ESP32，然后做个底板，模仿PCIE的接口用来供电，然后给出引脚可以插主板的Power Switch，同时还多一组可以将原本的重新输出回去，不影响实体按键，直接模拟实际按键进行开机关机。
 
-![image-20210826192845861](https://i.loli.net/2021/08/26/RLhYevtpcKSrEwD.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/RLhYevtpcKSrEwD.png)
 
 这种方式也有一些问题，一个是主板不能断电，关机之后PCIE至少得是能供电的状态。第二个需要自行修改开关机的连接线，稍微麻烦了一点。
 
@@ -228,11 +228,11 @@ S5，全部断电
 
 最后买了一个Gosund智能排插，最多4孔可控，1个快充USB口，2个普充USB，本身可以连接2.4g网络，远程控制，断电记忆。
 
-![image-20210614152541153](https://i.loli.net/2021/06/14/x7ZSCJRqfu6kTKe.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/x7ZSCJRqfu6kTKe.png)
 
 然后他可以接入米家，就能智能控制了
 
-![image-20210614152639387](https://i.loli.net/2021/06/14/HW3JfmVkcA6Ks2I.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/HW3JfmVkcA6Ks2I.png)
 
 
 

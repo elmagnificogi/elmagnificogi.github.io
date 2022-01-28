@@ -150,7 +150,7 @@ _Unit108.TBootloader.CheckStrACK
 
 - 实际上这个串口buff地址每次启动都会不一样，但是总体每次运行到这个位置的时候，某个寄存器里面一定存的就是这个地址
 
-![image-20210716172235050](https://i.loli.net/2021/07/16/3L4fjtRnQhHbCc1.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/3L4fjtRnQhHbCc1.png)
 
 
 
@@ -951,11 +951,11 @@ _Unit102.TBLHeli.ReadSetupFromBinString
 
 看起来是个程序地址，我跳过去看了一下
 
-![image-20210717111029804](https://i.loli.net/2021/07/17/CfnLhwjqMUOHpIJ.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/CfnLhwjqMUOHpIJ.png)
 
 这里倒是没什么，但是再往下，可以看到这里的名字基本上全都是对应的参数值！
 
-![image-20210717111042758](https://i.loli.net/2021/07/17/Dh24BXzT9dJ3ntM.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/Dh24BXzT9dJ3ntM.png)
 
 
 
@@ -1020,7 +1020,7 @@ _Unit102.TBLHeli.ReadSetupFromBinString
 
 上面的是解析内容，下面的是串口raw值，总算找到了解析的地方
 
-![image-20210717115950567](https://i.loli.net/2021/07/17/1HctWPrebpIMaJB.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/1HctWPrebpIMaJB.png)
 
 
 
@@ -1104,7 +1104,7 @@ _Unit102.TBLHeli.ReadMCU
 
 这部分数据是直接平移过来的
 
-![image-20210717162449070](https://i.loli.net/2021/07/17/ph4F5uVWXUgIKbm.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/ph4F5uVWXUgIKbm.png)
 
 
 
@@ -1814,7 +1814,7 @@ System.sub_0040D0EC
 
 
 
-![image-20210720165559845](https://i.loli.net/2021/07/20/yLN16TCoRMYdVBb.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/yLN16TCoRMYdVBb.png)
 
 内存对比，完全符合，我就懒得看具体代码了。唯一这里担心一点，那就是他把抛弃的前2个字节重新在某个地方又拼接了一下，然后又合成了一个新信息，如果有这样的话就坑爹了。
 
@@ -1913,7 +1913,7 @@ System.sub_0040D0EC
 
 ## 串口数据格式
 
-![image-20210716180115583](https://i.loli.net/2021/07/16/Y3JrM1ikpVmAoNE.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/Y3JrM1ikpVmAoNE.png)
 
 从0x50F6BE4开始，前四个字节描述数据长度，所以这里就是0x0000 0103，也就是259字节数据
 
@@ -1921,7 +1921,7 @@ System.sub_0040D0EC
 
 这里有一个奇怪的值是从404B48 那个奇怪的地址读出来的
 
-![image-20210716182847388](https://i.loli.net/2021/07/16/V7FMc45UHIr1dKx.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/V7FMc45UHIr1dKx.png)
 
 
 
@@ -2201,11 +2201,11 @@ for i in range(0, 64, 2):
 
 rawdata.txt中是本次读取的数据，类似于这样就行，可以自动解析出来正确的256字节配置
 
-![image-20210719184659222](https://i.loli.net/2021/07/19/mtyoDsR8fNIEKF9.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/mtyoDsR8fNIEKF9.png)
 
 目前每次解出来的数据是和反汇编看到的一模一样。最后的输出我将每8字节的前2字节去掉，然后就变成可读的字符串了，和内存的排布是一样的。
 
-![image-20210720200104954](https://i.loli.net/2021/07/20/IKRnv1Ab9li4FBz.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/IKRnv1Ab9li4FBz.png)
 
 当解密完成以后，如果有相关经验的可能可以从算法推出来是用什么加密的。至于为什么每次加密后的密文都不同，那就不知道了，难道是每次随机给进来的前2个字节是随机的？所以加密以后导致密文每次都不同？加密的那一段代码由于我没啥需求，就不继续破解了
 

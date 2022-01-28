@@ -32,7 +32,7 @@ tags:
 
 第一次攻击
 
-![image-20210513100226821](https://i.loli.net/2021/05/13/I4sHu1Ek7ZTVDeq.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/I4sHu1Ek7ZTVDeq.png)
 
 第一次被攻击，小激动了一下，然后就被腾讯云提示拉进黑洞了，刚开始被攻击的时候还能连上ssh，后面就直接没了。等他攻击结束以后，我手动恢复了。
 
@@ -40,13 +40,13 @@ tags:
 
 然后没多久立马第二次又开始了。
 
-![image-20210513100314263](https://i.loli.net/2021/05/13/ul9YAXVJPjLxMGW.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/ul9YAXVJPjLxMGW.png)
 
 腾讯云的轻量防御只有2G，攻击带宽比较大30g，直接给我打死了了，只是实际流量才这么点为什么就直接给我拉黑洞了。他这个2G防御是累计2G嘛，只要满了2G，下次稍微有一点就给打死了？懵逼中。
 
 然后我又手动解封了一次，就上床了
 
-![image-20210513100339145](https://i.loli.net/2021/05/13/JHEWdbYyth2j7GS.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/JHEWdbYyth2j7GS.png)
 
 没多久，又提示我被打了，nmd，我就睡了，随你打。
 
@@ -54,7 +54,7 @@ tags:
 
 当我把防御弄好了以后，再次解封我的vps，然后我又被打了，基本是秒被打，所以估计我要换个vps了
 
-![image-20210513112700440](https://i.loli.net/2021/05/13/etZXsGr6wjuIpa1.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/etZXsGr6wjuIpa1.png)
 
 
 
@@ -76,13 +76,13 @@ tags:
 
 > https://cdn.bnxb.com/index.html
 
-![image-20210513103602220](https://i.loli.net/2021/05/13/oQaNqx9bYLv8R3S.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/oQaNqx9bYLv8R3S.png)
 
 然后把DNS服务商的域名全都解析到cloudflare给的cdn域名
 
 
 
-![image-20210513103653842](https://i.loli.net/2021/05/13/qkHKs7Bz9uo8hxG.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/qkHKs7Bz9uo8hxG.png)
 
 这个时候我的blog就可以正常访问了。
 

@@ -44,11 +44,11 @@ git:
 
 首先他可以直接拖拽上传，这是基本操作，然后可以直接从剪贴板上传文件，上传结束以后还可以自定义你需要的链接复制到剪贴板中，比如我的：
 
-![SMMS](https://i.loli.net/2018/12/26/5c232d5d35f51.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/5c232d5d35f51.png)
 
 自定义为有SMMS标签的，每次上传结束以后会自动给我这样的链接:
 
-![SMMS](https://i.loli.net/2018/12/26/5c232db489965.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/5c232db489965.png)
 
 这样我下次替换图片的时候或者找哪些文章里有图片的时候比较好找。
 

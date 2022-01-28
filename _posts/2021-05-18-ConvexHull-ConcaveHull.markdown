@@ -26,24 +26,24 @@ tags:
 
 ### Graham Scan算法
 
-![20200818191802740](https://i.loli.net/2021/05/18/U5vVO8wYQqaeWRS.gif)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/U5vVO8wYQqaeWRS.gif)
 
 1. 先找到一个Y最低的点作为起始点，
 
 2. 然后使用叉积角度判断的方法去判断点的走向,如果走向是凸的那就保留，直到找不到为止。说白了就是求已知点中和当前点所成角度最小的的那个点
 3. 最终找到第一个点，此时在栈内留下的点序列就是凸包点了。
 
-![image-20210518141330183](https://i.loli.net/2021/05/18/Okyb75a2N8Xdu1v.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/Okyb75a2N8Xdu1v.png)
 
 如图所示，最终得到的就是1-2-3-5-6-1 这样一个凸包连线，但是如果我们想要的就是边界办法那要怎么办？
 
 比如下图中的1-2-3-4-5-6-7-1 这样的一个轮廓，两个对比就能看出来凸包有时候圈出来的范围是远大于实际这个点集覆盖的范围的，比如6-7-1 就比6-1所圈的范围要小，如果点集中类似的凹坑比较多或者凹的成都比较大的话，那么求出来的范围偏离实际就比较多。
 
-![image-20210518141402433](https://i.loli.net/2021/05/18/danUG3yF29kKPor.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/danUG3yF29kKPor.png)
 
 得到的总是类似下面凸包，大范围轮廓
 
-![img](https://i.loli.net/2021/05/18/9aIr5vk7hdTGgDu.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/9aIr5vk7hdTGgDu.png)
 
 
 
@@ -55,7 +55,7 @@ tags:
 
 ### 滚球法
 
-![20200818191847991](https://i.loli.net/2021/05/18/shclmF5vYRq69CA.gif)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/shclmF5vYRq69CA.gif)
 
 滚球法算是最简单，最容易理解的，设定一个球有一定的半径，让他沿着点集的边缘运动，只要他不会陷入到其中，那么与他所包含进去的点就是边缘轮廓的点，而相邻两点必然是这个球的弦。
 
@@ -68,7 +68,7 @@ tags:
 
 如果这个R选择足够合适，那么大概率可以得到一个凹的轮廓。
 
-![img](https://i.loli.net/2021/05/18/UVWDcgnQSkqxu9Z.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/UVWDcgnQSkqxu9Z.png)
 
 为什么这里说的是大概率，因为有可能你的点集不够集中，那么这个时候R就会出现要么过大要么过小，没有一个合适的值。
 
@@ -84,7 +84,7 @@ tags:
 
 滚球法有个问题，如果出现单边直线，比如下图中的1-2-3-4和 7-8-9-10 这两条都是完全平行的直线，那么滚球法这里无法正确滚到这几个点。需要通过R来排除这种共线的情况
 
-![image-20210518151615244](https://i.loli.net/2021/05/18/yWL1SNw7MivopJX.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/yWL1SNw7MivopJX.png)
 
 #### 建议
 
@@ -94,11 +94,11 @@ tags:
 
 ### Delaunay三角化
 
-![o_QQ截图20140302154307](https://i.loli.net/2021/05/18/P7RlCrIi2XvKJOa.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/P7RlCrIi2XvKJOa.png)
 
 Delaunay三角化可以让点集形成如图所示的三角网络，如果不删边，这个时候这个图就是一个凸包。通过选择性删边，可以得到一个凹包的效果。
 
-![image-20210518163049859](https://i.loli.net/2021/05/18/uJ3Yj9ImTUFQtA8.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/uJ3Yj9ImTUFQtA8.png)
 
 
 

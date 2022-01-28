@@ -42,7 +42,7 @@ PicGo，更新了几个小版本，这么一更新呢，增加了几个自己的
 
 - SM.MS 注册登录，并且生成API Token
 
-  ![SMMS](https://i.loli.net/2019/08/30/XlhmCi9GDsbnJ2c.png)
+  ![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/XlhmCi9GDsbnJ2c.png)
 
 - 查看SM.MS的API v2 版本
 
@@ -80,7 +80,7 @@ customHeader：{"Content-Type":"multipart/form-data","Authorization":"你的toke
 jsonPath:data.url
 ```
 
-![SMMS](https://i.loli.net/2019/08/30/9SjGaWRfu87HUPe.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/9SjGaWRfu87HUPe.png)
 
 其他几项可以不用填，然后切到上传区中的自定义Web图床，上传一下就能看到结果了。
 
@@ -90,7 +90,7 @@ jsonPath:data.url
 
 #### 查看图片
 
-![SMMS](https://i.loli.net/2019/08/30/3ZMjvTBNnQHms1h.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/3ZMjvTBNnQHms1h.png)
 
 这里就能直接查看图片了，有点类似于以前七牛云的那个方式，这里可以直接查看图片或者删除。
 

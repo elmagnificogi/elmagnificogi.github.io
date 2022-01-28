@@ -31,11 +31,11 @@ tags:
 
 
 
-![image-20211019011424508](https://i.loli.net/2021/10/19/yQcYJgfIt7POZCq.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/yQcYJgfIt7POZCq.png)
 
 直接运行，已经打包了需要的暗黑文件，打开以后保持不要关闭命令行就行了
 
-![image-20211019011503340](https://i.loli.net/2021/10/19/O4frTuRZg5xlcGp.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/O4frTuRZg5xlcGp.png)
 
 
 

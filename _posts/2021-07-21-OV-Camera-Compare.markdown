@@ -58,21 +58,21 @@ OV7620也不错，可惜没有现成的模组可以买。
 
 - 但是视场角也不是越大越好，同样的视场角大了，那么在相同距离下，**目标在图像中呈现的大小就变小了**，这个时候可能视场角变大并不是什么好事。
 
-![image-20210726163724699](https://i.loli.net/2021/07/26/3cC5Zx2pPQjJhgG.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/3cC5Zx2pPQjJhgG.png)
 
 这种小尺寸封装，常见于笔记本电脑的摄像头或者针孔摄像头之类的，追求小尺寸，但是对应的，这个视场角就只有62°了，不同家的这种封装可能略有不同，但总的来说视场角大概在58°-70°之间。
 
-![image-20210726164606756](https://i.loli.net/2021/07/26/Qv2xZDrTtoUB5m4.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/Qv2xZDrTtoUB5m4.png)
 
 这种尺寸的比较常见，视场角大概在95°-120°左右，当然也有一种比这个小一些的，视场角只有78°左右了。
 
 
 
-![image-20210726164820450](https://i.loli.net/2021/07/26/HlzBC4P1YhgoMX9.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/HlzBC4P1YhgoMX9.png)
 
 而要兼顾小巧还要大视场角就得用类似这样的，开口大一些，这种可以达到120°，还是不错的。
 
-![image-20210726164941353](https://i.loli.net/2021/07/26/insldwYACUuaKM1.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/insldwYACUuaKM1.png)
 
 有的可能需要广角，这个配置可以达到160°+广角镜头，十分恐怖。
 

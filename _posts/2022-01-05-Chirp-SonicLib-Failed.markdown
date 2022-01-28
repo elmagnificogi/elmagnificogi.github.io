@@ -382,7 +382,7 @@ static uint8_t handle_data_ready(ch_group_t *grp_ptr) {
 
 从官方文档里看，数据还是挺好的
 
-![image-20220105150636286](https://s2.loli.net/2022/01/05/Ttu8RWyzLE6wdKM.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/Ttu8RWyzLE6wdKM.png)
 
 然而我这边一开始就出现问题，官方的BSP里仔细看他的I2C的Mem模式和Master模式，基本是混用的。我被这个卡了老半天，一直传感器的频率不正常，好不容易调好了，通信正常了。可是数据又死活不对。
 
@@ -396,15 +396,15 @@ static uint8_t handle_data_ready(ch_group_t *grp_ptr) {
 
 ## 遮罩
 
-![image-20220105151132643](https://s2.loli.net/2022/01/05/x8LcQVXPHhR9afI.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/x8LcQVXPHhR9afI.png)
 
-![image-20220105151158679](https://s2.loli.net/2022/01/05/JpP1RgSohBn9s58.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/JpP1RgSohBn9s58.png)
 
 由于是超声波，所以为了能收到回波，直接使用裸片肯定效果不行，所以他要加遮罩。首先是选择有扩散的遮罩，提升接收的强度和角度，同时还要附加一层金属网最好，可以有效防止尘土等小颗粒对于效果的影响。
 
 但是这个遮罩同时也会扩大干扰，如果有多个超声波传感器使用，那么必然会造成接收到对方的声波，而且这个角度还不小
 
-![image-20220105152924643](https://s2.loli.net/2022/01/05/HAfSeNlCWjzwiuF.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/HAfSeNlCWjzwiuF.png)
 
 同时官方还要求最好将其安装在一个较大的平面上，反射面也比较大，才能达到比较好的测距效果。
 

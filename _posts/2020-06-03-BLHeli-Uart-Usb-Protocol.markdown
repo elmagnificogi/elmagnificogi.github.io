@@ -55,7 +55,7 @@ BLHeli自从升级到了32位以后，就闭源了，而要做到ecs自动校准
 
 我是用的就是下图这样的板子，它本身就是一个支持usb转单线串口的工具而已，本身就是透传，整个协议我能dump也是建立在透传之上的。
 
-![image-20210709115956208](https://i.loli.net/2021/07/09/4zHbDu8Nmc1KBAt.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/4zHbDu8Nmc1KBAt.png)
 
 板子的关键词：
 

@@ -359,7 +359,7 @@ services:
 
 #### 导出数据带数据库
 
-![SMMS](https://i.loli.net/2019/09/04/sC46Qi5uF3fjboH.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/sC46Qi5uF3fjboH.png)
 
 之前发现我导出的sql不带数据库自身，这就有一些问题，初始化的时候相当于没有指定数据库。如果只有一个数据库还好，如果有两个就有问题了。
 

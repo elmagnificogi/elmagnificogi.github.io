@@ -30,13 +30,13 @@ tags:
 
 这里可以申请多个激活权限，具体多了不知道能不能通过。（目前已知我申请了一个激活次数，但是我在多个pc上都能激活）
 
-![image-20210514003212552](https://i.loli.net/2021/05/14/3J1VvLCNn2ZTXga.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/3J1VvLCNn2ZTXga.png)
 
 这里可能还需要你的项目有一个license，github上的项目可以通过添加一个新文件，然后文件叫license就会自动出现右侧的Choose a license template，然后就可以选一个License。
 
-![image-20210514003554143](https://i.loli.net/2021/05/14/OwaHPxgtVDXB35S.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/OwaHPxgtVDXB35S.png)
 
-![image-20210514003652150](https://i.loli.net/2021/05/14/Bs6ogzJTIcqWLK2.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/Bs6ogzJTIcqWLK2.png)
 
 然后提交，等待邮件即可。
 
@@ -92,19 +92,19 @@ tags:
 
 这个License可以使用一年，一年后重新申请即可
 
-![image-20210514004029571](https://i.loli.net/2021/05/14/PqiZAgxG3v8J6aB.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/PqiZAgxG3v8J6aB.png)
 
 接着点开链接登陆账号就能拿到对应的激活权限了。
 
-![image-20210514010203754](https://i.loli.net/2021/05/14/jcWn1gMdAqIvNxC.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/jcWn1gMdAqIvNxC.png)
 
 接着正常登陆账号，就激活了
 
 
 
-![image-20210514005541561](https://i.loli.net/2021/05/14/cetrCMVBf41vPXJ.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/cetrCMVBf41vPXJ.png)
 
-![image-20210514010552234](https://i.loli.net/2021/05/14/VzmQRytWveIYkni.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/VzmQRytWveIYkni.png)
 
 
 
@@ -116,9 +116,9 @@ tags:
 
 如果是用的别人的激活码，则似乎通过Help-Register删除之前的License，然后改成自己的
 
-![image-20210514011233876](https://i.loli.net/2021/05/14/MJ4rIA2LU8qdjoZ.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/MJ4rIA2LU8qdjoZ.png)
 
-![image-20210514011217350](https://i.loli.net/2021/05/14/sF7wZjPzITHmcoO.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/sF7wZjPzITHmcoO.png)
 
 
 
@@ -138,7 +138,7 @@ Certificate used to sign the license is not signed by JetBrains root certifi
 
 彻底一些，搜索 `.vmoptions` 然后将文件内容中的关于jetbrains的都注释了
 
-![image-20210526144017149](https://i.loli.net/2021/05/26/lTyD93cvtdUOL8b.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/lTyD93cvtdUOL8b.png)
 
 然后重启一下ide，再激活就正常了。
 

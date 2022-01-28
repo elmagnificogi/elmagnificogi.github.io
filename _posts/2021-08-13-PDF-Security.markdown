@@ -17,7 +17,7 @@ tags:
 
 最近看PDF，顺便就加点批注，高亮啥的，做个小笔记，方便日后再翻阅的时候找重点。然后就发现PDF被锁住了，处于安全状态，无法编辑。
 
-![image-20210813152250082](https://i.loli.net/2021/08/13/v6Uy2YTOzXNQb5D.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/v6Uy2YTOzXNQb5D.png)
 
 本身PDF就带了水印，还这么处理一下有点麻烦，找了半天没看到有啥快速便捷的办法。
 
@@ -29,19 +29,19 @@ tags:
 
 打开以后，首先改成所有文件，然后选择需要去掉安全选项的pdf
 
-![image-20210813152615198](https://i.loli.net/2021/08/13/Ghtui1MOzARWkVf.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/Ghtui1MOzARWkVf.png)
 
 接着选中这个pdf，然后文件导出
 
-![image-20210813152822095](https://i.loli.net/2021/08/13/xGRIpNQdnauoqOF.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/xGRIpNQdnauoqOF.png)
 
 这些都勾上，有可能会提示可能有些内容没有导出或者什么之类的，无视即可
 
-![image-20210813152856725](https://i.loli.net/2021/08/13/3USzEMdt1lgrD28.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/3USzEMdt1lgrD28.png)
 
 然后打开刚才导出的，就可以看到安全属性已经没有了，可以随意添加注释了。
 
-![image-20210813153014272](https://i.loli.net/2021/08/13/TxGQMucE5vpaXnI.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/TxGQMucE5vpaXnI.png)
 
 
 

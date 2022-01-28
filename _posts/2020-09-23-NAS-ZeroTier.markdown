@@ -51,13 +51,13 @@ ZeroTier 基本是全平台吧，各种NAS也支持，Windows和Android 基本�
 
 windows比较简单，直接右键弹起，Join Network即可
 
-![image-20200923175417483](https://i.loli.net/2020/09/23/hkpXzAqyHr4u8Bt.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/hkpXzAqyHr4u8Bt.png)
 
 它本身没有多余的界面，双击也没有什么主界面弹出来，非常简洁
 
 windows本身会添加一个虚拟网卡，这个网卡就是连入内网的虚拟设备了，类似sstap，提示是否发现网络内设备时，需要选择是
 
-![image-20200923180143805](https://i.loli.net/2020/09/23/wyVJiOqRFbKD82A.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/wyVJiOqRFbKD82A.png)
 
 
 
@@ -65,7 +65,7 @@ windows本身会添加一个虚拟网卡，这个网卡就是连入内网的虚�
 
 同理安卓这边也是，简洁，高效
 
-![image-20200923175920520](https://i.loli.net/2020/09/23/Uu8ZaRwQhqFvAj2.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/Uu8ZaRwQhqFvAj2.png)
 
 填入以后，只需要开启即可
 
@@ -79,13 +79,13 @@ windows本身会添加一个虚拟网卡，这个网卡就是连入内网的虚�
 
 首先开启NAS的SSH，记得稍后不用了把这个关了
 
-![image-20200923180539089](https://i.loli.net/2020/09/23/4a5ELDkdpuOK9s6.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/4a5ELDkdpuOK9s6.png)
 
 
 
 ssh连接到NAS
 
-![image-20200923180652025](https://i.loli.net/2020/09/23/e6LQvRnZrPDYaAI.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/e6LQvRnZrPDYaAI.png)
 
 
 
@@ -103,13 +103,13 @@ uname -ar
 
 打开套件中心，选择手动安装，上传刚得到的spk，然后下一步，应用即可
 
-![image-20200923181022237](https://i.loli.net/2020/09/23/7MZlrbVG5xs8INO.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/7MZlrbVG5xs8INO.png)
 
 
 
 还是一样的简洁，输入Network ID 加入即可
 
-![image-20200923181158020](https://i.loli.net/2020/09/23/F2SpHGR9AknjCTr.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/F2SpHGR9AknjCTr.png)
 
 
 
@@ -117,7 +117,7 @@ uname -ar
 
 上面三个个设备添加以后，刷新一下ZeroTier网站，然后可以看到对应3个设备，已经显示在Members中了
 
-![image-20200923181509877](https://i.loli.net/2020/09/23/3UlNaEq6WCRn4DH.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/3UlNaEq6WCRn4DH.png)
 
 这里就需要勾选前面的Auth，这个设备就可以加入内网了，设备的ip或者是否在线，都能通过这里查看到。
 
@@ -135,17 +135,17 @@ uname -ar
 
 windows开启远程，打开控制面板，选择系统，选择远程设置
 
-![image-20200925140934198](https://i.loli.net/2020/09/25/iydCYceT9zjfVMO.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/iydCYceT9zjfVMO.png)
 
 然后允许远程连接到此计算机，如果不是用Microsoft账号登录的话，或者是其他账号登录的话，需要选择用户添加一下远程过来的账号，然后应用确定就行了。
 
 如果是用Microsoft账号登录默认登录账号就开启了，无需设置用户。
 
-![image-20200925141144240](https://i.loli.net/2020/09/25/rvaWqk2z7OEYdl1.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/rvaWqk2z7OEYdl1.png)
 
 然后开启ZeroTier，通过mstsc，输入要连接的目标内网地址，连接即可
 
-![image-20200925141221587](https://i.loli.net/2020/09/25/VzpJTUwEKoYQlfL.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/VzpJTUwEKoYQlfL.png)
 
 
 
@@ -161,7 +161,7 @@ windows开启远程，打开控制面板，选择系统，选择远程设置
 
 - 注意，Synology Drive新建同步任务会认为你已经连接到了老的nas，所以需要删除所有原来的的同步任务再重新创建才能正常工作
 
-![image-20200925142224332](https://i.loli.net/2020/09/25/VeaodnIZ4FS5BPM.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/VeaodnIZ4FS5BPM.png)
 
 这样就能正常工作了
 

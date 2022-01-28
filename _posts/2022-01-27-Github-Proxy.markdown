@@ -29,11 +29,11 @@ tags:
 
 先创建一个服务，服务名称随意，选择显示简单HTML网页的Woker处理程序，创建服务
 
-![image-20220127132249579](https://s2.loli.net/2022/01/27/hgAzRQ3Pp5LNXfd.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/hgAzRQ3Pp5LNXfd.png)
 
 然后进入快速编辑页面
 
-![](https://s2.loli.net/2022/01/27/6JjA15y4zX9betD.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/6JjA15y4zX9betD.png)
 
 
 
@@ -216,7 +216,7 @@ async function proxy(urlObj, reqInit) {
 
 透过预览刷新，就能看到页面了，这个url就可以分享给其他人了
 
-![image-20220127132627498](https://s2.loli.net/2022/01/27/S9MKPg7nDjaucAf.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/S9MKPg7nDjaucAf.png)
 
 
 
@@ -254,11 +254,11 @@ python的版本功能更强大一些，只不过需要vps来搭建，不能用�
 
 首先自定义一个域名，比如gitproxy，内容无所谓是什么，主要是要切换成代理状态即可，剩下的交给CF就行了
 
-![image-20220127141729681](https://s2.loli.net/2022/01/27/T8V4kUCa2DeMyPO.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/T8V4kUCa2DeMyPO.png)
 
 然后在Workers中添加路由，选择刚才建好的服务和环境，就可以直接通过自定义的域名进行访问了
 
-![image-20220127141319458](https://s2.loli.net/2022/01/27/UP6rM8eQNHZEC9j.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/UP6rM8eQNHZEC9j.png)
 
 最后通过下面的链接就能访问的一样的加速页面了
 

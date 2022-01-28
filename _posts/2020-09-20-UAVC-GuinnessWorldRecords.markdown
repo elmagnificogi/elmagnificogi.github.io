@@ -53,15 +53,15 @@ tags:
 
 ## 现场图片
 
-![image-20200920170209960](https://i.loli.net/2020/09/20/8zIDSA4ifxOYHaM.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/8zIDSA4ifxOYHaM.png)
 
-![image-20200920173701439](https://i.loli.net/2020/09/20/8CynwcTzkgLEHJa.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/8CynwcTzkgLEHJa.png)
 
-![image-20200920173534950](https://i.loli.net/2020/09/20/JdCLcD4OR16A9jY.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/JdCLcD4OR16A9jY.png)
 
-![image-20200920170254705](https://i.loli.net/2020/09/20/Hfs4YzidpQJGwxW.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/Hfs4YzidpQJGwxW.png)
 
-![image-20200920170321694](https://i.loli.net/2020/09/20/WigbCx5tIl6BJsn.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/WigbCx5tIl6BJsn.png)
 
 最后这张图里有我的背影
 
@@ -69,7 +69,7 @@ tags:
 
 最后结束以后，每个人能拿到一份证书，每份200
 
-![image-20201025195942755](https://i.loli.net/2020/10/25/LEfAu52DWqdsnit.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/LEfAu52DWqdsnit.png)
 
 
 

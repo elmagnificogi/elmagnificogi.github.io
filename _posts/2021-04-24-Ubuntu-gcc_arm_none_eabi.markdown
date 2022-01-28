@@ -208,7 +208,7 @@ config debug
 
 解压以后，修改qv2ray的配置为刚才下的v2raycore即可
 
-![image-20210730154517432](https://i.loli.net/2021/07/30/mp17O48BbnAcatF.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/mp17O48BbnAcatF.png)
 
 **没想到没过多久，qv2ray就直接停止维护了，还搞了一堆破事。然后qv2ray确实也不够好用，只要用了一次就强行设置了系统代理，而退出却不能取消代理，这就很弱智了，所以还是别用了吧**
 

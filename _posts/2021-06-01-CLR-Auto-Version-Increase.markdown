@@ -97,11 +97,11 @@ C++ CLI 这里基本就是个摆设，基本不能用，要增加版本信息还
 
 #### 添加资源文件
 
-![image-20210601101522451](https://i.loli.net/2021/06/01/pTltGEQWz7uinHA.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/pTltGEQWz7uinHA.png)
 
 然后选择Version，新建
 
-![image-20210601101603396](https://i.loli.net/2021/06/01/DgqbXPWZ2ueGMOj.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/DgqbXPWZ2ueGMOj.png)
 
 这样就得到了一个资源文件，在CLR中叫app.rc
 
@@ -218,7 +218,7 @@ END
             VALUE "ProductVersion", "1.0.0.3"
 ```
 
-![image-20210601193640547](https://i.loli.net/2021/06/01/1qYLBmuJ8OlUTjC.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/1qYLBmuJ8OlUTjC.png)
 
 同时`FILEVERSION`和`PRODUCTVERSION`都必须是正规版本号的形式，也就是一定是`x,x,x,x`，而下面的key值，可以是任意字符串。
 
@@ -293,9 +293,9 @@ sed -i '/VALUE \"ProductName\"/a\            VALUE \"ProductVersion\",  \"'$git_
 
 然后就是生成前事件中添加对应的命令，由于windows下执行shell实际上是靠git-bash来完成，所以这里调用了一下。
 
-![image-20210602114415014](https://i.loli.net/2021/06/02/XofpZ5kIUqPwLts.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/XofpZ5kIUqPwLts.png)
 
-![image-20210601200920441](https://i.loli.net/2021/06/01/nFAGw6QX5Iqcj8J.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/nFAGw6QX5Iqcj8J.png)
 
 最终结果如图所示，这样整个dll的自动版本控制就算完成了，在windows和linux下都可以正常工作。
 
@@ -311,11 +311,11 @@ sed -i '/VALUE \"ProductName\"/a\            VALUE \"ProductVersion\",  \"'$git_
 
 如果在解决方案里通过F7查看代码打开了，那么在资源视图里，他就直接报错了
 
-![image-20210601104716842](https://i.loli.net/2021/06/01/hCBzGmYHVKyAcE6.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/hCBzGmYHVKyAcE6.png)
 
 就必须先关闭之前的代码，然后点这个小三角不显示，再点一下显示，他才能正常。
 
-![image-20210601105310552](https://i.loli.net/2021/06/01/Ox5PbMTd7N3yDEU.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/Ox5PbMTd7N3yDEU.png)
 
 还不仅如此，如果修改了version.h中的内容，但是这个资源中的VS_VERSION_INFO是不会更新的，就算你已经重编译了。
 
@@ -331,7 +331,7 @@ sed无法处理UTF-16的任何一种情况，BE或者LE，又或者带或不带B
 
 主要是由于UTF-16 凭空多了占位符，会导致sed完全无法正常执行。
 
-![image-20210602114039620](https://i.loli.net/2021/06/02/2DOiJQm9lxE3MvN.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/2DOiJQm9lxE3MvN.png)
 
 而默认生成的app.rc文件，它本身就是UTF-16，所以脚本无法生效，需要手动保存一下，将其修改为UTF-8即可，带不带BOM都行。
 

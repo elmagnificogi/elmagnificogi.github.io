@@ -374,7 +374,7 @@ namespace System.Drawing.Drawing2D
 
 但是NearestNeighbor也并不都是好处，如下图所示可以明显看到在不规则形状的时候，这种插值会造成边缘模糊了很多，而且自带了一圈较重拖影。这是放大时的样子，如果缩小会得到另外一种结果，别的缩放方法都还能看得清原本大致的样子，而如果使用NearestNeighbor就会造成缩小后很多细节或者本不应该被缩放掉的主体信息都被缩放到没有了，所以平常不建议使用这种方法。
 
-![SMMS](https://i.loli.net/2020/08/04/tYaQH7ChPoLf5VZ.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/tYaQH7ChPoLf5VZ.png)
 
 ## Summary
 

@@ -23,7 +23,7 @@ tags:
 
 后来就有了Oneshot，Multishot等等，不过最开始的是DSHOT150，然后DSHOT300，DSHOT600，现在的DSHOT1200。在这之前最强的应该是Multishot，当然对应协议的提升，也要求电调的控制板更强，从之前的8位，16位，到现在的32位单片机，并且时钟频率也从8Mhz，一直提升到了现在的48Mhz，72Mhz甚至更高。
 
-![SMMS](https://i.loli.net/2020/06/03/SrPBVdNHDGEhiec.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/SrPBVdNHDGEhiec.png)
 
 这些都是老图了，可以看到DSHOT600已经非常接近Multishot了，而DSHOT1200直接碾压
 
@@ -55,17 +55,17 @@ DSHOT本身一个完整控制帧，是16bits，其中11bits用来表示油门，
 
 然后后面的4bits crc校验可以防止给出错误帧导致电调给出错误的控制信号（实际电调内部还有一个根据输入PID电机输出的东西）
 
-![SMMS](https://i.loli.net/2020/06/03/QVknPb7qy6Guplc.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/QVknPb7qy6Guplc.png)
 
 既然是数字信号，那么对于0和1的定义就是必须要有的，其实这里0和1是按照占空比来区分的。75%左右的占空比就是1，37.5%左右的占空比就是0.
 
 如下图所示。
 
-![SMMS](https://i.loli.net/2020/06/03/sLR62aojHtD1ybr.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/sLR62aojHtD1ybr.png)
 
 这样原本的模拟信号就组测了一个个数字bit，从而形成一个完整信号帧，这里的75%要求不是很严格，稍微多一些少一些都能正常识别
 
-![SMMS](https://i.loli.net/2020/06/03/9s6PV5e1pbEzSO3.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/9s6PV5e1pbEzSO3.png)
 
 
 
@@ -132,7 +132,7 @@ DSHOT必须先给0，然后逐渐拉高，拉到最大2047，然后再拉回最�
 
 同时电调的设置里也要开启回应telmetry才行
 
-![image-20210820181808186](https://i.loli.net/2021/08/20/D3rMEyWJnj7kpbR.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/D3rMEyWJnj7kpbR.png)
 
 有了这些基础，DSHOT基本就可以正常工作了
 
@@ -330,11 +330,11 @@ static void TIM_DMAPeriodElapsedCplt(DMA_HandleTypeDef *hdma)
 
 正常串口协议是这样的：
 
-![SMMS](https://i.loli.net/2020/06/03/1CeRZVjT362nEmD.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/1CeRZVjT362nEmD.png)
 
 姑且不论后面的0-7位是0还是1，而我实际从示波器上看到的是这样的：
 
-![SMMS](https://i.loli.net/2020/06/03/2i5wDnvR64pEJtI.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/2i5wDnvR64pEJtI.png)
 
 也就是第一个起始位0，被输出了2个0，如果是circle模式，后面无论输出多少个0或者起始位，都不会再出现这个问题。
 

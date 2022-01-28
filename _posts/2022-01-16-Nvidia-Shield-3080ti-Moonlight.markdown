@@ -30,11 +30,11 @@ tags:
 
 所以检查 NVIDIA Web Helper.exe 是否启动了
 
-![image-20220117002750612](https://s2.loli.net/2022/01/17/8jQIt1TimGRed6P.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/8jQIt1TimGRed6P.png)
 
 以及 NVIDIA 服务是否启动了，主要是看NVIDIA LocalSystem Container，服务是否正常。
 
-![image-20220117002911383](https://s2.loli.net/2022/01/17/X5CI2JlF4Z3Ve9h.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/X5CI2JlF4Z3Ve9h.png)
 
 
 
@@ -42,7 +42,7 @@ tags:
 
 RPD远程桌面的时候会出现无法获取信息！的故障提示，这个问题只能通过其他远程桌面比如AnyDesk或者TeamView等方式打开，他们打开就不会提示了。
 
-![image-20220117132601123](https://s2.loli.net/2022/01/17/byvUKOC1Jd9rFqE.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/byvUKOC1Jd9rFqE.png)
 
 
 
@@ -112,7 +112,7 @@ RPD远程桌面的时候会出现无法获取信息！的故障提示，这个�
 
 然后正常安装即可，安好以后，确认你的Shield是正常能打开的状态，同时开启GAMESTREAM
 
-![image-20220117010258550](https://s2.loli.net/2022/01/17/WlvMY5iIphzmsUb.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/WlvMY5iIphzmsUb.png)
 
 
 
@@ -130,19 +130,19 @@ RPD远程桌面的时候会出现无法获取信息！的故障提示，这个�
 
 与串流PC进行配对
 
-![QQ图片20220117010024](https://s2.loli.net/2022/01/17/JWUvtVOXA4YCcHI.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/JWUvtVOXA4YCcHI.png)
 
 串流PC会显示输入验证码，输入即可
 
-![image-20220117010004798](https://s2.loli.net/2022/01/17/L8tKD5CrZSVaXFs.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/L8tKD5CrZSVaXFs.png)
 
 然后在显示PC上就看到了如下画面，已经正常连接了
 
-![img](https://s2.loli.net/2022/01/17/UYzN6wnrIjEs31H.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/UYzN6wnrIjEs31H.png)
 
 点进去就能看到当前可以串流的游戏，剩下就是点击就能玩了
 
-![1234](https://s2.loli.net/2022/01/17/CQ7dqYUlp8ZrX42.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/CQ7dqYUlp8ZrX42.png)
 
 
 
@@ -150,7 +150,7 @@ RPD远程桌面的时候会出现无法获取信息！的故障提示，这个�
 
 一般来说网速没问题，都设置成1080P 60fps，然后下面的视频码率，可以当作带宽来看到，建议不超过串流网络的上传速率，比如家里只有30M上传，那么就别超过30就行了。
 
-![img](https://s2.loli.net/2022/01/17/bsQeydGA5xRZOnX.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/bsQeydGA5xRZOnX.png)
 
 
 
@@ -160,7 +160,7 @@ RPD远程桌面的时候会出现无法获取信息！的故障提示，这个�
 
 在SHIELD这里，添加，然后指定exe即可，比如我这里D2R就是暗黑2，而mstsc就是windows RPD 远程桌面的exe，我也拿来串流了。
 
-![image-20220117010258550](https://s2.loli.net/2022/01/17/WlvMY5iIphzmsUb.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/WlvMY5iIphzmsUb.png)
 
 
 
@@ -170,7 +170,7 @@ RPD远程桌面的时候会出现无法获取信息！的故障提示，这个�
 
 比如我如果使用RPD打开暗黑2，那么必定锁30帧，而且无论怎么调整都无效。但是当我使用MoonLight开启RPD的时候，锁帧就被取消了，这就很舒服了。
 
-![img](https://s2.loli.net/2022/01/17/ZTJHCW3d7RXLw68.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/ZTJHCW3d7RXLw68.png)
 
 
 
@@ -178,17 +178,17 @@ RPD远程桌面的时候会出现无法获取信息！的故障提示，这个�
 
 注意修改分辨率，不要通过windows自带的，类似下图的地方修改，改了以后Moonlight可能识别不到，会导致串流的分辨率还是错误的。
 
-![image-20220119141619649](https://s2.loli.net/2022/01/19/kFqMxQzwtXycLYP.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/kFqMxQzwtXycLYP.png)
 
 要通过NVIDIA的显示更新分辨率来设置，这样才能正确识别。如果已经改了，**可以先改个别的分辨率，再切过来就行了**
 
-![image-20220119141752421](https://s2.loli.net/2022/01/19/g2GAyEHup6UQi4F.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/g2GAyEHup6UQi4F.png)
 
 可能很多串流的机器已经不是1080p了，但是串流以后会发现图像特别小，甚至可能有黑边，然后鼠标也是错位的情况。
 
 这个时候就需要你进到NVIDIA的控制面板-调整桌面尺寸和位置 然后设置成全屏，下面的分辨率也设置成1080P
 
-![image-20220117012709876](https://s2.loli.net/2022/01/17/Gc29dDSR6kiEMbl.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/Gc29dDSR6kiEMbl.png)
 
 然后再重新开启串流，刚才变形的画面就正常了。
 

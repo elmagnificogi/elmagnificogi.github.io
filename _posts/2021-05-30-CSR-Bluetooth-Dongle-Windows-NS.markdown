@@ -24,11 +24,11 @@ tags:
 
 蓝牙适配器，最好直接买这个绿联的4.0，5.0可能不行，因为有驱动芯片的要求，有些芯片可能驱动不同，无法适配
 
-![](https://i.loli.net/2021/05/30/ihJtnwUuOx7WC9y.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/ihJtnwUuOx7WC9y.png)
 
 芯片要求是CSR8510，也有可能叫CSR8510 a10（驱动对应a10的称呼）
 
-![image-20220127153703592](https://s2.loli.net/2022/01/27/ezbHNIKgWhlAiwL.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/ezbHNIKgWhlAiwL.png)
 
 
 
@@ -44,31 +44,31 @@ tags:
 
 这个其实是给怪物猎人崛起（后面简称mhr）融珠子用的，但是作为使用入门足够了。
 
-![image-20210530144148473](https://i.loli.net/2021/05/30/M6XyDJAeazY41KO.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/M6XyDJAeazY41KO.png)
 
 首先第一次使用，需要安装第三方驱动替换原版的CSR蓝牙驱动（当然这样CSR的蓝牙就不能用了，但是如果你还有其他蓝牙，那不影响）
 
 点击1，然后就能看到这里有一个对应的设备显示，如果蓝牙不符合要求，这里不会显示的。
 
-![image-20210530144428239](https://i.loli.net/2021/05/30/m2VlhEAR6Jfp59i.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/m2VlhEAR6Jfp59i.png)
 
 选中，点右下角替换当前驱动，提示选择是
 
-![image-20210530144447111](https://i.loli.net/2021/05/30/P3dFS9pycCefXNm.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/P3dFS9pycCefXNm.png)
 
 正常安装后就能在设备管理器中看到，CSR8510 A10的串口设备了。
 
-![image-20210530144520281](https://i.loli.net/2021/05/30/HZGYg8MRcTvzxEe.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/HZGYg8MRcTvzxEe.png)
 
 再回到主界面，切换到了Bluetooth，点击2连接（此处没有任何提示），打开NS，手动点开手柄-更改握法/顺序，过一会，会自动显示有一个手柄连接上了。（第一次按A退出匹配界面，可能会有点延迟，要按2下才有反应）
 
-![image-20210530144706146](https://i.loli.net/2021/05/30/TR9uiyCh58JYkGo.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/TR9uiyCh58JYkGo.png)
 
 然后点击主界面3，按下A键。对应NS的A键被按下了，手柄匹配界面就消失了。
 
 这个时候其实手柄就可以正常工作了。
 
-![image-20210530144936042](https://i.loli.net/2021/05/30/QHcETJSVdq41ng7.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/QHcETJSVdq41ng7.png)
 
 对应按下上面的功能，可以看到NS这边已经在运行了。
 
@@ -84,13 +84,13 @@ AutoTalismanMelding只能给mhr用，而想像伊机控一样，任何游戏都�
 
 同理，如果第一次使用，驱动都没安装的话需要像AutoTalismanMelding一样，点1，然后安装一下CSR驱动
 
-![image-20210530145540787](https://i.loli.net/2021/05/30/By5uKd8gIZTnzC7.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/By5uKd8gIZTnzC7.png)
 
 后面安装好了以后，就可以直接2，bluetooth无线连接，然后NS那边切换到手柄-更改握法/顺序,等一下就会匹配了。
 
 然后点开3，可以看到对应的按键映射，相当于是你键盘按了什么，对应模拟手柄就按了什么。
 
-![image-20210530145722412](https://i.loli.net/2021/05/30/XWtiwJ7Lld5ZFjU.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/XWtiwJ7Lld5ZFjU.png)
 
 设置好了以后，键盘控制，试一下就行了。（第一次按A退出匹配界面，可能会有点延迟，要按2下才有反应）
 
@@ -98,7 +98,7 @@ AutoTalismanMelding只能给mhr用，而想像伊机控一样，任何游戏都�
 
 NX Macro Controller Installer 比较像伊机控，可以自己编写脚本，点击入力辅助，可以弹出来输入框，点击对应的操作就可以记录下来脚本了。然后执行即可，当然也可以像伊机控一样直接通过键盘操作录制脚本。
 
-![image-20210530150021347](https://i.loli.net/2021/05/30/ERiIoyf5pwYgsX8.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/ERiIoyf5pwYgsX8.png)
 
 
 
@@ -123,7 +123,7 @@ NX Macro Controller Installer 比较像伊机控，可以自己编写脚本，�
 
 如果要恢复CSR蓝牙适配器的功能，直接卸载驱动即可，然后重新插入或者扫描一下即可
 
-![image-20210530151513361](https://i.loli.net/2021/05/30/N4Sg1JEPbMp8wTW.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/N4Sg1JEPbMp8wTW.png)
 
 
 

@@ -18,7 +18,7 @@ The robot can only move either down or right at any point in time. The robot is 
 
 How many possible unique paths are there?
 
-![SMMS](https://i.loli.net/2018/11/30/5c00aa6106ed0.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/5c00aa6106ed0.png)
 
 Above is a 3 x 7 grid. How many possible unique paths are there?
 

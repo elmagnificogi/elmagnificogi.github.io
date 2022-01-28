@@ -19,7 +19,7 @@ tags:
 
 ## 2021年国产单机
 
-![img](https://s2.loli.net/2022/01/25/B6DNe1POctdbnWG.jpg)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/B6DNe1POctdbnWG.jpg)
 
 今年的国产比较夸张，百万销量都挡不住了，头部都是三百万起步了。整体国产游戏市场一下子打开了，翻了好几倍。
 

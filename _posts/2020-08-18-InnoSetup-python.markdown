@@ -37,7 +37,7 @@ tags:
 
 Inno Setup目前安装界面比较传统吧，但是不算老掉牙，老掉牙的历史版本也有。
 
-![image-20200818152248703](https://i.loli.net/2020/08/18/BZ537mM8xLD26yU.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/BZ537mM8xLD26yU.png)
 
 但是胜在简单，很多逻辑简单的程序基本都可以一键通过配置向导直接配置完成。
 
@@ -47,7 +47,7 @@ Inno Setup目前安装界面比较传统吧，但是不算老掉牙，老掉牙�
 
 通过文件新建一个项目，就会自动弹出配置向导，一步步操作，就可以生成一个简单的配置脚本。
 
-![image-20200818161536187](https://i.loli.net/2020/08/18/os1tClbeIDpaJZE.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/os1tClbeIDpaJZE.png)
 
 但是这个简单的配置脚本，还是有点简单了，很多情况没处理，所以我基于基础配置脚本，又增加了一些其他方面的配置，相当于是一个例程了
 
@@ -303,7 +303,7 @@ InfoBeforeFile=.\InfoBeforeFile.txt
 InfoAfterFile=.\InfoAfterFile.txt
 ```
 
-![image-20200818170327320](https://i.loli.net/2020/08/18/c736bm1HinoNLsw.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/c736bm1HinoNLsw.png)
 
 然而inno的iss文件自身却是个得用gbk解码中文的文件格式
 

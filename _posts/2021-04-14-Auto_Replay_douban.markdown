@@ -244,7 +244,7 @@ https://jingyan.baidu.com/article/5d368d1ea6c6e33f60c057ef.html
 
 一天顶25次，就需要500分，也就是5毛钱，租房实际上你也用不了10天吧？5块钱肯定能解决问题，如果5块还不能解决问题，就翻倍10块总可以吧。
 
-![](https://i.loli.net/2021/04/14/neIxDr7qtvAOpVa.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/neIxDr7qtvAOpVa.png)
 
 
 

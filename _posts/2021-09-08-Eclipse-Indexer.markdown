@@ -19,7 +19,7 @@ tags:
 
 ## 现象
 
-![image-20210908161829295](https://i.loli.net/2021/09/08/wJMx97gzP5Wu6yQ.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/wJMx97gzP5Wu6yQ.png)
 
 通过 C/C++ General 里的 indexer 选择 Use active build configuration ，并且勾上 Reindex project on change of active build configuration 然后应用，关闭。
 
@@ -29,7 +29,7 @@ tags:
 
 ## 解决
 
-![image-20210908162229995](https://i.loli.net/2021/09/08/Yq2SI5K7ZjOdQfp.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/Yq2SI5K7ZjOdQfp.png)
 
 最后发现，只有通过 Configura Workspace Setting 修改对应的 Indexer，使用 Use active build configuration 。 然后关闭eclipse之后，再打开就会发现工程的配置变成了自动切换了，不再使用某个单一配置了。
 

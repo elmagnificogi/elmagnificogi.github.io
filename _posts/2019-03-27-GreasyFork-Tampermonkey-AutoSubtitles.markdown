@@ -69,11 +69,11 @@ GreasyFork的发布太难找了，网站上看了一圈都没看到任何一个�
 
 找了半天帮助才看到要从用户页面进去才能看到发布按钮
 
-![SMMS](https://i.loli.net/2019/03/27/5c9af4334de76.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/5c9af4334de76.png)
 
 在用户界面的控制台下才有提交脚本相关内容
 
-![SMMS](https://i.loli.net/2019/03/27/5c9af45071bbc.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/5c9af45071bbc.png)
 
 ## Quote
 

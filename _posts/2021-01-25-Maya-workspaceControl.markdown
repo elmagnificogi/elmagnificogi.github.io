@@ -162,19 +162,19 @@ cmds.workspaceControl(dock_name, edit=True, uiScript="print 'open dock----------
 
 具体参数：
 
-![image-20210125174301524](https://i.loli.net/2021/01/25/5YrUTd8yZVHSvIe.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/5YrUTd8yZVHSvIe.png)
 
 这个参数在maya 2017无update的版本中无法正常使用，会提示参数不存在。由于maya 2017是初版的qt5，导致workspaceControl里面同时还有其他参数实际上并没有实现，虽然有api解释，实际不可用。
 
 比如：
 
-![image-20210125174443020](https://i.loli.net/2021/01/25/8GMXQOnLHuhcty3.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/8GMXQOnLHuhcty3.png)
 
 
 
 stateString在无update中不可以用，而其他版本中直接返回空内容，很奇怪
 
-![image-20210125174503443](https://i.loli.net/2021/01/25/w3HQ8f7YmDZpk5T.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/w3HQ8f7YmDZpk5T.png)
 
 
 

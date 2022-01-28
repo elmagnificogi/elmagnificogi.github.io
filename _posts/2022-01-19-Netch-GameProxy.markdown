@@ -83,7 +83,7 @@ Netch 支持多种语言，在启动时会根据系统语言选择自身语言�
 
 Netch本身没有详细的教程，也没啥具体的说明，但是魔改大佬加了一个，不过可能忘记外链出来了。这里引用一下。
 
-![主界面部分功能介绍](https://s2.loli.net/2022/01/19/Y9lTjMLgDXiAOP7.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/Y9lTjMLgDXiAOP7.png)
 
 在设置界面填写完快捷配置数量后即可在主界面进行配置，填入配置名，选择相应的服务器和游戏模式，按下 `Ctrl` 与鼠标左键，即可保存当前配置。下次使用时，点击配置名即可快速启用。
 
@@ -93,7 +93,7 @@ Netch本身没有详细的教程，也没啥具体的说明，但是魔改大佬
 
 现在分页比较多，可能有所不同了，不懂的话保持默认就好了
 
-![image-20220119152934572](https://s2.loli.net/2022/01/19/ev9z3Nid4WBuZhO.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/ev9z3Nid4WBuZhO.png)
 
 每个分页负责一个模式，以及DNS相关的设置
 
@@ -105,7 +105,7 @@ Netch本身没有详细的教程，也没啥具体的说明，但是魔改大佬
 
 首先，点击`服务器`增加所需服务器
 
-![asdf](https://s2.loli.net/2022/01/19/m4bsW8LKpvdoZTH.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/m4bsW8LKpvdoZTH.png)
 
 
 
@@ -115,7 +115,7 @@ Netch本身没有详细的教程，也没啥具体的说明，但是魔改大佬
 
 点击 `订阅` ` 管理订阅链接` 进入以下界面。
 
-![a1sdf](https://s2.loli.net/2022/01/19/Y2ABlwQPvOfWpUz.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/Y2ABlwQPvOfWpUz.png)
 
 
 
@@ -133,13 +133,13 @@ ping 的值未必准确，因为这只是你本地到代理服务器而非游戏
 
 接着点击菜单栏上的`模式 - 创建进程模式`
 
-![image-20220119153127477](https://s2.loli.net/2022/01/19/EDVbp84Z3LJhPga.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/EDVbp84Z3LJhPga.png)
 
 ##### 扫描
 
 在弹出的窗口中点击`扫描`
 
-![image-20220119153155412](https://s2.loli.net/2022/01/19/7zvefkiDP354Q2L.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/7zvefkiDP354Q2L.png)
 
 选择你要加速的游戏的安装路径，根据游戏不同，可能需要选择多个不同的目录进行扫描，参见[萌鹰的 Netch 教程](https://www.eaglemoe.com/archives/142)（包括 GTAOL 和 R6S 的配置方法）
 
@@ -150,7 +150,7 @@ ping 的值未必准确，因为这只是你本地到代理服务器而非游戏
 
 这里以CSGO为例，只需添加CSGO游戏根目录即可
 
-![](https://s2.loli.net/2022/01/19/2pLnyGdVRFrTOHW.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/2pLnyGdVRFrTOHW.png)
 
 扫描时可能需要稍等片刻，扫描后记得填写备注
 
@@ -158,13 +158,13 @@ ping 的值未必准确，因为这只是你本地到代理服务器而非游戏
 
 之后点保存进行`保存`
 
-![保存](https://s2.loli.net/2022/01/19/2eDbpToWQhzEHlt.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/2eDbpToWQhzEHlt.png)
 
 ##### 启动
 
 最后确认服务器一栏和模式一栏均为之前自己添加并需要使用的，没问题后点击`启动`即可
 
-![image-20220119153332087](https://s2.loli.net/2022/01/19/uCP7EarBAWfvidh.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/uCP7EarBAWfvidh.png)
 
 启动后，你再去游戏根目录或者别的启动器如 Steam，Uplay 启动游戏即可。此时游戏就已经被代理了
 
@@ -178,7 +178,7 @@ ping 的值未必准确，因为这只是你本地到代理服务器而非游戏
 
 点击创建路由表规则，选择代理规则IP
 
-![image-20220119164451216](https://s2.loli.net/2022/01/19/wSlJHBdb2GkaNIs.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/wSlJHBdb2GkaNIs.png)
 
 规则这里得用这种子网和掩码长度的模式
 
@@ -322,7 +322,7 @@ csgo.exe
 
 之前的公告截图不是这样的，之前是直接说停止开发，然后整个Github都变成只读了，tg的群也直接全体禁言了。
 
-![image-20220118184416673](https://s2.loli.net/2022/01/19/qzuEisIMCPfweXx.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/qzuEisIMCPfweXx.png)
 
 由于当时发的最新版1.9.2和1.9.3有严重问题，后来又解开了禁言，然后版本又迭代了一下。
 

@@ -275,7 +275,7 @@ SMTransition，切换场景的方式，动画效果等
 
 9. OnDestroy 函数 : 当前游戏对象或游戏组件被销毁时执行
 
-![img](https://i.loli.net/2021/08/17/uga7WeCX1xHnJPk.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/uga7WeCX1xHnJPk.png)
 
 
 

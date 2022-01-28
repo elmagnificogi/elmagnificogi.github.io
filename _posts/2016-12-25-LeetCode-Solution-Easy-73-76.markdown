@@ -24,7 +24,7 @@ Example:
 	Answer: 16
 	Explanation: The perimeter is the 16 yellow stripes in the image below:
 
-![SMMS](https://i.loli.net/2018/11/30/5c00aa4b4ece3.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/5c00aa4b4ece3.png)
 
 ### 73.Island Perimeter-Analysis
 

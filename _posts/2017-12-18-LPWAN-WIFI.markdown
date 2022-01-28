@@ -16,7 +16,7 @@ tags:
 
 下图基本列举出了目前在用的各种方案，下文将按照图中的顺序来进行介绍。
 
-![SMMS](https://i.loli.net/2018/11/30/5c00a78687365.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/5c00a78687365.png)
 
 # 物联网无线通信技术
 

@@ -32,7 +32,7 @@ vs，pycharm等等基本打开大文件都会卡死老半天，然后搜索可�
 
 > http://www.uvviewsoft.com/logviewer/
 
-![image-20220103150657092](https://s2.loli.net/2022/01/03/Lezvj4fSCkOUP6K.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/Lezvj4fSCkOUP6K.png)
 
 非常强大，上百M的log也能秒开，非商业无非就是打开的时候有一个固定弹窗，而商业注册表则没有这个问题。当然吾爱有学习版本。
 
@@ -40,7 +40,7 @@ vs，pycharm等等基本打开大文件都会卡死老半天，然后搜索可�
 
 缺点就是选择文件的时候，用的是老式的打开框，输入路径要从文件名这里打开，非常蠢的对话框。
 
-![](https://s2.loli.net/2022/01/03/n92A3Fr1sECXWUB.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/n92A3Fr1sECXWUB.png)
 
 还有一个问题就是**搜索不好用，如果使用utf-8或者其他编码模式，搜索会存在错位的情况。**
 
@@ -54,7 +54,7 @@ vs，pycharm等等基本打开大文件都会卡死老半天，然后搜索可�
 
 > http://textanalysistool.github.io/
 
-![image-20220103151946441](https://s2.loli.net/2022/01/03/vOfGeSTW458gDHn.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/vOfGeSTW458gDHn.png)
 
 TextAnalysisTool 更偏向分析过滤一些，虽然秒开没啥压力，但是本身不支持修改编码，中文基本都似乎乱码。
 
@@ -66,7 +66,7 @@ TextAnalysisTool 更偏向分析过滤一些，虽然秒开没啥压力，但是
 
 > https://tilipa.zlsam.com/#/tool?id=199&name=%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7
 
-![image-20220103152551476](https://s2.loli.net/2022/01/03/ZvhYxnMPNTzArJB.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/ZvhYxnMPNTzArJB.png)
 
 Tilipa 日志分析工具，比较好的是他是在线的，不需要下载任何东西，直接打开就行了。
 
@@ -78,7 +78,7 @@ Tilipa 日志分析工具，比较好的是他是在线的，不需要下载任�
 
 > https://www.cnblogs.com/jpfss/p/9182636.html
 
-![27241-20160920090218762-733199152.gif](https://s2.loli.net/2022/01/03/hFT47YeS18vgnwk.gif)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/hFT47YeS18vgnwk.gif)
 
 LogViewer 看着比较友好，但是也有问题，你的log必须符合他的格式，否则无法解析。然后由于他要解析所以打开的速度自然就很慢，同时没有任何打开的按钮，你得自己拖文件进去。
 
@@ -97,7 +97,7 @@ LogViewer 看着比较友好，但是也有问题，你的log必须符合他的�
 
 > https://www.ultraedit.com/support/tutorials-power-tips/ultraedit/large-file-handling.html
 
-![image-20220103154538865.png](https://s2.loli.net/2022/01/03/sG8oEMTXw5QAaY9.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/sG8oEMTXw5QAaY9.png)
 
 好像国内代理的就叫UtraEdit，他这个更像是编辑器，能打开4G以上的log
 
@@ -107,7 +107,7 @@ LogViewer 看着比较友好，但是也有问题，你的log必须符合他的�
 
 > https://www.pilotedit.com/
 
-![content-img-01.png](https://s2.loli.net/2022/01/03/iODPoAygBkMaxeZ.png)
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/iODPoAygBkMaxeZ.png)
 
 怎么说呢，虽然很强大，编码和打开速度都不错，但是这个UI类似以前的Office，实在是让人看着难受，特别还有主副窗口，套娃，就是太丑了。
 
