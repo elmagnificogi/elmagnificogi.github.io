@@ -180,6 +180,26 @@ layout: default
                                 </a>
                             </li>
                             {% endif %}
+                            {% if site.qq_username %}
+                            <li>
+                                <a target="_blank" href="tencent://message/?uin={{ site.linkedin_username }}&Site=&Menu=no">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fa fa-circle fa-stack-2x"></i>
+                                        <i class="fa fa-qq fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            {% endif %}
+                            {% if site.telegram_username %}
+                            <li>
+                                <a target="_blank" href="https://t.me/{{ site.linkedin_username }}">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fa fa-circle fa-stack-2x"></i>
+                                        <i class="fa fa-telegram fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            {% endif %}
                         </ul>
                     </div>
                 </section>
