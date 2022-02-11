@@ -423,6 +423,26 @@ for file in os.listdir(dir):
 
 
 
+## 问题
+
+**目前持久化用户数据有点问题，虽然文件数据没丢**
+
+之前一直都是docker-compose直接启动，使用，没注意他这个持久化的问题。
+
+> https://github.com/sapicd/sapic/issues/17
+
+docker-compose当前的redis开启持久化以后，文件还是在docker容器内，还没有挂载到外部硬盘里。
+
+所以就会出现down以后重新启动，数据记录都丢失了。虽然文件本身还在，但是用户信息没了，也很蛋疼。
+
+根据他当前的做法，通过脚本将redis数据平移到另外一个正在运行的redis那边去，但是这样不太符合正常使用的场景。
+
+> https://blog.saintic.com/blog/265.html
+
+
+
+
+
 ## Summary
 
 剩下就是我把整个blog的图片全都dump下来，然后转存到了我自己的服务器上，以后就不依赖SMMS了。
