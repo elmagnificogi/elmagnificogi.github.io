@@ -423,7 +423,7 @@ for file in os.listdir(dir):
 
 
 
-## 问题
+## 数据问题
 
 **目前持久化用户数据有点问题，虽然文件数据没丢**
 
@@ -440,6 +440,56 @@ docker-compose当前的redis开启持久化以后，文件还是在docker容器�
 > https://blog.saintic.com/blog/265.html
 
 
+
+进入到redis的容器里，就能在下面的路径里看到持久化的文件
+
+```
+/data
+```
+
+把文件复制出来
+
+```
+docker cp '容器的id':/data/appendonly.aof /root/appendonly.aof
+```
+
+把文件恢复回去
+
+```
+docker cp /root/appendonly.aof '容器的id':/data/appendonly.aof 
+```
+
+
+
+#### 完美解决方案
+
+简单的增加redis的volume就行了，如果已经有数据了务必先复制出来，再重建docker-compose，这样以后随便怎么折腾本地都有一个备份，不至于升级的时候就无了。
+
+```
+version: '3'
+services:
+  webapp:
+    build: .
+    restart: always
+    ports:
+      - "9514:9514"
+    environment:
+      - sapic_redis_url=redis://@redis:6379
+      # 设置信任代理标头
+      #- sapic_proxyfix=true
+    volumes:
+      - static:/picbed/static/
+      - /data/picbed/:/picbed/static/upload/
+    depends_on:
+      - "redis"
+  redis:
+    image: "redis:alpine"
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - /data/picbed/redis/data/:/data/
+volumes:
+  static:
+```
 
 
 
