@@ -65,6 +65,13 @@ s可能是功能按键，类似于放置障碍物，设置目标点，设置起�
 具体在不同demo里有不同作用。
 
 
+
+TestApplication (testbed application)，这是个简单的设置寻路起点和终点，等待结果就ok的场景
+
+![image-20220214152046173](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220214152046173.png)
+
+
+
 Swarm (testbed application)，这个类似于红警、星际一类的游戏，群体寻路，但是碰撞稍微有点问题，会出现对象重合后再散开的情况
 
 ![image-20220214111600922](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220214111600922.png)
@@ -86,6 +93,24 @@ Benchmark (testbed application)，这个是个寻路基础测试
 CollapsibleGroup (testbed application)，这个是群体无碰撞路径规划，在路基上布满无碰撞的群体
 
 ![image-20220214111456772](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220214111456772.png)
+
+
+
+#### 问题
+
+> https://www.pathengine.com/Contents/Overview/FundamentalConcepts/GroundMeshes/page.php
+
+根据说明，可以知道他本质上就是2d的网格寻路，但是由于他是使用投影来计算可用面，所以导致实际这里不可以有面出现翻转朝向
+
+> A mesh may include arbitrary variations in height but PathEngine essentially deals with a 2d projection of that geometry onto the horizontal plane. Overlapping layers are disambiguated by the connectivity of the mesh. But this means that a mesh may not contain faces that are vertical or face downwards.
+
+![a mesh with overhanging geometry](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/avp.gif)
+
+同时通过我代码查看，他的坐标系是`x,y,cell`其中cell则是面的含义，指定了具体坐标是在哪一个面上，所以使用这个就不可避免的需要规定哪些面是可以移动的，哪些面是不行的。
+
+
+
+demo里有一个3d的说明，仔细看了一下，他的3d其实就是考虑了对象的高度以及斜坡楼梯之类的参数，某些会产生碰撞的路径会过不去，而实际上应该还是2d的网格寻路。这个3d demo本身没有源码，只有编译好的现成文件，所以看不到细节具体是什么了。和我想要的3d空间路径规划还是有区别的。
 
 
 
