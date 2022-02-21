@@ -10,7 +10,7 @@ catalog:    true
 mathjax:    false
 tags:
     - c#
-    - c++
+    - C++
 ---
 
 ## Foreword
