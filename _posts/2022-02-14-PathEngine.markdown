@@ -5,7 +5,7 @@ subtitle:   "pathfind，game"
 date:       2022-02-14
 update:     2022-02-14
 author:     "elmagnifico"
-header-img: "img/bg7.jpg"
+header-img: "img/bg8.jpg"
 catalog:    true
 tags:
     - pathfind
