@@ -9,7 +9,7 @@ header-img: "img/bg5.jpg"
 catalog:    true
 mathjax:    false
 tags:
-    - crack
+    - Crack
     - BLHeli
 ---
 

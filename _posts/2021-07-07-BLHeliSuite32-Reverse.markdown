@@ -9,7 +9,7 @@ header-img: "img/drone-head-bg.jpg"
 catalog:    true
 mathjax:    false
 tags:
-    - crack
+    - Crack
     - BLHeli
 ---
 
