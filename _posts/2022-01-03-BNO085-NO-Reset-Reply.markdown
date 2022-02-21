@@ -9,7 +9,7 @@ header-img: "img/welding2.jpg"
 catalog:    true
 tags:
     - Embedded
-    - sensor
+    - Sensor
 ---
 
 ## Forward

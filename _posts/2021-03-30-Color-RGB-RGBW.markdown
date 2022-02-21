@@ -8,8 +8,8 @@ author:     "elmagnifico"
 header-img: "img/led.jpg"
 catalog:    true
 tags:
-    - led
-    - color
+    - LED
+    - Color
 ---
 
 ## Foreword

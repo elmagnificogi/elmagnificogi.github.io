@@ -9,7 +9,7 @@ header-img: "img/sensor-head-bg.jpg"
 catalog:    true
 tags:
     - Embedded
-    - sensor
+    - Sensor
 ---
 
 ## Forward
