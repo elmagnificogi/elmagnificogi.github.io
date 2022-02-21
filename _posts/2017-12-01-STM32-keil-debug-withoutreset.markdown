@@ -8,7 +8,7 @@ header-img: "img/cap-head-bg.jpg"
 catalog:    true
 tags:
     - 嵌入式
-    - stm32
+    - STM32
 ---
 
 ## Foreword
