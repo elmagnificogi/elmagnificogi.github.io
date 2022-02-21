@@ -7,9 +7,9 @@ author:     "elmagnifico"
 header-img: "img/bg6.jpg"
 catalog:    true
 tags:
-    - equip
+    - Equip
     - Goods
-    - share
+    - Share
 ---
 
 ## Forward

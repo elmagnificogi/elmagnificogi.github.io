@@ -7,9 +7,9 @@ author:     "elmagnifico"
 header-img: "img/play.jpg"
 catalog:    true
 tags:
-    - equip
+    - Equip
     - Goods
-    - share
+    - Share
 ---
 
 ## Foreword

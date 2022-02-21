@@ -8,7 +8,7 @@ author:     "elmagnifico"
 header-img: "img/api-bg.jpg"
 catalog:    true
 tags:
-    - equip
+    - Equip
 ---
 
 ## Forward

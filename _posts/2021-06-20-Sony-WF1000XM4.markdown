@@ -9,9 +9,9 @@ header-img: "img/play.jpg"
 catalog:    true
 mathjax:    false
 tags:
-    - equip
+    - Equip
     - Goods
-    - share
+    - Share
 ---
 
 ## Foreword

@@ -8,7 +8,7 @@ author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"
 tags:
     - git
-    - blog
+    - Blog
     - 代理
 ---
 

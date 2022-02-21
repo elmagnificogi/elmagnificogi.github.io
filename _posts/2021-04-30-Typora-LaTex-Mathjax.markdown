@@ -9,7 +9,7 @@ header-img: "img/bg7.jpg"
 catalog:    true
 mathjax:    true
 tags:
-    - blog
+    - Blog
 ---
 
 ## Foreword
