@@ -7,7 +7,7 @@ author:     "elmagnifico"
 header-img: "img/bg5.jpg"
 catalog:    true
 tags:
-    - blender
+    - Blender
 ---
 
 ## Foreword

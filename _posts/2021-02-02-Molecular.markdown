@@ -8,7 +8,7 @@ header-img: "img/bg7.jpg"
 catalog:    true
 tags:
     - Algorithm
-    - blender
+    - Blender
 ---
 
 ## Foreword
