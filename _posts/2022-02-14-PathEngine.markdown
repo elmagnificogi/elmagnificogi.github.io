@@ -9,7 +9,7 @@ header-img: "img/bg8.jpg"
 catalog:    true
 tags:
     - PathFind
-    - game
+    - Game
 ---
 
 ## Foreword
