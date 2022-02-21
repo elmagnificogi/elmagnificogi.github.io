@@ -8,7 +8,7 @@ header-img: "img/bg6.jpg"
 catalog:    true
 tags:
     - Typora
-    - markdown
+    - Markdown
 ---
 
 ## Forward

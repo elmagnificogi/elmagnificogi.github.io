@@ -8,7 +8,7 @@ header-img: "img/git-head-bg.jpg"
 catalog:    true
 tags:
     - tomcat
-    - springboot
+    - Springboot
 
 ---
 
