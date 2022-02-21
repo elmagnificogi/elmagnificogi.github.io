@@ -7,7 +7,7 @@ author:     "elmagnifico"
 header-img: "img/baidu.jpg"
 catalog:    true
 tags:
-    - Javascript
+    - JavaScript
     - baidu
 ---
 

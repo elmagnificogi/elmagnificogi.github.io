@@ -8,7 +8,7 @@ author:     "elmagnifico"
 header-img: "img/typora.jpg"
 catalog:    true
 tags:
-    - tools
+    - Tools
     - log
 ---
 
