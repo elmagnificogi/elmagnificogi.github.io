@@ -56,10 +56,6 @@ ST Visual Develop (STVD)  就是主要开发的IDE了，只是它本身集成度
 
 看着名字还以为是类似Visual Studio的IDE，然后实际上是个Debug工具，用来读内存、实时显示，也很废物。
 
-<iframe src="https://video.zhihu.com/video/1058869166186074112?player=%7B%22autoplay%22%3Afalse%2C%22shouldShowPageFullScreenButton%22%3Atrue%7D" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width = 720 height =640> </iframe>
-
-
-
 <video src='http://img.elmagnifico.tech:9514/static/upload/elmagnifico/STM32STM_Studio_-_.mp4' title='' controls></video>
 
 
