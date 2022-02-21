@@ -8,7 +8,7 @@ header-img: "img/Raspberrypi-head-bg.png"
 catalog:    true
 tags:
     - VPS
-    - v2ray
+    - V2Ray
 
 ---
 

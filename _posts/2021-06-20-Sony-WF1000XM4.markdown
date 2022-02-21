@@ -10,7 +10,7 @@ catalog:    true
 mathjax:    false
 tags:
     - equip
-    - goods
+    - Goods
     - share
 ---
 

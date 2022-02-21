@@ -8,7 +8,7 @@ header-img: "img/bg3.jpg"
 catalog:    true
 tags:
     - equip
-    - goods
+    - Goods
     - share
 ---
 

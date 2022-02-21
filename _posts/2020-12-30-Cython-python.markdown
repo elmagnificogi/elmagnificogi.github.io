@@ -9,7 +9,7 @@ header-img: "img/bg6.jpg"
 catalog:    true
 tags:
     - Maya
-    - cython
+    - Cython
     - python
 ---
 
