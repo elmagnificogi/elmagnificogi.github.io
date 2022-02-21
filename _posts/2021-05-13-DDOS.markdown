@@ -9,7 +9,7 @@ header-img: "img/web.jpg"
 catalog:    true
 mathjax:    false
 tags:
-    - vps
+    - VPS
     - CDN
     - CloudFlare
 ---

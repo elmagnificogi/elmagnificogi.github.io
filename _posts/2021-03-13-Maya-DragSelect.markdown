@@ -7,7 +7,7 @@ author:     "elmagnifico"
 header-img: "img/blackboard.jpg"
 catalog:    true
 tags:
-    - maya
+    - Maya
 ---
 
 ## Foreword

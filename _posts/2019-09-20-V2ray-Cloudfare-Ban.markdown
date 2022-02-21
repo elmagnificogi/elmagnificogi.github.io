@@ -7,7 +7,7 @@ author:     "elmagnifico"
 header-img: "img/Raspberrypi-head-bg.png"
 catalog:    true
 tags:
-    - vps
+    - VPS
     - v2ray
 
 ---

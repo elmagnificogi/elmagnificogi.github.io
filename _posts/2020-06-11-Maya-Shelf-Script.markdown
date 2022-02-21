@@ -7,7 +7,7 @@ author:     "elmagnifico"
 header-img: "img/line-head-bg.jpg"
 catalog:    true
 tags:
-    - maya
+    - Maya
     - python
 ---
 

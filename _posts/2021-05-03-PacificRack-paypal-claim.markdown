@@ -9,7 +9,7 @@ header-img: "img/balance.jpg"
 catalog:    true
 mathjax:    false
 tags:
-    - vps
+    - VPS
 ---
 
 ## Foreword
