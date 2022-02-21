@@ -7,7 +7,7 @@ author:     "elmagnifico"
 header-img: "img/bg6.jpg"
 catalog:    true
 tags:
-    - typora
+    - Typora
     - markdown
 ---
 
