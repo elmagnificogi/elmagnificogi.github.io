@@ -132,7 +132,7 @@ header-img: "img/zerotier.jpg"
 catalog:    true
 mathjax:    true
 tags:
-    - pathfinding
+    - PathFind
 ```
 
 

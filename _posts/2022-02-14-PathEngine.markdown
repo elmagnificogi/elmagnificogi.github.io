@@ -8,7 +8,7 @@ author:     "elmagnifico"
 header-img: "img/bg8.jpg"
 catalog:    true
 tags:
-    - pathfind
+    - PathFind
     - game
 ---
 

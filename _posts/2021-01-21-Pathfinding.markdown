@@ -7,7 +7,7 @@ author:     "elmagnifico"
 header-img: "img/maze.jpg"
 catalog:    true
 tags:
-    - pathfinding
+    - PathFind
 
 ---
 
