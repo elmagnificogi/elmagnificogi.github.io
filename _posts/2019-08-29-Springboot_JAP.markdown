@@ -8,7 +8,7 @@ header-img: "img/git-head-bg.jpg"
 catalog:    true
 tags:
     - Java
-    - spring
+    - Spring
 ---
 
 ## Java

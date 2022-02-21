@@ -7,7 +7,7 @@ author:     "elmagnifico"
 header-img: "img/python-head-bg.png"
 catalog:    true
 tags:
-    - c#
+    - C#
 ---
 
 ## Foreword
