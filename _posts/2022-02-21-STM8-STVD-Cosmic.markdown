@@ -3,7 +3,7 @@ layout:     post
 title:      "STM8开发环境搭建"
 subtitle:   "STVD，Cosmic"
 date:       2022-02-21
-update:     2022-02-21
+update:     2022-02-22
 author:     "elmagnifico"
 header-img: "img/bg9.jpg"
 catalog:    true
@@ -67,6 +67,10 @@ STVD需要Comic的编译器来完成编译，好家伙，绕一圈。
 > https://www.cosmicsoftware.com/download_stm8_32k.php
 
 通过这里下载安装-注册-得到License-激活。
+
+![image-20220222094527690](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220222094527690.png)
+
+拿到的license是1年有效期，功能上没有任何限制
 
 
 
