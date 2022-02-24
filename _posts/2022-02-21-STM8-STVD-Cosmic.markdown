@@ -3,7 +3,7 @@ layout:     post
 title:      "STM8开发环境搭建"
 subtitle:   "STVD，Cosmic"
 date:       2022-02-21
-update:     2022-02-22
+update:     2022-02-24
 author:     "elmagnifico"
 header-img: "img/bg9.jpg"
 catalog:    true
@@ -101,6 +101,36 @@ STVD有点类似Eclipse，有一个工作环境的配置。
 使用编译，会发现ok，无报错。
 
 
+
+## 下载
+
+![image-20220224155453276](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220224155453276.png)
+
+通过IDE中的Programmer就可以下载，但是可能会出现闪退的情况。
+
+> https://community.st.com/s/question/0D50X00009XkWxBSAV/st-visual-developer-says-out-of-memory-and-crashes-when-trying-to-launch-the-programming-tool
+
+选择ST-LINK，选择SWIM
+
+![image-20220224155723261](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220224155723261.png)
+
+由于是从flash启动，所以选择program memory 选择对应debug或者release中生成的文件
+
+![image-20220224155814685](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220224155814685.png)
+
+切换到Program 页面，然后start即可
+
+![image-20220224155905148](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220224155905148.png)
+
+
+
+#### 闪退修复
+
+如果闪退了，下载下面的tools.cnf文件，然后放置到以下目录即可
+
+> https://st--c.eu10.content.force.com/sfc/dist/version/download/?oid=00Db0000000YtG6&ids=0680X000006HyEY&d=%2Fa%2F0X0000000b5C%2F1sIa3iUbq_l7hHViMuRMVO70mBHfGIeHGCYM2UsURVA&asPdf=false
+
+![image-20220224155642450](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220224155642450.png)
 
 ## 不支持
 
