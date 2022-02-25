@@ -3,7 +3,7 @@ layout:     post
 title:      "STM8开发环境搭建"
 subtitle:   "STVD，Cosmic"
 date:       2022-02-21
-update:     2022-02-24
+update:     2022-02-25
 author:     "elmagnifico"
 header-img: "img/bg9.jpg"
 catalog:    true
@@ -131,6 +131,45 @@ STVD有点类似Eclipse，有一个工作环境的配置。
 > https://st--c.eu10.content.force.com/sfc/dist/version/download/?oid=00Db0000000YtG6&ids=0680X000006HyEY&d=%2Fa%2F0X0000000b5C%2F1sIa3iUbq_l7hHViMuRMVO70mBHfGIeHGCYM2UsURVA&asPdf=false
 
 ![image-20220224155642450](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220224155642450.png)
+
+#### stm8_interrupt_vector.c
+
+这个文件是中断向量表，但是不要直接通过加文件的方式去添加，会导致他一直提示文件不存在，报错。
+
+正确的添加方法是从工程设置中的Linker-Input里添加向量表，添加以后可能文件目录还是不显示。保存以后重启STVD就能正常显示了。
+
+![image-20220225163454136](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220225163454136.png)
+
+
+
+## 外设库 STM8S_StdPeriph_Driver
+
+> https://www.st.com/zh/embedded-software/stsw-stm8069.html
+
+这里就能下载到STM8S的固件库了,有了固件库以后就好写了。
+
+
+
+
+
+## 超行显示
+
+毕竟是老东西了，分辨率比较低，一旦行比较长了，就会超行显示红色的背景
+
+![image-20220225163647622](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220225163647622.png)
+
+可以通过Tools-Options 取消超行显示或者是自己重新设置超行数
+
+![image-20220225163735477](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220225163735477.png)
+
+
+
+## 注意事项
+
+- STVD中编译顺序和左侧文件树的顺序是一样的，如果文件夹名称顺序不对，会出现main不是第一个编译的文件，进而会引起一些错误，调整顺序以后就正确了。
+- STM8S_StdPeriph_Driver，库中包含的文件比较多，有一部分可能用不上，但是他也会强行编译报错，需要手动排除
+
+
 
 ## 不支持
 
