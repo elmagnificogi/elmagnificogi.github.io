@@ -44,11 +44,23 @@ ST Visual Develop (STVD)  就是主要开发的IDE了，只是它本身集成度
 
 整个软件风格比较像以前的Keil2，老的不行，在win10上还能运行，万幸。
 
+![image-20220226151336175](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220226151336175.png)
+
+
+
+#### STVP
+
+ST Visual Programmer(STVD)，这个有点类似于 JLink 中的 JFlash ，主要是读取和修改固件的，但是他还有一个额外功能，修改引脚的复用。
+
+![image-20220226151110068](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220226151110068.png)
+
 
 
 #### STM8 CubeMX
 
 不要下！我刚开始以为可以直接Cube生成代码，然后下完以后发现，只能生成report，毛用没有。这东西从17年出来到现在都5年了，根本没想集成STM8进去，所以别指望了。
+
+![image-20220226151304608](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220226151304608.png)
 
 
 
@@ -148,7 +160,39 @@ STVD有点类似Eclipse，有一个工作环境的配置。
 
 这里就能下载到STM8S的固件库了,有了固件库以后就好写了。
 
+外设库的用法和STM32差不多，把文件都加好，就能编译通过了。
 
+
+
+## 注意事项
+
+- STVD中编译顺序和左侧文件树的顺序是一样的，如果文件夹名称顺序不对，会出现main不是第一个编译的文件，进而会引起一些错误，调整顺序以后就正确了。
+- STM8S_StdPeriph_Driver，库中包含的文件比较多，有一部分可能用不上，但是他也会强行编译报错，需要手动排除（这个标准库没有支持Low-Density，这种宏，也就是有些外设他分不清你实际对应的芯片里到底有没有，不像STM32的标准库能分清）
+- 标准库的头文件是默认全添加的，可以自行注释掉一些不用的，同时对应的C文件也需要排除编译
+
+
+
+## 管脚复用
+
+STM8和STM32比起来还是麻烦了一些，STM32管脚复用直接配置就行了，但是STM8这里如果要复用，必须用STVP来进行修改
+
+比如我这里需要使用TIM1的通道1，就需要将这里修改复用，并且这个复用会影响到其他几个引脚，所以做功能的时候要避开。
+
+
+
+#### Light Programmer
+
+通过Light Programmer修改，右键选择
+
+![image-20220226152547342](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220226152547342.png)
+
+
+
+#### STVP
+
+下面是通过STVP修改
+
+![image-20220226151435926](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220226151435926.png)
 
 
 
@@ -161,15 +205,6 @@ STVD有点类似Eclipse，有一个工作环境的配置。
 可以通过Tools-Options 取消超行显示或者是自己重新设置超行数
 
 ![image-20220225163735477](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220225163735477.png)
-
-
-
-## 注意事项
-
-- STVD中编译顺序和左侧文件树的顺序是一样的，如果文件夹名称顺序不对，会出现main不是第一个编译的文件，进而会引起一些错误，调整顺序以后就正确了。
-- STM8S_StdPeriph_Driver，库中包含的文件比较多，有一部分可能用不上，但是他也会强行编译报错，需要手动排除（这个标准库没有支持Low-Density，这种宏，也就是有些外设他分不清你实际对应的芯片里到底有没有，不像STM32的标准库能分清）
-
-
 
 
 
