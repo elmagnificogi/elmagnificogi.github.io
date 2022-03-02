@@ -3,7 +3,7 @@ layout:     post
 title:      "STM8开发环境搭建"
 subtitle:   "STVD，Cosmic"
 date:       2022-02-21
-update:     2022-02-25
+update:     2022-03-02
 author:     "elmagnifico"
 header-img: "img/bg9.jpg"
 catalog:    true
@@ -205,6 +205,83 @@ STM8和STM32比起来还是麻烦了一些，STM32管脚复用直接配置就行
 可以通过Tools-Options 取消超行显示或者是自己重新设置超行数
 
 ![image-20220225163735477](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220225163735477.png)
+
+
+
+## @svlreg missing for function
+
+```
+Running Linker
+clnk -lD:\COSMIC\FSE_Compilers\CXSTM8\Lib  -o Debug\receiver.sm8 -mDebug\receiver.map Debug\receiver.lkf 
+#error clnk Debug\receiver.lkf:1 @svlreg missing for function f_TIM1_CAP_COM_IRQHandler
+ The command: "clnk -lD:\COSMIC\FSE_Compilers\CXSTM8\Lib  -o Debug\receiver.sm8 -mDebug\receiver.map Debug\receiver.lkf " has failed, the returned value is: 1
+exit code=1.
+```
+
+这个错比较常见，如果在中断函数里调用了其他函数，基本都会出现问题。
+
+
+
+在Cosmic C Cross Compiler User’s Guide for ST Microelectronics STM8 的文档中可以看到
+
+> The c_lreg area is not saved implicitly in such
+> a case, in order to keep the interrupt function as efficient as possible. If
+> any function called by the interrupt function uses longs or floats, the
+> c_lreg area can be saved by using the type qualifier @svlreg on the
+> interrupt function definition. Whatever the model used is, these copies
+> are made directly on the stack.
+
+简单说就是当右值是一个long或者float之类的超过16bit的类型，左值的变量必须是全局变量，否则默认情况下在中断中是不会把任何一个左值存储进栈的，这样保证了中断执行的效率。
+
+而如果需要保存临时左值，那么就必须要加一个关键字 `@svlreg` 来告诉编译器，保存中断区域中的临时变量，其实就是把他们压入栈。
+
+（这里不得不吐槽，之所以不喜欢用IVR就是因为，老是有人写代码，带着这种和编译器相关性特别高的额外关键字，没想到 Cosmic 里也有这种东西，很难受）
+
+
+
+比如，下面的例子，就一定会报错
+
+```c
+void TIM_IC_CaptureCallback(void)
+{
+  int a =1;
+  a+1;
+  a++;
+}
+
+INTERRUPT_HANDLER(TIM1_CAP_COM_IRQHandler, 12)
+{
+  /* In order to detect unexpected events during development,
+     it is recommended to set a breakpoint on the following instruction.
+  */
+	TIM_IC_CaptureCallback();
+}
+```
+
+
+
+加上 @svlreg 就正常了
+
+```c
+void TIM_IC_CaptureCallback(void)
+{
+  int a =1;
+  a+1;
+  a++;
+}
+
+@svlreg INTERRUPT_HANDLER(TIM1_CAP_COM_IRQHandler, 12)
+{
+  /* In order to detect unexpected events during development,
+     it is recommended to set a breakpoint on the following instruction.
+  */
+	TIM_IC_CaptureCallback();
+}
+```
+
+
+
+同理如果函数里套函数，那么每层函数都必须要处理好他的返回值才行
 
 
 
