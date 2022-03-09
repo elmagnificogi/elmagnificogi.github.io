@@ -3,7 +3,7 @@ layout:     post
 title:      "STM8开发环境搭建"
 subtitle:   "STVD，Cosmic"
 date:       2022-02-21
-update:     2022-03-02
+update:     2022-03-09
 author:     "elmagnifico"
 header-img: "img/bg9.jpg"
 catalog:    true
@@ -196,7 +196,67 @@ STM8和STM32比起来还是麻烦了一些，STM32管脚复用直接配置就行
 
 
 
-## 超行显示
+#### 通过Flash软件设置Option Byte
+
+简单说就是通过解锁Flash的数据区域，然后写入Option Byte的字节，这里直接解锁了PC6 PC7的Timer那个引脚复用
+
+```c
+void FLASH_Init(void)
+{ 
+    __IO unsigned char *flash_OPT2;
+    __IO unsigned char *flash_NOPT2;
+    __IO unsigned char *FLASH_IAPSR;
+    __IO unsigned char *FLASH_CR2;
+    __IO unsigned char *FLASH_DUKR;
+    __IO unsigned char *FLASH_NCR2;
+    uint8_t val = 0;
+    flash_OPT2=(unsigned char*)0x4803;
+    flash_NOPT2=(unsigned char*)0x4804;
+    FLASH_IAPSR= ((unsigned char*)(FLASH_BaseAddress+0x05));
+    FLASH_CR2  =((unsigned char*)(FLASH_BaseAddress+0x01));
+    FLASH_DUKR  =((unsigned char*)(FLASH_BaseAddress+0x0A));
+    FLASH_NCR2  =((unsigned char*)(FLASH_BaseAddress+0x02));
+	
+    // check if Option Byte has been changed
+    if((*flash_OPT2)&0x01==0x01)
+        return;
+	
+	
+	// unlock data flash
+    while( ( (*FLASH_IAPSR) & FLASH_IAPSR_DUL) == 0X00 )     
+    { 
+        *FLASH_DUKR = 0XAE;      
+        *FLASH_DUKR = 0X56;  			
+    }
+
+    *FLASH_CR2 |= 0X80;     //OPT  = 1 
+    *FLASH_NCR2 &= 0X7F;    //NOPT = 0  
+
+    // alter the Pin PC7 PC6
+    *flash_OPT2 = 0X01;      
+    while( ((*FLASH_IAPSR) & FLASH_IAPSR_EOP) == 0 );  
+
+    *flash_NOPT2 = ~*flash_OPT2;    
+    while( ((*FLASH_IAPSR) & FLASH_IAPSR_EOP) == 0 );  
+
+	// lock data flash
+    *FLASH_CR2 &= ~0X80;    //OPT  = 1 
+    *FLASH_NCR2 |= 0X80;    //NOPT = 0 
+}
+```
+
+为了防止无限刷写Flash，需要判断一下是否已经写过了，写过了的情况下就不再重复刷写了。
+
+- 同时由于是一上电就启动了，如果通过STVP修改Option Byte会出现失败的情况，这是由于他修改完以后会重启cpu，然后程序里重新置位，导致STVP的验证失败了。要解决这个问题，就得先刷一个没有修改Option Byte的程序才能正常使用STVP。
+- **修改Option Byte并不能立即生效，需要重启一下硬件（硬重启，软重启不生效）**
+
+
+
+## 常见问题
+
+
+
+#### 超行显示
 
 毕竟是老东西了，分辨率比较低，一旦行比较长了，就会超行显示红色的背景
 
@@ -208,7 +268,7 @@ STM8和STM32比起来还是麻烦了一些，STM32管脚复用直接配置就行
 
 
 
-## @svlreg missing for function
+#### @svlreg missing for function
 
 ```
 Running Linker
@@ -285,6 +345,81 @@ void TIM_IC_CaptureCallback(void)
 
 
 
+#### Failed to launch child process:<gdb.exe>
+
+![image-20220308173753430](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220308173753430.png)
+
+```
+Failed to launch child process:<gdb.exe>
+>error=2 - ''The system cannot find the file specified''.''
+```
+
+
+
+我是莫名其妙出现这个错误的，前一分钟还在正常调试，下一分钟就报错了，再也无法调试了，非常神奇。
+
+一般是2种解决方案：
+
+1.通过使用管理员权限重开STVD，然后这个错误就消失了，一切都正常了。（然而我并不可以，并且会出现另外一个错误）
+
+2.通过重新指定gdb.exe的路径
+
+进入以下目录，将gdb7.exe和gdb.ini 打包压缩，然后将gdb7.exe 修改为gdb.exe
+
+```
+\st_toolset\stvd
+```
+
+将以下内容插入到 gdb.ini 中
+
+```
+#
+# emulator reset port and MCU
+#
+define emulator-reset-port-mcu
+target gdi -dll swim\stm_swim.dll -stlink3 -port $arg0 -mcuname $arg1
+mcuname -set $arg1
+end
+```
+
+然后调试就恢复正常了。
+
+
+
+如果后续还遇到问题，可以通过恢复压缩文件，来还原。
+
+
+
+#### 应用程序无法启动，因为应用程序的并行配置不正确
+
+解决办法有2个，第一个是重启一下，很多人重启以后就恢复正常了，但是也有不行的
+
+
+
+第二个，运行库不兼容，导致直接STVD打不开了
+
+![image-20220308173929769](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220308173929769.png)
+
+重新安装Microsoft Visual C++ 2005 运行库即可
+
+> https://www.microsoft.com/en-us/download/details.aspx?id=26347
+
+
+
+#### st8 Discovery gdi-error [40201]: can't access configuration database
+
+如果一意孤行，强行用管理员权限打开程序，虽然debug不会报找不到gdb了，但是会出现无法访问database的情况。
+
+一般说是文件权限不够，也就是以下目录可能没有权限
+
+```
+\st_toolset\stvd\dao
+```
+
+直接运行其中的 ST Toolset.msi 进行修复，实际上修复完，依然不能解决这个错误，所以通过管理员权限启动程序反而解决不了。
+
+
+
 ## 不支持
 
 #### Keil
@@ -304,6 +439,12 @@ void TIM_IC_CaptureCallback(void)
 > https://jingyan.baidu.com/article/ea24bc399c91bada63b33162.html
 >
 > https://zhuanlan.zhihu.com/p/52811699
+>
+> https://community.st.com/s/question/0D50X0000BWnzNbSQJ/failed-to-launch-child-processgdbexe
+>
+> https://community.st.com/s/question/0D50X0000BD32GYSQZ/cant-open-stvd-after-install-it
+>
+> https://community.st.com/s/question/0D50X00009XkhJjSAJ/st8-discovery-gdierror-40201-cant-access-configuration-database
 
 
 
