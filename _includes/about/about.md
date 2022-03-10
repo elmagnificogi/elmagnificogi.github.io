@@ -4,9 +4,9 @@
 
 我是elmagnifico
 
-程序员，maya插件开发者，无人机集群表演设计师，嵌入式开发者，多智能体研究者，独立游戏爱好者。
+程序员，maya插件开发者，无人机集群表演设计师，嵌入式工程师，多智能体研究者，独立游戏爱好者。
 
-Tobe全栈工程师，目前c/c++，python，java，c#都能写，STM32，FreeRTOS，SpringBoot CRUD，thymeleaf，Bootstrap，maya 插件开发都略懂一些，除了各种框架不懂，我已经全栈了
+全栈工程师，目前C/C++，Python，Java，C#都能写，STM32，FreeRTOS，SpringBoot CRUD，Thymeleaf，Bootstrap，Maya 插件开发都略懂一些，除了各种框架不懂，我已经全栈了
 
 梦想，~~一个全栈工程师的梦想，就是再也不用写代码了~~ ┑(￣▽ ￣)┍，希望有一天可以做出我自己的独立游戏
 
@@ -22,7 +22,7 @@ Tobe全栈工程师，目前c/c++，python，java，c#都能写，STM32，FreeRT
 
 一些期待成为的角色：
 
-- Independent game producer
+- Independent Game Producer
 
 - TD
 - Product Manager
