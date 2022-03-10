@@ -162,6 +162,20 @@ STVD有点类似Eclipse，有一个工作环境的配置。
 
 外设库的用法和STM32差不多，把文件都加好，就能编译通过了。
 
+- 需要注意，一旦选择使用外设库，那么必须要开启设置中的缩减代码选项，否则会出现代码太长了，放不下的情况
+
+
+
+![image-20220310185842663](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220310185842663.png)
+
+至少要勾选这两项优化，否则百分比会有下面的提示:
+
+```
+#error clnk Debug\test.lkf:1 segment .text size overflow (3717)
+ The command: "clnk -lF:\Lib  -o Debug\test.sm8 -mDebug\test.map Debug\test.lkf " has failed, the returned value is: 1
+exit code=1.
+```
+
 
 
 ## 注意事项
