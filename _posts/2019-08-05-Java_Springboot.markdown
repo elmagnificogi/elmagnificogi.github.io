@@ -7,8 +7,8 @@ author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"
 catalog:    true
 tags:
-    - java
-    - spring
+    - Java
+    - Spring
 ---
 
 ## Java

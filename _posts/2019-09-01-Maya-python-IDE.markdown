@@ -8,7 +8,7 @@ author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"
 catalog:    true
 tags:
-    - maya
+    - Maya
     - python
 ---
 

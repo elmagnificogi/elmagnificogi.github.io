@@ -7,7 +7,7 @@ author:     "elmagnifico"
 header-img: "img/play.jpg"
 catalog:    true
 tags:
-    - game
+    - Game
 ---
 
 ## Foreword

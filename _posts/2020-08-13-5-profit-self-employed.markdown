@@ -7,8 +7,8 @@ author:     "elmagnifico"
 header-img: "img/balance.jpg"
 catalog:    true
 tags:
-    - life
-    - work
+    - Life
+    - Work
 ---
 
 ## Foreword

@@ -8,7 +8,7 @@ header-img: "img/Raspberrypi-head-bg.png"
 catalog:    true
 tags:
     - python
-    - script
+    - Script
 ---
 
 ## Foreword

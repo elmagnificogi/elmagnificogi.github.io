@@ -7,7 +7,7 @@ author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"
 catalog:    true
 tags:
-    - c/c++
+    - C/C++
     - firmware
 ---
 

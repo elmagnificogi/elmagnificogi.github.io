@@ -7,8 +7,8 @@ author:     "elmagnifico"
 header-img: "img/docker-head-bg.jpg"
 catalog:    true
 tags:
-    - springboot
-    - docker
+    - Springboot
+    - Docker
 ---
 
 ## Foreword

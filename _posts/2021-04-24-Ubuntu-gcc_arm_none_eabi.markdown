@@ -8,7 +8,7 @@ author:     "elmagnifico"
 header-img: "img/bg1.jpg"
 catalog:    true
 tags:
-    - stm32
+    - STM32
 ---
 
 ## Foreword

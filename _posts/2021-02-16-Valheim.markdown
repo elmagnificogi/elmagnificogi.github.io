@@ -8,7 +8,7 @@ author:     "elmagnifico"
 header-img: "img/pen-head-bg.jpg"
 catalog:    true
 tags:
-    - game
+    - Game
 ---
 
 ## Foreword

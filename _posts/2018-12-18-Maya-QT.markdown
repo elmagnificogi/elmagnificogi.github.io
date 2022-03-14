@@ -8,7 +8,7 @@ header-img: "img/python-head-bg.png"
 catalog:    true
 tags:
     - QT
-    - maya
+    - Maya
 ---
 
 ## Foreword

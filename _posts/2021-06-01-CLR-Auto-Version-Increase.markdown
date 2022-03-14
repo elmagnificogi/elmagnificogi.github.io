@@ -9,8 +9,8 @@ header-img: "img/maze.jpg"
 catalog:    true
 mathjax:    false
 tags:
-    - c#
-    - c++
+    - C#
+    - C++
 ---
 
 ## Foreword

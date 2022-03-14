@@ -7,7 +7,7 @@ author:     "elmagnifico"
 header-img: "img/cap-head-bg.jpg"
 catalog:    true
 tags:
-    - vps
+    - VPS
 ---
 
 ## Foreword

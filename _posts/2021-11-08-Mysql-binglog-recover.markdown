@@ -8,7 +8,7 @@ author:     "elmagnifico"
 header-img: "img/web.jpg"
 catalog:    true
 tags:
-    - mysql
+    - MySql
 ---
 
 ## Forward

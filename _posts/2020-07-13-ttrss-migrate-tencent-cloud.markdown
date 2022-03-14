@@ -3,11 +3,13 @@ layout:     post
 title:      "TTRSS迁移到腾讯云"
 subtitle:   "轻量服务器"
 date:       2020-07-13
+update:     2022-02-14
 author:     "elmagnifico"
 header-img: "img/desk-head-bg.jpg"
 catalog:    true
 tags:
-    - vps
+    - VPS
+    - TTRSS
 ---
 
 ## Foreword
@@ -127,6 +129,41 @@ rm -fr /usr/local/qcloud
 7. 测试所有服务是否正常工作
 
 这样就基本可以正常工作了，啥配置基本都在，如果是老版本升级可能有些配置需要重新再配一下，最新版的基本没啥问题了。
+
+
+
+#### 保持老版本Postgres 
+
+源码目录下有好几个docker-compose.yml文件，其中docker-compose.pg12.yml就是老版本的，不选择升级，留在老版本一样没有什么大问题，由于主分支升级太快了，所以我选择老版的docker-compose文件。
+
+
+
+#### 6 Could not resolve host
+
+突然遇到了整个ttrss不更新的情况，然后看了一下信息是无法解析域名了，任何host都不行。
+
+> https://github.com/HenryQW/Awesome-TTRSS/issues/336
+
+检查dns设置发现没问题
+
+```
+ cat /etc/resolv.conf 
+```
+
+检查防火墙，发现防火墙好像出问题了，彻底关闭了，理论上也没问题。
+
+开启防火墙以后，又发现NAT确实没开启，于是开启NAT，问题依然存在
+
+```
+firewall-cmd --query-masquerade
+no
+firewall-cmd --zone=public --add-masquerade --permanent
+firewall-cmd --reload
+```
+
+然后重启了整个docker，就好了....
+
+
 
 ## Quote
 

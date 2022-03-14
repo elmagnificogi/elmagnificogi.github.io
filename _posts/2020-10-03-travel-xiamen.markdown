@@ -8,7 +8,7 @@ header-img: "img/xiamen.jpg"
 catalog:    true
 tags:
     - 旅游
-    - log
+    - Log
 ---
 
 ## Forward

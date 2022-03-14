@@ -12,12 +12,13 @@ baseurl: ""
 
 # SNS settings
 RSS: true
-weibo_username:     5329300217
-zhihu_username:     yun-qian-xue-82
+#weibo_username:     5329300217
+#zhihu_username:     yun-qian-xue-82
 github_username:    elmagnificogi
-twitter_username:   elmagnificotw
-facebook_username:  magnificofa.el
-
+#twitter_username:   elmagnificotw
+#facebook_username:  magnificofa.el
+qq_username:  363562671
+telegram_username:  elmagnificote
 
 
 # Build settings
@@ -58,7 +59,7 @@ ba_track_id: '9d14c694ddec7e797a00c990e9e8312d'
 
 # Google Analytics
 ga_track_id: 'UA-174663490-1'            # Format: UA-xxxxxx-xx
-ga_domain: elmagnifico.tech
+
 
 
 

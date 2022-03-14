@@ -7,7 +7,7 @@ author:     "elmagnifico"
 header-img: "img/springboot.jpg"
 catalog:    true
 tags:
-    - java
+    - Java
     - Springboot
 ---
 

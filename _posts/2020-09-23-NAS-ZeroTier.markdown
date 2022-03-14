@@ -7,7 +7,7 @@ author:     "elmagnifico"
 header-img: "img/zerotier.jpg"
 catalog:    true
 tags:
-    - nas
+    - NAS
     - 群晖
 ---
 

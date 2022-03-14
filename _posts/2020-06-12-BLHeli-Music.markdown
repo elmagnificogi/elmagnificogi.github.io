@@ -8,7 +8,7 @@ author:     "elmagnifico"
 header-img: "img/drone-head-bg.jpg"
 catalog:    true
 tags:
-    - esc
+    - ESC
     - BLHeli
 ---
 

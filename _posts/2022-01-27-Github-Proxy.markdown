@@ -10,7 +10,7 @@ catalog:    true
 tags:
     - GitHub
     - Proxy
-    - Cloudflare
+    - CloudFlare
 ---
 
 ## Foreword

@@ -3,7 +3,7 @@ layout:     post
 title:      "继SMMS图床要求登陆后，使用sapic自建图床"
 subtitle:   "typora，picgo，图床，更新docker"
 date:       2022-01-20
-update:     2022-01-28
+update:     2022-02-11
 author:     "elmagnifico"
 header-img: "img/bg6.jpg"
 catalog:    true
@@ -420,6 +420,76 @@ for file in os.listdir(dir):
 ```
 
 两个脚本都运行完以后，我的blog所有图片就都替换完成了。
+
+
+
+## 数据问题
+
+**目前持久化用户数据有点问题，虽然文件数据没丢**
+
+之前一直都是docker-compose直接启动，使用，没注意他这个持久化的问题。
+
+> https://github.com/sapicd/sapic/issues/17
+
+docker-compose当前的redis开启持久化以后，文件还是在docker容器内，还没有挂载到外部硬盘里。
+
+所以就会出现down以后重新启动，数据记录都丢失了。虽然文件本身还在，但是用户信息没了，也很蛋疼。
+
+根据他当前的做法，通过脚本将redis数据平移到另外一个正在运行的redis那边去，但是这样不太符合正常使用的场景。
+
+> https://blog.saintic.com/blog/265.html
+
+
+
+进入到redis的容器里，就能在下面的路径里看到持久化的文件
+
+```
+/data
+```
+
+把文件复制出来
+
+```
+docker cp '容器的id':/data/appendonly.aof /root/appendonly.aof
+```
+
+把文件恢复回去
+
+```
+docker cp /root/appendonly.aof '容器的id':/data/appendonly.aof 
+```
+
+
+
+#### 完美解决方案
+
+简单的增加redis的volume就行了，如果已经有数据了务必先复制出来，再重建docker-compose，这样以后随便怎么折腾本地都有一个备份，不至于升级的时候就无了。
+
+```
+version: '3'
+services:
+  webapp:
+    build: .
+    restart: always
+    ports:
+      - "9514:9514"
+    environment:
+      - sapic_redis_url=redis://@redis:6379
+      # 设置信任代理标头
+      #- sapic_proxyfix=true
+    volumes:
+      - static:/picbed/static/
+      - /data/picbed/:/picbed/static/upload/
+    depends_on:
+      - "redis"
+  redis:
+    image: "redis:alpine"
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - /data/picbed/redis/data/:/data/
+volumes:
+  static:
+```
 
 
 

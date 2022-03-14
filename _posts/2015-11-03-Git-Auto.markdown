@@ -9,7 +9,7 @@ header-img: "img/git-head-bg.jpg"
 catalog:    true
 tags:
     - git
-    - blog
+    - Blog
     - 脚本
 ---
 

@@ -3,13 +3,13 @@ layout:     post
 title:      "BLHeliSuite32逆向（四）"
 subtitle:   "Crack，Reverse"
 date:       2021-09-02
-update:     2022-01-13
+update:     2022-02-16
 author:     "elmagnifico"
 header-img: "img/bg5.jpg"
 catalog:    true
 mathjax:    false
 tags:
-    - crack
+    - Crack
     - BLHeli
 ---
 
@@ -580,6 +580,10 @@ ds[0x839634] = 0x9E3779B9
 ```
 
 这个值由于每次都是固定位置拿的，并且后续都是乘以20的固定值，所以一直没作为key，其实也可以加入到key里。
+
+
+
+结合电调在读写时命令的不同，**0x7C00和0xF800都是对应的读写地址**，也就是配置保存的起始地址。所以当出这个问题的时候，其实读写协议也变了，也需要修改对应的地址。
 
 
 

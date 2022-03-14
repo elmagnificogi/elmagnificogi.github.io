@@ -7,7 +7,7 @@ author:     "elmagnifico"
 header-img: "img/bg4.jpg"
 catalog:    true
 tags:
-    - pathfinding
+    - PathFind
 ---
 
 ## Foreword

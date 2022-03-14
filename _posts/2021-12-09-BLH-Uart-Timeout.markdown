@@ -8,7 +8,7 @@ author:     "elmagnifico"
 header-img: "img/welding2.jpg"
 catalog:    true
 tags:
-    - BLH
+    - BLHeli
     - ESC
     - BUG
 ---

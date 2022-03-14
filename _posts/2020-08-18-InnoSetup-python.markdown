@@ -9,7 +9,7 @@ catalog:    true
 tags:
     - Inno Setup
     - python
-    - maya
+    - Maya
 ---
 
 ## Forward

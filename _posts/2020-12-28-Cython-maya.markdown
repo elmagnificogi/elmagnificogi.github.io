@@ -8,8 +8,8 @@ author:     "elmagnifico"
 header-img: "img/bg7.jpg"
 catalog:    true
 tags:
-    - maya
-    - cython
+    - Maya
+    - Cython
     - python
 ---
 

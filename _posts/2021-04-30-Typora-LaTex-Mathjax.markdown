@@ -9,7 +9,7 @@ header-img: "img/bg7.jpg"
 catalog:    true
 mathjax:    true
 tags:
-    - blog
+    - Blog
 ---
 
 ## Foreword
@@ -132,7 +132,7 @@ header-img: "img/zerotier.jpg"
 catalog:    true
 mathjax:    true
 tags:
-    - pathfinding
+    - PathFind
 ```
 
 
@@ -160,7 +160,7 @@ xxx...
 
 $ \Sigma= \lbrace 0, 1 \rbrace $
 
-如果你直接输入，下面的内容，在typora里显示是正确的
+如果你直接输入，下面的内容，在Typora里显示是正确的
 
 ```
 $ \Sigma= \{ 0, 1 \} $
@@ -180,7 +180,7 @@ $ \Sigma= \{ 0, 1 \} $
 $ \Sigma= \\{ 0, 1 \\} $
 ```
 
-可是这样在typora中又会显示错误，类似于这样：
+可是这样在Typora中又会显示错误，类似于这样：
 
 ![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/y2JbXqmCTODv31B.png)
 
@@ -194,13 +194,13 @@ $ \Sigma= \\{ 0, 1 \\} $
 $ \Sigma= \lbrace 0, 1 \rbrace $
 ```
 
-然后你就看到$ \Sigma= \lbrace 0, 1 \rbrace $ 无论是typora还是web显示，都是正确的了
+然后你就看到$ \Sigma= \lbrace 0, 1 \rbrace $ 无论是Typora还是web显示，都是正确的了
 
 
 
 类似的一些符号，由于潜在的解析问题，都可以通过直接输入对应的符号名称来代替，从而解决符号不兼容的情况
 
-这样能让typora和web解析后的保持一致就很舒服了。
+这样能让Typora和web解析后的保持一致就很舒服了。
 
 
 

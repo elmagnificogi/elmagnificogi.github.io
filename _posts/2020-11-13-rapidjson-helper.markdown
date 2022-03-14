@@ -7,8 +7,8 @@ author:     "elmagnifico"
 header-img: "img/bg3.jpg"
 catalog:    true
 tags:
-    - c++
-    - json
+    - C++
+    - JSON
 ---
 
 ## Foreword

@@ -33,6 +33,16 @@ ps:黄玄的blog有点对不起这么多star，长期不更新，而且讲道理
 
 
 
+#### 2022.2.23
+
+- 替换Google追踪的代码，移除无用的相关代码
+- 整理网站tag，所有图片替换成自己的图床
+- 修改License，使用GPL
+- 切换CDN为cloudflare
+- 切换fontawesome-webfont为4.7.0，支持qq telgram等图标
+
+
+
 #### 2021.4.30
 
 - 添加latex公式支持（黄玄自己的挂了2年了）

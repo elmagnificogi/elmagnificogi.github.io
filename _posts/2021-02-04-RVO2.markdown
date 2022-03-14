@@ -7,7 +7,7 @@ author:     "elmagnifico"
 header-img: "img/Embedded-head-bg.png"
 catalog:    true
 tags:
-    - pathfinding
+    - PathFind
 ---
 
 ## Foreword
