@@ -9,6 +9,7 @@ header-img: "img/bg1.jpg"
 catalog:    true
 tags:
     - STM32
+    - Embedded
 ---
 
 ## Foreword
