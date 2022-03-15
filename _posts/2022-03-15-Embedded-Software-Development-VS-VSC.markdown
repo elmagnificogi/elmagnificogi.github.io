@@ -95,6 +95,10 @@ Start-Process "D:\Microsoft Visual Studio\2022\Community\Common7\IDE\devenv" .
 
 
 
+但是问题也有，比如添加个文件，需要手动修改CMakeLists.txt才行
+
+
+
 ## 额外信息
 
 其实从工程中的一些其他文件里可以看到，官方实际背后用的是什么
@@ -306,7 +310,7 @@ $env:HTTPS_PROXY="https://127.0.0.1:1081"
 
 ## Summary
 
-简单说，能用倒是能用，还得等VS官方再完善完善。
+简单说，能用倒是能用，还得等VS官方再完善完善，总的来说现在集成程度还是非常低的，用起来还是很不爽。
 
 
 
