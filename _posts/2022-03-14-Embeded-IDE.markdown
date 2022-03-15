@@ -115,7 +115,7 @@ VisualGDB不能算是个IDE，他只是个插件，但是当他和Visual Studio�
 
 > https://devblogs.microsoft.com/cppblog/visual-studio-embedded-development/
 
-简单说当前的Visual Studio 2022中包含了一个安装选项，可以添加嵌入式的开发环境，并且基于此可以对RTOS进行调试。而这个是官方支持的嵌入式开发和其他野生的可是大不相同。只是目前版本还比较低，可用性可能不高。
+简单说当前的Visual Studio 2022中包含了一个安装选项，可以添加嵌入式的开发环境，并且基于此可以对RTOS进行调试。而这个是官方支持的嵌入式开发和其他野生的可是大不相同。只是目前版本还比较低，可用性不高。
 
 
 
@@ -133,7 +133,7 @@ VisualGDB不能算是个IDE，他只是个插件，但是当他和Visual Studio�
 
 ## VS Code
 
-以VS Code 作为主编辑器，而靠其他插件来支持嵌入式开发
+以VS Code 作为主编辑器，而靠其他插件来支持嵌入式开发。
 
 
 
@@ -179,9 +179,23 @@ Ozone准确来说只是拿来调试的工具，很早的时候我倒是试过，
 
 这也是一个插件，简单说就是用VS Code写代码，他支持直接打开Keil的工程文件，用Keil来编译和调试，集各家之所长吧，算是一个取巧方案。
 
+这种方案不仅仅有Keil，而且还有IAR的版本，所以某种程度上可能是大家都是互通的，编辑用一个，编译调试用另外一个
+
+IAR的版本就叫 IAR Embedded Workbench
 
 
-## Embedded Tools![image-20220315174810670](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202203151748762.png)
+
+### Embedded IDE
+
+我之前开发的STM8等这种性能比较差的单片机，就可以使用这个插件
+
+![image-20220315195410042](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202203151954128.png)
+
+不过他本身不支持调试，只是可以用来写代码和烧写而已。
+
+
+
+### Embedded Tools![image-20220315174810670](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202203151748762.png)
 
 同理VS中有了嵌入式开发环境，对应的VS Code里也会有，最后实现的效果类似于VS中的。
 

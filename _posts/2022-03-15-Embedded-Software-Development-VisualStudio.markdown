@@ -19,7 +19,7 @@ tags:
 
 本篇比较像以上两个文字的翻译，外加一些针对国内的对应修改，和我实测之后的体验。
 
-先说结论，当前这个东西应该说只是个demo演示，虽然能编译和debug，但如果要自己配置，有些东西没给出来或者说还不能充分设置，需要自己去研究。和其他比较流行的嵌入式插件比起来，很多东西都是依赖于vcpkg的包管理完成的，还处于比较原始的阶段。
+先说结论，当前这个东西应该说只是个demo演示，实际并不可用，虽然能编译和debug，但如果要自己配置，有些东西没给出来或者说还不能充分设置。
 
 
 
@@ -214,7 +214,7 @@ openocd -f board/stm32f4discovery.cfg -c "program build/app/mxchip_azure_iot.elf
 
 Launch具体启动刷写和debug是调用了什么，现在还是隐藏的。这个流程可能日后可以给我们修改吧。
 
-结合startup中的文件，文件的格式和ld这些，其实和Eclipse那边用的gcc-arm-none-eabi一模一样，目前来说用这个来开发还是太早了点，现在的完成度和目前其他集成度稍微高一些的插件比还是有些差距的，他只是一个简单的建立起来的联系而已。
+结合startup中的文件，文件的格式和ld这些，其实和Eclipse那边用的gcc-arm-none-eabi一模一样，目前来说用这个来开发还是太早了点，很多东西都缺失。
 
 ![image-20220315190021932](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202203151900960.png)
 
@@ -262,45 +262,11 @@ $env:HTTP_PROXY="http://127.0.0.1:1081"
 $env:HTTPS_PROXY="https://127.0.0.1:1081"
 ```
 
-打开工程文件夹`AZ3166`，然后就会看到提示，安装即可
-
-![image-20220315200248453](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202203152002486.png)
-
 
 
 ### 使用VS Code开发
 
-首先也是一样的，选择好对应的预设和输出目标，然后运行和调试切换成`Launch`
 
-![image-20220315200450134](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202203152004209.png)
-
-在VS中看不到的Launch设置，这里点击设置就能看到了
-
-```json
-        {
-            "name": "Launch",
-            "type": "cppdbg",
-            "request": "launch",
-            "cwd": "${workspaceFolder}",
-            "program": "${workspaceFolder}/build/app/mxchip_azure_iot.elf",
-            "MIMode": "gdb",
-            "miDebuggerPath": "arm-none-eabi-gdb",
-            "miDebuggerServerAddress": "localhost:3333",
-            "debugServerPath": "openocd",
-            "debugServerArgs": "-f board/stm32f4discovery.cfg",
-            "serverStarted": "Listening on port .* for gdb connections",
-            "filterStderr": true,
-            "stopAtConnect": true,
-            "hardwareBreakpoints": {
-                "require": true,
-                "limit": 6
-            },
-            "preLaunchTask": "Flash",
-            "svdPath": "${workspaceFolder}/STM32F412.svd"
-        }
-```
-
-可以看到一样是通过arm-none-eabi-gdb来进行调试的，所以说这个demo工程更多的其实可以理解为是给VS Code用的，在VS这边差的还比较多。日后官方是否还会继续更新，增加更多功能，就不太可知了。
 
 
 
