@@ -240,6 +240,10 @@ IDE方面的内容实在是太多了，有些日后再说吧
 > https://www.armbbs.cn/forum.php?mod=viewthread&tid=111335&highlight=IDE
 >
 > https://www.armbbs.cn/forum.php?mod=viewthread&tid=93102&highlight=%B1%C8%BD%CF
+>
+> https://devblogs.microsoft.com/cppblog/vscode-embedded-development/
+>
+> https://devblogs.microsoft.com/cppblog/visual-studio-embedded-development/
 
 
 
