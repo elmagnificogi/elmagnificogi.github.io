@@ -3,7 +3,7 @@ layout:     post
 title:      "Maya python转Cython"
 subtitle:   "pyd，c"
 date:       2020-12-28
-update:     2021-01-27
+update:     2022-03-16
 author:     "elmagnifico"
 header-img: "img/bg7.jpg"
 catalog:    true
@@ -120,7 +120,7 @@ Maya2017/lib/python27.lib 复制到 Maya2017\Python\libs\python27.lib，这里li
 ```bat
 D:\Autodesk\Maya2017\bin\mayapy.exe setup.py install
 
-正常的话就能看到下面的提示了，全程无报错
+正常的话就能看到类似下面的提示了，全程无报错
 Installing cygdb.exe script to D:\Autodesk\Maya2017\Python\Scripts
 Installing cythonize-script.py script to D:\Autodesk\Maya2017\Python\Scripts
 Installing cythonize.exe script to D:\Autodesk\Maya2017\Python\Scripts
@@ -251,6 +251,14 @@ ImportError: DLL load failed 动态链接库(DLL)初始化例程失败
 就是下面这帖子的做法，不建议这么做，这是用非常老的库，新版本或者新机器根本无法正常用这个方法
 
 类似报vcarsall.bat错误，找不到之类的帖子都不建议看，太老了，早就过期了，而且好多库都不兼容这几个。
+
+```
+[8/8] Cythonizing E:\temp\cython-0.29.28\Cython\Tempita\_tempita.py
+building 'Cython.Plex.Scanners' extension
+error: Unable to find vcvarsall.bat
+```
+
+如果是上面的错误，本质上应该是没有安装VS2012造成的，安装以后解决
 
 > https://blog.csdn.net/weixin_42825585/article/details/106851576
 >
