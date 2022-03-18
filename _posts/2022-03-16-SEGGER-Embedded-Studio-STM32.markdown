@@ -3,7 +3,7 @@ layout:     post
 title:      "使用SEGGER Embedded Studio开发STM32"
 subtitle:   "STM32，IDE"
 date:       2022-03-16
-update:     2022-03-17
+update:     2022-03-18
 author:     "elmagnifico"
 header-img: "img/desk-head-bg.jpg"
 catalog:    true
@@ -119,6 +119,8 @@ Tools –> Options –> Text Editor，然后将对应的修改
 
 这个问题我已经向官方提出来了，只是不知道啥时候能回复解决一下。
 
+> https://forum.segger.com/index.php/Thread/8471-Embedded-Studio-Windows-Waypoint-cant-work-by-mouse/#post30883
+
 
 
 ## 分析
@@ -220,6 +222,28 @@ define block stack with size = __STACKSIZE__, alignment = 8, /* fill =0xCD, */ r
 ```
 
 这里是将xml中定义的RAM和Flash都联系进来了，之后才能将其给到.s文件中去编译
+
+
+
+## 常见问题
+
+由于SES在国内使用的比较少，能搜到的问题一般都在官方论坛里有解释
+
+> https://forum.segger.com/index.php/Board/9-SEGGER-Embedded-Studio-related/
+
+国内基本只有硬汉嵌入式论坛里能搜到一些解决办法
+
+> https://www.armbbs.cn/
+
+
+
+实际使用的时候还发现一个问题，如果你有2个同名文件，比如motors.cpp和motors.c 就会出现下面的错误，原因我猜想是由于编译的时候都是转换成的motors.o文件，导致出现了同名，要解决这个问题也很简单，就是改个名字就行了，但是Eclipse中就不会有这种问题，所以还是编译的问题。
+
+```
+The object file Ov3 Internal/motors.o has been supplied more than once
+```
+
+> https://forum.segger.com/index.php/Thread/8472-Same-name-C-and-Cpp-file-error-has-been-supplied-more-than-once/
 
 
 
