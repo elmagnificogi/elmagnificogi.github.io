@@ -3,7 +3,7 @@ layout:     post
 title:      "使用SEGGER Embedded Studio开发STM32"
 subtitle:   "STM32，IDE"
 date:       2022-03-16
-update:     2022-03-18
+update:     2022-03-21
 author:     "elmagnifico"
 header-img: "img/desk-head-bg.jpg"
 catalog:    true
@@ -54,6 +54,20 @@ tags:
 
 
 ## 使用
+
+
+
+#### 代理
+
+由于SES也是从国外服务器下载，所以最好能开启代理，下载速度会快很多
+
+打开Tools-Options-Environment，可以看到对应的http的代理设置，不需要的话留空就自动不生效了。
+
+![image-20220321102522665](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220321102522665.png)
+
+
+
+#### 支持包
 
 新建项目之前，最好先安装一下对应的板级支持包。
 
