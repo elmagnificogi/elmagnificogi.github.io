@@ -3,7 +3,7 @@ layout:     post
 title:      "使用SEGGER Embedded Studio开发STM32进阶"
 subtitle:   "STM32，IDE"
 date:       2022-03-18
-update:     2022-03-18
+update:     2022-03-21
 author:     "elmagnifico"
 header-img: "img/desk-head-bg.jpg"
 catalog:    true
@@ -35,7 +35,19 @@ tags:
 
 
 
+## 目录树
+
+目录树取消大小显示，很多余。打开的文件自动同步展开目录树位置，也有点多余，所以也去掉
+
+![image-20220321155026990](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220321155026990.png)
+
+
+
 ## 配置问题
+
+
+
+#### Solution与Project
 
 首先得理解SES一个项目管理的结构，最底层是Solution，然后一个Solution中会有好几个Project。
 
@@ -45,15 +57,27 @@ tags:
 
 
 
+#### Public与Private
+
 然后对于一个层级中，还有Public和Private的区别
 
 ![image-20220318182141212](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202203181821240.png)
 
+简单说就是Public 继承 Private Configuration，举个例子，如果一个项目里Private Configuration 就是搞框架的人 第一次配好的，一个相当通用的配置。如果和他的环境相同，基本就可以直接使用Public Configurations继承它，然后直接编译就行了。但是如果你和的环境略有区别，那么就比较适合你自己在Public的配置上略作修改，但是Private的保持原样，同时git也不追踪Public的部分，这样就能兼顾总体和个体。
+
+类似的，比如文件路径就应该在Private里设置，而Public里只是继承一下就行了，有些预定义的宏也应该在Private里定义
 
 
-同一个配置之中还有Internal和Common的区别
 
-![image-20220318182056908](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202203181820951.png)
+#### Internal和External
+
+![image-20220321145355790](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220321145355790.png)
+
+同一个配置之中还有Internal和Extern的区别，其实会造成这个的原样的是导入的问题，如果导入选择了外部GNU，那么就全都是External，同理如果选了内置的，那就是Internal，如果2个都选了，那么就会出现又有内部又有外部的情况，这种就是自动生成的配置，自己改改就行了
+
+![image-20220321111448808](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220321111448808.png)
+
+
 
 
 
@@ -75,13 +99,37 @@ tags:
 
 ### GNU
 
+#### gcc-arm-none-eabi
+
+如果提前安装了gcc-arm-none-eabi，并且重新启动了SES，那么他会自动识别对应的GNU工具链
+
+> https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-rm/downloads
+
+![image-20220321111448808](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220321111448808.png)
 
 
 
 
-## SEGGER Embedded Studio
+
+## 导入Eclipse工程
+
+将目录转换成常规文件夹，只有这样才能使用右键排除编译或者排除文件夹
+
+![image-20220321112733672](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220321112733672.png)
 
 
+
+
+
+## Bug
+
+屮，又遇到了bug，明明使用的是GNU，C和C++混合的，但是没想到他这里的标签直接就出错了
+
+![image-20220321155906054](C:\Users\elmagnifico\Pictures\image-20220321155906054.png)
+
+![image-20220321155938570](C:\Users\elmagnifico\Pictures\image-20220321155938570.png)
+
+> https://forum.segger.com/index.php/Thread/8477-BUG-C-and-C-Language-Standard-upside-down/#post30892
 
 
 
@@ -96,4 +144,6 @@ To Be Continued
 > https://studio.segger.com/index.htm?https://studio.segger.com/home.htm
 >
 > https://www.armbbs.cn/forum.php?mod=forumdisplay&fid=28
+>
+> https://blog.csdn.net/zhengyangliu123/article/details/54783443
 
