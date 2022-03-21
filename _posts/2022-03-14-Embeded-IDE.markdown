@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "嵌入式开发环境介绍"
+title:      "2022年嵌入式开发环境介绍"
 subtitle:   "STM32，IDE"
 date:       2022-03-14
 update:     2022-03-15
