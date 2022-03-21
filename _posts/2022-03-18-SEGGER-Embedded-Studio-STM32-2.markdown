@@ -25,6 +25,16 @@ tags:
 
 
 
+## 代理
+
+由于SES也是从国外服务器下载，所以最好能开启代理，下载速度会快很多
+
+打开Tools-Options-Environment，可以看到对应的http的代理设置，不需要的话留空就自动不生效了。
+
+![image-20220321102522665](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220321102522665.png)
+
+
+
 ## 配置问题
 
 首先得理解SES一个项目管理的结构，最底层是Solution，然后一个Solution中会有好几个Project。
@@ -44,8 +54,6 @@ tags:
 同一个配置之中还有Internal和Common的区别
 
 ![image-20220318182056908](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202203181820951.png)
-
-
 
 
 
