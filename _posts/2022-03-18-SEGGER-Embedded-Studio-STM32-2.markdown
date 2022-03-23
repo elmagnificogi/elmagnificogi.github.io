@@ -91,21 +91,59 @@ tags:
 
 
 
-#### GCC
+#### ARMCC
+
+简单说就是Keil 自带的那一套，就是基于ARMCC的，本身是基于ARM开发的，所以编译后效率和bin大小都要优于其他的方式一点，但是由于之前Keil v5之前的版本实在是太慢了，直接被其他人吊起来打，所以很多人吐槽。
+
+再加上本身这个不开源，而且收费，所以实际看到使用的IDE比较少。
+
+目前最新的Arm Compiler 6，则是切换到了基于LLVM的Clang，整个速度一下子上去了，目前应该是综合最好的。
+
+所以现在说ARMCC一般是指5以前的版本，而现在的6版本基本都叫ARMCLANG了
 
 
 
 #### Clang
 
+Clang其实只是一个编译器的前端，只是由于新的编译器前端都是采用Clang，为了和老的分开，经常被通称为Clang
+
 
 
 #### LLVM
 
+LLVM则是指编译器的后端，实际上在不同的地方可能指代不同，嵌入式这里某些时候指代的范围类似于Clang，这种基本都属于乱用，把概念搞模糊了。
+
+![Clang LLVM](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/Clang-LLVM.jpg)
+
+随着时代的发展，很多单纯使用GCC的地方都被LLVM替代了，当然嵌入式常常落后一个时代，所以还有很多GCC的使用。
 
 
-### GNU
+
+### GCC
+
+本质上用GCC来编译，都是用gcc-arm-none-eabi，然后这个东西版本不同，各自有所修改，标准不够统一，经常遇到各种问题。但是好处是他是开源、免费的，所以很多IDE里可能都有集成他们进来。
+
+
+
+#### SES的GCC
+
+先说SES的gcc，可以清楚的看到版本4.2.1
+
+![image-20220323174046580](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220323174046580.png)
+
+实际上文件也就是用的gcc-arm-none-eabi，不但版本非常老，而且还是阉割版的，有很多编外的库文件，直接就没有，或者他内置到其他文件夹去了
+
+![image-20220323171121709](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220323171121709.png)
+
+从SES官方角度来说还是推荐你用SEGGER的编译器，而不是gcc，因为有很多东西没说明白，官方文档没说清楚，而论坛里竟然也搜不到相关的问题。
+
+比如要使用gcc，用C++开发，就会发现怎么弄labc的相关几个库死活都导入不了，如果只是单纯使用C，可能不会遇到这么棘手的问题
+
+
 
 #### gcc-arm-none-eabi
+
+官方版本的gcc-arm-none-eabi，外部的库更全一些，而且官方相当于是最标准的那一个，不存在IDE本身遮遮掩掩之类的操作。
 
 如果提前安装了gcc-arm-none-eabi，并且重新启动了SES，那么他会自动识别对应的GNU工具链
 
@@ -154,4 +192,10 @@ To Be Continued
 > https://www.armbbs.cn/forum.php?mod=forumdisplay&fid=28
 >
 > https://blog.csdn.net/zhengyangliu123/article/details/54783443
+>
+> https://blog.csdn.net/ZCShouCSDN/article/details/89553323
+>
+> https://www.armbbs.cn/forum.php?mod=viewthread&tid=93102&highlight=%B1%C8%BD%CF
+>
+> https://blog.csdn.net/xhhjin/article/details/81164076
 
