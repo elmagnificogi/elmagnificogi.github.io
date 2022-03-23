@@ -3,7 +3,7 @@ layout:     post
 title:      "使用SEGGER Embedded Studio开发STM32"
 subtitle:   "STM32，IDE"
 date:       2022-03-16
-update:     2022-03-21
+update:     2022-03-22
 author:     "elmagnifico"
 header-img: "img/desk-head-bg.jpg"
 catalog:    true
@@ -131,7 +131,7 @@ Tools –> Options –> Text Editor，然后将对应的修改
 
 然后前后跳转的快捷键，是Alt+Left或者Alt+Right，但是本身也支持Back和Forward，但是实际上鼠标的侧键，并不能跳转，这个比较难受。从我测试来看，他本身IDE是不支持捕获鼠标侧键的，所以Back和Forward就基本不可能实现了
 
-这个问题我已经向官方提出来了，只是不知道啥时候能回复解决一下。
+这个问题我已经向官方提出来了，官方只能说增加一个feature，但是不知道啥时候能安排上
 
 > https://forum.segger.com/index.php/Thread/8471-Embedded-Studio-Windows-Waypoint-cant-work-by-mouse/#post30883
 
@@ -245,6 +245,10 @@ define block stack with size = __STACKSIZE__, alignment = 8, /* fill =0xCD, */ r
 
 > https://forum.segger.com/index.php/Board/9-SEGGER-Embedded-Studio-related/
 
+很多问题官方是定期会解答一次，每次不一定是多久，有可能20天，也有可能一周内就回复了。
+
+
+
 国内基本只有硬汉嵌入式论坛里能搜到一些解决办法
 
 > https://www.armbbs.cn/
@@ -258,6 +262,10 @@ The object file Ov3 Internal/motors.o has been supplied more than once
 ```
 
 > https://forum.segger.com/index.php/Thread/8472-Same-name-C-and-Cpp-file-error-has-been-supplied-more-than-once/
+
+官方的说法是这个obj文件的命名方式是可以修改的，但是他们不会改这个默认的
+
+![image-20220322102141172](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220322102141172.png)
 
 
 

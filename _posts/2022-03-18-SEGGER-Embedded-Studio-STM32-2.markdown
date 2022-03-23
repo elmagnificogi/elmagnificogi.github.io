@@ -55,6 +55,8 @@ tags:
 
 ![image-20220318181250149](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202203181812211.png)
 
+从官方的解释来说，Project的所有路径都是相对的，而Solution则是绝对路径，基于继承关系，所以你可以自己弄出来多个Solution的配置，从而可以达到切换路径的效果，进而Project的路径不需要反复修改（当然，具体哪里用得上这种情况，我也不知道）
+
 
 
 #### Public与Private
@@ -78,6 +80,10 @@ tags:
 ![image-20220321111448808](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220321111448808.png)
 
 
+
+#### 配置显示出错
+
+偶尔会遇到你打开配置，但是看到的配置完全是错的。关闭以后，重新再打开，又是对的情况，这个比较诡异，也没法说，但是确实会发生。
 
 
 
@@ -130,6 +136,8 @@ tags:
 ![image-20220321155938570](C:\Users\elmagnifico\Pictures\image-20220321155938570.png)
 
 > https://forum.segger.com/index.php/Thread/8477-BUG-C-and-C-Language-Standard-upside-down/#post30892
+
+官方目前已经确认了这个bug
 
 
 
