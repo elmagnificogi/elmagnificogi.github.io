@@ -3,7 +3,7 @@ layout:     post
 title:      "使用SEGGER Embedded Studio开发STM32进阶"
 subtitle:   "STM32，IDE"
 date:       2022-03-18
-update:     2022-03-21
+update:     2022-03-24
 author:     "elmagnifico"
 header-img: "img/desk-head-bg.jpg"
 catalog:    true
