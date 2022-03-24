@@ -212,9 +212,9 @@ signalr.c:(.text._kill_r+0xe): undefined reference to `_kill'
 
 屮，又遇到了bug，明明使用的是GNU，C和C++混合的，但是没想到他这里的标签直接就出错了
 
-![image-20220321155906054](C:\Users\elmagnifico\Pictures\image-20220321155906054.png)
+![image-20220321155906054](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220321155906054.png)
 
-![image-20220321155938570](C:\Users\elmagnifico\Pictures\image-20220321155938570.png)
+![image-20220321155938570](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220321155938570.png)
 
 > https://forum.segger.com/index.php/Thread/8477-BUG-C-and-C-Language-Standard-upside-down/#post30892
 
