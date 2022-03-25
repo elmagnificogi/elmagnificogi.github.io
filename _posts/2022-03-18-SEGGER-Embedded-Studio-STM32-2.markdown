@@ -224,7 +224,224 @@ signalr.c:(.text._kill_r+0xe): undefined reference to `_kill'
 
 
 
-## 编译加入git commit 信息
+## 链接
+
+#### 链接文件
+
+如果是使用SEGGER，那么就是用SEGGER的内置链接文件的格式，也就是icf文件，可以通过生成默认工程查看到对应的配置文件
+
+如果是使用GCC的模式，那么就是用GCC的ld文件，这个ld文件一般在STM32的固件包里就能找到
+
+![image-20220325170947751](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220325170947751.png)
+
+类似于这样的
+
+```
+/*
+*****************************************************************************
+**
+
+**  File        : LinkerScript.ld
+**
+**  Abstract    : Linker script for STM32F756NGHx Device with
+**                1024KByte FLASH, 320KByte RAM
+**
+**                Set heap size, stack size and stack location according
+**                to application requirements.
+**
+**                Set memory bank area and size if external memory is used.
+**
+**  Target      : STMicroelectronics STM32
+**
+**
+**  Distribution: The file is distributed as is, without any warranty
+**                of any kind.
+**
+**  (c)Copyright Ac6.
+**  You may use this file as-is or modify it according to the needs of your
+**  project. Distribution of this file (unmodified or modified) is not
+**  permitted. Ac6 permit registered System Workbench for MCU users the
+**  rights to distribute the assembled, compiled & linked contents of this
+**  file as part of an application binary file, provided that it is built
+**  using the System Workbench for MCU toolchain.
+**
+*****************************************************************************
+*/
+
+/* Entry Point */
+ENTRY(Reset_Handler)
+
+/* Highest address of the user mode stack */
+_estack = 0x20050000;    /* end of RAM */
+/* Generate a link error if heap and stack don't fit into RAM */
+_Min_Heap_Size = 0x200;      /* required amount of heap  */
+_Min_Stack_Size = 0x400; /* required amount of stack */
+
+/* Specify the memory areas */
+MEMORY
+{
+FLASH (rx)      : ORIGIN = 0x08000000, LENGTH = 1024K
+RAM (xrw)      : ORIGIN = 0x20000000, LENGTH = 320K
+}
+
+/* Define output sections */
+SECTIONS
+{
+  /* The startup code goes first into FLASH */
+  .isr_vector :
+  {
+    . = ALIGN(4);
+    KEEP(*(.isr_vector)) /* Startup code */
+    . = ALIGN(4);
+  } >FLASH
+
+  /* The program code and other data goes into FLASH */
+  .text :
+  {
+    . = ALIGN(4);
+    *(.text)           /* .text sections (code) */
+    *(.text*)          /* .text* sections (code) */
+    *(.glue_7)         /* glue arm to thumb code */
+    *(.glue_7t)        /* glue thumb to arm code */
+    *(.eh_frame)
+
+    KEEP (*(.init))
+    KEEP (*(.fini))
+
+    . = ALIGN(4);
+    _etext = .;        /* define a global symbols at end of code */
+  } >FLASH
+
+  /* Constant data goes into FLASH */
+  .rodata :
+  {
+    . = ALIGN(4);
+    *(.rodata)         /* .rodata sections (constants, strings, etc.) */
+    *(.rodata*)        /* .rodata* sections (constants, strings, etc.) */
+    . = ALIGN(4);
+  } >FLASH
+
+  .ARM.extab   : { *(.ARM.extab* .gnu.linkonce.armextab.*) } >FLASH
+  .ARM : {
+    __exidx_start = .;
+    *(.ARM.exidx*)
+    __exidx_end = .;
+  } >FLASH
+
+  .preinit_array     :
+  {
+    PROVIDE_HIDDEN (__preinit_array_start = .);
+    KEEP (*(.preinit_array*))
+    PROVIDE_HIDDEN (__preinit_array_end = .);
+  } >FLASH
+  .init_array :
+  {
+    PROVIDE_HIDDEN (__init_array_start = .);
+    KEEP (*(SORT(.init_array.*)))
+    KEEP (*(.init_array*))
+    PROVIDE_HIDDEN (__init_array_end = .);
+  } >FLASH
+  .fini_array :
+  {
+    PROVIDE_HIDDEN (__fini_array_start = .);
+    KEEP (*(SORT(.fini_array.*)))
+    KEEP (*(.fini_array*))
+    PROVIDE_HIDDEN (__fini_array_end = .);
+  } >FLASH
+
+  /* used by the startup to initialize data */
+  _sidata = LOADADDR(.data);
+
+  /* Initialized data sections goes into RAM, load LMA copy after code */
+  .data : 
+  {
+    . = ALIGN(4);
+    _sdata = .;        /* create a global symbol at data start */
+    *(.data)           /* .data sections */
+    *(.data*)          /* .data* sections */
+
+    . = ALIGN(4);
+    _edata = .;        /* define a global symbol at data end */
+  } >RAM AT> FLASH
+
+  
+  /* Uninitialized data section */
+  . = ALIGN(4);
+  .bss :
+  {
+    /* This is used by the startup in order to initialize the .bss secion */
+    _sbss = .;         /* define a global symbol at bss start */
+    __bss_start__ = _sbss;
+    *(.bss)
+    *(.bss*)
+    *(COMMON)
+
+    . = ALIGN(4);
+    _ebss = .;         /* define a global symbol at bss end */
+    __bss_end__ = _ebss;
+  } >RAM
+
+  /* User_heap_stack section, used to check that there is enough RAM left */
+  ._user_heap_stack :
+  {
+    . = ALIGN(8);
+    PROVIDE ( end = . );
+    PROVIDE ( _end = . );
+    . = . + _Min_Heap_Size;
+    . = . + _Min_Stack_Size;
+    . = ALIGN(8);
+  } >RAM
+
+  
+
+  /* Remove information from the standard libraries */
+  /DISCARD/ :
+  {
+    libc.a ( * )
+    libm.a ( * )
+    libgcc.a ( * )
+  }
+
+  .ARM.attributes 0 : { *(.ARM.attributes) }
+}
+
+```
+
+#### 内存映射
+
+一般内存映射文件都在SEGGER Embedded Studio 的目录下，当然你要安装了对应的固件包
+
+```
+C:\Users\你的用户名\AppData\Local\SEGGER\SEGGER Embedded Studio\v3\packages\STM32H7xx\XML
+```
+
+一般类似于这样，有了这个以后，编译才能看到对应的内存和flash各使用了多少
+
+```xml
+<!DOCTYPE Board_Memory_Definition_File>
+<root name="STM32H742AGIx">
+  <MemorySegment name="ITCM_RAM1" start="0x00000000" size="0x00010000" access="Read/Write" />
+  <MemorySegment name="FLASH1" start="0x08000000" size="0x00080000" access="ReadOnly" />
+  <MemorySegment name="FLASH2" start="0x08100000" size="0x00080000" access="ReadOnly" />
+  <MemorySegment name="DTCM_RAM1" start="0x20000000" size="0x00020000" access="Read/Write" />
+  <MemorySegment name="AXI_RAM1" start="0x24000000" size="0x00060000" access="Read/Write" />
+  <MemorySegment name="RAM1" start="0x30000000" size="0x00008000" access="Read/Write" />
+  <MemorySegment name="RAM2" start="0x30020000" size="0x00004000" access="Read/Write" />
+  <MemorySegment name="RAM3" start="0x38000000" size="0x00010000" access="Read/Write" />
+  <MemorySegment name="Backup_RAM1" start="0x38800000" size="0x00001000" access="Read/Write" />
+</root>
+
+```
+
+![image-20220325171316135](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220325171316135.png)
+
+但是由于这个是静态的，带操作系统的部分自然就看不到了，需要结合操作系统实时看了。
+
+
+
+## 编译生成
+
+### 编译加入git commit 信息
 
 #### makefile.init
 
@@ -274,7 +491,7 @@ const char * build_git_author= "Author: Pawel Krzyzanowski <pl.krzyzanowski@gmai
 以上是基于可以直接调用sh的方式，还有一种是bat的方式，这种就不需要修改什么环境变量，是个人都能用，我也放在下面，类似的调用生成version.c
 
 ```bat
-for /F %%i in ('git describe --tags --always --abbrev^=8 HEAD') do (set tagid=%%i)
+for /F %%i in ('git describe --tags --always --abbrev^=0 HEAD') do (set tagid=%%i)
 echo %tagid%
 set num=%tagid:~-3%
 echo #include "version.h" > ./version.c
@@ -287,9 +504,9 @@ echo.>> ./version.c
 
 
 
-## 生成bin
+### 生成bin
 
-默认是生成hex的，不过我这边一直用bin，所以修改一下生成bin文件，然后将这个bin文件对应重命名
+默认是生成hex的，不过我这边一直用bin，所以修改一下生成bin文件，然后将这个bin文件对应重命名，这里结合了上面的commit进行重命名
 
 ```sh
 "$(ToolChainDir)/arm-none-eabi-objcopy" -O binary "$(ProjectDir)/$(RelTargetPath)" "$(ProjectDir)/test.bin" && $(ProjectDir)/rename.bat $(ProjectDir)
@@ -297,12 +514,12 @@ echo.>> ./version.c
 
 
 
-下面是`rename.bat`，这里结合了git ，直接重命名为与tag相关的名称
+下面是`rename.bat`，直接重命名为与tag相关的名称
 
 ```bat
 @echo off
 :: echo %1%
-for /F %%i in ('git describe --tags --always --abbrev^=8 HEAD') do (set tagid=%%i)
+for /F %%i in ('git describe --tags --always --abbrev^=0 HEAD') do (set tagid=%%i)
 :: echo %tagid%
 set "path=%1%
 set "path=%path:/=\%"
@@ -325,6 +542,18 @@ SES支持一些宏定义，可能有的项目需要，可以直接用
 一种是system一种是build，都可以直接利用。
 
 还有一种是自定义的，但是这个值都是相当于是个text，没办法给你执行脚本之类的东西。
+
+
+
+## debug
+
+#### Restricted memory range
+
+debug的时候，有可能你看变量显示的是 `Restricted memory range` 看不到具体值是多少，因为这部分变量要么是动态申请的，要么是某些内部寄存器的值，直接不给你看，工程的默认选项是只显示默认的本地变量或者是在已知内存范围内的变量。但是可以通过打开`Restricted memory range`来强行看到。
+
+> https://forum.segger.com/index.php/Thread/5797-SOLVED-Restricted-memory-range-in-watch-window/
+
+![image-20220325160814900](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220325160814900.png)
 
 
 
