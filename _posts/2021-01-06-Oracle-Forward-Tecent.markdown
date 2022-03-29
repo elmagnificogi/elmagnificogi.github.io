@@ -1,9 +1,9 @@
 ---
 layout:     post
 title:      "Oracle用腾讯云中转"
-subtitle:   "轻量云，v2ray，安全组"
+subtitle:   "轻量云，v2ray，安全组，转发"
 date:       2021-01-06
-update:     2021-10-27
+update:     2022-03-29
 author:     "elmagnifico"
 header-img: "img/drone-head-bg.jpg"
 catalog:    true
@@ -125,12 +125,36 @@ service iptables start
 
 
 
+如果是下面的提示，那是没安装iptables，重装一下吧
+
+```
+Unit iptables.service could not be found
+```
+
+重装
+
+```
+yum install iptables-services
+sudo systemctl enable iptables
+sudo systemctl start iptables
+```
+
+
+
 #### firewall 中转
 
 先检查运行状态，firewall不运行的时候是没用的
 
 ```
 firewall-cmd --state
+```
+
+
+
+查看已经开启的转发的端口和ip
+
+```
+firewall-cmd --zone=public --list-forward-ports
 ```
 
 
