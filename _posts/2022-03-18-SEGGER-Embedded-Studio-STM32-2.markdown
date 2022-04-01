@@ -557,6 +557,28 @@ debug的时候，有可能你看变量显示的是 `Restricted memory range` 看
 
 
 
+## 代码显示问题
+
+#### tab显示
+
+默认tab显示的是8个空格，非常蠢，修改成4个，同时建议关闭Tab的使用，用空格就好了
+
+![image-20220401164323946](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220401164323946.png)
+
+
+
+建议勾选上清除tab的保存，每次自动将tab替换成space，让这个世界永无tab吧。
+
+![image-20220401164520157](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220401164520157.png)
+
+
+
+代码格式化这里也是8个，修改为4个
+
+![image-20220401164403099](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220401164403099.png)
+
+
+
 ## Summary
 
 差不多把可能遇到的问题都解决了，整个自动化的流程总算是好了点。
