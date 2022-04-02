@@ -328,6 +328,12 @@ csgo.exe
 
 
 
+**当前建议使用1.9.1版本，之后的版本多少都有点毛病**
+
+> https://github.com/netchx/netch/releases/tag/1.9.1
+
+
+
 ## 源码仓库说明
 
 源码是基于我当时fork的为基础来说的
