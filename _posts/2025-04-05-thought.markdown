@@ -2,8 +2,8 @@
 layout:     post
 title:      "游戏设定"
 subtitle:   "无限，代入感"
-date:       2022-04-05
-update:     2022-04-05
+date:       2025-04-05
+update:     2025-04-05
 author:     "elmagnifico"
 header-img: "img/Raspberrypi-head-bg.png"
 catalog:    true
