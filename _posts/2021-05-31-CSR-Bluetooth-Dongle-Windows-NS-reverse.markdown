@@ -9,7 +9,7 @@ header-img: "img/mqtt.jpg"
 catalog:    true
 mathjax:    false
 tags:
-    - NS
+    - Nintendo Switch
     - Crack
 ---
 

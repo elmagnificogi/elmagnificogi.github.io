@@ -9,7 +9,7 @@ header-img: "img/pen-head-bg.jpg"
 catalog:    true
 mathjax:    false
 tags:
-    - NS
+    - Nintendo Switch
 ---
 
 ## Foreword

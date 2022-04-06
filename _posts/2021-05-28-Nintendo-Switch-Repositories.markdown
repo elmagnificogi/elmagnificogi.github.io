@@ -9,7 +9,7 @@ header-img: "img/Raspberrypi-head-bg.png"
 catalog:    true
 mathjax:    false
 tags:
-    - NS
+    - Nintendo Switch
 ---
 
 ## Foreword
