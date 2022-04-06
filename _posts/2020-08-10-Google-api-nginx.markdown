@@ -8,7 +8,7 @@ header-img: "img/desk-head-bg.jpg"
 catalog:    true
 tags:
     - VPS
-    - google
+    - Proxy
 ---
 
 ## Foreword
