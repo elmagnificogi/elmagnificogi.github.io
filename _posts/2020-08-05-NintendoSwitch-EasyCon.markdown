@@ -8,8 +8,7 @@ author:     "elmagnifico"
 header-img: "img/Raspberrypi-head-bg.png"
 catalog:    true
 tags:
-    - NintendoSwitch
-    - NS
+    - Nintendo Switch
     - EasyCon
 ---
 

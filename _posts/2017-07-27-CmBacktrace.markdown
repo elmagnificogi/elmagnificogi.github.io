@@ -8,7 +8,8 @@ header-img: "img/git-head-bg.jpg"
 catalog:    true
 tags:
     - C/C++
-    - firmware
+    - STM32
+    - Embedded
 ---
 
 ## Foreword

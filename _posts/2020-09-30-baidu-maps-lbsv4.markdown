@@ -8,7 +8,8 @@ header-img: "img/baidu.jpg"
 catalog:    true
 tags:
     - JavaScript
-    - baidu
+    - Baidu
+    - Map
 ---
 
 ## Forward
