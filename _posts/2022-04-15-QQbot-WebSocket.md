@@ -5,7 +5,7 @@ subtitle:   "WebSocket，aiohttp"
 date:       2022-04-15
 update:     2022-04-15
 author:     "elmagnifico"
-header-img: "img/drone.jpg"
+header-img: "img/drone-head-bg.jpg"
 catalog:    true
 tags:
     - QQ
