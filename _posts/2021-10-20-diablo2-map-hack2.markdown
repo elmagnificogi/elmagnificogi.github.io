@@ -3,7 +3,7 @@ layout:     post
 title:      "我的暗黑2重置版地图插件"
 subtitle:   "maphack,hackmap,D2RAssist"
 date:       2021-10-20
-update:     2021-10-25
+update:     2022-04-16
 author:     "elmagnifico"
 header-img: "img/zerotier.jpg"
 catalog:    true
@@ -141,6 +141,12 @@ tags:
 - 同步更新
 - 自动地址偏移探测
 
+2022.4.16.12.55
+
+- 更新到最新版
+
+> https://github.com/elmagnificogi/MapAssist/releases/tag/release%2FelmagnificoV1
+
 
 
 ## 已知问题
@@ -152,19 +158,19 @@ tags:
 
 
 
-## 游戏更新无法使用
+## ~~游戏更新无法使用~~
 
-由于内存自动扫描无法正常工作，所以游戏往往更新的时候没办法正常使用，想要偷用一下也是有方法的，但是**风险比较高，不推荐使用**。
+~~由于内存自动扫描无法正常工作，所以游戏往往更新的时候没办法正常使用，想要偷用一下也是有方法的，但是**风险比较高，不推荐使用**。~~
 
 
 
-下载老客户的的exe，直接覆盖暗黑2源文件中的exe
+~~下载老客户的的exe，直接覆盖暗黑2源文件中的exe~~
 
-> https://github.com/elmagnificogi/D2RAssist/releases/tag/OLD_Client
+> ~~https://github.com/elmagnificogi/D2RAssist/releases/tag/OLD_Client~~
 
-地图插件就直接用老的就行了。
+~~地图插件就直接用老的就行了。~~
 
-但是这个方法只是临时用一下，不要长期使用，**很容易被检测，被封禁**
+~~但是这个方法只是临时用一下，不要长期使用，**很容易被检测，被封禁~~**
 
 
 
@@ -184,7 +190,7 @@ tags:
 
 ## Summary
 
-后续更新再说
+不定期更新
 
 
 
