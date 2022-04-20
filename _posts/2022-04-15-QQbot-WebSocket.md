@@ -3,7 +3,7 @@ layout:     post
 title:      "QQ频道botpy框架解析"
 subtitle:   "WebSocket，aiohttp"
 date:       2022-04-15
-update:     2022-04-15
+update:     2022-04-20
 author:     "elmagnifico"
 header-img: "img/drone-head-bg.jpg"
 catalog:    true
@@ -59,7 +59,7 @@ HTTP本身的设计是基于无状态的，老HTTP，一般都认为是不持久
 
 WebSocket，看名字，就能看出来，其实是基于Web的Socket，本质上就是使用Socket的接口，然后在Web上进行一次封装后的协议。可以维持长连接、支持全双工通信，本身协议内容就是加密后的，并且可以在握手阶段就能识别两者是否互相兼容。
 
-同时WebSocket也继承了http协议里的header、respond等基础内容，那么这就让WebSocket可以使用类似与https的设计，从而在设计层面，更容易理解。
+同时WebSocket在握手的时候其实就是通过HTTP完成的，请求进行了协议升级，之后才是按照WebSocket的流程走。
 
 
 
@@ -138,7 +138,7 @@ if __name__ == '__main__':
 1.通过解析YAML获取到bot和用户的输入
 2.注册机器人事件
 	2.1 ws建立连接，处理所有连接回流的信息
-	2.2 ws定期心跳检测
+	2.2 ws定期心跳回传，timeout会自动重连
 3.监听事件，处理，所有事件是由ws的信息中判断触发的
 	3.1 监听中，对消息进行回复等是通过aiohttp异步完成
 ```
@@ -159,6 +159,10 @@ if __name__ == '__main__':
 
 
 
+bot本身是允许多链接接入的，也就是同时启动多个可以，不过有个上限，后面的逻辑怎么处理是使用者的问题了。如果量大，要负载均衡需要自己设计一下。
+
+
+
 # Quote
 
 > https://www.bilibili.com/video/BV1B4411L7PF?p=5
@@ -170,3 +174,5 @@ if __name__ == '__main__':
 > https://security.tencent.com/index.php/blog/msg/119
 >
 > https://bot.q.qq.com/wiki/develop/api/#%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B
+>
+> https://blog.csdn.net/qq_50216270/article/details/117875950
