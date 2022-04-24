@@ -37,8 +37,53 @@ mirai暴露的接口，则是通过插件来实现的，插件则是可以通过
 
 下载对应系统的版本，他这个安装包逻辑比较奇怪，安装包在哪里，就安装在哪个文件夹了，所以先把安装包放到你想要安装的目录中，然后再运行
 
-```
+```bash
 ./mcl-installer-1.0.4-linux-amd64
+
+iTXTech MCL Installer 1.0.4 [OS: linux]
+Licensed under GNU AGPLv3.
+https://github.com/iTXTech/mcl-installer
+
+iTXTech MCL and Java will be downloaded to "/root"
+
+Checking existing Java installation.
+Error occurred while checking Java installation
+
+Would you like to install Java? (Y/N, default: Y) Y
+Java version (8-17, default: 11): 
+JRE or JDK (1: JRE, 2: JDK, default: JRE): 
+Binary Architecture (default: x64): 
+Fetching file list for jre version 11 on x64
+Start Downloading: https://mirrors.tuna.tsinghua.edu.cn/AdoptOpenJDK/11/jre/x64/linux/OpenJDK11U-jre_x64_linux_hotspot_11.0.14.1_1.tar.gz
+Downloading: 42434630/42434630
+Extracting jdk-11.0.14.1+1-jre/legal/jdk.management/ADDITIONAL_LICENSE_INFOOFOOE_INFONFONSE_INFO
+Testing Java Executable: /root/java/bin/java
+openjdk version "11.0.14.1" 2022-02-08
+OpenJDK Runtime Environment Temurin-11.0.14.1+1 (build 11.0.14.1+1)
+OpenJDK 64-Bit Server VM Temurin-11.0.14.1+1 (build 11.0.14.1+1, mixed mode)
+
+Fetching iTXTech MCL Package Info from https://repo.itxtech.org/org/itxtech/mcl/package.json
+Mirai Console Loader 公告栏
+
+如果在图片上传的时候遇到问题请与我们联系 (需要提供图片文件源本)
+`- 如 Unsupported image type for ExternalResource *
+`  considering use gif/png/bmp/jpg format.
+`- Tracker: https://github.com/mamoe/mirai/issues/new/choose
+
+常用资源整合
+`- https://mirai.mamoe.net/topic/653
+ 
+如果无法获取Mirai-Repo信息, 例如启动时出现JSON解析错误
+请升级到MCL 2.0 Beta并将 config.json 中的 Mirai-Repo 更改为 https://repo.itxtech.org
+
+The latest stable version of iTXTech MCL is 2.0.0
+Would you like to download it? (Y/N, default: Y) Y
+Start Downloading: https://maven.aliyun.com/repository/public/org/itxtech/mcl/2.0.0/mcl-2.0.0.zip
+Downloading: 559848/559848
+Extracting [5/5] mcl.jarmd
+MCL startup script has been updated.
+Use "./mcl" to start MCL.
+
 ```
 
 默认安装即可，如果是windows版本可能需要注意一下，默认安装的java可能不能用，缺少环境变量，需要手动配置一下。已经安装了java的不要重复安装，也会出现java和javac版本不一致报错。
@@ -49,7 +94,7 @@ mirai暴露的接口，则是通过插件来实现的，插件则是可以通过
 
 安装好以后就可以启动Mirai Console Loader，首次启动会安装一堆
 
-```
+```bash
 ./mcl
 ```
 
@@ -65,14 +110,42 @@ mirai暴露的接口，则是通过插件来实现的，插件则是可以通过
 
 退出前面安装的Mirai Console Loader，再运行
 
-```
+```bash
 ./mcl --update-package net.mamoe:mirai-api-http --channel stable-v2 --type plugin
+  15:41:56 [INFO] iTXTech Mirai Console Loader version 2.0.0-7f867cc
+  15:41:56 [INFO] https://github.com/iTXTech/mirai-console-loader
+  15:41:56 [INFO] This program is licensed under GNU AGPL v3
+  15:41:56 [INFO] Package "net.mamoe:mirai-api-http" has been added.
 ```
 
-安装完成以后再启动
+再启动
 
-```
+```bash
 ./mcl
+
+# 这种提示是正常启动了http
+2022-04-24 15:51:02 I/http adapter: >>> [http adapter] is listening at http://localhost:8080
+2022-04-24 15:51:02 I/Mirai HTTP API: Http api server is running with verifyKey: INITKEYGlxLgWRM
+2022-04-24 15:51:02 I/Mirai HTTP API: adaptors: [http]
+2022-04-24 15:51:02 I/Mirai HTTP API: ********************************************************
+2022-04-24 15:51:02 I/MCL Addon: iTXTech MCL Version: 2.0.0-7f867cc
+2022-04-24 15:51:02 W/MCL Addon: iTXTech Soyuz ????Soyuz MCL Handler ?????
+2022-04-24 15:51:02 I/main: 2 plugin(s) enabled.
+2022-04-24 15:51:02 I/main: mirai-console started successfully.
+```
+
+
+有可能会出现下面的报错，这种就是网络不行，下不到包
+
+```bash
+  15:42:20 [INFO] Verifying "net.mamoe:mirai-console" v2.10.1
+  15:42:20 [INFO] Verifying "net.mamoe:mirai-console-terminal" v2.10.1
+  15:42:20 [INFO] Verifying "net.mamoe:mirai-core-all" v2.10.1
+  15:42:21 [INFO] Verifying "org.itxtech:mcl-addon" v2.0.2
+  15:42:21 [INFO] Verifying "net.mamoe:mirai-api-http"
+  15:42:21 [INFO] Updating "net.mamoe:mirai-api-http" to v2.5.0
+  15:42:21 [ERROR] Cannot download package "net.mamoe:mirai-api-http"
+  15:42:21 [ERROR] The local file "net.mamoe:mirai-api-http" is still corrupted, please check the network.
 ```
 
 
@@ -89,7 +162,7 @@ mirai暴露的接口，则是通过插件来实现的，插件则是可以通过
 
 再次重新启动`mcl`，就能看到类似下面的内容，说明安装成功
 
-```
+```bash
 2021-08-03 22:02:08 W/net.mamoe.mirai-api-http: USING INITIAL KEY, please edit the key
 2021-08-03 22:02:08 I/Mirai HTTP API: ********************************************************
 2021-08-03 22:02:08 I/http adapter: >>> [http adapter] is listening at http://localhost:8080
@@ -102,7 +175,7 @@ mirai暴露的接口，则是通过插件来实现的，插件则是可以通过
 
 退出mcl，修改配置文件`config/net.mamoe.mirai-api-http/setting.yml`，修改成如下内容，使用`websocket`，verifykey也换成`yirimirai`，这个可以自定义，然后端口使用`8080`
 
-```
+```yaml
 adapters:
   - ws
 debug: true
@@ -119,7 +192,7 @@ adapterSettings:
 
 重启`mcl`，就能看到类似下面的内容，这个时候`Mirai HTTP API`接口就正常工作了
 
-```
+```bash
 2021-08-03 22:46:18 I/Mirai HTTP API: ********************************************************
 2021-08-03 22:46:18 I/ws adapter: >>> [ws adapter] is listening at ws://localhost:8000
 2021-08-03 22:46:18 I/Mirai HTTP API: Http api server is running with verifyKey: yirimirai
@@ -139,27 +212,68 @@ login 你的qq qq密码
 
 登陆本质上是模拟安卓端的登陆，所以很多操作可能需要这个qq已经登陆的移动端来处理。
 
+正常登陆就会有下面的提示了
+
+```bash
+2022-04-24 15:58:01 I/Bot.2843887718: Login successful
+2022-04-24 15:58:01 I/Bot.2843887718: Saved account secrets to local cache for fast login.
+2022-04-24 15:58:01 I/Bot.2843887718: Login successful.
+2022-04-24 15:58:04 V/Bot.2843887718: Event: BotOnlineEvent(bot=Bot(2843887718))
+2022-04-24 15:58:04 I/Bot.2843887718: Bot login successful.
+```
+
+所有消息就能正常get到了
+
+
+
 登陆可能会有2个问题要处理，一个是异地登陆或者说异设备登陆造成的，需要手动解锁，一个是登陆时弹出的验证码需要解决
 
 
 
 ### 设备锁
 
+windows会有一个弹窗
+
 ![device-verify](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/device-verify-51685adea6b4490bb6bdcb91f338b849.png)
 
-这种情况下，把对应的url发给手机端去打开，然后在页面中选择登陆即可
+linux下是命令行提示
+
+```bash
+2022-04-24 15:56:17 I/Bot.2843887718: [SliderCaptcha] ?????...
+2022-04-24 15:56:17 I/Bot.2843887718: [SliderCaptcha] Submitting...
+2022-04-24 15:56:17 I/Bot.2843887718: [UnsafeLogin] ?????????????????????? QQ ????? https://ti.qq.com/safe/verify?_wv=2&_wwv=128&envfrom=device-lock&uin=2843887718&sig=Zsd7vkkka2648pjuPn2QRhScepokvhPfn43vgzhHcIYOQmiIznP0dXARP41Maxawi%2Bs7k1s6I1Jso%2BjD%2FPC8UI9i%2BaHZo4aInAZQTSjIVZkK%2F%2BX6bApc9ykDpLiu7A9f ?????????????
+2022-04-24 15:56:17 I/Bot.2843887718: [UnsafeLogin] Account verification required by the server. Please open https://ti.qq.com/safe/verify?_wv=2&_wwv=128&envfrom=device-lock&uin=2843887718&sig=Zsd7vkkka2648pjuPn2QRhScepokvhPfn43vgzhHcIYOQmiIznP0dXARP41Maxawi%2Bs7k1s6I1Jso%2BjD%2FPC8UI9i%2BaHZo4aInAZQTSjIVZkK%2F%2BX6bApc9ykDpLiu7A9f in QQ browser and complete challenge, then type anything here to submit.
+```
+
+这种情况下，把对应的url发给手机端去打开，然后在页面中选择登陆即可。
 
 
 
 ### 滑动验证
 
-首先需要下载一个app，TxCaptchaHelper，主要就是显示手机登陆的时候弹出的滑动验证。
+```bash
+> login 2843887718 elmagnifico93
+2022-04-24 15:54:03 W/stderr: ERROR StatusLogger Log4j2 could not find a logging implementation. Please add log4j-core to the classpath. Using SimpleLogger to log to the console...
+2022-04-24 15:54:04 I/Bot.2843887718: [SliderCaptcha] ???????, ?????????????????, ???????? ticket
+2022-04-24 15:54:04 I/Bot.2843887718: [SliderCaptcha] Slider captcha required. Please solve the captcha with following link. Type ticket here after completion.
+2022-04-24 15:54:04 I/Bot.2843887718: [SliderCaptcha] @see https://github.com/project-mirai/mirai-login-solver-selenium
+2022-04-24 15:54:04 I/Bot.2843887718: [SliderCaptcha] @see https://docs.mirai.mamoe.net/mirai-login-solver-selenium/
+2022-04-24 15:54:04 I/Bot.2843887718: [SliderCaptcha] ???? TxCaptchaHelper ??? TxCaptchaHelper ???????
+2022-04-24 15:54:04 I/Bot.2843887718: [SliderCaptcha] Or type `TxCaptchaHelper` to resolve slider captcha with TxCaptchaHelper.apk
+2022-04-24 15:54:04 I/Bot.2843887718: [SliderCaptcha] Captcha link: https://ssl.captcha.qq.com/template/wireless_mqq_captcha.html?style=simple&aid=16&uin=2843887718&sid=449214629753979420&cap_cd=4m9m-q09BBEHPFQ6BliHBSwAlBfx64w_sLO5mOhIWe_E2O_KPIZLsw**&clientype=1&apptype=2
+```
+
+这里复制`Captcha link`的链接到`TxCaptchaHelper`
+
+首先需要下载一个app，`TxCaptchaHelper`，主要就是显示手机登陆的时候弹出的滑动验证。
 
 > https://github.com/mzdluo123/TxCaptchaHelper/releases
 
-然后Mirai中会提示你对应的请求码，输入之后会弹出滑动验证，验证ok即可。
+然后Mirai中会提示你对应的`请求码`或者是`Captcha link`，输入之后会弹出滑动验证，验证ok即可。
 
+![image-20220424160136720](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220424160136720.png)
 
+成功以后会获得一个`ticket`，继续在命令行输入`ticket`，然后回车
 
 完成以上2项，一般来说就可以看到`mcl`提示登陆成功了
 
@@ -213,7 +327,7 @@ pip install yiri-mirai
 
 在前面QQ登陆以后，可以尝试Demo，私聊机器人时发送你好，会得到对应的回复。
 
-```
+```python
 from mirai import Mirai, WebSocketAdapter, FriendMessage, Plain
 
 if __name__ == '__main__':
