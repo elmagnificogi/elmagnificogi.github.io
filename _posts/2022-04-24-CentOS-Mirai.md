@@ -2,8 +2,8 @@
 layout:     post
 title:      "CentOS安装Mirai准备"
 subtitle:   "nonebot2，mcl，中文乱码"
-date:       2022-04-25
-update:     2022-04-25
+date:       2022-04-24
+update:     2022-04-24
 author:     "elmagnifico"
 header-img: "img/line-head-bg.jpg"
 catalog:    true
@@ -15,7 +15,18 @@ tags:
 
 ## Foreword
 
-CentOS下强行安装Mirai，可能会遇到很多麻烦的地方，但是最终是可用的，不至于说安不好。
+CentOS下强行安装Mirai，可能会遇到很多麻烦的地方，但是最终是可用的，不至于说安不好。建议先看最后的总结
+
+
+
+#### 安装环境
+
+```bash
+cat /etc/centos-release
+CentOS Linux release 7.9.2009 (Core)
+```
+
+这是基于CentOS7.9，版本的安装指南，算是克服重重阻挠，强行装上了
 
 
 
@@ -210,6 +221,10 @@ python3.9 --version
 Python 3.9.10
 ```
 
+
+
+### nonebot2
+
 同时python3，在国内的VPS是不能直接安装nonebot2的，会出现某个包怎么都下不到
 
 ```bash
@@ -304,7 +319,7 @@ unset http_proxy https_proxy
 
 
 
-### pydantic
+### pygtrie
 
 ```
 Collecting pygtrie
@@ -325,12 +340,32 @@ error: metadata-generation-failed
 ╰─> See above for output.
 ```
 
-如果出现上面的错，不是pygtrie的问题，而是pydantic太老了，需要重新安装一个新版的
+如果出现上面的错，不管怎么pip安装，都会出现报错的情况，只要在国内（翻墙都不行），除非是完全国外的环境就能正常安装。
 
+这里需要手动下载pygtrie的安装包，然后手动安装
+
+> https://pypi.org/project/pygtrie/#files
+
+```bash
+wget https://files.pythonhosted.org/packages/a5/8b/90d0f21a27a354e808a73eb0ffb94db990ab11ad1d8b3db3e5196c882cad/pygtrie-2.4.2.tar.gz
+tar xvf pygtrie-2.4.2.tar.gz 
+cd pygtrie-2.4.2/
+python3.9 setup.py install
+
+running install
+running build
+running build_py
+creating build
+creating build/lib
+generating pygtrie.py -> build/lib
+running install_lib
+copying build/lib/pygtrie.py -> /usr/local/lib/python3.9/site-packages
+byte-compiling /usr/local/lib/python3.9/site-packages/pygtrie.py to pygtrie.cpython-39.pyc
+running install_egg_info
+Writing /usr/local/lib/python3.9/site-packages/pygtrie-2.4.2-py3.9.egg-info
 ```
-pip uninstall pydantic
-pip install pydantic
-```
+
+解决了以上各种问题以后，总算是正常了
 
 
 
@@ -385,7 +420,15 @@ localedef -c -f UTF-8 -i zh_CN zh_CN.utf8
 
 ## Summary
 
+前面在群里说我用CentOS，被群里的小朋友一顿嘲笑，甚至惊为天人。给我莫名其妙了半天，总体来说，原因是CentOS要停止维护了，并且CentOS里有很多依赖库很久都不更新了，这就导致很多程序他们部署都是习惯在ubuntu的设备上，而ubuntu最近版本发的又比较勤，很多相关库都比较新，CentOS的库就很老了。这也就导致他们的工程依赖，在CentOS这里都需要重新编译安装，非常蛋疼。
 
+![image-20220424223654515](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202204242237620.png)
+
+CentOS之前就看到了停止支持的新闻，也没在意，等到被人无情嘲笑，加上我实验了一下，发现CentOS确实不行了。我的VPS基本清一色的CentOS，而V2Ray等很多工具也经常都是优先支持CentOS的，估计日后支持可能会变吧。
+
+
+
+**这里还是推荐直接VPS重装一个新一些版本的Ubuntu，可以省很多事**
 
 
 
@@ -406,3 +449,7 @@ localedef -c -f UTF-8 -i zh_CN zh_CN.utf8
 > https://blog.csdn.net/weixin_44022472/article/details/123668527
 >
 > https://stackoverflow.com/questions/33410577/python-requests-exceptions-sslerror-eof-occurred-in-violation-of-protocol
+>
+> https://wiki.centos.org/zh/About/Product
+>
+> https://blog.csdn.net/gsls200808/article/details/113763603
