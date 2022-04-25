@@ -3,6 +3,7 @@ layout:     post
 title:      "反代谷歌API"
 subtitle:   "Nginx，谷歌地图"
 date:       2020-08-10
+update:     2022-04-25
 author:     "elmagnifico"
 header-img: "img/desk-head-bg.jpg"
 catalog:    true
@@ -69,7 +70,15 @@ lnmp vhost add
 
 会提示输入域名：比如maps.yourdomain.com,其他一堆配置我都直接回车默认跳过了
 
-修改虚拟主机nginx配置文件
+这里配置完成以后，直接重启一下VPS，这个时候nginx是无法正常工作的
+
+```
+reboot
+```
+
+
+
+继续修改虚拟主机nginx配置文件
 
 ```
 cd /usr/local/nginx/conf/vhost/
@@ -78,9 +87,7 @@ vi {maps.your-domain.com你的域名}.conf
 
 #### https
 
-这里开始有分歧了，如果要支持Https就按照下面的来输入，增加一个server,这里需要证书啊什么的都和上面的添加主机有关系。
-
-这里不选用https的原因是因为我还想同时再开一个v2ray ws tls的代理，所以443不能给他反代用，同理如果这里挂了博客或者其他的，那就别用443 https了。
+这里开始有分歧了，如果要支持Https就按照下面的来输入，增加一个server,这里需要证书啊什么的，保证443可以正常工作
 
 ```
 server
@@ -127,6 +134,23 @@ server
 
     }
 ```
+
+
+
+这里可能启动nginx的时候可能会提示这个文件不存在
+
+```
+/usr/local/nginx/conf/ssl/dhparam.pem;
+```
+
+他是通过`openssl`生成的一个自己的密钥交换文件
+
+```
+cd /usr/local/nginx/conf/ssl/
+openssl dhparam -out dhparam.pem 4096
+```
+
+
 
 #### http
 
@@ -249,10 +273,9 @@ systemctl restart nginx
 
 #### 资源占用
 
-- 1c
-- 1g
+cpu日常只有零点几，memory也只有200M左右
 
-基本够用了，虽然我是2g，不过实际使用起来内存占用都不够1g
+1c 1g 基本够用了，虽然我是2g，不过实际使用起来内存占用都不够1g
 
 
 
@@ -264,7 +287,7 @@ systemctl restart nginx
 
 
 
-然后这个是一个佬的反代，偷偷发一下，试过了完全可用
+~~然后这个是一个佬的反代，偷偷发一下，试过了完全可用~~       2022年4月已经不可用了
 
 ```
 https://maps.beeyun.cn/maps/api/js?key=YOUR_GOOGLEMAP_API&callback=initMap&sensor=false
@@ -281,6 +304,8 @@ https://maps.beeyun.cn/maps/api/js?key=YOUR_GOOGLEMAP_API&callback=initMap&senso
 ## Summary
 
 基本就是这些，可能这个反代通过nginx还能再换个端口，不用443也不用80什么的，可能会更方便吧
+
+
 
 ## Quote
 
