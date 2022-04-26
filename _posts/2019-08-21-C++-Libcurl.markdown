@@ -1,9 +1,9 @@
 ---
 layout:     post
 title:      "Visual Studio2017 编译使用libcurl"
-subtitle:   "C++,http"
+subtitle:   "C++,http,/MD,/MT"
 date:       2019-08-21
-update:     2021-02-23
+update:     2022-04-26
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"
 catalog:    true
@@ -225,7 +225,7 @@ curl可以认为是一个命令行工具，经常被脚本啊或者什么其他�
 先确定一下，当前的VS是什么版本的，通过下面的命令查看版本信息，这个是14.1版本，可以认为是14版本的
 
 ```
-nmake -version
+nmake
 ```
 
 ![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/zuhJSvnktBaC2sW.png)
@@ -358,6 +358,8 @@ curl_global_cleanup(curl);
 curl_easy_init()
 ```
 
+
+
 ## /MD /MT
 
 还没完，上面有一个奇怪的地方，基本所有人的教程都是这样的，明明是用的静态编译，但是为什么最后编译出来以后是在/MD模式下进行的编译
@@ -459,6 +461,8 @@ so that nmake can build it from scratch.
 nmake /f Makefile.vc mode=static VC=11 ENABLE_IDN=no ENABLE_SSPI=no DEBUG=no MACHINE=x64 RTLIBCFG=static
 ```
 
+
+
 ## SSL HTTPS
 
 之前的编译都是基于http的，如果要支持https，那么之前编译的是无法正常工作的，会提示不支持协议。
@@ -481,6 +485,8 @@ to connect to servers that no longer support the legacy handshakes and
 algorithms used by those versions. If you will be using curl in one of those
 earlier versions of Windows you should choose another SSL backend like OpenSSL.
 ```
+
+
 
 ## 总结
 
