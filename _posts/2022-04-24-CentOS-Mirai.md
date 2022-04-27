@@ -3,7 +3,7 @@ layout:     post
 title:      "CentOS安装Mirai准备"
 subtitle:   "nonebot2，mcl，中文乱码"
 date:       2022-04-24
-update:     2022-04-24
+update:     2022-04-27
 author:     "elmagnifico"
 header-img: "img/line-head-bg.jpg"
 catalog:    true
@@ -225,7 +225,7 @@ Python 3.9.10
 
 ### nonebot2
 
-同时python3，在国内的VPS是不能直接安装nonebot2的，会出现某个包怎么都下不到
+如果需要使用nonebot2的库，在国内的VPS是不能直接安装nonebot2的，会出现某个包怎么都下不到
 
 ```bash
 python3.9 -m pip install nonebot2
@@ -316,6 +316,8 @@ pip install pyasn1
 ```
 unset http_proxy https_proxy
 ```
+
+如果通过挂代理还是不能正常下载，建议手动单独安装缺少的包，再重新安装`nonebot2`，类似下面
 
 
 

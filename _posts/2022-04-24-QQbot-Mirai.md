@@ -3,7 +3,7 @@ layout:     post
 title:      "QQ机器人Mirai及其相关框架"
 subtitle:   "nonebot2，YiriMirai"
 date:       2022-04-24
-update:     2022-04-24
+update:     2022-04-27
 author:     "elmagnifico"
 header-img: "img/led.jpg"
 catalog:    true
@@ -172,6 +172,10 @@ Use "./mcl" to start MCL.
 ```
 
 
+
+##### 适配YiriMirai
+
+**如果要使用YiriMirai，需要如下修改协议**
 
 退出mcl，修改配置文件`config/net.mamoe.mirai-api-http/setting.yml`，修改成如下内容，使用`websocket`，verifykey也换成`yirimirai`，这个可以自定义，然后端口使用`8080`
 
