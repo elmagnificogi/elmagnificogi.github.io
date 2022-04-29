@@ -3,7 +3,7 @@ layout:     post
 title:      "暗黑2重置版地图显示插件"
 subtitle:   "maphack,hackmap,D2RAssist"
 date:       2021-10-18
-update:     2022-04-16
+update:     2022-04-30
 author:     "elmagnifico"
 header-img: "img/2020.jpg"
 catalog:    true
@@ -19,6 +19,12 @@ tags:
 
 
 
+本篇文章已经过老了，请关注群或者仓库更新
+
+> https://github.com/elmagnificogi/MapAssist
+
+
+
 ## D2RAssist
 
 简单说项目这个D2RAssist，这个项目完成了地图的整体显示。大致原理是首先你得有老版暗黑的客户端，然后运行以前的老版地图解析的一个程序，也就是d2mapapi.exe，它主要用来解析地图，返回数据给显示这边。显示这边具体通过啥手段拿到了当前客户端所在地图和seed，我还没看代码，具体还不知道。
@@ -28,6 +34,8 @@ tags:
  原作者好像不维护了，所以项目换人了
 
 > https://github.com/OneXDeveloper/MapAssist
+
+
 
 
 

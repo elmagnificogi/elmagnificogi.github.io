@@ -3,7 +3,7 @@ layout:     post
 title:      "我的暗黑2重置版地图插件"
 subtitle:   "maphack,hackmap,D2RAssist"
 date:       2021-10-20
-update:     2022-04-16
+update:     2022-04-30
 author:     "elmagnifico"
 header-img: "img/zerotier.jpg"
 catalog:    true
@@ -14,6 +14,12 @@ tags:
 ## Forward
 
 由于时差还有翻译问题，所以我直接独立更新一个D2RAssist，但是同时也实时合并D2RAssist最新的commit。我也能写自己的功能上去。
+
+
+
+本篇文章已经过老了，请关注群或者仓库更新
+
+> https://github.com/elmagnificogi/MapAssist
 
 
 
@@ -145,7 +151,9 @@ tags:
 
 - 更新到最新版
 
-> https://github.com/elmagnificogi/MapAssist/releases/tag/release%2FelmagnificoV1
+2022.4.30.02.20
+
+- 更新到天梯，不用手动选择地图了
 
 
 
