@@ -3,7 +3,7 @@ layout:     post
 title:      "暗黑2重置版地图显示插件"
 subtitle:   "maphack,hackmap,D2RAssist"
 date:       2021-10-18
-update:     2022-04-30
+update:     2022-05-05
 author:     "elmagnifico"
 header-img: "img/2020.jpg"
 catalog:    true
@@ -237,6 +237,10 @@ D2RAssist的作者有数字货币收款，对于赞助者有特殊服务，目�
 
 
 我的暗黑交流群941746977
+
+建议后期配合我的MA_Filter一起使用，效果更好
+
+> https://github.com/elmagnificogi/MA_Filter
 
 ## Quote
 
