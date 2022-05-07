@@ -3,7 +3,7 @@ layout:     post
 title:      "我的暗黑2重置版地图插件"
 subtitle:   "maphack,hackmap,D2RAssist"
 date:       2021-10-20
-update:     2022-04-30
+update:     2022-05-05
 author:     "elmagnifico"
 header-img: "img/zerotier.jpg"
 catalog:    true
@@ -199,6 +199,10 @@ tags:
 ## Summary
 
 不定期更新
+
+建议后期配合我的MA_Filter一起使用，效果更好
+
+> https://github.com/elmagnificogi/MA_Filter
 
 
 

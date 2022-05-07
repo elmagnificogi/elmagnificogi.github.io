@@ -266,6 +266,12 @@ void FLASH_Init(void)
 
 
 
+还有一个办法，修改烧写的设置，取消验证，这样无所谓是否修改Option Byte 都能正常烧写了
+
+![image-20220506161007245](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220506161007245.png)
+
+
+
 ## 常见问题
 
 

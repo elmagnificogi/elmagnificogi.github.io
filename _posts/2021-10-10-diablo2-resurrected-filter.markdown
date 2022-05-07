@@ -3,7 +3,7 @@ layout:     post
 title:      "暗黑2重置版物品过滤"
 subtitle:   "diablo2 resurrected loot filter"
 date:       2021-10-10
-update:     2021-10-25
+update:     2022-05-05
 author:     "elmagnifico"
 header-img: "img/baidu.jpg"
 catalog:    true
@@ -236,6 +236,12 @@ mod解压到暗黑2重置的目录中
 15号：猛增一堆人下载
 
 ![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/wTHRV3lNJQ9z2cY.png)
+
+建议后期配合我的MA_Filter一起使用，效果更好
+
+> https://github.com/elmagnificogi/MA_Filter
+
+
 
 ## Quote
 
