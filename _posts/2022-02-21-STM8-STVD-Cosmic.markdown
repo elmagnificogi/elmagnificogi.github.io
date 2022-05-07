@@ -272,6 +272,65 @@ void FLASH_Init(void)
 
 
 
+#### 命令行批量烧写
+
+在stvp的目录下有一个命令行程序`STVP_CmdLine.exe`，可以用来批量烧写
+
+```
+D:\STMicroelectronics\st_toolset\stvp>STVP_CmdLine.exe -h
+
+STVP_CmdLine version 1.6
+Argument ERROR or unknown argument: -h
+
+Usage:STVP_CmdLine [-BoardName=STxxx] [-Port=xxx] [-ProgMode=xxx] [-Device=STxxx]
+[-Tool_ID=x]|[-NbTools=x] [-version] [-verbose]|[-no_verbose] [-log]|[-no_log] [-loop]|[-no_loop]
+[-help] [-no_progProg] [-no_progData] [-no_progOption] [-progress]|[-no_progress]
+[-warn_protect]|[-no_warn_protect] [-readProg] [-readData] [-readOption]
+[-erase]|[-no_erase] [-blank]|[-no_blank] [-verif]|[-no_verif]
+[-FileProg=fname.hex/s19] [-FileData=fname.hex/s19] [-FileOption=fname.hex/s19]
+With:
+[-BoardName=STxxx] ==========> Programming Tool name (ST-LINK, RLINK, STICE, ...)
+[-Tool_ID=x] ================> ST-LINK Programming Tool ID (0, 1, 2...)
+[-NbTools=x] ================> Number of ST-LINK Tools with same device connected (Tool_ID is automatically incremented)
+[-Port=xxx] =================> Communication Port (USB, LPT1)
+[-ProgMode=xxx] =============> Programming mode or protocol (SWIM, JTAG, SWD)
+[-Device=STxxx] =============> Device name (exact same name as in STVP)
+[-version] ==================> Display version of this application
+[-verbose] ==================> Display messages, warnings, errors
+[-log] ======================> Generate or append Result.log log file
+[-loop] =====================> Loop on actions until 'Space' key hit
+[-progress] =================> Display progress of each action
+[-warn_protect] =============> Message Box if programming Option Byte protection
+[-no_progProg] ==============> Do not program PROGRAM MEMORY (used to verify device from a file)
+[-no_progData] ==============> Do not program DATA MEMORY (used to verify device from a file)
+[-no_progOption] ============> Do not program OPTION BYTE (used to verify device from a file)
+[-readProg] =================> Read PROGRAM MEMORY
+[-readData] =================> Read DATA MEMORY
+[-readOption] ===============> Read OPTION BYTE
+[-erase] ====================> Erase the device (before programming)
+[-blank] ====================> Blank Check the device (before programming)
+[-verif] ====================> Verify the device after programming
+[-FileProg=fname.hex/s19] ===> File name to program PROGRAM MEMORY area (hex or s19)
+[-FileData=fname.hex/s19] ===> File name to program DATA MEMORY area (hex or s19)
+[-FileOption=fname.hex/s19] => File name to program OPTION BYTE area (hex or s19)
+```
+
+
+
+ ![image-20220507172807672](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220507172807672.png)
+
+
+
+简单的批量烧写示例，这里是把固件和对应的optionbyte都一起烧写了，如果不需要去掉就行了
+
+```
+STVP_CmdLine.exe -Port=USB -ProgMode=SWIM -Device=STM8S003F3 -progress -verif -FileProg=./yourfirmware.s19 -FileOption=./youroptionbyte.s19
+```
+
+输入空格，他就会自动开始下一次烧写，还是挺简单的
+
+
+
 ## 常见问题
 
 
