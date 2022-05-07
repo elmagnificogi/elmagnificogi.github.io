@@ -109,6 +109,10 @@ MapAssist 中文版
 
 - 暗金物品的词缀目前无法过滤
 
+
+
+#### 使用示例
+
 我以手斧为例，先选择斧类，然后选择手斧，然后添加一个新规则，启用质量过滤，选择白色和蓝色，然后点击保存，这个时候这条规则就被记录下来了。
 
 ![image-20220507145642688](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202205071456764.png)
@@ -126,6 +130,16 @@ MapAssist 中文版
 剩下就看你对物品的熟悉程度，来应用各种条件的过滤了。当所有过滤都修改或者设置完了，那就导出就行了，会有对应的提示，按操作执行就行了。
 
 ![image-20220507160808897](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202205071608935.png)
+
+#### 合并
+
+选择两个需要合并的过滤，然后打开即可
+
+![image-20220507163815996](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202205071638040.png)
+
+合并完成会显示对应的规则总数，接下来修改或者导出都可以
+
+![image-20220507163849351](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202205071638387.png)
 
 
 
