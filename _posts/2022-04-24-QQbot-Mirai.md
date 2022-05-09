@@ -5,7 +5,7 @@ subtitle:   "nonebot2，YiriMirai"
 date:       2022-04-24
 update:     2022-04-27
 author:     "elmagnifico"
-header-img: "img/led.jpg"
+header-img: "img/play.jpg"
 catalog:    true
 tags:
     - QQ
