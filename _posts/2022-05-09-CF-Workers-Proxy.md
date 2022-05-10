@@ -1,9 +1,9 @@
 ---
 layout:     post
 title:      "Cloud Flare Workers简易反代"
-subtitle:   "maphack,filter,mod"
-date:       2022-05-07
-update:     2022-05-07
+subtitle:   "cf,proxy,nginx"
+date:       2022-05-09
+update:     2022-05-09
 author:     "elmagnifico"
 header-img: "img/mqtt.jpg"
 catalog:    true
