@@ -9,7 +9,7 @@ header-img: "img/line-head-bg.jpg"
 catalog:    true
 tags:
     - QQ
-    - bot
+    - Bot
     - Python
 ---
 

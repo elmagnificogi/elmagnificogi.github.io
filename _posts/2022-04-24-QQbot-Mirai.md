@@ -9,7 +9,7 @@ header-img: "img/play.jpg"
 catalog:    true
 tags:
     - QQ
-    - bot
+    - Bot
     - Python
 ---
 

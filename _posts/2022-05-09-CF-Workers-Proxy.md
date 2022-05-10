@@ -8,7 +8,7 @@ author:     "elmagnifico"
 header-img: "img/mqtt.jpg"
 catalog:    true
 tags:
-    - Game
+    - Proxy
 ---
 
 ## Forward
