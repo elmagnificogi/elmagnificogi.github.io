@@ -78,6 +78,19 @@ python setup.py build_ext --inplace
 
 
 
+#### 路径不能过长
+
+由以上的问题，会发生路径过长的情况，比如本来就在一个复杂路径下了，然后还调用build，就会导致他内部编译自建的目录又会在你当前目录下生成一个当前目录，这个目录相当于直接叠加了一层，路径过长时会出现`无法创建xxx.obj`的情况，移动到简单路径下就完全没有问题了
+
+这是一个简单路径的叠加的情况，如果多套2层直接就出错了，build之后是自动叠加的路径。
+
+```
+F:\Drama_editor\Dmd_drama_editor\Dmd_drama_editor_py\Output_pyd\Dmd\plug-ins\Dmd_drama_editor_py\align_tools\align_tools.c : fatal error C1083: 无法打开编译器生成的文件:“build\temp.win-amd64-2.7\Release\Drama_editor/Dmd_drama_editor/Dmd_drama_editor_py/Output_pyd/Dmd/plug-ins/Dmd_drama_editor_py/align_tools/align_tools.obj”: No such file or directory
+error: command 'D:\\Microsoft Visual Studio 11.0\\VC\\BIN\\amd64\\cl.exe' failed with exit status 1
+```
+
+
+
 ## 解决办法
 
 实际上可以修改cython源码，解决入口函数的问题，从而可以解决这个重名问题，但是我本来也不熟这部分代码，就不想浪费时间。
@@ -233,7 +246,7 @@ setup(
 
 
 
-这里面用的Recycle.exe是一个用来删除文件的exe，可以通过命令行直接调用，比os的remove好用一点，可以替换成对应的删除，主要通过Recycle.exe删除的文件会进回收站，而os和shutil删除的不进入回收站
+这里面用的Recycle.exe是一个用来删除文件的exe，可以通过命令行直接调用，比os的remove好用一点，可以替换成对应的删除，主要通过Recycle.exe删除的文件会进回收站，而os和shutil删除的不进入回收站，这是为了防止发生意外，还能抢救一下
 
 ```python
 def del_file(path_data):
