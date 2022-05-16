@@ -3,7 +3,7 @@ layout:     post
 title:      "我的暗黑2重置版地图插件"
 subtitle:   "maphack,hackmap,D2RAssist"
 date:       2021-10-20
-update:     2022-05-05
+update:     2022-05-16
 author:     "elmagnifico"
 header-img: "img/zerotier.jpg"
 catalog:    true
@@ -20,6 +20,12 @@ tags:
 本篇文章已经过老了，请关注群或者仓库更新
 
 > https://github.com/elmagnificogi/MapAssist
+
+
+
+## 视频
+
+<iframe src="//player.bilibili.com/player.html?aid=341498840&bvid=BV1BR4y1A7Uc&cid=715224439&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width=640 height=480> </iframe>
 
 
 

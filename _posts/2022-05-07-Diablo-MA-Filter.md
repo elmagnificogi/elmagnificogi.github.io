@@ -3,7 +3,7 @@ layout:     post
 title:      "Diablo MapAssist 过滤器"
 subtitle:   "maphack,filter,mod"
 date:       2022-05-07
-update:     2022-05-07
+update:     2022-05-16
 author:     "elmagnifico"
 header-img: "img/pen-head-bg.jpg"
 catalog:    true
@@ -160,6 +160,12 @@ MapAssist 中文版
 ## 快速使用
 
 直接下别人下好的，比如群里，这都是经过验证的，替换，并且重启`MapAssist`生效，进游戏刷就是了。
+
+
+
+## 视频演示
+
+<iframe src="//player.bilibili.com/player.html?aid=981420646&bvid=BV1R44y1u79x&cid=715261625&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width=640 height=480> </iframe>
 
 
 
