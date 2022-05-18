@@ -439,6 +439,20 @@ C:\Users\你的用户名\AppData\Local\SEGGER\SEGGER Embedded Studio\v3\packages
 
 
 
+#### 生成静态库
+
+首先是创建一个library的工程
+
+![image-20220518163907567](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220518163907567.png)
+
+选择对应的Core
+
+![image-20220518163937354](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220518163937354.png)
+
+之后就是添加文件，添加函数之类的基础操作了，直接编译一般都不会报错
+
+
+
 #### 链接静态库
 
 如果要链接静态库，有一些不太一样的地方，首先静态库编译生成必须符合实际
