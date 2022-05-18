@@ -3,7 +3,7 @@ layout:     post
 title:      "使用SEGGER Embedded Studio开发STM32进阶"
 subtitle:   "STM32，IDE"
 date:       2022-03-18
-update:     2022-03-24
+update:     2022-05-18
 author:     "elmagnifico"
 header-img: "img/desk-head-bg.jpg"
 catalog:    true
@@ -436,6 +436,41 @@ C:\Users\你的用户名\AppData\Local\SEGGER\SEGGER Embedded Studio\v3\packages
 ![image-20220325171316135](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220325171316135.png)
 
 但是由于这个是静态的，带操作系统的部分自然就看不到了，需要结合操作系统实时看了。
+
+
+
+#### 链接静态库
+
+如果要链接静态库，有一些不太一样的地方，首先静态库编译生成必须符合实际
+
+![image-20220518162753016](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220518162753016.png)
+
+对应使用的地方，是什么样的类型就选择什么样的类型。
+
+其次是如果是内部gcc直接通过`Standard Libraries Directory`加入即可，不需要额外的命令
+
+![image-20220518162855259](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220518162855259.png)
+
+但是如果是通过外部gcc(`arm-none-eabi-gcc`)，就需要手动指定静态库
+
+![image-20220518163019691](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220518163019691.png)
+
+在`C++ Link Command`中指定路径和文件
+
+```
+-L./libs  #指定静态库路径
+-l:Library.a #指定静态库的文件名
+```
+
+如果有多个静态库，就使用多个即可
+
+之后代码中调用静态库，只需要声明一下即可
+
+```c++
+extern int LibFunc(int Cnt);
+float a = LibFunc(1);
+printf("%f\n",a);
+```
 
 
 
