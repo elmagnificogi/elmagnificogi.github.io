@@ -4,7 +4,7 @@ title:      "APM中的Schedule Starved"
 subtitle:   "嵌入式，驱动，Timeout"
 date:       2017-03-15
 author:     "elmagnifico"
-header-img: "img/Embedded-head-bg.png"
+header-img: "img/Embedded-head-bg.jpg"
 catalog:    true
 tags:
     - 嵌入式

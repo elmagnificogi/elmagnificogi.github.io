@@ -4,7 +4,7 @@ title:      "FreeRTOS Delay Bug"
 subtitle:   "STM32，FreeRTOS"
 date:       2017-07-26
 author:     "elmagnifico"
-header-img: "img/Embedded-head-bg.png"
+header-img: "img/Embedded-head-bg.jpg"
 catalog:    true
 tags:
     - 嵌入式

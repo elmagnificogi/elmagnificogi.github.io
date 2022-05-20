@@ -4,7 +4,7 @@ title:      "Maya QT in VS 2017"
 subtitle:   "UI, helixQtCmd, plugin"
 date:       2018-12-18
 author:     "elmagnifico"
-header-img: "img/python-head-bg.png"
+header-img: "img/python-head-bg.jpg"
 catalog:    true
 tags:
     - QT

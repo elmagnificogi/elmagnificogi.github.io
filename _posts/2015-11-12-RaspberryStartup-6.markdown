@@ -4,7 +4,7 @@ title:      "树莓派启动那些事（六）"
 subtitle:   "linux启动，systemd，unit，target"
 date:       2015-11-12
 author:     "elmagnifico"
-header-img: "img/Raspberrypi-head-bg.png"
+header-img: "img/Raspberrypi-head-bg.jpg"
 tags:
     - RaspberryPi
 ---

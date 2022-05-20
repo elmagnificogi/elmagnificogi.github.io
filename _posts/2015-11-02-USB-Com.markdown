@@ -4,7 +4,7 @@ title:      "嵌入式设备的usb转串口驱动"
 subtitle:   "嵌入式，串口，驱动"
 date:       2015-11-02
 author:     "elmagnifico"
-header-img: "img/Embedded-head-bg.png"
+header-img: "img/Embedded-head-bg.jpg"
 tags:
     - 嵌入式
 ---

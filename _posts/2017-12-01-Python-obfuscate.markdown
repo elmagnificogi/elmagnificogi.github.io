@@ -4,7 +4,7 @@ title:      "Python 混淆"
 subtitle:   "obfuscate"
 date:       2017-12-01
 author:     "elmagnifico"
-header-img: "img/python-head-bg.png"
+header-img: "img/python-head-bg.jpg"
 catalog:    true
 tags:
     - python

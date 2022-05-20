@@ -5,7 +5,7 @@ subtitle:   "Multicast，Broadcast"
 date:       2021-07-03
 update:     2021-07-03
 author:     "elmagnifico"
-header-img: "img/Embedded-head-bg.png"
+header-img: "img/Embedded-head-bg.jpg"
 catalog:    true
 mathjax:    false
 tags:

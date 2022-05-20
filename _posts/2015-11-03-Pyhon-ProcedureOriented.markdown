@@ -4,7 +4,7 @@ title:      "Python学习第一章（面向过程）"
 subtitle:   "Python，变量，函数，数据结构"
 date:       2015-11-03
 author:     "elmagnifico"
-header-img: "img/python-head-bg.png"
+header-img: "img/python-head-bg.jpg"
 tags:
     - python
 ---

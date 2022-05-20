@@ -4,7 +4,7 @@ title:      "字符集与编码"
 subtitle:   "encode,deconde,character-set"
 date:       2017-12-01
 author:     "elmagnifico"
-header-img: "img/python-head-bg.png"
+header-img: "img/python-head-bg.jpg"
 catalog:    true
 tags:
     - python

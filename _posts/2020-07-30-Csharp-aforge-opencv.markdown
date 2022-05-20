@@ -4,7 +4,7 @@ title:      "C# 高效视频采集"
 subtitle:   "Aforge，opencv"
 date:       2020-07-30
 author:     "elmagnifico"
-header-img: "img/python-head-bg.png"
+header-img: "img/python-head-bg.jpg"
 catalog:    true
 tags:
     - C#

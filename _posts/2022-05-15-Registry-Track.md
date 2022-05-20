@@ -5,7 +5,7 @@ subtitle:   "Registry,regedit,监控"
 date:       2022-05-15
 update:     2022-05-15
 author:     "elmagnifico"
-header-img: "img/python-head-bg.png"
+header-img: "img/python-head-bg.jpg"
 catalog:    true
 tags:
     - Game

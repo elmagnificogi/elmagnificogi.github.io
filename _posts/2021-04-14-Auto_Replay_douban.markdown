@@ -4,7 +4,7 @@ title:      "豆瓣自动回复，自动顶帖"
 subtitle:   "超级鹰,验证码识别"
 date:       2021-04-14
 author:     "elmagnifico"
-header-img: "img/Raspberrypi-head-bg.png"
+header-img: "img/Raspberrypi-head-bg.jpg"
 catalog:    true
 tags:
     - python

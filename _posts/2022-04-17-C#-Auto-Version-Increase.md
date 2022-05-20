@@ -5,7 +5,7 @@ subtitle:   "AssemblyInfo，Version"
 date:       2022-04-17
 update:     2022-04-17
 author:     "elmagnifico"
-header-img: "img/Embedded-head-bg.png"
+header-img: "img/Embedded-head-bg.jpg"
 catalog:    true
 tags:
     - C#

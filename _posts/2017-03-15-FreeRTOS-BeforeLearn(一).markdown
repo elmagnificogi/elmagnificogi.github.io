@@ -4,7 +4,7 @@ title:      "FreeRTOS学习准备(一)"
 subtitle:   "嵌入式，FreeRTOS，学习"
 date:       2017-03-15
 author:     "elmagnifico"
-header-img: "img/Embedded-head-bg.png"
+header-img: "img/Embedded-head-bg.jpg"
 catalog:    true
 tags:
     - 嵌入式

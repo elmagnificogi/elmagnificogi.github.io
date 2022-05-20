@@ -4,7 +4,7 @@ title:      "Python PDF to JPEG"
 subtitle:   "Wand, PIL, PyPDF2"
 date:       2017-07-31
 author:     "elmagnifico"
-header-img: "img/python-head-bg.png"
+header-img: "img/python-head-bg.jpg"
 catalog:    true
 tags:
     - python

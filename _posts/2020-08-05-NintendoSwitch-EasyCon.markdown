@@ -5,7 +5,7 @@ subtitle:   "宝可梦，单片机"
 date:       2020-08-05
 update:     2021-04-30
 author:     "elmagnifico"
-header-img: "img/Raspberrypi-head-bg.png"
+header-img: "img/Raspberrypi-head-bg.jpg"
 catalog:    true
 tags:
     - Nintendo Switch

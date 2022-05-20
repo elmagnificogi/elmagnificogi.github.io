@@ -5,7 +5,7 @@ subtitle:   "Switch-Fightstick，auto，AVR USB"
 date:       2019-12-15
 update:     2021-04-30
 author:     "elmagnifico"
-header-img: "img/Raspberrypi-head-bg.png"
+header-img: "img/Raspberrypi-head-bg.jpg"
 catalog:    true
 tags:
     - AVR

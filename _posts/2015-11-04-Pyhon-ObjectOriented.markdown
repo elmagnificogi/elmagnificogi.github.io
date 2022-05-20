@@ -4,7 +4,7 @@ title:      "Python学习第二章（面向对象）"
 subtitle:   "Python,类,import"
 date:       2015-11-04
 author:     "elmagnifico"
-header-img: "img/python-head-bg.png"
+header-img: "img/python-head-bg.jpg"
 tags:
     - python
 ---

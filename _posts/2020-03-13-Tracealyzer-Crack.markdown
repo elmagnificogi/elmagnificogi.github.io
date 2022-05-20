@@ -4,7 +4,7 @@ title:      "Tracealyzer Crack"
 subtitle:   "FreeRTOS，Trace"
 date:       2020-03-13
 author:     "elmagnifico"
-header-img: "img/Embedded-head-bg.png"
+header-img: "img/Embedded-head-bg.jpg"
 catalog:    true
 tags:
     - FreeRTOS

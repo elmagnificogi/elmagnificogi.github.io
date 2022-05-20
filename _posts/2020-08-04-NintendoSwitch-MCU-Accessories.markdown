@@ -5,7 +5,7 @@ subtitle:   "MCU，串口，采集卡，宝可梦"
 date:       2020-08-04
 update:     2021-04-30
 author:     "elmagnifico"
-header-img: "img/Raspberrypi-head-bg.png"
+header-img: "img/Raspberrypi-head-bg.jpg"
 catalog:    true
 tags:
     - Nintendo Switch

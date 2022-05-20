@@ -4,7 +4,7 @@ title:      "C++中坑人的fstream(二)"
 subtitle:   "c/c++，fstream"
 date:       2017-02-18
 author:     "elmagnifico"
-header-img: "img/python-head-bg.png"
+header-img: "img/python-head-bg.jpg"
 catalog:    true
 tags:
     - C++

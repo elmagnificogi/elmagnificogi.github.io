@@ -4,7 +4,7 @@ title:      "USB-Redirector"
 subtitle:   "Tools"
 date:       2017-07-25
 author:     "elmagnifico"
-header-img: "img/Embedded-head-bg.png"
+header-img: "img/Embedded-head-bg.jpg"
 catalog:    true
 tags:
     - Ubuntu

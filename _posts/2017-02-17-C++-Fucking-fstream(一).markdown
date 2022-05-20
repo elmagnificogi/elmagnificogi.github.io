@@ -4,7 +4,7 @@ title:      "C++中坑人的fstream(一)"
 subtitle:   "c/c++，fstream"
 date:       2017-02-17
 author:     "elmagnifico"
-header-img: "img/python-head-bg.png"
+header-img: "img/python-head-bg.jpg"
 catalog:    true
 tags:
     - C++
@@ -31,7 +31,7 @@ Visual Studio 2013
 	subtitle:   "c/c++，fstream"
 	date:       2017-02-17
 	author:     "elmagnifico"
-	header-img: "img/python-head-bg.png"
+	header-img: "img/python-head-bg.jpg"
 	catalog:    true
 	tags:
 	    - C++

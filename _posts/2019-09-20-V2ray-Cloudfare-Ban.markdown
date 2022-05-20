@@ -4,7 +4,7 @@ title:      "V2ray借助Cloudflare使用被墙IP"
 subtitle:   "GF,BAN,WS,vps"
 date:       2019-09-20
 author:     "elmagnifico"
-header-img: "img/Raspberrypi-head-bg.png"
+header-img: "img/Raspberrypi-head-bg.jpg"
 catalog:    true
 tags:
     - VPS

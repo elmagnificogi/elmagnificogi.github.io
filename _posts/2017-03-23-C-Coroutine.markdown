@@ -4,7 +4,7 @@ title:      "协程到底是怎么一回事"
 subtitle:   "嵌入式，FreeRTOS，croutine"
 date:       2017-03-23
 author:     "elmagnifico"
-header-img: "img/Embedded-head-bg.png"
+header-img: "img/Embedded-head-bg.jpg"
 catalog:    true
 tags:
     - 嵌入式

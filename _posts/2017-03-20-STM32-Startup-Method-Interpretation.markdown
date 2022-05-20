@@ -4,7 +4,7 @@ title:      "STM32启动方式分析"
 subtitle:   "嵌入式，boot，STM32"
 date:       2017-03-20
 author:     "elmagnifico"
-header-img: "img/Embedded-head-bg.png"
+header-img: "img/Embedded-head-bg.jpg"
 catalog:    true
 tags:
     - 嵌入式

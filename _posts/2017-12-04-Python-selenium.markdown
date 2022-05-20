@@ -4,7 +4,7 @@ title:      "Python selenium"
 subtitle:   "auto test,Firefox,"
 date:       2017-12-04
 author:     "elmagnifico"
-header-img: "img/python-head-bg.png"
+header-img: "img/python-head-bg.jpg"
 catalog:    true
 tags:
     - python

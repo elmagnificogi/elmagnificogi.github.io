@@ -4,7 +4,7 @@ title:      "Python in VS2017并且使用Pyinstaller打包成exe"
 subtitle:   "Anaconda,VS2017,Pyinstaller"
 date:       2017-07-31
 author:     "elmagnifico"
-header-img: "img/python-head-bg.png"
+header-img: "img/python-head-bg.jpg"
 catalog:    true
 tags:
     - python

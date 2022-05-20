@@ -5,7 +5,7 @@ subtitle:   "无限，代入感"
 date:       2025-04-05
 update:     2025-04-05
 author:     "elmagnifico"
-header-img: "img/Raspberrypi-head-bg.png"
+header-img: "img/Raspberrypi-head-bg.jpg"
 catalog:    true
 tags:
     - Game

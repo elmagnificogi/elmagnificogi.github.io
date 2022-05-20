@@ -4,7 +4,7 @@ title:      "Maya QT MAKE"
 subtitle:   ".pro,makefile"
 date:       2018-12-19
 author:     "elmagnifico"
-header-img: "img/python-head-bg.png"
+header-img: "img/python-head-bg.jpg"
 catalog:    true
 tags:
     - QT

@@ -4,7 +4,7 @@ title:      "Tracealyzer指南和注意事项"
 subtitle:   "FreeRTOS，Trace，setup"
 date:       2020-03-14
 author:     "elmagnifico"
-header-img: "img/Embedded-head-bg.png"
+header-img: "img/Embedded-head-bg.jpg"
 catalog:    true
 tags:
     - FreeRTOS

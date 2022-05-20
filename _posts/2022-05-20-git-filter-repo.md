@@ -5,7 +5,7 @@ subtitle:   "git-filter-repo,BFG Repo-Cleaner"
 date:       2022-05-20
 update:     2022-05-20
 author:     "elmagnifico"
-header-img: "img/Raspberrypi-head-bg.png"
+header-img: "img/Raspberrypi-head-bg.jpg"
 catalog:    true
 tags:
     - Game

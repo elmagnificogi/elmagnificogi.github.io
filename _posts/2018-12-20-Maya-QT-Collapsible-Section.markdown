@@ -4,7 +4,7 @@ title:      "Maya QT 可折叠frame"
 subtitle:   "Qt-Collapsible-Section,WidgetBox"
 date:       2018-12-20
 author:     "elmagnifico"
-header-img: "img/python-head-bg.png"
+header-img: "img/python-head-bg.jpg"
 catalog:    true
 tags:
     - QT

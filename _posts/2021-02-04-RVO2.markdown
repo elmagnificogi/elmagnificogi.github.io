@@ -4,7 +4,7 @@ title:      "RVO2 3d实际应用"
 subtitle:   "碰撞，路径规划"
 date:       2021-02-04
 author:     "elmagnifico"
-header-img: "img/Embedded-head-bg.png"
+header-img: "img/Embedded-head-bg.jpg"
 catalog:    true
 tags:
     - PathFind

@@ -4,7 +4,7 @@ title:      "回调函数"
 subtitle:   "c/c++，callback"
 date:       2017-03-25
 author:     "elmagnifico"
-header-img: "img/python-head-bg.png"
+header-img: "img/python-head-bg.jpg"
 catalog:    true
 tags:
     - C++

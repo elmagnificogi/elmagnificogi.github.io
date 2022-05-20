@@ -5,7 +5,7 @@ subtitle:   "crack,dock,pro controllor"
 date:       2021-05-28
 update:     2021-05-28
 author:     "elmagnifico"
-header-img: "img/Raspberrypi-head-bg.png"
+header-img: "img/Raspberrypi-head-bg.jpg"
 catalog:    true
 mathjax:    false
 tags:

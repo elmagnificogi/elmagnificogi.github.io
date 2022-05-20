@@ -4,7 +4,7 @@ title:      "C++中Enum与array的最后一个逗号"
 subtitle:   "c/c++，enum,array,comma"
 date:       2017-03-13
 author:     "elmagnifico"
-header-img: "img/python-head-bg.png"
+header-img: "img/python-head-bg.jpg"
 catalog:    true
 tags:
     - C++

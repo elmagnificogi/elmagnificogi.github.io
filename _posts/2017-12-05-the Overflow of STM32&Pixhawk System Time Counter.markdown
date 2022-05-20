@@ -4,7 +4,7 @@ title:      "APM与STM32中系统时间计数器溢出"
 subtitle:   "APM，Copter loop，Overflow"
 date:       2017-12-05
 author:     "elmagnifico"
-header-img: "img/Embedded-head-bg.png"
+header-img: "img/Embedded-head-bg.jpg"
 catalog:    true
 tags:
     - 嵌入式

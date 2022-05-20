@@ -5,7 +5,7 @@ subtitle:   "maphack,hackmap,D2RAssist"
 date:       2021-10-31
 update:     2021-10-31
 author:     "elmagnifico"
-header-img: "img/Raspberrypi-head-bg.png"
+header-img: "img/Raspberrypi-head-bg.jpg"
 catalog:    true
 tags:
     - Game
