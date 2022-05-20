@@ -3,7 +3,7 @@ layout:     post
 title:      "开源项目免费获取JetBrains全家桶"
 subtitle:   "github,license"
 date:       2021-05-14
-update:     2021-05-26
+update:     2022-05-21
 author:     "elmagnifico"
 header-img: "img/welding2.jpg"
 catalog:    true
@@ -141,6 +141,22 @@ Certificate used to sign the license is not signed by JetBrains root certifi
 ![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/lTyD93cvtdUOL8b.png)
 
 然后重启一下ide，再激活就正常了。
+
+
+
+## 续签
+
+一般会在到期前2周，给你发送续签的邮件，只要点链接再申请一下就行了，非常简单（然而我没看到邮件错过了）
+
+![image-20220521000011272](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202205210000317.png)
+
+如果忘记续签，其实他也会额外让你用一周，一周后才会真的到期。
+
+
+
+我就是真的到期了，然后才发现没续，于是翻到了邮件，当天立马续签。大概五六个小时以后(可能是他们的早上八点)我就拿到了续签通知，又可以继续白嫖了，美滋滋
+
+![image-20220521000041844](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202205210000890.png)
 
 
 
