@@ -3,6 +3,7 @@ layout:     post
 title:      "Maya C++开发 in VS2017"
 subtitle:   "API, HelloWorld, plugin"
 date:       2017-12-23
+update:     2022-05-20
 author:     "elmagnifico"
 header-img: "img/bg5.jpg"
 catalog:    true
@@ -33,27 +34,27 @@ maya除了可以直接使用MEL和Python的脚本语言（Maya Commands）来开
 
 商城里搜索develope 就能找到2016版以后的开发套件，需要与你开发的版本一一对应，否则可能会有无法解决的错误。
 
-#### MayaPluginWizard
+### MayaPluginWizard
 
 MayaPluginWizard 这个比较简单，就是普通Visual Studio中新建项目时的项目引导，或者说工程模板，帮助你快速建立项目，而与maya相关的配置他都帮你配好了，非常好用。
 
 Visual Studio的版本更新比较快，而maya自然不可能跟上最新版的VS，比如maya2017使用的是vs2012，而maya2018使用的是vs2015，所以经常会遇到问题,使用这种方法,就需要和maya相配套的vs.
 
-###### 使用方法
+#### 使用方法
 
 下载完Maya2017_DEVKIT_Windows之后，解压下面目录中的内容
 
     devkitBase\devkit\pluginwizard\MayaPluginWizard2.0
 
-###### vs2012
+**vs2012**
 
 将顶层目录MayaPluginWizard整个复制到 D:\Microsoft Visual Studio 11.0\VC\VCWizards（你自己的安装路径）
 
-###### vs2017
+**vs2017**
 
 将顶层目录MayaPluginWizard整个复制到 D:\Visual Studio 2017\\VC\VCWizards（你自己的安装路径）
 
-###### vs2012
+**vs2012**
 
 然后将MayaPluginWizard目录下的这三个文件全都放到 D:\Microsoft Visual Studio 11.0\VC\vcprojects 目录下（你自己的安装路径）。
 
@@ -61,7 +62,7 @@ Visual Studio的版本更新比较快，而maya自然不可能跟上最新版的
     MayaPluginWizard.vsz
     MayaPluginWizard.vsdir
 
-###### vs2017
+**vs2017**
 
 然后将MayaPluginWizard目录下的这三个文件全都放到 D:\Visual Studio 2017\Common7\IDE\VC\vcprojects 目录下（你自己的安装路径）。
 
@@ -87,11 +88,11 @@ Visual Studio的版本更新比较快，而maya自然不可能跟上最新版的
 
 然后就能正常编译了,同时使用cout流输出也是会自动输出到 output window,都是正常的
 
-#### Maya Plug-in Tutorials
+### Maya Plug-in Tutorials
 
 MayaPluginWizard 可能vs版本不同或者更新的版本导致不能用,这里用另一种方式，手动配置工程，完全从头开始.
 
-###### 使用方法
+#### 使用方法
 
 > http://blog.josephkider.com/2015/08/20/creating-your-first-maya-plug-in-in-visual-studio/#comment-274
 
@@ -121,7 +122,9 @@ MAYA_PATH,或者是手动修改工程中lib和include的搜索目录.
 
 打开他的工程过程中可能会提示工程版本更新等信息,更新不更新都可以正常运行.
 
-###### Debug
+
+
+### Debug
 
 使用VS直接调试maya插件,需要在工程配置中的Debugging中,切换到远程Windows调试器,然后下面的命令指定到maya.exe的位置,比如:
 
@@ -129,9 +132,13 @@ MAYA_PATH,或者是手动修改工程中lib和include的搜索目录.
 
 附加选项也要选择是.
 
+![Values of set debugging properties](https://i1.wp.com/nickcullen.net/blog/wp-content/uploads/2017/06/propertiesRemoteDebuggerValues.png?resize=504%2C360&ssl=1)
+
 每次开始调试前,一定要确保maya已经打开,并且maya已经加载完成,可以操作为止,否则会报异常.
 
 调试的时候也要切换到远程调试模式下,再按F5.
+
+
 
 ### Cout
 
@@ -153,11 +160,14 @@ std::cerr.set_rdbuf(MStreamUtils::stdErrorStream().rdbuf());
 ```
 
 
+
 ## Summary
 
 自己手动配置maya工程的方式在maya的help中并没有提及,网上能找到的资料都很有限,而AutoDesk论坛上关于VS和maya的问题基本上都是被要求切换到对应的VS版本来解决了,也没有人说具体怎么配置.
 
 上面提到的流定向的问题,在Maya2017配合VS2017无输出的情况下,安装了VS2012版本,而然问题依旧,要解决这个问题最好是使用现成的工程模板或者说是从工程模板里反向找到缺少的设置。
+
+
 
 ## Quote
 
