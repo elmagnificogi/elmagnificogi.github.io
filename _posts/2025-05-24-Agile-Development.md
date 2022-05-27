@@ -2,8 +2,8 @@
 layout:     post
 title:      "回顾我的敏捷流开发"
 subtitle:   "Agile Development,AM"
-date:       2022-05-24
-update:     2022-05-24
+date:       2025-05-24
+update:     2025-05-24
 author:     "elmagnifico"
 header-img: "img/y7.jpg"
 catalog:    true
