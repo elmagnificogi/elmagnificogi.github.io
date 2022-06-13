@@ -9,7 +9,7 @@ header-img: "img/bg2.jpg"
 catalog:    true
 tags:
     - Game
-    - D2R
+    - Diablo
 ---
 
 ## Forward
