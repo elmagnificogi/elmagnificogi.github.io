@@ -9,6 +9,7 @@ header-img: "img/2020.jpg"
 catalog:    true
 tags:
     - Game
+    - Diablo
 ---
 
 ## Forward

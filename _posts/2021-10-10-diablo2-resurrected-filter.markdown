@@ -9,6 +9,7 @@ header-img: "img/baidu.jpg"
 catalog:    true
 tags:
     - Game
+    - Diablo
 ---
 
 ## Forward

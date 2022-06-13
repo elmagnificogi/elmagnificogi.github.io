@@ -9,6 +9,7 @@ header-img: "img/Raspberrypi-head-bg.jpg"
 catalog:    true
 tags:
     - Game
+    - Diablo
 ---
 
 ## Forward

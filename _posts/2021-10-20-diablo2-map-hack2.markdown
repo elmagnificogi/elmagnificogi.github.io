@@ -9,6 +9,7 @@ header-img: "img/zerotier.jpg"
 catalog:    true
 tags:
     - Game
+    - Diablo
 ---
 
 ## Forward
