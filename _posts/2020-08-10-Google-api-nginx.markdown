@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "反代谷歌API"
+title:      "反代谷歌地图API"
 subtitle:   "Nginx，谷歌地图"
 date:       2020-08-10
 update:     2022-04-25
