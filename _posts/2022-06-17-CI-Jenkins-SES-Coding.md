@@ -78,7 +78,7 @@ ubuntu中安装完ses以后，默认的emBuild是没有添加到环境变量中�
 
 首先清空编译残留，然后重新编译
 
-```
+```bash
 /usr/share/segger_embedded_studio_for_arm_6.30/bin/emBuild  -config configName1 ./test.emProject -clean -echo
 /usr/share/segger_embedded_studio_for_arm_6.30/bin/emBuild  -config configName2 ./test.emProject -rebuild -echo
 ```
@@ -99,7 +99,24 @@ ubuntu中安装完ses以后，默认的emBuild是没有添加到环境变量中�
 
 
 
-- 这里遗留了一个小问题，编译是否成功没有判断
+这里遗留了一个小问题，emBuild编译是否成功没有判断，无法直接从返回值里获取到，所以增加了判断
+
+```bash
+bin="test.bin"
+
+cur_config="test1"
+compile_cmd="/usr/share/segger_embedded_studio_for_arm_6.30/bin/emBuild  -config "$cur_config" ./test.emProject -rebuild -echo -verbose"
+#echo $compile_cmd
+ret=`eval $compile_cmd`
+#echo $ret
+if [[ $ret =~ $bin ]]
+then
+	echo "release bin"
+	# push or encrypt bin
+else
+	echo "no bin release"
+fi
+```
 
 
 
@@ -125,11 +142,45 @@ Jenkins这边主要是把路径给过去，然后把token两边填一致，再�
 
 ## release
 
+完整的release.sh 脚本就在这里了
 
+```bash
+bin="test.bin"
+cur_path=$1
+#echo $cur_path 
+cur_tag=`git describe --tags --always --abbrev=0 HEAD`
+
+cur_config="test_config"
+compile_cmd="/usr/share/segger_embedded_studio_for_arm_6.30/bin/emBuild  -config "$cur_config" ./test.emProject -rebuild -echo -verbose"
+#echo $compile_cmd
+ret=`eval $compile_cmd`
+#echo $ret
+if [[ $ret =~ $bin ]]
+then
+	echo "release bin"
+	# push and excrypt
+	python3 ../test_encrypt/bin_encrypt.py $cur_config"("$cur_tag").bin"
+	python3 push.py
+else
+	echo "no bin release"
+fi
+```
+
+
+
+## 遗留问题
+
+首先，就是Jenkins这里没办法反馈每个环节的状态，比如这个代码是编译报错了，还是加密报错了，还是提交报错了，这个CI进度只有启动和完成，中间的部分看不到。
+
+当然可以通过把脚本拆开，分步执行来区分各个环节，但是由于流程比较简单，拆开了又有点蠢，就放着了
+
+
+
+还有一种方式是直接在Jenkins内部执行，安装SES，并且拉取代码，然后运行编译，类似Github，不过这种做成docker img 可能更方便一些
 
 ## Summary
 
-还有一些没写完，后续补充
+后续还更新的话，继续补充
 
 
 
