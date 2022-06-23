@@ -604,6 +604,20 @@ debug的时候，有可能你看变量显示的是 `Restricted memory range` 看
 
 ![image-20220325160814900](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220325160814900.png)
 
+#### 显示外设寄存器
+
+调试的时候希望能看到对应的寄存器的值，如果不是工程模板建立的，可能会发现寄存器就只有CPU相关，其他的寄存器完全不存在
+
+这就需要设置一下寄存器定义文件
+
+![image-20220623175928640](https://s2.loli.net/2022/06/23/VHyZWwtd6MDSNTp.png)
+
+这个文件一般都在对应的packages中，所以要先安装好对应的package，然后才能找到`Registers.xml`
+
+![image-20220623180114366](https://s2.loli.net/2022/06/23/kYxhpm5gdGMKqoz.png)
+
+设置以后才能在调试的时候，打开对应的寄存器
+
 
 
 ## 代码显示问题
@@ -653,4 +667,6 @@ debug的时候，有可能你看变量显示的是 `Restricted memory range` 看
 > https://www.cnblogs.com/dylancao/p/10329407.html
 >
 > https://devzone.nordicsemi.com/f/nordic-q-a/36692/segger-embedded-studio---makefile-alternatives-git-into-a-code-integration
+>
+> https://forum.segger.com/index.php/Thread/5044-SOLVED-Registry-view/
 
