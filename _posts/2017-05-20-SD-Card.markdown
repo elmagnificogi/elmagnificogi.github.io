@@ -1,0 +1,317 @@
+---
+layout:     post
+title:      "SD卡驱动学习"
+subtitle:   "STM32"
+date:       2017-05-20
+author:     "elmagnifico"
+header-img: "img/z5.jpg"
+catalog:    true
+tags:
+    - C/C++
+    - SD
+---
+
+## SDMMC
+
+SDMMC是STM32手册中对于整个SD/SDIO/MMC接口的统称。
+
+然后明白这里SD/SDIO/MMC的概念
+
+- MMC：MultiMediaCard ，即多媒体卡，容量大，耗电少，速率快，广泛用于消费类电子产品中。
+- SD卡：Secure Digital Mermory Card ，即安全数码卡，他是在MMC的基础上发展而来的，主要强调安全性，可以设定存储的使用权限，传输速率比MMC快，同时向前兼容了MMC卡。
+- SDIO卡：SDIO是在SD标准上定义了一种外设接口，它和SD卡规范间的一个重要区别是增加了低速标准。在SDIO卡只需要SPI和1位SD传输模式。低速卡的目标应用是以最小的硬件开销支持低速IO能力。
+- MCI：Multimedia Card Interface ，即多媒体卡接口，上面说的不同卡的接口都属于MCI接口。
+
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/20140901131422343.jpg)
+
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/20140901131700068.jpg)
+
+STM32中的SDMMC接口目前可以支持下面的协议：
+
+- MMC 4.2版本，并且向前兼容 ，支持3种模式：1-bit，4-bit，8-bit
+- SD卡 2.0版本
+- SDIO卡 2.0版本，支持：1-bit，4-bit
+
+目前的SDMMC接口在8-bit模式下最快支持50Mhz的数据传输
+
+SDMMC的总线传输协议基本上是分为两个部分，一个是命令/回应的传输，一个是数据块/流的传输
+
+SDMMC中的D0接口被拉低，表示Busy状态，这个时候，SDMMC是不会发送任何数据到总线上的。
+
+使用SDIO接口的外围设备：
+
+- Wi-Fi Card
+- CMOS Sensor Card
+- GPS Card
+- GSM/GPRS Modem Card
+- Bluetooth Card
+
+SDMMC主要包含两部分，一个是SDMMC适配器，其包含了时钟、命令、数据传输模块，另一个就是APB2接口，通过SDMMC寄存器产生中断和DMA请求信号。
+
+3.31以上版本的MMC卡可以支持1位、4位、8位总线用来数据传输，但是低于这个版本的只能用1位传输，而且初始化命令时必须要用开漏模式。
+
+SD卡和SDIO卡可以用1位或者4位，数据线应该使用推挽模式。
+
+再看一下各种输出模式的特性
+
+- 推挽输出:导通损耗小、效率高。输出既可以向负载灌电流，也可以从负载抽取电流。推拉式输出级既提高电路的负载能力，又提高开关速度。
+- 开漏输出：一般来说，开漏是用来连接不同电平的器件，匹配电平用的，适合于做电流型的驱动,其吸收电流的能力相对强(一般20ma以内)，但是有上升沿延时。
+
+其中所使用的时钟必须满足下面的要求：
+
+PCLK2 > 3 x 总线宽度 ⁄ 32 × SDMMC_CK
+
+我们所使用的是：
+
+PCLK2(108) > 3 x 总线宽度(4) ⁄ 32 × SDMMC_CK(48)
+
+SDMMC适配器又包含了5个子模块：
+- 寄存器
+- 控制单元
+- 命令路径
+- 数据路径
+- 数据队列
+
+其中数据队列(DaTa FIFO)需要详细了解一下。
+
+FIFO 是 32-bit宽 32字的深度
+
+同时这个FIFO是被APB2的总线时钟来控制的，而不是SDMMCCLK。
+
+
+
+## SDMMC的DMA
+
+SDMMC如何使用DMA，其配置也是手册上说明的
+
+- 使能DMA2，清除所有DMA2相关中断
+
+- 根据读写配置DMA2_Stream3或者DMA2_Stream6的通道4。
+
+- DMA传输的目标地址是SDMMC_FIFO的寄存器地址。
+
+- 内存是自增模式，外设非自增，外设和源宽度都是一个字
+
+- 配置硬件流控制(F4版本的不同)
+
+- 配置突发传输量是4节拍，使能DMA，完成配置
+
+如果SDMMC主机要使用DMA必须配置成外设控制流的模式，而且SDMMC只会产生突发的传输，所以外设方面必须要配置成自增突发模式
+
+
+
+## 卡的识别过程
+
+对于不同的卡，识别的过程并不一样。
+
+我们用的是SDHC卡，其实就是高容量的SD卡，在SD 2.0中，规定SDHC是符合新的规范、且容量大于2GB小于等于32GB的SD卡。
+
+所以卡的识别过程中 CMD引脚应该用的就是推挽模式。
+
+1. 激活总线，广播SD_APP_OP_COND (ACMD41)命令
+2. 卡会根据其内容进行响应，不兼容的卡会被挂起
+3. 继续广播ALL_SEND_CID (CMD2)命令给所有激活的卡
+4. 卡会发送他们自己的CIDs，并且进入识别状态
+5. SDMMC发送SET_RELATIVE_ADDR (CMD3)命令给某个激活卡，给了他们一个关联地址，RCA，RCA地址比CID要短，并且通过RCA地址进行寻址操作，有了地址的卡变成了待机状态。关联地址可以修改，寻址地址为最后接收到的地址。
+6. 如果有多块卡的情况下，重复5的步骤，完成全部的卡关联。
+
+CID:Card Identification Number
+CSD:Card Specific Data
+
+
+
+## 基础操作
+
+#### 块写入
+
+写入块的结尾会附加CRC校验，块的大小取决于WRITE_BL_LEN的配置，如果CRC校验失败了，已传输数据不会被写入，SDMMC_D引脚会拉低，如果多块写入，则剩下的块数据都会被忽略。
+
+有一些卡写一块数据，可能需要很长或者是无法预测的时间。
+
+总体来说写入分为两个部分，一个是SDMMC把数据通过DMA发送出去，一个是SD卡接收到数据以后，也要先完成CRC校验，然后开始写入到卡内部块中去，如果写缓冲满了或者是无法接收新块的数据，这个时候SDMMC_D 是拉低的。
+
+主控可以通过SEND_STATUS command (CMD13)命令 来获取当前卡的状态信息，READY_FOR_DATA会显示是否可以接收新数据。卡写入的时候，可以释放片选，这不会中断写入操作，重新选择卡的时候也是会用SDMMC_D 拉低与否来显示当前是否在写入。
+
+#### 块读取
+
+通过CMD17 (READ_SINGLE_BLOCK)命令来初始化单块读取，然后卡会转变为Transfer状态。
+CMD18 (READ_MULTIPLE_BLOCK)命令来多块读取。如果出现了任何错误，会停止数据传输，这时需要主机发送停止传输命令，错误的状态会显示在Response中
+
+流模式只能用于MMC卡，其他卡无法使用。
+
+#### 块擦除
+
+MMC使用的是组擦除，SD使用的是什么并没有说明。
+
+ERASE_GROUP_START(CMD35) 用来设置开始擦除地址
+ERASE_GROUP_END (CMD36) 设置擦除结束地址
+ERASE (CMD38)开始擦除
+
+擦除时也是使用 SDMMC_D 拉低与否来显示当前是否在擦除。
+
+#### 修改总线宽度
+
+通过 SET_BUS_WIDTH (ACMD6)命令可以修改总线宽度。在SDMMC启动以后或者使用GO_IDLE_STATE
+(CMD0)命令 可以使得总线宽度为1位
+
+#### 片选
+
+因为可能包含多个卡，所以可以通过SELECT/DESELECT_CARD (CMD7)命令来片选。
+
+#### 写保护
+
+写保护模式，可以通过CSD中的写保护来设置永久写保护或者临时写保护。当然可以设置部分扇区写
+保护，详细的参考CSD中的组写保护相关设置
+
+还有一种是机械写保护模式，直接拨动SD卡的写保护开关即可。
+
+还有密码保护模式，密码保护模式下可以reset卡，初始化，选卡，查询卡状态，就是不能传输数据。
+密码保护的细节见数据手册
+
+
+
+## 状态寄存器
+
+一共有两个状态寄存器,一个是卡状态寄存器，一个是SD状态寄存器。
+
+**卡状态寄存器**
+
+命令的响应会包括一个32位的卡状态寄存器，没有特殊说明的情况下，卡状态寄存器总是与上一次的命令相关。
+
+**SD状态寄存器**
+
+SD状态寄存器主要是和SD存储卡相关的，512位大小，通过发送 CMD13来获取该寄存器内容。
+
+这里存储的信息多属于SD卡的硬件信息相关，虽然很大，但是有很多内容都是保留，有用的位相对较少。
+
+
+
+## 命令和响应
+
+### 命令
+
+SDMMC提供了两种命令，ACMD和GEN_CMD。其中ACMD是特定命令，相当于是系统级别命令，而GEN_CMD相当于是普通命令。
+
+要使用特殊命令，需要先发APP_CMD (CMD55)，APP_CMD就会被置位，然后发送所需要的ACMD，卡就会将接收到的命令解释为ACMD。如果发的是普通命令，那么APP_CMD就会被清零，执行的也是普通命令。
+
+具体的命令又分为了四种：
+
+- 广播不响应命令
+- 广播响应命令，接收所有卡的响应
+- 点到点命令
+- 点到点数据传输命令
+
+具体命令详见手册中的命令表
+
+
+
+### 响应
+
+响应一共有五种：
+
+- R1 正常响应命令，带CRC校验
+- R1b 类似与R1 但是带有一个可选的Busy的传输信号，可作用于传输的引脚上，应该指的是SDMMC_D0引脚
+- R2 是用来返回CID和CSD寄存器内容的，对应CMD2和CMD10
+- R3 是用来返回OCR寄存器内容的，对应CMD1
+- R4 包含了RCA地址，用来寻址，返回寄存器内容
+- R4b 类似于R4，但是仅SDIO可以使用
+- R5 中断请求
+- R6 仅SDIO可用，对CMD3的响应，主要也是对
+
+
+
+## 硬件流控制
+
+硬件流控制，主要是为了防止FIFO溢出的，当要溢出时，他会停止SDMMC_CK并且冻结SDMMC状态机。
+冻结的前提是状态机的时钟来源是SDMMC_CK
+
+感觉看完了F7手册里关于SDMMC的介绍，还是不是很理解到底要怎么做，虽然有些配置是知道了，
+但是还是有很多东西不明白，还要参考其他文档。
+
+
+
+## SD卡协议
+
+### SD卡初始流程
+
+初始化时使用 1bit 位宽进行初始化
+先进行管脚设置
+然后配置收发的DMA
+设置为busy状态，开始sd卡的参数初始化
+本质上就算之前没有配置1bit位宽在sd卡初始化HAL_SD_InitCard的时候也会被强制成1bit进行初始化
+
+SDMMC：
+先关闭时钟，开启SDMMC电源，然后开启SDMMC时钟，开启后稍微等待几个时钟周期
+
+SD_PowerON，获取SD卡的操作电压，操作时钟等信息
+检测卡的协议类型
+
+初始化结束时 使用 4bit 位宽，进行正常读写操作
+
+库中明确说明了在读写操作之前，应该通过get cardstatus来判断是否可以进行读写操作
+
+
+
+### SD卡状态
+
+一旦数据传输完成，卡将退出数据写状态并进入Programming State(传输成功)或Transfer State（传输失败）。
+如果一个快写操作停止，而且最后一块块长度和CRC是有效的，那么数据可以被操作（programmed）。
+卡可能提供块写缓冲。这意味着在前一块数据被操作时，下一块数据可以传送给卡。如果所有卡写缓冲已满，只要卡在Programming State，DAT0将保持低电平（BUSY）。
+
+也就是说判断是否可以传输不仅仅是看Programming State，还是取决于Transfer State
+在卡被编程（programming）时，禁止参数设置命令。参数设置命令包括：设置块长度（CMD16），擦除块开始(CMD32)和擦除块结束（CMD33）
+
+![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/701087_1350359875Re1r.jpg)
+
+如图所示，SD卡的状态机是这样的，如果在programming状态以后必然会回到Transfer，所以只需要在Transfer判断是否可以继续传输即可
+
+
+
+### 出错处理
+
+SD卡在超时以后的处理
+
+```c++
+/* Clear all the static flags */
+__HAL_SD_CLEAR_FLAG(hsd, SDMMC_STATIC_FLAGS);
+hsd->ErrorCode |= errorstate;
+hsd->State = HAL_SD_STATE_READY;
+return HAL_ERROR;
+
+/* Send stop transmission command in case of multiblock read */
+if(__HAL_SD_GET_FLAG(hsd, SDMMC_FLAG_DATAEND) && (NumberOfBlocks > 1U))
+{
+  if(hsd->SdCard.CardType != CARD_SECURED)
+  {
+    /* Send stop transmission command */
+    errorstate = SDMMC_CmdStopTransfer(hsd->Instance);
+    if(errorstate != HAL_SD_ERROR_NONE)
+    {
+      /* Clear all the static flags */
+      __HAL_SD_CLEAR_FLAG(hsd, SDMMC_STATIC_FLAGS);
+      hsd->ErrorCode |= errorstate;
+      hsd->State = HAL_SD_STATE_READY;
+      return HAL_ERROR;
+    }
+  }
+}
+
+/* Empty FIFO if there is still any data */
+while ((__HAL_SD_GET_FLAG(hsd, SDMMC_FLAG_RXDAVL)))
+{
+  *tempbuff = SDMMC_ReadFIFO(hsd->Instance);
+  tempbuff++;
+
+  if((Timeout == 0U)||((HAL_GetTick()-tickstart) >=  Timeout))
+  {
+    /* Clear all the static flags */
+    __HAL_SD_CLEAR_FLAG(hsd, SDMMC_STATIC_FLAGS);
+    hsd->ErrorCode |= HAL_SD_ERROR_TIMEOUT;
+    hsd->State= HAL_SD_STATE_READY;
+    return HAL_ERROR;
+  }
+}
+```
+
+
+
