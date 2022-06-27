@@ -1,9 +1,9 @@
 ---
 layout:     post
-title:      "防止D2R扫进程-保护隐私"
+title:      "火绒防止D2R扫进程-实测无效"
 subtitle:   "Diablo,Process"
-date:       2024-06-18
-update:     2024-06-18
+date:       2022-06-18
+update:     2022-06-18
 author:     "elmagnifico"
 header-img: "img/z4.jpg"
 catalog:    true
@@ -84,6 +84,8 @@ tags:
 
 ## 测试
 
+主要是通过火绒的工具-火绒剑来监控系统
+
 ![image-20220618205602512](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202206182056557.png)
 可以看到从我开启防护以后，到现在再也没成功读取过了
 
@@ -93,8 +95,12 @@ tags:
 
 ![image-20220618210939179](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202206182109215.png)
 
+**但是多测试几次就发，会漏，D2R依然会锁定文件，不知道为什么有时候读文件会漏过去，甚至阻止了，但是D2R依然读到了文件。**
+
+**此方法无法真正规避读进程和文件的情况**
+
 
 
 ## Summary
 
-当然最后还是要去掉特征码，有几个程序被明显打了标记了，再用的话还是很危险的，所以最好不时换一下，最好是还能自动更新一下，防止被追踪
+最后还是得去掉特征码，D2R就再也不会锁文件了，不然很容易就被判断封号了。
