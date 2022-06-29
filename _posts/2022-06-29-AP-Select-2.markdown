@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "室外高密度AP选择（二）"
-subtitle:   "Diablo,"
+subtitle:   "AP,Router"
 date:       2022-06-29
 update:     2022-06-29
 author:     "elmagnifico"
@@ -14,9 +14,9 @@ tags:
 
 ## Forward
 
-室外远距离AP选择
+室外远距离AP选择，Mikrotik和Ubnt的路由都缺货，要不就是进货周期拉的特别长，所以需要找一些国内的替代品。
 
-又到了一年一度选AP环节
+于是又到了一年一度选AP环节
 
 **信息采集时间：2022.6.29**
 
