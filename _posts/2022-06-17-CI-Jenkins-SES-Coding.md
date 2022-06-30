@@ -3,7 +3,7 @@ layout:     post
 title:      "Jenkins搭建SES嵌入式CI/CD"
 subtitle:   "Diablo,"
 date:       2022-06-17
-update:     2022-06-17
+update:     2022-06-28
 author:     "elmagnifico"
 header-img: "img/z6.jpg"
 catalog:    true
@@ -28,7 +28,13 @@ ubuntu 下安装SES流程
 
 > https://www.segger.com/downloads/embedded-studio/
 
-然后直接启动`SEGGER Embeded Studio For Arm 6.30`，界面和Windows基本一模一样
+```
+wget https://dl2.segger.com/files/embedded-studio/Setup_EmbeddedStudio_ARM_v632a_linux_x64.tar.gz
+tar -zxvf Setup_EmbeddedStudio_ARM_v632a_linux_x64.tar.gz 
+./install_segger_embedded_studio
+```
+
+然后直接启动`SEGGER Embeded Studio For Arm 6.30`，界面和Windows基本一模一样(缺少GUI的环境是无法正常安装的，所以一定要有X server之类的东西)
 
 进到这边就会发现，由于使用了外部编译器编译，所以缺少了必要的编译器，就要安装`GNU Arm Embedded Toolchain`的ubuntu版本
 
