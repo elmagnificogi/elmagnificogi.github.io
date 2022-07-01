@@ -155,6 +155,22 @@ netstat -ntlp
 
 
 
+## 安装arm-none-eabi-gcc
+
+yum没有 gcc-arm-none-eabi ， 所以只能通过wget安装了
+
+```
+wget https://developer.arm.com/-/media/Files/downloads/gnu-rm/10.3-2021.10/gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2
+```
+
+
+
+```
+
+```
+
+
+
 ## Summary
 
 还有很多其他的相关配置，可以看引用，写的比较详细，我只是用来确保桌面环境库存在，能安装SES而已，其他的倒是无所谓了
