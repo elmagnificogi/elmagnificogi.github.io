@@ -8,8 +8,8 @@ author:     "elmagnifico"
 header-img: "img/z5.jpg"
 catalog:    true
 tags:
-    - Embedded
-    - Jenkins
+    - Network
+    - AP
 ---
 
 ## Forward
