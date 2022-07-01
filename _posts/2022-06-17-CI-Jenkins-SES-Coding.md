@@ -31,6 +31,7 @@ ubuntu 下安装SES流程
 ```
 wget https://dl2.segger.com/files/embedded-studio/Setup_EmbeddedStudio_ARM_v630_linux_x64.tar.gz
 tar -zxvf Setup_EmbeddedStudio_ARM_v630_linux_x64.tar.gz 
+cd arm_segger_embedded_studio_v630_linux_x64
 ./install_segger_embedded_studio
 ```
 

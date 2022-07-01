@@ -163,10 +163,16 @@ yum没有 gcc-arm-none-eabi ， 所以只能通过wget安装了
 wget https://developer.arm.com/-/media/Files/downloads/gnu-rm/10.3-2021.10/gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2
 ```
 
-
+解压
 
 ```
+tar -xjf gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2
+```
 
+添加环境变量
+
+```
+export PATH=$PATH:/usr/local/gcc-arm-none-eabi-10.3-2021.10/bin
 ```
 
 
