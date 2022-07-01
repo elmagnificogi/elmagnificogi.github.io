@@ -7,7 +7,7 @@ author:     "elmagnifico"
 header-img: "img/z5.jpg"
 catalog:    true
 tags:
-    - C/C++
+    - Embedded
     - SD
 ---
 
