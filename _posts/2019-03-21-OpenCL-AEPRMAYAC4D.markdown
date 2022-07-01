@@ -8,6 +8,7 @@ header-img: "img/git-head-bg.jpg"
 catalog:    true
 tags:
     - Tools
+    - Maya
 ---
 
 ## Foreword

@@ -8,7 +8,8 @@ author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"
 catalog:    true
 tags:
-    - Embedded
+    - AP
+    - Network
 ---
 
 ## Foreword
