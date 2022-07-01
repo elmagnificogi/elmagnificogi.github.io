@@ -157,6 +157,8 @@ netstat -ntlp
 
 ## 安装arm-none-eabi-gcc
 
+顺便再记录一下CentOS安装gcc-arm-none-eabi 
+
 yum没有 gcc-arm-none-eabi ， 所以只能通过wget安装了
 
 ```
