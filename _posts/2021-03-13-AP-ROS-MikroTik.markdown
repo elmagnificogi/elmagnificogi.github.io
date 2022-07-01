@@ -8,7 +8,8 @@ author:     "elmagnifico"
 header-img: "img/sensor-head-bg.jpg"
 catalog:    true
 tags:
-    - Maya
+    - AP
+    - Network
 ---
 
 ## Foreword
