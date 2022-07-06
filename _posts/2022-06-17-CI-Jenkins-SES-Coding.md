@@ -3,7 +3,7 @@ layout:     post
 title:      "Jenkins搭建SES嵌入式CI/CD"
 subtitle:   "Diablo,"
 date:       2022-06-17
-update:     2022-06-28
+update:     2022-07-06
 author:     "elmagnifico"
 header-img: "img/z6.jpg"
 catalog:    true
@@ -129,7 +129,9 @@ fi
 
 ## Jenkins
 
-由于是从coding过来的，Jenkins的coding插件还过期不能用了。看了一下coding改用通用插件来对接Jenkins了
+由于是从coding过来的，Jenkins的coding插件还过期不能用了。看了一下coding改用通用插件来对接Jenkins了，也就是`generic-webhook-trigger`
+
+![image-20220706142410802](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220706142410802.png)
 
 <img src="http://img.elmagnifico.tech:9514/static/upload/elmagnifico/129824834-bafcebd1-c408-40fa-8f82-b44bdcfc9f65.png" alt="image" style="zoom:50%;" />
 
@@ -139,11 +141,17 @@ fi
 
 <img src="http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220617094223875.png" alt="image-20220617094223875" style="zoom: 80%;" />
 
-Jenkins这边主要是把路径给过去，然后把token两边填一致，再把coding账号信息输入进去，随便commit一下，就可以看到Jenkins这边收到了并且触发了
+
+
+Jenkins这边主要是把路径给过去，然后把token两边填一致，再把coding账号信息输入进去，保存一下设置
 
 <img src="http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220617094501615.png" alt="image-20220617094501615" style="zoom:80%;" />
 
 由于是嵌入式项目，所以没有SES可以用的插件，需要靠脚本去实现后续的编译和release
+
+再切回到了coding这边，点击测试，就能看到已经触发了Jenkins
+
+![image-20220706144038732](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220706144038732.png)
 
 
 
@@ -185,7 +193,15 @@ fi
 
 还有一种方式是直接在Jenkins内部执行，安装SES，并且拉取代码，然后运行编译，类似Github，不过这种做成docker img 可能更方便一些
 
+（这样有一个大问题，emBuild需要桌面的环境，而docker里基本不可能包含这玩意，安装起来十分麻烦，而且每次都重新构建环境，完全浪费内存，不如直接交给VPS完成就算了）
+
+
+
 ## Summary
+
+再总结一下整体流程，代码coding完了以后，push到自动CI的分支上，然后触发Jenkins，执行编译脚本，编译脚本中会进行各种文件打包和bin加密，再通过发布API，将打包好的文件上传。这样一次CI就完成了，CD是交给实际使用的人去部署，这里没有自动部署一说。
+
+
 
 后续还更新的话，继续补充
 
