@@ -7,7 +7,7 @@ update:     2021-04-21
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"
 tags:
-    - git
+    - Git
     - 代理
 ---
 
