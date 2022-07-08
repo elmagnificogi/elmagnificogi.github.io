@@ -1,9 +1,9 @@
 ---
 layout:     post
-title:      "git的自动化以及快捷设置"
-subtitle:   "git，自动push，一键上传"
+title:      "Git设置以及常用命令"
+subtitle:   "免密码，一键上传"
 date:       2015-11-03
-update:     2021-02-23
+update:     2022-07-08
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"
 catalog:    true
@@ -126,6 +126,8 @@ Win10下
 
 就可以完成所有操作啦。
 
+
+
 ## add
 
     git add .
@@ -193,6 +195,28 @@ Win10下
 
 查看分支的不同之处，进而合并分支，有必要时需要使用 add来添加文件
 
+
+
+#### 解决冲突
+
+通过命令行选择我方或者对方的冲突点，而不手动修改每个文件
+
+```
+# 冲突全部选择当前分支
+git checkout --ours <fileName>
+# 或者冲突全部选择对方分支
+git checkout --theirs <fileName>
+
+# 解决完冲突，加入更新
+git add <fileName>
+# 继续下一个冲突
+git rebase --continue
+# 查看下一个冲突点
+git status
+```
+
+
+
 ## status
 
     git status
@@ -245,6 +269,8 @@ Win10下
 
     git submodule update --init --recursive
 
+
+
 ## branch
 
     git checkout -b newpro
@@ -258,6 +284,8 @@ Win10下
     git branch newpro
 
 新建一个叫newpro的分支，但是不会切换过去
+
+
 
 ## 图形化界面
 
