@@ -75,7 +75,7 @@ $ A = \{ \langle G \rangle \vert G \text{ is a connected undirected graph}\} $
 
 默认的jekyll的markdown是不支持显示公式的
 
-推荐使用下面的脚本，嵌入到你的post loyout中
+推荐使用下面的脚本，嵌入到你的post layout中
 
 ```html
 <script type="text/x-mathjax-config">
@@ -97,6 +97,12 @@ $ A = \{ \langle G \rangle \vert G \text{ is a connected undirected graph}\} $
 ```
 
 这样嵌入的公式可以右键，有很多选项和操作
+
+
+
+或者单独提出来作为一个include的文件
+
+![image-20220725233624662](C:\Users\elmag\AppData\Roaming\Typora\typora-user-images\image-20220725233624662.png)
 
 
 
