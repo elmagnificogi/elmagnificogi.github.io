@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "腾讯云Ban使用翻墙服务的VPS"
-subtitle:   "xiaomi,55,ad,adb"
+subtitle:   "v2ray,跨境访问节点"
 date:       2022-07-25
 update:     2022-07-25
 author:     "elmagnifico"
