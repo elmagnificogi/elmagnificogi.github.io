@@ -116,7 +116,7 @@ wget --no-check-certificate -qO natcfg.sh http://www.arloor.com/sh/iptablesUtils
 
 ## Summary
 
-未完待续
+当前已经恢复正常，所有服务又都起来了，只是v2ray暂时关闭了
 
 
 
