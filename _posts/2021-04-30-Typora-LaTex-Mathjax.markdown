@@ -102,9 +102,7 @@ $ A = \{ \langle G \rangle \vert G \text{ is a connected undirected graph}\} $
 
 或者单独提出来作为一个include的文件
 
-![image-20220725233624662](C:\Users\elmag\AppData\Roaming\Typora\typora-user-images\image-20220725233624662.png)
-
-
+![image-20220726185154888](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202207261851008.png)
 
 #### page.mathjax
 
