@@ -70,6 +70,12 @@ tags:
 
 
 
+核实确认以后，就多了一张代金券，退款我发现一共也就退了七八块钱的样子
+
+![image-20220726184806575](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202207261848740.png)
+
+
+
 ## 临时解决
 
 先把blog的域名CNAME到我的Github的域名上，blog暂时恢复了，只是图床和TTRss还不行
