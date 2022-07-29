@@ -1,9 +1,9 @@
 ---
 layout:     post
-title:      "TTRSS迁移到腾讯云"
+title:      "TTRSS迁移到腾讯云以及常见问题"
 subtitle:   "轻量服务器"
 date:       2020-07-13
-update:     2022-02-14
+update:     2022-07-29
 author:     "elmagnifico"
 header-img: "img/desk-head-bg.jpg"
 catalog:    true
@@ -157,11 +157,24 @@ rm -fr /usr/local/qcloud
 ```
 firewall-cmd --query-masquerade
 no
+```
+
+开启NAT，重新加载防火墙
+
+```
 firewall-cmd --zone=public --add-masquerade --permanent
+firewall-cmd --query-masquerade
+yes
 firewall-cmd --reload
 ```
 
-然后重启了整个docker，就好了....
+然后重启docker-compose，发现又爆了新错，这个错比较好解，所有docker服务停一下，然后重启docker就行了
+
+```
+ERROR: Failed to Setup IP tables: Unable to enable SKIP DNAT rule
+```
+
+折腾完以后，就能看到正常更新了
 
 
 
@@ -169,4 +182,5 @@ firewall-cmd --reload
 
 > http://ttrss.henry.wang/zh/
 >
+> https://www.cnblogs.com/pxblog/p/14955420.html
 
