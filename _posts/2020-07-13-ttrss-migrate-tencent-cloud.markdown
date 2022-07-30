@@ -3,11 +3,7 @@ layout:     post
 title:      "TTRSS迁移到腾讯云以及常见问题"
 subtitle:   "轻量服务器"
 date:       2020-07-13
-<<<<<<< HEAD
 update:     2022-07-29
-=======
-update:     2022-07-26
->>>>>>> 2b38980b9622c9e85a1ee5ccfb08c6ae7259012c
 author:     "elmagnifico"
 header-img: "img/desk-head-bg.jpg"
 catalog:    true
