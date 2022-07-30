@@ -3,7 +3,11 @@ layout:     post
 title:      "TTRSS迁移到腾讯云以及常见问题"
 subtitle:   "轻量服务器"
 date:       2020-07-13
+<<<<<<< HEAD
 update:     2022-07-29
+=======
+update:     2022-07-26
+>>>>>>> 2b38980b9622c9e85a1ee5ccfb08c6ae7259012c
 author:     "elmagnifico"
 header-img: "img/desk-head-bg.jpg"
 catalog:    true
@@ -53,6 +57,8 @@ tags:
 
 当然二者都是CN2 gia，不过水墨对移动和联通用户可能更友好一些，腾讯差了点。
 
+
+
 ## 轻量香港
 
 101开头的ip，实测延迟10ms左右，非常舒服，youtube也能跑满，甚至能超速，实际没有开任何bbr或者锐速相关加速，完全原生。
@@ -60,6 +66,8 @@ tags:
 从前面的表里也能看到，101支持Netflix，也支持youtube，还有谷歌学术。
 
 然后之前101非常难开，一直都只能开出来119的，但是119的网络也非常好，除了ip这几个地方有限制，其他都很完美，由于不支持换IP，工单投诉了几波以后，101ip大量放出来了，随便买就能买到了
+
+
 
 #### 移除腾讯监控
 
@@ -69,14 +77,22 @@ tags:
 /usr/local/qcloud/stargate/admin/uninstall.sh
 /usr/local/qcloud/YunJing/uninst.sh
 /usr/local/qcloud/monitor/barad/admin/uninstall.sh
-rm -fr /usr/local/qcloud
+systemctl stop tat_agent
+systemctl disable tat_agent
+rm -f /etc/systemd/system/tat_agent.service
+rm -rf /usr/local/qcloud
+ps -A | grep agent
 ```
 
 接着就是bbr+v2ray+ws全套搞上去，测试正常就行了。
 
+
+
 ## TTRSS迁移
 
 其实之前已经迁移过一次了，不过还是记录一下吧，防止找不到了
+
+
 
 #### Postgres 数据库迁移
 
@@ -132,7 +148,7 @@ rm -fr /usr/local/qcloud
 
 
 
-#### 保持老版本Postgres 
+#### 保持老版本Postgres
 
 源码目录下有好几个docker-compose.yml文件，其中docker-compose.pg12.yml就是老版本的，不选择升级，留在老版本一样没有什么大问题，由于主分支升级太快了，所以我选择老版的docker-compose文件。
 

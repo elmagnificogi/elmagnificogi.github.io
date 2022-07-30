@@ -3,7 +3,7 @@ layout:     post
 title:      "Nintendo Switch 自动手柄"
 subtitle:   "Switch-Fightstick，auto，AVR USB"
 date:       2019-12-15
-update:     2021-04-30
+update:     2022-07-31
 author:     "elmagnifico"
 header-img: "img/Raspberrypi-head-bg.jpg"
 catalog:    true
@@ -86,15 +86,21 @@ Teensy v2.0 淘宝一下，包邮以后基本都是32+，所以买了一个。
 
 这样就能无论是接采集卡然后usb-a直连，还是用掌机模式typec直连都能用了。
 
+
+
 ### 软件环境
 
 首先github上有写怎么搭建环境，但是呢，稍微有点麻烦，而且有些东西完全没必要。
+
+
 
 #### The Teensy Loader
 
 > https://www.pjrc.com/teensy/loader.html
 
 这个是烧写软件，必须要有，直接下了就能用
+
+
 
 #### WinAVR
 
@@ -104,13 +110,25 @@ Teensy v2.0 淘宝一下，包邮以后基本都是32+，所以买了一个。
 
 直接下载，然后安装，安装完成以后还不能直接用，在win10上make会直接报错。
 
-由于WinAVR原本/utils/bin中的msys-1.0.dll太老了，导致编译出错。
+##### Resource temporarily unavailable
+
+```bash
+avr-objcopy -O ihex -j .eeprom --set-section-flags=.eeprom="alloc,load" --change-section-lma .eeprom=0 --no-change-warnings Teensy2/Teensy2.elf Teensy2/Teensy2.eep || exit 0
+      0 [main] sh 13532 sync_with_child: child 12848(0x1EC) died before initialization with status code 0xC0000142
+    190 [main] sh 13532 sync_with_child: *** child state waiting for longjmp
+/usr/bin/sh: fork: Resource temporarily unavailable
+make: *** [Teensy2/Teensy2.eep] Error 128
+```
+
+由于WinAVR原本/utils/bin中的msys-1.0.dll太老了，64位不兼容，导致编译出错。
 
 所以需要下一个新一些的替换即可正常使用了。
 
 msys-1.0.dll下载链接：
 
 > http://www.lab-z.com/wp-content/uploads/2018/10/msys-1.0-vista64.zip
+
+
 
 ##### 编译报错
 
@@ -555,7 +573,19 @@ void GetNextReport(USB_JoystickReport_Input_t* const ReportData) {
 }
 ```
 
-这样简单的自动手柄就完成了。
+这样简单的自动手柄就完成了
+
+进入文件夹目录，直接make，就可以正常编译通过了。
+
+如果有问题，记得先清除上次编译
+
+```
+make clean
+```
+
+如果增加了文件需要对应修改`makefile.core.mk`
+
+
 
 ## 0风险
 
@@ -584,7 +614,6 @@ NS宝可梦剑盾 一群 490570154 二群车主群27775142 三群伊机控单片
 > https://gbatemp.net/threads/tutorial-printing-spla2n-posts-with-an-arduino-teensy-board.482166/
 >
 > http://www.lab-z.com/winavrwin10/
-
 
 
 
