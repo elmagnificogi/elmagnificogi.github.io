@@ -103,15 +103,30 @@ ad.mi.com
 ad.xiaomi.com
 ```
 
-还有开源的仓库在更新广告的部分
+还有开源的仓库在更新广告的部分，但是这里面有一些不合理，比如直接把米家屏蔽没了，小米的应用商店直接屏蔽没了，完全不能用了。
 
 > https://github.com/liamliu108/miTVhosts/blob/master/hosts
 
 
 
-用来给路由器的广告屏蔽刚刚好
+所以我稍微修改了一下，把一些正常会用到的去掉了，用来给路由器的广告屏蔽刚刚好
 
 ```
+gvod.aiseejapp.atianqi.com
+stat.pandora.xiaomi.com
+upgrade.mishop.pandora.xiaomi.com
+logonext.tv.kuyun.com
+config.kuyun.com
+dvb.pandora.xiaomi.com
+api.ad.xiaomi.com
+de.pandora.xiaomi.com
+data.mistat.xiaomi.com
+jellyfish.pandora.xiaomi.com
+gallery.pandora.xiaomi.com
+o2o.api.xiaomi.com
+bss.pandora.xiaomi.com
+ad.mi.com
+ad.xiaomi.com
 ad.hpplay.cn
 ad.mi.com
 ad.xiaomi.com
@@ -135,16 +150,6 @@ data.mistat.xiaomi.com
 de.pandora.xiaomi.com
 devicemgr.hpplay.cn
 dvb.pandora.xiaomi.com
-f1.market.mi-img.com
-f1.market.xiaomi.com
-f2.market.mi-img.com
-f2.market.xiaomi.com
-f3.market.mi-img.com
-f3.market.xiaomi.com
-f4.market.mi-img.com
-f4.market.xiaomi.com
-f5.market.mi-img.com
-f5.market.xiaomi.com
 file.xmpush.xiaomi.com
 fix.hpplay.cn
 ftp.hpplay.com.cn
@@ -165,7 +170,6 @@ logonext.tv.kuyun.com
 metok.sys.miui.com
 milink.pandora.xiaomi.com
 misc.pandora.xiaomi.com
-mishop.pandora.xiaomi.com
 mitv.tracking.miui.com
 new.api.ad.xiaomi.com
 osfota.cdn.aliyun.com
@@ -191,11 +195,9 @@ tv.weixin.pandora.xiaomi.com
 tvapp.hpplay.cn
 tvmanager.pandora.xiaomi.com
 tvmgr.pandora.xiaomi.com
-upgrade.mishop.pandora.xiaomi.com
 upgrade.xl9.xunlei.com
 userapi.hpplay.com.cn
 v.admaster.com.cn
-video.market.xiaomi.com
 vipauth.hpplay.cn
 vipsdkauth.hpplay.cn
 ad.doubleclick.net
@@ -209,8 +211,6 @@ auth.api.gitv.tv
 cdn.ad.xiaomi.com
 d1.xiaomi.com
 e.ad.xiaomi.com
-localhost
-market.xiaomi.com
 misc.in.duokanbox.com
 o2o.api.xiaomi.com
 omgmta.play.aiseet.atianqi.com
@@ -220,11 +220,6 @@ package.cdn.pandora.xiaomi.com
 secure-chn.imrworldwide.com
 ssp.ad.xiaomi.com
 starfish.pandora.xiaomi.com
-t1.a.market.xiaomi.com
-t2.a.market.xiaomi.com
-t3.a.market.xiaomi.com
-t4.a.market.xiaomi.com
-t5.a.market.xiaomi.com
 test.ad.xiaomi.com
 test.new.api.ad.xiaomi.com
 tv.aiseet.atianqi.com
