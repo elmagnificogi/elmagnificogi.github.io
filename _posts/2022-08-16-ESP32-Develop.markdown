@@ -1,0 +1,57 @@
+---
+layout:     post
+title:      "ESP32开发记录"
+subtitle:   "EasyCon,蓝牙,YD-ESP32-C3"
+date:       2022-08-16
+update:     2022-08-16
+author:     "elmagnifico"
+header-img: "img/y5.jpg"
+catalog:    true
+tags:
+    - ESP32
+---
+
+## Forward
+
+好久没弄ESP32，又要捡起来折腾一下，记录一下相关内容。
+
+
+
+## 环境
+
+ESP32 IDF没有IDE，所以还是依赖VS code来完成，直接搜索esp32，安装对应插件
+
+![image-20220816004715027](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208160047129.png)
+
+根据教程，F1，输入`Select where to save configuration settings` 设置一下工程路径，然后下载对应的IDF
+
+![image-20220816005131804](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208160051874.png)
+
+需要注意的是这里插件其实已经把整个虚拟环境安装好了，包括各种编译需要的工具链。
+
+所以官方教程中的编译第一个项目，需要安装的各种都可以跳过，直接进入编译调试环节就行了。
+
+
+
+## 蓝牙 Classic HID
+
+
+
+
+
+## Summary
+
+未完待续
+
+
+
+## Quote
+
+> https://github.com/espressif/esp-idf
+>
+> https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32c3/get-started/index.html
+>
+> https://github.com/espressif/vscode-esp-idf-extension/blob/master/docs/tutorial/install.md
+>
+> https://github.com/espressif/esp-idf/tree/2761ad4865919693fcd02f4096711ba0fd0f6271/examples/bluetooth/bluedroid/classic_bt/bt_hid_mouse_device
+
