@@ -3,7 +3,7 @@ layout:     post
 title:      "蓝牙学习"
 subtitle:   "Bluetooth"
 date:       2022-08-16
-update:     2022-08-16
+update:     2022-08-17
 author:     "elmagnifico"
 header-img: "img/y4.jpg"
 catalog:    true
@@ -13,7 +13,7 @@ tags:
 
 ## Forward
 
-蓝牙入门学习，不太明白的地方还是比较多的
+蓝牙入门学习，不太明白的地方还是比较多的，所以翻看了一些蓝牙的blog，总结记录一下
 
 
 
@@ -31,11 +31,40 @@ tags:
 
 
 
+简单说有两种模式的蓝牙，这是从协议上进行大的区分，Classic和BLE，不同的模式，导致实际应用完全不同，甚至芯片也不同。
+
+#### Classic
+
+BR：Basic Rate是正宗的蓝牙技术，可以包括**可选（optional）的EDR（Enhanced Data Rate）技术，以及交替使用的（Alternate）**的MAC（Media Access Control）层和PHY层扩展（简称AMP（Alternate MAC and PHY layer extension））。
+
+BR：最早期的蓝牙技术，速度只能达到721.2Kbps，在那个年代，已为高大上了。
+EDR：随着技术的提升，使用EDR技术的蓝牙，理论速率可以达到2.1Mbps。
+AMP：使用AMP技术的蓝牙，理论速率可以达到54Mbps。
+AMP的Alternate交替使用体现在：由于蓝牙自身的物理层和AMP技术差异太明显，BR/EDR和AMP是不能同时使用的。
+
+简单的说，就是：BR和EDR是可以同时存在的，但BR/EDR和AMP只能二选一
+
+#### BLE
+
+BR技术的进化路线，就是传输速率的加快、加快、再加快。但能量是守恒的，你想传的更快，代价就是消耗更多的能量。而有很多的应用场景，并不关心传输速率，反而非常关心功耗。这就是Bluetooth LE（称作蓝牙低功耗）产生的背景。
+
+从它的英文名字上就可以看出它是一种低功耗蓝牙技术，是蓝牙技术联盟设计和销售的一种个人局域网技术，旨在用于医疗保健、运动健身、信标、安防、家庭娱乐等领域的新兴应用。
+
+低功耗蓝牙与经典蓝牙使用相同的2.4GHz无线电频率，因此双模设备可以共享同一个天线。低功耗蓝牙使用的调制系统更简单。
+
+LE技术相比BR技术，差异非常大，或者说就是两种不同的技术，凑巧都加一个“蓝牙”的前缀而已，目前BLE主要广泛应用于IoT产品领域。
+
+
+
 ## 架构
 
 1. 单芯片解决方案，比如ESP32，CSR系列等
 2. 蓝牙+MCU，各负责各的，通信靠自定义协议
-3. 蓝牙host+controllor，兼容多种协议
+3. 蓝牙host+controllor，兼容多种协议。说白了就是把蓝牙拆开了，蓝牙芯片只做数据发送的部分，而主控自带了蓝牙协议栈，通过HCI来发送和接收数据然后处理，这样具体使用什么样的协议都是由主控自己决定，蓝牙芯片只管好发送就行了。
+
+
+
+蓝牙的解决方案是多种多样的，不同架构可能不同，但是一般说的应该都是指第三种，就是Host的蓝牙协议栈+蓝牙芯片，一起组成一个完整的蓝牙。而常说的HCI，则是指协议栈和芯片之间的接口。协议栈往往也都是实现HCI的接口，所以大部分情况下都叫做了HCI。
 
 
 
@@ -59,31 +88,117 @@ HCI架构的蓝牙会有以下几种架构
 
 详细架构图
 
-![img](https://img-blog.csdnimg.cn/20200720164649531.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1hpYW9YaWFvUGVuZ0Jv,size_16,color_FFFFFF,t_70)
+<img src="http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208162111676.png" alt="img"  />
 
-## Classic
-
-BR：Basic Rate是正宗的蓝牙技术，可以包括**可选（optional）的EDR（Enhanced Data Rate）技术，以及交替使用的（Alternate）**的MAC（Media Access Control）层和PHY层扩展（简称AMP（Alternate MAC and PHY layer extension））。
-
-BR：最早期的蓝牙技术，速度只能达到721.2Kbps，在那个年代，已为高大上了。
-EDR：随着技术的提升，使用EDR技术的蓝牙，理论速率可以达到2.1Mbps。
-AMP：使用AMP技术的蓝牙，理论速率可以达到54Mbps。
-AMP的Alternate交替使用体现在：由于蓝牙自身的物理层和AMP技术差异太明显，BR/EDR和AMP是不能同时使用的。
-
-简单的说，就是：BR和EDR是可以同时存在的，但BR/EDR和AMP只能二选一
+基于HCI的时候，总体上是APP-HOST-Transport（算是中间协议层）-HW。
 
 
-## BLE
 
-上面所讲的BR技术的进化路线，就是传输速率的加快、加快、再加快。但能量是守恒的，你想传的更快，代价就是消耗更多的能量。而有很多的应用场景，并不关心传输速率，反而非常关心功耗。这就是Bluetooth LE（称作蓝牙低功耗）产生的背景。
+#### HW
 
-从它的英文名字上就可以看出它是一种低功耗蓝牙技术，是蓝牙技术联盟设计和销售的一种个人局域网技术，旨在用于医疗保健、运动健身、信标、安防、家庭娱乐等领域的新兴应用。
+- RF是基础射频的部分，所有数据最后都需要转换成射频信号发送出去
 
-低功耗蓝牙与经典蓝牙使用相同的2.4GHz无线电频率，因此双模设备可以共享同一个天线。低功耗蓝牙使用的调制系统更简单。
+  - BB，baseband，射频与数字或语音信号相互转化
+    - LMP，链路管理层，主要是建立设备直接通信链路的
+    - HCI，这里的HCI是主机控制层接口，将协议栈的各种数据转换成下面链路层的通信，以及将收到数据转换后传给上层
 
-LE技术相比BR技术，差异非常大，或者说就是两种不同的技术，凑巧都加一个“蓝牙”的前缀而已。
+  - BLE PHY则是BLE的物理层
+  - BLE LL 就是对应BLE的链路层
 
-目前BLE主要广泛应用于IoT产品领域。
+这里的BB和BLE级别就是4.0的区分的地方了
+
+
+
+#### Transport
+
+作为协议层，主要是提供接口给更上层，并且给下层一个统一接口。
+
+- H2，基于USB的协议层
+- H4，基于UART的协议层，H4是最简单的一种数据封装，他基本只在上面的HCI raw data前多了一个type数据，H4其实是串口带硬件流控制的串口，适合大量数据传输
+- H5，也是基于UART的协议层，这种相当于是三线串口，适合小量数据传输
+- BCSP，也是基于UART的协议层，三线串口，但是他主要是给存储卡使用的接口
+- SDIO，基于SDIO的协议层
+
+![img](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208162151296.png)
+
+HCI一共有5种数据类型
+
+- HCI Command，命令，蓝牙协议栈控制芯片的，比如搜索、联机、取消等等
+- HCI Event，蓝牙芯片上报事件给蓝牙协议栈，其实可以视作Command的回复，ACK或者是某些请求之类的东西
+- HCI ACL，双向交互的普通数据
+- hCI SCO，双向交互的语音类数据，部分芯片是跨越了Transport直接和HOST沟通的
+- HCI ISO，LE 语音类数据
+
+
+
+#### HOST
+
+HOST这里就比较复杂了，HCI前面已经大概介绍了一下
+
+- L2CAP，逻辑链路控制与适配协议，将ACL数据分组交换为便于高层应用的数据分组格式，并提供协议复用和服务质量交换等功能。通过协议多路复用、分段重组操作和组概念,向高层提供面向连接的和无连接的数据服务,L2CAP还屏蔽了低层传输协议中的很多特性，使得高层协议应用开发人员可以不必了解基层协议而进行开发
+
+
+
+##### 经典蓝牙
+
+- SDP，服务发现协议，服务发现协议(SDP)为应用程序提供了一种方法来发现哪些服务可用，并确定这些可用服务的特征
+
+- RFCOMM，串口仿真协议，上层协议蓝牙电话，蓝牙透传SPP等协议都是直接走的RFCOMM
+
+  - OBEX，对象交换协议，蓝牙电话本，蓝牙短信，文件传输等协议都是走的OBEX
+
+    - PBAP，蓝牙电话本访问协议
+
+    - MAP，蓝牙短信访问协议
+
+    - OPP，对象推送协议
+
+      
+
+  - HFP，蓝牙免提协议，就是经典的windows蓝牙耳机可以看到Hands-Free和Stereo两种设备同时出现，其中Hands-Free就是对应的协议例子
+
+  - HSP，早期蓝牙耳机的协议
+
+  - SPP，蓝牙串口协议，有些蓝牙串口走的就是这种方式
+
+  - IAP，苹果的协议，IAP1和IAP2，主要是CarPlay和iPod使用的
+
+
+
+- AVCTP，音视频控制传输协议，是AVRCP蓝牙音乐控制协议，简单说就是控制音乐启动停止上一首下一首之类的功能
+- AVDTP，音频分布式传输协议，是A2DP蓝牙音乐协议的底层
+- HID，人机接口协议，鼠标、键盘、手柄等等都是走这里的
+
+
+
+##### BLE
+
+- ATT，蓝牙属性协议，用于发现、读、写设备属性的协议，简单说属性主要是三个部分，类型、句柄、权限，主要是两个角色在其中，客户端和服务端，服务端暴露属性，让客户端访问，并且可以主动通知客户端
+- GATT，通用属性协议，就是对ATT的封装
+- SM，蓝牙BLE安全管理协议
+
+
+
+以上的介绍漏了一部分协议，就是3.0的AMP，由于蓝牙3.0某种程度上说其实不成熟或者说他给BLE打了个底，所以实际3.0应用比较少看到，要么是2.x，要么就是4.x起步了，3.x的反而很少。仔细看架构图，也会发现AMP直接重构了底层架构，这就导致了前期兼容了1.x和2.x的蓝牙如果要适配3.x就需要改芯片，那自然成本高了，没人弄了。
+
+![img](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208170051163.png)
+
+
+
+
+
+## 蓝牙分析工具
+
+### Btsnoop
+
+Btsnoop用来记录蓝牙协议栈和芯片交互的数据，主要用来分析定位问题。
+
+
+
+### 解析工具
+
+一般Btsnoop只能记录数据，但是实际上还需要对应的解析工具来辅助查看对应的数据，可以使用`Wireshark`，也可以用`Frontline`，也可以用`Ellisys`
+
 
 
 ## Summary
@@ -97,4 +212,6 @@ LE技术相比BR技术，差异非常大，或者说就是两种不同的技术�
 > https://github.com/espressif/esp-idf/tree/2761ad4865919693fcd02f4096711ba0fd0f6271/examples/bluetooth
 >
 > https://blog.csdn.net/XiaoXiaoPengBo/article/details/107462426
+>
+> https://www.cnblogs.com/zink623/p/15137259.html
 
