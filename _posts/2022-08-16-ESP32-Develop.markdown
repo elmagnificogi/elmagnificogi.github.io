@@ -3,7 +3,7 @@ layout:     post
 title:      "ESP32开发记录"
 subtitle:   "EasyCon,蓝牙,YD-ESP32-C3"
 date:       2022-08-16
-update:     2022-08-16
+update:     2022-08-19
 author:     "elmagnifico"
 header-img: "img/y5.jpg"
 catalog:    true
@@ -45,43 +45,12 @@ ESP32 IDF没有IDE，所以还是依赖VS code来完成，直接搜索esp32，�
 
 最后安装环境可能会出错
 
+第一种是这样的错，可能是网络有问题，这种需要删掉之前的`.espressif`和`esp`路径的内容，挂vpn以后，重新安装
+
 ```shell
 Command failed: "E:\switch\esp32\.espressif\tools\idf-python\3.8.7\python.exe" "E:\switch\esp32\esp\esp-idf\tools\idf_tools.py" install-python-env
     ERROR: Command errored out with exit status 1:
-     command: 'E:\switch\esp32\.espressif\python_env\idf4.4_py3.8_env\Scripts\python.exe' -c 'import sys, setuptools, tokenize; sys.argv[0] = '"'"'C:\\Users\\elmag\\AppData\\Local\\Temp\\pip-req-build-ft3q1rrh\\setup.py'"'"'; __file__='"'"'C:\\Users\\elmag\\AppData\\Local\\Temp\\pip-req-build-ft3q1rrh\\setup.py'"'"';f=getattr(tokenize, '"'"'open'"'"', open)(__file__);code=f.read().replace('"'"'\r\n'"'"', '"'"'\n'"'"');f.close();exec(compile(code, __file__, '"'"'exec'"'"'))' egg_info --egg-base 'C:\Users\elmag\AppData\Local\Temp\pip-pip-egg-info-9j49suw2'
-         cwd: C:\Users\elmag\AppData\Local\Temp\pip-req-build-ft3q1rrh\
-    Complete output (34 lines):
-    running egg_info
-    creating C:\Users\elmag\AppData\Local\Temp\pip-pip-egg-info-9j49suw2\esp_windows_curses.egg-info
-    writing C:\Users\elmag\AppData\Local\Temp\pip-pip-egg-info-9j49suw2\esp_windows_curses.egg-info\PKG-INFO
-    writing dependency_links to C:\Users\elmag\AppData\Local\Temp\pip-pip-egg-info-9j49suw2\esp_windows_curses.egg-info\dependency_links.txt
-    writing requirements to C:\Users\elmag\AppData\Local\Temp\pip-pip-egg-info-9j49suw2\esp_windows_curses.egg-info\requires.txt
-    writing top-level names to C:\Users\elmag\AppData\Local\Temp\pip-pip-egg-info-9j49suw2\esp_windows_curses.egg-info\top_level.txt
-    writing manifest file 'C:\Users\elmag\AppData\Local\Temp\pip-pip-egg-info-9j49suw2\esp_windows_curses.egg-info\SOURCES.txt'
-    reading manifest file 'C:\Users\elmag\AppData\Local\Temp\pip-pip-egg-info-9j49suw2\esp_windows_curses.egg-info\SOURCES.txt'
-    Traceback (most recent call last):
-      File "<string>", line 1, in <module>
-      File "C:\Users\elmag\AppData\Local\Temp\pip-req-build-ft3q1rrh\setup.py", line 19, in <module>
-        setup(name='esp-windows-curses',
-      File "E:\switch\esp32\.espressif\python_env\idf4.4_py3.8_env\lib\site-packages\setuptools\__init__.py", line 153, in setup
-        return distutils.core.setup(**attrs)
-      File "distutils\core.py", line 148, in setup
-      File "distutils\dist.py", line 966, in run_commands
-      File "distutils\dist.py", line 985, in run_command
-      File "E:\switch\esp32\.espressif\python_env\idf4.4_py3.8_env\lib\site-packages\setuptools\command\egg_info.py", line 299, in run
-        self.find_sources()
-      File "E:\switch\esp32\.espressif\python_env\idf4.4_py3.8_env\lib\site-packages\setuptools\command\egg_info.py", line 306, in find_sources
-        mm.run()
-      File "E:\switch\esp32\.espressif\python_env\idf4.4_py3.8_env\lib\site-packages\setuptools\command\egg_info.py", line 544, in run
-        self.prune_file_list()
-      File "E:\switch\esp32\.espressif\python_env\idf4.4_py3.8_env\lib\site-packages\setuptools\command\egg_info.py", line 596, in prune_file_list
-        build = self.get_finalized_command('build')
-      File "distutils\cmd.py", line 298, in get_finalized_command
-      File "distutils\dist.py", line 857, in get_command_obj
-      File "E:\switch\esp32\.espressif\python_env\idf4.4_py3.8_env\lib\site-packages\setuptools\dist.py", line 755, in get_command_class
-        self.cmdclass[command] = cmdclass = ep.load()
-      File "E:\switch\esp32\.espressif\python_env\idf4.4_py3.8_env\lib\site-packages\pkg_resources\__init__.py", line 2450, in load
-        return self.resolve()
+    ....
       File "E:\switch\esp32\.espressif\python_env\idf4.4_py3.8_env\lib\site-packages\pkg_resources\__init__.py", line 2456, in resolve
         module = __import__(self.module_name, fromlist=['__name__'], level=0)
     ModuleNotFoundError: No module named 'setuptools.command.build'
@@ -103,7 +72,26 @@ subprocess.CalledProcessError: Command '['E:\\switch\\esp32\\.espressif\\python_
 
 
 
+可能还会遇到出错的情况下，会提示你pip版本太低，可以手动升级一下，再重新安装
 
+```
+WARNING: You are using pip version 20.3.3; however, version 22.2.2 is available.
+You should consider upgrading via the 'e:\esp32\.espressif\python_env\idf4.4_py3.8_env\Scripts\python.exe -m pip install --upgrade pip' command.
+
+e:\switch\esp32\.espressif\python_env\idf4.4_py3.8_env\Scripts\python.exe -m pip install --upgrade pip
+```
+
+还有一种情况，如果出现了这个错，这个错不会直接报错，而且报错了也会提示在中间，不影响后续流程，但是实际上出现了以后，后续流程一定是会出错的，如果不解决这个问题，那么后面的报错是解不了的
+
+```
+error launching git: 
+```
+
+出现这个错，是因为你设置的`esp`和`.espressif`路径过长了，比如我设置的`e:\switch\esp32\.espressif`这就算过长路径了，后续的很多python的包或者git，他们对路径的长度有限制，可是他们安装的路径又特别深，这就会导致后续各种报错，要解决这个问题就需要将前面的路径清理掉，直接变成`e:\esp32\.espressif`，就能正常安装完成了
+
+
+
+![image-20220819005334582](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208190053658.png)
 
 ## 蓝牙 Classic HID
 
@@ -126,4 +114,6 @@ subprocess.CalledProcessError: Command '['E:\\switch\\esp32\\.espressif\\python_
 > https://github.com/espressif/vscode-esp-idf-extension/blob/master/docs/tutorial/install.md
 >
 > https://github.com/espressif/esp-idf/tree/2761ad4865919693fcd02f4096711ba0fd0f6271/examples/bluetooth/bluedroid/classic_bt/bt_hid_mouse_device
+>
+> https://www.codenong.com/54731054/
 
