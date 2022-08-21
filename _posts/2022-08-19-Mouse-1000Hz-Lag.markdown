@@ -3,7 +3,7 @@ layout:     post
 title:      "鼠标1000Hz回报率导致windows UI 卡顿"
 subtitle:   "Logitech,fps,iCUE"
 date:       2022-08-19
-update:     2022-08-19
+update:     2022-08-21
 author:     "elmagnifico"
 header-img: "img/y4.jpg"
 catalog:    true
