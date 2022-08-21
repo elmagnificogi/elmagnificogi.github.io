@@ -1,9 +1,9 @@
 ---
 layout:     post
-title:      "ESP32开发记录"
-subtitle:   "EasyCon,蓝牙,YD-ESP32-C3"
+title:      "ESP32开发环境折腾记录"
+subtitle:   "USB-JTAG-BUILDin,OpenOCD,YD-ESP32-C3,zadig,libwdi,"
 date:       2022-08-16
-update:     2022-08-19
+update:     2022-08-21
 author:     "elmagnifico"
 header-img: "img/y5.jpg"
 catalog:    true
@@ -93,9 +93,111 @@ error launching git:
 
 ![image-20220819005334582](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208190053658.png)
 
-## 蓝牙 Classic HID
+## Example
+
+`Ctrl+Shift+p` 然后`Show Example Projects`，就能看到各种例程了，选择一个编译一下
+
+![image-20220821204453239](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208212044330.png)
 
 
+
+然后选择路径，对应的示例工程就创建好了
+
+![image-20220821204557031](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208212045132.png)
+
+然后选择芯片，设置调试方式，`Set Espressif device target `，选择对应的芯片，然后选择调试的接口，可以是JTAG或者是USB或者是Uart，建议先用Uart，这里不会出错
+
+`Ctrl+E+B`编译工程
+
+![image-20220821205245758](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208212052067.png)
+
+
+
+`Ctrl+E+S`查看编译后的固件信息，比如大小，sram使用情况什么的
+
+![image-20220821205307365](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208212053408.png)
+
+烧写时需要指定串口`Ctrl+E+P`选择烧写串口
+
+
+
+`Ctrl+E+F`烧写，需要选择烧写的方式，这里是通过串口烧写，先不选择Jtag或者USB什么的
+
+![image-20220821205605584](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208212056622.png)
+
+
+
+`Ctrl+E+M`连接串口输出的控制台，就能看到例程中的串口输出了
+
+![image-20220821205723409](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208212057447.png)
+
+
+
+## Debug
+
+一般来说ESP32有3种Debug方式
+
+1. 通过USB-JTAG-BUILDin，简单说平常ESP32的USB接口直接就内置了一个JTAG调试和串口，既能用来烧写又能用来串口输出或者是烧写，缺点就是由于是内置的，所以如果程序本身休眠或者跑死了，是无法再JTAG调试的，只能调试硬件正常的情况。
+2. 通过PROG，这种就是官方给的调试接口了，需要对应的ESP-PROG调试器
+3. 通过J-Link，相当是使用第三方的调试器来调试，有个J-Link就行了
+
+VS code这里使用1和2比较简单，使用三需要单独配置
+
+`ESP-IDF: Select OpenOCD Board Configuration`首先设置一下Debug的选项
+
+直接对着工程`F5`即可，单步执行什么的都是没问题的
+
+![image-20220821225417163](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208212255957.png)
+
+
+
+但是可能会出现无法调试，报错的情况
+
+```
+[OpenOCD]
+❌ Info : Listening on port 4444 for telnet connections
+Error: libusb_open() failed with LIBUSB_ERROR_NOT_FOUND
+[OpenOCD]
+❌ Error: esp_usb_jtag: could not find or open device!
+```
+
+出现这个情况非常正常，因为ESP32的USB被默认安装了windows的驱动，这个驱动无法支持调试，需要手动更换
+
+还有一种简单的方法判断驱动是否正常，如果这里的驱动提供商是Microsoft而不是libwdi，那这个驱动肯定就不对
+
+![image](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208212307503.png)
+
+![image-20220821230553232](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208212305266.png)
+
+
+
+#### 更换USB驱动
+
+首先下载一个`zadig-2.7.exe`，他其实是一个windows下usb驱动安装程序，可以很容易替换当前正在使用的usb驱动
+
+> https://github.com/pbatard/libwdi/wiki/Zadig
+
+
+
+勾选`List All Devices`，显示所有usb设备
+
+![image-20220821225942452](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208212259483.png)
+
+然后就能看到，列出来了很多设备
+
+![image-20220821230041639](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208212300555.png)
+
+这里有问题的就是这个`USB JTAG/serial debug unit(interface 2)`，一般情况，如果下面WCID这里✔了，那么就是他，另外一个Interface 0 是串口，这个一般没啥问题。
+
+![image-20220821230229831](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208212304906.png)
+
+主要是这个驱动有问题，右侧三角选择**替换驱动**而不是安装WCID驱动，然后提示重启，重启以后再进入VS code调试，就发现一切正常了。
+
+
+
+还有一种方法就是重装整个环境，用ESP官方安装包，但是如果这么做的话就没必要用VS code了，一个环境安装了2遍，太过多余了
+
+> https://docs.espressif.com/projects/esp-idf/en/latest/esp32c3/get-started/windows-setup.html#esp-idf-tools-installer
 
 
 
@@ -113,7 +215,13 @@ error launching git:
 >
 > https://github.com/espressif/vscode-esp-idf-extension/blob/master/docs/tutorial/install.md
 >
+> https://github.com/espressif/vscode-esp-idf-extension/blob/master/docs/tutorial/basic_use.md
+>
+> https://github.com/espressif/vscode-esp-idf-extension/blob/master/docs/tutorial/debugging.md
+>
 > https://github.com/espressif/esp-idf/tree/2761ad4865919693fcd02f4096711ba0fd0f6271/examples/bluetooth/bluedroid/classic_bt/bt_hid_mouse_device
 >
 > https://www.codenong.com/54731054/
+>
+> https://github.com/espressif/idf-installer/issues/133
 
