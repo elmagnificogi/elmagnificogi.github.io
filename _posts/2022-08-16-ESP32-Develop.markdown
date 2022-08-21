@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "ESP32开发环境折腾记录"
-subtitle:   "USB-JTAG-BUILDin,OpenOCD,YD-ESP32-C3,zadig,libwdi,"
+subtitle:   "USB-JTAG-BUILDin,OpenOCD,YD-ESP32-C3,zadig,libwdi"
 date:       2022-08-16
 update:     2022-08-21
 author:     "elmagnifico"
