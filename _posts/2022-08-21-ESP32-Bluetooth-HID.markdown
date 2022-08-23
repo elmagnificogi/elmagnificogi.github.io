@@ -3,7 +3,7 @@ layout:     post
 title:      "ESP32经典蓝牙HID开发"
 subtitle:   "Classic Bluetooth Hid"
 date:       2022-08-21
-update:     2022-08-22
+update:     2022-08-24
 author:     "elmagnifico"
 header-img: "img/y5.jpg"
 catalog:    true
@@ -14,6 +14,14 @@ tags:
 ## Forward
 
 看一下官方的ESP32 经典蓝牙 HID是什么样的架构，以及如何修改HID
+
+
+
+#### 硬件
+
+需要注意的是ESP32，必须是不带任何后缀的，才具有双模，S和C系列的都是单BLE蓝牙，无法使用经典蓝牙
+
+![image-20220824011800461](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208240118531.png)
 
 
 
@@ -697,8 +705,6 @@ bool check_report_id_type(uint8_t report_id, uint8_t report_type)
 ## 测试
 
 看完以后，编译烧写测试了一下，基本如我所写
-
-
 
 
 
