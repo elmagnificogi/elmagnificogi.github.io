@@ -704,7 +704,11 @@ bool check_report_id_type(uint8_t report_id, uint8_t report_type)
 
 ## 测试
 
-看完以后，编译烧写测试了一下，基本如我所写
+看完以后，编译烧写测试了一下，基本ok
+
+![image-20220824014046300](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208240140345.png)
+
+连接以后，鼠标开始左右平移
 
 
 
