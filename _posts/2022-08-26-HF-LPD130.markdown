@@ -1,0 +1,107 @@
+---
+layout:     post
+title:      "HF-LPD1xx系列wifi死机问题"
+subtitle:   "nmi，nds32le-elf-mculib-v3，Andes Technology，汉枫，Beacon"
+date:       2022-08-26
+update:     2022-08-26
+author:     "elmagnifico"
+header-img: "img/y1.jpg"
+catalog:    true
+tags:
+    - WIFI
+---
+
+## Forward
+
+又让WIFI模块坑到了，记录一下，希望后来者都能跳过这种厂家和芯片吧
+
+
+
+## 现象
+
+硬件：HF-LPD130
+
+在特定场景中，出现WIFI模块上电后随机卡死，基本几十秒内就卡死重启了，后续就是重复重启卡死的流程，基本没法正常工作了
+
+
+
+log 如下，触发nmi，然后触发看门狗，重启硬件
+
+```
+nmi start!!!
+System wdt occurred !
+[UART] uart 1:115200, 8, 0, fc:0, parity:0
+
+Entry HF-LPD100 Main Jul 20 2022 08:30:25 [00000000] >>>> 
+
+[VER] 1.12.45(2022-07-12 15:00)
+radio init s
+RF table ver 19.00 PHY table ver 19.00, common code ver 1.18 
+radio init e
+if0 28:9C:6E:5B:D0:68
+if1  28:9C:6E:5B:D0:69
+```
+
+
+
+## 测试
+
+- 离开问题场地以后不复现
+
+- 通过制造大量AP存在的场景，35个AP在30平方的范围内，无法触发该问题。
+- 接近100个SSID存在于30平方范围内，无法触发
+
+
+
+## 原因
+
+根据HF技术说明：当WiFi模块收到一个正常Beacon（ssid的无线广播包）是没问题的，但是在问题环境中会出现一个几KB的Beacon包（正常的最大也只有72B）
+
+这个包会导致wifi模块底层芯片直接报错，触发nmi报错，再触发看门狗重启，最终就是wifi模块一直重启，无法上线。据说原厂的工程师也在问题场地调试过了，但是并不能解决，所以这个是芯片本身有缺陷，无法避免。
+
+所处的特殊环境中的AP就会发出这种问题Beacon包，并且这个包是来自于5.8G频段的WIFI的，只要关闭了所有5.8G频段，就不会触发这个问题？（只是概率小了非常多，实际还有可能其他情况触发）
+
+只要有一个5.8G开启，就会出现重启，开得越多，重启频率就越高。
+
+
+
+出现这个问题的设备是：H3C的AP，被H3C统一管理
+
+
+
+## 解决
+
+幸好现场的所有AP都是在掌握之内的，可以一定程度上调节
+
+
+
+#### 临时解决办法
+
+关闭所有5.8G频段，幸好还有2.4G的频段可以顶着
+
+
+
+#### 长期解决办法
+
+基本默认Beacon的发送频率都是100TU，尝试修改了一下
+
+修改AP的Beacon发送频率以后，这个问题基本不见了，不再需要关闭5G频段也能让WIFI模块正常上线。
+
+还是有概率触发nmi重启的，只是比起来WIFI完全用不了，已经小到可以忽略的程度了。
+
+![image-20220826110243504](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208261102672.png)
+
+
+
+## Summary
+
+但是这个问题无法避免，错误的beacon包我们也无法预知，谁知道谁家的AP会发出错误的Beacon。
+
+最大的问题还是这个芯片，一个错包就导致整个芯片重启了，非常离谱了，这个模块能不用还是尽量别用吧。
+
+
+
+## Quote
+
+> https://zhuanlan.zhihu.com/p/339693421
+
