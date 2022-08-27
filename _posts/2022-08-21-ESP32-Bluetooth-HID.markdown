@@ -3,7 +3,7 @@ layout:     post
 title:      "ESP32经典蓝牙HID开发"
 subtitle:   "Classic Bluetooth Hid"
 date:       2022-08-21
-update:     2022-08-24
+update:     2022-08-28
 author:     "elmagnifico"
 header-img: "img/y5.jpg"
 catalog:    true
@@ -537,7 +537,7 @@ void esp_bt_hidd_cb(esp_hidd_cb_event_t event, esp_hidd_cb_param_t *param)
         }
         break;
     case ESP_HIDD_SEND_REPORT_EVT:
-        // 需要发送report
+        // report发送完成回调标志
         ESP_LOGI(TAG, "ESP_HIDD_SEND_REPORT_EVT id:0x%02x, type:%d", param->send_report.report_id,
                  param->send_report.report_type);
         break;
@@ -676,6 +676,22 @@ void bt_app_task_shut_down(void)
 }
 ```
 
+这里需要注意两个东西，`send_mouse`是发送了report，而回调中的`ESP_HIDD_SEND_REPORT_EVT`则是对应一个report发送完成的事件，如果收到了这个，说明这个report发送ok了。否则可能这个report就丢了或者怎样了。
+
+```
+case ESP_HIDD_SEND_REPORT_EVT:
+    // report发送完成回调标志
+    ESP_LOGI(TAG, "ESP_HIDD_SEND_REPORT_EVT id:0x%02x, type:%d", param->send_report.report_id,
+    param->send_report.report_type);
+send_mouse
+```
+
+同时，也要注意，其实这个report无法连续发送多个，会出现直接崩溃的情况。正确应该是一个report发完，有了event回调以后，再发下一个。稍微注意一下官方demo中每个report其实等了50ms，实际上如果测试的话，会发现，大概在20ms以内，就能收到event了。
+
+
+
+report还有一个特点，鼠标这里可能体现不出来，如果是类似手柄一类的东西，比如这次的report和上次是相同的，对于不同的host，可能处理方式不一样。有的host可能会持续执行之前操作，有的可能会直接不执行任何操作，比如一个button长按，发送一次report和连续发送3次report，没有区别，实际host表现出来的结果是相同的。而有的host则是，如果你发了一个report，没有后续，超过一定时间，则不会继续执行这个report的内容了。
+
 
 
 前面还有一个地方，收到report以后，这里对应做了一个解析吧
@@ -718,6 +734,30 @@ bool check_report_id_type(uint8_t report_id, uint8_t report_type)
 
 
 
+#### 双核相关
+
+esp32是双核的，所以创建任务的时候就会出现任务跑在哪个核心的问题。
+
+简单说有两个核心，一个是PRO_CPU，一个是APP_CPU，底层是FreeRTOS，所以当挂起调度器的时候，只会挂起对应的那个核心调度，而不会影响到另一个核心。同时，双核是SystemTick也是独立的，中断也独立，互不影响。
+
+如下就是普通的创建任务和将任务绑定到某个核心上的操作
+
+```
+xTaskCreate(startBlink, "blink_task", 1024, NULL, 1, &BlinkHandle);
+xTaskCreatePinnedToCore(send_task, "send_task", 2048, NULL, 2, &SendingHandle, 0);
+```
+
+最后一个参数至关重要，决定这个任务创建在哪个核上.PRO_CPU 为 0, APP_CPU 为 1,或者 tskNO_AFFINITY 允许任务在两者上运行.
+
+```
+  xTaskCreatePinnedToCore(Task1, "Task1", 10000, NULL, 1, NULL,  0);  
+  xTaskCreatePinnedToCore(Task2, "Task2", 10000, NULL, 1, NULL,  1);
+```
+
+一般来说PRO_CPU，字面含义，WIIF和蓝牙的协议栈都是在这里跑的，可能用户代码进程被中断或者延迟，所以平常用户代码应该写在APP_CPU上，这样就和协议栈的繁忙工作流区分开了，进而可以充分利用资源。
+
+
+
 ## 测试
 
 看完以后，编译烧写测试了一下，基本ok
@@ -743,4 +783,6 @@ bool check_report_id_type(uint8_t report_id, uint8_t report_type)
 > https://docs.espressif.com/projects/esp-idf/zh_CN/release-v4.0/api-reference/bluetooth/esp_gap_bt.html
 >
 > https://blog.csdn.net/XiaoXiaoPengBo/article/details/108366776
+>
+> https://blog.csdn.net/ailta/article/details/106465015
 
