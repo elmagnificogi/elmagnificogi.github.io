@@ -101,7 +101,7 @@ typedef struct {
 #define ESP_HID_CLASS_COM          (0x30<<2)           /* Combo keyboard/pointing */
 ```
 
-接着就是`desc_list`设备描述符，这里就是普通键鼠HID设备的描述了
+接着就是`desc_list`设备描述符，这里就是普通键鼠HID设备的描述了，后面再详细看这个内容
 
 ```c
 // a generic mouse descriptor
@@ -391,6 +391,14 @@ typedef enum {
 
     print_bt_address();
 	ESP_LOGI(TAG, "exiting");
+```
+
+
+
+这个地方需要注意一下，`vTaskDelay(2000)`和`vTaskDelay(2000 / portTICK_PERIOD_MS)`是不同的时间，前者大概是后者的10倍，前者是基于systick的，而后者是基于物理时间ms的，搞错的话会导致运行时间不正确的。
+
+```
+vTaskDelay(2000 / portTICK_PERIOD_MS);
 ```
 
 
@@ -758,6 +766,200 @@ xTaskCreatePinnedToCore(send_task, "send_task", 2048, NULL, 2, &SendingHandle, 0
 
 
 
+#### HID Report Descriptor
+
+HID的Report Descriptor要怎么写，也记录一下
+
+首先Descriptor必须有`Usage Page`说明这个HID的大类，比如这里指代USB通用设备
+
+![image-20220828021639948](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208280216055.png)
+
+
+
+具体可以参考这里，usb规范
+
+> https://www.usb.org/sites/default/files/hut1_21_0.pdf#page=16
+
+```
+    0x05, 0x01,                    // USAGE_PAGE (Generic Desktop)
+    0x09, 0x02,                    // USAGE (Mouse)
+    0xA1, 0x01,                    # Collection (Application)    
+```
+
+![image-20220828021729529](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208280217580.png)
+
+开头的USAGE相当于是USAGE_PAGE的详细描述，说明当前设备是鼠标
+
+但是由于现代鼠标都不是只有一个功能，可能除了基础鼠标功能还有什么额外的功能，所以要分别描述每个部分。
+
+Collection也分类型，一般是Application统领全局，然后再用Physical在其内部做进一步区分，同时每个Collection要有对应的开始和结束
+
+![image-20220828022153779](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208280221837.png)
+
+```
+    0xA1, 0x01,     # Collection (Application)
+    0xXX, 0xXX,     # USAGE
+    0xa1, 0x00,                    //   COLLECTION (Physical)
+	...  
+	0xC0,           # End Collection (Physical)
+	...
+    0xC0,           # End Collection (Application)
+```
+
+针对每个子Collection都需要有一个具体描述，所以还需要用一次USAGE
+
+Collection可以嵌套，Physical Collection 则是指相当于是子Collection，他主要是说明在一个Applicaion中可能会有多个传感器或者多个数据集合，那么就需要再定义一层。
+
+```
+0xa1, 0x00,                    //   COLLECTION (Physical)
+0xC0,           # End Collection
+```
+
+
+
+由于有多个Collection，不同的Collection的Report是不同的，所以就要单独设置每一个Report，并且用Report Id 区分。当然也可以只有一个Report，那么这种情况下必须要写Report Id，直接使用Collection 代替即可
+
+```
+    # report map for keyboard
+    0x05, 0x01,     # Usage Page (Generic Desktop)
+    0x09, 0x06,     # Usage (Keyboard)
+    0xA1, 0x01,     # Collection (Application)
+    0x85, 0x01,     #     Report ID (1)
+    ...
+    0xC0,           # End Collection
+    # report map for Cosumer Control (media keys)
+    0x05, 0x0C,       # Usage Page (CONSUMER PAGE)
+    0x09, 0x01,       # Usage (Consumer Control)
+    0xA1, 0x01,       # Collection (Application)
+    0x85, 0x02,       #     here Report ID (2)
+    ...
+    0xC0,             # End Collection
+```
+
+这里就存在两个report，一个是01，一个是02，分别发送各自的内容，每一个Report都需要被Collection包起来。
+
+
+
+再接着就是report的内容是如何定义的，Size定义了一个元数据的大小，而Count定义了这个元有几个。
+
+这里则是表示有3个元数据，并且每个元数据的大小是1bit
+
+```
+    0x95, 0x03,                    //     REPORT_COUNT (3)
+    0x75, 0x01,                    //     REPORT_SIZE (1)
+```
+
+除了说明Report的组成，还要说明这几个元数据是用来干嘛的，所以在开头的时候会加上说明，这里就说明是一个按键
+
+```
+ 0x05, 0x09,                    //     USAGE_PAGE (Button)
+```
+
+同时还需要说明，这个元数据最小值和最大值都是多少，由于是Bit，这里表示这个值最小是0，最大是1。如果是字节那就需要自定义了
+
+```
+    0x15, 0x00,                    //     LOGICAL_MINIMUM (0)
+    0x25, 0x01,                    //     LOGICAL_MAXIMUM (1)
+```
+
+除了说明了元数据的值，还需要说明你给的这个值对应到Host的时候，他们表示什么
+
+![image-20220828024009955](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208280240998.png)
+
+根据键盘的Keyboard Page的定义，这里说明这三个元数据对应键盘的1-3，指代没啥用的按键
+
+```
+    0x19, 0x01,                    //     USAGE_MINIMUM (Button 1)
+    0x29, 0x03,                    //     USAGE_MAXIMUM (Button 3)
+```
+
+上面还缺少一个描述，就是Logical元数据和Usage的按键，他们是怎么对应的，这个值是不是会变的，还是固定的，是一个bit来表示还是2个bit又或者是1个字节来表示的，这些都需要描述，Input就是描述这个东西的
+
+![image-20220828024549406](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208280245458.png)
+
+实际描述这个元数据只需要1个report size（1bit），所以是`0x81`
+
+首先按键肯定是会变的，所以是Variable，其次这里的按键时绝对，而不是相对值，所以是Absolute，其他位用不到，所以都是0，那么其实就是0x02了
+
+```
+010
+```
+
+结合在一起，就是这样了
+
+```
+0x81, 0x02,                    //     INPUT (Cnst,Var,Abs)
+```
+
+由于这个元数据是使用Bit来表示的，所以他们实际只用了3bit，但是最小长度是字节，则要用1字节大小存储。那么还有5个bit没有定义，如果没用到的话，也需要写上对应的说明，所以后续会有定义一个元数据，他的大小是5，数量是1，实际映射时，是使用1个report size（5bits），然后是Const类型的变量，不会变的
+
+```
+    0x95, 0x01,                    //     REPORT_COUNT (1)
+    0x75, 0x05,                    //     REPORT_SIZE (5)
+    0x81, 0x03,                    //     INPUT (Cnst,Var,Abs)
+```
+
+这样就把一个report完整定义好了。
+
+继续定义鼠标的X、Y和滚轮值
+
+```
+    0x05, 0x01,                    //     USAGE_PAGE (Generic Desktop)
+    0x09, 0x30,                    //     USAGE (X)
+    0x09, 0x31,                    //     USAGE (Y)
+    0x09, 0x38,                    //     USAGE (Wheel)
+    0x15, 0x81,                    //     LOGICAL_MINIMUM (-127)
+    0x25, 0x7f,                    //     LOGICAL_MAXIMUM (127)
+    0x75, 0x08,                    //     REPORT_SIZE (8)
+    0x95, 0x03,                    //     REPORT_COUNT (3)
+    0x81, 0x06,                    //     INPUT (Data,Var,Rel)
+```
+
+按照上面的说明，X、Y、Wheel最大时127最小时-127，同时一个数据使用8bit，一共3个数据，并且这个数据是可变的、相对值，而不是绝对值。
+
+
+
+将上面的结合在一起，就得到了最终的mouse descriptor
+
+```
+// a generic mouse descriptor
+uint8_t hid_descriptor_mouse_boot_mode[] = {
+    0x05, 0x01,                    // USAGE_PAGE (Generic Desktop)
+    0x09, 0x02,                    // USAGE (Mouse)
+    0xa1, 0x01,                    // COLLECTION (Application)
+
+    0x09, 0x01,                    //   USAGE (Pointer)
+    0xa1, 0x00,                    //   COLLECTION (Physical)
+
+    0x05, 0x09,                    //     USAGE_PAGE (Button)
+    0x19, 0x01,                    //     USAGE_MINIMUM (Button 1)
+    0x29, 0x03,                    //     USAGE_MAXIMUM (Button 3)
+    0x15, 0x00,                    //     LOGICAL_MINIMUM (0)
+    0x25, 0x01,                    //     LOGICAL_MAXIMUM (1)
+    0x95, 0x03,                    //     REPORT_COUNT (3)
+    0x75, 0x01,                    //     REPORT_SIZE (1)
+    0x81, 0x02,                    //     INPUT (Data,Var,Abs)
+    0x95, 0x01,                    //     REPORT_COUNT (1)
+    0x75, 0x05,                    //     REPORT_SIZE (5)
+    0x81, 0x03,                    //     INPUT (Cnst,Var,Abs)
+
+    0x05, 0x01,                    //     USAGE_PAGE (Generic Desktop)
+    0x09, 0x30,                    //     USAGE (X)
+    0x09, 0x31,                    //     USAGE (Y)
+    0x09, 0x38,                    //     USAGE (Wheel)
+    0x15, 0x81,                    //     LOGICAL_MINIMUM (-127)
+    0x25, 0x7f,                    //     LOGICAL_MAXIMUM (127)
+    0x75, 0x08,                    //     REPORT_SIZE (8)
+    0x95, 0x03,                    //     REPORT_COUNT (3)
+    0x81, 0x06,                    //     INPUT (Data,Var,Rel)
+
+    0xc0,                          //   END_COLLECTION
+    0xc0                           // END_COLLECTION
+};
+```
+
+
+
 ## 测试
 
 看完以后，编译烧写测试了一下，基本ok
@@ -785,4 +987,8 @@ xTaskCreatePinnedToCore(send_task, "send_task", 2048, NULL, 2, &SendingHandle, 0
 > https://blog.csdn.net/XiaoXiaoPengBo/article/details/108366776
 >
 > https://blog.csdn.net/ailta/article/details/106465015
+>
+> https://hackmd.io/@meebox/By9V9AJPd
+>
+> https://www.cnblogs.com/AlwaysOnLines/p/4552840.html
 
