@@ -430,7 +430,23 @@ typedef enum {
 
 ```
 
+cod结构体
 
+![img](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208260047025.png)
+
+![image-20220826004835024](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208260048067.png)
+
+Major有以下几种：
+
+![image-20220826005417655](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208260054698.png)
+
+Minor的类型比较多，他是根据Major的不同而不同的
+
+![image-20220826005016780](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208260050816.png)
+
+第六位和第七位特指了鼠标、键盘或者混合设备或者两者都不是的设备，算是大的设备种类吧，然后在这个种类的情况下，再叠加上第2345位决定这个设备具体是哪种。Minor一般不是很重要，很多地方都会省略他。
+
+![image-20220826005112500](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208260051546.png)
 
 最后是一点设置配对pin的类型，如果设置成了`ESP_BT_PIN_TYPE_VARIABLE`，那么pin最终是由GAP部分给出来，否则的话就是固定值，不会回调GAP部分的pin request
 
@@ -725,4 +741,6 @@ bool check_report_id_type(uint8_t report_id, uint8_t report_type)
 > https://blog.csdn.net/lum250/article/details/123012522
 >
 > https://docs.espressif.com/projects/esp-idf/zh_CN/release-v4.0/api-reference/bluetooth/esp_gap_bt.html
+>
+> https://blog.csdn.net/XiaoXiaoPengBo/article/details/108366776
 
