@@ -479,6 +479,7 @@ void esp_bt_hidd_cb(esp_hidd_cb_event_t event, esp_hidd_cb_param_t *param)
         // HID初始化的时候，使用了前面填充的app和qos的设置
         if (param->init.status == ESP_HIDD_SUCCESS) {
             ESP_LOGI(TAG, "setting hid parameters");
+            // 当注册成功以后就会触发下面的事件ESP_HIDD_REGISTER_APP_EVT
             esp_bt_hid_device_register_app(&s_local_param.app_param, &s_local_param.both_qos, &s_local_param.both_qos);
         } else {
             ESP_LOGE(TAG, "init hidd failed!");
@@ -494,6 +495,7 @@ void esp_bt_hidd_cb(esp_hidd_cb_event_t event, esp_hidd_cb_param_t *param)
             esp_bt_gap_set_scan_mode(ESP_BT_CONNECTABLE, ESP_BT_GENERAL_DISCOVERABLE);
             if (param->register_app.in_use && param->register_app.bd_addr != NULL) {
                 ESP_LOGI(TAG, "start virtual cable plug!");
+                // 当连接成功以后，会回调下面的ESP_HIDD_OPEN_EVT
                 esp_bt_hid_device_connect(param->register_app.bd_addr);
             }
         } else {
