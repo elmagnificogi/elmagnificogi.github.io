@@ -5,7 +5,7 @@ subtitle:   "Classic Bluetooth Hid"
 date:       2022-08-21
 update:     2022-08-28
 author:     "elmagnifico"
-header-img: "img/y5.jpg"
+header-img: "img/bg1.jpg"
 catalog:    true
 tags:
     - ESP32
