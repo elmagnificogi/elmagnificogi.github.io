@@ -495,6 +495,8 @@ joycontrol的流程中状态切换都靠每个响应的命令，而状态恢复�
 >
 > https://github.com/mumumusuc/Nintendo_Switch_Reverse_Engineering
 >
+> https://github.com/elmagnificogi/Nintendo_Switch_Reverse_Engineering/commits/master
+>
 > https://github.com/mumumusuc/libjoycon
 >
 > https://github.com/CTCaer/jc_toolkit
