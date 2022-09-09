@@ -233,6 +233,43 @@ Develop烧写固件界面
 
 
 
+## Watchdog
+
+用ESP32，一旦任务执行频率过高，就会造成BackTrack，疯狂干扰正常运行
+
+可以通过config直接关闭整个watchdog，不在监控Idel task无法运行
+
+```
+CONFIG_ESP_TASK_WDT = n
+```
+
+
+
+关闭整个watchdog可能太过激进了，一般情况下可以选择关闭cpu1的，而cpu0是协议核，一般都给他开着。
+
+```
+CONFIG_ESP_TASK_WDT_CHECK_IDLE_TASK_CPU0 = n
+CONFIG_ESP_TASK_WDT_CHECK_IDLE_TASK_CPU1 = n
+```
+
+
+
+## Log
+
+非运行时可以直接通过config关闭log
+
+
+
+运行时关闭log，基本可以关闭大部分非强制log的输出
+
+```
+esp_log_level_set("*", ESP_LOG_NONE);
+```
+
+
+
+
+
 ## Summary
 
 暂时就这么多，日后还有遇到问题再补充。
@@ -258,4 +295,6 @@ Develop烧写固件界面
 > https://github.com/espressif/idf-installer/issues/133
 >
 > https://www.esp32.com/viewtopic.php?t=21799
+>
+> https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/system/wdts.html
 
