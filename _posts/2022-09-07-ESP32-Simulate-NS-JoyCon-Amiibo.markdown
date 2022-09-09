@@ -3,7 +3,7 @@ layout:     post
 title:      "ESP32模拟JoyCon和Pro，兼容Amiibo"
 subtitle:   "EasyCon,joycontrol,nxbt"
 date:       2022-09-07
-update:     2022-09-07
+update:     2022-09-09
 author:     "elmagnifico"
 header-img: "img/amiibo.jpg"
 catalog:    true
@@ -64,6 +64,16 @@ JoyCon配对流程，额外增加两步
 
 
 手柄一定是整个流程走完了，自动会变成等待用户按键以后结束配对，否则会卡在中间重复发没有确认的命令。JoyCon的配对完成以后，发送按键可能并不能激活，这是因为需要一对JC才能完全显示手柄，单JC，切换成横着使用的模式（SR+SL）才能显示，否则就只能Home键，切回桌面或者是触屏退出配对，然后就能看到实际上JC已经在左下角显示出来了，功能也是正常的。
+
+
+
+#### 报文序号
+
+![image-20220909165115549](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202209091651933.png)
+
+需要注意报文序号需要实现，否则会出现发送HID报文，但是NS完全不识别的情况（只响应了第一次的报文）
+
+反倒是配对和Amiibo的命令报文，如果你没有序号，也能正常工作
 
 
 
