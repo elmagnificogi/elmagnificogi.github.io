@@ -201,9 +201,41 @@ Error: libusb_open() failed with LIBUSB_ERROR_NOT_FOUND
 
 
 
+## 烧写
+
+当没有编译环境的时候如何烧写，下载官方的烧写工具
+
+> https://www.espressif.com.cn/zh-hans/support/download/other-tools
+
+选择对应的芯片
+
+![SMMS](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202209091656142.png)
+
+Develop是给一般人用的，如果是工厂可能需要批量烧写，那么可以选择，对应会出现支持很多个串口烧写的UI，平常完全没必要。
+
+Develop烧写固件界面
+
+![image-20220909165659188](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202209091656745.png)
+
+由于ESP32比较复杂，所以可能有好几个固件需要烧写，并且要指定对应的地址。
+
+一般来说就是三个地址，boot、partition和app
+
+```
+0x0000 bootloader.bin
+0x8000 partition-table.bin
+0x10000 app.bin
+```
+
+设置好了以后就可以进行烧写了
+
+还有一种整合的方法，点击`CombineBin`，将需要烧写的固件整合在一起，就可以每次直接从0x0000地址烧写了，不用额外填那么多其他地址。
+
+
+
 ## Summary
 
-未完待续
+暂时就这么多，日后还有遇到问题再补充。
 
 
 
@@ -224,4 +256,6 @@ Error: libusb_open() failed with LIBUSB_ERROR_NOT_FOUND
 > https://www.codenong.com/54731054/
 >
 > https://github.com/espressif/idf-installer/issues/133
+>
+> https://www.esp32.com/viewtopic.php?t=21799
 
