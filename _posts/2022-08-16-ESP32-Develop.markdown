@@ -301,6 +301,18 @@ CONFIG_LOG_BOOTLOADER_LEVEL=0
 
 
 
+## FreeRTOS
+
+ESP32使用的是FreeRTOS，但是他的FreeRTOS用的不是systick，这就导致操作系统的时钟精度是不够的，默认情况下工程创建的是100Hz的Tick，这就导致实际如果执行`vTaskDelay(4 / portTICK_PERIOD_MS);`，就会出现精度受影响的情况。
+
+![image-20220912200209819](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202209122002873.png)
+
+如果一个循环中，没有什么可能阻塞的业务，那么`vTaskDelay`由于精度不够，会直接就跳过了，等于`vTaskDelay(0);`
+
+要修复这个问题，必须把Tick设置到1000Hz，这样短延迟才能正常发挥作用。
+
+
+
 ## Summary
 
 暂时就这么多，日后还有遇到问题再补充。
