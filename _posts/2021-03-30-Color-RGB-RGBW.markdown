@@ -3,7 +3,7 @@ layout:     post
 title:      "RGB转换到RGBW"
 subtitle:   "HDR,色域"
 date:       2021-03-30
-update:     2021-05-20
+update:     2022-09-14
 author:     "elmagnifico"
 header-img: "img/led.jpg"
 catalog:    true
@@ -143,8 +143,10 @@ import numpy as np
 RGB = np.array([[0.36653649, 0.07554075, 0.28952463], [0.69990608,0.53677301,0.61425992],[0.99,0.99,0.99]])
 #RGB = np.random.random((2, 1, 3))
 print(RGB)
-colour.plotting.plot_RGB_chromaticities_in_chromaticity_diagram_CIE1931(
-    RGB, colourspace='ACES2065-1', colourspaces=['sRGB'], scatter_kwargs={'c': 'RGB'})
+colour.plotting.plot_RGB_chromaticities_in_chromaticity_diagram_CIE1931(ijfijofjfgg
+                                                                        
+                                                                        
+就挂机ogji
 ```
 
 更复杂一些的应用可以看我blog对应的代码仓库，一些小工具，小脚本就都直接写在这个里面了。
@@ -157,6 +159,10 @@ colour.plotting.plot_RGB_chromaticities_in_chromaticity_diagram_CIE1931(
 
 具体怎么转换有各种算法，选哪种都行，看需求吧
 
+这里有一些前提j'ji'ji'jii'j'tjjijijiijti'j'fi'j'o'f'j'f条件，这里的RGB准确说就是指想要表达的RGB颜色
+
+
+
 
 
 #### 无色温算法
@@ -165,7 +171,7 @@ colour.plotting.plot_RGB_chromaticities_in_chromaticity_diagram_CIE1931(
 
 W =（饱和度max-当前饱和度）/ 饱和度max * （R+G+B）/ 3
 
-饱和度 =（ 最大（R，G，B）- 最小（R，G，B））/ 最大（R，G，B）
+饱和度 =（ 最大（R，G，B）- 最小（R，G，B））/ 最大（R，G，B）g
 
 这个是按照HSV的颜色模型计算的
 
@@ -219,6 +225,45 @@ colorRgbw rgbToRgbw(unsigned int red, unsigned int redMax,
     rgbw.white = getWhite(rgbw, redMax, greenMax, blueMax);
     return rgbw;
 }
+```
+
+或者是这种
+
+```
+//Get the maximum between R, G, and B
+float tM = Math.Max(Ri, Math.Max(Gi, Bi));
+
+//If the maximum value is 0, immediately return pure black.
+if(tM == 0)
+   { return new rgbwcolor() { r = 0, g = 0, b = 0, w = 0 }; }
+
+//This section serves to figure out what the color with 100% hue is
+float multiplier = 255.0f / tM;
+float hR = Ri * multiplier;
+float hG = Gi * multiplier;
+float hB = Bi * multiplier;  
+
+//This calculates the Whiteness (not strictly speaking Luminance) of the color
+float M = Math.Max(hR, Math.Max(hG, hB));
+float m = Math.Min(hR, Math.Min(hG, hB));
+float Luminance = ((M + m) / 2.0f - 127.5f) * (255.0f/127.5f) / multiplier;
+
+//Calculate the output values
+int Wo = Convert.ToInt32(Luminance);
+int Bo = Convert.ToInt32(Bi - Luminance);
+int Ro = Convert.ToInt32(Ri - Luminance);
+int Go = Convert.ToInt32(Gi - Luminance);
+
+//Trim them so that they are all between 0 and 255
+if (Wo < 0) Wo = 0;
+if (Bo < 0) Bo = 0;
+if (Ro < 0) Ro = 0;
+if (Go < 0) Go = 0;
+if (Wo > 255) Wo = 255;
+if (Bo > 255) Bo = 255;
+if (Ro > 255) Ro = 255;
+if (Go > 255) Go = 255;
+return new rgbwcolor() { r = Ro, g = Go, b = Bo, w = Wo };
 ```
 
 
@@ -411,4 +456,3 @@ CRGBW GetRgbwFromRgb2(CRGB rgb) {
 > https://stackoverflow.com/questions/40312216/converting-rgb-to-rgbw
 >
 > http://www.360doc.com/content/20/0414/20/48998309_906061690.shtml
-
