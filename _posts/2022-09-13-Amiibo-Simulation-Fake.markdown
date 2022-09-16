@@ -3,7 +3,7 @@ layout:     post
 title:      "Amiibo Fake"
 subtitle:   "Nintendo Switch,EasyCon"
 date:       2022-09-13
-update:     2022-09-13
+update:     2022-09-17
 author:     "elmagnifico"
 header-img: "img/typora.jpg"
 catalog:    true
@@ -21,6 +21,8 @@ tags:
 ## Amiibo
 
 #### NTAG215
+
+> https://wiki.gbatemp.net/wiki/Amiibo
 
 Amiibo本质上就是一个NTAG215标签，以前弄过超远距离RFID，所以这个倒是了解一点。
 
@@ -95,6 +97,142 @@ LibAmiibo.Data.AmiiboTag amiiboTag = LibAmiibo.Data.AmiiboTag.FromNtagData(encry
 又找到了一个大全，号称所有都有，包括key_retail.bin
 
 > https://drive.google.com/drive/u/0/folders/1TCEmF5alHGCbg5gSk4qRLmJYHIzgYUJH?sort=13&direction=a
+
+这样就有了对应的Key了
+
+
+
+Libamiibo跑不起来，可以解析未加密的内容，但是加密内容的key传不进去，调用不上。卡尔又提供了新思路，所以跳过去看看。
+
+
+
+## amiitool
+
+> https://github.com/socram8888/amiitool
+
+amiitool 直接用c实现了，我直接省事了
+
+这个仓库从18年就再没更新过了，应该是稳定了，加解密流程稳定了。
+
+先看一下issue，大概确定了
+
+> https://github.com/socram8888/amiitool/issues/4
+
+首先加解密必须要有`mbedTLS `
+
+> https://github.com/Mbed-TLS/mbedtls
+
+`mbedTLS`是个相当大的库，amiitool里是直接使用的静态库，也就是源码编译的。
+
+主要是完成2个加密算法 HMAC-SHA256 和 AES
+
+> - Calculating a HMAC-SHA256 as part of the DRBG
+> - Checking and generating the fixed part HMAC-SHA256
+> - Checking and generating the user content's HMAC-SHA256
+> - Decrypting and encrypting the user contents using AES
+
+
+
+上一秒还在考虑`mbedTLS`要移植2个算法出来太麻烦了，下一秒就看到了ESP32直接内部已经移植了这个库，可以直接调用了。
+
+![image-20220917013025615](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202209170130700.png)
+
+
+
+然后他这里是需要前面提到的Locked-Secret.bin和Unfixed-Info.bin
+
+> - Decryption "mario.bin" and displaying hex to terminal:
+>
+>   > amiitool -d -k retail.bin -i "mario.bin" | xxd
+>
+> - Encryption "modified.bin" to "signed.bin":
+>
+>   > amiitool -e -k retail.bin -i "modified.bin" -o "signed.bin"
+>
+> - Copy "mario2.bin" Saves (AppData) into "mario1.bin" and save to "mario3.bin"
+>
+>   > amiitool -c -k retail.bin -i "mario1.bin" -s "mario2.bin" -o "mario3.bin"
+
+仔细查看以后发现，其实
+
+```
+key_retail.bin = Unfixed-Info.bin + Locked-Secret.bin
+```
+
+所以他 -k 的参数是直接使用的retail.bin
+
+
+
+#### 测试
+
+```
+amiitool.exe -d -k amiibo_key_retail.bin -i Mipha.bin -o mipha_decryption.bin
+```
+
+然后就得到了解密以后的bin，直接拉进对比
+
+![image-20220917021259620](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202209170212686.png)
+
+可以看到只有最后一部分是相同的，也就是以下部分是固定值
+
+![image-20220917021505602](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202209170215627.png)
+
+
+
+再试一下加密，将刚才的解密bin加密回去
+
+```
+amiitool.exe -e -k amiibo_key_retail.bin -i mipha_decryption.bin -o mipha_en.bin
+```
+
+经过对比，加密后和原来的bin是一样的。
+
+那么这个东西肯定就能用，
+
+
+
+```
+amiitool.exe -d -k amiibo_key_retail.bin -i "Link (Rider).bin" -o Rider.bin
+amiitool.exe -d -k amiibo_key_retail.bin -i "Link (Archer).bin" -o Archer.bin
+```
+
+可以看到0x58的地方实际上是对应的amiibo的识别位置
+
+![image-20220917024243393](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202209170242446.png)
+
+
+
+同样解密以后，他们58的地方也是不同的，现在试着把他们修改成相同的，看一下结果
+
+![image-20220917024358081](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202209170243130.png)
+
+加密回去右边的
+
+```
+amiitool.exe -e -k amiibo_key_retail.bin -i Archer.bin -o archer_en.bin
+```
+
+加密以后发现，amiibo的位置其实没有变，依然是03 53，没有变成想象的03 54
+
+
+
+仔细看了一下，发现其实03 54 不在0x58这个位置了，而是在0x1E0
+
+![image-20220917025354271](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202209170253308.png)
+
+所以我应该改这个地方，重新调整以后再加密，已经修改为0x54了
+
+![image-20220917025458260](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202209170254319.png)
+
+测试一下是否有效，测试修改为54以后，正确识别了，但是现在不能区分识别到的这个Amiibo到底是不是0x54 还是识别的是0x53
+
+
+
+## pyamiibo
+
+> https://pypi.org/project/pyamiibo/
+
+这个是amiitool的作者推荐的python的库，实现的功能也是一样的
 
 
 
