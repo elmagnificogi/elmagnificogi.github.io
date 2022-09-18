@@ -3,13 +3,14 @@ layout:     post
 title:      "Amiibo Fake"
 subtitle:   "Nintendo Switch,EasyCon"
 date:       2022-09-13
-update:     2022-09-17
+update:     2022-09-19
 author:     "elmagnifico"
 header-img: "img/typora.jpg"
 catalog:    true
 tags:
-    - C
-    - C#
+    - ESP32
+    - EasyCon
+    - Nintendo Switch
 ---
 
 ## Forward
@@ -163,7 +164,7 @@ key_retail.bin = Unfixed-Info.bin + Locked-Secret.bin
 
 
 
-#### 测试
+#### 测试amiitool
 
 ```
 amiitool.exe -d -k amiibo_key_retail.bin -i Mipha.bin -o mipha_decryption.bin
@@ -190,6 +191,8 @@ amiitool.exe -e -k amiibo_key_retail.bin -i mipha_decryption.bin -o mipha_en.bin
 那么这个东西肯定就能用，
 
 
+
+#### 测试Amiibo Id
 
 ```
 amiitool.exe -d -k amiibo_key_retail.bin -i "Link (Rider).bin" -o Rider.bin
@@ -226,6 +229,86 @@ amiitool.exe -e -k amiibo_key_retail.bin -i Archer.bin -o archer_en.bin
 
 测试一下是否有效，测试修改为54以后，正确识别了，但是现在不能区分识别到的这个Amiibo到底是不是0x54 还是识别的是0x53
 
+经过cale纠正，一个amiibo的识别码，不仅仅是`0354`这么一点，实际上是
+
+![image-20220918224614698](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202209182246729.png)
+
+这里的8字节共同决定的，所以要替换的内容还要再多一点。要实际看到Amiibo到底是哪个，可以借助动森或者是喷2、喷3，他们会显示具体是哪个amiibo。我这里就借用喷2试一下。
+
+
+
+#### 喷射2测试
+
+```
+amiitool.exe -d -k amiibo_key_retail.bin -i "Inkling Boy.bin" -o boy_d.bin
+amiitool.exe -d -k amiibo_key_retail.bin -i "Inkling Girl.bin" -o girl_d.bin
+```
+
+解密前
+
+![image-20220918235612084](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202209182356119.png)
+
+结合amiibo api的数据一起看
+
+> https://amiiboapi.com/api/amiibo/
+
+```json
+    {
+      "amiiboSeries": "Splatoon", 
+      "character": "Inkling", 
+      "gameSeries": "Splatoon", 
+      "head": "08000100", 
+      "image": "https://raw.githubusercontent.com/N3evin/AmiiboAPI/master/images/icon_08000100-003e0402.png", 
+      "name": "Inkling Girl", 
+      "release": {
+        "au": "2015-05-30", 
+        "eu": "2015-05-29", 
+        "jp": "2015-05-28", 
+        "na": "2015-05-29"
+      }, 
+      "tail": "003e0402", 
+      "type": "Figure"
+    }, 
+    {
+      "amiiboSeries": "Splatoon", 
+      "character": "Inkling", 
+      "gameSeries": "Splatoon", 
+      "head": "08000200", 
+      "image": "https://raw.githubusercontent.com/N3evin/AmiiboAPI/master/images/icon_08000200-003f0402.png", 
+      "name": "Inkling Boy", 
+      "release": {
+        "au": "2015-05-30", 
+        "eu": "2015-05-29", 
+        "jp": "2015-05-28", 
+        "na": "2015-05-29"
+      }, 
+      "tail": "003f0402", 
+      "type": "Figure"
+    }, 
+```
+
+我将girl的数值改成了boy的，其他内容不变，重新再加密
+
+```
+amiitool.exe -e -k amiibo_key_retail.bin -i girl_d.bin -o girl_en.bin
+```
+
+![image-20220919000131197](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202209190001244.png)
+
+单纯和boy比的话，基本全都变了
+
+![image-20220919000200677](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202209190002735.png)
+
+进入喷2，使用刚才伪造的boy，进入游戏，正常识别到了，但是这个对话名称稍微有点问题，男性角色却是女性名称了
+
+![image-20220919000952739](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202209190009995.png)
+
+正常girl，应该是这样的
+
+![image-20220919001106908](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202209190011148.png)
+
+验证成功，所以剩下的只要移植代码就行了，比较简单了。
+
 
 
 ## pyamiibo
@@ -238,7 +321,9 @@ amiitool.exe -e -k amiibo_key_retail.bin -i Archer.bin -o archer_en.bin
 
 ## Summary
 
-未完待续
+如果只是用来弄 Amiibo 基本就是完美方案了，比nfc更快的识别速度，而且可以存下任意数量的Amiibo，也能通过伊机控更新。
+
+ESP32这个方案就测试到这里，暂时不会relese bin 也不会移植了，方案肯定是可行的。
 
 
 
@@ -249,3 +334,5 @@ amiitool.exe -e -k amiibo_key_retail.bin -i Archer.bin -o archer_en.bin
 > https://github.com/Falco20019/libamiibo
 >
 > https://hax0kartik.github.io/amiibo-generator/
+>
+> https://kevinbrewster.github.io/Amiibo-Reverse-Engineering/

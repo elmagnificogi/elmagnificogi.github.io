@@ -3,7 +3,7 @@ layout:     post
 title:      "ESP32模拟JoyCon和Pro，兼容Amiibo使用指南"
 subtitle:   "EasyCon,joycontrol,nxbt"
 date:       2022-09-15
-update:     2022-09-15
+update:     2022-09-19
 author:     "elmagnifico"
 header-img: "img/amiibo.jpg"
 catalog:    true
@@ -53,11 +53,17 @@ ESP32建议购买ESP32-WROOM-32、ESP32-WROOM-32E、ESP32-WROOM-32D，任何使�
 
 #### 推荐
 
-![image-20220915233436739](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202209152334802.png)
+![image-20220918205306450](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202209182053515.png)
 
-不差钱可以买这样的，带屏幕+按键，平常用起来也方便，后续会更新屏幕和按键交互
+- 按键是按照引脚15对齐的，正面和屏幕一致
 
+不差钱可以买这样的，带屏幕+按键，平常用起来也方便
 
+![image-20220918205817738](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202209182058913.png)
+
+如果是4*4键盘，定义如图，其他按键时重复功能（IO不够用）
+
+![image-20220918205929241](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202209182059355.png)
 
 省钱请搜以下关键词，找便宜的
 
