@@ -1,0 +1,172 @@
+---
+layout:     post
+title:      "lwIP学习（一）"
+subtitle:   "IP,Udp"
+date:       2022-09-21
+update:     2022-09-21
+author:     "elmagnifico"
+header-img: "img/springboot.jpg"
+catalog:    true
+tags:
+    - C
+---
+
+## Forward
+
+IwIP，直接看MTK的demo好像挺简单的，实际一用，发现不是这么回事，而且感觉API非常多，各种地方使用的都乱七八糟的。还是看官方文档学习一下具体是怎么使用的。
+
+
+
+## IwIP
+
+
+
+### API
+
+
+
+- Callback API
+
+lwIP大部分API都是基于Callback的形式设计的，只要定义好需要处理的事件，后续在对应的Callback中一一回应就行了。Callback类型的API自然也不能在IRQ里调用。
+
+
+
+- raw API
+
+同时，他也有对应的裸板API，或者说非CallBack类型的API，主要是节省内存空间，而且不需要操作系统，就可以直接使用。
+
+
+
+- sequential API
+
+顺序API，主要是给底层调用协议栈使用的，阻塞式的
+
+
+
+- socket API
+
+基于sequential API而来的，BSD风格的，由于存在复制数据等层层包装，效率低一些
+
+
+
+- Netconn API
+
+基于sequential API，主要是线程安全，复制数据比socket API稍微少一点，可以从其他线程调用
+
+
+
+- NETIF API
+
+这个主要是用于处理多网口的应用，平常应该不会有这个问题
+
+
+
+一般来说，开发主要使用Callback API或者是 sequential API
+
+
+
+### UDP
+
+#### Callback/Socket API
+
+以udp开头的api，基本都是Callback API
+
+UDP由于本身比较简单，所以他的接口相对TCP来说也简单了很多
+
+```
+struct udp_pcb *udp_new(void)
+```
+
+创建一个pcb，只有绑定到本地或者连接到远端地址才生效
+
+
+
+```
+void udp_remove(struct udp_pcb *pcb)
+```
+
+移除一个pcb
+
+
+
+```
+err_t udp_bind(struct udp_pcb *pcb, ip_addr_t *ipaddr,
+                 u16_t port)
+```
+
+绑定到本地，监听所有需要设置ip为`IP_ADDR_ANY `
+
+
+
+```
+err_t udp_connect(struct udp_pcb *pcb, ip_addr_t *ipaddr,
+                    u16_t port)
+```
+
+连接远端地址，实际不会发送任何数据到远端
+
+
+
+```
+udp_disconnect(struct udp_pcb *pcb)
+```
+
+断开远端连接
+
+
+
+```
+udp_send(struct udp_pcb *pcb, struct pbuf *p)
+```
+
+发送对应的数据
+
+
+
+```
+udp_recv(struct udp_pcb *pcb,
+                void (* recv)(void *arg, struct udp_pcb *upcb,
+                                         struct pbuf *p,
+                                         ip_addr_t *addr,
+                                         u16_t port),
+                              void *recv_arg)
+```
+
+设置接收数据的回调
+
+
+
+#### 阻塞与非阻塞
+
+如果使用直接进行传输的接口，可能还会有阻塞和非阻塞的问题
+
+```c
+uint32_t mode1 = 1;
+ioctlsocket(s,FIONBIO,&mode1);//非阻塞
+mode1 = 0;
+ioctlsocket(s,FIONBIO,&mode1);//阻塞
+```
+
+
+
+最后的参数使用`MSG_DONTWAIT`表示非阻塞，``表示阻塞
+
+```c
+rlen = lwip_recv(dmd_udp_sock, rcv_buf, sizeof(rcv_buf) - 1,MSG_DONTWAIT);
+```
+
+
+
+但是这里遇到了问题，实际接收这里完全没有反应，依然会阻塞，还没找到问题在哪里
+
+
+
+## Summary
+
+未完待续
+
+
+
+## Quote
+
+> https://www.nongnu.org/lwip/2_0_x/raw_api.html
