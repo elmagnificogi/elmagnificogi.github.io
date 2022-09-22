@@ -3,7 +3,7 @@ layout:     post
 title:      "腾讯云封锁使用翻墙服务的轻量云"
 subtitle:   "v2ray,跨境访问节点"
 date:       2022-07-25
-update:     2022-07-28
+update:     2022-09-22
 author:     "elmagnifico"
 header-img: "img/y7.jpg"
 catalog:    true
@@ -22,6 +22,8 @@ tags:
 没想到今晚就轮到我了，哎，又要去找一个稳定节点了。
 
 我的图床、TTRss、Blog全都跑在这个服务器上，要是先封其他的倒还好，直接把主服务器封了，真的是麻烦。
+
+2022.9.22又有一个香港的被封了，还是移动到了新加坡保平安了
 
 
 
@@ -143,9 +145,13 @@ wget --no-check-certificate -qO natcfg.sh http://www.arloor.com/sh/iptablesUtils
 
 到此就将香港轻量的镜像移动到了新加坡轻量，由于都是用的竞价，整体花费不超过1元，就是创建镜像费点时间。
 
+2022.9.22 后来轻量支持直接跨地域复制镜像了，就不用上述方法曲线救国了。
+
+
+
 ![image-20220801182920270](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208011829030.png)
 
-等弄过来发现了一个致命问题，价格低一些的套餐，硬盘大小竟然是不够的。我去，白折腾了半天。
+等弄过来发现了一个致命问题，价格低一些的套餐，**硬盘大小竟然是不够的**。我去，白折腾了半天。
 
 
 
