@@ -3,7 +3,7 @@ layout:     post
 title:      "lwIP学习（一）"
 subtitle:   "IP,Udp"
 date:       2022-09-21
-update:     2022-09-21
+update:     2022-09-23
 author:     "elmagnifico"
 header-img: "img/springboot.jpg"
 catalog:    true
@@ -159,6 +159,8 @@ lwip_send(dmd_udp_sock, mav_send_bytes, sizeof(mav_send_count),MSG_DONTWAIT);
 
 
 这里遇到一点问题，mt793x的lwip_socket_demo，udp client应该是写错了，用上面的api会出现直接卡死，收不到任何数据的情况
+
+**实际不建议直接使用`lwip`开头的API，除非你真的知道你在干什么**
 
 
 
