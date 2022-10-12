@@ -1,0 +1,283 @@
+---
+layout:     post
+title:      "MT793x GPIO配置生成"
+subtitle:   "EPT"
+date:       2022-10-12
+update:     2022-10-12
+author:     "elmagnifico"
+header-img: "img/sensor-head-bg.jpg"
+catalog:    true
+tags:
+    - C
+---
+
+## Forward
+
+ST的CubeMX自动生成GPIO等相关配置文件的代码已经非常简单易懂了，最近看了MT的实现，发现也比较简单易懂，这里做一点解析。
+
+
+
+## Eays PinMux Tool
+
+Eays PinMux Tool，可以通过这个工具，直接配置GPIO的功能和上下拉以及方向，同时也可以自定义注释。
+
+![image-20221012151409286](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202210121514592.png)
+
+之后就可以直接生成对应的.c和.h文件，只需要将对应的文件扔到工厂目录中，加入编译即可
+
+
+
+部分代码
+
+```c
+#ifndef _EPT_GPIO_DRV_H
+#define _EPT_GPIO_DRV_H
+
+#define MODE_0  0
+#define MODE_1  1
+#define MODE_2  2
+#define MODE_3  3
+#define MODE_4  4
+#define MODE_5  5
+#define MODE_6  6
+#define MODE_7  7
+#define MODE_NC  0
+
+#define PULL_ENABLE    1
+#define PULL_DISABLE  0
+#define DIR_INPUT       0
+#define DIR_OUTPUT    1
+#define GPIO_PORTNULL_MODE    0
+#define GPIO_PORTNULL_DIR       0
+#define GPIO_PORTNULL_OUTPUT_LEVEL  0
+#define GPIO_PORTNULL_PU        0
+#define GPIO_PORTNULL_PD        0
+#define GPIO_PORTNULL_R0        0
+#define GPIO_PORTNULL_R1        0
+#define GPIO_PORTNULL_PUPD    0
+#define GPIO_PORTNULL_DOUT   0
+
+#define GPIO_PORT0_MODE   MODE_1 // 1:SF_QPI_CK : Used for SF_QPI_CK
+#define GPIO_PORT1_MODE   MODE_1 // 1:SF_QPI_CS : Used for SF_QPI_CS
+#define GPIO_PORT2_MODE   MODE_1 // 1:SF_QPI_D0 : Used for SF_QPI_D0
+#define GPIO_PORT3_MODE   MODE_1 // 1:SF_QPI_D1 : Used for SF_QPI_D1
+#define GPIO_PORT4_MODE   MODE_1 // 1:SF_QPI_D2 : Used for SF_QPI_D2
+#define GPIO_PORT5_MODE   MODE_1 // 1:SF_QPI_D3 : Used for SF_QPI_D3
+#define GPIO_PORT6_MODE   MODE_3 // 3:SPIM0_SCK : Used for SPIM0_SCK
+#define GPIO_PORT7_MODE   MODE_3 // 3:SPIM0_CS_N : Used for SPIM0_CS_N
+#define GPIO_PORT8_MODE   MODE_3 // 3:SPIM0_MISO : Used for SPIM0_MISO
+#define GPIO_PORT9_MODE   MODE_3 // 3:SPIM0_MOSI : Used for SPIM0_MOSI
+#define GPIO_PORT10_MODE   MODE_3 // 3:I2SIN_DAT0 : Used for I2SIN_DAT0
+#define GPIO_PORT11_MODE   MODE_3 // 3:I2SO_DAT0 : Used for I2SO_DAT0
+#define GPIO_PORT12_MODE   MODE_3 // 3:CONN_BT_TXD : Used for CONN_BT_TXD
+#define GPIO_PORT13_MODE   MODE_6 // 6:ANT_SEL4 : Used for ANT_SEL4
+#define GPIO_PORT14_MODE   MODE_6 // 6:ANT_SEL5 : Used for ANT_SEL5
+#define GPIO_PORT15_MODE   MODE_0 // 0:GPIO15 : Used for GPIO15
+#define GPIO_PORT16_MODE   MODE_0 // 0:GPIO16 : Used for GPIO16
+```
+
+
+
+```c
+/*Output for default variable names*/
+/*@XXX_XX_PIN in gpio.cmp          */
+
+const char HAL_UART0_DTE_DCD_PIN = 0xff;
+const char HAL_UART0_DTE_DSR_PIN = 0xff;
+const char HAL_UART0_DTE_DTR_PIN = 0xff;
+const char HAL_UART0_DTE_RI_PIN = 0xff;
+const char HAL_UART1_DTE_DCD_PIN = 0xff;
+const char HAL_UART1_DTE_DSR_PIN = 0xff;
+const char HAL_UART1_DTE_DTR_PIN = 0xff;
+const char HAL_UART1_DTE_RI_PIN = 0xff;
+const char HAL_UART2_DTE_DCD_PIN = 0xff;
+const char HAL_UART2_DTE_DSR_PIN = 0xff;
+const char HAL_UART2_DTE_DTR_PIN = 0xff;
+const char HAL_UART2_DTE_RI_PIN = 0xff;
+const char BSP_CTP_SW_I2C_SCL_PIN = 0xff;
+const char BSP_CTP_SW_I2C_SDA_PIN = 0xff;
+const char BSP_CTP_RST_PIN = 0xff;
+const char BSP_CTP_EINT_PIN = 0xff;
+const char BSP_SPEAKER_EBABLE_PIN = 0xff;
+const char BSP_AUXADC_ENABLE_PIN = 0xff;
+const char BSP_GNSS_POWER_PIN = 0xff;
+```
+
+
+
+## 具体实现
+
+如果直接搜上面代码的宏定义，会发现根本没被调用。实际上这个部分是通过宏字符串拼接来引用的
+
+
+
+直接定义了寄存器的组成
+
+```c
+#define    GPIO_MODE_REG0    GPIO_HWORD_REG_VAL(MODE,  0,  1,  2,  3,  4,  5,  6,  7, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,\
+    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)
+#define    GPIO_MODE_REG1    GPIO_HWORD_REG_VAL(MODE,  8,  9,  10,  11,  12,  13,  14,  15, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,\
+    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)
+```
+
+
+
+具体实现
+
+```c
+#define GPIO_HWORD_REG_VAL(name, port0, port1, port2, port3, port4, port5, port6, port7, port8, port9, port10, \
+                                port11, port12, port13, port14, port15, port16, port17, port18, port19, port20, port21, \
+                               port22, port23, port24, port25, port26, port27, port28, port29, port30, port31,      \
+                               port32, port33, port34, port35, port36, port37, port38, port39, port40, port41,      \
+                               port42, port43, port44, port45, port46, port47, port48, port49, port50, port51, port52)      \
+((GPIO_PORT##port0##_##name<<((GPIO_##name##_##ONE_CONTROL_BITS*0) & 0x1f)) | \
+(GPIO_PORT##port1##_##name<<((GPIO_##name##_##ONE_CONTROL_BITS*1) & 0x1f)) |    \
+(GPIO_PORT##port2##_##name<<((GPIO_##name##_##ONE_CONTROL_BITS*2) & 0x1f)) |   \
+(GPIO_PORT##port3##_##name<<((GPIO_##name##_##ONE_CONTROL_BITS*3) & 0x1f)) |    \
+(GPIO_PORT##port4##_##name<<((GPIO_##name##_##ONE_CONTROL_BITS*4) & 0x1f)) | \
+(GPIO_PORT##port5##_##name<<((GPIO_##name##_##ONE_CONTROL_BITS*5) & 0x1f)) |    \
+(GPIO_PORT##port6##_##name<<((GPIO_##name##_##ONE_CONTROL_BITS*6) & 0x1f)) | \
+(GPIO_PORT##port7##_##name<<((GPIO_##name##_##ONE_CONTROL_BITS*7) & 0x1f)) |    \
+(GPIO_PORT##port8##_##name<<((GPIO_##name##_##ONE_CONTROL_BITS*8) & 0x1f)) | \
+(GPIO_PORT##port9##_##name<<((GPIO_##name##_##ONE_CONTROL_BITS*9) & 0x1f)) |    \
+(GPIO_PORT##port10##_##name<<((GPIO_##name##_##ONE_CONTROL_BITS*10) & 0x1f)) |\
+(GPIO_PORT##port11##_##name<<((GPIO_##name##_##ONE_CONTROL_BITS*11) & 0x1f)) |  \
+(GPIO_PORT##port12##_##name<<((GPIO_##name##_##ONE_CONTROL_BITS*12) & 0x1f)) | \
+(GPIO_PORT##port13##_##name<<((GPIO_##name##_##ONE_CONTROL_BITS*13) & 0x1f)) |  \
+(GPIO_PORT##port14##_##name<<((GPIO_##name##_##ONE_CONTROL_BITS*14) & 0x1f)) | \
+(GPIO_PORT##port15##_##name<<((GPIO_##name##_##ONE_CONTROL_BITS*15) & 0x1f)) |  \
+(GPIO_PORT##port16##_##name<<((GPIO_##name##_##ONE_CONTROL_BITS*16) & 0x1f)) | \
+(GPIO_PORT##port17##_##name<<((GPIO_##name##_##ONE_CONTROL_BITS*17) & 0x1f)) |  \
+(GPIO_PORT##port18##_##name<<((GPIO_##name##_##ONE_CONTROL_BITS*18) & 0x1f)) |  \
+(GPIO_PORT##port19##_##name<<((GPIO_##name##_##ONE_CONTROL_BITS*19) & 0x1f)) |  \
+(GPIO_PORT##port20##_##name<<((GPIO_##name##_##ONE_CONTROL_BITS*20) & 0x1f)) | \
+(GPIO_PORT##port21##_##name<<((GPIO_##name##_##ONE_CONTROL_BITS*21) & 0x1f)) |  \
+(GPIO_PORT##port22##_##name<<((GPIO_##name##_##ONE_CONTROL_BITS*22) & 0x1f)) | \
+(GPIO_PORT##port23##_##name<<((GPIO_##name##_##ONE_CONTROL_BITS*23) & 0x1f)) |  \
+(GPIO_PORT##port24##_##name<<((GPIO_##name##_##ONE_CONTROL_BITS*24) & 0x1f)) | \
+(GPIO_PORT##port25##_##name<<((GPIO_##name##_##ONE_CONTROL_BITS*25) & 0x1f)) |  \
+(GPIO_PORT##port26##_##name<<((GPIO_##name##_##ONE_CONTROL_BITS*26) & 0x1f)) |  \
+(GPIO_PORT##port27##_##name<<((GPIO_##name##_##ONE_CONTROL_BITS*27) & 0x1f)) |  \
+(GPIO_PORT##port28##_##name<<((GPIO_##name##_##ONE_CONTROL_BITS*28) & 0x1f)) | \
+(GPIO_PORT##port29##_##name<<((GPIO_##name##_##ONE_CONTROL_BITS*29) & 0x1f)) |  \
+(GPIO_PORT##port30##_##name<<((GPIO_##name##_##ONE_CONTROL_BITS*30) & 0x1f)) | \
+(GPIO_PORT##port31##_##name<<((GPIO_##name##_##ONE_CONTROL_BITS*31) & 0x1f)) | \
+(GPIO_PORT##port32##_##name<<((GPIO_##name##_##ONE_CONTROL_BITS*32) & 0x1f)) |    \
+(GPIO_PORT##port33##_##name<<((GPIO_##name##_##ONE_CONTROL_BITS*33) & 0x1f)) |   \
+(GPIO_PORT##port34##_##name<<((GPIO_##name##_##ONE_CONTROL_BITS*34) & 0x1f)) |    \
+(GPIO_PORT##port35##_##name<<((GPIO_##name##_##ONE_CONTROL_BITS*35) & 0x1f)) | \
+(GPIO_PORT##port36##_##name<<((GPIO_##name##_##ONE_CONTROL_BITS*36) & 0x1f)) |    \
+(GPIO_PORT##port37##_##name<<((GPIO_##name##_##ONE_CONTROL_BITS*37) & 0x1f)) | \
+(GPIO_PORT##port38##_##name<<((GPIO_##name##_##ONE_CONTROL_BITS*38) & 0x1f)) |    \
+(GPIO_PORT##port39##_##name<<((GPIO_##name##_##ONE_CONTROL_BITS*39) & 0x1f)) | \
+(GPIO_PORT##port40##_##name<<((GPIO_##name##_##ONE_CONTROL_BITS*40) & 0x1f)) |    \
+(GPIO_PORT##port41##_##name<<((GPIO_##name##_##ONE_CONTROL_BITS*41) & 0x1f)) |\
+(GPIO_PORT##port42##_##name<<((GPIO_##name##_##ONE_CONTROL_BITS*42) & 0x1f)) |  \
+(GPIO_PORT##port43##_##name<<((GPIO_##name##_##ONE_CONTROL_BITS*43) & 0x1f)) | \
+(GPIO_PORT##port44##_##name<<((GPIO_##name##_##ONE_CONTROL_BITS*44) & 0x1f)) |  \
+(GPIO_PORT##port45##_##name<<((GPIO_##name##_##ONE_CONTROL_BITS*45) & 0x1f)) | \
+(GPIO_PORT##port46##_##name<<((GPIO_##name##_##ONE_CONTROL_BITS*46) & 0x1f)) |  \
+(GPIO_PORT##port47##_##name<<((GPIO_##name##_##ONE_CONTROL_BITS*47) & 0x1f)) | \
+(GPIO_PORT##port48##_##name<<((GPIO_##name##_##ONE_CONTROL_BITS*48) & 0x1f)) |  \
+(GPIO_PORT##port49##_##name<<((GPIO_##name##_##ONE_CONTROL_BITS*49) & 0x1f)) |  \
+(GPIO_PORT##port50##_##name<<((GPIO_##name##_##ONE_CONTROL_BITS*50) & 0x1f)) |  \
+(GPIO_PORT##port51##_##name<<((GPIO_##name##_##ONE_CONTROL_BITS*51) & 0x1f)) | \
+(GPIO_PORT##port52##_##name<<((GPIO_##name##_##ONE_CONTROL_BITS*52) & 0x1f)))
+```
+
+在这里通过，宏拼接，将EPT的定义引入。
+
+之后再通过init初始化各个gpio的模式，输入输出、上下拉，电阻大小等值。
+
+```c
+/**
+  * @brief  write the joint data about GPIO mode to GPIO mode register one by one
+  * @param  None
+  * @retval None
+  */
+void gpio_mode_init(void)
+{
+    uint32_t i, j;
+    uint32_t reg_mask[GPIO_MODE_REG_MAX_NUM];
+    uint32_t temp;
+
+#ifdef GPIO_MODE_REG_MAX_NUM
+    uint32_t mode_temp[GPIO_MODE_REG_MAX_NUM] = { GPIO_MODE_ALL_VALUE };
+
+    for (i = 0; i < GPIO_MODE_REG_MAX_NUM; i++) {
+        reg_mask[i] = 0;
+        for (j = 0; j < GPIO_MODE_ONE_REG_CONTROL_NUM; j++) {
+            temp = j + i * GPIO_MODE_ONE_REG_CONTROL_NUM;
+            if ((1 << (temp % 32)) &  GPIO_REG_PIN_MASK[temp / 32]) {
+                uint32_t pin_mask = 0xf << (GPIO_MODE_ONE_CONTROL_BITS * j);
+                uint32_t mode_current = ept_gpio_base->GPIO_MODE[i].RW & pin_mask;
+                uint32_t mode_update  = mode_temp[i] & pin_mask;
+
+                if (mode_current != mode_update)
+                    reg_mask[i] |= pin_mask;
+            }
+        }
+    }
+
+    for (i = 0; i < GPIO_MODE_REG_MAX_NUM; i++) {
+        ept_gpio_base->GPIO_MODE[i].CLR = reg_mask[i];
+        ept_gpio_base->GPIO_MODE[i].SET = mode_temp[i];
+    }
+
+#endif
+}
+```
+
+
+
+被bsp统一调用
+
+```c
+/**
+  * @brief  Main program to make the configuration of EPT to take effect
+  * @param  None
+  * @retval None
+  */
+
+void bsp_ept_gpio_setting_init(void)
+{
+    gpio_mode_init();
+    gpio_dir_init();
+    gpio_pupd_init();
+    gpio_r0_r1_init();
+    gpio_output_init();
+}
+```
+
+
+
+```c
+int main(void)
+{
+    /* Do system initialization, eg: hardware, nvdm, logging and random seed. */
+    system_init();
+
+#ifdef HAL_GPIO_MODULE_ENABLED
+    bsp_ept_gpio_setting_init();
+#endif /* #ifdef HAL_GPIO_MODULE_ENABLED */
+
+#if defined(MTK_MINICLI_ENABLE)
+    /* Initialize cli task to enable user input cli command from uart port.*/
+    cli_def_create();
+    cli_task_create();
+#endif /* #if defined(MTK_MINICLI_ENABLE) */
+```
+
+bsp的初始化使能是在hal_feature中设置的
+
+![image-20221012154118587](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202210121542660.png)
+
+## Summary
+
+还有啥日后再补充
+
+
+
+## Quote
+
+> MT793X IoT SDK for Easy PinMux Tool Users Guide .pdf
