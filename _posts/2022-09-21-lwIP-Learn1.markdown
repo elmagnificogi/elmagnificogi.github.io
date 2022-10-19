@@ -166,7 +166,7 @@ lwip_send(dmd_udp_sock, mav_send_bytes, sizeof(mav_send_count),MSG_DONTWAIT);
 
 #### demo
 
-参考如下，略作修改
+参考如下，略作修改，源代码各种空指针
 
 > https://github.com/54zorb/stm32-lwip
 
@@ -210,19 +210,18 @@ static void udp_receive_callback(void *arg, struct udp_pcb *upcb,
         
         while(ptmp != NULL)
         {
-            for (i = 0; i < p->len; i++)
+            for (i = 0; i < ptmp->len; i++)
             {
-                printf("%c", *((char *)p->payload + i));
+                printf("%c", *((char *)ptmp->payload + i));
             }
             
-            ptmp = p->next;
+            ptmp = ptmp->next;
         }
         
         printf("\r\n");
+        /* 释放缓冲区数据 */
+    	pbuf_free(p);
     }
-    
-    /* 释放缓冲区数据 */
-    pbuf_free(p);
 }
 
 /******************************************************************************
@@ -298,7 +297,7 @@ void udp_client_init(void)
 
 ## Summary
 
-未完待续
+暂时先这样
 
 
 
