@@ -172,7 +172,7 @@ lwip_send(dmd_udp_sock, mav_send_bytes, sizeof(mav_send_count),MSG_DONTWAIT);
 
 
 
-```
+```c
 #include "stm32f4xx_hal.h"
 #include "lwip.h"
 #include "udp.h"
@@ -210,17 +210,17 @@ static void udp_receive_callback(void *arg, struct udp_pcb *upcb,
         
         while(ptmp != NULL)
         {
+        	ptmp = p;
             for (i = 0; i < ptmp->len; i++)
             {
                 printf("%c", *((char *)ptmp->payload + i));
             }
             
-            ptmp = ptmp->next;
+            p = ptmp->next;     
+        	printf("\r\n");
+           /* 释放缓冲区数据 */
+    		pbuf_free(ptmp);
         }
-        
-        printf("\r\n");
-        /* 释放缓冲区数据 */
-    	pbuf_free(p);
     }
 }
 
