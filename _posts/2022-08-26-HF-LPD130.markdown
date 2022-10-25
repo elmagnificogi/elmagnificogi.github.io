@@ -3,7 +3,7 @@ layout:     post
 title:      "HF-LPD1xx系列wifi死机问题"
 subtitle:   "nmi，nds32le-elf-mculib-v3，Andes Technology，汉枫，Beacon"
 date:       2022-08-26
-update:     2022-08-26
+update:     2022-10-25
 author:     "elmagnifico"
 header-img: "img/y1.jpg"
 catalog:    true
@@ -90,6 +90,12 @@ if1  28:9C:6E:5B:D0:69
 还是有概率触发nmi重启的，只是比起来WIFI完全用不了，已经小到可以忽略的程度了。
 
 ![image-20220826110243504](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208261102672.png)
+
+
+
+2022.10.25，突然就无法复现这个问题了，之前有关闭一个联通的基站，场地的墙插有更换过，除此以外理论上应该再没其他改变了
+
+当时没有抓包手段，后续debug设备有了以后，竟然无法复现，技术支持所说的情况是否属实，还需要怀疑一下。
 
 
 
