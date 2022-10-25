@@ -3,7 +3,7 @@ layout:     post
 title:      "MT793x GPIO配置生成"
 subtitle:   "EPT"
 date:       2022-10-12
-update:     2022-10-25
+update:     2022-10-12
 author:     "elmagnifico"
 header-img: "img/sensor-head-bg.jpg"
 catalog:    true
@@ -272,30 +272,9 @@ bsp的初始化使能是在hal_feature中设置的
 
 ![image-20221012154118587](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202210121542660.png)
 
-## 离谱的点
-
-无论是手册还是工具，都单独把以下四个串口给分别独立出来说明了。
-
-```
-uart0
-uart1
-uart2
-CM33_Uart
-```
-
-甚至引脚上也有单独的CM33_Uart，但是实际代码里只有3个uart，就是0-2，并且其中的0就是CM33_Uart，从而出现了一个情况。实际IO上的uart1对应的是代码中的uart0，整体错位，这代码写的，真的好迷
-
-```
-hal_uart0 CM33_UART
-hal_uart1 UART0
-hal_uart2 UART1
-```
-
-
-
 ## Summary
 
-可能ST的代码看多了，MT793X的这个底层代码写的一言难尽，很多block的地方都非常难受。
+还有啥日后再补充
 
 
 
