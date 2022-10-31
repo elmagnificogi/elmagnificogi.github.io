@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "Maya Python 反射"
-subtitle:   "EPT"
+subtitle:   "eval,getattr"
 date:       2022-10-25
 update:     2022-10-95
 author:     "elmagnifico"

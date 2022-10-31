@@ -1,0 +1,125 @@
+---
+layout:     post
+title:      "MT793x 烧写指南"
+subtitle:   "flash,firmware"
+date:       2022-10-31
+update:     2022-10-31
+author:     "elmagnifico"
+header-img: "img/pen-head-bg.jpg"
+catalog:    true
+tags:
+    - C
+    - MT793x
+---
+
+## Forward
+
+MT7931和MT7933的资料太少了，而且文档和代码还各种错，这里记录一下
+
+
+
+## MT793x烧写
+
+
+
+### 准备
+
+- FlashBurningTool_V2.83.rar
+- 固件文件
+- 串口工具
+
+
+
+**安装驱动**
+
+解压`FlashBurningTool_V2.83.rar`，可以得到2个文件夹
+
+- FBTool_v2p83_win64_GUI，烧写工具
+- MTK_USB_driver，驱动程序
+
+
+
+先安装`MTK_USB_driver`内的驱动程序
+
+
+
+**复制固件**
+
+将固件文件解压到`burn_files`，覆盖
+
+![image-20221031102412156](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202210311024341.png)
+
+
+
+### 烧写
+
+![image-20221031102702918](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202210311027026.png)
+
+打开`FBTool_v2p83_slib.exe`
+
+1. 选择uart
+2. 选择烧写串口
+3. 波特率设置为921600
+4. 打开bufn_files中的mt7931an_xip_qfn_bw_scatter.ini
+5. 勾上所有固件
+6. 点击download
+7. 同时按下开发板上的sys reset和download key
+8. 松开sys reset，烧写软件下部进度条会变黄，进度100%
+9. 松开download key，进度条清零，开始烧写
+10. 烧写完成以后，断电重启或者按下sys rest即可工作
+
+![image-20221031103706502](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202210311037615.png)
+
+烧写画面
+
+![image-20221031103724384](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202210311037455.png)
+
+**更新固件以后，需要点一下Refresh**
+
+
+
+### 检测
+
+烧写完成以后，通过串口工具打开刚才的烧写，就能看到debug输出内容
+
+![image-20221031142201709](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202210311422792.png)
+
+重启板子之后，有类似输出，说明板子正常启动了
+
+
+
+## 固件说明
+
+![image-20221031142433706](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202210311424809.png)
+
+一般来说BL、BT以及WIIF_EXT是不需要重新烧写的，一般人是不会修改底层的这些部分的，大部分情况下烧写一次就行了。
+
+NVDM可以通过烧写的时候勾选，擦除。
+
+平常的业务代码基本都存储在了RTOS的bin中，所以只需要更新生成的RTOS就行了
+
+
+
+## 常见问题
+
+卡烧写或者烧写报错了，重开软件即可
+
+
+
+**特殊情况**：
+
+FlashBurningTool 这个工具2.8以前的版本和以后的版本有比较大的不同，2.8以前很容易出现工具无法打开串口，读写数据失败。
+
+所以建议使用2.8以后的版本
+
+
+
+## Summary
+
+资料太少，而且还是从第三方拿的二手资料，十分蛋疼
+
+
+
+## Quote
+
+> MT793X IoT SDK for Flash Burning Tool v2.83.pdf
