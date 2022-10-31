@@ -5,7 +5,7 @@ subtitle:   "build,env"
 date:       2022-10-31
 update:     2022-10-31
 author:     "elmagnifico"
-header-img: "img/pen-head-bg.jpg"
+header-img: "img/pcb-head-bg.jpg"
 catalog:    true
 tags:
     - C
