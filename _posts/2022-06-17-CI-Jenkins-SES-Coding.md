@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "Jenkins搭建SES嵌入式CI/CD"
-subtitle:   "Diablo,"
+subtitle:   "自动化编译"
 date:       2022-06-17
 update:     2022-07-11
 author:     "elmagnifico"
