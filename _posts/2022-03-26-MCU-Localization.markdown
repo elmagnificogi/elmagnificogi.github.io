@@ -3,7 +3,7 @@ layout:     post
 title:      "STM32替代-MCU国产化-厂商介绍"
 subtitle:   "STM32，单片机"
 date:       2022-03-26
-update:     2022-03-26
+update:     2022-11-07
 author:     "elmagnifico"
 header-img: "img/docker-head-bg.jpg"
 catalog:    true
@@ -83,7 +83,7 @@ GD32，主要产品是M23、M3、M4、M33的部分，M4的部分比较多一些�
 
 #### 中科芯
 
->http://www.cksmcu.com/cn/index.html
+>http://cks.cetc.com.cn/
 
 主要是M0、M3系列，替代F0、F1、F4的部分产品
 
@@ -115,7 +115,7 @@ GD32，主要产品是M23、M3、M4、M33的部分，M4的部分比较多一些�
 
 #### 贝特莱
 
-> 官网挂了
+> http://www.blestech.com/
 >
 > 贝特莱有基于ARM Cortex-M 系列的MCU。BLM32F103 已经大量在打印机，刷卡机，航模，独轮车，无人飞机，电机控制。经过在各大网站上搜索，能找到BLM32F103R8T6、BLM32F103CBT6、BLM32F103RBT6和BLM32F103C8T6，可直接替代对应STM32型号。
 
