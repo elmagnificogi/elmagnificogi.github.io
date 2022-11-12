@@ -3,7 +3,7 @@ layout:     post
 title:      "恩智浦IMXRT1050开发尝试"
 subtitle:   "build,env"
 date:       2022-11-11
-update:     2022-11-11
+update:     2022-11-12
 author:     "elmagnifico"
 header-img: "img/mqtt.jpg"
 catalog:    true
@@ -109,7 +109,7 @@ int main(void)
 
 
 
-#### 工程配置
+### 工程配置
 
 ![image-20221112114755474](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202211121147539.png)
 
@@ -147,7 +147,7 @@ Flash的选择可以通过板子上的拨码来调整
 
 
 
-#### 电源
+### 电源
 
 默认的电源配置是跳了5-6的，这意味着通过debug_usb供电，如果接在1-2，就是dc插口供电，3-4是另外两个USB OTG供电，他这个供电设计是不能同时供电的，选了就只有某一部分起作用。
 
@@ -156,6 +156,8 @@ Flash的选择可以通过板子上的拨码来调整
 
 
 ## Summary
+
+未完待续
 
 
 
