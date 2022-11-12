@@ -1,0 +1,178 @@
+---
+layout:     post
+title:      "恩智浦IMXRT1050开发尝试"
+subtitle:   "build,env"
+date:       2022-11-11
+update:     2022-11-11
+author:     "elmagnifico"
+header-img: "img/mqtt.jpg"
+catalog:    true
+tags:
+    - C
+    - MT793x
+---
+
+## Forward
+
+无意间发现恩智浦的IMXRT系列的芯片，性能非常强劲啊，但是资料非常少。
+
+最初是看到PX4项目里，有打算用`i.MX RT1050`，H7系列早就量产了，反倒是这个RT1050迟迟没有动静，有点奇怪。
+
+![image-20221111150757850](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202211111508941.png)
+
+搜搜新闻，也能看到当时NXP应该是和Pixhawk有联系，看他们的说明本身用途就是给无人机用的，只是迟迟没看到Pixhawk设计相关的内容出来。
+
+
+
+查看了一下NXP的RT系列，性能都非常强劲，某种程度上说每个档好像都能吊打ST，但是用的人和热度反而不如ST多。仔细看了下所有芯片都是BGA封装的，没有焊台的话，手焊难度还是非常大的，普通玩家或者DIY玩家基本玩不起。
+
+> 一款芯片想要挡住DIY玩家的最好方法就是使用BGA封装
+
+
+
+NXP属于是闷声发大财的那种，现在RT系列好像更多的被用在了显示器、触摸驱动之类的地方，似乎没听说谁家飞控是NXP的
+
+
+
+## 小对比
+
+之前一直觉得ST在M7上性能算是做的比较强的了，对比NXP，直接吊打ST了，外设各方面也不见得比ST差，同比价格只有1/8的，可以说非常逆天了。
+
+![image-20221111152947840](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202211111529959.png)
+
+ST被炒成天价，各种期货
+
+
+
+## EVK开箱
+
+> https://www.nxp.com/document/guide/getting-started-with-the-mimxrt1050-evk-evaluation-board:GS-MIMXRT1050-EVK
+
+USB一插上电即可，可以看到还是自带了一个DAPLink，可以直接烧写和调试，还是挺方便的。板子上也留了JLink口，也能直接用。
+
+![image-20221111152501127](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202211111525215.png)
+
+
+
+> DAPLink，包括CMSIS-DAP的全部功能，增加了拖拽下载/WebUSB下载功能，是ARM公司为开发板供应商提供的一种廉价开发环境，也可以说是与开发板供应商共同发展出来的。 有几个原因：
+> 1.价格便宜，整套开发板的价格就不贵，不必要求终端用户购买JLINK等仿真器，也不需要MDK/Keil等收费的IDE即可使用。 常见的有pyOCD, mBed, GCC等等。
+> 2.带有DAPLink的系统，开发板供应商/第三方软件商，可以包装出一种儿童使用的硬件+软件开发环境，儿童不需要知道DAPLink的存在和C语言什么的，基本上都是图形化的，各种图标在屏幕上面拖来拖去的，也能完成计算机教育从娃娃抓起。 国外很流行。
+
+DAPLink也有一些不方便的地方，一种芯片或者一种板子就需要对应一个DAP的固件，而板子千千万，每个都适配显然不太可能，所以只用在开发板，浅尝辄止的地方还行，需要更深入的地方，还是得JLink上
+
+
+
+## 开发指南
+
+
+
+### 架构
+
+![image-20221112144010298](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202211121440433.png)
+
+整体架构大概是这样的，挺普通的吧，大部分都这么写的，当然这个是基于MCUXpresso SDK来说的，相当于是官方推荐的架构了。
+
+从官方的例程代码来看，他们把RT高主频系列不是当作普通的单片机来看，更偏向一些会使用到各种第三方库的一个综合性的中控系统。
+
+
+
+### 烧写
+
+如果是使用DAPLink烧写，给的hello_world工程，需要先把默认配置切换成带有`flexspi_nor`的配置文件，才能顺利烧写
+
+![image-20221112113623431](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202211121136628.png)
+
+其他配置应该是要用JLink烧写才行
+
+```c
+int main(void)
+{
+    char ch;
+
+    /* Init board hardware. */
+    BOARD_ConfigMPU();
+    BOARD_InitBootPins();
+    BOARD_InitBootClocks();
+    BOARD_InitDebugConsole();
+
+    PRINTF("hello world.\r\n");
+
+    while (1)
+    {
+        ch = GETCHAR();
+        PUTCHAR(ch);
+    }
+}
+```
+
+烧一个串口回显，试了一下，目前没啥问题了
+
+
+
+#### 工程配置
+
+![image-20221112114755474](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202211121147539.png)
+
+工程配置中，单独的debug是直接使用内置flash块烧写，并且运行，而flexspi_nor_debug是XIP的方式运行代码，烧写的是外部flash
+
+
+
+**XIP**
+
+> eXecute In Place，即芯片内执行，是指CPU直接从存储器中读取程序代码执行，而不用再读到内存中。应用程序可以直接在flash闪存内运行，不必再把代码读到系统RAM中。flash内执行是指nor flash不需要初始化，可以直接在flash内执行代码。但往往**只执行部分代码**，比如**初始化RAM**。好处即是程序代码无需占用内存，减少内存的要求。
+
+这里说的不是很准确，XIP虽然代码是直接被运行的，但是本质上是需要NOR Flash的读写特性，同时他也需要RAM，程序运行过程中的变量，不可能存储在Flash本身上的，所以实际上XIP依然需要内存来存储变量等内容，只是程序的运行逻辑存储在了Flash而已，而不是加载到内存。这种特性只有NOR Flash才具有，NAND Flash不支持
+
+![image-20221112163612817](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202211121636939.png)
+
+flexspi_nor的配置中都有加入XIP的相关设置，XIP的这几个设置可以通过不同的组合，达到不同的效果
+
+![image-20221112164001178](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202211121640281.png)
+
+**FlexSPI**
+
+RT105x系列有2个FlexSPI接口，A和B，由于是Flex，所以可以自由组合成单、双、四、八的数据引脚模式，可以自由组合flash器件
+
+然后EVK上有两种Flash接口，一个是HyperFlash，一个是QSPI Flash，前者使用八线，后者使用四线模式。
+
+
+
+**BOOT**
+
+Flash的选择可以通过板子上的拨码来调整
+
+![image-20221112154556144](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202211121545298.png)
+
+默认使用的是0110，也就是使用IS26KS512S，HyperFlash 3V3
+
+
+
+#### 电源
+
+默认的电源配置是跳了5-6的，这意味着通过debug_usb供电，如果接在1-2，就是dc插口供电，3-4是另外两个USB OTG供电，他这个供电设计是不能同时供电的，选了就只有某一部分起作用。
+
+![image-20221112142418845](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202211121424938.png)
+
+
+
+## Summary
+
+
+
+> 当一个手焊玩家觉得已经拿下QFN封装的时候，他还不知道aQFN
+
+
+
+## Quote
+
+> https://blog.csdn.net/weixin_30399511/article/details/111976357
+>
+> https://www.keil.com/pack/doc/CMSIS/DAP/html/index.html
+>
+> https://blog.csdn.net/Mculover666/article/details/117840266
+>
+> https://www.eefocus.com/mcu-dsp/467593
+>
+> https://zhuanlan.zhihu.com/p/368276428
+>
+> Getting Started with MCUXpresso SDK for EVKB-IMXRT1050.pdf
