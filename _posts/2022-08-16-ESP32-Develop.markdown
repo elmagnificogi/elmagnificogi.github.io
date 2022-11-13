@@ -3,7 +3,7 @@ layout:     post
 title:      "ESP32开发环境折腾记录"
 subtitle:   "USB-JTAG-BUILDin,OpenOCD,YD-ESP32-C3,zadig,libwdi"
 date:       2022-08-16
-update:     2022-08-21
+update:     2022-11-13
 author:     "elmagnifico"
 header-img: "img/y5.jpg"
 catalog:    true
@@ -313,6 +313,36 @@ ESP32使用的是FreeRTOS，但是他的FreeRTOS用的不是systick，这就导�
 
 
 
+## NVS
+
+好像遇到了一点问题，NVS设置的不正确，导致存储出问题了
+
+默认设置里一般用的是`Single factory app,no OTA`，偏移是`0x8000`
+
+![image-20221113151821448](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202211131518499.png)
+
+找到他的具体设置，可以看到应该是由CSV文件决定的
+
+![image-20221113151934279](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202211131519313.png)
+
+csv中的内容如下：
+
+![image-20221113151750190](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202211131517257.png)
+
+实际这个芯片是4M大小，给了APP 1MB，给了nvs 24KB
+
+但是实际可用大小，还需要考虑到实际存储头等消耗，所以具体应该只有20567大小
+
+![image-20221113152409588](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202211131524625.png)
+
+但是，还不止这些。其实nvs里面可能还存储了很多wifi或者bt的相关设置，然后就实际可用大小其实只有7020左右。
+
+所以如果要更大，需要手动修改csv，并且要注意：
+
+大部分情况下，修改以后固件的起始地址会变，可能平常是0x10000,改大以后会变成0x20000或者更大，固件的地址是0x10000对齐的
+
+
+
 ## Summary
 
 暂时就这么多，日后还有遇到问题再补充。
@@ -340,4 +370,6 @@ ESP32使用的是FreeRTOS，但是他的FreeRTOS用的不是systick，这就导�
 > https://www.esp32.com/viewtopic.php?t=21799
 >
 > https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/system/wdts.html
+>
+> https://blog.csdn.net/toopoo/article/details/107327828
 
