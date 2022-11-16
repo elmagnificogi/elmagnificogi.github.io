@@ -3,7 +3,7 @@ layout:     post
 title:      "STM8开发环境搭建"
 subtitle:   "STVD，Cosmic"
 date:       2022-02-21
-update:     2022-05-07
+update:     2022-11-16
 author:     "elmagnifico"
 header-img: "img/bg9.jpg"
 catalog:    true
