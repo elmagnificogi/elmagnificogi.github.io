@@ -1,7 +1,7 @@
 ---
 layout:     post
-title:      "解决便笺无法同步问题"
-subtitle:   "windows,Sticky Notes,v2ray,uu"
+title:      "解决便笺及其他UWP无法同步问题"
+subtitle:   "Loopback,Sticky Notes,v2ray,uu"
 date:       2022-11-21
 update:     2022-11-21
 author:     "elmagnifico"
@@ -33,7 +33,7 @@ Windows应用商店直接搜索安装
 
 #### 同步失败
 
-但是新装的便笺很容易出现无法同步或者失败的问题。
+但是新装的便笺很容易出现无法同步或者失败的问题。由于Windows的APP本质上是在沙箱中运行的，这就导致本地代理不但代理不了，还会莫名其妙影响到沙箱的网络
 
 一般情况下，只要不开启VPN，也就是V2ray，不使用局域网的代理设置，Windows商店就能正常打开，就可以正常同步
 
@@ -69,15 +69,55 @@ Windows加速只有一个选项，就是Windows Xbox App，加速以后，再进
 
 ![image-20221121141916686](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202211211419752.png)
 
+## 解决代理问题
+
+![Win10 App如何走代理?Win10应用代理教程](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202211211516727.jpeg)
+
+比较有名的网络分析软件Fiddler有一个工具，`AppContainer Loopback Exemption Utility`，他可以实现将指定的windows uwp应用修改网络模式。当然也有一些命令行工具可以用，只是需要查询注册表，然后再去执行，比较麻烦
+
+
+
+不过我嫌安装Fiddler也比较麻烦，所以搜了一下，刚好看到了一个项目
+
+> https://github.com/tiagonmas/Windows-Loopback-Exemption-Manager
+
+不过他没编译，所以我fork以后重新编译了一下
+
+![image-20221121151908935](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202211211519989.png)
+
+可以在这里直接下载编译好的exe
+
+> https://github.com/elmagnificogi/Windows-Loopback-Exemption-Manager/releases/tag/V1
+
+
+
+没开启前，使用v2ray和pac协议
+
+![image-20221121154436558](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202211211544636.png)
+
+![image-20221121154056991](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202211211540061.png)
+
+可以看到有网络问题，搜索stick，勾选Exempt，然后Save
+
+![image-20221121154538175](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202211211545212.png)
+
+重新打开便笺，就看到同步正常了
+
+![image-20221121154716343](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202211211547406.png)
+
 
 
 ## Summary
 
-未完待续
+同理此方法可以适用于所有uwp应用或者与此相关的
 
 
 
 ## Quote
 
 >https://techcommunity.microsoft.com/t5/windows-10/microsoft-sticky-notes-sync-issue/m-p/2111908
+>
+>http://www.ddrfans.com/Html/1/32736.html
+>
+>http://bbs.csource.com.cn/index.php?c=read&id=395&page=1
 
