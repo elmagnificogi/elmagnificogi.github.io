@@ -3,7 +3,7 @@ layout:     post
 title:      "STM8开发环境搭建"
 subtitle:   "STVD，Cosmic"
 date:       2022-02-21
-update:     2022-05-07
+update:     2022-11-16
 author:     "elmagnifico"
 header-img: "img/bg9.jpg"
 catalog:    true
@@ -83,6 +83,18 @@ STVD需要Comic的编译器来完成编译，好家伙，绕一圈。
 ![image-20220222094527690](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220222094527690.png)
 
 拿到的license是1年有效期，功能上没有任何限制
+
+
+
+#####　破解
+
+2022.11.16，突然就出现license失效了，然后申请不到新的license，被迫找到了一个破解版，解决了编译的问题
+
+> https://www.jb51.net/softs/626867.html
+
+破解也很简单，安装完以后，使用补丁，替换文件即可
+
+![img](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202211161811194.jpeg)
 
 
 
@@ -327,7 +339,7 @@ With:
 STVP_CmdLine.exe -Port=USB -ProgMode=SWIM -Device=STM8S003F3 -progress -verif -FileProg=./yourfirmware.s19 -FileOption=./youroptionbyte.s19
 ```
 
-输入空格，他就会自动开始下一次烧写，还是挺简单的
+输入非空格，他就会自动开始下一次烧写，还是挺简单的
 
 
 

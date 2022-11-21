@@ -3,7 +3,7 @@ layout:     post
 title:      "Git设置以及常用命令"
 subtitle:   "免密码，一键上传"
 date:       2015-11-03
-update:     2022-07-08
+update:     2022-11-17
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"
 catalog:    true
@@ -305,6 +305,22 @@ git config --global gui.encoding utf-8
 
 
 
+修改commit的编码模式，这样同步仓库也是一样的
+
+```
+git config --global i18n.commitencoding utf-8
+```
+
+
+
+## git status中文乱码
+
+```
+git config --global core.quotepath false
+```
+
+
+
 ## Quote
 
 > http://blog.csdn.net/on_1y/article/details/19259435
@@ -316,3 +332,5 @@ git config --global gui.encoding utf-8
 > http://www.cnblogs.com/ballwql/p/3462104.html
 >
 > http://blog.csdn.net/wh_19910525/article/details/7784901
+>
+> https://support.huaweicloud.com/usermanual-codehub/devcloud_hlp_0957.html
