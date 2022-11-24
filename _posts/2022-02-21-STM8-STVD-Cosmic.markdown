@@ -152,7 +152,7 @@ STVD有点类似Eclipse，有一个工作环境的配置。
 
 如果闪退了，下载下面的tools.cnf文件，然后放置到以下目录即可
 
-> https://st--c.eu10.content.force.com/sfc/dist/version/download/?oid=00Db0000000YtG6&ids=0680X000006HyEY&d=%2Fa%2F0X0000000b5C%2F1sIa3iUbq_l7hHViMuRMVO70mBHfGIeHGCYM2UsURVA&asPdf=false
+> https://github.com/elmagnificogi/MyTools/raw/master/STM8/tools.cnf
 
 ![image-20220224155642450](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220224155642450.png)
 

@@ -3,7 +3,7 @@ layout:     post
 title:      "Maya python转Cython"
 subtitle:   "pyd，c"
 date:       2020-12-28
-update:     2022-03-16
+update:     2022-11-24
 author:     "elmagnifico"
 header-img: "img/bg7.jpg"
 catalog:    true
@@ -86,9 +86,9 @@ foo.foo()
 
 首先下载cython源码，千万不要使用pip install cython，有兼容性问题，同时不要用最新的版本。
 
-就用0.26的版本，其他版本不能保证正确
+就用0.26的版本，其他版本不能保证正确，官方已经删除了0.26版本的cython，我这里单独存了一个档
 
-> https://github.com/cython/cython/releases?after=0.26.1
+> https://github.com/elmagnificogi/MyTools/blob/master/Cython/cython-0.26.1rc1.rar
 
 下完以后解压，先放到一边备用。
 
