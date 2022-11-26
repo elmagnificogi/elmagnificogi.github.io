@@ -3,7 +3,7 @@ layout:     post
 title:      "STM8开发环境搭建"
 subtitle:   "STVD，Cosmic"
 date:       2022-02-21
-update:     2022-11-16
+update:     2022-11-27
 author:     "elmagnifico"
 header-img: "img/bg9.jpg"
 catalog:    true
@@ -83,6 +83,8 @@ STVD需要Comic的编译器来完成编译，好家伙，绕一圈。
 ![image-20220222094527690](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220222094527690.png)
 
 拿到的license是1年有效期，功能上没有任何限制
+
+- 后来发现这个license是绑定电脑的，并且只能给一台 电脑使用，一旦有其他电脑再次使用该license，就会导致之前的授权失效，也就是说每次必须重新申请
 
 
 
