@@ -3,6 +3,7 @@ layout:     post
 title:      "V2ray借助Cloudflare使用被墙IP"
 subtitle:   "GF,BAN,WS,vps"
 date:       2019-09-20
+update:     2022-11-28
 author:     "elmagnifico"
 header-img: "img/Raspberrypi-head-bg.jpg"
 catalog:    true
@@ -21,6 +22,28 @@ tags:
 我的是当时的9刀 1c1g 30M 1T流量，现在已经绝版了，1T的流量包再也买不到了，这就导致了就算被墙了也不能轻易放弃
 
 ![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/oNmFpAYX1kQEtPz.png)
+
+
+
+## 被墙检测
+
+现在看来有两种情况，一种是直接整个IP国内ping不通，一种是端口被封
+
+
+
+IP是否被封，可以通过全国ping检测看到对应的情况
+
+> https://ping.chinaz.com/
+
+
+
+端口是否被封可以通过下面的工具看到国内外的情况
+
+> https://www.toolsdaquan.com/ipcheck/
+
+一般来说端口被封是有概率复活的，只是还有可能会二进宫或者是直接导致IP被封
+
+
 
 ## Oracle Cloud 免费VPS
 
@@ -80,6 +103,10 @@ Oracle Cloud的日本或者韩国的ping低一些，本质上现在也能抢，�
 然后就可以添加对应的子域名了，将被封的VPS添加为一个子域名A记录
 
 ![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/bUxAOLWRZcdkEKf.png)
+
+![image-20221128141117249](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202211281411484.png)
+
+同时SSL至少需要设置`Full或者strict`否则无法实现SSL流量代理
 
 等几分后，ping一下子域名，发现ping通了，并且ip也改变了。
 
