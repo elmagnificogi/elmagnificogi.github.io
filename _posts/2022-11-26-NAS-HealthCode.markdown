@@ -3,7 +3,7 @@ layout:     post
 title:      "为什么我们需要一个NAS"
 subtitle:   "健康码、开源、悬浮图片"
 date:       2022-11-26
-update:     2022-11-26
+update:     2022-11-29
 author:     "elmagnifico"
 header-img: "img/led.jpg"
 catalog:    true
@@ -97,6 +97,27 @@ make serve
 
 
 
+如果使用caddy的话，可以这样部署
+
+```
+xxx.xxx.xx {
+   root * /root/health-code-simulator/src
+   file_server
+}
+import sites/*
+
+```
+
+重启caddy
+
+```
+systemctl restart caddy
+```
+
+重启caddy，就可以看到效果非常好了
+
+
+
 ## 悬浮健康码
 
 还有一种方式，也非常简单，就是直接悬浮一个核酸检测结果就行，一般不会仔细看里面的时间
@@ -135,3 +156,8 @@ make serve
 
 世事无常，只有捏在自己手里的才是真的吧
 
+
+
+## Quote
+
+> https://zhuanlan.zhihu.com/p/407133025
