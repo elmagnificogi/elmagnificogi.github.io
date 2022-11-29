@@ -610,11 +610,11 @@ debug的时候，有可能你看变量显示的是 `Restricted memory range` 看
 
 这就需要设置一下寄存器定义文件
 
-![image-20220623175928640](https://s2.loli.net/2022/06/23/VHyZWwtd6MDSNTp.png)
+![image-20221128230317160](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202211282303201.png)
 
 这个文件一般都在对应的packages中，所以要先安装好对应的package，然后才能找到`Registers.xml`
 
-![image-20220623180114366](https://s2.loli.net/2022/06/23/kYxhpm5gdGMKqoz.png)
+![image-20221128230257353](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202211282303451.png)
 
 设置以后才能在调试的时候，打开对应的寄存器
 
