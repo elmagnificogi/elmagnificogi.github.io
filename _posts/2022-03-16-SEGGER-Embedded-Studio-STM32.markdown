@@ -9,6 +9,8 @@ header-img: "img/desk-head-bg.jpg"
 catalog:    true
 tags:
     - Embedded
+    - SES
+    - STM32
 ---
 
 ## Foreword
