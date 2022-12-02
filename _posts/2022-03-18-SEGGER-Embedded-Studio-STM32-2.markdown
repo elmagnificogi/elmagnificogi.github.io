@@ -3,7 +3,7 @@ layout:     post
 title:      "使用SEGGER Embedded Studio开发STM32进阶"
 subtitle:   "STM32，IDE"
 date:       2022-03-18
-update:     2022-05-18
+update:     2022-12-02
 author:     "elmagnifico"
 header-img: "img/desk-head-bg.jpg"
 catalog:    true
@@ -639,6 +639,18 @@ debug的时候，有可能你看变量显示的是 `Restricted memory range` 看
 代码格式化这里也是8个，修改为4个
 
 ![image-20220401164403099](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220401164403099.png)
+
+
+
+## 搜索替换
+
+SES有个傻逼设定，他的全局替换只能在打开的文档中使用
+
+![image-20221202093228433](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212020932619.png)
+
+而不能把整个工程的文件内容进行替换，如果选择当前工程或者其他不支持的选项，就会变灰，无法使用。
+
+![image-20221202093320003](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212020933087.png)
 
 
 
