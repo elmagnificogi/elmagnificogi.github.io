@@ -1,0 +1,357 @@
+---
+layout:     post
+title:      "STM32 SD SDSC类型卡无法正常读取"
+subtitle:   "Sector size、CSD、CID"
+date:       2022-12-03
+update:     2022-12-03
+author:     "elmagnifico"
+header-img: "img/freertos.jpg"
+catalog:    true
+tags:
+    - STM32
+---
+
+## Forward
+
+ST的HAL库对于SDSC的支持有问题，因为这种老卡很少了，估计用的人也不多，也没注意到这个问题，甚至可能ST都没测过这个库是否能正常读写
+
+
+
+## SD
+
+一般来说SD卡在驱动里就分2种，其实还有更高速的和更大容量的，ST的驱动并没有支持，需要魔改
+
+```
+#define CARD_SDSC                  ((uint32_t)0x00000000U)  /*!< SD Standard Capacity <2Go                          */
+#define CARD_SDHC_SDXC             ((uint32_t)0x00000001U)  /*!< SD High Capacity <32Go, SD Extended Capacity <2To  */
+#define CARD_SECURED               ((uint32_t)0x00000003U)
+```
+
+比较成熟的是`CARD_SDHC_SDXC`类型的卡，一般来说多数大于等于2G的卡都是这种类型，大多数都能正常工作 。
+
+
+
+而小于2G的卡，近年就比较少见了，他们一般都是1.0的卡，可能存在各种稀奇古怪的参数，不是非常标准。
+
+
+
+#### Block/Sector size问题
+
+主要问题就出在了SDV1.0的卡，他们的扇区大小是不稳定的，可能是512，也有可能是1024，也有可能是2048等等，而在SD2.0中，这个扇区大小就基本统一512了。
+
+```c
+/**
+  * @brief  Returns information the information of the card which are stored on
+  *         the CSD register.
+  * @param  hsd: Pointer to SD handle
+  * @param  pCSD: Pointer to a HAL_SD_CardCSDTypeDef structure that
+  *         contains all CSD register parameters
+  * @retval HAL status
+  */
+HAL_StatusTypeDef HAL_SD_GetCardCSD(SD_HandleTypeDef *hsd, HAL_SD_CardCSDTypeDef *pCSD)
+{
+
+  pCSD->CSDStruct = (uint8_t)((hsd->CSD[0] & 0xC0000000U) >> 30U);
+
+  pCSD->SysSpecVersion = (uint8_t)((hsd->CSD[0] & 0x3C000000U) >> 26U);
+
+  pCSD->Reserved1 = (uint8_t)((hsd->CSD[0] & 0x03000000U) >> 24U);
+
+  pCSD->TAAC = (uint8_t)((hsd->CSD[0] & 0x00FF0000U) >> 16U);
+
+  pCSD->NSAC = (uint8_t)((hsd->CSD[0] & 0x0000FF00U) >> 8U);
+
+  pCSD->MaxBusClkFrec = (uint8_t)(hsd->CSD[0] & 0x000000FFU);
+
+  pCSD->CardComdClasses = (uint16_t)((hsd->CSD[1] & 0xFFF00000U) >> 20U);
+
+  pCSD->RdBlockLen = (uint8_t)((hsd->CSD[1] & 0x000F0000U) >> 16U);
+
+  pCSD->PartBlockRead   = (uint8_t)((hsd->CSD[1] & 0x00008000U) >> 15U);
+
+  pCSD->WrBlockMisalign = (uint8_t)((hsd->CSD[1] & 0x00004000U) >> 14U);
+
+  pCSD->RdBlockMisalign = (uint8_t)((hsd->CSD[1] & 0x00002000U) >> 13U);
+
+  pCSD->DSRImpl = (uint8_t)((hsd->CSD[1] & 0x00001000U) >> 12U);
+
+  pCSD->Reserved2 = 0U; /*!< Reserved */
+
+  if (hsd->SdCard.CardType == CARD_SDSC)
+  {
+    pCSD->DeviceSize = (((hsd->CSD[1] & 0x000003FFU) << 2U) | ((hsd->CSD[2] & 0xC0000000U) >> 30U));
+
+    pCSD->MaxRdCurrentVDDMin = (uint8_t)((hsd->CSD[2] & 0x38000000U) >> 27U);
+
+    pCSD->MaxRdCurrentVDDMax = (uint8_t)((hsd->CSD[2] & 0x07000000U) >> 24U);
+
+    pCSD->MaxWrCurrentVDDMin = (uint8_t)((hsd->CSD[2] & 0x00E00000U) >> 21U);
+
+    pCSD->MaxWrCurrentVDDMax = (uint8_t)((hsd->CSD[2] & 0x001C0000U) >> 18U);
+
+    pCSD->DeviceSizeMul = (uint8_t)((hsd->CSD[2] & 0x00038000U) >> 15U);
+
+    hsd->SdCard.BlockNbr  = (pCSD->DeviceSize + 1U) ;
+    hsd->SdCard.BlockNbr *= (1UL << ((pCSD->DeviceSizeMul & 0x07U) + 2U));
+    // 出问题的点
+    hsd->SdCard.BlockSize = (1UL << (pCSD->RdBlockLen & 0x0FU));
+    hsd->SdCard.LogBlockNbr = (hsd->SdCard.BlockNbr) * ((hsd->SdCard.BlockSize) / 512U);
+    hsd->SdCard.LogBlockSize = 512U;
+  }
+  else if (hsd->SdCard.CardType == CARD_SDHC_SDXC)
+  {
+    /* Byte 7 */
+    pCSD->DeviceSize = (((hsd->CSD[1] & 0x0000003FU) << 16U) | ((hsd->CSD[2] & 0xFFFF0000U) >> 16U));
+
+    hsd->SdCard.BlockNbr = ((pCSD->DeviceSize + 1U) * 1024U);
+    hsd->SdCard.LogBlockNbr = hsd->SdCard.BlockNbr;
+    hsd->SdCard.BlockSize = 512U;
+    hsd->SdCard.LogBlockSize = hsd->SdCard.BlockSize;
+  }
+  else
+  {
+    /* Clear all the static flags */
+    __HAL_SD_CLEAR_FLAG(hsd, SDMMC_STATIC_FLAGS);
+    hsd->ErrorCode |= HAL_SD_ERROR_UNSUPPORTED_FEATURE;
+    hsd->State = HAL_SD_STATE_READY;
+    return HAL_ERROR;
+  }
+
+  pCSD->EraseGrSize = (uint8_t)((hsd->CSD[2] & 0x00004000U) >> 14U);
+
+  pCSD->EraseGrMul = (uint8_t)((hsd->CSD[2] & 0x00003F80U) >> 7U);
+
+  pCSD->WrProtectGrSize = (uint8_t)(hsd->CSD[2] & 0x0000007FU);
+
+  pCSD->WrProtectGrEnable = (uint8_t)((hsd->CSD[3] & 0x80000000U) >> 31U);
+
+  pCSD->ManDeflECC = (uint8_t)((hsd->CSD[3] & 0x60000000U) >> 29U);
+
+  pCSD->WrSpeedFact = (uint8_t)((hsd->CSD[3] & 0x1C000000U) >> 26U);
+
+  pCSD->MaxWrBlockLen = (uint8_t)((hsd->CSD[3] & 0x03C00000U) >> 22U);
+
+  pCSD->WriteBlockPaPartial = (uint8_t)((hsd->CSD[3] & 0x00200000U) >> 21U);
+
+  pCSD->Reserved3 = 0;
+
+  pCSD->ContentProtectAppli = (uint8_t)((hsd->CSD[3] & 0x00010000U) >> 16U);
+
+  pCSD->FileFormatGroup = (uint8_t)((hsd->CSD[3] & 0x00008000U) >> 15U);
+
+  pCSD->CopyFlag = (uint8_t)((hsd->CSD[3] & 0x00004000U) >> 14U);
+
+  pCSD->PermWrProtect = (uint8_t)((hsd->CSD[3] & 0x00002000U) >> 13U);
+
+  pCSD->TempWrProtect = (uint8_t)((hsd->CSD[3] & 0x00001000U) >> 12U);
+
+  pCSD->FileFormat = (uint8_t)((hsd->CSD[3] & 0x00000C00U) >> 10U);
+
+  pCSD->ECC = (uint8_t)((hsd->CSD[3] & 0x00000300U) >> 8U);
+
+  pCSD->CSD_CRC = (uint8_t)((hsd->CSD[3] & 0x000000FEU) >> 1U);
+
+  pCSD->Reserved4 = 1;
+
+  return HAL_OK;
+}
+```
+
+如果SD返回的sector大小是512，可能没有什么问题，但是当返回的是其他值的时候，SD的驱动就跑不通了
+
+![image-20221203102939438](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212031029607.png)
+
+这里是一块512MB的贴片SD Nand，可以看到`RdBlockLen=0x0a`，换算成Sector以后就是1024
+
+
+
+在SD的初始化中，可以看到，当初始化完成以后，会设置一次Block的大小，`BLOCKSIZE=512`
+
+```c
+  /* Card initialization */
+  errorstate = SD_InitCard(hsd);
+  if (errorstate != HAL_SD_ERROR_NONE)
+  {
+    hsd->State = HAL_SD_STATE_READY;
+    hsd->ErrorCode |= errorstate;
+    return HAL_ERROR;
+  }
+
+  /* Set Block Size for Card */
+  errorstate = SDMMC_CmdBlockLength(hsd->Instance, BLOCKSIZE);
+  if (errorstate != HAL_SD_ERROR_NONE)
+  {
+    /* Clear all the static flags */
+    __HAL_SD_CLEAR_FLAG(hsd, SDMMC_STATIC_FLAGS);
+    hsd->ErrorCode |= errorstate;
+    hsd->State = HAL_SD_STATE_READY;
+    return HAL_ERROR;
+  }
+```
+
+然而SDV1.0的芯片，Blocksize 是根本不能设置的，同时就算使用了这条命令，也不会返回失败，所以怎么都会认为设置成功。
+
+就算真的设置成功了，SD驱动也会有问题，因为他没有重新读取CSD信息，SD的本地结构体中存储的依然是之前的1024信息。
+
+
+
+再结合到驱动内，可以看到所有的块大小都是直接写死的`SDMMC_DATABLOCK_SIZE_512B`，就算你强行调整`BLOCKSIZE=1024`宏，具体驱动操作的时候依然会出现错误。
+
+```
+    /* Configure the SD DPSM (Data Path State Machine) */
+    config.DataTimeOut   = SDMMC_DATATIMEOUT;
+    config.DataLength    = NumberOfBlocks * BLOCKSIZE;
+    config.DataBlockSize = SDMMC_DATABLOCK_SIZE_512B;
+    config.TransferDir   = SDMMC_TRANSFER_DIR_TO_CARD;
+    config.TransferMode  = SDMMC_TRANSFER_MODE_BLOCK;
+    config.DPSM          = SDMMC_DPSM_DISABLE;
+    (void)SDMMC_ConfigData(hsd->Instance, &config);
+    __SDMMC_CMDTRANS_ENABLE(hsd->Instance);
+```
+
+
+
+#### 解决
+
+解决比较简单，强制将块设置为512并重新计算容量大小即可
+
+```c
+/**
+  * @brief  Returns information the information of the card which are stored on
+  *         the CSD register.
+  * @param  hsd: Pointer to SD handle
+  * @param  pCSD: Pointer to a HAL_SD_CardCSDTypeDef structure that
+  *         contains all CSD register parameters
+  * @retval HAL status
+  */
+HAL_StatusTypeDef HAL_SD_GetCardCSD(SD_HandleTypeDef *hsd, HAL_SD_CardCSDTypeDef *pCSD)
+{
+
+  pCSD->CSDStruct = (uint8_t)((hsd->CSD[0] & 0xC0000000U) >> 30U);
+
+  pCSD->SysSpecVersion = (uint8_t)((hsd->CSD[0] & 0x3C000000U) >> 26U);
+
+  pCSD->Reserved1 = (uint8_t)((hsd->CSD[0] & 0x03000000U) >> 24U);
+
+  pCSD->TAAC = (uint8_t)((hsd->CSD[0] & 0x00FF0000U) >> 16U);
+
+  pCSD->NSAC = (uint8_t)((hsd->CSD[0] & 0x0000FF00U) >> 8U);
+
+  pCSD->MaxBusClkFrec = (uint8_t)(hsd->CSD[0] & 0x000000FFU);
+
+  pCSD->CardComdClasses = (uint16_t)((hsd->CSD[1] & 0xFFF00000U) >> 20U);
+
+  pCSD->RdBlockLen = (uint8_t)((hsd->CSD[1] & 0x000F0000U) >> 16U);
+
+  pCSD->PartBlockRead   = (uint8_t)((hsd->CSD[1] & 0x00008000U) >> 15U);
+
+  pCSD->WrBlockMisalign = (uint8_t)((hsd->CSD[1] & 0x00004000U) >> 14U);
+
+  pCSD->RdBlockMisalign = (uint8_t)((hsd->CSD[1] & 0x00002000U) >> 13U);
+
+  pCSD->DSRImpl = (uint8_t)((hsd->CSD[1] & 0x00001000U) >> 12U);
+
+  pCSD->Reserved2 = 0U; /*!< Reserved */
+
+  if (hsd->SdCard.CardType == CARD_SDSC)
+  {
+    pCSD->DeviceSize = (((hsd->CSD[1] & 0x000003FFU) << 2U) | ((hsd->CSD[2] & 0xC0000000U) >> 30U));
+
+    pCSD->MaxRdCurrentVDDMin = (uint8_t)((hsd->CSD[2] & 0x38000000U) >> 27U);
+
+    pCSD->MaxRdCurrentVDDMax = (uint8_t)((hsd->CSD[2] & 0x07000000U) >> 24U);
+
+    pCSD->MaxWrCurrentVDDMin = (uint8_t)((hsd->CSD[2] & 0x00E00000U) >> 21U);
+
+    pCSD->MaxWrCurrentVDDMax = (uint8_t)((hsd->CSD[2] & 0x001C0000U) >> 18U);
+
+    pCSD->DeviceSizeMul = (uint8_t)((hsd->CSD[2] & 0x00038000U) >> 15U);
+
+    hsd->SdCard.BlockNbr  = (pCSD->DeviceSize + 1U) ;
+    hsd->SdCard.BlockNbr *= (1UL << ((pCSD->DeviceSizeMul & 0x07U) + 2U));
+    // 强制将任意的块识别为512
+    hsd->SdCard.BlockNbr *= (1UL << (pCSD->RdBlockLen & 0x0FU)) / 512U;
+    hsd->SdCard.BlockSize = 512U;
+    hsd->SdCard.LogBlockNbr = (hsd->SdCard.BlockNbr) * ((hsd->SdCard.BlockSize) / 512U);
+    hsd->SdCard.LogBlockSize = 512U;
+  }
+  else if (hsd->SdCard.CardType == CARD_SDHC_SDXC)
+  {
+    /* Byte 7 */
+    pCSD->DeviceSize = (((hsd->CSD[1] & 0x0000003FU) << 16U) | ((hsd->CSD[2] & 0xFFFF0000U) >> 16U));
+
+    hsd->SdCard.BlockNbr = ((pCSD->DeviceSize + 1U) * 1024U);
+    hsd->SdCard.LogBlockNbr = hsd->SdCard.BlockNbr;
+    hsd->SdCard.BlockSize = 512U;
+    hsd->SdCard.LogBlockSize = hsd->SdCard.BlockSize;
+  }
+  else
+  {
+    /* Clear all the static flags */
+    __HAL_SD_CLEAR_FLAG(hsd, SDMMC_STATIC_FLAGS);
+    hsd->ErrorCode |= HAL_SD_ERROR_UNSUPPORTED_FEATURE;
+    hsd->State = HAL_SD_STATE_READY;
+    return HAL_ERROR;
+  }
+
+  pCSD->EraseGrSize = (uint8_t)((hsd->CSD[2] & 0x00004000U) >> 14U);
+
+  pCSD->EraseGrMul = (uint8_t)((hsd->CSD[2] & 0x00003F80U) >> 7U);
+
+  pCSD->WrProtectGrSize = (uint8_t)(hsd->CSD[2] & 0x0000007FU);
+
+  pCSD->WrProtectGrEnable = (uint8_t)((hsd->CSD[3] & 0x80000000U) >> 31U);
+
+  pCSD->ManDeflECC = (uint8_t)((hsd->CSD[3] & 0x60000000U) >> 29U);
+
+  pCSD->WrSpeedFact = (uint8_t)((hsd->CSD[3] & 0x1C000000U) >> 26U);
+
+  pCSD->MaxWrBlockLen = (uint8_t)((hsd->CSD[3] & 0x03C00000U) >> 22U);
+
+  pCSD->WriteBlockPaPartial = (uint8_t)((hsd->CSD[3] & 0x00200000U) >> 21U);
+
+  pCSD->Reserved3 = 0;
+
+  pCSD->ContentProtectAppli = (uint8_t)((hsd->CSD[3] & 0x00010000U) >> 16U);
+
+  pCSD->FileFormatGroup = (uint8_t)((hsd->CSD[3] & 0x00008000U) >> 15U);
+
+  pCSD->CopyFlag = (uint8_t)((hsd->CSD[3] & 0x00004000U) >> 14U);
+
+  pCSD->PermWrProtect = (uint8_t)((hsd->CSD[3] & 0x00002000U) >> 13U);
+
+  pCSD->TempWrProtect = (uint8_t)((hsd->CSD[3] & 0x00001000U) >> 12U);
+
+  pCSD->FileFormat = (uint8_t)((hsd->CSD[3] & 0x00000C00U) >> 10U);
+
+  pCSD->ECC = (uint8_t)((hsd->CSD[3] & 0x00000300U) >> 8U);
+
+  pCSD->CSD_CRC = (uint8_t)((hsd->CSD[3] & 0x000000FEU) >> 1U);
+
+  pCSD->Reserved4 = 1;
+
+  return HAL_OK;
+}
+```
+
+
+
+## 疑惑点
+
+这里面遗留了一个问题，如果使用winhex打开磁盘，可以直接看到他识别到的扇区字节数就是512，而我之前也看到过他识别为1024
+
+![image-20221203104924608](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212031049689.png)
+
+不知道他具体识别的逻辑是怎样的
+
+
+
+## Summary
+
+其实挺简单的问题，但是第一次遇到，也没有类似的东西可以验证这个问题。求助于芯片的FAE，但是碰到的这个FAE就是个傻逼，各种给你车轱辘话，让他帮忙给一下CSD和CID信息，怎么都不愿意给。逼得我没办法，让客服再给我换一个FAE，另外一个FAE就很好（那个傻逼的FAE给的CSD还是个错的，我也是服了），直接给了具体的寄存器值，立马就验证了我这边和他那边是一个情况。
+
+
+
+## Quote
+
+> 傻逼的FAE
