@@ -3,7 +3,7 @@ layout:     post
 title:      "使用SEGGER Embedded Studio开发STM32进阶"
 subtitle:   "STM32，IDE"
 date:       2022-03-18
-update:     2022-12-02
+update:     2022-12-03
 author:     "elmagnifico"
 header-img: "img/desk-head-bg.jpg"
 catalog:    true
@@ -641,6 +641,10 @@ debug的时候，有可能你看变量显示的是 `Restricted memory range` 看
 代码格式化这里也是8个，修改为4个
 
 ![image-20220401164403099](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220401164403099.png)
+
+将tab按键也调整为4
+
+![image-20221203112347219](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212031123330.png)
 
 
 
