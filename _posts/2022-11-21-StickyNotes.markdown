@@ -3,7 +3,7 @@ layout:     post
 title:      "解决便笺及其他UWP无法同步问题"
 subtitle:   "Loopback,Sticky Notes,v2ray,uu"
 date:       2022-11-21
-update:     2022-11-21
+update:     2022-12-03
 author:     "elmagnifico"
 header-img: "img/line-head-bg.jpg"
 catalog:    true
@@ -104,6 +104,14 @@ Windows加速只有一个选项，就是Windows Xbox App，加速以后，再进
 重新打开便笺，就看到同步正常了
 
 ![image-20221121154716343](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202211211547406.png)
+
+
+
+#### V2rayN
+
+后来发现原来新版的V2rayN就自带了这个UWP解除代理的工具，也非常好用
+
+![image-20221203115605804](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212031156960.png)
 
 
 
