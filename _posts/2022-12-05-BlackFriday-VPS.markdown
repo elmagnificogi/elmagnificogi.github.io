@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "VPS合租-长期有效"
-subtitle:   "memory、BGA"
+subtitle:   "BlackFriday、IPLC"
 date:       2022-12-05
 update:     2022-12-05
 author:     "elmagnifico"
@@ -79,7 +79,7 @@ v2rayN目前线路列表
 
 ## 游戏
 
-原本的IPLC的线路跑路，所以下了，游戏目前没啥好的解决办法，IPLC价格都比较高，除非有人愿意单独再合租一个IPLC的线路，否则有点难了
+原本的IPLC的线路跑路，所以下了，游戏目前没啥好的解决办法，IPLC价格都比较高，除非有人愿意单独再合租一个IPLC的线路，否则有点难了。IPLC的线路价格比起UU加速并不具有明显优势，需求太小，所以不如人手一个UU。
 
 
 
