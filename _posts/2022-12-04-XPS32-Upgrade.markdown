@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "XPS13升级内存"
-subtitle:   "memory、BGA"
+subtitle:   "RAM、BGA、相变"
 date:       2022-12-04
 update:     2022-12-04
 author:     "elmagnifico"
