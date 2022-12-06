@@ -23,6 +23,10 @@ tags:
 
 黑五前加价入手了一个BWG的CN2、一个斯巴达的24刀，黑五后又入手了一个JustG的南非GIA
 
+意外RN中奖了，直接送10刀，等于我只花了1刀，开心
+
+![image-20221206130136828](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212061301991.png)
+
 
 
 #### 统计表
