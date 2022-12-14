@@ -49,9 +49,13 @@ setInterval("createtime()",250);
 
 字数很简单就能统计了，如果想要阅读时间做个比例换算就行了。
 
+{% raw %}
+
 ```
 Words:&nbsp;{{ post.content | number_of_words }}
 ```
+
+{% endraw %}
 
 
 
