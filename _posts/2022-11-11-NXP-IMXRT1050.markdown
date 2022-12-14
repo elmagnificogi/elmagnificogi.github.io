@@ -196,3 +196,5 @@ Flash的选择可以通过板子上的拨码来调整
 > https://zhuanlan.zhihu.com/p/368276428
 >
 > Getting Started with MCUXpresso SDK for EVKB-IMXRT1050.pdf
+>
+> https://www.cnblogs.com/Netsharp/p/11073142.html
