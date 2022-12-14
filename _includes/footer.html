@@ -111,6 +111,13 @@
     </div>
 </footer>
 
+<!-- back-to-top -->
+<div id="back-top">
+    <a href="#section" data-toggle="tooltip" data-placement="top" title="top">
+    <i class="fa fa-chevron-up" aria-hidden="true"></i>
+    </a>
+</div>
+
 <!-- jQuery -->
 <script src="{{ "/js/jquery.min.js " | prepend: site.baseurl }}"></script>
 
@@ -212,6 +219,65 @@
     } 
 setInterval("createtime()",250);
 </script>
+
+<!-- back-top -->
+<script type="module">
+    $('#back-top').hide();
+    $(document).ready(function () {
+    $(window).scroll(function () {
+    if ($(this).scrollTop() > 250) {
+      $('#back-top').fadeIn();
+    } else {
+      $('#back-top').fadeOut();
+    }
+    });
+    $('#back-top a').click(function () {
+    $('body,html').animate({
+      scrollTop: 0
+    }, 800);
+    return false;
+    });
+  });
+  </script>
+
+<!-- 文章进度条：在style.css里面更改进度条样式 -->
+<script type="module">
+    /* 顶部进度条 */
+    (function() {
+    var $w = $(window);
+    var $prog2 = $('.progress-indicator');
+    var wh = $w.height();
+    var h = $('body').height();
+    var sHeight = h - wh;
+    $w.on('scroll', function() {
+    window.requestAnimationFrame(function(){
+        var perc = Math.max(0, Math.min(1, $w.scrollTop() / sHeight));
+        updateProgress(perc);
+    });
+    });
+
+    function updateProgress(perc) {
+    $prog2.css({width: perc * 100 + '%'});
+    }
+    }());
+</script>
+
+<!-- google-translate -->
+<script async="async" type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<script type="text/javascript">
+var userLang = navigator.language || navigator.userLanguage || navigator.languages;
+function googleTranslateElementInit() {
+new google.translate.TranslateElement({
+    includedLanguages: 'en,zh-CN,zh-TW,hi,es,fr,ar,bn,ru,pt,de,ja,ko,it',
+    autoDisplay: true,
+    pageLanguage: 'zh-CN',
+    multilanguagePage: false,
+    layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+    //layout: google.translate.TranslateElement.FloatPosition.TOP_RIGHT
+}, 'google_translate_element');
+}
+</script>
+
 {% endif %}
 
 
@@ -266,22 +332,6 @@ setInterval("createtime()",250);
             padding: 80
         });
     });
-</script>
-
-<!-- google-translate -->
-<script async="async" type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-<script type="text/javascript">
-var userLang = navigator.language || navigator.userLanguage || navigator.languages;
-function googleTranslateElementInit() {
-new google.translate.TranslateElement({
-    includedLanguages: 'en,zh-CN,zh-TW,hi,es,fr,ar,bn,ru,pt,de,ja,ko,it',
-    autoDisplay: true,
-    pageLanguage: 'zh-CN',
-    multilanguagePage: false,
-    //layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-    layout: google.translate.TranslateElement.FloatPosition.TOP_RIGHT
-}, 'google_translate_element');
-}
 </script>
 
 {% endif %}
