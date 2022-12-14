@@ -153,6 +153,24 @@ Flash的选择可以通过板子上的拨码来调整
 
 ![image-20221112142418845](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202211121424938.png)
 
+### ARMGCC
+
+想把他的架构改一下适配我们的项目，发现一些问题
+
+> Getting Started with MCUXpresso SDK for EVKB-IMXRT1050.pdf
+
+跟着手册中对于ARM GCC环境的搭建，完成以后，发现最新的SDK `SDK_2_11_1_EVKB-IMXRT1050`下没有armgcc文件夹，也就是整个cmakelist等东西全都没有，那等于是要人重写一个，有点离谱了。
+
+找了半天，发现`i.MXRT1050 EVK Extension Feature Example Code and HW Guide`中有armgcc，但是基本都是编译过不去的，各种问题。
+
+上github搜了一下，发现竟然有人传了老的SDK
+
+> https://github.com/zhongguocs/SDK_2.6.0_EVKB-IMXRT1050
+
+经过测试，2.6.0的编译是OK的，根据这个修改即可
+
+![image-20221214115508208](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212141155368.png)
+
 
 
 ## Summary
