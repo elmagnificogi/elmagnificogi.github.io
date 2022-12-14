@@ -41,7 +41,9 @@ setInterval("createtime()",250);
 </script>
 ```
 
+效果还行
 
+![image-20221214175437773](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212141754884.png)
 
 ## 不蒜子
 
