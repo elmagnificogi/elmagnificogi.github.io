@@ -761,6 +761,20 @@ a.anchorjs-link {
   background-color: #fff0;
 }
 
+.goog-te-gadget-simple{
+  background-color: #fff0;
+  border-left: none; 
+  border-top: none; 
+  border-bottom: none; 
+  border-right: none; 
+  font-size: none; 
+  padding-top: none; 
+  padding-bottom: none;
+  cursor: pointer; 
+  zoom: 1;
+  display: inline;
+}
+
 #back-top {
   position: fixed;
   bottom: 110px;
