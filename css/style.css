@@ -757,6 +757,10 @@ a.anchorjs-link {
   -webkit-font-smoothing: antialiased
 }
 
+#google-translate {
+  background-color: #fff0;
+}
+
 #back-top {
   position: fixed;
   bottom: 110px;
