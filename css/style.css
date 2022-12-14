@@ -757,11 +757,7 @@ a.anchorjs-link {
   -webkit-font-smoothing: antialiased
 }
 
-.goog-te-gadget-simple {
-  display: none;
-}
-
-.goog-te-gadget-simple:before{
+#google_translate_element .goog-te-gadget-simple {
   background-color: #fff0;
   border-left: none; 
   border-top: none; 
@@ -770,12 +766,14 @@ a.anchorjs-link {
   font-size: none; 
   padding-top: none; 
   padding-bottom: none;
-  cursor: pointer; 
   zoom: 1;
   display: inline;
 }
 
+#google_translate_element .goog-te-gadget-simple img:first-child{display: none;}
+
 #google_translate_element .goog-te-gadget-simple .goog-te-menu-value span:first-child{display: none;}
+
 #google_translate_element .goog-te-gadget-simple .goog-te-menu-value:before {
   content: 'Translate'
 }
