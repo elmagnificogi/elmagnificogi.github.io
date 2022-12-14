@@ -757,7 +757,11 @@ a.anchorjs-link {
   -webkit-font-smoothing: antialiased
 }
 
-.goog-te-gadget-simple::after{
+.goog-te-gadget-simple {
+  display: none;
+}
+
+.goog-te-gadget-simple:before{
   background-color: #fff0;
   border-left: none; 
   border-top: none; 
@@ -772,7 +776,9 @@ a.anchorjs-link {
 }
 
 #google_translate_element .goog-te-gadget-simple .goog-te-menu-value span:first-child{display: none;}
-#google_translate_element .goog-te-gadget-simple .goog-te-menu-value:before{content: 'Translate'}
+#google_translate_element .goog-te-gadget-simple .goog-te-menu-value:before {
+  content: 'Translate'
+}
 
 #back-top {
   position: fixed;
