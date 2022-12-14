@@ -757,11 +757,7 @@ a.anchorjs-link {
   -webkit-font-smoothing: antialiased
 }
 
-#google-translate {
-  background-color: #fff0;
-}
-
-#goog-te-gadget-simple{
+.goog-te-gadget-simple:before{
   background-color: #fff0;
   border-left: none; 
   border-top: none; 
