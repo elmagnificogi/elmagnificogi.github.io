@@ -92,6 +92,53 @@ Words:&nbsp;{{ post.content | number_of_words }}
 
 
 
+## 增加顶部进度条
+
+
+
+{% raw %}
+
+```html
+    <!-- top processbar -->
+    <link rel="preload" href="{{ site.BASE_PATH }}/css/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="{{ site.BASE_PATH }}/css/style.css" rel="stylesheet"></noscript>
+
+    <!-- 文章进度条 -->
+    <div class="progress-indicator" style="width: 0%;"></div>
+    
+    <!-- 文章进度条：在style.css里面更改进度条样式 -->
+<script type="module">
+  /* 顶部进度条 */
+  (function() {
+    var $w = $(window);
+    var $prog2 = $('.progress-indicator');
+    var wh = $w.height();
+    var h = $('body').height();
+    var sHeight = h - wh;
+    $w.on('scroll', function() {
+    window.requestAnimationFrame(function(){
+      var perc = Math.max(0, Math.min(1, $w.scrollTop() / sHeight));
+      updateProgress(perc);
+    });
+    });
+
+    function updateProgress(perc) {
+    $prog2.css({width: perc * 100 + '%'});
+    }
+  }());
+</script>
+```
+
+{% endraw %}
+
+
+
+引用自
+
+> https://blog.whuzfb.cn/
+
+
+
 ## 不蒜子
 
 > https://busuanzi.ibruce.info/
