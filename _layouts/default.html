@@ -21,48 +21,51 @@
         <i class="fa fa-chevron-up" aria-hidden="true"></i>
         </a>
     </div>
+    
+    <script type="module">
+        $('#back-top').hide();
+        $(document).ready(function () {
+        $(window).scroll(function () {
+        if ($(this).scrollTop() > 250) {
+          $('#back-top').fadeIn();
+        } else {
+          $('#back-top').fadeOut();
+        }
+        });
+        $('#back-top a').click(function () {
+        $('body,html').animate({
+          scrollTop: 0
+        }, 800);
+        return false;
+        });
+      });
+      </script>
 
+    <!-- 文章进度条：在style.css里面更改进度条样式 -->
+    <script type="module">
+        /* 顶部进度条 */
+        (function() {
+        var $w = $(window);
+        var $prog2 = $('.progress-indicator');
+        var wh = $w.height();
+        var h = $('body').height();
+        var sHeight = h - wh;
+        $w.on('scroll', function() {
+        window.requestAnimationFrame(function(){
+            var perc = Math.max(0, Math.min(1, $w.scrollTop() / sHeight));
+            updateProgress(perc);
+        });
+        });
+    
+        function updateProgress(perc) {
+        $prog2.css({width: perc * 100 + '%'});
+        }
+        }());
+    </script>
 </body>
 
-<!-- 文章进度条：在style.css里面更改进度条样式 -->
-<script type="module">
-  /* 顶部进度条 */
-  (function() {
-    var $w = $(window);
-    var $prog2 = $('.progress-indicator');
-    var wh = $w.height();
-    var h = $('body').height();
-    var sHeight = h - wh;
-    $w.on('scroll', function() {
-    window.requestAnimationFrame(function(){
-      var perc = Math.max(0, Math.min(1, $w.scrollTop() / sHeight));
-      updateProgress(perc);
-    });
-    });
 
-    function updateProgress(perc) {
-    $prog2.css({width: perc * 100 + '%'});
-    }
-  }());
-</script>
 
-<script type="module">
-  $('#back-top').hide();
-  $(document).ready(function () {
-  $(window).scroll(function () {
-  if ($(this).scrollTop() > 250) {
-    $('#back-top').fadeIn();
-  } else {
-    $('#back-top').fadeOut();
-  }
-  });
-  $('#back-top a').click(function () {
-  $('body,html').animate({
-    scrollTop: 0
-  }, 800);
-  return false;
-  });
-});
-</script>
+
 
 </html>
