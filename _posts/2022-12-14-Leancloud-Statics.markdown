@@ -139,6 +139,44 @@ Words:&nbsp;{{ post.content | number_of_words }}
 
 
 
+## 返回顶部按钮
+
+
+
+{% raw %}
+
+```html
+    <!-- back-to-top -->
+    <div id="back-top">
+        <a href="#section" data-toggle="tooltip" data-placement="top" title="top">
+        <i class="fa fa-chevron-up" aria-hidden="true"></i>
+        </a>
+    </div>
+    
+    <script type="module">
+        $('#back-top').hide();
+        $(document).ready(function () {
+        $(window).scroll(function () {
+        if ($(this).scrollTop() > 250) {
+          $('#back-top').fadeIn();
+        } else {
+          $('#back-top').fadeOut();
+        }
+        });
+        $('#back-top a').click(function () {
+        $('body,html').animate({
+          scrollTop: 0
+        }, 800);
+        return false;
+        });
+      });
+      </script>
+```
+
+{% endraw %}
+
+
+
 ## 不蒜子
 
 > https://busuanzi.ibruce.info/
