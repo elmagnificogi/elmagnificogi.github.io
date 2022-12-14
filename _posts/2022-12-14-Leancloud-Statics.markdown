@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "博客增加文章点击统计和显示"
-subtitle:   "统计、不蒜子、LeanCloud"
+subtitle:   "不蒜子、LeanCloud、谷歌翻译、动态效果"
 date:       2022-12-14
 update:     2022-12-14
 author:     "elmagnifico"
@@ -323,6 +323,8 @@ https://recukngv.api.lncldglobal.com/1.1/classes/Counter?where=%7B%22time%22%3A%
 
 ## Summary
 
+更新了一下视觉效果，感觉好像比以前加载慢了一点
+
 
 
 ## Quote
@@ -340,6 +342,10 @@ https://recukngv.api.lncldglobal.com/1.1/classes/Counter?where=%7B%22time%22%3A%
 > https://qchaha.github.io/2018/09/19/homepageStatistics.html
 >
 > https://www.cnblogs.com/zfb132/p/10665385.html
+>
+> https://stackoverflow.com/questions/9306015/modifying-element-from-google-translate-translateelement-results/46306852#46306852
+>
+> https://github.com/zfb132/zfb132.github.com
 
 
 
