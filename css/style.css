@@ -983,7 +983,7 @@ input[type=text]:focus {
   left: 0;
   height: 4px;
   z-index: 99;
-  background-color: red;
+  background-color: #00ffa1;
 }
 
 .goog-te-banner-frame{display:none !important;}

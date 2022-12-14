@@ -133,6 +133,8 @@ Words:&nbsp;{{ post.content | number_of_words }}
 
 
 
+![image-20221215012240725](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212150122905.png)
+
 引用自
 
 > https://blog.whuzfb.cn/
@@ -174,6 +176,10 @@ Words:&nbsp;{{ post.content | number_of_words }}
 ```
 
 {% endraw %}
+
+效果如下：
+
+![image-20221215012155801](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212150121828.png)
 
 
 
@@ -240,7 +246,9 @@ new google.translate.TranslateElement({
 
 {% endraw %}
 
+效果还行，至少UI上统一了
 
+![image-20221215012111815](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212150121858.png)
 
 ## 不蒜子
 
