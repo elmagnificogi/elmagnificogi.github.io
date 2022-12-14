@@ -757,16 +757,6 @@ a.anchorjs-link {
   -webkit-font-smoothing: antialiased
 }
 
-#google-translate {
-  position: fixed;
-  bottom: 170px;
-  right: 4%;
-  -webkit-transition: 1s;
-  -moz-transition: 1s;
-  transition: 1s;
-  font-size: 20px;
-}
-
 #back-top {
   position: fixed;
   bottom: 110px;
