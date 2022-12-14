@@ -19,7 +19,7 @@ description: "且行且珍惜"
         </div>
     </a>
     <p class="post-meta">
-        Posted by {% if post.author %}{{ post.author }}{% else %}{{ site.title }}{% endif %} on {{ post.date | date: "%B %-d, %Y" }}
+        Posted on {{ post.date | date: "%B %-d, %Y" }};&nbsp;浏览量:&nbsp;<span id="{{ post.url }}" class="leancloud_visitors" data-flag-title="{{ post.title }}"> - </span>次.&nbsp;字数:&nbsp;{{ post.content | number_of_words }}
     </p>
 </div>
 <hr>

@@ -242,16 +242,14 @@
 </script>
 
 <!-- blog浏览量统计 同时兼容http与https -->
-<!-- 同时兼容http与https -->
-<script src="//unpkg.com/leancloud-storage@4.12.2/dist/av-min.js"></script>
-<script>
-    // 第一个参数是appid，第二个参数是appkey，此处的只是示例
+<!-- <script src="//unpkg.com/leancloud-storage@4.12.2/dist/av-min.js"></script> -->
+<script defer src="{{ site.BASE_PATH }}/assets/js/av-min-4.12.2.js"></script>
+<script type="module">
     AV.init({
       appId: "ReCukNGVOzcALKyQoTw2v5am-MdYXbMMI",
       appKey: "qMGYDr8Ls4It1VlXb8Cmch6E",
       serverURL: "http://elmagnifico.tech"
     });
-    // 自己创建的Class的名字
     var name='Counter';
     function createRecord(Counter){
       // 设置 ACL
@@ -277,6 +275,10 @@
         allcounter.push(newcounter);
         // 顺便更新显示span为默认值0
         elements[i].textContent=0;
+      }
+      // 判断是否需要新建记录
+      if(allcounter.length == 0){
+        return;
       }
       AV.Object.saveAll(allcounter).then(function (todo) {
         // 成功保存记录之后
@@ -306,8 +308,15 @@
           var item = results[i];
           var url = item.get('url');
           var time = item.get('time');
-          var element = document.getElementById(url);
-          element.textContent = time;
+          try {
+            var element = document.getElementById(url);
+            // 删除原字符串中的空格
+            if(element.textContent.replace(/\s+|&nbsp;/ig,'') == '-' || parseInt(element.textContent) < time){
+              element.textContent = time;
+            }
+          } catch (error) {
+            // console.log("获取"+url+"的网页元素出错："+error);
+          }
         }
         // 当某个span含有默认值时说明需要创建记录
         if($('.leancloud_visitors').text().indexOf("-") != -1){
