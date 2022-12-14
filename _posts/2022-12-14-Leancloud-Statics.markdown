@@ -104,6 +104,18 @@ LeanCloud经历了比较多的变动，之前出现了一次域名被禁止解�
 
 
 
+现状就是如果使用CND的js，各方面都配置正确了依然会提示错误，他要求你绑定域名
+
+```
+Access to XMLHttpRequest at 'https://recukngv.api.lncldglobal.com/1.1/classes/Counter?where=%7B%22time%22%3A%7B%22%24gte%22%3A0%7D%7D' from origin 'http://elmagnifico.tech' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+(index):1383 query error:Request has been terminated
+Possible causes: the network is offline, Origin is not allowed by Access-Control-Allow-Origin, the page is being unloaded, etc. [N/A GET https://recukngv.api.lncldglobal.com/1.1/classes/Counter]
+
+https://recukngv.api.lncldglobal.com/1.1/classes/Counter?where=%7B%22time%22%3A%7B%22%24gte%22%3A0%7D%7D net::ERR_FAILED
+```
+
+
+
 ## Summary
 
 
