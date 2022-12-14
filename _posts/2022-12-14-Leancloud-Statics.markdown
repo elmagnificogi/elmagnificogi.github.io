@@ -177,6 +177,49 @@ Words:&nbsp;{{ post.content | number_of_words }}
 
 
 
+## 内置谷歌翻译
+
+有些老外看不懂，还要内置翻译一下
+
+首先修改CSS，替换谷歌翻译的原生UI，有点难看
+
+{% raw %}
+
+```css
+#google_translate_element .goog-te-gadget-simple {
+  background-color: #fff0;
+  border-left: none; 
+  border-top: none; 
+  border-bottom: none; 
+  border-right: none; 
+  font-size: none; 
+  padding-top: none; 
+  padding-bottom: none;
+  zoom: 1;
+  display: inline;
+}
+
+#google_translate_element .goog-te-gadget-simple img:first-child{display: none;}
+
+#google_translate_element .goog-te-gadget-simple .goog-te-menu-value span:first-child{display: none;}
+
+#google_translate_element .goog-te-gadget-simple .goog-te-menu-value:before {
+  content: 'Translate'
+}
+```
+
+{% endraw %}
+
+
+
+{% raw %}
+
+```
+
+```
+
+{% endraw %}
+
 ## 不蒜子
 
 > https://busuanzi.ibruce.info/
