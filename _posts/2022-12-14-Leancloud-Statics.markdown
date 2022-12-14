@@ -45,22 +45,58 @@ setInterval("createtime()",250);
 
 ![image-20221214175437773](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212141754884.png)
 
+## 统计文章字数
+
+字数很简单就能统计了，如果想要阅读时间做个比例换算就行了。
+
+```
+Words:&nbsp;{{ post.content | number_of_words }}
+```
+
+
+
 ## 不蒜子
 
 > https://busuanzi.ibruce.info/
 
 
 
-```
+```html
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
             <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+            <span id="busuanzi_container_site_uv">本站总访客数<span id="busuanzi_value_site_uv"></span>人</span>
+            <span id="busuanzi_value_page_pv">本页总访问量<span id="busuanzi_value_page_pv"></span>次</span>
 ```
+
+
+
+总体来说非常简单易用，但是唯一的问题是，数据不在你手上，而且如果有一天不蒜子没了，那么你的所有统计信息都没有了。
+
+同时如果已经运行了很久，就无法再统计数量了，不蒜子暂停注册了，不能修改初始值了，所以就有点困难。
+
+
+
+如果有一天不蒜子没了，也有下面的替代品，可以自己部署，自己存储
+
+> https://github.com/soxft/busuanzi
+>
+> https://github.com/zkeq/Busuanzi_backend_self
+>
+> https://github.com/qiushaocloud/site-counter
 
 
 
 ## LeanCloud
 
+使用LeanCloud的数据统计服务
 
+> https://www.leancloud.cn/
+
+
+
+但是LeanCloud为了合规，不允许国内使用了
+
+> https://forum.leancloud.cn/t/2022-8/25408
 
 
 
