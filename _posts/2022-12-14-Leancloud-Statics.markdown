@@ -69,7 +69,7 @@ Words:&nbsp;{{ post.content | number_of_words }}
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
             <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
             <span id="busuanzi_container_site_uv">本站总访客数<span id="busuanzi_value_site_uv"></span>人</span>
-            <span id="busuanzi_value_page_pv">本页总访问量<span id="busuanzi_value_page_pv"></span>次</span>
+            <span id="busuanzi_container_page_pv">本页总访问量<span id="busuanzi_value_page_pv"></span>次</span>
 ```
 
 
@@ -83,6 +83,8 @@ Words:&nbsp;{{ post.content | number_of_words }}
 如果有一天不蒜子没了，也有下面的替代品，可以自己部署，自己存储
 
 > https://github.com/soxft/busuanzi
+>
+> https://github.com/zkeq/Busuanzi
 >
 > https://github.com/zkeq/Busuanzi_backend_self
 >
@@ -120,6 +122,14 @@ https://recukngv.api.lncldglobal.com/1.1/classes/Counter?where=%7B%22time%22%3A%
 
 
 
+## badge
+
+一个可以用来统计任何一个页面的标签，不好的点就是这个标签需要每次手动申请，挺麻烦的
+
+> https://www.v2ex.com/t/702702
+
+
+
 ## Summary
 
 
@@ -136,7 +146,9 @@ https://recukngv.api.lncldglobal.com/1.1/classes/Counter?where=%7B%22time%22%3A%
 >
 > https://github.com/zfb132/zfb132.github.com/blob/master/index.html
 >
-> 
+> https://qchaha.github.io/2018/09/19/homepageStatistics.html
+>
+> https://www.cnblogs.com/zfb132/p/10665385.html
 
 
 
