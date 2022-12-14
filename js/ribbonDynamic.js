@@ -155,10 +155,8 @@
         this._context = this._canvas.getContext("2d");
         this._context.clearRect(0, 0, this._width, this._height);
         this._context.globalAlpha = this._options.colorAlpha;
-        // 这里可以设置是否随着窗口的滚动而滚动
         window.addEventListener("resize", this._onResize);
         window.addEventListener("scroll", this._onScroll);
-        // 这里设置添加的位置
         var body_ = document.getElementsByTagName('body')[0];
         body_.appendChild(this._canvas);
       } catch (e) {
