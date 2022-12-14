@@ -212,13 +212,35 @@ Words:&nbsp;{{ post.content | number_of_words }}
 
 
 
+然后加入谷歌翻译
+
 {% raw %}
 
-```
+```html
+<div id="google-translate">
+<div id="google_translate_element"></div>
+</div>
 
+<!-- google-translate -->
+<script async="async" type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<script type="text/javascript">
+var userLang = navigator.language || navigator.userLanguage || navigator.languages;
+function googleTranslateElementInit() {
+new google.translate.TranslateElement({
+    includedLanguages: 'en,hi,es,zh-TW,fr,ar,bn,ru,pt,de,ja,ko,it',
+    autoDisplay: true,
+    pageLanguage: 'zh-CN',
+    multilanguagePage: false,
+    layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+    //layout: google.translate.TranslateElement.FloatPosition.TOP_RIGHT
+}, 'google_translate_element');
+}
+</script>
 ```
 
 {% endraw %}
+
+
 
 ## 不蒜子
 
