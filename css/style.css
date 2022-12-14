@@ -757,7 +757,7 @@ a.anchorjs-link {
   -webkit-font-smoothing: antialiased
 }
 
-.goog-te-gadget-simple:before{
+.goog-te-gadget-simple::before{
   background-color: #fff0;
   border-left: none; 
   border-top: none; 
