@@ -94,11 +94,13 @@ Words:&nbsp;{{ post.content | number_of_words }}
 
 
 
-但是LeanCloud为了合规，不允许国内使用了
+LeanCloud经历了比较多的变动，之前出现了一次域名被禁止解析，然后js文件直接拉不到，很多人都选择了把js存本地，然后又能用了
+
+> https://forum.leancloud.cn/t/av-core-mini-0-6-4-js-av-min-js/22777
+
+但是后来，直接停止国内未绑定域名的服务，就导致很多人又搬去了国外站，再接着就是国外依然能访问国内，LeanCloud国际为了合规，不允许国内使用了，直接把国外的访问屏蔽了。
 
 > https://forum.leancloud.cn/t/2022-8/25408
-
-
 
 
 
