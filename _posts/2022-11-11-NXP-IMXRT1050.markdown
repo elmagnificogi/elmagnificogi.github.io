@@ -3,7 +3,7 @@ layout:     post
 title:      "恩智浦IMXRT1050开发尝试"
 subtitle:   "build,env"
 date:       2022-11-11
-update:     2022-11-12
+update:     2022-12-14
 author:     "elmagnifico"
 header-img: "img/mqtt.jpg"
 catalog:    true
