@@ -5,6 +5,8 @@
 
 <!-- hack iOS CSS :active style -->
 <body ontouchstart="">
+    <!-- 文章进度条 -->
+    <div class="progress-indicator" style="width: 0%;"></div>
 
     {% include nav.html %}
 
@@ -14,5 +16,25 @@
     {% include footer.html %}
 
 </body>
+<!-- 文章进度条：在style.css里面更改进度条样式 -->
+<script type="module">
+  /* 顶部进度条 */
+  (function() {
+    var $w = $(window);
+    var $prog2 = $('.progress-indicator');
+    var wh = $w.height();
+    var h = $('body').height();
+    var sHeight = h - wh;
+    $w.on('scroll', function() {
+    window.requestAnimationFrame(function(){
+      var perc = Math.max(0, Math.min(1, $w.scrollTop() / sHeight));
+      updateProgress(perc);
+    });
+    });
 
+    function updateProgress(perc) {
+    $prog2.css({width: perc * 100 + '%'});
+    }
+  }());
+</script>
 </html>
