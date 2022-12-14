@@ -33,14 +33,6 @@
   color: #0085a1!important
 }
 
-.sidebar-container .tags a {
-  border-color: #bfbfbf
-}
-
-.sidebar-container .tags a:hover,.sidebar-container .tags a:active {
-  border-color: #0085a1
-}
-
 .sidebar-container .short-about img {
   width: 80%;
   display: block;
@@ -958,76 +950,15 @@ input[type=text] {
   width: 90%;
 }
 
-.tags {
-  margin-bottom: -5px
-}
-
-.tags a,.tags .tag {
-  display: inline-block;
-  border: 1px solid rgba(255,255,255,.8);
-  border-radius: 999em;
-  padding: 0 10px;
-  color: #fff;
-  line-height: 24px;
-  font-size: 12px;
-  text-decoration: none;
-  margin: 0 1px;
-  margin-bottom: 6px
-}
-
-.tags a:hover,.tags .tag:hover,.tags a:active,.tags .tag:active {
-  color: #fff;
-  border-color: #fff;
-  background-color: rgba(255,255,255,.4);
-  text-decoration: none
-}
-
-@media only screen and (min-width: 768px) {
-  .tags a,.tags .tag {
-      margin-right:5px
-  }
-}
-
-#tag-heading {
-  padding: 70px 0 60px
-}
-
 @media only screen and (min-width: 768px) {
   #tag-heading {
       padding:55px 0
   }
 }
 
-#tag_cloud {
-  margin: 20px 0 15px 0
-}
-
-#tag_cloud a,#tag_cloud .tag {
-  font-size: 14px;
-  border: none;
-  line-height: 28px;
-  margin: 0 2px;
-  margin-bottom: 8px;
-  background: #D6D6D6
-}
-
-#tag_cloud a:hover,#tag_cloud .tag:hover,#tag_cloud a:active,#tag_cloud .tag:active {
-  background-color: #0085a1!important
-}
-
 @media only screen and (min-width: 768px) {
   #tag_cloud {
       margin-bottom:25px
-  }
-}
-
-.tag-comments {
-  font-size: 12px
-}
-
-@media only screen and (min-width: 768px) {
-  .tag-comments {
-      font-size:14px
   }
 }
 
