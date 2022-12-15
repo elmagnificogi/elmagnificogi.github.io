@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "NXP的ARM-GCC编译分析"
+title:      "NXP的ARM-GCC编译分析与转SES工程"
 subtitle:   "Makefile、cmake、sdk"
 date:       2022-12-15
 update:     2022-12-15
@@ -9,6 +9,7 @@ header-img: "img/desk-head-bg.jpg"
 catalog:    true
 tags:
     - NXP
+    - SES
 ---
 
 ## Forward
@@ -952,9 +953,115 @@ debug/hello_world.elf，结果
 
 
 
+## Ninja
+
+如果要转SES工程，会发现，SES只支持从keil、iar、ninja等工程配置转换过来。
+
+而如果要手动创建一个工程，就很麻烦，很多东西需要设置，大概率不能直接弄好，那不如用一用官方的转换。
+
+我想直接使用外部的编译，而不是SES自带的，如果从keil转就做不到了。官方刚好给了这个arm-gcc的，只不过他是用MinGW来生成的，SES需要用Ninja，Ninja使用也非常简单。
+
+
+
+直接下载Ninja，然后放到一个目录中
+
+> https://github.com/ninja-build/ninja/releases
+
+比如我这里是
+
+```
+D:\ninja\ninja.exe
+```
+
+然后将ninja的路径添加到`path`中，这样让cmake可以找到这个ninja
+
+![image-20221215184401465](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212151844538.png)
+
+然后修改编译的`build_debug.bat`，替换成Ninja
+
+```
+cmake -DCMAKE_TOOLCHAIN_FILE="../../../../../tools/cmake_toolchain_files/armgcc.cmake" -G "Ninja" -DCMAKE_BUILD_TYPE=debug  .
+```
+
+直接运行，就可以正常生成对应的Ninja文件了
+
+```bash
+F:\NXP\ref\SDK_2.6.0_EVKB-IMXRT1050\SDK_2.6.0_EVKB-IMXRT1050\boards\evkbimxrt1050\demo_apps\hello_world\armgcc>cmake -DCMAKE_TOOLCHAIN_FILE="../../../../../tools/cmake_toolchain_files/armgcc.cmake" -G "Ninja" -DCMAKE_BUILD_TYPE=debug  .
+CMake Warning (dev) in CMakeLists.txt:
+  No project() command is present.  The top-level CMakeLists.txt file must
+  contain a literal, direct call to the project() command.  Add a line of
+  code such as
+
+    project(ProjectName)
+
+  near the top of the file, but after cmake_minimum_required().
+
+  CMake is pretending there is a "project(Project)" command on the first
+  line.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+-- TOOLCHAIN_DIR: D:/GNU Arm Embedded Toolchain/10 2021.10
+CMake Deprecation Warning at D:/CMake/share/cmake-3.25/Modules/CMakeForceCompiler.cmake:75 (message):
+  The CMAKE_FORCE_C_COMPILER macro is deprecated.  Instead just set
+  CMAKE_C_COMPILER and allow CMake to identify the compiler.
+Call Stack (most recent call first):
+  F:/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/tools/cmake_toolchain_files/armgcc.cmake:33 (CMAKE_FORCE_C_COMPILER)
+  CMakeFiles/3.25.1/CMakeSystem.cmake:6 (include)
+  CMakeLists.txt
+
+
+CMake Deprecation Warning at D:/CMake/share/cmake-3.25/Modules/CMakeForceCompiler.cmake:89 (message):
+  The CMAKE_FORCE_CXX_COMPILER macro is deprecated.  Instead just set
+  CMAKE_CXX_COMPILER and allow CMake to identify the compiler.
+Call Stack (most recent call first):
+  F:/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/tools/cmake_toolchain_files/armgcc.cmake:34 (CMAKE_FORCE_CXX_COMPILER)
+  CMakeFiles/3.25.1/CMakeSystem.cmake:6 (include)
+  CMakeLists.txt
+
+
+-- BUILD_TYPE: debug
+CMake Deprecation Warning at CMakeLists.txt:5 (CMAKE_MINIMUM_REQUIRED):
+  Compatibility with CMake < 2.8.12 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value or use a ...<max> suffix to tell
+  CMake that the project does not need compatibility with older versions.
+
+
+-- The ASM compiler identification is GNU
+-- Found assembler: D:/GNU Arm Embedded Toolchain/10 2021.10/bin/arm-none-eabi-gcc.exe
+-- Configuring done
+-- Generating done
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    CMAKE_TOOLCHAIN_FILE
+
+
+-- Build files have been written to: F:/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/boards/evkbimxrt1050/demo_apps/hello_world/armgcc
+```
+
+然后SES这里直接导入Ninja
+
+![image-20221215184627182](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212151846249.png)
+
+导入以后有两个地方需要修改一下，build中关于ARMGCC的路径宏是不正确的，需要自己重新设置一下
+
+![image-20221215184745292](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212151847360.png)
+
+外部编译的路径也不正确，需要修改
+
+![image-20221215184930748](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212151849820.png)
+
+这样以后，就能正常编译过了
+
+![image-20221215185422060](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212151854154.png)
+
+
+
 ## Summary
 
-有了这些信息以后，基本就可以基于此转移到其他IDE中了
+通过这种方式了就可以将所有NXP的例程都转换成SES的工程，只是这里路径还是有点不够优雅，看看后续是否还有更好的方式。但是基于此创建基础工程和拓展已经可以了。
 
 
 
