@@ -8,8 +8,7 @@ author:     "elmagnifico"
 header-img: "img/mqtt.jpg"
 catalog:    true
 tags:
-    - C
-    - MT793x
+    - NXP
 ---
 
 ## Forward

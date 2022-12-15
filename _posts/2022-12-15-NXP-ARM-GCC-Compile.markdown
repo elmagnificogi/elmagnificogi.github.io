@@ -1,0 +1,978 @@
+---
+layout:     post
+title:      "NXP的ARM-GCC编译分析"
+subtitle:   "Makefile、cmake、sdk"
+date:       2022-12-15
+update:     2022-12-15
+author:     "elmagnifico"
+header-img: "img/desk-head-bg.jpg"
+catalog:    true
+tags:
+    - NXP
+---
+
+## Forward
+
+NXP的ARM-GCC编译脚本分析
+
+基于`SDK_2.6.0_EVKB-IMXRT1050`进行分析
+
+
+
+## build_debug.bat
+
+```bat
+cmake -DCMAKE_TOOLCHAIN_FILE="../../../../../tools/cmake_toolchain_files/armgcc.cmake" -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=debug  .
+mingw32-make -j4 2> build_log.txt 
+IF "%1" == "" ( pause ) 
+
+```
+
+这里比较简单，直接指定cmake编译配置文件路径，指定生成器是`MinGW Makefiles`，生成debug类型的makefile文件
+
+最后调用mingw32进行编译，最多4线程运行并把编译信息输出到`build_log.txt`
+
+
+
+## armgcc.cmake
+
+接着就是看cmake配置怎么写的了
+
+{% raw %}
+
+```cmake
+# 引入指定编译器工具
+INCLUDE(CMakeForceCompiler)
+
+# 根据平台决定运行程序后缀
+# TOOLCHAIN EXTENSION
+IF(WIN32)
+    SET(TOOLCHAIN_EXT ".exe")
+ELSE()
+    SET(TOOLCHAIN_EXT "")
+ENDIF()
+
+# 生成文件后缀
+# EXECUTABLE EXTENSION
+SET (CMAKE_EXECUTABLE_SUFFIX ".elf")
+
+# 指定工具链路径，这个是环境变量，其实就是 D:\GNU Arm Embedded Toolchain\10 2021.10
+# TOOLCHAIN_DIR AND NANO LIBRARY
+SET(TOOLCHAIN_DIR $ENV{ARMGCC_DIR})
+# 处理路径分隔符
+STRING(REGEX REPLACE "\\\\" "/" TOOLCHAIN_DIR "${TOOLCHAIN_DIR}")
+
+# 路径不存在报错
+IF(NOT TOOLCHAIN_DIR)
+    MESSAGE(FATAL_ERROR "***Please set ARMGCC_DIR in envionment variables***")
+ENDIF()
+
+# 显示工具链路径
+MESSAGE(STATUS "TOOLCHAIN_DIR: " ${TOOLCHAIN_DIR})
+
+# TARGET_TRIPLET
+# 设置三元路径
+SET(TARGET_TRIPLET "arm-none-eabi")
+
+SET(TOOLCHAIN_BIN_DIR ${TOOLCHAIN_DIR}/bin)
+SET(TOOLCHAIN_INC_DIR ${TOOLCHAIN_DIR}/${TARGET_TRIPLET}/include)
+SET(TOOLCHAIN_LIB_DIR ${TOOLCHAIN_DIR}/${TARGET_TRIPLET}/lib)
+
+# 设置编译目标系统名称，这里是通用
+SET(CMAKE_SYSTEM_NAME Generic)
+# 设置编译目标架构是arm架构
+SET(CMAKE_SYSTEM_PROCESSOR arm)
+
+# 指定编译器
+CMAKE_FORCE_C_COMPILER(${TOOLCHAIN_BIN_DIR}/${TARGET_TRIPLET}-gcc${TOOLCHAIN_EXT} GNU)
+CMAKE_FORCE_CXX_COMPILER(${TOOLCHAIN_BIN_DIR}/${TARGET_TRIPLET}-g++${TOOLCHAIN_EXT} GNU)
+SET(CMAKE_ASM_COMPILER ${TOOLCHAIN_BIN_DIR}/${TARGET_TRIPLET}-gcc${TOOLCHAIN_EXT})
+
+# 设置copy和dump工具
+SET(CMAKE_OBJCOPY ${TOOLCHAIN_BIN_DIR}/${TARGET_TRIPLET}-objcopy CACHE INTERNAL "objcopy tool")
+SET(CMAKE_OBJDUMP ${TOOLCHAIN_BIN_DIR}/${TARGET_TRIPLET}-objdump CACHE INTERNAL "objdump tool")
+
+# 设置debug编译优化级别和link标记
+SET(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -O0 -g" CACHE INTERNAL "c compiler flags debug")
+SET(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -O0 -g" CACHE INTERNAL "cxx compiler flags debug")
+SET(CMAKE_ASM_FLAGS_DEBUG "${CMAKE_ASM_FLAGS_DEBUG} -g" CACHE INTERNAL "asm compiler flags debug")
+SET(CMAKE_EXE_LINKER_FLAGS_DEBUG "${CMAKE_EXE_LINKER_FLAGS_DEBUG}" CACHE INTERNAL "linker flags debug")
+
+# 设置release编译优化级别和link标记
+SET(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} -O3 " CACHE INTERNAL "c compiler flags release")
+SET(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3 " CACHE INTERNAL "cxx compiler flags release")
+SET(CMAKE_ASM_FLAGS_RELEASE "${CMAKE_ASM_FLAGS_RELEASE}" CACHE INTERNAL "asm compiler flags release")
+SET(CMAKE_EXE_LINKER_FLAGS_RELESE "${CMAKE_EXE_LINKER_FLAGS_RELESE}" CACHE INTERNAL "linker flags release")
+
+# 设置根路径 EXTRA_FIND_PATH是额外指定的查找路径，这里没有写
+SET(CMAKE_FIND_ROOT_PATH ${TOOLCHAIN_DIR}/${TARGET_TRIPLET} ${EXTRA_FIND_PATH})
+# FIND_PROGRAM 不从根路径搜索
+SET(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
+# FIND_LIBRARY 只从根路径查找
+SET(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
+#FIND_INCLUDE 只从根路径查找
+SET(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
+
+# 设置普通输出路径
+SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/${CMAKE_BUILD_TYPE})
+# 设置库输出路径
+SET(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/${CMAKE_BUILD_TYPE})
+
+# 显示当前build的类型
+MESSAGE(STATUS "BUILD_TYPE: " ${CMAKE_BUILD_TYPE})
+
+```
+
+{% endraw %}
+
+总体看还是非常简单的，先是指定具体的编译器路径，程序、库、include路径，设置编译级别和link路径，以及编译后输出路径。和IDE联系在一起，也是设置类似的东西即可。
+
+
+
+#### 测试
+
+看一下cmake以后的结果
+
+```bash
+
+F:\NXP\ref\SDK_2.6.0_EVKB-IMXRT1050\SDK_2.6.0_EVKB-IMXRT1050\boards\evkbimxrt1050\demo_apps\hello_world\armgcc>cmake -DCMAKE_TOOLCHAIN_FILE="../../../../../tools/cmake_toolchain_files/armgcc.cmake" -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=debug  .
+# 这里是没有设置工程名称，造成的警告，可以无视也可以补充上定义
+CMake Warning (dev) in CMakeLists.txt:
+  No project() command is present.  The top-level CMakeLists.txt file must
+  contain a literal, direct call to the project() command.  Add a line of
+  code such as
+
+    project(ProjectName)
+
+  near the top of the file, but after cmake_minimum_required().
+
+  CMake is pretending there is a "project(Project)" command on the first
+  line.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+# 回显工具链路径 正确
+-- TOOLCHAIN_DIR: D:/GNU Arm Embedded Toolchain/10 2021.10
+# CMAKE_FORCE_C_COMPILER的宏已经太老了，现在直接指定即可，不是什么大问题
+CMake Deprecation Warning at D:/CMake/share/cmake-3.25/Modules/CMakeForceCompiler.cmake:75 (message):
+  The CMAKE_FORCE_C_COMPILER macro is deprecated.  Instead just set
+  CMAKE_C_COMPILER and allow CMake to identify the compiler.
+Call Stack (most recent call first):
+  F:/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/tools/cmake_toolchain_files/armgcc.cmake:33 (CMAKE_FORCE_C_COMPILER)
+  D:/CMake/share/cmake-3.25/Modules/CMakeDetermineSystem.cmake:121 (include)
+  CMakeLists.txt
+
+# 同上
+CMake Deprecation Warning at D:/CMake/share/cmake-3.25/Modules/CMakeForceCompiler.cmake:89 (message):
+  The CMAKE_FORCE_CXX_COMPILER macro is deprecated.  Instead just set
+  CMAKE_CXX_COMPILER and allow CMake to identify the compiler.
+Call Stack (most recent call first):
+  F:/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/tools/cmake_toolchain_files/armgcc.cmake:34 (CMAKE_FORCE_CXX_COMPILER)
+  D:/CMake/share/cmake-3.25/Modules/CMakeDetermineSystem.cmake:121 (include)
+  CMakeLists.txt
+
+# 回显编译类型
+-- BUILD_TYPE: debug
+# 回显路径
+-- TOOLCHAIN_DIR: D:/GNU Arm Embedded Toolchain/10 2021.10
+CMake Deprecation Warning at D:/CMake/share/cmake-3.25/Modules/CMakeForceCompiler.cmake:75 (message):
+  The CMAKE_FORCE_C_COMPILER macro is deprecated.  Instead just set
+  CMAKE_C_COMPILER and allow CMake to identify the compiler.
+Call Stack (most recent call first):
+  F:/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/tools/cmake_toolchain_files/armgcc.cmake:33 (CMAKE_FORCE_C_COMPILER)
+  CMakeFiles/3.25.1/CMakeSystem.cmake:6 (include)
+  CMakeLists.txt
+
+
+CMake Deprecation Warning at D:/CMake/share/cmake-3.25/Modules/CMakeForceCompiler.cmake:89 (message):
+  The CMAKE_FORCE_CXX_COMPILER macro is deprecated.  Instead just set
+  CMAKE_CXX_COMPILER and allow CMake to identify the compiler.
+Call Stack (most recent call first):
+  F:/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/tools/cmake_toolchain_files/armgcc.cmake:34 (CMAKE_FORCE_CXX_COMPILER)
+  CMakeFiles/3.25.1/CMakeSystem.cmake:6 (include)
+  CMakeLists.txt
+
+
+-- BUILD_TYPE: debug
+CMake Deprecation Warning at CMakeLists.txt:5 (CMAKE_MINIMUM_REQUIRED):
+  Compatibility with CMake < 2.8.12 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value or use a ...<max> suffix to tell
+  CMake that the project does not need compatibility with older versions.
+
+# 汇编路径回显
+-- The ASM compiler identification is GNU
+-- Found assembler: D:/GNU Arm Embedded Toolchain/10 2021.10/bin/arm-none-eabi-gcc.exe
+-- Configuring done
+-- Generating done
+-- Build files have been written to: F:/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/boards/evkbimxrt1050/demo_apps/hello_world/armgcc
+
+```
+
+一共会生成5个内容
+
+![image-20221215111718008](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212151117068.png)
+
+![image-20221215111737372](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212151117428.png)
+
+CMakeCache.txt可以看到CMake相关的各种定义的值，可以修改，下次编译的时候还会使用这个缓存信息。
+
+cmake_install.cmake是反射你当前的cmake环境，当把这个build结果给到别人的时候，别人可以通过安装和你相同的环境，来复现相同的编译
+
+```
+cmake -P cmake_install.cmake
+```
+
+Makefile，编译文件，后续分析
+
+CMakeFiles，自动生成一堆MakeFile，用来辅助编译
+
+
+
+## Makefile
+
+```makefile
+# CMAKE generated file: DO NOT EDIT!
+# Generated by "MinGW Makefiles" Generator, CMake Version 3.25
+
+# Default target executed when no arguments are given to make.
+default_target: all
+.PHONY : default_target
+
+# Allow only one "make -f Makefile2" at a time, but pass parallelism.
+.NOTPARALLEL:
+
+#=============================================================================
+# Special targets provided by cmake.
+
+# Disable implicit rules so canonical targets will work.
+.SUFFIXES:
+
+# Disable VCS-based implicit rules.
+% : %,v
+
+# Disable VCS-based implicit rules.
+% : RCS/%
+
+# Disable VCS-based implicit rules.
+% : RCS/%,v
+
+# Disable VCS-based implicit rules.
+% : SCCS/s.%
+
+# Disable VCS-based implicit rules.
+% : s.%
+
+.SUFFIXES: .hpux_make_needs_suffix_list
+
+# Command-line flag to silence nested $(MAKE).
+$(VERBOSE)MAKESILENT = -s
+
+#Suppress display of executed commands.
+$(VERBOSE).SILENT:
+
+# A target that is always out of date.
+cmake_force:
+.PHONY : cmake_force
+
+#=============================================================================
+# Set environment variables for the build.
+
+SHELL = cmd.exe
+
+# The CMake executable.
+CMAKE_COMMAND = D:\CMake\bin\cmake.exe
+
+# The command to remove a file.
+RM = D:\CMake\bin\cmake.exe -E rm -f
+
+# Escaping for special characters.
+EQUALS = =
+
+# The top-level source directory on which CMake was run.
+CMAKE_SOURCE_DIR = F:\NXP\ref\SDK_2.6.0_EVKB-IMXRT1050\SDK_2.6.0_EVKB-IMXRT1050\boards\evkbimxrt1050\demo_apps\hello_world\armgcc
+
+# The top-level build directory on which CMake was run.
+CMAKE_BINARY_DIR = F:\NXP\ref\SDK_2.6.0_EVKB-IMXRT1050\SDK_2.6.0_EVKB-IMXRT1050\boards\evkbimxrt1050\demo_apps\hello_world\armgcc
+
+#=============================================================================
+# Targets provided globally by CMake.
+
+# Special rule for the target edit_cache
+edit_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
+	D:\CMake\bin\cmake-gui.exe -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+.PHONY : edit_cache
+
+# Special rule for the target edit_cache
+edit_cache/fast: edit_cache
+.PHONY : edit_cache/fast
+
+# Special rule for the target rebuild_cache
+rebuild_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
+	D:\CMake\bin\cmake.exe --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+.PHONY : rebuild_cache
+
+# Special rule for the target rebuild_cache
+rebuild_cache/fast: rebuild_cache
+.PHONY : rebuild_cache/fast
+
+# The main all target
+all: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start F:\NXP\ref\SDK_2.6.0_EVKB-IMXRT1050\SDK_2.6.0_EVKB-IMXRT1050\boards\evkbimxrt1050\demo_apps\hello_world\armgcc\CMakeFiles F:\NXP\ref\SDK_2.6.0_EVKB-IMXRT1050\SDK_2.6.0_EVKB-IMXRT1050\boards\evkbimxrt1050\demo_apps\hello_world\armgcc\\CMakeFiles\progress.marks
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 all
+	$(CMAKE_COMMAND) -E cmake_progress_start F:\NXP\ref\SDK_2.6.0_EVKB-IMXRT1050\SDK_2.6.0_EVKB-IMXRT1050\boards\evkbimxrt1050\demo_apps\hello_world\armgcc\CMakeFiles 0
+.PHONY : all
+
+# The main clean target
+clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 clean
+.PHONY : clean
+
+# The main clean target
+clean/fast: clean
+.PHONY : clean/fast
+
+# Prepare targets for installation.
+preinstall: all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 preinstall
+.PHONY : preinstall
+
+# Prepare targets for installation.
+preinstall/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 preinstall
+.PHONY : preinstall/fast
+
+# clear depends
+depend:
+	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles\Makefile.cmake 1
+.PHONY : depend
+
+#=============================================================================
+# Target rules for targets named hello_world.elf
+
+# Build rule for target.
+hello_world.elf: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 hello_world.elf
+.PHONY : hello_world.elf
+
+# fast build rule for target.
+hello_world.elf/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\hello_world.elf.dir\build.make CMakeFiles/hello_world.elf.dir/build
+.PHONY : hello_world.elf/fast
+
+06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/board.obj: 06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/board.c.obj
+.PHONY : 06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/board.obj
+
+# target to build an object file
+06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/board.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\hello_world.elf.dir\build.make CMakeFiles/hello_world.elf.dir/06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/board.c.obj
+.PHONY : 06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/board.c.obj
+
+06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/board.i: 06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/board.c.i
+.PHONY : 06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/board.i
+
+# target to preprocess a source file
+06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/board.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\hello_world.elf.dir\build.make CMakeFiles/hello_world.elf.dir/06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/board.c.i
+.PHONY : 06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/board.c.i
+
+06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/board.s: 06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/board.c.s
+.PHONY : 06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/board.s
+
+# target to generate assembly for a file
+06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/board.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\hello_world.elf.dir\build.make CMakeFiles/hello_world.elf.dir/06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/board.c.s
+.PHONY : 06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/board.c.s
+
+06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/clock_config.obj: 06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/clock_config.c.obj
+.PHONY : 06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/clock_config.obj
+
+# target to build an object file
+06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/clock_config.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\hello_world.elf.dir\build.make CMakeFiles/hello_world.elf.dir/06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/clock_config.c.obj
+.PHONY : 06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/clock_config.c.obj
+
+06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/clock_config.i: 06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/clock_config.c.i
+.PHONY : 06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/clock_config.i
+
+# target to preprocess a source file
+06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/clock_config.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\hello_world.elf.dir\build.make CMakeFiles/hello_world.elf.dir/06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/clock_config.c.i
+.PHONY : 06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/clock_config.c.i
+
+06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/clock_config.s: 06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/clock_config.c.s
+.PHONY : 06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/clock_config.s
+
+# target to generate assembly for a file
+06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/clock_config.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\hello_world.elf.dir\build.make CMakeFiles/hello_world.elf.dir/06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/clock_config.c.s
+.PHONY : 06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/clock_config.c.s
+
+06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/hello_world.obj: 06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/hello_world.c.obj
+.PHONY : 06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/hello_world.obj
+
+# target to build an object file
+06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/hello_world.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\hello_world.elf.dir\build.make CMakeFiles/hello_world.elf.dir/06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/hello_world.c.obj
+.PHONY : 06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/hello_world.c.obj
+
+06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/hello_world.i: 06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/hello_world.c.i
+.PHONY : 06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/hello_world.i
+
+# target to preprocess a source file
+06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/hello_world.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\hello_world.elf.dir\build.make CMakeFiles/hello_world.elf.dir/06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/hello_world.c.i
+.PHONY : 06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/hello_world.c.i
+
+06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/hello_world.s: 06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/hello_world.c.s
+.PHONY : 06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/hello_world.s
+
+# target to generate assembly for a file
+06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/hello_world.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\hello_world.elf.dir\build.make CMakeFiles/hello_world.elf.dir/06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/hello_world.c.s
+.PHONY : 06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/hello_world.c.s
+
+06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/pin_mux.obj: 06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/pin_mux.c.obj
+.PHONY : 06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/pin_mux.obj
+
+# target to build an object file
+06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/pin_mux.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\hello_world.elf.dir\build.make CMakeFiles/hello_world.elf.dir/06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/pin_mux.c.obj
+.PHONY : 06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/pin_mux.c.obj
+
+06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/pin_mux.i: 06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/pin_mux.c.i
+.PHONY : 06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/pin_mux.i
+
+# target to preprocess a source file
+06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/pin_mux.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\hello_world.elf.dir\build.make CMakeFiles/hello_world.elf.dir/06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/pin_mux.c.i
+.PHONY : 06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/pin_mux.c.i
+
+06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/pin_mux.s: 06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/pin_mux.c.s
+.PHONY : 06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/pin_mux.s
+
+# target to generate assembly for a file
+06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/pin_mux.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\hello_world.elf.dir\build.make CMakeFiles/hello_world.elf.dir/06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/pin_mux.c.s
+.PHONY : 06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/pin_mux.c.s
+
+06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/xip/evkbimxrt1050_flexspi_nor_config.obj: 06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/xip/evkbimxrt1050_flexspi_nor_config.c.obj
+.PHONY : 06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/xip/evkbimxrt1050_flexspi_nor_config.obj
+
+# target to build an object file
+06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/xip/evkbimxrt1050_flexspi_nor_config.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\hello_world.elf.dir\build.make CMakeFiles/hello_world.elf.dir/06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/xip/evkbimxrt1050_flexspi_nor_config.c.obj
+.PHONY : 06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/xip/evkbimxrt1050_flexspi_nor_config.c.obj
+
+06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/xip/evkbimxrt1050_flexspi_nor_config.i: 06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/xip/evkbimxrt1050_flexspi_nor_config.c.i
+.PHONY : 06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/xip/evkbimxrt1050_flexspi_nor_config.i
+
+# target to preprocess a source file
+06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/xip/evkbimxrt1050_flexspi_nor_config.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\hello_world.elf.dir\build.make CMakeFiles/hello_world.elf.dir/06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/xip/evkbimxrt1050_flexspi_nor_config.c.i
+.PHONY : 06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/xip/evkbimxrt1050_flexspi_nor_config.c.i
+
+06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/xip/evkbimxrt1050_flexspi_nor_config.s: 06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/xip/evkbimxrt1050_flexspi_nor_config.c.s
+.PHONY : 06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/xip/evkbimxrt1050_flexspi_nor_config.s
+
+# target to generate assembly for a file
+06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/xip/evkbimxrt1050_flexspi_nor_config.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\hello_world.elf.dir\build.make CMakeFiles/hello_world.elf.dir/06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/xip/evkbimxrt1050_flexspi_nor_config.c.s
+.PHONY : 06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/xip/evkbimxrt1050_flexspi_nor_config.c.s
+
+06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/xip/evkbimxrt1050_sdram_ini_dcd.obj: 06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/xip/evkbimxrt1050_sdram_ini_dcd.c.obj
+.PHONY : 06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/xip/evkbimxrt1050_sdram_ini_dcd.obj
+
+# target to build an object file
+06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/xip/evkbimxrt1050_sdram_ini_dcd.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\hello_world.elf.dir\build.make CMakeFiles/hello_world.elf.dir/06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/xip/evkbimxrt1050_sdram_ini_dcd.c.obj
+.PHONY : 06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/xip/evkbimxrt1050_sdram_ini_dcd.c.obj
+
+06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/xip/evkbimxrt1050_sdram_ini_dcd.i: 06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/xip/evkbimxrt1050_sdram_ini_dcd.c.i
+.PHONY : 06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/xip/evkbimxrt1050_sdram_ini_dcd.i
+
+# target to preprocess a source file
+06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/xip/evkbimxrt1050_sdram_ini_dcd.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\hello_world.elf.dir\build.make CMakeFiles/hello_world.elf.dir/06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/xip/evkbimxrt1050_sdram_ini_dcd.c.i
+.PHONY : 06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/xip/evkbimxrt1050_sdram_ini_dcd.c.i
+
+06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/xip/evkbimxrt1050_sdram_ini_dcd.s: 06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/xip/evkbimxrt1050_sdram_ini_dcd.c.s
+.PHONY : 06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/xip/evkbimxrt1050_sdram_ini_dcd.s
+
+# target to generate assembly for a file
+06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/xip/evkbimxrt1050_sdram_ini_dcd.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\hello_world.elf.dir\build.make CMakeFiles/hello_world.elf.dir/06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/xip/evkbimxrt1050_sdram_ini_dcd.c.s
+.PHONY : 06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/xip/evkbimxrt1050_sdram_ini_dcd.c.s
+
+06b4f722f0096b8e831cef3a518bd843/devices/MIMXRT1052/utilities/debug_console/fsl_debug_console.obj: 06b4f722f0096b8e831cef3a518bd843/devices/MIMXRT1052/utilities/debug_console/fsl_debug_console.c.obj
+.PHONY : 06b4f722f0096b8e831cef3a518bd843/devices/MIMXRT1052/utilities/debug_console/fsl_debug_console.obj
+
+# target to build an object file
+06b4f722f0096b8e831cef3a518bd843/devices/MIMXRT1052/utilities/debug_console/fsl_debug_console.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\hello_world.elf.dir\build.make CMakeFiles/hello_world.elf.dir/06b4f722f0096b8e831cef3a518bd843/devices/MIMXRT1052/utilities/debug_console/fsl_debug_console.c.obj
+.PHONY : 06b4f722f0096b8e831cef3a518bd843/devices/MIMXRT1052/utilities/debug_console/fsl_debug_console.c.obj
+
+06b4f722f0096b8e831cef3a518bd843/devices/MIMXRT1052/utilities/debug_console/fsl_debug_console.i: 06b4f722f0096b8e831cef3a518bd843/devices/MIMXRT1052/utilities/debug_console/fsl_debug_console.c.i
+.PHONY : 06b4f722f0096b8e831cef3a518bd843/devices/MIMXRT1052/utilities/debug_console/fsl_debug_console.i
+
+# target to preprocess a source file
+06b4f722f0096b8e831cef3a518bd843/devices/MIMXRT1052/utilities/debug_console/fsl_debug_console.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\hello_world.elf.dir\build.make CMakeFiles/hello_world.elf.dir/06b4f722f0096b8e831cef3a518bd843/devices/MIMXRT1052/utilities/debug_console/fsl_debug_console.c.i
+.PHONY : 06b4f722f0096b8e831cef3a518bd843/devices/MIMXRT1052/utilities/debug_console/fsl_debug_console.c.i
+
+06b4f722f0096b8e831cef3a518bd843/devices/MIMXRT1052/utilities/debug_console/fsl_debug_console.s: 06b4f722f0096b8e831cef3a518bd843/devices/MIMXRT1052/utilities/debug_console/fsl_debug_console.c.s
+.PHONY : 06b4f722f0096b8e831cef3a518bd843/devices/MIMXRT1052/utilities/debug_console/fsl_debug_console.s
+
+# target to generate assembly for a file
+06b4f722f0096b8e831cef3a518bd843/devices/MIMXRT1052/utilities/debug_console/fsl_debug_console.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\hello_world.elf.dir\build.make CMakeFiles/hello_world.elf.dir/06b4f722f0096b8e831cef3a518bd843/devices/MIMXRT1052/utilities/debug_console/fsl_debug_console.c.s
+.PHONY : 06b4f722f0096b8e831cef3a518bd843/devices/MIMXRT1052/utilities/debug_console/fsl_debug_console.c.s
+
+F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/components/lists/generic_list.obj: F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/components/lists/generic_list.c.obj
+.PHONY : F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/components/lists/generic_list.obj
+
+# target to build an object file
+F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/components/lists/generic_list.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\hello_world.elf.dir\build.make CMakeFiles/hello_world.elf.dir/F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/components/lists/generic_list.c.obj
+.PHONY : F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/components/lists/generic_list.c.obj
+
+F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/components/lists/generic_list.i: F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/components/lists/generic_list.c.i
+.PHONY : F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/components/lists/generic_list.i
+
+# target to preprocess a source file
+F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/components/lists/generic_list.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\hello_world.elf.dir\build.make CMakeFiles/hello_world.elf.dir/F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/components/lists/generic_list.c.i
+.PHONY : F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/components/lists/generic_list.c.i
+
+F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/components/lists/generic_list.s: F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/components/lists/generic_list.c.s
+.PHONY : F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/components/lists/generic_list.s
+
+# target to generate assembly for a file
+F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/components/lists/generic_list.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\hello_world.elf.dir\build.make CMakeFiles/hello_world.elf.dir/F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/components/lists/generic_list.c.s
+.PHONY : F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/components/lists/generic_list.c.s
+
+F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/components/serial_manager/serial_manager.obj: F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/components/serial_manager/serial_manager.c.obj
+.PHONY : F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/components/serial_manager/serial_manager.obj
+
+# target to build an object file
+F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/components/serial_manager/serial_manager.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\hello_world.elf.dir\build.make CMakeFiles/hello_world.elf.dir/F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/components/serial_manager/serial_manager.c.obj
+.PHONY : F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/components/serial_manager/serial_manager.c.obj
+
+F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/components/serial_manager/serial_manager.i: F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/components/serial_manager/serial_manager.c.i
+.PHONY : F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/components/serial_manager/serial_manager.i
+
+# target to preprocess a source file
+F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/components/serial_manager/serial_manager.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\hello_world.elf.dir\build.make CMakeFiles/hello_world.elf.dir/F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/components/serial_manager/serial_manager.c.i
+.PHONY : F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/components/serial_manager/serial_manager.c.i
+
+F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/components/serial_manager/serial_manager.s: F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/components/serial_manager/serial_manager.c.s
+.PHONY : F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/components/serial_manager/serial_manager.s
+
+# target to generate assembly for a file
+F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/components/serial_manager/serial_manager.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\hello_world.elf.dir\build.make CMakeFiles/hello_world.elf.dir/F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/components/serial_manager/serial_manager.c.s
+.PHONY : F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/components/serial_manager/serial_manager.c.s
+
+F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/components/uart/lpuart_adapter.obj: F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/components/uart/lpuart_adapter.c.obj
+.PHONY : F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/components/uart/lpuart_adapter.obj
+
+# target to build an object file
+F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/components/uart/lpuart_adapter.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\hello_world.elf.dir\build.make CMakeFiles/hello_world.elf.dir/F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/components/uart/lpuart_adapter.c.obj
+.PHONY : F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/components/uart/lpuart_adapter.c.obj
+
+F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/components/uart/lpuart_adapter.i: F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/components/uart/lpuart_adapter.c.i
+.PHONY : F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/components/uart/lpuart_adapter.i
+
+# target to preprocess a source file
+F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/components/uart/lpuart_adapter.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\hello_world.elf.dir\build.make CMakeFiles/hello_world.elf.dir/F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/components/uart/lpuart_adapter.c.i
+.PHONY : F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/components/uart/lpuart_adapter.c.i
+
+F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/components/uart/lpuart_adapter.s: F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/components/uart/lpuart_adapter.c.s
+.PHONY : F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/components/uart/lpuart_adapter.s
+
+# target to generate assembly for a file
+F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/components/uart/lpuart_adapter.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\hello_world.elf.dir\build.make CMakeFiles/hello_world.elf.dir/F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/components/uart/lpuart_adapter.c.s
+.PHONY : F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/components/uart/lpuart_adapter.c.s
+
+F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_clock.obj: F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_clock.c.obj
+.PHONY : F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_clock.obj
+
+# target to build an object file
+F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_clock.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\hello_world.elf.dir\build.make CMakeFiles/hello_world.elf.dir/F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_clock.c.obj
+.PHONY : F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_clock.c.obj
+
+F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_clock.i: F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_clock.c.i
+.PHONY : F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_clock.i
+
+# target to preprocess a source file
+F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_clock.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\hello_world.elf.dir\build.make CMakeFiles/hello_world.elf.dir/F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_clock.c.i
+.PHONY : F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_clock.c.i
+
+F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_clock.s: F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_clock.c.s
+.PHONY : F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_clock.s
+
+# target to generate assembly for a file
+F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_clock.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\hello_world.elf.dir\build.make CMakeFiles/hello_world.elf.dir/F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_clock.c.s
+.PHONY : F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_clock.c.s
+
+F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_common.obj: F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_common.c.obj
+.PHONY : F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_common.obj
+
+# target to build an object file
+F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_common.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\hello_world.elf.dir\build.make CMakeFiles/hello_world.elf.dir/F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_common.c.obj
+.PHONY : F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_common.c.obj
+
+F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_common.i: F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_common.c.i
+.PHONY : F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_common.i
+
+# target to preprocess a source file
+F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_common.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\hello_world.elf.dir\build.make CMakeFiles/hello_world.elf.dir/F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_common.c.i
+.PHONY : F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_common.c.i
+
+F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_common.s: F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_common.c.s
+.PHONY : F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_common.s
+
+# target to generate assembly for a file
+F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_common.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\hello_world.elf.dir\build.make CMakeFiles/hello_world.elf.dir/F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_common.c.s
+.PHONY : F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_common.c.s
+
+F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_gpio.obj: F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_gpio.c.obj
+.PHONY : F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_gpio.obj
+
+# target to build an object file
+F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_gpio.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\hello_world.elf.dir\build.make CMakeFiles/hello_world.elf.dir/F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_gpio.c.obj
+.PHONY : F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_gpio.c.obj
+
+F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_gpio.i: F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_gpio.c.i
+.PHONY : F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_gpio.i
+
+# target to preprocess a source file
+F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_gpio.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\hello_world.elf.dir\build.make CMakeFiles/hello_world.elf.dir/F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_gpio.c.i
+.PHONY : F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_gpio.c.i
+
+F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_gpio.s: F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_gpio.c.s
+.PHONY : F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_gpio.s
+
+# target to generate assembly for a file
+F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_gpio.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\hello_world.elf.dir\build.make CMakeFiles/hello_world.elf.dir/F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_gpio.c.s
+.PHONY : F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_gpio.c.s
+
+F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_lpuart.obj: F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_lpuart.c.obj
+.PHONY : F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_lpuart.obj
+
+# target to build an object file
+F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_lpuart.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\hello_world.elf.dir\build.make CMakeFiles/hello_world.elf.dir/F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_lpuart.c.obj
+.PHONY : F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_lpuart.c.obj
+
+F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_lpuart.i: F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_lpuart.c.i
+.PHONY : F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_lpuart.i
+
+# target to preprocess a source file
+F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_lpuart.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\hello_world.elf.dir\build.make CMakeFiles/hello_world.elf.dir/F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_lpuart.c.i
+.PHONY : F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_lpuart.c.i
+
+F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_lpuart.s: F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_lpuart.c.s
+.PHONY : F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_lpuart.s
+
+# target to generate assembly for a file
+F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_lpuart.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\hello_world.elf.dir\build.make CMakeFiles/hello_world.elf.dir/F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_lpuart.c.s
+.PHONY : F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_lpuart.c.s
+
+F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/gcc/startup_MIMXRT1052.obj: F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/gcc/startup_MIMXRT1052.S.obj
+.PHONY : F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/gcc/startup_MIMXRT1052.obj
+
+# target to build an object file
+F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/gcc/startup_MIMXRT1052.S.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\hello_world.elf.dir\build.make CMakeFiles/hello_world.elf.dir/F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/gcc/startup_MIMXRT1052.S.obj
+.PHONY : F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/gcc/startup_MIMXRT1052.S.obj
+
+F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/system_MIMXRT1052.obj: F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/system_MIMXRT1052.c.obj
+.PHONY : F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/system_MIMXRT1052.obj
+
+# target to build an object file
+F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/system_MIMXRT1052.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\hello_world.elf.dir\build.make CMakeFiles/hello_world.elf.dir/F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/system_MIMXRT1052.c.obj
+.PHONY : F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/system_MIMXRT1052.c.obj
+
+F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/system_MIMXRT1052.i: F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/system_MIMXRT1052.c.i
+.PHONY : F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/system_MIMXRT1052.i
+
+# target to preprocess a source file
+F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/system_MIMXRT1052.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\hello_world.elf.dir\build.make CMakeFiles/hello_world.elf.dir/F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/system_MIMXRT1052.c.i
+.PHONY : F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/system_MIMXRT1052.c.i
+
+F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/system_MIMXRT1052.s: F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/system_MIMXRT1052.c.s
+.PHONY : F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/system_MIMXRT1052.s
+
+# target to generate assembly for a file
+F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/system_MIMXRT1052.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\hello_world.elf.dir\build.make CMakeFiles/hello_world.elf.dir/F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/system_MIMXRT1052.c.s
+.PHONY : F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/system_MIMXRT1052.c.s
+
+F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/utilities/fsl_assert.obj: F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/utilities/fsl_assert.c.obj
+.PHONY : F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/utilities/fsl_assert.obj
+
+# target to build an object file
+F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/utilities/fsl_assert.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\hello_world.elf.dir\build.make CMakeFiles/hello_world.elf.dir/F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/utilities/fsl_assert.c.obj
+.PHONY : F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/utilities/fsl_assert.c.obj
+
+F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/utilities/fsl_assert.i: F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/utilities/fsl_assert.c.i
+.PHONY : F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/utilities/fsl_assert.i
+
+# target to preprocess a source file
+F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/utilities/fsl_assert.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\hello_world.elf.dir\build.make CMakeFiles/hello_world.elf.dir/F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/utilities/fsl_assert.c.i
+.PHONY : F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/utilities/fsl_assert.c.i
+
+F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/utilities/fsl_assert.s: F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/utilities/fsl_assert.c.s
+.PHONY : F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/utilities/fsl_assert.s
+
+# target to generate assembly for a file
+F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/utilities/fsl_assert.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\hello_world.elf.dir\build.make CMakeFiles/hello_world.elf.dir/F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/utilities/fsl_assert.c.s
+.PHONY : F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/utilities/fsl_assert.c.s
+
+F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/utilities/str/fsl_str.obj: F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/utilities/str/fsl_str.c.obj
+.PHONY : F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/utilities/str/fsl_str.obj
+
+# target to build an object file
+F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/utilities/str/fsl_str.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\hello_world.elf.dir\build.make CMakeFiles/hello_world.elf.dir/F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/utilities/str/fsl_str.c.obj
+.PHONY : F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/utilities/str/fsl_str.c.obj
+
+F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/utilities/str/fsl_str.i: F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/utilities/str/fsl_str.c.i
+.PHONY : F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/utilities/str/fsl_str.i
+
+# target to preprocess a source file
+F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/utilities/str/fsl_str.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\hello_world.elf.dir\build.make CMakeFiles/hello_world.elf.dir/F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/utilities/str/fsl_str.c.i
+.PHONY : F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/utilities/str/fsl_str.c.i
+
+F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/utilities/str/fsl_str.s: F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/utilities/str/fsl_str.c.s
+.PHONY : F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/utilities/str/fsl_str.s
+
+# target to generate assembly for a file
+F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/utilities/str/fsl_str.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\hello_world.elf.dir\build.make CMakeFiles/hello_world.elf.dir/F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/utilities/str/fsl_str.c.s
+.PHONY : F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/utilities/str/fsl_str.c.s
+
+e80b1e64208fade1e56dcc745157207a/SDK_2.6.0_EVKB-IMXRT1050/components/serial_manager/serial_port_uart.obj: e80b1e64208fade1e56dcc745157207a/SDK_2.6.0_EVKB-IMXRT1050/components/serial_manager/serial_port_uart.c.obj
+.PHONY : e80b1e64208fade1e56dcc745157207a/SDK_2.6.0_EVKB-IMXRT1050/components/serial_manager/serial_port_uart.obj
+
+# target to build an object file
+e80b1e64208fade1e56dcc745157207a/SDK_2.6.0_EVKB-IMXRT1050/components/serial_manager/serial_port_uart.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\hello_world.elf.dir\build.make CMakeFiles/hello_world.elf.dir/e80b1e64208fade1e56dcc745157207a/SDK_2.6.0_EVKB-IMXRT1050/components/serial_manager/serial_port_uart.c.obj
+.PHONY : e80b1e64208fade1e56dcc745157207a/SDK_2.6.0_EVKB-IMXRT1050/components/serial_manager/serial_port_uart.c.obj
+
+e80b1e64208fade1e56dcc745157207a/SDK_2.6.0_EVKB-IMXRT1050/components/serial_manager/serial_port_uart.i: e80b1e64208fade1e56dcc745157207a/SDK_2.6.0_EVKB-IMXRT1050/components/serial_manager/serial_port_uart.c.i
+.PHONY : e80b1e64208fade1e56dcc745157207a/SDK_2.6.0_EVKB-IMXRT1050/components/serial_manager/serial_port_uart.i
+
+# target to preprocess a source file
+e80b1e64208fade1e56dcc745157207a/SDK_2.6.0_EVKB-IMXRT1050/components/serial_manager/serial_port_uart.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\hello_world.elf.dir\build.make CMakeFiles/hello_world.elf.dir/e80b1e64208fade1e56dcc745157207a/SDK_2.6.0_EVKB-IMXRT1050/components/serial_manager/serial_port_uart.c.i
+.PHONY : e80b1e64208fade1e56dcc745157207a/SDK_2.6.0_EVKB-IMXRT1050/components/serial_manager/serial_port_uart.c.i
+
+e80b1e64208fade1e56dcc745157207a/SDK_2.6.0_EVKB-IMXRT1050/components/serial_manager/serial_port_uart.s: e80b1e64208fade1e56dcc745157207a/SDK_2.6.0_EVKB-IMXRT1050/components/serial_manager/serial_port_uart.c.s
+.PHONY : e80b1e64208fade1e56dcc745157207a/SDK_2.6.0_EVKB-IMXRT1050/components/serial_manager/serial_port_uart.s
+
+# target to generate assembly for a file
+e80b1e64208fade1e56dcc745157207a/SDK_2.6.0_EVKB-IMXRT1050/components/serial_manager/serial_port_uart.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\hello_world.elf.dir\build.make CMakeFiles/hello_world.elf.dir/e80b1e64208fade1e56dcc745157207a/SDK_2.6.0_EVKB-IMXRT1050/components/serial_manager/serial_port_uart.c.s
+.PHONY : e80b1e64208fade1e56dcc745157207a/SDK_2.6.0_EVKB-IMXRT1050/components/serial_manager/serial_port_uart.c.s
+
+e80b1e64208fade1e56dcc745157207a/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/xip/fsl_flexspi_nor_boot.obj: e80b1e64208fade1e56dcc745157207a/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/xip/fsl_flexspi_nor_boot.c.obj
+.PHONY : e80b1e64208fade1e56dcc745157207a/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/xip/fsl_flexspi_nor_boot.obj
+
+# target to build an object file
+e80b1e64208fade1e56dcc745157207a/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/xip/fsl_flexspi_nor_boot.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\hello_world.elf.dir\build.make CMakeFiles/hello_world.elf.dir/e80b1e64208fade1e56dcc745157207a/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/xip/fsl_flexspi_nor_boot.c.obj
+.PHONY : e80b1e64208fade1e56dcc745157207a/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/xip/fsl_flexspi_nor_boot.c.obj
+
+e80b1e64208fade1e56dcc745157207a/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/xip/fsl_flexspi_nor_boot.i: e80b1e64208fade1e56dcc745157207a/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/xip/fsl_flexspi_nor_boot.c.i
+.PHONY : e80b1e64208fade1e56dcc745157207a/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/xip/fsl_flexspi_nor_boot.i
+
+# target to preprocess a source file
+e80b1e64208fade1e56dcc745157207a/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/xip/fsl_flexspi_nor_boot.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\hello_world.elf.dir\build.make CMakeFiles/hello_world.elf.dir/e80b1e64208fade1e56dcc745157207a/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/xip/fsl_flexspi_nor_boot.c.i
+.PHONY : e80b1e64208fade1e56dcc745157207a/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/xip/fsl_flexspi_nor_boot.c.i
+
+e80b1e64208fade1e56dcc745157207a/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/xip/fsl_flexspi_nor_boot.s: e80b1e64208fade1e56dcc745157207a/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/xip/fsl_flexspi_nor_boot.c.s
+.PHONY : e80b1e64208fade1e56dcc745157207a/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/xip/fsl_flexspi_nor_boot.s
+
+# target to generate assembly for a file
+e80b1e64208fade1e56dcc745157207a/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/xip/fsl_flexspi_nor_boot.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\hello_world.elf.dir\build.make CMakeFiles/hello_world.elf.dir/e80b1e64208fade1e56dcc745157207a/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/xip/fsl_flexspi_nor_boot.c.s
+.PHONY : e80b1e64208fade1e56dcc745157207a/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/xip/fsl_flexspi_nor_boot.c.s
+
+# Help Target
+help:
+	@echo The following are some of the valid targets for this Makefile:
+	@echo ... all (the default if no target is provided)
+	@echo ... clean
+	@echo ... depend
+	@echo ... edit_cache
+	@echo ... rebuild_cache
+	@echo ... hello_world.elf
+	@echo ... 06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/board.obj
+	@echo ... 06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/board.i
+	@echo ... 06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/board.s
+	@echo ... 06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/clock_config.obj
+	@echo ... 06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/clock_config.i
+	@echo ... 06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/clock_config.s
+	@echo ... 06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/hello_world.obj
+	@echo ... 06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/hello_world.i
+	@echo ... 06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/hello_world.s
+	@echo ... 06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/pin_mux.obj
+	@echo ... 06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/pin_mux.i
+	@echo ... 06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/pin_mux.s
+	@echo ... 06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/xip/evkbimxrt1050_flexspi_nor_config.obj
+	@echo ... 06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/xip/evkbimxrt1050_flexspi_nor_config.i
+	@echo ... 06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/xip/evkbimxrt1050_flexspi_nor_config.s
+	@echo ... 06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/xip/evkbimxrt1050_sdram_ini_dcd.obj
+	@echo ... 06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/xip/evkbimxrt1050_sdram_ini_dcd.i
+	@echo ... 06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/xip/evkbimxrt1050_sdram_ini_dcd.s
+	@echo ... 06b4f722f0096b8e831cef3a518bd843/devices/MIMXRT1052/utilities/debug_console/fsl_debug_console.obj
+	@echo ... 06b4f722f0096b8e831cef3a518bd843/devices/MIMXRT1052/utilities/debug_console/fsl_debug_console.i
+	@echo ... 06b4f722f0096b8e831cef3a518bd843/devices/MIMXRT1052/utilities/debug_console/fsl_debug_console.s
+	@echo ... F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/components/lists/generic_list.obj
+	@echo ... F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/components/lists/generic_list.i
+	@echo ... F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/components/lists/generic_list.s
+	@echo ... F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/components/serial_manager/serial_manager.obj
+	@echo ... F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/components/serial_manager/serial_manager.i
+	@echo ... F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/components/serial_manager/serial_manager.s
+	@echo ... F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/components/uart/lpuart_adapter.obj
+	@echo ... F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/components/uart/lpuart_adapter.i
+	@echo ... F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/components/uart/lpuart_adapter.s
+	@echo ... F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_clock.obj
+	@echo ... F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_clock.i
+	@echo ... F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_clock.s
+	@echo ... F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_common.obj
+	@echo ... F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_common.i
+	@echo ... F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_common.s
+	@echo ... F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_gpio.obj
+	@echo ... F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_gpio.i
+	@echo ... F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_gpio.s
+	@echo ... F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_lpuart.obj
+	@echo ... F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_lpuart.i
+	@echo ... F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_lpuart.s
+	@echo ... F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/gcc/startup_MIMXRT1052.obj
+	@echo ... F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/system_MIMXRT1052.obj
+	@echo ... F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/system_MIMXRT1052.i
+	@echo ... F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/system_MIMXRT1052.s
+	@echo ... F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/utilities/fsl_assert.obj
+	@echo ... F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/utilities/fsl_assert.i
+	@echo ... F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/utilities/fsl_assert.s
+	@echo ... F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/utilities/str/fsl_str.obj
+	@echo ... F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/utilities/str/fsl_str.i
+	@echo ... F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/utilities/str/fsl_str.s
+	@echo ... e80b1e64208fade1e56dcc745157207a/SDK_2.6.0_EVKB-IMXRT1050/components/serial_manager/serial_port_uart.obj
+	@echo ... e80b1e64208fade1e56dcc745157207a/SDK_2.6.0_EVKB-IMXRT1050/components/serial_manager/serial_port_uart.i
+	@echo ... e80b1e64208fade1e56dcc745157207a/SDK_2.6.0_EVKB-IMXRT1050/components/serial_manager/serial_port_uart.s
+	@echo ... e80b1e64208fade1e56dcc745157207a/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/xip/fsl_flexspi_nor_boot.obj
+	@echo ... e80b1e64208fade1e56dcc745157207a/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/xip/fsl_flexspi_nor_boot.i
+	@echo ... e80b1e64208fade1e56dcc745157207a/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/xip/fsl_flexspi_nor_boot.s
+.PHONY : help
+
+
+
+#=============================================================================
+# Special targets to cleanup operation of make.
+
+# Special rule to run CMake to check the build system integrity.
+# No rule that depends on this can have commands that come from listfiles
+# because they might be regenerated.
+cmake_check_build_system:
+	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles\Makefile.cmake 0
+.PHONY : cmake_check_build_system
+
+
+```
+
+自动生成的Makefile，主要是看下有什么文件被引用了，以及路径是怎么设置的。
+
+
+
+## 编译
+
+```bash
+F:\NXP\ref\SDK_2.6.0_EVKB-IMXRT1050\SDK_2.6.0_EVKB-IMXRT1050\boards\evkbimxrt1050\demo_apps\hello_world\armgcc>mingw32-make -j4 2> build_log.txt
+[  4%] Building C object CMakeFiles/hello_world.elf.dir/06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/hello_world.c.obj
+[  9%] Building C object CMakeFiles/hello_world.elf.dir/06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/pin_mux.c.obj[ 14%]
+Building C object CMakeFiles/hello_world.elf.dir/06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/board.c.obj
+[ 19%] Building C object CMakeFiles/hello_world.elf.dir/06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/demo_apps/hello_world/clock_config.c.obj
+[ 28%] [ 28%] Building C object CMakeFiles/hello_world.elf.dir/F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_common.c.objBuilding C object CMakeFiles/hello_world.elf.dir/F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_clock.c.obj
+
+[ 33%] Building C object CMakeFiles/hello_world.elf.dir/F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/system_MIMXRT1052.c.obj
+[ 38%] Building C object CMakeFiles/hello_world.elf.dir/06b4f722f0096b8e831cef3a518bd843/devices/MIMXRT1052/utilities/debug_console/fsl_debug_console.c.obj
+[ 42%] Building C object CMakeFiles/hello_world.elf.dir/F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/components/uart/lpuart_adapter.c.obj
+[ 47%] Building C object CMakeFiles/hello_world.elf.dir/F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/utilities/str/fsl_str.c.obj
+[ 52%] Building C object CMakeFiles/hello_world.elf.dir/F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/components/serial_manager/serial_manager.c.obj
+[ 57%] Building C object CMakeFiles/hello_world.elf.dir/e80b1e64208fade1e56dcc745157207a/SDK_2.6.0_EVKB-IMXRT1050/components/serial_manager/serial_port_uart.c.obj
+[ 61%] Building C object CMakeFiles/hello_world.elf.dir/F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_lpuart.c.obj
+[ 66%] Building C object CMakeFiles/hello_world.elf.dir/F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/components/lists/generic_list.c.obj
+[ 71%] Building ASM object CMakeFiles/hello_world.elf.dir/F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/gcc/startup_MIMXRT1052.S.obj
+[ 76%] Building C object CMakeFiles/hello_world.elf.dir/F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/utilities/fsl_assert.c.obj
+[ 80%] [ 85%] Building C object CMakeFiles/hello_world.elf.dir/F_/NXP/ref/SDK_2.6.0_EVKB-IMXRT1050/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/drivers/fsl_gpio.c.objBuilding C object CMakeFiles/hello_world.elf.dir/06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/xip/evkbimxrt1050_flexspi_nor_config.c.obj
+
+[ 90%] Building C object CMakeFiles/hello_world.elf.dir/e80b1e64208fade1e56dcc745157207a/SDK_2.6.0_EVKB-IMXRT1050/devices/MIMXRT1052/xip/fsl_flexspi_nor_boot.c.obj
+[ 95%] Building C object CMakeFiles/hello_world.elf.dir/06b4f722f0096b8e831cef3a518bd843/boards/evkbimxrt1050/xip/evkbimxrt1050_sdram_ini_dcd.c.obj
+[100%] Linking C executable debug\hello_world.elf
+[100%] Built target hello_world.elf
+```
+
+编译完成以后还会输出一些文件
+
+build_log.txt，编译时的log和各种问题显示
+
+output.map，内存映射，用来debug
+
+debug/hello_world.elf，结果
+
+
+
+## Summary
+
+有了这些信息以后，基本就可以基于此转移到其他IDE中了
+
+
+
+## Quote
+
+> https://blog.csdn.net/weixin_42491857/article/details/80741060
+>
+> https://blog.csdn.net/zxyhhjs2017/article/details/79061263
+>
+> https://blog.csdn.net/smart_jackli/article/details/128041406
+>
+> https://www.w3cschool.cn/doc_cmake_3_5/cmake_3_5-module-cmakeforcecompiler.html
+>
+> https://blog.csdn.net/June_we/article/details/122713530
+>
+> https://www.cnblogs.com/uestc-mm/p/15666249.html
+>
+> https://stackoverflow.com/questions/25669919/what-is-cmake-install-cmake
+
+
+
