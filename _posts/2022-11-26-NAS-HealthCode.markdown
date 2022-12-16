@@ -3,7 +3,7 @@ layout:     post
 title:      "为什么我们需要一个NAS"
 subtitle:   "健康码、开源、悬浮图片"
 date:       2022-11-26
-update:     2022-11-29
+update:     2022-12-16
 author:     "elmagnifico"
 header-img: "img/led.jpg"
 catalog:    true
@@ -155,6 +155,8 @@ systemctl restart caddy
 ## Summary
 
 世事无常，只有捏在自己手里的才是真的吧
+
+没过一周，健康码和行程码基本都下线了，转变的也太快了。
 
 
 
