@@ -1387,3 +1387,5 @@ Ninja相当于是直接把每个要编译的文件和对应的编译参数全都
 > https://www.cnblogs.com/uestc-mm/p/15666249.html
 >
 > https://stackoverflow.com/questions/25669919/what-is-cmake-install-cmake
+>
+> https://github.com/FrankHB/pl-docs/blob/master/zh-CN/mingw-vs-mingw-v64.md
