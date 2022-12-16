@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "NXP的ARM-GCC编译分析与转SES工程"
-subtitle:   "Makefile、cmake、sdk"
+subtitle:   "Makefile、cmake、Ninja"
 date:       2022-12-15
 update:     2022-12-16
 author:     "elmagnifico"
@@ -1058,6 +1058,12 @@ CMake Warning:
 这样以后，就能正常编译过了
 
 ![image-20221215185422060](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212151854154.png)
+
+
+
+转换后的工程开源在我的工具中，有需要可以参考
+
+> https://github.com/elmagnificogi/MyTools/tree/master/NXP_IMXRT1052_SES_hello_world
 
 
 
