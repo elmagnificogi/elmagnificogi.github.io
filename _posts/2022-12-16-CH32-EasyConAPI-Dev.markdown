@@ -3,7 +3,7 @@ layout:     post
 title:      "CH32快速开发移植EasyConAPI"
 subtitle:   "伊机控、NS、单片机"
 date:       2022-12-16
-update:     2022-12-16
+update:     2022-12-17
 author:     "elmagnifico"
 header-img: "img/cap-head-bg2.jpg"
 catalog:    true
@@ -58,9 +58,25 @@ ch32f103  ../../SRC/CMSIS/core_cm3.c(445): error: non-ASM statement in naked fun
 
 ![image-20221216213345880](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212162133914.png)
 
+##### 安装V5
+
 两个办法，一个是直接下一个老版的ARM Compiler
 
 > https://developer.arm.com/documentation/ka005184/latest
+
+![image-20221217193604143](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212171936223.png)
+
+- 一定要安装在这个目录中，否则会提示你没有授权
+
+![image-20221217193829899](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212171938943.png)
+
+![image-20221217193840852](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212171938882.png)
+
+然后就能看到V5版本了
+
+
+
+##### 修改工程
 
 还有一个修改一下工程即可
 
@@ -121,4 +137,6 @@ WCH不愧是专业搞USB相关的，确实很多东西做的很简单。
 > https://blog.csdn.net/weixin_44775687/article/details/126843414
 >
 > CH32F103评估板说明书.pdf
+>
+> https://www.keil.com/appnotes/files/apnt_298.pdf
 
