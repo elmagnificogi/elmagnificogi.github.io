@@ -1049,7 +1049,7 @@ CMake Warning:
 
 导入以后有两个地方需要修改一下，build中关于ARMGCC的路径宏是不正确的，需要自己重新设置一下
 
-![image-20221215184745292](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212151847360.png)
+![image-20221216163054955](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212161630040.png)
 
 外部编译的路径也不正确，需要修改
 
