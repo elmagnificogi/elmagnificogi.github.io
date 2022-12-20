@@ -3,7 +3,7 @@ layout:     post
 title:      "NXP的ARM-GCC编译分析与转SES工程"
 subtitle:   "Makefile、cmake、Ninja"
 date:       2022-12-15
-update:     2022-12-16
+update:     2022-12-20
 author:     "elmagnifico"
 header-img: "img/desk-head-bg.jpg"
 catalog:    true
@@ -32,6 +32,30 @@ IF "%1" == "" ( pause )
 这里比较简单，直接指定cmake编译配置文件路径，指定生成器是`MinGW Makefiles`，生成debug类型的makefile文件
 
 最后调用mingw32进行编译，最多4线程运行并把编译信息输出到`build_log.txt`
+
+
+
+有一点比较巧妙，NXP的指南中让你使用短名称代替默认Arm工具链冗长的地址（其实应该是地址太长了会导致某些目录特别深的代码编译报错）
+
+```
+for %I in (.) do echo %~sI
+```
+
+
+
+可以从执行结果看到，原本55个字符的路径变成了31个字符路径，多的这点字符可能就够某些深层路径使用了。
+
+```
+D:\GNU Arm Embedded Toolchain\10 2021.10\arm-none-eabi>for %I in (.) do echo %~sI
+
+D:\GNU Arm Embedded Toolchain\10 2021.10\arm-none-eabi>echo D:\GNUARM~1\102021~1.10\ARM-NO~1
+D:\GNUARM~1\102021~1.10\ARM-NO~1
+
+D:\GNU Arm Embedded Toolchain\10 2021.10\arm-none-eabi>
+
+```
+
+一般来说当单目录名或者文件名超过16字节的时候，都可以通过这种方法来缩短路径
 
 
 
