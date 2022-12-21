@@ -112,6 +112,10 @@ ch32f103  ../../SRC/CMSIS/core_cm3.c(445): error: non-ASM statement in naked fun
 
 选好程序以后，直接就能下载了，还是比较方便的。
 
+这里要注意，把读保护关闭，否则后面可能debug或者用st-link下载会出现无法烧写校验等情况
+
+![image-20221217202737371](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212172027460.png)
+
 
 
 ## EasyMCU_CH32
