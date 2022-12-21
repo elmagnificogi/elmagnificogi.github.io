@@ -3,7 +3,7 @@ layout:     post
 title:      "NXP的ARM-GCC编译分析与转SES工程"
 subtitle:   "Makefile、cmake、Ninja"
 date:       2022-12-15
-update:     2022-12-20
+update:     2022-12-21
 author:     "elmagnifico"
 header-img: "img/desk-head-bg.jpg"
 catalog:    true
@@ -1084,6 +1084,14 @@ CMake Warning:
 ![image-20221215185422060](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212151854154.png)
 
 
+
+后来发现实际上转换出来的工程还是有点小问题的，SES处理的时候用了一些UI没有显示的东西
+
+![image-20221221160200128](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212211602242.png)
+
+比如所有头文件的引用，正常应该是写在某个配置中的，但是从Ninja转换过来的直接写在了文件夹的属性里，并且这个属性是不能通过UI显示出来的，只看到文件都继承了一个值，但是去看文件夹又没有这个值，就非常奇怪，应该是SES目前还是不完善造成的。
+
+我把工程再移植以后，发现Ninja转换过来的路径全都是写死的，还需要手动改一遍，变成相对路径。
 
 转换后的工程开源在我的工具中，有需要可以参考
 
