@@ -3,7 +3,7 @@ layout:     post
 title:      "CH32快速开发移植EasyConAPI"
 subtitle:   "伊机控、NS、单片机"
 date:       2022-12-16
-update:     2022-12-17
+update:     2022-12-22
 author:     "elmagnifico"
 header-img: "img/cap-head-bg2.jpg"
 catalog:    true
@@ -118,6 +118,22 @@ ch32f103  ../../SRC/CMSIS/core_cm3.c(445): error: non-ASM statement in naked fun
 
 
 
+## USB例程问题
+
+可能其他例程都能正常跑，但是CDC的例程只要连上，就提示无法识别
+
+![image-20221222003310738](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212220033853.png)
+
+代码中推荐用串口2作为调试串口，把串口1用来CDC转发。默认代码中是使用串口1作为调试串口的。我以为不改也没关系，就没管，然后怎么都不识别CDC串口。
+
+![image-20221222003358443](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212220033505.png)
+
+官方论坛又看到官方回复，`取消串口2作为调试口`，更坚定了我的想法。然而事实是，要用串口2作为调试串口，然后这个CDC例程才能正常工作，真是坑爹啊。
+
+再仔细一看这个debug，是所有例程公用的，一改全改了。
+
+
+
 ## EasyMCU_CH32
 
 > https://github.com/EasyConNS/EasyMCU_CH32
@@ -143,4 +159,6 @@ WCH不愧是专业搞USB相关的，确实很多东西做的很简单。
 > CH32F103评估板说明书.pdf
 >
 > https://www.keil.com/appnotes/files/apnt_298.pdf
+>
+> https://www.wch.cn/bbs/thread-97775-1.html
 
