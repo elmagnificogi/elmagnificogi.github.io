@@ -3,7 +3,7 @@ layout:     post
 title:      "无线网络唤醒，从入门到放弃"
 subtitle:   "wol,PCI Express WAKE"
 date:       2021-05-25
-update:     2021-08-26
+update:     2022-12-24
 author:     "elmagnifico"
 header-img: "img/springboot.jpg"
 catalog:    true
@@ -214,13 +214,31 @@ S5，全部断电
 
 ### HomeKit
 
+使用`AC recovery`有一点不好，就是沙雕键盘，每次都得重新插一下才能正常识别到，可能某些外设断电再上电可能会有影响。
+
+2022.12.24更新
+
+> https://item.taobao.com/item.htm?spm=a1z09.2.0.0.3aa32e8dpd1cS2&id=686930830876&_u=o1g76mj9ff46
+
 简单说用个ESP32，然后做个底板，模仿PCIE的接口用来供电，然后给出引脚可以插主板的Power Switch，同时还多一组可以将原本的重新输出回去，不影响实体按键，直接模拟实际按键进行开机关机。
 
 ![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/RLhYevtpcKSrEwD.png)
 
-这种方式也有一些问题，一个是主板不能断电，关机之后PCIE至少得是能供电的状态。第二个需要自行修改开关机的连接线，稍微麻烦了一点。
+需要注意如果没有多余的PCIe的红色短接口，用黄色的长接口也可以正常使用
 
-高级一点的可以直接使用HomeKit的功能，然后就能接入到小米里了，还是很舒服的。
+![image-20221224224409362](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212242244459.png)
+
+
+
+我还顺带买了无线开关，这样就可以用无线按钮，远程的时候直接通过米家开机
+
+![image-20221224224047275](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212242240342.png)
+
+
+
+![image-20221224224135011](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212242241095.png)
+
+
 
 
 
