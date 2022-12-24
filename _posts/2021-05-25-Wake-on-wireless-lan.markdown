@@ -214,6 +214,12 @@ S5，全部断电
 
 ### HomeKit
 
+有一些HomeKit的开关，可以做通断控制
+
+
+
+## 米家mesh
+
 使用`AC recovery`有一点不好，就是沙雕键盘，每次都得重新插一下才能正常识别到，可能某些外设断电再上电可能会有影响。
 
 2022.12.24更新
@@ -221,6 +227,8 @@ S5，全部断电
 > https://item.taobao.com/item.htm?spm=a1z09.2.0.0.3aa32e8dpd1cS2&id=686930830876&_u=o1g76mj9ff46
 
 简单说用个ESP32，然后做个底板，模仿PCIE的接口用来供电，然后给出引脚可以插主板的Power Switch，同时还多一组可以将原本的重新输出回去，不影响实体按键，直接模拟实际按键进行开机关机。
+
+- 这个东西必须要有mesh网关才能正常使用，否则只能蓝牙直连
 
 ![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/RLhYevtpcKSrEwD.png)
 
@@ -242,7 +250,7 @@ S5，全部断电
 
 
 
-## 妥协AC recovery
+## AC recovery
 
 最后买了一个Gosund智能排插，最多4孔可控，1个快充USB口，2个普充USB，本身可以连接2.4g网络，远程控制，断电记忆。
 
