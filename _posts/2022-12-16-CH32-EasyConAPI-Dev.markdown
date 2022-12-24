@@ -62,7 +62,13 @@ ch32f103  ../../SRC/CMSIS/core_cm3.c(445): error: non-ASM statement in naked fun
 
 两个办法，一个是直接下一个老版的ARM Compiler
 
-> https://developer.arm.com/documentation/ka005184/latest
+> https://developer.arm.com/downloads/view/ACOMP5
+
+这里很容易被恶心到，ARM必须要注册才能下载，并且注册还必须手机验证、邮箱验证，搞不好还会被提示地区要被审查，你暂时无法登录，就是不给你下载，所以我下了一个放到了我的工具里，直接下载就行了，这个东西官方也不会更新了，所以以后也不需要考虑换什么的。
+
+> https://github.com/elmagnificogi/MyTools/tree/master/ARMCompiler_506
+
+
 
 ![image-20221217193604143](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212171936223.png)
 

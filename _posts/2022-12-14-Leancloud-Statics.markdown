@@ -3,7 +3,7 @@ layout:     post
 title:      "博客增加文章点击统计和显示"
 subtitle:   "不蒜子、LeanCloud、谷歌翻译、动态效果"
 date:       2022-12-14
-update:     2022-12-14
+update:     2022-12-23
 author:     "elmagnifico"
 header-img: "img/docker-head-bg.jpg"
 catalog:    true
@@ -335,6 +335,22 @@ new google.translate.TranslateElement({
 效果还行，至少UI上统一了
 
 ![image-20221215012111815](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212150121858.png)
+
+
+
+## 中文独立博客列表
+
+> https://github.com/timqian/chinese-independent-blogs
+
+之前就加入了，只是一直忘了写，这里有各种中文博客，有需要可以自己提PR，格式模仿上一位即可，最好是带上自己的RSS订阅链接
+
+![image-20221223150455570](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212231505731.png)
+
+Feeds Pub相当于也是一个RSS的阅览器，提交以后可以在设置里认证一下自己的网站
+
+![image-20221223150517769](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212231505895.png)
+
+目前使用Feeds Pub的人不是很多，不过如果有需要的话，完全可以通过爬这份列表，拿到各种技术文章更新
 
 
 
