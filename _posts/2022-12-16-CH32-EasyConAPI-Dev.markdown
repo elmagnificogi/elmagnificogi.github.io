@@ -3,7 +3,7 @@ layout:     post
 title:      "CH32快速开发移植EasyConAPI"
 subtitle:   "伊机控、NS、单片机"
 date:       2022-12-16
-update:     2022-12-22
+update:     2022-12-25
 author:     "elmagnifico"
 header-img: "img/cap-head-bg2.jpg"
 catalog:    true
@@ -124,6 +124,12 @@ ch32f103  ../../SRC/CMSIS/core_cm3.c(445): error: non-ASM statement in naked fun
 
 
 
+后来发现新版的ISP下载软件有点挫，如果是老版本的UI就很ok，建议还是用老版的吧
+
+![image-20221225203319565](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212252033610.png)
+
+
+
 ## USB例程问题
 
 可能其他例程都能正常跑，但是CDC的例程只要连上，就提示无法识别
@@ -140,7 +146,166 @@ ch32f103  ../../SRC/CMSIS/core_cm3.c(445): error: non-ASM statement in naked fun
 
 
 
+## USB无法识别
+
+如果在代码初始化的过程中，优先去执行一些耗时的操作
+
+```c
+int main(void)
+{
+	Delay_Init(); 
+	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
+  	USART_Printf_Init(115200);
+  	EasyCon_script_init();
+    Delay_ms(1000)
+	/* USB20 device init */
+	UART1_ParaInit(1);
+	USBHD_RCC_Init( );
+	USBHD_Device_Init( ENABLE );
+  
+	/* Timer init */
+  	TIM2_Init();
+  	ledb_test();
+  	/* USBD init */
+	Set_USBConfig(); 
+  	USB_Init();	    
+ 	USB_Interrupts_Config();    
+}
+```
+
+比如delay了1秒或者是操作了flash，就会导致usb初始化直接失败。原因是USB的引脚在默认上电的情况下，就已经自带上拉了，会导致主机直接识别了USB插入，就会开始准备USB初始化了，而实际的MCU还在干别的事情，等MCU忙完了去初始化USB就会直接失败了。
+
+解决这个问题也很简单，初始化第一步就是先把USB的引脚挂起，让他无法被识别即可，后续再让他初始化就行了。
+
+```c
+int main(void)
+{
+	Delay_Init(); 
+	USB_Port_Set(DISABLE, DISABLE);
+	USBHD_Device_Init( DISABLE );
+	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
+	Delay_Init(); 
+  	USART_Printf_Init(115200);
+  	EasyCon_script_init();
+	/* USB20 device init */
+	UART1_ParaInit(1);
+	USBHD_RCC_Init( );
+	USBHD_Device_Init( ENABLE );
+  
+	/* Timer init */
+  	TIM2_Init();
+  	ledb_test();
+  	/* USBD init */
+	Set_USBConfig(); 
+  	USB_Init();	    
+ 	USB_Interrupts_Config();    
+}
+```
+
+
+
+## USB移植修改
+
+![image-20221225205251970](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212252052004.png)
+
+USB移植修改的时候，基本上这里的文件大部分都要改动，官方例程写的不是很好，很多很细节的东西都在一个个小函数里，不对比很难看出来问题
+
+特别是Reset中设置了ENDP口，其他都改对了，但是这里不改的话是不能正常工作的
+
+```c
+/*********************************************************************
+ * @fn      USBD_Reset
+ *
+ * @brief   Virtual_Com_Port Mouse reset routine
+ *
+ * @return  none
+ */
+void USBD_Reset(void)
+{
+    pInformation->Current_Configuration = 0;
+    pInformation->Current_Feature = USBD_ConfigDescriptor[7];
+    pInformation->Current_Interface = 0;
+
+    SetBTABLE(BTABLE_ADDRESS);
+
+    SetEPType(ENDP0, EP_CONTROL);
+    SetEPTxStatus(ENDP0, EP_TX_STALL);
+    SetEPRxAddr(ENDP0, ENDP0_RXADDR);
+    SetEPTxAddr(ENDP0, ENDP0_TXADDR);
+    Clear_Status_Out(ENDP0);
+    SetEPRxCount(ENDP0, Device_Property.MaxPacketSize);
+    SetEPRxValid(ENDP0);
+    _ClearDTOG_RX(ENDP0);
+    _ClearDTOG_TX(ENDP0);
+
+    SetEPType(ENDP1, EP_INTERRUPT);
+	  SetEPTxAddr(ENDP1, ENDP1_TXADDR);
+    SetEPTxStatus(ENDP1, EP_TX_NAK);
+    _ClearDTOG_TX(ENDP1);
+    _ClearDTOG_RX(ENDP1);
+
+    SetEPType(ENDP2, EP_INTERRUPT);
+    SetEPRxAddr(ENDP2, ENDP2_RXADDR);
+    SetEPTxStatus(ENDP2, EP_RX_DIS);
+    SetEPRxStatus(ENDP2,EP_RX_DIS);
+    _ClearDTOG_TX(ENDP2);
+    _ClearDTOG_RX(ENDP2);
+    
+    SetDeviceAddress(0);
+
+    bDeviceState = ATTACHED;
+}
+```
+
+
+
+## USB HID查看工具
+
+#### HIDDemonstrator_V1.0.2
+
+他必须要vc++ 2005才能正常打开，实际上我打开了也用不了。不推荐
+
+
+
+#### MyUSB.exe
+
+![image-20221225205722084](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212252057124.png)
+
+这个只能看个大概，不能打开USB看不到具体包，也不推荐
+
+
+
+#### HID调试助手.exe
+
+![image-20221225205819565](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212252058599.png)
+
+直接打不开设备，淘汰
+
+
+
+#### 纸飞机
+
+![image-20221225210230723](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212252102775.png)
+
+收费软件，也不是很贵，20多，第一次试用直接给了1个月，可以直接打开设备，也能调整分包什么的，简单用用还是不错的。
+
+他的其他功能比较强大，画图什么的
+
+#### USBlyzer
+
+![image-20221225210904537](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212252109647.png)
+
+这就比较强大了，可以查看各种包，会分类什么的
+
+同时也能看到对应的USB描述符、配置等等内容，可以用来审查是否和自己的设置不同
+
+![image-20221225211035314](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212252110348.png)
+
+
+
 ## EasyMCU_CH32
+
+已经移植完成了
 
 > https://github.com/EasyConNS/EasyMCU_CH32
 
