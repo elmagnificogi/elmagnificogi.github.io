@@ -1,0 +1,729 @@
+---
+layout:     post
+title:      ".ld文件解析"
+subtitle:   ".lds，link文件"
+date:       2023-01-04
+update:     2023-01-04
+author:     "elmagnifico"
+header-img: "img/bg9.jpg"
+catalog:    true
+tags:
+    - Embedded
+---
+
+## Forward
+
+详细解析一下ld文件，以NXP的1052为例
+
+
+
+## .ld
+
+#### .ld的作用
+
+ld文件是在连接时起作用，一般了解就是内存和flash分配。实际上可能远不止于此，他需要定义堆栈位置、代码段位置，静态的变量位置，初始化各种变量，程序入口点。
+
+一般ld是作为脚本文件，他也有自己的语法规则，分号是命令的结束标记，冒号是赋值。
+
+
+
+#### ENTRY
+
+`ENTRY`用来定义程序的入口位置
+
+```
+/* Entry Point */
+ENTRY(Reset_Handler)
+```
+
+
+
+这里就是普通变量的定义，定义堆栈空间的大小，后面会用到
+
+```
+HEAP_SIZE  = DEFINED(__heap_size__)  ? __heap_size__  : 0x0400;
+STACK_SIZE = DEFINED(__stack_size__) ? __stack_size__ : 0x0400;
+```
+
+
+
+#### MEMORY
+
+`MEMORY`顾名思义，内存配置块，具体使用了哪些内存，具体位置和大小，还有是否可读写和执行，都需要写清楚。
+
+比如这里就定义了中断的入口地址(0x0)以及中断向量表的长度(0x400)，接着是代码的位置紧接着向量表，中断和代码都是只读可运行的，所以是RX。
+
+后面的两个区域就是对应的RAM区域了，如果有两块就分开写，如果是一块在功能上要区分成多块的话，也可以分段写。
+
+里面的区域名称可以自定义，但是后面会对每个部分进行初始化，所以这个变量会被引用到。
+
+```
+/* Specify the memory areas */
+MEMORY
+{
+  m_interrupts          (RX)  : ORIGIN = 0x00000000, LENGTH = 0x00000400
+  m_text                (RX)  : ORIGIN = 0x00000400, LENGTH = 0x0001FC00
+  m_data                (RW)  : ORIGIN = 0x20000000, LENGTH = 0x00020000
+  m_data2               (RW)  : ORIGIN = 0x20200000, LENGTH = 0x00040000
+}
+```
+
+
+
+### SECTIONS
+
+`SECTIONS`是描述各个部分应该映射到哪里，如何放到VMA和LMA中，说白了就是描述输入和输出的
+
+```
+/* Define output sections */
+SECTIONS
+{
+....
+}
+```
+
+
+
+#### VMA与LMA
+
+- VMA，virtual memory address虚拟内存地址或程序地址空间地址
+
+- LMA，load memory address加载内存地址或进程地址空间地址
+
+嵌入式系统中, 经常存在加载地址和执行地址不同的情况： **比如将输出文件加载到开发板的flash中(由LMA指定)，而在运行时将位于flash中的输出文件复制到SDRAM中(由VMA指定)**。
+
+![img](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202301041702494.webp)
+
+说的简单一点，程序作为输入文件，被转换的时候，转换得到的地址是VMA，也就是虚拟地址，而实际运行以后，会得知这个虚拟地址对应的实际物理地址是什么，也就是换算出LMA，那么读取具体变量的时候就是从LMA读取。实际的变量，正常的情况下就是放在对应的LMA地址上，但是如果你通过 data section修改了变量的存储位置，比如偏移了4字节，那么就会出现，程序运行时输出的变量也直接错位了，下面的例子就是实际的情况。
+
+> 可这样来理解VMA和LMA, 假设:
+> (1) .data section对应的VMA地址是0x08050000，该section内包含了3个32位全局变量，i、j和k，分别为1，2，3。
+> (2) .text section内包含由"`printf( "j=%d ", j );`"程序片段产生的代码.
+>
+> 连接时指定`.data section`的VMA为0x08050000，产生的printf指令是将地址为0x08050004处的4字节内容作为一个整数打印出来。
+>
+> 如果`.data section`的LMA为0x08050000，显然结果是j=2。
+>
+> ```
+> LMA为0x08050000则加载输出文件的起始地址是0x08050000。 i、j 和 k 的地址为：
+> 0x08050000、0x08050004、0x08050008。（32位全局变量）
+> 12
+> ```
+>
+> 如果`.data section`的LMA为0x08050004，显然结果是 j=1。
+>
+> ```
+> LMA为0x08050004则加载输出文件的起始地址是0x08050004。 i、j 和 k 的地址为：
+> 0x08050004、0x08050008、0x0805000C。打印 0x08050004地址的值，实际上是 i 的值 1。
+> 12
+> ```
+
+
+
+#### .interrupt
+
+这里主要定义了前面说的`m_interrupts`的位置和内存对齐方式
+
+这里是4字节对齐，对应的地址就需要4字节对齐，而不能写成其他的方式
+
+`.`是一个特殊符号，相当于是当前位置的指针，它可以做左值，也可以做右值，左值时就是设置此时的地址，右值就是给其他变量赋值当前地址
+
+```ld
+/* Define output sections */
+SECTIONS
+{
+  /* The startup code goes first into internal RAM */
+  .interrupts :
+  {
+  // 这里就是将 __VECTOR_TABLE 设置为了 . 也就是0x0
+    __VECTOR_TABLE = .;
+    . = ALIGN(4);
+    KEEP(*(.isr_vector))     /* Startup code */
+    . = ALIGN(4);
+  } > m_interrupts
+  __VECTOR_RAM = __VECTOR_TABLE;
+  __RAM_VECTOR_TABLE_SIZE_BYTES = 0x0;  
+```
+
+
+
+`> m_interrupts`，这里就是指将上述描述的内容，输出到这个地址上去，即输入文件映射到输出地址上，后续都是如此
+
+`KEEP`，某些section可能由于编译器优化导致被跳过，为了保证这里不会被跳过所以使用KEEP，保留住。
+
+`ALIGN`，用来对齐的，确保当前地址会重新对齐到对应大小的位置上
+
+`*`，作为通配符使用，指所有对应文件或者内容
+
+在.interrupt中定义的变量会在之后被.S中引用到
+
+```assembly
+    .section .isr_vector, "a"
+    .align 2
+    .globl __isr_vector
+__isr_vector:
+    .long   __StackTop                                      /* Top of Stack */
+    .long   Reset_Handler                                   /* Reset Handler */
+```
+
+
+
+#### .text
+
+.text 就是具体的代码段映射的位置了
+
+```
+  /* The program code and other data goes into internal RAM */
+  .text :
+  {
+    . = ALIGN(4);
+    // 这里设置_stext 也就是text的开始位置
+    _stext = .;
+    // 将所有输入文件从该空间开始连续分布
+    *(.text)                 /* .text sections (code) */
+    *(.text*)                /* .text* sections (code) */
+    *(.rodata)               /* .rodata sections (constants, strings, etc.) */
+    *(.rodata*)              /* .rodata* sections (constants, strings, etc.) */
+    *(.glue_7)               /* glue arm to thumb code */
+    *(.glue_7t)              /* glue thumb to arm code */
+    *(.eh_frame)
+    KEEP (*(.init))
+    KEEP (*(.fini))
+    . = ALIGN(4);
+  } > m_text
+```
+
+
+
+#### .ARM.extab
+
+可以理解为是.ARM.exidx的数据存储的部分
+
+```
+  .ARM.extab :
+  {
+    *(.ARM.extab* .gnu.linkonce.armextab.*)
+  } > m_text
+```
+
+
+
+#### .ARM
+
+.ARM.exidx是一组入口定义，但是他只存储了入口的位置和长度，而实际的存储内容是在.ARM.extab中定义的
+
+```
+  .ARM :
+  {
+    __exidx_start = .;
+    *(.ARM.exidx*)
+    __exidx_end = .;
+  } > m_text
+```
+
+具体.ARM.exidx内的入口到底是干什么用的，我也不是很清楚，先跳过吧
+
+
+
+#### .ctors
+
+给某函数添加__attribute__((constructor))属性，编译器会将该函数名指针添加到名为.ctors的section, 添加__attribute__((destructor))属性，则会将函数名指针添加到.dtors。即是将函数名地址添加到.ctors和.dtors指示的可变长数组。记住，只是函数名地址，而不是函数体
+
+另外，classTest()是类classTest的同名函数，是构造函数，编译器也会将该函数地址填入到.ctors，即编译器判定某个函数为类的构造函数后，自动给该函数添加__attribute__((constructor))属性；同理，对析构函数~classTest()添加__attribute__((destructor))属性，将该函数地址加入.dtors
+
+
+
+简单说就是构造和析构函数会分别给到 .ctors和.dtors部分去处理。
+
+```
+ .ctors :
+  {
+    __CTOR_LIST__ = .;
+    /* gcc uses crtbegin.o to find the start of
+       the constructors, so we make sure it is
+       first.  Because this is a wildcard, it
+       doesn't matter if the user does not
+       actually link against crtbegin.o; the
+       linker won't look for a file to match a
+       wildcard.  The wildcard also means that it
+       doesn't matter which directory crtbegin.o
+       is in.  */
+    KEEP (*crtbegin.o(.ctors))
+    KEEP (*crtbegin?.o(.ctors))
+    /* We don't want to include the .ctor section from
+       from the crtend.o file until after the sorted ctors.
+       The .ctor section from the crtend file contains the
+       end of ctors marker and it must be last */
+    KEEP (*(EXCLUDE_FILE(*crtend?.o *crtend.o) .ctors))
+    KEEP (*(SORT(.ctors.*)))
+    KEEP (*(.ctors))
+    __CTOR_END__ = .;
+  } > m_text
+```
+
+`EXCLUDE_FILE`这个是排除了部分文件，这部分文件需要放到最后
+
+
+
+#### .dtors
+
+```
+  .dtors :
+  {
+    __DTOR_LIST__ = .;
+    KEEP (*crtbegin.o(.dtors))
+    KEEP (*crtbegin?.o(.dtors))
+    KEEP (*(EXCLUDE_FILE(*crtend?.o *crtend.o) .dtors))
+    KEEP (*(SORT(.dtors.*)))
+    KEEP (*(.dtors))
+    __DTOR_END__ = .;
+  } > m_text
+```
+
+
+
+#### .preinit_array
+
+preinit_array是早于init_array初始化的、fini_array是init_array初始化后才会被调用的部分
+
+```
+  .preinit_array :
+  {
+    PROVIDE_HIDDEN (__preinit_array_start = .);
+    KEEP (*(.preinit_array*))
+    PROVIDE_HIDDEN (__preinit_array_end = .);
+  } > m_text
+```
+
+`PROVIDE_HIDDEN`主要作用是将这个变量对用户隐藏，也就是用户可以定义同名变量，但是实际操作中还是建议不要使用，容易出问题
+
+
+
+#### .init_array
+
+```
+  .init_array :
+  {
+    PROVIDE_HIDDEN (__init_array_start = .);
+    KEEP (*(SORT(.init_array.*)))
+    KEEP (*(.init_array*))
+    PROVIDE_HIDDEN (__init_array_end = .);
+  } > m_text
+```
+
+
+
+#### .fini_array
+
+```
+  .fini_array :
+  {
+    PROVIDE_HIDDEN (__fini_array_start = .);
+    KEEP (*(SORT(.fini_array.*)))
+    KEEP (*(.fini_array*))
+    PROVIDE_HIDDEN (__fini_array_end = .);
+  } > m_text
+  _etext = .;    /* define a global symbol at end of code */
+```
+
+
+
+#### .data
+
+.data存储初始化过的全局变量和静态变量
+
+`AT(__DATA_ROM)`设置将data段的加载地址LMA为__DATA_ROM，其实也就是当前地址
+
+```
+  __DATA_ROM = .; /* Symbol is used by startup for data initialization */  
+  .data : AT(__DATA_ROM)
+  {
+    . = ALIGN(4);
+    __DATA_RAM = .;
+    __data_start__ = .;      /* create a global symbol at data start */
+    *(m_usb_dma_init_data)
+    *(.data)                 /* .data sections */
+    *(.data*)                /* .data* sections */
+    KEEP(*(.jcr*))
+    . = ALIGN(4);
+    __data_end__ = .;        /* define a global symbol at data end */
+  } > m_data
+```
+
+
+
+#### .ncache
+
+```
+  __NDATA_ROM = __DATA_ROM + (__data_end__ - __data_start__);
+  .ncache.init : AT(__NDATA_ROM)
+  {
+    __noncachedata_start__ = .;   /* create a global symbol at ncache data start */
+    *(NonCacheable.init)
+    . = ALIGN(4);
+    __noncachedata_init_end__ = .;   /* create a global symbol at initialized ncache data end */
+  } > m_data
+  . = __noncachedata_init_end__;
+  .ncache :
+  {
+    *(NonCacheable)
+    . = ALIGN(4);
+    __noncachedata_end__ = .;     /* define a global symbol at ncache data end */
+  } > m_data
+
+  __DATA_END = __NDATA_ROM + (__noncachedata_init_end__ - __noncachedata_start__);
+  text_end = ORIGIN(m_text) + LENGTH(m_text);
+  ASSERT(__DATA_END <= text_end, "region m_text overflowed with text and data")
+```
+
+`ASSERT`这里加了一个断言，用来判断如果m_text是否越界
+
+
+
+#### .bss
+
+bss处理没有初始化的变量
+
+```
+  /* Uninitialized data section */
+  .bss :
+  {
+    /* This is used by the startup in order to initialize the .bss section */
+    . = ALIGN(4);
+    __START_BSS = .;
+    __bss_start__ = .;
+    *(m_usb_dma_noninit_data)
+    *(.bss)
+    *(.bss*)
+    *(COMMON)
+    . = ALIGN(4);
+    __bss_end__ = .;
+    __END_BSS = .;
+  } > m_data
+```
+
+
+
+#### .heap
+
+处理heap
+
+```
+  .heap :
+  {
+    . = ALIGN(8);
+    __end__ = .;
+    PROVIDE(end = .);
+    __HeapBase = .;
+    . += HEAP_SIZE;
+    __HeapLimit = .;
+    __heap_limit = .; /* Add for _sbrk */
+  } > m_data
+```
+
+`PROVIDE`，表示他里面的变量是可以被用户程序里调用的
+
+
+
+#### .stack
+
+stack栈处理，由于栈是逆序生长的，所以栈顶就是内存栈空间的最后字节。
+
+```
+  .stack :
+  {
+    . = ALIGN(8);
+    . += STACK_SIZE;
+  } > m_data
+  /* Initializes stack on the end of block */
+  __StackTop   = ORIGIN(m_data) + LENGTH(m_data);
+  __StackLimit = __StackTop - STACK_SIZE;
+  PROVIDE(__stack = __StackTop);
+
+  .ARM.attributes 0 : { *(.ARM.attributes) }
+
+  ASSERT(__StackLimit >= __HeapLimit, "region m_data overflowed with stack and heap")
+```
+
+最后加了一个判断，当栈溢出的时候提示，这里其实是栈设的太大了超过了当前这个空间大小，就会提示了，所以如果有多块，可能需要分别设置。
+
+
+
+## 不同内存对比
+
+#### sdram与ram
+
+对比`MIMXRT1052xxxxx_sdram.ld`和`MIMXRT1052xxxxx_ram.ld`，其实主要就是多了`m_ncache`和`m_data3`，实际上就是使用了片外的ram
+
+```
+/* Specify the memory areas */
+MEMORY
+{
+  m_interrupts          (RX)  : ORIGIN = 0x00000000, LENGTH = 0x00000400
+  m_text                (RX)  : ORIGIN = 0x00000400, LENGTH = 0x0001FC00
+  m_data                (RW)  : ORIGIN = 0x80000000, LENGTH = 0x01E00000
+  m_ncache              (RW)  : ORIGIN = 0x81E00000, LENGTH = 0x00200000
+  m_data2               (RW)  : ORIGIN = 0x20000000, LENGTH = 0x00020000
+  m_data3               (RW)  : ORIGIN = 0x20200000, LENGTH = 0x00040000
+}
+```
+
+并且将.ncache的部分给到了m_ncache里
+
+
+
+
+
+#### flexspi和sdram
+
+flexspi中多了一部分flash和ivt的内容，实际上0x60000000开始的地址就是片外flash的地址，而sdram的时候只是用了很少一部分片内地址
+
+```
+MEMORY
+{
+  m_flash_config        (RX)  : ORIGIN = 0x60000000, LENGTH = 0x00001000
+  m_ivt                 (RX)  : ORIGIN = 0x60001000, LENGTH = 0x00001000
+  m_interrupts          (RX)  : ORIGIN = 0x60002000, LENGTH = 0x00000400
+  m_text                (RX)  : ORIGIN = 0x60002400, LENGTH = 0x03FFDC00
+  m_data                (RW)  : ORIGIN = 0x20000000, LENGTH = 0x00020000
+  m_data2               (RW)  : ORIGIN = 0x20200000, LENGTH = 0x00040000
+}
+```
+
+
+
+这两部分也在sections中，其实主要就是boot程序的位置和一些设置
+
+```
+  .flash_config :
+  {
+    . = ALIGN(4);
+    __FLASH_BASE = .;
+    KEEP(* (.boot_hdr.conf))     /* flash config section */
+    . = ALIGN(4);
+  } > m_flash_config
+
+  ivt_begin= ORIGIN(m_flash_config) + LENGTH(m_flash_config);
+
+  .ivt : AT(ivt_begin)
+  {
+    . = ALIGN(4);
+	KEEP(* (.boot_hdr.ivt))           /* ivt section */
+	KEEP(* (.boot_hdr.boot_data))     /* boot section */
+	KEEP(* (.boot_hdr.dcd_data))      /* dcd section */
+    . = ALIGN(4);
+  } > m_ivt
+```
+
+
+
+## STM32对比
+
+对比STM32的，其实也差不多，只是可能少了ncache、ctors、dtors等内容
+
+```
+/*
+*****************************************************************************
+**
+**  File        : stm32_flash.ld
+**
+**  Abstract    : Linker script for STM32H743VI Device with
+**                2048KByte FLASH, 1024KByte RAM
+**
+**                Set heap size, stack size and stack location according
+**                to application requirements.
+**
+**                Set memory bank area and size if external memory is used.
+**
+**  Target      : STMicroelectronics STM32
+**
+**  Environment : Eclipse CDT
+**
+**  Distribution: The file is distributed "as is", without any warranty
+**                of any kind.
+**
+**  (c)Copyright elmagnifico
+**  You may use this file as-is or modify it according to the needs of your
+**  project. Just feel free to use it.
+*****************************************************************************
+
+/* memory map for STM32H743VI
+ * DTCM : 0x20000000 - 0x2001FFFF 128KB
+ * SRAM : 0x24000000 - 0x2407FFFF 512KB
+ * SRAM1: 0x30000000 - 0x3001FFFF 128KB
+ * SRAM2: 0x30020000 - 0x3003FFFF 128KB
+ * SRAM3: 0x30040000 - 0x30047FFF 32KB
+ * SRAM4: 0x38000000 - 0x3800FFFF 64KB
+ * BANK1: 0x08000000 - 0x080FFFFF 1024KB
+ * BANK2: 0x08100000 - 0x081FFFFF 1024KB
+*/
+
+/* Entry Point */
+ENTRY(Reset_Handler)
+
+/* Highest address of the main stack */
+_estack = 0x2000BFFF;    /* end of MRAM */
+
+/* Generate a link error if heap and stack don't fit into RAM */
+_Min_Heap_Size  = 0x000;  /* required amount of heap,  heap managed by freertos, so this would be zero */
+_Min_Stack_Size = 0x1000; /* required amount of stack, 4K for main stack */
+
+MEMORY
+{
+    DTCMRAM (xrw)     : ORIGIN = 0x20000000, LENGTH = 128K
+    RAM_D1 (xrw)      : ORIGIN = 0x24000000, LENGTH = 512K
+    RAM_D2 (xrw)      : ORIGIN = 0x30000000, LENGTH = 288K
+    RAM_D3 (xrw)      : ORIGIN = 0x38000000, LENGTH = 64K
+    ITCMRAM (xrw)     : ORIGIN = 0x00000000, LENGTH = 64K
+    FLASH (rx)        : ORIGIN = 0x08000000, LENGTH = 2048K
+}
+
+/* Define output sections */
+SECTIONS
+{
+  /* The startup code goes first into FLASH */
+  .isr_vector :
+  {
+    . = ALIGN(4);
+    KEEP(*(.isr_vector)) /* Startup code */
+    . = ALIGN(4);
+  } >FLASH
+
+  /* The program code and other data goes into FLASH */
+  .text :
+  {
+    . = ALIGN(4);
+    _stext = .;
+    *(.text)           /* .text sections (code) */
+    *(.text*)          /* .text* sections (code) */
+    *(.glue_7)         /* glue arm to thumb code */
+    *(.glue_7t)        /* glue thumb to arm code */
+    *(.eh_frame)
+
+    KEEP (*(.init))
+    KEEP (*(.fini))
+
+    . = ALIGN(4);
+    _etext = .;        /* define a global symbols at end of code */
+  } >FLASH
+
+  /* Constant data goes into FLASH */
+  .rodata :
+  {
+    . = ALIGN(4);
+    *(.rodata)         /* .rodata sections (constants, strings, etc.) */
+    *(.rodata*)        /* .rodata* sections (constants, strings, etc.) */
+    . = ALIGN(4);
+  } >FLASH
+
+  .ARM.extab   : { *(.ARM.extab* .gnu.linkonce.armextab.*) } >FLASH
+  .ARM : {
+    __exidx_start = .;
+    *(.ARM.exidx*)
+    __exidx_end = .;
+  } >FLASH
+
+  .preinit_array     :
+  {
+    PROVIDE_HIDDEN (__preinit_array_start = .);
+    KEEP (*(.preinit_array*))
+    PROVIDE_HIDDEN (__preinit_array_end = .);
+  } >FLASH
+  .init_array :
+  {
+    PROVIDE_HIDDEN (__init_array_start = .);
+    KEEP (*(SORT(.init_array.*)))
+    KEEP (*(.init_array*))
+    PROVIDE_HIDDEN (__init_array_end = .);
+  } >FLASH
+  .fini_array :
+  {
+    PROVIDE_HIDDEN (__fini_array_start = .);
+    KEEP (*(SORT(.fini_array.*)))
+    KEEP (*(.fini_array*))
+    PROVIDE_HIDDEN (__fini_array_end = .);
+  } >FLASH
+
+  /* used by the startup to initialize data */
+  _sidata = LOADADDR(.data);
+
+  /* Initialized data sections goes into RAM, load LMA copy after code */
+  .data : 
+  {
+    . = ALIGN(4);
+    _sdata = .;        /* create a global symbol at data start */
+    *(.data)           /* .data sections */
+    *(.data*)          /* .data* sections */
+
+    . = ALIGN(4);
+    _edata = .;        /* define a global symbol at data end */
+  } >DTCMRAM AT> FLASH
+
+  /* Uninitialized data section */
+  . = ALIGN(4);
+  .bss :
+  {
+    /* This is used by the startup in order to initialize the .bss section */
+    _sbss = .;         /* define a global symbol at bss start */
+    __bss_start__ = _sbss;
+    *(.bss)
+    *(.bss*)
+    *(COMMON)
+
+    . = ALIGN(4);
+    _ebss = .;         /* define a global symbol at bss end */
+    __bss_end__ = _ebss;
+  } >DTCMRAM
+
+  /* User_heap_stack section, used to check that there is enough RAM left */
+  ._user_heap_stack :
+  {
+    . = ALIGN(8);
+    _sstack = .;
+    PROVIDE ( end = . );
+    PROVIDE ( _end = . );
+    . = . + _Min_Heap_Size;
+    . = . + _Min_Stack_Size;
+    . = ALIGN(8);
+  } >DTCMRAM
+
+  /* Remove information from the standard libraries */
+  /DISCARD/ :
+  {
+    libc.a ( * )
+    libm.a ( * )
+    libgcc.a ( * )
+  }
+
+  .ARM.attributes 0 : { *(.ARM.attributes) }
+}
+```
+
+
+
+## Summary
+
+基本总结到这里
+
+
+
+## Quote
+
+> https://blog.csdn.net/shenjin_s/article/details/88712249
+>
+> https://zhuanlan.zhihu.com/p/521964756
+>
+> http://t.zoukankan.com/god-of-death-p-14879078.html
+>
+> https://www.leadroyal.cn/p/1125/
+>
+> https://blog.csdn.net/studyingdda/article/details/125501166
+>
+> https://blog.csdn.net/Longyu_wlz/article/details/109128395
+>
+> https://www.cnblogs.com/revercc/p/16859449.html
+>
+> https://blog.csdn.net/Oushuwen/article/details/109382103
+>
+> https://blog.csdn.net/yyww322/article/details/50827418?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-4.pc_relevant_is_cache&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-4.pc_relevant_is_cache
+
