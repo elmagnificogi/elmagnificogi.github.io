@@ -3,7 +3,7 @@ layout:     post
 title:      ".ld文件解析"
 subtitle:   ".lds，link文件"
 date:       2023-01-04
-update:     2023-01-04
+update:     2023-01-06
 author:     "elmagnifico"
 header-img: "img/bg9.jpg"
 catalog:    true
@@ -353,6 +353,10 @@ preinit_array是早于init_array初始化的、fini_array是init_array初始化�
 
 
 #### .ncache
+
+这里的ncache，其实就是 不允许cpu使用cache的区域，一般都是给DMA之类使用的内存空间，防止因为cache导致的数据不一致。
+
+讲究的会在SECTION中直接分配这么一部分none cache的区域，实际上也可以在每次cache的时候调用clean或者invalidcache之类的操作。
 
 ```
   __NDATA_ROM = __DATA_ROM + (__data_end__ - __data_start__);
