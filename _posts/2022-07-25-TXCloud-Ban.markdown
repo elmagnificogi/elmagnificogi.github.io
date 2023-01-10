@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "腾讯云封锁使用翻墙服务的轻量云"
+title:      "腾讯云封锁使用翻墙的轻量服务器"
 subtitle:   "v2ray,跨境访问节点"
 date:       2022-07-25
 update:     2022-09-22
@@ -108,7 +108,7 @@ tags:
 | idc.wiki    | ￥91.6      | 1000 |        | 2g   | 500  | 9929      | 洛杉矶   |                  |        |
 | RFCHOST     | $26.91      | 2000 | 有     | 2g   | 200  | GIA       | 洛杉矶   | hkg3openup       |        |
 
-VPS最后换到了kurun的，虽然跑不了那么高，但是算是性价比比较高的了，先用着看看吧，希望别用不满一年就跑路了。
+最后哪个都没选，还是腾讯云转移到了新加坡。
 
 
 
@@ -161,7 +161,7 @@ wget --no-check-certificate -qO natcfg.sh http://www.arloor.com/sh/iptablesUtils
 
 ## Summary
 
-当前已经恢复正常，所有服务又都起来了，只是v2ray也恢复了
+当前已经恢复正常，所有服务又都起来了，v2ray也恢复了
 
 
 
