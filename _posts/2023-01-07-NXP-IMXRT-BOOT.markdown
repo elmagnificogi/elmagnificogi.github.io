@@ -46,7 +46,11 @@ IMXRT系列基本都是没有内部Flash的，所以他们都是二级启动，�
 
 ![image-20230107161931504](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202301071619636.png)
 
-从参考手册里可以看到 `0x00200000-0x00217FFF`这个范围被保留了，实际上是BooTROM，而他之后接着的就是ITCM区域，`0x80000000-0xDFFFFFFF`和`0x60000000-0x7F7FFFFF`则是分配给外设的区域
+从参考手册里可以看到 `0x00200000-0x00217FFF`这个范围被保留了，实际上是BootROM，而他之后接着的就是ITCM区域，`0x80000000-0xDFFFFFFF`和`0x60000000-0x7F7FFFFF`则是分配给外设的区域
+
+![image6](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202301101733596.png)
+
+ITCM和DTCM以及OCRAM，三者的大小在芯片内部其实是可以调整的
 
 
 

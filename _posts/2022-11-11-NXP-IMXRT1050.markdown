@@ -172,6 +172,16 @@ Flash的选择可以通过板子上的拨码来调整
 
 
 
+#### 配置工具
+
+> MCUXpresso Config Tools
+
+NXP也有类似STCUBEMX的工具，相对比ST稍微弱了点，但是很多比较麻烦的工作都可以帮你直接配好，还是好用的
+
+他主要是处理三个东西，引脚、时钟、外设，当然DCD配置也可以通过这里完成。
+
+
+
 ## Summary
 
 未完待续
@@ -197,3 +207,5 @@ Flash的选择可以通过板子上的拨码来调整
 > Getting Started with MCUXpresso SDK for EVKB-IMXRT1050.pdf
 >
 > https://www.cnblogs.com/Netsharp/p/11073142.html
+>
+> https://www.cnblogs.com/henjay724/p/15225250.html
