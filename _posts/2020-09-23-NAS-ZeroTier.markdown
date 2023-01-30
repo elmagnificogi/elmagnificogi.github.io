@@ -3,6 +3,7 @@ layout:     post
 title:      "NAS与ZeroTier内网穿透"
 subtitle:   "Frp，群晖"
 date:       2020-09-23
+update:     2023-01-30
 author:     "elmagnifico"
 header-img: "img/zerotier.jpg"
 catalog:    true
@@ -120,6 +121,14 @@ uname -ar
 ![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/3UlNaEq6WCRn4DH.png)
 
 这里就需要勾选前面的Auth，这个设备就可以加入内网了，设备的ip或者是否在线，都能通过这里查看到。
+
+
+
+##### 添加域名
+
+有时候完全记不住这个ip，就可以在域名里直接加入解析，这样不管到哪里都可以直接用，而不需要再登录zerotier查看具体的ip是多少了
+
+![image-20230130120926716](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20230130120926716.png)
 
 
 
