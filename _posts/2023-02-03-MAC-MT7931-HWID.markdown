@@ -1,0 +1,207 @@
+---
+layout:     post
+title:      "MAC地址购买与MT7931自定义MAC"
+subtitle:   "HWID，eFuse"
+date:       2023-02-03
+update:     2023-02-03
+author:     "elmagnifico"
+header-img: "img/bg9.jpg"
+catalog:    true
+tags:
+    - Embedded
+    - MTK
+---
+
+## Forward
+
+我之前已经知道，MAC地址作为链路层传输的基础，MAC必须唯一，否则在局域网或者路由寻址的时候就会出现错误。没想到还真的在实践过程中遇到了相同MAC地址的情况。
+
+
+
+## MAC
+
+MAC地址，直译为媒体存取控制位址，是一个用来确认网络设备位置的位址。在OSI模型中，第三层网络层负责IP地址，第二层数据链路层则负责MAC位址 。MAC地址用于在网络中唯一标示一个网卡，一台设备若有一或多个网卡，则每个网卡都需要并会有一个唯一的MAC地址
+
+MAC地址的长度为48位(6个字节)，通常表示为12个16进制数，如：`00-16-EA-AE-3C-40`就是一个MAC地址，其中前3个字节，16进制数`00-16-EA`代表网络硬件制造商的编号，它由IEEE(电气与电子工程师协会)分配，而后3个字节，16进制数`AE-3C-40`代表该制造商所制造的某个网络产品(如网卡)的系列号。只要不更改自己的MAC地址，MAC地址在世界是唯一的。形象地说，MAC地址就如同身份证上的身份证号码，具有唯一性
+
+除此以外，MAC地址最高字节（MSB）的低第二位（LSb）表示这个MAC地址是全局的还是本地的，即U/L（Universal/Local）位，如果为0，表示是全局地址。所有的OUI这一位都是0。MAC地址最高字节（MSB）的低第一位(LSb），表示这个MAC地址是单播还是多播。0表示单播
+
+![image-20230203182617798](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20230203182617798.png)
+
+这个比较重要，大部分设备基本都是`unicast/global`，普通消费产品都是全局唯一mac，而部分非公网可能会出现很多local的mac地址。
+
+> https://cn.ieee.org/mac/
+
+平常的MAC地址只能从IEEE协会购买，之后由各个生产厂商自行使用。当然，我没想到的是买个MAC地址这么简单，不过普通人就算买了这个也没啥用，可以理解吧。
+
+购买流程介绍
+
+> https://blog.csdn.net/zhaoxinfan/article/details/113407524
+
+MA-L就是买数量最多的（1600万个左右），MA-M中间数量（100万个左右），MA-S数量最少（4096个），其中MA-L的价格也只需要3000多美元就足够了，可以说非常便宜了。
+
+![image-20230203185937295](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20230203185937295.png)
+
+
+
+#### MAC重复出现的现象
+
+MAC重复以后，就发现对应的客户端在AP中来回上线，每次大概能维持个一会就被另一个挤下线了。
+
+后来仔细看才发现两个不同IP的设备，竟然MAC一模一样，上了更多设备，就发现不止一对MAC重复，而是很多MAC重复，造成整体不稳定的情况。
+
+
+
+#### MAC地址查询
+
+普通MAC地址可以通过直接查询前3字节，看到具体生产商是谁。
+
+比如比较常用的，`00:08:22`开头的MAC，都是`InPro Comm`的，甚至随机的MAC也都是以他家MAC开头的，估计是写代码的当初就直接以他家的为例了吧。
+
+```
+00:08:22:2d:04:00
+```
+
+
+
+> https://www.cleancss.com/mac-lookup/00-08-22
+
+
+
+## 自定义MAC
+
+主要用的是MT7931，小批量芯片，他们的MAC不是提前写到eFuse中的（也就是说这部分费用要你自己解决），而是需要实际开发生产去处理这个问题。
+
+
+
+查了一下，发现设备每次上电都会自动变更MAC地址，再查了一下代码MT7931的WIFI模块中，默认使用的是NVDM中的MAC地址，而我的配置中根本没设置MAC，所以这个MAC是发现没有MAC的时候随机生成的。
+
+查了一下对应的CLI命令，只有GetMAC的操作，没有Set，于是乎又仔细看了下具体实现，发现其实有，只是设置的是AP模式下的MAC，而STA模式的MAC无法设置。MAC又有两种存储方式，一种是NVDM，另一种则是eFuse，仔细一看，eFuse的Module根本没启用，所以默认MAC只会从NVDM中取得。
+
+通过设置MAC默认值以后，成功修改了MAC，但是这样还不够，虽然也是比较封闭的环境中使用，但是全局唯一的MAC还是要保证的。
+
+
+
+```
+获取STA MAC地址
+wifi config get mac 0
+
+设置MAC地址，仅限AP，STA并不能被设置
+wifi config set mc_address 0 00:08:22:2d:04:02
+```
+
+其实深究，可以看到代码中的设置部分，都被注释了，如果测试使用，是可以放开的。
+
+
+
+#### eFuse
+
+想要一个唯一MAC，最简单的就是直接用唯一的芯片序列号作为MAC，这样生产可以直接省去一步，自动配置好就行了。
+
+找了半天，总算看到了芯片序列号在eFuse中，并且有16字节，而我们只需要取其中6字节即可（其实还是有点危险的，但是数量较少也就忽略了）
+
+![image-20230203184532496](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20230203184532496.png)
+
+翻遍了所有MT7933x的手册，发现都无法找到任何一个关于eFuse的完整描述，关于他的描述都是这种没有给出具体HUID位置的，蛋疼
+
+于是乎只好通过CLI，开启eFUSE CLI之后，调用`efusedrv ereader_group 0`输出整个group内容。
+
+```
+efusedrv ereader_group 0
+offset(00000000) efuse hex:00000000 00000000 00000000 00000000 
+offset(00000010) efuse hex:00000000 00000000 00000000 00000000 
+offset(00000020) efuse hex:00000000 00000000 00000000 00000000 
+offset(00000030) efuse hex:00000000 00000000 00000000 00000000 
+offset(00000040) efuse hex:00000000 00000000 00000000 00000000 
+offset(00000050) efuse hex:00000000 00000000 00000000 00000000 
+offset(00000060) efuse hex:00000000 00000000 00000000 00000000 
+offset(00000070) efuse hex:00000000 00000000 00000000 00000000 
+offset(00000080) efuse hex:00000000 00000000 00000000 00000000 
+offset(00000090) efuse hex:00000000 00000000 00000000 00000000 
+offset(000000a0) efuse hex:00000000 00000000 00000000 00000000 
+offset(000000b0) efuse hex:00000000 00000000 00000000 00000000 
+offset(000000c0) efuse hex:00000000 00000000 00000000 00000000 
+offset(000000d0) efuse hex:00000000 00000000 00000000 00000000 
+offset(000000e0) efuse hex:00000000 00000000 00000000 00000000 
+offset(000000f0) efuse hex:00000000 00000000 00000000 00000000 
+offset(00000100) efuse hex:00000000 00000000 00000000 00000000 
+offset(00000110) efuse hex:00000000 00000000 00000000 00000000 
+offset(00000120) efuse hex:00000000 00000000 00000000 00000000 
+offset(00000130) efuse hex:00000000 00000000 00000000 00000000 
+offset(00000140) efuse hex:00000000 00000000 00000000 00000000 
+offset(00000150) efuse hex:207628fc 40880fa1 133314b1 26640774 
+offset(00000160) efuse hex:00000000 00000000 00000000 00000000 
+offset(00000170) efuse hex:00000000 00000000 00000000 00000000 
+offset(00000180) efuse hex:00000000 01000000 00000000 00000000 
+offset(00000190) efuse hex:00000000 00000000 00000000 00000000 
+offset(000001a0) efuse hex:00000000 00000000 00000000 00000000 
+offset(000001b0) efuse hex:00000000 00000000 00000000 00000000 
+offset(000001c0) efuse hex:00000000 00000000 00000000 00000000 
+offset(000001d0) efuse hex:00000000 00000000 00000000 00000000 
+offset(000001e0) efuse hex:00000000 00000000 00000000 00000000 
+offset(000001f0) efuse hex:00000000 00000000 00000000 00000000 
+```
+
+简单对比以后，发现实际的序列号就是`0x150`位置的16字节，那就很简单了，提出来6字节转换成MAC即可。
+
+后续只需要读取对应位置，就能直接获取到HWID了
+
+```
+efusedrv ereader_phy 0 0x150
+```
+
+
+
+#### Gen Custom Mac
+
+结合MAC的实际含义，需要将首字节的低两位bit置0，否则这个MAC地址不合法，最终还是无法使用。
+
+```c
+    // read hardware id from efuse as mac id
+    unsigned int uEfuseAddr, uEfuseGroup;
+    int ret = 0, i = 0;
+    long unsigned int efuse_buf[4];
+
+    ret = efuse_physical_read(0, 0x150, efuse_buf);
+
+    if (ret) {
+        MSG("failed to read efuse\r\n");
+    } else {
+        MSG("efuse hex: ");
+        for (i = 0; i < 4; i++)
+            MSG("%#lx ", *(efuse_buf + i));
+        MSG("\r\n");
+    }
+
+    // set mac address
+    uint8_t mac_addr_s[18] = {0};
+    uint8_t mac_addr[6] = {0};
+    mac_addr[0] = ((efuse_buf[0]&0xFF000000)>>24) & 0xFC;
+    mac_addr[1] = (efuse_buf[0]&0x00FF0000)>>16;
+    mac_addr[2] = (efuse_buf[0]&0x0000FF00)>>8;
+    mac_addr[3] = (efuse_buf[0]&0x000000FF);
+    mac_addr[4] = (efuse_buf[1]&0xFF000000)>>24;
+    mac_addr[5] = (efuse_buf[1]&0x00FF0000)>>16;
+    os_snprintf(mac_addr_s, 18, MACSTR, MAC2STR(mac_addr));
+    if (nvdm_write_data_item("STA", "MacAddr", NVDM_DATA_ITEM_TYPE_STRING, mac_addr_s, 18) != NVDM_STATUS_OK)
+    {
+        LOG_I(common, "set mac addr failed");
+    }
+    log_write(mac_addr_s, 18);
+    LOG_I(common, "set mac addr ok");
+```
+
+
+
+## Summary
+
+只是封闭范围内使用，这种自定义MAC撞车的概率还是非常小的，如果是大范围使用，还是要买MAC的，而且MAC地址也不是很贵，随便就能买到非常多数量。
+
+
+
+## Quote
+
+> https://cn.ieee.org/mac/
+>
+> https://blog.csdn.net/zhaoxinfan/article/details/113407524
+
