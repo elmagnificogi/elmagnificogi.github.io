@@ -3,7 +3,7 @@ layout:     post
 title:      "解决便笺及其他UWP无法同步问题"
 subtitle:   "Loopback,Sticky Notes,v2ray,uu"
 date:       2022-11-21
-update:     2022-12-03
+update:     2023-02-04
 author:     "elmagnifico"
 header-img: "img/line-head-bg.jpg"
 catalog:    true
@@ -112,6 +112,16 @@ Windows加速只有一个选项，就是Windows Xbox App，加速以后，再进
 后来发现原来新版的V2rayN就自带了这个UWP解除代理的工具，也非常好用
 
 ![image-20221203115605804](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212031156960.png)
+
+
+
+## 代理也依然无效的情况
+
+某次重装windows以后，由于自带了sticky notes，所以直接使用上述方法进行代理，发现无论怎样都不能正常同步。
+
+默认自带的sticky notes在注册表中的名称更简洁，和上述的略微有些不同，后来直接删除sticky notes，重新从windows store下载，发现重下后的sticky notes的注册路径就比较正常了，再重新代理，同步就正确了。
+
+然后还有一点，有可能sticky notes也需要windows store后台工作，所以随手把windows store也代理了
 
 
 
