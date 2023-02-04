@@ -5,7 +5,7 @@ subtitle:   "HWID，eFuse"
 date:       2023-02-03
 update:     2023-02-03
 author:     "elmagnifico"
-header-img: "img/bg9.jpg"
+header-img: "img/bg7.jpg"
 catalog:    true
 tags:
     - Embedded

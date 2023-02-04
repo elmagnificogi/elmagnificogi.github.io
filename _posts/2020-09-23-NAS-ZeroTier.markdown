@@ -3,13 +3,14 @@ layout:     post
 title:      "NAS与ZeroTier内网穿透"
 subtitle:   "Frp，群晖"
 date:       2020-09-23
-update:     2023-01-30
+update:     2023-02-04
 author:     "elmagnifico"
 header-img: "img/zerotier.jpg"
 catalog:    true
 tags:
     - NAS
     - 群晖
+    - ZeroTier
 ---
 
 ## Forward
@@ -138,6 +139,14 @@ uname -ar
 
 
 
+#### 中转加速
+
+参考我的文章，提升非常明显
+
+> http://elmagnifico.tech/2023/02/04/Zerotier-Moon/
+
+
+
 ## 远程
 
 #### windows
@@ -173,6 +182,8 @@ windows开启远程，打开控制面板，选择系统，选择远程设置
 ![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/VeaodnIZ4FS5BPM.png)
 
 这样就能正常工作了
+
+
 
 ## Summary
 
