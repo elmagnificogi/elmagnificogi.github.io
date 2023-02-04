@@ -4,7 +4,7 @@ description: "且行且珍惜"
 ---
 
 <!--top article-->
-{% if paginator.page == 1}
+{% if paginator.page == 1 %}
     {% for post in site.posts %}
         {% if post.top %}
         <div class="post-preview">
