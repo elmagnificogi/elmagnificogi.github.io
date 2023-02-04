@@ -3,6 +3,31 @@ layout: page
 description: "且行且珍惜"
 ---
 
+<!--top article-->
+{% for post in paginator.posts %}
+<div class="post-preview">
+    {% if post.top %}
+        <a href="{{ post.url | prepend: site.baseurl }}">
+            <h2 class="post-title">
+                {{ post.title }}
+            </h2>
+            {% if post.subtitle %}
+            <h3 class="post-subtitle">
+                {{ post.subtitle }}
+            </h3>
+            {% endif %}
+            <div class="post-content-preview">
+                {{ post.content | strip_html | truncate:200 }}
+            </div>
+        </a>
+        <p class="post-meta">
+            Posted on {{ post.date | date: "%B %-d, %Y" }};&nbsp;Words:&nbsp;{{ post.content | number_of_words }}
+        </p>
+    {% endif %}
+</div>
+<hr>
+{% endfor %}
+
 {% for post in paginator.posts %}
 <div class="post-preview">
     <a href="{{ post.url | prepend: site.baseurl }}">

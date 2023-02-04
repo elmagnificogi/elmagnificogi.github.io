@@ -7,6 +7,7 @@ update:     2023-01-14
 author:     "elmagnifico"
 header-img: "img/drone-head-bg.jpg"
 catalog:    true
+top:        true
 tags:
     - VPS
 ---
