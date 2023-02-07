@@ -7,7 +7,7 @@ update:     2023-01-14
 author:     "elmagnifico"
 header-img: "img/drone-head-bg.jpg"
 catalog:    true
-top:        true
+top:        false
 tags:
     - VPS
 ---
@@ -15,6 +15,10 @@ tags:
 ## Forward
 
 统计一下目前拥有的VPS，黑五又买了一些新的，扩展了一下目前拥有的线路。
+
+
+
+**2023.2目前已经满30人了，所以本月暂时不再收人了，下个月看情况决定是否再增加新人**
 
 
 
