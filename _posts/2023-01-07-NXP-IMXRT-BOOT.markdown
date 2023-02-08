@@ -3,7 +3,7 @@ layout:     post
 title:      "i.MXRT1xxx系列启动分析"
 subtitle:   "MXRT1052，BootROM，BootMode"
 date:       2023-01-07
-update:     2023-01-07
+update:     2023-02-08
 author:     "elmagnifico"
 header-img: "img/bg8.jpg"
 catalog:    true
@@ -44,17 +44,39 @@ IMXRT系列基本都是没有内部Flash的，所以他们都是二级启动，�
 
 #### Memory Map
 
+存储器一般可以分成8块，每块各自还有细分
+
+![image-20230208155103118](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20230208155103118.png)
+
+0，一般是代码存储区域，片内存储，比如bootload
+
+1，一般是内存存储区域，片内存储
+
+2，一般是各种外设，寄存器地址什么的
+
+3，如果片内内存不够用，需要扩展，那么就接在这里
+
+4，同理，如果有外部设备，分配在这里
+
+5，6，7不太常用，跳过
+
+
+
+细分如下
+
 ![image-20230107161931504](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202301071619636.png)
 
 从参考手册里可以看到 `0x00200000-0x00217FFF`这个范围被保留了，实际上是BootROM，而他之后接着的就是ITCM区域，`0x80000000-0xDFFFFFFF`和`0x60000000-0x7F7FFFFF`则是分配给外设的区域
 
 ![image6](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202301101733596.png)
 
-ITCM和DTCM以及OCRAM，三者的大小在芯片内部其实是可以调整的
+（这个图是从野火等国内拿过来的，实际官方找不到这张图）
+
+ITCM和DTCM以及OCRAM，三者的大小在芯片内部其实是可以调整的，并不是各自占用这么大，FlexRAM机制让我们可以调整这三者所占大小。
 
 
 
-实际上可以被Boot的设备也有说明：
+可以被Boot的设备也有说明：
 
 ![image-20230107171511088](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202301071715183.png)
 

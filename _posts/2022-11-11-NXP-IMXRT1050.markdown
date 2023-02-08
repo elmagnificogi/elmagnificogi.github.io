@@ -3,7 +3,7 @@ layout:     post
 title:      "恩智浦IMXRT1050开发尝试"
 subtitle:   "build,env"
 date:       2022-11-11
-update:     2022-12-14
+update:     2023-02-08
 author:     "elmagnifico"
 header-img: "img/mqtt.jpg"
 catalog:    true
@@ -172,6 +172,10 @@ Flash的选择可以通过板子上的拨码来调整
 
 
 
+后来发现其实官方SDK有ARMGCC版本，完全不需要从第三方拿。
+
+
+
 #### 配置工具
 
 > MCUXpresso Config Tools
@@ -182,9 +186,19 @@ NXP也有类似STCUBEMX的工具，相对比ST稍微弱了点，但是很多比�
 
 
 
+## 官方SDK
+
+> https://github.com/nxp-mcuxpresso/mcux-sdk
+
+github上有官方sdk，并且main有点类似于dev分支，开发更新频率比较高，而官方IDE的SDK基本就作为了release级别的。
+
+同时github上的doc都是带一份中文的版本，非常好评。
+
+
+
 ## Summary
 
-未完待续
+还是得多看看官方资料，否则会走很多弯路
 
 
 
