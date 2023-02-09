@@ -3,6 +3,7 @@ layout:     post
 title:      "豆瓣自动回复，自动顶帖"
 subtitle:   "超级鹰,验证码识别"
 date:       2021-04-14
+update:     2023-02-09
 author:     "elmagnifico"
 header-img: "img/Raspberrypi-head-bg.jpg"
 catalog:    true
@@ -42,6 +43,8 @@ tags:
 
 
 ## 代码
+
+> https://github.com/elmagnificogi/AutoReplay_douban
 
 代码里只需要配好帖子链接，cookie，回复内容，超级鹰用户名，密码，软id就能工作了
 
