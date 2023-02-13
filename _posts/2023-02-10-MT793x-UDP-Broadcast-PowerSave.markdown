@@ -3,7 +3,7 @@ layout:     post
 title:      "省电模式造成UDP广播大量丢包"
 subtitle:   "power save，MT793x，wifi"
 date:       2023-02-10
-update:     2023-02-10
+update:     2023-02-13
 author:     "elmagnifico"
 header-img: "img/bg5.jpg"
 catalog:    true
@@ -36,8 +36,6 @@ MT793x遇到一个奇怪的问题，udp广播丢包，同时的其他单播的ud
 
 
 ## 检查
-
-
 
 #### lwip
 
@@ -278,7 +276,7 @@ Client收到Beacon以后，会根据AID，检查TIM（流量指示图），看�
 
 这里面有一个特殊情况，
 
-- DTIM，当发送几个TIM之后，就要发送一个DTIM，其除了缓存单播信息，也同时指示AP缓存的**组播**或**广播**信息，一旦AP发送了DTIM, STA就必须处于清醒，因为广播或组播无重发机制，不醒来数据就收不到了。同样的由于DTIM并非全时刻都有，所以广播和组播在节电模式时，会出现很多丢包。
+- DTIM，当发送几个TIM之后，就要发送一个DTIM，其除了缓存单播信息，也同时指示AP缓存的**组播**或**广播**信息，一旦AP发送了DTIM, STA就必须处于清醒，因为广播或组播无重发机制，不醒来数据就收不到了。DTIM可能和Listen Interval对不上，这种情况下就有可能会丢包
 
 
 
@@ -312,6 +310,111 @@ AP检查是否多播缓冲已经开启了
 
 
 
+```c
+typedef struct {
+	uint32_t sta_wep_key_index_present : 1;
+	/**< Set to 1 to mark the presence of the sta_wep_key_index, set to 0,
+	 * otherwise. */
+	uint32_t sta_auto_connect_present : 1;
+	/**< Set to 1 to mark the presence of the sta_auto_connect, set to 0,
+	 * otherwise. */
+	uint32_t ap_wep_key_index_present : 1;
+	/**< Set to 1 to mark the presence of the ap_wep_key_index, set to 0,
+	 * otherwise. */
+	uint32_t ap_hidden_ssid_enable_present : 1;
+	/**< Set to 1 to mark the presence of the ap_hidden_ssid_enable, set to
+	 * 0, otherwise. */
+	uint32_t country_code_present : 1; /**< Set to 1 to mark the presence of
+					      the country_code[4], set to 0,
+					      otherwise. */
+	uint32_t sta_bandwidth_present : 1; /**< Set to 1 to mark the presence
+					       of the sta_bandwidth, set to 0,
+					       otherwise. */
+	uint32_t sta_wireless_mode_present : 1;
+	/**< Set to 1 to mark the presence of the sta_wireless_mode, set to 0,
+	 * otherwise. */
+	uint32_t sta_listen_interval_present : 1;
+	/**< Set to 1 to mark the presence of the sta_listen_interval, set to 0,
+	 * otherwise. */
+	uint32_t sta_power_save_mode_present : 1;
+	/**< Set to 1 to mark the presence of the sta_power_save_mode, set to 0,
+	 * otherwise. */
+	uint32_t ap_wireless_mode_present : 1;
+	/**< Set to 1 to mark the presence of the ap_wireless_mode, set to 0,
+	 * otherwise. */
+	uint32_t ap_dtim_interval_present : 1;
+	/**< Set to 1 to mark the presence of the ap_dtim_interval, set to 0,
+	 * otherwise. */
+	uint32_t reserved_bit : 21; /**< Reserved. */
+	uint32_t reserved_word[3];  /**< Reserved. */
+
+	uint8_t sta_wep_key_index; /**< The WEP key index for STA. It should be
+				      set when the STA uses the WEP encryption.
+				      */
+	uint8_t sta_auto_connect;  /**< Set to 1 to enable the STA to
+				      automatically connect to the target AP
+				      after the initialization. Set to 0 to force
+				      the STA to stay idle after the
+				      initialization and to call
+				      #wifi_config_reload_setting() to trigger
+				      connection. The default is set to 1. */
+	uint8_t ap_wep_key_index;  /**< The WEP key index for AP. It should be
+				      set when the AP uses WEP encryption. */
+	uint8_t ap_hidden_ssid_enable; /**< Set to 1 to enable the hidden SSID
+					  in the beacon and probe response
+					  packets. The default is set to 0. */
+	uint8_t country_code[4];       /**< The country code setting. */
+	uint8_t sta_bandwidth; /**< The bandwidth setting for STA. The value is
+				  either
+				  #WIFI_IOT_COMMAND_CONFIG_BANDWIDTH_20MHZ or
+				  #WIFI_IOT_COMMAND_CONFIG_BANDWIDTH_40MHZ, or
+				  WIFI_IOT_COMMAND_CONFIG_BANDWIDTH_2040MHZ.*/
+	wifi_phy_mode_t sta_wireless_mode; /**< The wireless mode setting for
+					      STA. Please refer to the
+					      definition of #wifi_phy_mode_t.*/
+	uint8_t sta_listen_interval; /**< The listening interval setting for
+					STA. The interval range is from 1 to 255
+					beacon intervals.*/
+	wifi_power_saving_mode_t sta_power_save_mode;
+	/**< The power saving mode setting for STA. Please refer to the
+	 * definition of #wifi_power_saving_mode_t.*/
+	wifi_phy_mode_t
+		ap_wireless_mode; /**< The wireless mode setting for AP. Please
+				     refer to the definition of
+				     #wifi_phy_mode_t.*/
+	uint8_t ap_dtim_interval; /**< The DTIM interval setting for AP. The
+				     interval range is from 1 to 255 beacon
+				     intervals. */
+
+} wifi_config_ext_t;
+```
+
+再仔细看下，实际上MT793x这部分代码没有配置listen interval，但是默认是1，所以应该没问题
+
+
+
+仔细一查，发现routeros不能设置dtim时间和beacon时间，关于dtim的具体时间是多少也是不确定的
+
+> https://forum.mikrotik.com/viewtopic.php?t=146749
+
+
+
+> multicast-buffering (disabled | enabled; Default: enabled)，For a client that has power saving, buffer multicast packets until next beacon time. A client should wake up to receive a beacon, by receiving beacon it sees that there are multicast packets pending, and it should wait for multicast packets to be sent.
+
+多播的缓冲选项，似乎只能缓冲一个beacon？这里的说明也很模糊
+
+
+
+那么现在基本可以推测，问题是由于在不同的节电模式下MT793x的唤醒周期和AP的DTIM对不上，导致实际出现丢包。而routeros中关于DTIM和多播缓冲的说明都有点隐晦，所以多少可能是有点问题的。
+
+
+
+## Multicast Helper
+
+通过启用`Multicast Helper`，将多播转为单播，原广播包就变得正常可以收到了。
+
+
+
 ## Summary
 
 客户端进入省电模式竟然还和AP有关系，以前一直以为只是单方的定时唤醒而已。
@@ -323,4 +426,6 @@ AP检查是否多播缓冲已经开启了
 > https://blog.csdn.net/zwl1584671413/article/details/78027215
 >
 > https://blog.csdn.net/qq_37117595/article/details/127123383
+>
+> https://forum.mikrotik.com/viewtopic.php?t=146749
 
