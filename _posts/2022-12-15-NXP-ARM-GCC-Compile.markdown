@@ -3,7 +3,7 @@ layout:     post
 title:      "NXP的ARM-GCC编译分析与转SES工程"
 subtitle:   "Makefile、cmake、Ninja"
 date:       2022-12-15
-update:     2022-12-21
+update:     2023-02-14
 author:     "elmagnifico"
 header-img: "img/desk-head-bg.jpg"
 catalog:    true
@@ -1395,6 +1395,22 @@ default all
 ```
 
 Ninja相当于是直接把每个要编译的文件和对应的编译参数全都列出来了
+
+
+
+## 问题
+
+后续发现就算NXP转成了SES，可以编译过，但是作为IDE，一体化的程度还是不够，最大的问题在于MIMXRT系列的板子都可以自定义FLASH或者RAM，这就导致要flash或者debug必须带有对应的驱动(cfx)，而SES并不具有烧写cfx的功能。
+
+同理如果debug在SES这里也不方便，相对比NXP自己的IDE MUCXpresso本身就具有cfx插件功能，并且在flash和ram的设置阶段就可以直接设置对应的文件，开发人员基本可以免去复杂的重写驱动之类的操作，这就很方便了。
+
+MUCXpresso也有不好的地方，首先他是eclipse的二次开发，卡顿感还是非常明显的，然后调试的时候也是延迟非常明显，很难受。
+
+同比，Keil没有以上说的缺点，但是本身工程架构太过恶心，实在不想选择他
+
+
+
+目前看来最好的方法就是调试的时候用一下MUCXpresso，平常CICD流程的时候使用arm-none-eabi完成
 
 
 

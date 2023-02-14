@@ -192,8 +192,6 @@ NXP也有类似STCUBEMX的工具，相对比ST稍微弱了点，但是很多比�
 
 github上有官方sdk，并且main有点类似于dev分支，开发更新频率比较高，而官方IDE的SDK基本就作为了release级别的。
 
-同时github上的doc都是带一份中文的版本，非常好评。
-
 
 
 ## Summary
