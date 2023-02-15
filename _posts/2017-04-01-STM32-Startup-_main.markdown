@@ -3,6 +3,7 @@ layout:     post
 title:      "STM32 _main 里做了什么"
 subtitle:   "嵌入式，bootloader，_main"
 date:       2017-04-01
+update:     2023-02-15
 author:     "elmagnifico"
 header-img: "img/pcb-head-bg.jpg"
 catalog:    true
@@ -10,6 +11,14 @@ tags:
     - 嵌入式
     - FreeRTOS
 ---
+
+## Foreword
+
+启动流程：
+
+![image-20230215155534582](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20230215155534582.png)
+
+
 
 ## STM32 _main 里做了什么
 
