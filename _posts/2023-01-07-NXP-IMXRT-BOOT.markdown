@@ -14,9 +14,7 @@ tags:
 
 ## Foreword
 
-与ST对比，i.MXRT1xxx系列的启动方式和流程都有很大不同，对比ST来说有一部分可以说相对麻烦。
-
-![image-20230215155714027](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20230215155714027.png)
+与ST对比，i.MXRT1xxx系列的启动方式和流程都有很大不同，对比ST来说有一部分可以说相当麻烦。
 
 
 
@@ -306,7 +304,7 @@ const ivt image_vector_table = {
 
 ```
 
-
+boot data 主要是定义了flash启动的空间和大小
 
 ```c
 const BOOT_DATA_T boot_data = {
@@ -317,7 +315,7 @@ const BOOT_DATA_T boot_data = {
 };
 ```
 
-
+dcd数据比较多，而且也没有解释后续我再分析。
 
 ```c
 const uint8_t dcd_sdram[1072] = {
@@ -339,7 +337,7 @@ const uint8_t dcd_sdram[1072] = {
 
 ## Summary
 
-未完待续
+到这里基本整体的启动流程就看完了，这部分是NXP和ST不同的地方，至于分散加载什么的已经分析过了
 
 
 
