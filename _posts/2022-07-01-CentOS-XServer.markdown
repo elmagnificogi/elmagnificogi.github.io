@@ -12,7 +12,7 @@ tags:
     - VPS
 ---
 
-## Forward
+## Foreword
 
 Centos8.2安装Xfce，配置VNC远程桌面
 

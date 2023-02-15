@@ -12,7 +12,7 @@ tags:
     - AP
 ---
 
-## Forward
+## Foreword
 
 室外远距离AP选择，Mikrotik和Ubnt的路由都缺货，要不就是进货周期拉的特别长，所以需要找一些国内的替代品。
 

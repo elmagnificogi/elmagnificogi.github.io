@@ -13,7 +13,7 @@ tags:
     - ZeroTier
 ---
 
-## Forward
+## Foreword
 
 由于teamviewer的破解版不能用了，导致现在远程起来不是很方便，现在用的是AnyDesk,但是有个很明显的问题，AnyDesk服务器不支持BGP，遇到电信转联通，或者电信转移动的时候，非常卡，而以前的teamviewer明显没有这个问题。
 

@@ -11,7 +11,7 @@ tags:
     - SoftWare
 ---
 
-## Forward
+## Foreword
 
 便笺，windows自带的程序，非常好用，可以自动同步，也简单易用。
 

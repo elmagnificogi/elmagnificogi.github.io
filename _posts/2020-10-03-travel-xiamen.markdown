@@ -11,7 +11,7 @@ tags:
     - Log
 ---
 
-## Forward
+## Foreword
 
 十一参加同学婚礼，顺便去厦门转一圈。
 

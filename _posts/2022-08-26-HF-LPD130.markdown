@@ -11,7 +11,7 @@ tags:
     - WIFI
 ---
 
-## Forward
+## Foreword
 
 又让WIFI模块坑到了，记录一下，希望后来者都能跳过这种厂家和芯片吧
 

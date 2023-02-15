@@ -12,7 +12,7 @@ tags:
     - Sensor
 ---
 
-## Forward
+## Foreword
 
 这个是之前调试的 CH201 Long-Range Ultrasonic Time-of-Flight Range Sensor 的记录，最后放弃了。
 

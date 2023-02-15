@@ -14,7 +14,7 @@ tags:
 
 ---
 
-## Forward
+## Foreword
 
 ESP32模拟JoyCon和Pro，兼容Amiibo使用指南
 

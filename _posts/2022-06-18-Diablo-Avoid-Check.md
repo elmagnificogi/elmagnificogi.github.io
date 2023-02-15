@@ -12,7 +12,7 @@ tags:
     - Game
 ---
 
-## Forward
+## Foreword
 
 防止D2R扫进程，保护我们的隐私
 

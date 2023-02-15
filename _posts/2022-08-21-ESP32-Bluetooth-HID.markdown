@@ -11,7 +11,7 @@ tags:
     - ESP32
 ---
 
-## Forward
+## Foreword
 
 看一下官方的ESP32 经典蓝牙 HID是什么样的架构，以及如何修改HID
 

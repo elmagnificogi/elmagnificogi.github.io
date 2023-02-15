@@ -11,7 +11,7 @@ tags:
     - VPS
 ---
 
-## Forward
+## Foreword
 
 上一次阿里云Ban服务，还是在上次，腾讯云坚持了几年也不行了。
 

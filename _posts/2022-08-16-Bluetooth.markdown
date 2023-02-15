@@ -11,7 +11,7 @@ tags:
     - Bluetooth
 ---
 
-## Forward
+## Foreword
 
 蓝牙入门学习，不太明白的地方还是比较多的，所以翻看了一些蓝牙的blog，总结记录一下
 

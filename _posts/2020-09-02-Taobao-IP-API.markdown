@@ -11,7 +11,7 @@ tags:
     - Springboot
 ---
 
-## Forward
+## Foreword
 
 最近需要通过IP获取对应的地区，然后搜了一下发现有淘宝现成的，而且多数帖子里的淘宝api早就失效了，这种重新记录一下
 

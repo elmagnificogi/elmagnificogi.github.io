@@ -13,7 +13,7 @@ tags:
     - BUG
 ---
 
-## Forward
+## Foreword
 
 万万没想到BLH竟然还有后续，这次遇到了一个算是恶性bug吧。
 

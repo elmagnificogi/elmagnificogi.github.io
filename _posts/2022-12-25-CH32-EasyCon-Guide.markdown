@@ -12,7 +12,7 @@ tags:
     - EasyCon
 ---
 
-## Forward
+## Foreword
 
 EasyConMCU_CH32，目前最便宜，功能也是最完整的方案，不需要额外购买杜邦线、也不用焊接、也不需要串口。
 

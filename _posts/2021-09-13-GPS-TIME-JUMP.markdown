@@ -11,7 +11,7 @@ tags:
     - Embedded
 ---
 
-## Forward
+## Foreword
 
 遇到一个奇怪的问题，GPS 给出来的 UTC 时间竟然出现了跳跃的情况。理论上说这个 UTC 时间应该是非常准确的，这里梳理一下可能遇到的 GPS 的坑
 

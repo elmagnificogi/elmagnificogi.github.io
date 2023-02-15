@@ -12,7 +12,7 @@ tags:
     - Game
 ---
 
-## Forward
+## Foreword
 
 万万没想到，搞出来了这么多事。
 

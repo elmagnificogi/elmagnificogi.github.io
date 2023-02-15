@@ -12,7 +12,7 @@ tags:
     - C#
 ---
 
-## Forward
+## Foreword
 
 遇到一个奇葩问题，ESP32的板子接入串口的时候会自动重启
 

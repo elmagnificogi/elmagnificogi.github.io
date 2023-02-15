@@ -11,7 +11,7 @@ tags:
     - Embedded
 ---
 
-## Forward
+## Foreword
 
 用eclipse合并好几个项目的时候发现保存索引设置的配置文件，无法正确保存。
 

@@ -11,7 +11,7 @@ tags:
     - C
 ---
 
-## Forward
+## Foreword
 
 ST的CubeMX自动生成GPIO等相关配置文件的代码已经非常简单易懂了，最近看了MT的实现，发现也比较简单易懂，这里做一点解析。
 

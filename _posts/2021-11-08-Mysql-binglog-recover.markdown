@@ -11,7 +11,7 @@ tags:
     - MySql
 ---
 
-## Forward
+## Foreword
 
 删库跑路怎么办?刚好有点Mysql的数据想要恢复一下，就查了一下，发现还挺简单的
 

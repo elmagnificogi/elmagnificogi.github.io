@@ -12,7 +12,7 @@ tags:
     - SES
 ---
 
-## Forward
+## Foreword
 
 NXP的ARM-GCC编译脚本分析
 

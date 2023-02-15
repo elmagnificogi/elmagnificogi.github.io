@@ -11,7 +11,7 @@ tags:
     - Game
 ---
 
-## Forward
+## Foreword
 
 记录一下如何追查注册表是被谁修改的，如何修改的
 

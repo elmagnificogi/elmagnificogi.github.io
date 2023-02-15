@@ -12,7 +12,7 @@ tags:
     - Embedded
 ---
 
-## Forward
+## Foreword
 
 经常看到别人git仓库泄露了什么数据库密码，关键Token，服务器密码什么的，但是也没看到具体说明是怎么处理的。
 

@@ -11,7 +11,7 @@ tags:
     - BLHeli
 ---
 
-## Forward
+## Foreword
 
 BLHeli自从升级到了32位以后，就闭源了，而要做到ecs自动校准或者说统一设置，就必须要他的协议。
 

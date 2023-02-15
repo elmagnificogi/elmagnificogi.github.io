@@ -11,7 +11,7 @@ tags:
     - Game
 ---
 
-## Forward
+## Foreword
 
 MapAssist 的过滤太难用了，然后就优化了一下，写了个交互式的
 

@@ -13,7 +13,7 @@ tags:
 
 ---
 
-## Forward
+## Foreword
 
 2019-09-16晚，我的阿里云香港VPS被墙
 

@@ -12,7 +12,7 @@ tags:
     - Diablo
 ---
 
-## Forward
+## Foreword
 
 由于时差还有翻译问题，所以我直接独立更新一个D2RAssist，但是同时也实时合并D2RAssist最新的commit。我也能写自己的功能上去。
 

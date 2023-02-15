@@ -12,7 +12,7 @@ tags:
     - EasyCon
 ---
 
-## Forward
+## Foreword
 
 开发一下CH32，快速移植一个EasyConAPI上去
 

@@ -11,7 +11,7 @@ tags:
     - Embedded
 ---
 
-## Forward
+## Foreword
 
 详细解析一下ld文件，以NXP的1052为例
 

@@ -12,7 +12,7 @@ tags:
     - Nvidia
 ---
 
-## Forward
+## Foreword
 
 之前有用Moonlight串口pc的游戏到公司电脑，然后突然有一天串流就不可用了，NVIDIA Shield 就消失了，怎么都开不起来。串流就失败了。然后也记录一下Moonlight串流的操作。
 

@@ -10,7 +10,7 @@ tags:
     - Crack
 ---
 
-## Forward
+## Foreword
 
 之前想汉化SW Seed Calculator，然后发现字符串都被混淆了，然后我就不明白了，最近搞了tracealyzer以后发现好像可以通过de4dot做点什么，于是尝试了一下，发现非常好用。
 

@@ -13,7 +13,7 @@ tags:
 
 ## Java
 
-## Forward
+## Foreword
 
 记录一下之前遇到的一个问题，Springboot中在映射实体到数据库的时候有一个映射方式，之前没注意。
 

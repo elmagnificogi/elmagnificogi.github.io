@@ -12,7 +12,7 @@ tags:
     - Embedded
 ---
 
-## Forward
+## Foreword
 
 最近要用到Tracealyzer来分析一下当前FreeRTOS中的一些平常看不见的bug，之前已经遇到过sd卡随机延迟，几分钟才能触发一次，导致buffer缓冲不足，进而造成部分进程被阻塞，就从查了好久才搞清楚。
 

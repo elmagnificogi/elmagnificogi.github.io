@@ -10,7 +10,7 @@ tags:
     - UE4
 ---
 
-## Forward
+## Foreword
 
 最近一直遇到UE4的游戏报错，莫名其妙闪退或者直接报一个LowLevelFatalError的错误，或者类似的一些错误
 

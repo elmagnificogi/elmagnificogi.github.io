@@ -10,7 +10,7 @@ tags:
     - RaspberryPi
 ---
 
-## Forward
+## Foreword
 
 最近一直调试网络，一直有一个诡异情况无法解。
 

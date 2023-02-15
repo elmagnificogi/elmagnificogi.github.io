@@ -12,7 +12,7 @@ tags:
     - Game
 ---
 
-## Forward
+## Foreword
 
 2022.6.15早8点，基本最近使用过MapAssist或者类似开图软件的玩家全都被封禁了
 

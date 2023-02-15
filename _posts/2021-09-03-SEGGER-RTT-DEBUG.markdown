@@ -11,7 +11,7 @@ tags:
     - Embedded
 ---
 
-## Forward
+## Foreword
 
 最近看到有人用 JLink 直接当串口用，发现还不错的样子。
 

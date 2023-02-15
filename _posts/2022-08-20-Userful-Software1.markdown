@@ -11,7 +11,7 @@ tags:
     - SoftWare
 ---
 
-## Forward
+## Foreword
 
 记录一些小软件，以后忘记的时候还能找到名字下载回来
 

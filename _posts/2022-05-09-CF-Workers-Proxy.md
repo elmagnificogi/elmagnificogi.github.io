@@ -11,7 +11,7 @@ tags:
     - Proxy
 ---
 
-## Forward
+## Foreword
 
 今天临时要反代一些别人的网页，又不想去改Nginx，想起来之前的Github反代，找了一下，发现了类似的方法，还挺简单的。
 

@@ -12,7 +12,7 @@ tags:
     - Sensor
 ---
 
-## Forward
+## Foreword
 
 这个是年前遇到的问题，一直没处理，现在记录一下。
 

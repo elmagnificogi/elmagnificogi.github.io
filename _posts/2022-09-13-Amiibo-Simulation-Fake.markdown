@@ -13,7 +13,7 @@ tags:
     - Nintendo Switch
 ---
 
-## Forward
+## Foreword
 
 由于Amiibo被破解了，所以理论上我可以直接生成任意一个Amiibo（按我现在的理解）
 

@@ -12,7 +12,7 @@ tags:
     - Python
 ---
 
-## Forward
+## Foreword
 
 最近开了一个弟弟，试用期写的代码真的漏洞百出，让人哭笑不得。
 

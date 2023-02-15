@@ -11,7 +11,7 @@ tags:
     - Equip
 ---
 
-## Forward
+## Foreword
 
 无意间发现，拖动windows的任何一个窗口都会有明显卡顿的情况。
 

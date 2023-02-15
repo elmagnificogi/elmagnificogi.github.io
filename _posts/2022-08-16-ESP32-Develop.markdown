@@ -11,7 +11,7 @@ tags:
     - ESP32
 ---
 
-## Forward
+## Foreword
 
 好久没弄ESP32，又要捡起来折腾一下，记录一下相关内容。
 

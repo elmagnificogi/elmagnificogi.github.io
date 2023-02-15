@@ -12,7 +12,7 @@ tags:
     - Embedded
 ---
 
-## Forward
+## Foreword
 
 有些关于Tracealyzer介绍的地方可能也没说清楚，这里再补充一些
 

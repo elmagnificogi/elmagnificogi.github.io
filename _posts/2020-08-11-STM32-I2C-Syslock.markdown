@@ -11,7 +11,7 @@ tags:
     - FreeRTOS
 ---
 
-## Forward
+## Foreword
 
 先说一下遇到的问题，I2C的SDA或者SCL信号线，只要拉低一段时间，必然造成系统锁死，触发看门狗。
 

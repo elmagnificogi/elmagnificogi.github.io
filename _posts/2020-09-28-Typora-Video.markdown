@@ -11,7 +11,7 @@ tags:
     - Markdown
 ---
 
-## Forward
+## Foreword
 
 突然遇到需要在Typora中拆入视频，然后发现有部分视频插入以后Typora显示不正常，但是能播放。
 

@@ -11,7 +11,7 @@ tags:
     - Docker
 ---
 
-## Forward
+## Foreword
 
 写完的springboot web 应用要结合docker部署到ECS上，然后ECS的环境大概看了一下，免费的里面大部分和我的应用需要的环境不太搭，于是自己从零开始配置环境。
 

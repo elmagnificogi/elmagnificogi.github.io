@@ -11,7 +11,7 @@ tags:
     - NXP
 ---
 
-## Forward
+## Foreword
 
 无意间发现恩智浦的IMXRT系列的芯片，性能非常强劲啊，但是资料非常少。
 

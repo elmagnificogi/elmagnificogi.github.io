@@ -11,7 +11,7 @@ tags:
     - MySql
 ---
 
-## Forward
+## Foreword
 
 我想通过docker-compose 同时建立两套后台，一套是正常使用的，一套是用来开发测试的。
 

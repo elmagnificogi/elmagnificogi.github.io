@@ -12,7 +12,7 @@ tags:
     - Trace
 ---
 
-## Forward
+## Foreword
 
 最近要用到Tracealyzer来分析FreeRTOS，又刚好看到了新手破解文，所以尝试了一下，几经折腾总算是成功了。
 

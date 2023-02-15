@@ -13,7 +13,7 @@ tags:
     - Nintendo Switch
 ---
 
-## Forward
+## Foreword
 
 最早的ESP32模拟Pro Controller，那会问题很多，甚至esp-idf都没有官方支持，靠着路人魔改的库，才勉强实现
 

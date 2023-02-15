@@ -11,7 +11,7 @@ tags:
     - MT793x
 ---
 
-## Forward
+## Foreword
 
 MT793x遇到一个奇怪的问题，udp广播丢包，同时的其他单播的udp包全都正常。
 

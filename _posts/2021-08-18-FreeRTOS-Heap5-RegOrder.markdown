@@ -11,7 +11,7 @@ tags:
     - Embedded
 ---
 
-## Forward
+## Foreword
 
 一直使用的FreeRTOS heap5作为内存分配，最近刚好遇到一个bug，仔细看了一下发现heap5的实现，发现这种情况无法处理。
 

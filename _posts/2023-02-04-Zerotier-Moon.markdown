@@ -12,7 +12,7 @@ tags:
     - ZeroTier
 ---
 
-## Forward
+## Foreword
 
 最近老是出现奇怪的情况，家里的主机总是连不上，公司和笔记本都没问题，但是家里的经常出现开机以后要等很久很久，zerotier才能ping通，然后中间可能还会又ping不通了，只要ping不通基本rdp就连不上。
 

@@ -12,7 +12,7 @@ tags:
     - Diablo
 ---
 
-## Forward
+## Foreword
 
 太难了，历经4个小时，总算是让大部分人都上了车
 

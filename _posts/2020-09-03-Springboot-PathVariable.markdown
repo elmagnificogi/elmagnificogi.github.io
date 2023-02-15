@@ -11,7 +11,7 @@ tags:
     - Springboot
 ---
 
-## Forward
+## Foreword
 
 最近遇到了一个奇葩错误，数据库一直报错，说我新增的实体已经存在了，而实体id不自增，debug半天每次给出来的entity的自增id都是固定值，永远不变
 

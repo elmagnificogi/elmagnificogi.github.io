@@ -13,7 +13,7 @@ tags:
     - 图床
 ---
 
-## Forward
+## Foreword
 
 这几天写blog，发现图床突然就不能用了，找了半天原因，发现好像是smms必须要登陆了？然后Picgo更新以后，我忘记使用自己token来上传smms的图片了。
 

@@ -12,7 +12,7 @@ tags:
     - Jenkins
 ---
 
-## Forward
+## Foreword
 
 记录一下我搭建的嵌入式CI/CD流程
 

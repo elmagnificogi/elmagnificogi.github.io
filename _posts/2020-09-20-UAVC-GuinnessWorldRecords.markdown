@@ -11,7 +11,7 @@ tags:
     - GuinnessWorldRecords
 ---
 
-## Forward
+## Foreword
 
 从来没有破过吉尼斯世界纪录，也没了解过到底要什么操作，这次大概知道了一些，做点小科普
 

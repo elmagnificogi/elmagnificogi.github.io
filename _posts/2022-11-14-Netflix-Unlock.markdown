@@ -11,7 +11,7 @@ tags:
     - VPS
 ---
 
-## Forward
+## Foreword
 
 突然Netflix的流媒体就失效了，然后折腾了半天，尝试了各种方法，总算找到了一个比较合适的办法
 

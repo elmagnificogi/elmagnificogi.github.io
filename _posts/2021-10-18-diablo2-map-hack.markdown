@@ -12,7 +12,7 @@ tags:
     - Diablo
 ---
 
-## Forward
+## Foreword
 
 没想到短短几天，就有人弄出来了重制版地图显示，不得不说牛皮啊。
 

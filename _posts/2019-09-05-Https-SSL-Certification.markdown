@@ -11,7 +11,7 @@ tags:
     - Springboot
 ---
 
-## Forward
+## Foreword
 
 由于是后台使用，需要更安全一些，所以打算上一个https，先说自签证书，再说阿里云免费证书
 
