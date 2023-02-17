@@ -3,7 +3,7 @@ layout:     post
 title:      "NXP的ARM-GCC编译分析与转SES工程"
 subtitle:   "Makefile、cmake、Ninja"
 date:       2022-12-15
-update:     2023-02-14
+update:     2023-02-17
 author:     "elmagnifico"
 header-img: "img/desk-head-bg.jpg"
 catalog:    true
@@ -1411,6 +1411,32 @@ MUCXpresso也有不好的地方，首先他是eclipse的二次开发，卡顿感
 
 
 目前看来最好的方法就是调试的时候用一下MUCXpresso，平常CICD流程的时候使用arm-none-eabi完成
+
+
+
+通过痞子衡的J-Link算法，已经解决了J-Link下载缺少算法的问题，但是又遇到另外一个bUG，SES中JLink的设置无法生效
+
+已经在设置中设置了目标设备的具体名称，但是实际使用的时候发现JLink依然连接的是默认设备，导致实际算法应用不上去。
+
+然后就无法下载和调试，非常蛋疼，如果使用J-Link Commander 一切正常。
+
+![image-20230217193628550](C:\Users\elmag\Pictures\202302171936594.png)
+
+![image-20230217193606742](C:\Users\elmag\Pictures\202302171936784.png)
+
+![image-20230217193538733](C:\Users\elmag\Pictures\202302171935784.png)
+
+Commander 正常工作
+
+![image-20230217194009286](C:\Users\elmag\Pictures\202302171940365.png)
+
+就差一点点就能完全正常工作了。
+
+
+
+关于这个问题已经在SES官方论坛提出了，就看什么时候能给解决一下
+
+> https://forum.segger.com/index.php/Thread/8928-SES-JLink-Device-config-not-work-in-Connect-download-or-debug/
 
 
 
