@@ -3,7 +3,7 @@ layout:     post
 title:      "恩智浦IMXRT1050开发尝试"
 subtitle:   "build,env"
 date:       2022-11-11
-update:     2023-02-08
+update:     2023-02-17
 author:     "elmagnifico"
 header-img: "img/mqtt.jpg"
 catalog:    true
@@ -81,8 +81,6 @@ DAPLink也有一些不方便的地方，一种芯片或者一种板子就需要�
 
 ![image-20221112113623431](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202211121136628.png)
 
-其他配置应该是要用JLink烧写才行
-
 ```c
 int main(void)
 {
@@ -112,7 +110,7 @@ int main(void)
 
 ![image-20221112114755474](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202211121147539.png)
 
-工程配置中，单独的debug是直接使用内置flash块烧写，并且运行，而flexspi_nor_debug是XIP的方式运行代码，烧写的是外部flash
+工程配置中，单独的debug是直接使用内置RAM块烧写，并且运行，而flexspi_nor_debug是XIP的方式运行代码，烧写的是外部flash
 
 
 

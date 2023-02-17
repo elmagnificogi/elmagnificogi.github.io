@@ -3,7 +3,7 @@ layout:     post
 title:      "i.MXRT1xxx系列启动分析"
 subtitle:   "MXRT1052，BootROM，BootMode"
 date:       2023-01-07
-update:     2023-02-15
+update:     2023-02-16
 author:     "elmagnifico"
 header-img: "img/bg8.jpg"
 catalog:    true
@@ -89,6 +89,8 @@ ITCM和DTCM以及OCRAM，三者的大小在芯片内部其实是可以调整的�
 ![image-20230215104949848](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20230215104949848.png)
 
 ![image-20230215104929412](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20230215104929412.png)
+
+- 但是有一点要注意，OCRAM是必须要配置的，因为实际上BOOROM启动时也需要内存，这个部分用的就是OCRAM的，而且大小也不能小于64KB
 
 
 
@@ -350,4 +352,6 @@ const uint8_t dcd_sdram[1072] = {
 > https://www.lmonkey.com/t/wLnkrWdBg
 >
 > https://www.bilibili.com/video/BV1J54y1L7bJ
+>
+> https://blog.csdn.net/Oushuwen/article/details/109336329
 

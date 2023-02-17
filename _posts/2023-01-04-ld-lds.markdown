@@ -3,7 +3,7 @@ layout:     post
 title:      ".ld文件解析"
 subtitle:   ".lds，link文件"
 date:       2023-01-04
-update:     2023-02-15
+update:     2023-02-16
 author:     "elmagnifico"
 header-img: "img/bg9.jpg"
 catalog:    true
@@ -520,6 +520,10 @@ MEMORY
     . = ALIGN(4);
   } > m_ivt
 ```
+
+这里有一个关键信息，`boot_hdr.conf`这个里面存储的是Flash的配置信息，与能否识别Flash和正常启动有关系
+
+至于下面的`ivt`部分，也同样重要，这部分信息的位置和内容都需要关注，否则有可能启动不了
 
 
 
