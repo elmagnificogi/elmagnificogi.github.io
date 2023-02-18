@@ -3,7 +3,7 @@ layout:     post
 title:      "NXP的ARM-GCC编译分析与转SES工程"
 subtitle:   "Makefile、cmake、Ninja"
 date:       2022-12-15
-update:     2023-02-17
+update:     2023-02-18
 author:     "elmagnifico"
 header-img: "img/desk-head-bg.jpg"
 catalog:    true
@@ -1414,6 +1414,8 @@ MUCXpresso也有不好的地方，首先他是eclipse的二次开发，卡顿感
 
 
 
+#### 柳暗花明
+
 通过痞子衡的J-Link算法，已经解决了J-Link下载缺少算法的问题，但是又遇到另外一个bUG，SES中JLink的设置无法生效
 
 已经在设置中设置了目标设备的具体名称，但是实际使用的时候发现JLink依然连接的是默认设备，导致实际算法应用不上去。
@@ -1437,6 +1439,16 @@ Commander 正常工作
 关于这个问题已经在SES官方论坛提出了，就看什么时候能给解决一下
 
 > https://forum.segger.com/index.php/Thread/8928-SES-JLink-Device-config-not-work-in-Connect-download-or-debug/
+
+
+
+#### 临时解决
+
+通过临时将JLink脚本中的设备名修改为新算法的，并且用`JLinkDLLUpdater.exe`更新了目前的SES的dll以后，发现可以正常烧写了
+
+![image-20230218150614164](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202302181506240.png)
+
+至此使用SES来开发NXP已经不是什么问题了，基本通路都打通了
 
 
 
