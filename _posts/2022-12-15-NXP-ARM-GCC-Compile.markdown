@@ -1420,15 +1420,15 @@ MUCXpresso也有不好的地方，首先他是eclipse的二次开发，卡顿感
 
 然后就无法下载和调试，非常蛋疼，如果使用J-Link Commander 一切正常。
 
-![image-20230217193628550](C:\Users\elmag\Pictures\202302171936594.png)
+![image-20230217193628550](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202302181001048.png)
 
-![image-20230217193606742](C:\Users\elmag\Pictures\202302171936784.png)
+![image-20230217193606742](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202302181001052.png)
 
-![image-20230217193538733](C:\Users\elmag\Pictures\202302171935784.png)
+![image-20230217193538733](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202302181001435.png)
 
 Commander 正常工作
 
-![image-20230217194009286](C:\Users\elmag\Pictures\202302171940365.png)
+![image-20230217194009286](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202302181001580.png)
 
 就差一点点就能完全正常工作了。
 
