@@ -2,7 +2,7 @@
 layout:     post
 title:      "V2ray升级到V2fly"
 subtitle:   "Nignx,bbr,ws"
-date:       2020-10-14
+date:       2020-10-13
 update:     2021-03-11
 author:     "elmagnifico"
 header-img: "img/cap-head-bg.jpg"
@@ -57,7 +57,7 @@ vi /usr/local/etc/v2ray/config.json
 #### 检测配置
 
 ```
-v2ray -test -config /usr/local/etc/v2ray/config.json
+v2ray test -config /usr/local/etc/v2ray/config.json
 ```
 
 
