@@ -3,7 +3,7 @@ layout:     post
 title:      "恩智浦IMXRT1050开发尝试"
 subtitle:   "build,env"
 date:       2022-11-11
-update:     2023-02-17
+update:     2023-02-21
 author:     "elmagnifico"
 header-img: "img/mqtt.jpg"
 catalog:    true
@@ -178,9 +178,11 @@ Flash的选择可以通过板子上的拨码来调整
 
 > MCUXpresso Config Tools
 
-NXP也有类似STCUBEMX的工具，相对比ST稍微弱了点，但是很多比较麻烦的工作都可以帮你直接配好，还是好用的
+NXP也有类似STCUBEMX的工具，相对比ST稍微弱了点，但是很多比较麻烦的工作都可以帮你直接配好
 
 他主要是处理三个东西，引脚、时钟、外设，当然DCD配置也可以通过这里完成。
+
+不过他这个东西一旦配置多了，就特别卡，随便操作一下都要卡半天，对比ST的CubeMX简直是垃圾
 
 
 
