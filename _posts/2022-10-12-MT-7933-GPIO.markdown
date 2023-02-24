@@ -17,9 +17,9 @@ ST的CubeMX自动生成GPIO等相关配置文件的代码已经非常简单易�
 
 
 
-## Eays PinMux Tool
+## Easy PinMux Tool
 
-Eays PinMux Tool，可以通过这个工具，直接配置GPIO的功能和上下拉以及方向，同时也可以自定义注释。
+Easy PinMux Tool，可以通过这个工具，直接配置GPIO的功能和上下拉以及方向，同时也可以自定义注释。
 
 ![image-20221012151409286](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202210121514592.png)
 
