@@ -1,9 +1,9 @@
 ---
 layout:     post
-title:      "V2ray ws tls Caddy使用动态端口"
+title:      "V2ray ws tls Caddy使用动态端口并不可行"
 subtitle:   "VMESS,V2RAYN,nginx"
 date:       2023-02-22
-update:     2023-02-23
+update:     2023-02-25
 author:     "elmagnifico"
 header-img: "img/bg3.jpg"
 catalog:    true
@@ -271,34 +271,59 @@ tcp        0      0 我的服务器:41290     142.250.68.110:443      ESTABLISHE
 tcp        0      0 我的服务器:58918     91.108.56.138:443       ESTABLISHED 26785/v2ray         
 tcp        0      0 我的服务器:41288     142.250.68.110:443      ESTABLISHED 26785/v2ray         
 tcp        0      0 我的服务器:43942     203.205.254.34:443      ESTABLISHED 26785/v2ray         
-tcp        0      0 我的服务器:40824     8.8.8.8:443             ESTABLISHED 26785/v2ray         
-tcp6       0      0 :::32788                :::*                    LISTEN      26785/v2ray         
-tcp6       0      0 :::32470                :::*                    LISTEN      26785/v2ray         
-tcp6       0      0 :::51926                :::*                    LISTEN      26785/v2ray         
-tcp6       0      0 :::58103                :::*                    LISTEN      26785/v2ray         
-tcp6       0      0 :::31322                :::*                    LISTEN      26785/v2ray         
-tcp6       0      0 :::57948                :::*                    LISTEN      26785/v2ray         
-tcp6       0      0 :::63966                :::*                    LISTEN      26785/v2ray         
-tcp6       0      0 :::41378                :::*                    LISTEN      26785/v2ray         
-tcp6       0      0 :::47075                :::*                    LISTEN      26785/v2ray         
-tcp6       0      0 :::40387                :::*                    LISTEN      26785/v2ray         
-tcp6       0      0 :::56644                :::*                    LISTEN      26785/v2ray         
-tcp6       0      0 :::56326                :::*                    LISTEN      26785/v2ray         
-tcp6       0      0 :::50790                :::*                    LISTEN      26785/v2ray         
-tcp6       0      0 :::40616                :::*                    LISTEN      26785/v2ray         
-tcp6       0      0 :::33738                :::*                    LISTEN      26785/v2ray         
-tcp6       0      0 :::41099                :::*                    LISTEN      26785/v2ray         
-tcp6       0      0 :::30220                :::*                    LISTEN      26785/v2ray         
-tcp6       0      0 :::35532                :::*                    LISTEN      26785/v2ray         
-tcp6       0      0 :::56717                :::*                    LISTEN      26785/v2ray         
-tcp6       0      0 :::37777                :::*                    LISTEN      26785/v2ray         
-tcp6       0      0 :::55987                :::*                    LISTEN      26785/v2ray         
-tcp6       0      0 127.0.0.1:63966         127.0.0.1:33524         ESTABLISHED 26785/v2ray         
+tcp        0      0 我的服务器:40824     8.8.8.8:443             ESTABLISHED 26785/v2ray                
 unix  3      [ ]         STREAM     CONNECTED     866036   26785/v2ray          
 
 ```
 
-可以看到已经有不同的端口连接着了，说明没问题
+可以看到已经有不同的端口连接着了，不过这都是出的端口，得看入口
+
+
+
+看到所有入口的ip，依然是4396端口，而实际上v2rayN根本没做多端口
+
+```
+tcp        0     36 我的服务器:29499     我的客户端:60503   ESTABLISHED 28295/sshd: root@pt 
+tcp6       0      0 我的服务器:4396      我的客户端:60338   ESTABLISHED 26768/caddy         
+tcp6       0      0 我的服务器:4396      我的客户端:59386   ESTABLISHED 26768/caddy         
+tcp6       0   2004 我的服务器:4396      我的客户端:59397   ESTABLISHED 26768/caddy         
+tcp6       0      0 我的服务器:4396      我的客户端:59993   ESTABLISHED 26768/caddy         
+tcp6       0      0 我的服务器:4396      我的客户端:59296   ESTABLISHED 26768/caddy
+```
+
+
+
+本地抓包发现，好像所有依然走的是4396，其他端口并没有走
+
+```
+  TCP    192.168.1.163:59386    我的服务器:4396     ESTABLISHED     5732
+  TCP    192.168.1.163:59397    我的服务器:4396     ESTABLISHED     5732
+  TCP    192.168.1.163:59993    我的服务器:4396     ESTABLISHED     5732
+  TCP    192.168.1.163:60338    我的服务器:4396     ESTABLISHED     5732
+  TCP    192.168.1.163:60503    我的服务器:29499    ESTABLISHED     438
+```
+
+29499是我的ssh端口，所以并不是v2ray
+
+
+
+## 客户端不支持动态端口
+
+之前从没注意过竟然不支持
+
+> https://github.com/2dust/v2rayN/issues/3342
+
+
+
+新版本种的V2rayN会一直报错，而老版本的V2rayN虽然不报错，但是实际上并没有走动态端口
+
+```
+2023/02/24 20:29:34 [Warning] [1402096796] app/proxyman/outbound: failed to process outbound traffic > proxy/vmess/outbound: failed to find an available destination > common/retry: [transport/internet/websocket: failed to dial WebSocket > transport/internet/websocket: failed to dial to (wss://我的服务器:44378/us6): > tls: first record does not look like a TLS handshake transport/internet/websocket: failed to dial WebSocket > transport/internet/websocket: failed to dial to (wss://我的服务器:31978/us6): > tls: first record does not look like a TLS handshake transport/internet/websocket: failed to dial WebSocket > transport/internet/websocket: failed to dial to (wss://我的服务器:56840/us6): > tls: first record does not look like a TLS handshake transport/internet/websocket: failed to dial WebSocket > transport/internet/websocket: failed to dial to (wss://我的服务器:34497/us6): > tls: first record does not look like a TLS handshake transport/internet/websocket: failed to dial WebSocket > transport/internet/websocket: failed to dial to (wss://我的服务器:40583/us6): > tls: first record does not look like a TLS handshake] > common/retry: all retry attempts failed
+```
+
+
+
+**实测Clash也不支持动态端口的设置**
 
 
 
@@ -324,7 +349,7 @@ unix  3      [ ]         STREAM     CONNECTED     866036   26785/v2ray
 
 ## Summary
 
-使用动态端口也会有点顾虑，万一下次是封IP呢？
+所以目前来看动态端口应该是没啥用，除非是直接裸启动v2ray-core或者是在中继上配置动态端口，否则根本无法生效
 
 
 
