@@ -1,5 +1,10 @@
 {
   "accentColor": "#00aaff",
   "baseFontSize": 15,
-  "theme": "moonstone"
+  "theme": "moonstone",
+  "cssTheme": "Typora-Vue",
+  "translucency": false,
+  "enabledCssSnippets": [
+    "custom"
+  ]
 }

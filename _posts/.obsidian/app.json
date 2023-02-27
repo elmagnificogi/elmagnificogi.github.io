@@ -1,3 +1,7 @@
 {
-  "showUnsupportedFiles": true
+  "showUnsupportedFiles": true,
+  "readableLineLength": true,
+  "strictLineBreaks": false,
+  "promptDelete": false,
+  "newLinkFormat": "absolute"
 }

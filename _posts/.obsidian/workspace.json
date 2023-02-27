@@ -4,17 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "d81d5b3b629a312f",
+        "id": "f31c40980df81687",
         "type": "tabs",
         "children": [
           {
-            "id": "37d262ac28f788ba",
+            "id": "2768451a5c07ee51",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "2020-08-05-NintendoSwitch-EasyCon.md",
-                "mode": "preview",
+                "file": "2023-02-27-Obsidian-trial.md",
+                "mode": "source",
                 "source": false
               }
             }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "2020-08-05-NintendoSwitch-EasyCon.md",
+                "file": "2023-02-27-Obsidian-trial.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "2020-08-05-NintendoSwitch-EasyCon.md",
+                "file": "2023-02-27-Obsidian-trial.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -120,21 +120,21 @@
             }
           },
           {
-            "id": "d38be721467068f4",
+            "id": "1a7074031e5f777b",
             "type": "leaf",
             "state": {
               "type": "outline",
               "state": {
-                "file": "2020-08-05-NintendoSwitch-EasyCon.md"
+                "file": "2023-02-27-Obsidian-trial.md"
               }
             }
           }
-        ]
+        ],
+        "currentTab": 3
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -146,26 +146,38 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "37d262ac28f788ba",
+  "active": "1a7074031e5f777b",
   "lastOpenFiles": [
-    "2020-08-18-InnoSetup-python.md",
-    "2022-09-15-ESP32-Simulate-NS-JoyCon-Amiibo-Guide.md",
-    "2022-10-31-MT793x-Framework.md",
-    "2022-11-14-Netflix-Unlock.md",
-    "2022-12-01-STM32-SD-Timeout.md",
-    "2022-12-05-BlackFriday-VPS.md",
-    "2022-12-07-Best-Simulation-NS-Controller.md",
+    "未命名.canvas",
+    "新建文件夹/home-bg.jpg",
+    "新建文件夹",
+    "2023-02-27-Obsidian-trial.md",
+    "home-bg.jpg",
+    "favicon.ico",
+    "2025-04-05-thought.md",
+    "选择j.md",
+    "2018-02-08-Knapsack-problem.md",
+    "2020-09-28-Typora-Video.md",
+    "2020-08-10-Typora-PicGo3.md",
     "2022-12-13-JLink-DAP-ERROR.md",
-    "2022-12-25-CH32-EasyCon-Guide.md",
-    "2022-12-04-XPS32-Upgrade.md",
-    "2022-12-03-STM32-SD-SDSC.md",
+    "未命名",
+    "2022-12-14-Leancloud-Statics.md",
+    "2023-02-27-Obsidian.md",
+    "2023-02-24-Obsidian.md",
+    "2023-02-24-OpenWRT-Crng - 副本.md",
     "2022-12-15-NXP-ARM-GCC-Compile.md",
-    "2022-06-16-Diablo-Ban.md",
-    "2022-06-14-STM32H7-ECC.md",
-    "2022-05-29-Vmq.md",
-    "2022-07-08-Agile-Development.md",
-    "2022-04-15-QQbot-WebSocket.md",
-    "2022-05-09-CF-Workers-Proxy.md",
-    "2022-04-24-CentOS-Mirai.md"
+    "2023-01-29-Game-Comment3.md",
+    "2022-12-16-CH32-EasyConAPI-Dev.md",
+    "2023-02-22-V2ray-Dynamic-Port.md",
+    "2022-12-04-XPS32-Upgrade.md",
+    "2023-02-17-NXP-Problem.md",
+    "2023-02-24-OpenWRT-Crng.md",
+    "2021-04-23-APF-OpenCV.md",
+    "2021-03-13-Maya-DragSelect.md",
+    "2021-02-04-RVO2.md",
+    "2021-04-14-Auto_Replay_douban.md",
+    "2021-02-07-Game-Comment1.md",
+    "2021-01-15-DMX512.md",
+    "2021-01-30-Blender-Keyed.md"
   ]
 }
