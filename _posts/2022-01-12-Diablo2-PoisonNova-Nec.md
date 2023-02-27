@@ -26,7 +26,7 @@ tags:
 
 ## 视频
 
-<iframe src="//player.bilibili.com/player.html?aid=507359294&bvid=BV1Cg411w7p7&cid=462015856&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width = 720 height =640> </iframe>
+<iframe src="https://player.bilibili.com/player.html?aid=507359294&bvid=BV1Cg411w7p7&cid=462015856&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width = 720 height =640> </iframe>
 
 
 

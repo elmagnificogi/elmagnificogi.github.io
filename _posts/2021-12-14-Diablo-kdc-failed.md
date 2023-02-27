@@ -20,7 +20,7 @@ tags:
 
 ## 开源精神
 
-<iframe src="//player.bilibili.com/player.html?aid=850517348&bvid=BV1AL4y1b787&cid=482913341&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width=640 height=480> </iframe>
+<iframe src="https://player.bilibili.com/player.html?aid=850517348&bvid=BV1AL4y1b787&cid=482913341&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width=640 height=480> </iframe>
 
 虽然我都代码没正式开源，但是本质上和开源区别不大。而且玩个游戏而已，kdc这点收益其实瞧不上，不过由于面对的是整个工作室或者说整个中老年群体，在他们的眼里就没啥免费的午餐，总是拿着过去几十年的经验来解读你，不可避免地沉沦在过去，主观上就恶意的揣测你的一切行为，总是从利益出发，这让人不屑，这样的人只配活在过去。
 
@@ -468,7 +468,7 @@ pk工作室可以稳定刷到200房左右，同时为了缩短开车时间，不
 
 实际上确实可以狙停工作室，小范围测试了一下，选中明显的工作室开车IP，我加入以后，拿到一百左右的房间，就把工作室抢光了，他们可能连平常一半水平都没达到，不得不停车。任何工作室都扛不住我的刷房速度，都会停止开车，所以不要随便招惹不该招惹的人，很容易没饭吃的。
 
-<iframe src="//player.bilibili.com/player.html?aid=592675567&bvid=BV1Xq4y1m75G&cid=471674586&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width=720 height=640> </iframe>
+<iframe src="https://player.bilibili.com/player.html?aid=592675567&bvid=BV1Xq4y1m75G&cid=471674586&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width=720 height=640> </iframe>
 
 以这样的效率，只要我开放授权，就可以阻断所有想开车的工作室
 

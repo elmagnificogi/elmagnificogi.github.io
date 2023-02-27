@@ -13,8 +13,8 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "2022-09-15-ESP32-Simulate-NS-JoyCon-Amiibo-Guide.md",
-                "mode": "source",
+                "file": "2020-08-05-NintendoSwitch-EasyCon.md",
+                "mode": "preview",
                 "source": false
               }
             }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "2022-09-15-ESP32-Simulate-NS-JoyCon-Amiibo-Guide.md",
+                "file": "2020-08-05-NintendoSwitch-EasyCon.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "2022-09-15-ESP32-Simulate-NS-JoyCon-Amiibo-Guide.md",
+                "file": "2020-08-05-NintendoSwitch-EasyCon.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "2022-09-15-ESP32-Simulate-NS-JoyCon-Amiibo-Guide.md"
+                "file": "2020-08-05-NintendoSwitch-EasyCon.md"
               }
             }
           }
@@ -148,6 +148,8 @@
   },
   "active": "37d262ac28f788ba",
   "lastOpenFiles": [
+    "2020-08-18-InnoSetup-python.md",
+    "2022-09-15-ESP32-Simulate-NS-JoyCon-Amiibo-Guide.md",
     "2022-10-31-MT793x-Framework.md",
     "2022-11-14-Netflix-Unlock.md",
     "2022-12-01-STM32-SD-Timeout.md",

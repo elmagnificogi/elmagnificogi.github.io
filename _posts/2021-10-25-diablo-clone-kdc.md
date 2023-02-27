@@ -172,7 +172,7 @@ A.B.C.D
 ## 视频教程
 
 
-<iframe src="//player.bilibili.com/player.html?aid=548842122&bvid=BV1fq4y1G7xi&cid=432033318&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="640px" height="480px">  </iframe>
+<iframe src="https://player.bilibili.com/player.html?aid=548842122&bvid=BV1fq4y1G7xi&cid=432033318&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="640px" height="480px">  </iframe>
 
 
 

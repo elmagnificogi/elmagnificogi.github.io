@@ -37,7 +37,7 @@ tags:
 
 去年就预言这个游戏破百万，没想到不但破了，还破了这么多，估计现在已经有400w了，游戏内容更新了这么久，依然重复度太高，后期全靠肝，关键我还在游戏调整难度前，强行硬刷了一个boss，简直打到吐血。内容还需要填，估计还得再努力个一两年，游戏内容才够。
 
-<iframe src="//player.bilibili.com/player.html?aid=332326169&bvid=BV1XA411N7zw&cid=316351218&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="720" height="640"> </iframe>
+<iframe src="https://player.bilibili.com/player.html?aid=332326169&bvid=BV1XA411N7zw&cid=316351218&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="720" height="640"> </iframe>
 
 
 
@@ -63,7 +63,7 @@ tags:
 
 最后这个拉跨的销量和好评率，实至名归。
 
-<iframe src="//player.bilibili.com/player.html?aid=545266640&bvid=BV1Dq4y1E73f&cid=332207250&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="720" height="640"> </iframe>
+<iframe src="https://player.bilibili.com/player.html?aid=545266640&bvid=BV1Dq4y1E73f&cid=332207250&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="720" height="640"> </iframe>
 
 
 
@@ -77,7 +77,7 @@ tags:
 
 游戏本身加密好像还挺复杂的，想加东西上去也不容易了，可惜了这个底子。
 
-<iframe src="//player.bilibili.com/player.html?aid=205706677&bvid=BV1zh411v79h&cid=339742477&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="720" height="640"> </iframe>
+<iframe src="https://player.bilibili.com/player.html?aid=205706677&bvid=BV1zh411v79h&cid=339742477&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="720" height="640"> </iframe>
 
 
 
@@ -85,7 +85,7 @@ tags:
 
 看笑笑视频入坑的，游戏机制比较简单，装备、遗物和技能搭配还挺丰富的，只是可惜作者不更新新内容了或者说不调整平衡了。本来游戏有一个最优解就是ggj的搭配，由于他是内测时期就玩了，所以他遗物等级特别高，当时升级简单，后来遗物特别难升，导致后面所有人都打不过他。为了抢世界第一，挂机挂了几个星期，升到了和他一个级别的遗物，最后游戏时间都快800小时了，总算是拿到更优解，稳站世界第一了。
 
-<iframe src="//player.bilibili.com/player.html?aid=334459239&bvid=BV1Jw411R78p&cid=376349358&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="720" height="640"> </iframe>
+<iframe src="https://player.bilibili.com/player.html?aid=334459239&bvid=BV1Jw411R78p&cid=376349358&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="720" height="640"> </iframe>
 
 
 
@@ -101,7 +101,7 @@ tags:
 
 简单说就是一款桌游，有点类似For the king，每个人可以玩自己的流派，自己搭配，然后守护村民，最后打个大boss就行了。可以各种build还是蛮有意思的，只是趣味性上还是少了那么一点点，整体上就是强调变强变强。
 
-<iframe src="//player.bilibili.com/player.html?aid=632984546&bvid=BV1rb4y127YD&cid=406104739&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="720" height="640"> </iframe>
+<iframe src="https://player.bilibili.com/player.html?aid=632984546&bvid=BV1rb4y127YD&cid=406104739&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="720" height="640"> </iframe>
 
 
 
