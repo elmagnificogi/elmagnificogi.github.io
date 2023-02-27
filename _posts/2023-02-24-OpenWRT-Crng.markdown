@@ -15,7 +15,7 @@ tags:
 
 OpenWRT系列遇到一个问题
 
-![image-20230224162225028](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20230224162225028.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20230224162225028.png)
 
 ```
 random:crng init done
