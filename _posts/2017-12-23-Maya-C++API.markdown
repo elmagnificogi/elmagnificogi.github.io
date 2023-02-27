@@ -16,7 +16,7 @@ tags:
 
 maya除了可以直接使用MEL和Python的脚本语言（Maya Commands）来开发，还可以使用C++ API或者python API，又或者C#
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/5bffc6b4bebe1.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/5bffc6b4bebe1.png)
 
 从本质上说python API 是基于C++ API来的，而C#的API基本就是C++ API
 
@@ -72,19 +72,19 @@ Visual Studio的版本更新比较快，而maya自然不可能跟上最新版的
 
 然后重新打开一下VS和MAYA，基本就可以直接通过项目模板，建立一个简单的MAYA插件的工程了，其相关的所有配置都给你配置好了。
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/5c22e9006b0a5.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/5c22e9006b0a5.png)
 
 然后选择maya版本，这里最好是使用 Custom location，不然一会还要手动设置maya的库文件路径什么的
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/5c22e96760223.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/5c22e96760223.png)
 
 选择模板类型，是mel命令还是node节点等
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/5c22e9849d0d9.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/5c22e9849d0d9.png)
 
 最后选择是要用的库都有哪些
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/5c22e9b67bd31.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/5c22e9b67bd31.png)
 
 然后就能正常编译了,同时使用cout流输出也是会自动输出到 output window,都是正常的
 
@@ -132,7 +132,7 @@ MAYA_PATH,或者是手动修改工程中lib和include的搜索目录.
 
 附加选项也要选择是.
 
-![Values of set debugging properties](https://i1.wp.com/nickcullen.net/blog/wp-content/uploads/2017/06/propertiesRemoteDebuggerValues.png?resize=504%2C360&ssl=1)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/propertiesRemoteDebuggerValues.png?resize=504%2C360&ssl=1)
 
 每次开始调试前,一定要确保maya已经打开,并且maya已经加载完成,可以操作为止,否则会报异常.
 

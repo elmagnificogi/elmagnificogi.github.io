@@ -196,7 +196,7 @@ int main()
 
 要避免这个问题就是堆栈大小设置的大一些，或者是不要用这种方式申请内存空间，用new或者其他更好的方式。
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/DSvGs7OjxmEF5Yo.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/DSvGs7OjxmEF5Yo.png)
 
 
 
@@ -218,7 +218,7 @@ curl可以认为是一个命令行工具，经常被脚本啊或者什么其他�
 
 然后使用管理员权限打开Developer Command Prompt for VS 2017,其实这个东西再打开一层可以发现这个东西有细分，有本地和交叉编译的选项，还有64和32位的区分，一般都选本地64位就行了。
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/G6vYdJhSNCXcFfP.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/G6vYdJhSNCXcFfP.png)
 
 打开后一样的，通过命令行cd 到 \curl-7.65.3\winbuild 目录下
 
@@ -228,7 +228,7 @@ curl可以认为是一个命令行工具，经常被脚本啊或者什么其他�
 nmake
 ```
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/zuhJSvnktBaC2sW.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/zuhJSvnktBaC2sW.png)
 
 如果想使用动态编译，将mode=static改为mode=dll
 如果使用x86，将MACHINE=x64改为MACHINE=x86
@@ -282,7 +282,7 @@ nmake /f Makefile.vc mode=static VC=11 MACHINE=x64 DEBUG=no
 
 这里要注意 这里是指VC的版本，VS2012是VC11，而VS2017是VC14，每个对应不一样，否则编译出来的会报错
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/PN3G7Dsl8ajt4Uo.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/PN3G7Dsl8ajt4Uo.png)
 
 然后就可以看到builds目录下对应的这里会有一个lib和include，这两个一般放到源码中使用，bin是直接生成了对应curl命令行程序
 
@@ -292,10 +292,10 @@ nmake /f Makefile.vc mode=static VC=11 MACHINE=x64 DEBUG=no
 
 1.引入头文件目录，引入库文件目录，要注意的是这里一定是要引入include还有lib，否则很有可能内部识别路径出错
 
- ![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/TBOD4KsXtPdxUgo.png)
+ ![](https://img.elmagnifico.tech/static/upload/elmagnifico/TBOD4KsXtPdxUgo.png)
 
 2.预处理器中增加 CURL_STATICLIB
-    ![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/fh2pLrCeclit7J9.png)
+    ![](https://img.elmagnifico.tech/static/upload/elmagnifico/fh2pLrCeclit7J9.png)
 
 3.链接器的输入中增加以下几个lib
 
@@ -308,10 +308,10 @@ Crypt32.lib
 Normaliz.lib
   ```
 
-  ![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/I1bz2MBPnd4rCcs.png)
+  ![](https://img.elmagnifico.tech/static/upload/elmagnifico/I1bz2MBPnd4rCcs.png)
 
 4.c++代码生成中运行库选择/MD模式
-    ![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/oiOhgkFnur6tLsy.png)
+    ![](https://img.elmagnifico.tech/static/upload/elmagnifico/oiOhgkFnur6tLsy.png)
 
 完成上四部以后，基本工程配置就ok了
 
@@ -396,7 +396,7 @@ msvcrt.lib
 
 通过在忽略特定默认库，可以消除warning
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/iZXITF8BW7zaGfP.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/iZXITF8BW7zaGfP.png)
 
 这样在之后的工程中就可以正式将libcurl作为我们的一部分拿进来使用了
 

@@ -58,7 +58,7 @@ tags:
 - 加入图片可以自动复制到对应目录下，对于写blog什么的非常方便，虽然我也不用。使用PicGo+SM.MS就已经非常完美的可以解决图片问题了
 - mac下会有历史版本管理，类似于git，但是windows下就没有这个功能了，有点遗憾
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/qTjtL8mC9dHSyVR.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/qTjtL8mC9dHSyVR.png)
 
 ##### 缺点：
 

@@ -62,7 +62,7 @@ tags:
 
 ## 伤害
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/Mgq64reHZJXSUQI.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/Mgq64reHZJXSUQI.png)
 
 这个图是10年前某个大佬给的，实际上他这里计算有点问题，他这里的毒抗都是减抗之后怪的毒抗（不太符合实际），并且只算了单纯的 1 PN 2秒 能打出来的伤害，没考虑到实际毒抗减少的幅度比他这个更大一些，而持续时间也更长一些。
 
@@ -91,7 +91,7 @@ tags:
 
 #### 地穴分析
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/lrCWBRv8QsGyLw1.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/lrCWBRv8QsGyLw1.png)
 
 地穴的几种怪物，比如白骨战士，他的毒抗最高是105，TP的三件套足以，地穴内其他怪基本没毒抗，其他骷髅都比他低，就更不用提了。所以三件套的毒抗配合降抗，绰绰有余。这个白骨战士基本算最肉的了，8pp的情况下只要1pn输出超过26784即可1pn秒所有
 
@@ -214,7 +214,7 @@ tags:
 
 这一套完全是为了能 1PN 毒死牛，在牛场看着别人目瞪口呆的样子，然后转身毒完就走，东西都不捡（其实捡不了），所以对于装备选择比较严格，同时面板伤害也必须达到17K才能完成毒死牛的程度。
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/q5vTOJ4nd1kU7fQ.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/q5vTOJ4nd1kU7fQ.png)
 
 可以看到牛拥有9442的血量，而他在8pp下血量*4.5 = 42489。
 
@@ -245,11 +245,11 @@ tags:
 
 ##### 面板
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/bePlgB5Gckj4HON.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/bePlgB5Gckj4HON.png)
 
 还不完美吧，但是基本就这样就够了
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/HmfwurBGpIhU8t2.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/HmfwurBGpIhU8t2.png)
 
 ## PP选择
 
@@ -263,7 +263,7 @@ Chaos不是很好刷，也容易遇到毒免破不掉，而世界2-3更是如此
 
 如果有谜团，带个眼光铁魔，佣兵可以选择A5可汗-搭配幻影头+3IAS+ED，拿无形击头者，穿刚毅，主要用来打boss或者攻坚，其他情况他都没啥用。
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/RHfznmGbFadrJp9.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/RHfznmGbFadrJp9.png)
 
 如果是8pp或者1pp炮毒，还是建议用A2枪兵-眼光-安头-刚毅，回蓝稳定一些，铁魔就别带了，分分钟就没了。可以选择带骷髅或者重生怪或者土魔吧。
 

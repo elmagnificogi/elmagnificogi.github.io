@@ -116,7 +116,7 @@ Windows客户端测试，首先查看是否能找到中转节点，windows cmd�
 zerotier-cli.bat listpeers
 ```
 
-![image-20230204095437208](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202302040954269.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202302040954269.png)
 
 一般这里会看到一个你的moon所在的vps的地址，那个的ztaddr就是我们要找的，比如我这里最后一条就是我实际的vps地址
 
@@ -130,7 +130,7 @@ zerotier-cli.bat orbit 你的ztaddr 你的ztaddr
 
 确认是否加入，可以看到他又之前的LEAF变成了MOON，就是正确加入了
 
-![image-20230204101600667](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202302041016717.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202302041016717.png)
 
 
 
@@ -138,7 +138,7 @@ zerotier-cli.bat orbit 你的ztaddr 你的ztaddr
 
 ping检测，可以看到我的ping很低了，平常可以ping时会跳80-90甚至非常高，不是很稳定。
 
-![image-20230204094907635](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202302040949764.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202302040949764.png)
 
 ping的表现这么好以后，后续使用moonlight等其他服务的时候也变得异常丝滑
 

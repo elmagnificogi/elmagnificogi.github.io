@@ -52,11 +52,11 @@ tags:
 
 这个包装实在是牛逼，前后都是通过小魔术贴来开关的，里面各种介绍。之前看过苹果的包装设计，这次看这个猫头鹰的，感觉也不差啊。
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/3Fbnpj7kwMSlBvU.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/3Fbnpj7kwMSlBvU.png)
 
 打开里面，就是各种线材配件和减震配件。
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/KxpDYTdgjBWEyAv.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/KxpDYTdgjBWEyAv.png)
 
 - 1条减速线（可以让转速降低，从而极致减噪）
 - 1条延长线，本身的线比较短，如果走线比较长，可以通过这根加长
@@ -69,7 +69,7 @@ tags:
 
 如果是水冷，有可能风扇边缘会触碰到散热器的边缘，所以建议更换全包裹的减震垫。
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/zmaJh83Hio9q6dI.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/zmaJh83Hio9q6dI.png)
 
 不过这个边缘的垫子稍微有些松垮，如果不是贴得严丝合缝的话，感觉就是聊胜于无。
 
@@ -99,7 +99,7 @@ b站的猫扇测试对比之类的视频我基本都看了一遍，最后只得�
 
 ## 成品
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/up4BSdei6bQDGtT.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/up4BSdei6bQDGtT.png)
 
 舒服，就是风道走向有点不满意，但是这个机箱没办法了。
 

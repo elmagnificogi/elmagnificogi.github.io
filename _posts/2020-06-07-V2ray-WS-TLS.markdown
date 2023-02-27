@@ -384,7 +384,7 @@ systemctl restart v2ray
 
 首先,从v2rayN中挑选需要建立的订阅的服务器
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/4ZUzWGulf6LPvT1.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/4ZUzWGulf6LPvT1.png)
 
 然后要有OneDrive,这个比较简单
 
@@ -392,7 +392,7 @@ systemctl restart v2ray
 
 右键-在线查看,在网页端查看该文件,共享,不允许编辑,获取链接
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/Lcuo9RCAesGjEbN.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/Lcuo9RCAesGjEbN.png)
 
 将得到的链接输入到下面的网址中,然后得到永久链接
 
@@ -400,7 +400,7 @@ systemctl restart v2ray
 
 这样这个永久链接就可以作为V2ran的订阅链接,日后只需要修改文件内容,就可以自动订阅了
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/CznQvFUhA6xws4P.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/CznQvFUhA6xws4P.png)
 
 还是非常方便的
 

@@ -21,7 +21,7 @@ tags:
 
 我的是当时的9刀 1c1g 30M 1T流量，现在已经绝版了，1T的流量包再也买不到了，这就导致了就算被墙了也不能轻易放弃
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/oNmFpAYX1kQEtPz.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/oNmFpAYX1kQEtPz.png)
 
 
 
@@ -55,17 +55,17 @@ Oracle Cloud的日本或者韩国的ping低一些，本质上现在也能抢，�
 
 ## Xshell 使用代理
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/7lywGMKh2gEUL1F.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/7lywGMKh2gEUL1F.png)
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/i8I9RXGSrYFEcCl.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/i8I9RXGSrYFEcCl.png)
 
 给xshell中的连接添加对应的代理，代理这里有一点要注意，v2ray有一个设定，参数设置，这里直接监听的是1080端口，可能在IE选项里面常见到v2ray不是1080而是1081或者1082，这个是http代理端口的设置，不影响我们这里socks5的.
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/BVSpMN4bz3vxu9h.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/BVSpMN4bz3vxu9h.png)
 
 同时还要注意一个问题，这里阿里云的主机IP也是直接用IP，用被封的IP，而不是域名，也不是后面Cloudflare给域名的CDN IP,否则会出现显示SSH连接上了，但是没有任何console回显信息。
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/pA7YgMt4iWB1lc3.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/pA7YgMt4iWB1lc3.png)
 
 有了以上方式就能正常登录到被封主机上了，当然也可以直接用阿里云的后台直接连接，但是阿里云的后台很卡，这种方式的虽然好一点，但是也比较卡
 
@@ -92,7 +92,7 @@ Oracle Cloud的日本或者韩国的ping低一些，本质上现在也能抢，�
 
 > https://www.cloudflare.com/
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/cNuGBaxWIpnmiPs.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/cNuGBaxWIpnmiPs.png)
 
 然后选择免费的套餐，他会自动提示你要你把域名解析DNS给转换成他的。
 
@@ -102,9 +102,9 @@ Oracle Cloud的日本或者韩国的ping低一些，本质上现在也能抢，�
 
 然后就可以添加对应的子域名了，将被封的VPS添加为一个子域名A记录
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/bUxAOLWRZcdkEKf.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/bUxAOLWRZcdkEKf.png)
 
-![image-20221128141117249](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202211281411484.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202211281411484.png)
 
 同时SSL至少需要设置`Full或者strict`否则无法实现SSL流量代理
 
@@ -167,7 +167,7 @@ firewall-cmd --zone= public --remove-port=80/udp --permanent
 
 做完以后，v2ray客户端的配置也对应改一下，切到ws，然后就又可以愉快的翻墙了，虽然速度慢了一点，只是看网页不是很明显吧，只是sstap的游戏加速用不了了
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/C8JYgOjNIf1oBr4.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/C8JYgOjNIf1oBr4.png)
 
 ## 总结
 

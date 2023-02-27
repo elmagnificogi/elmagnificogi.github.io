@@ -89,7 +89,7 @@ if1  28:9C:6E:5B:D0:69
 
 还是有概率触发nmi重启的，只是比起来WIFI完全用不了，已经小到可以忽略的程度了。
 
-![image-20220826110243504](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208261102672.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202208261102672.png)
 
 
 

@@ -48,13 +48,13 @@ tags:
 
 - switch ---> 单片机 ---> 串口 ---> PC
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/qsQ436RXgiSZzFT.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/qsQ436RXgiSZzFT.png)
 
 左边选择单片机类型，这里已经支持了5种，根据你自己的选择就可以了。
 
 第二步，自动连接串口，也可以手动下拉选择串口（多串口多设备的情况下）
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/sIDHil1jJ8pOVTy.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/sIDHil1jJ8pOVTy.png)
 
 - 在注意一下伊机控这里必须要使用自动搜索端口，如果提示搜不到，尝试交换tx和rx
 - 如果还搜不到，先断开单片机到switch的连接，同时断开串口到pc的连接，但是串口和单片机还是通过杜邦线连接的，然后先插入单片机到switch，再插入串口到pc
@@ -68,13 +68,13 @@ tags:
 
 第三步，选择一个脚本，比如我这里打开自动刷茶杯闪的脚本
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/TlE5utH7Uz4dPw1.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/TlE5utH7Uz4dPw1.png)
 
 
 
 第四步，点击运行，脚本就开始执行了
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/WBGDasYJtNqI3pf.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/WBGDasYJtNqI3pf.png)
 
 这个时候你就能看到，switch里已经在操作了，当然这个方法不限于宝可梦剑盾，实际上奥德赛，塞尔达，怪物猎人，动森，火焰纹章，很多重复度高的内容都可以通过这样的脚本来完成。
 
@@ -86,15 +86,15 @@ tags:
 
 点击编译并烧录
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/tvrR8hNe6PLWJDI.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/tvrR8hNe6PLWJDI.png)
 
 会提示你烧录完成，和目前已经使用了的脚本空间大小，点击确定
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/nYPhGLZo1AOqx3U.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/nYPhGLZo1AOqx3U.png)
 
 然后点击远程运行，左上角的黑屏里不会像联机模式一样输出当前运行到哪里的信息，但是你看画面游戏里已经在动了
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/7dam4xqhsyAinF1.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/7dam4xqhsyAinF1.png)
 
 切换脚本的时候，重新打开脚本文件，然后烧录即可。
 有时候可能会遇到bug之类的，那就先清空烧录程序，再烧录，反复使用，完全不用担心单片机反复烧写的问题
@@ -105,11 +105,11 @@ tags:
 
 固件模式是这个里面最简单的模式，不需要串口支持，打开软件以后，不需要管什么串口啊，烧录啊，只要打开脚本，点击生成固件，就ok了！
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/VinBkKxJ28Fwozf.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/VinBkKxJ28Fwozf.png)
 
 生成的固件位置在同目录下，是什么单片机，固件名字就是 单片机+Script.hex 你只要把这个hex烧写进你的单片机，那么就能正常工作了！
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/aupBGR3WJL1S7Yd.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/aupBGR3WJL1S7Yd.png)
 
 但是固件模式是最不推荐的模式，本身单片机的flash烧写次数就有限，大概是10000次左右，反复固件烧写比较废flash，所以联机和烧录模式是更好的选择
 
@@ -121,7 +121,7 @@ tags:
 
 比如串口连接的时候，其实你可以直接用键盘控制switch，相当于是个手柄
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/f56cr9gzh4lWQUG.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/f56cr9gzh4lWQUG.png)
 
 启动虚拟手柄时，你就能看到一个joy-con出现在桌面，左键单击可以禁用/启动，右键可以拖动，中键-隐藏加禁用。你也可以点旁边的小问号查看帮助。
 
@@ -139,7 +139,7 @@ tags:
 
 
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/1Wbcda63ESIfwjr.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/1Wbcda63ESIfwjr.png)
 
 
 
@@ -147,7 +147,7 @@ tags:
 
 
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/UeaPJ7K1Y3HpBVM.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/UeaPJ7K1Y3HpBVM.png)
 
 
 
@@ -232,7 +232,7 @@ NEXT
 
 #### 录制脚本
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/ZAopTEkfgU2jRwq.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/ZAopTEkfgU2jRwq.png)
 
 点击录制脚本，开启虚拟手柄，所有按键操作和延迟都会实时记录显示，录制结束以后，可以立即运行看效果。
 

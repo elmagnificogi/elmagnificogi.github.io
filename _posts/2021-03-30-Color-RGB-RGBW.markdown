@@ -36,13 +36,13 @@ tags:
 
 由于颜色是一种感觉，并且是部分光造成的，为了描述颜色，就有了CIE 1931 RGB Color Matching Functions，等色匹配实验
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/aIPE4TpRufdGVWg.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/aIPE4TpRufdGVWg.png)
 
 相当于是规定了什么样的光谱描述了我们的RGB，这里有点小问题，就是这个负光的问题，负光就简单理解为从相反方向发射过来的一簇光，用来抵消当前的光，从而他就是负光了。
 
 从图里也能看到，其实光或者说颜色，他们不是线性的，颜色之间的过渡，可能多也可能少。这也是为什么直接用线性RGB来输出光的时候，这个颜色经常有色偏。
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/6aNx3AVq92zTC7W.jpg)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/6aNx3AVq92zTC7W.jpg)
 
 
 
@@ -52,7 +52,7 @@ tags:
 
 但是也有缺点，CIE 1931 xy色度图为了简化，他将三维轴降到了2维，还有一维的亮度信息，可以认为丢失了，所以这样描述的颜色都是没有说明亮度（过亮，你会认为是白色，过暗你会认为是黑色，但是光本身是不会骗人的，只是你识别的灵敏度有限而已）
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/z8hHXdmSnOMDQ7I.jpg)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/z8hHXdmSnOMDQ7I.jpg)
 
 而要表示一个完整的颜色空间，需要有以下3个基础变量：
 

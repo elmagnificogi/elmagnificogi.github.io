@@ -236,9 +236,9 @@ CMake Deprecation Warning at CMakeLists.txt:5 (CMAKE_MINIMUM_REQUIRED):
 
 一共会生成5个内容
 
-![image-20221215111718008](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212151117068.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202212151117068.png)
 
-![image-20221215111737372](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212151117428.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202212151117428.png)
 
 CMakeCache.txt可以看到CMake相关的各种定义的值，可以修改，下次编译的时候还会使用这个缓存信息。
 
@@ -1001,7 +1001,7 @@ D:\ninja\ninja.exe
 
 然后将ninja的路径添加到`path`中，这样让cmake可以找到这个ninja
 
-![image-20221215184401465](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212151844538.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202212151844538.png)
 
 然后修改编译的`build_debug.bat`，替换成Ninja
 
@@ -1069,25 +1069,25 @@ CMake Warning:
 
 然后SES这里直接导入Ninja
 
-![image-20221215184627182](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212151846249.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202212151846249.png)
 
 导入以后有两个地方需要修改一下，build中关于ARMGCC的路径宏是不正确的，需要自己重新设置一下
 
-![image-20221216163054955](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212161630040.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202212161630040.png)
 
 外部编译的路径也不正确，需要修改
 
-![image-20221215184930748](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212151849820.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202212151849820.png)
 
 这样以后，就能正常编译过了
 
-![image-20221215185422060](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212151854154.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202212151854154.png)
 
 
 
 后来发现实际上转换出来的工程还是有点小问题的，SES处理的时候用了一些UI没有显示的东西
 
-![image-20221221160200128](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212211602242.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202212211602242.png)
 
 比如所有头文件的引用，正常应该是写在某个配置中的，但是从Ninja转换过来的直接写在了文件夹的属性里，并且这个属性是不能通过UI显示出来的，只看到文件都继承了一个值，但是去看文件夹又没有这个值，就非常奇怪，应该是SES目前还是不完善造成的。
 
@@ -1422,15 +1422,15 @@ MUCXpresso也有不好的地方，首先他是eclipse的二次开发，卡顿感
 
 然后就无法下载和调试，非常蛋疼，如果使用J-Link Commander 一切正常。
 
-![image-20230217193628550](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202302181001048.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202302181001048.png)
 
-![image-20230217193606742](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202302181001052.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202302181001052.png)
 
-![image-20230217193538733](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202302181001435.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202302181001435.png)
 
 Commander 正常工作
 
-![image-20230217194009286](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202302181001580.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202302181001580.png)
 
 就差一点点就能完全正常工作了。
 
@@ -1446,7 +1446,7 @@ Commander 正常工作
 
 通过临时将JLink脚本中的设备名修改为新算法的，并且用`JLinkDLLUpdater.exe`更新了目前的SES的dll以后，发现可以正常烧写了
 
-![image-20230218150614164](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202302181506240.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202302181506240.png)
 
 至此使用SES来开发NXP已经不是什么问题了，基本通路都打通了
 

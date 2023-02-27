@@ -21,7 +21,7 @@ tags:
 
 一般是把图中的顶点分成左右两部分，左顶点要和右顶点做一个匹配。
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/5bffc5eae07c1.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/5bffc5eae07c1.png)
 
 类似于图中1,2,3就是左顶点，4,5,6就是右顶点，顶点之间的边表示可到达，一般遇到匹配问题的时候也会有可到达和不可到达的区别。
 
@@ -112,7 +112,7 @@ void judge()
 
 比如左图就是一个二分图，二右图中红色的边则是匹配边，其中最大匹配数为4。
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/5bffc5eae3d7a.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/5bffc5eae3d7a.png)
 
 一般来说求解最大匹配数用的是匈牙利算法。
 
@@ -122,11 +122,11 @@ void judge()
 
 - 增广路：从一个未匹配点出发，先走到非匹配边，再走一条匹配边，走一条非匹配边，再走一条匹配边，一直按照这个非匹配和匹配交替走，如果走到了另一个非匹配点，那么这条路就是增广路.
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/5bffc5eb4d8c2.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/5bffc5eb4d8c2.png)
 
 比如图中从9开始,依次是非匹配边,匹配边,非匹配边....一直走到2
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/5bffc67001047.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/5bffc67001047.png)
 
 可以看到这条路径有一个特性,那就是非匹配边数比匹配边数多一条,而匹配边数,则是上一次找到的,而由于匹配和非匹配边是交错出现的,所以交换二者也不会破坏匹配的性质,从而多了一条匹配边.
 

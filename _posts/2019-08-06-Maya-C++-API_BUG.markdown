@@ -76,7 +76,7 @@ checkErr(status, "Could not t-n connect out-current time");
 
 但是如果是下图的属性，要如何连接呢？
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/BhcEeHWO4RGZyo1.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/BhcEeHWO4RGZyo1.png)
 
 如果是python直接无视属性名就是xxx[0]或者xxx[1]，以此类推就可以了。
 
@@ -206,7 +206,7 @@ unsigned int & 	index,
 MStatus * 	ReturnStatus = NULL
 )
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/hAejJd4wRLrCXc1.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/hAejJd4wRLrCXc1.png)
 
 咋一看觉得这个index是一个返回值对吧，而且说了隐式返回，虽然他的标记是个in而不是out
 
@@ -214,7 +214,7 @@ MStatus * 	ReturnStatus = NULL
 
 这就导致后面所有基于这个api来做的帧操作都是错的。
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/QespdGIBmFZuzVP.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/QespdGIBmFZuzVP.png)
 
 在这种情况下只有用findClosest才能找到真正的值
 
@@ -269,7 +269,7 @@ MStatus rename_nodes(MObject transform, MString baseName)
 
 卸载插件的时候提示插件服务正在被使用，应该说不是bug，只是很多时候没有提到这个细节。
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/zfDZUnOH7KAX3Ve.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/zfDZUnOH7KAX3Ve.png)
 
 只要你写的Cmd命令中允许了undo，那么当用了这个命令以后，maya会将这个命令的对象存入UndoList中，而当你卸载的时候，如果不把他从UndoList中清除出去就会导致使用撤销以后访问到一个空指针，从而导致maya崩溃。
 

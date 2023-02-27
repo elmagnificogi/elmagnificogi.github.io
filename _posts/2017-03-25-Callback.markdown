@@ -268,7 +268,7 @@ typedef  struct
 
 那么这就可以了啊，只是利用c语言中的函数指针以及typedef我们就完成了类中的接口封装，以面向过程完成了面向对象的思想。
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/Dwy7PKgUkO3AFiV.jpg)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/Dwy7PKgUkO3AFiV.jpg)
 
 ## 总结
 

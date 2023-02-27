@@ -19,7 +19,7 @@ tags:
 
 ## Dap error while reading AIRCR/CPUID register
 
-![91a32b2a-d2c0-4a1c-919b-2a9f380dcc59.png](https://community.silabs.com/sfc/servlet.shepherd/version/renditionDownload?rendition=THUMB720BY480&versionId=0681M00000EWPBU&operationContext=CHATTER&contentId=05T1M00000qOPGF&page=0)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20230227131328355.png)
 
 出现的问题类似这个EFR32、BGM121，报错基本一模一样，只是换了个板子而已
 
@@ -170,7 +170,7 @@ J-Link>
 
 首先使用`JLinkSTM32.exe`尝试解锁
 
-![image-20221214093811750](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212140938967.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202212140938967.png)
 
 会看到他在重置option bytes，等一段时间以后，重置完成，再次重连，一样不行。
 

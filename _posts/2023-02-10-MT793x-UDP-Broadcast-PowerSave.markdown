@@ -247,7 +247,7 @@ int32_t wifi_config_set_power_save_mode(uint8_t ps_mode)
 
 Wifi服务集分为两种一个是BSS，一个是IBSS，BSS可以简单理解为是普通的Wifi，1对n的连接模式，1是AP，n是客户端，而IBSS则是指点对点的连接的服务模式，他们中没有AP，是互相保持与对方的连接的，即对等网络，以前常用的AdHoc就是IBSS
 
-![image-20230211162831618](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202302111628754.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202302111628754.png)
 
 ### BSS
 
@@ -296,7 +296,7 @@ Client收到Beacon以后，会根据AID，检查TIM（流量指示图），看�
 
 AP检查是否多播缓冲已经开启了
 
-![image-20230211172812152](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202302111728196.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202302111728196.png)
 
 比较有意思的是下面的`multicast-helper`，它可以在AP层面直接把多播转换成单播，从而解决各种无线环境中的多播问题。
 
@@ -304,7 +304,7 @@ AP检查是否多播缓冲已经开启了
 
 仔细看他提出的无线多播问题，如果多播帧是从AP发出，由于多播在无线传输中没有任何类ack的机制，这就会导致一旦这个帧发出去以后，其实client可能根本没收到，但是不具有重传等机制就会导致这个帧真实丢失了，这样可靠性就很差。同时为了提高多播的可靠性，任何多播的帧都会选择最低速率去传输，以此来提高稳定性。
 
-![image-20230211173254409](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202302111732477.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202302111732477.png)
 
 相反如果多播帧是从client发出，那么这个帧是由AP转发的，所以会提供重传机制，并且速率也会在约定速率，而非最低。但是同时，这个转发会走前面AP发出多播的流程，导致这个多播帧依然是不可靠的，并且多播帧被传输了两次，浪费了整个网络的带宽。
 

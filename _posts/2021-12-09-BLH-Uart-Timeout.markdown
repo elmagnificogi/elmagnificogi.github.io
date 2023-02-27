@@ -45,7 +45,7 @@ tags:
 
 那只好拿逻辑分析仪看一下具体是啥情况了。
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/er3qT6aK5Az9JNO.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/er3qT6aK5Az9JNO.png)
 
 然后就看到了，当7D发完，就看到有一个下拉信号，然后显示了一次帧错误。但是在此以后，电调一直没有回复。
 
@@ -53,7 +53,7 @@ tags:
 
 再看后面一次正常的操作，发现这里依然存在一个下拉信息，还是一样的帧错误，但是电调有回复了，后续流程都是正常的了。
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/hr5MPoYbG49aDcC.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/hr5MPoYbG49aDcC.png)
 
 仔细看了一下这个下拉是我写的，然后去掉了，但是该不回复还是不回复，和我拉不拉没关系。
 

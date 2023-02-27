@@ -36,7 +36,7 @@ java里不允许多重继承，然后interface可以，但是interface本身就�
 
 类似于下图，实现了最基本的接口，然后再往下设计
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/NmxlEvafehWX9CQ.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/NmxlEvafehWX9CQ.png)
 
 其实相当于以前C++中的虽然也有接口也有类似的虚函数或者抽象类的存在，但是这些类都不可避免的有构造函数，析构函数等等，他们都是一个基础类，但是这里interface其实是一个简化的类，或者说已经不是类了，他就是interface，一个描述接口的东西，描述顶级抽象的东西，他就是用来在一开始的时候明确对外的出口是什么内容。
 
@@ -93,7 +93,7 @@ java bean经常被提起，但是刚开始根本不知道这个是什么东西�
 
 Spring 也比较老了，本身是一个重量级的框架，不适合快速开发，有很东西都需要自己写
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/WQD5oByIvu3Jlr8.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/WQD5oByIvu3Jlr8.png)
 
 ### Springboot
 
@@ -125,11 +125,11 @@ spring.freemaker.cashe=false
 
 打开调试中的更新后动作设置，将其修改为更新类和资源，这样只要编辑过，就会自动同步修改了
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/VuiDpz2dokTPE5a.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/VuiDpz2dokTPE5a.png)
 
 
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/9S3f4xrKzNGI7gs.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/9S3f4xrKzNGI7gs.png)
 
 增加依赖
 
@@ -166,17 +166,17 @@ show variables like '%time_zone%';
 
 如果看到的是
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/dSDtGXWqLhrUKpj.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/dSDtGXWqLhrUKpj.png)
 
 这样的话，基本就是错误的，这个system使用的大概是CST时间，就会导致连接JPA的时候时区出错，无法同步
 
 然后通过SQL workbench 设置时区，当然也可以通过修改配置文件什么的，修改完成以后重启一下Mysql,让配置生效
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/uOGUDioVBTHwex3.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/uOGUDioVBTHwex3.png)
 
 如果看到的是下面这样基本就是正确的了
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/c9q8CoTNXgVKSB4.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/c9q8CoTNXgVKSB4.png)
 
 
 

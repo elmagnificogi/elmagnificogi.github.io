@@ -31,19 +31,19 @@ tags:
 
 相当简单，第一步找到了数值以后，`Pointer scan for this address`
 
-![image-20220522143619252](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202205221436350.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202205221436350.png)
 
 
 
 然后主要就是调整搜索的深度，越深花费的时间就越多，并且搜索到的条目也会越多。
 
-![image-20220522143718158](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202205221437196.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202205221437196.png)
 
 一般第一次建议直接从3层开始，搜完以后，不关搜索结果的情况下，重启目标客户端，然后看一遍结果是否有正确的。如果有那就算找到了（这种级别基本没啥保护了）。如果没有就继续加深搜索，再验证。
 
 需要注意，这里会提示保存位置，最好每次都用一个新文件，我发现当搜索结果少的情况下，他覆盖不全，会导致上次的搜索结果融入到本次，有点难受。而且每建一个新文件，想返回上次结果也能重新加载。
 
-![image-20220522143952726](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202205221439779.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202205221439779.png)
 
 - 搜索结果是每条一个独立文件，存储位置可能文件数量会爆炸。
 
@@ -53,21 +53,21 @@ tags:
 
 每次的搜索结果，首先通过右键`Resync modulelist`来刷新一遍所有的结果
 
-![image-20220522144302493](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202205221443523.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202205221443523.png)
 
 然后如果结果太多了，建议通过`Rescan memory`来从当前结果中再过滤一次 
 
-![image-20220522144237353](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202205221442383.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202205221442383.png)
 
 结果过滤一般可以通过2种方式，一个是依然指向当前地址的方式过滤，一个是值过滤。
 
-![image-20220522144512446](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202205221445472.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202205221445472.png)
 
 当前地址过滤这个一般不行，因为你重启客户端以后，目标地址一般都变了，所以用值过滤比较多一些。主要是通过值过滤，来找和之前相同值的基址。
 
 这里也有需要注意的点，搜索显示的结果转成的值，和二次筛选用的数据类型可能是不一样的，最好弄到一致。
 
-![image-20220522144745125](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202205221447160.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202205221447160.png)
 
 否则会出现2个值对不上，永远找不到可行基址。
 
@@ -91,7 +91,7 @@ tags:
 
 比如这里我的目标地址是`05CDEA1C`，可以看到他附近，有一些字符串可读。
 
-![image-20220522145635017](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202205221456073.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202205221456073.png)
 
 通过多次重启测试，发现每次2-3都有部分值是一样的。
 
@@ -162,7 +162,7 @@ print search_pattern
 - x是相同值，？是 不同值
 - ce data是用来给ce搜索验证目标串唯一 的
 
-![image-20220522150723845](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202205221507886.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202205221507886.png)
 
 
 
@@ -172,7 +172,7 @@ print search_pattern
 
 我以上说明都是基于原始CE来说的，但是需要额外开启`CE Knernal`，开启这个以后会造成部分游戏直接进不去，甚至触发游戏保护机制和反作弊系统。但是开了以后某些被简单保护的内存空间才能被搜索，否则搜都搜不到，还谈什么。
 
-![image-20220522150941651](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202205221509694.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202205221509694.png)
 
 这个模式开启以后，关闭CE并不能解除模式，需要重启电脑，然后就正常了（特别是D2R）
 

@@ -16,7 +16,7 @@ tags:
 
 下图基本列举出了目前在用的各种方案，下文将按照图中的顺序来进行介绍。
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/5c00a78687365.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/5c00a78687365.png)
 
 # 物联网无线通信技术
 

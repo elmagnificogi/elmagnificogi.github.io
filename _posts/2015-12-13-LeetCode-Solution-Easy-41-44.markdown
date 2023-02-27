@@ -16,7 +16,7 @@ Determine if a Sudoku is valid, according to: Sudoku Puzzles - The Rules.
 
 The Sudoku board could be partially filled, where empty cells are filled with the character '.'.
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/5c00aacee9f9c.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/5c00aacee9f9c.png)
 
 A partially filled sudoku which is valid.
 
@@ -300,7 +300,7 @@ Find the total area covered by two rectilinear rectangles in a 2D plane.
 
 Each rectangle is defined by its bottom left corner and top right corner as shown in the figure.
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/5c00aae8c6b68.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/5c00aae8c6b68.png)
 
 Assume that the total area is never beyond the maximum possible value of int.
 

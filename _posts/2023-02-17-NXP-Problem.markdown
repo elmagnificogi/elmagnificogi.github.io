@@ -30,7 +30,7 @@ DAP-Link开源，免费，对于厂商来说当然是愿意选择的，不用给
 
 J-Link通用，但是NXP默认支持的都不是J-Link，MCUXPresso IDE 默认的也不是J-Link，甚至它的很多设置，看似是通用的，实则是只有DAP可以使用。
 
-![image-20230217150956187](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202302171510329.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202302171510329.png)
 
 比如工程配置中的Flash驱动选择和他的算法，只有DAP才生效，用JLink，完全不起作用。可以看到很多教程都是教你用DAP，配好就能烧写，就能调试，而如果用J-Link，直接就不能用。
 
@@ -58,7 +58,7 @@ MCUXPresso IDE下使用看这里，主要就是给J-Link设置一下芯片型号
 
 关键点就只有一个，Device 这里手动输入，默认选项中根本没有具体的算法
 
-![image-20230217151504899](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202302171515959.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202302171515959.png)
 
 
 
@@ -68,7 +68,7 @@ MCUXPresso IDE下使用看这里，主要就是给J-Link设置一下芯片型号
 
 目前常用的一般就是Hyper和QSPI，其他的类型比较少见。现在只是基于类型来说，比较笼统，具体到烧写阶段的时候，一般需要烧写器（J-Link）做区分，比如Hyper的有一种算法，QSPI有一种算法
 
-![image-20230217152357454](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202302171523511.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202302171523511.png)
 
 所以一般会根据实际使用的类型，选择算法，算法的Size可以往大选，但是不能往小选
 
@@ -76,7 +76,7 @@ MCUXPresso IDE下使用看这里，主要就是给J-Link设置一下芯片型号
 
 这个算法文件在Keil是`.FLM`后缀，在MCUXPresso IDE中是`.cfx`后缀，一般来说QSPI就能通用到所有QSPI类型的Flash上了，同理Hyper也是。在MCUXPresso IDE中基本也是这样的，EVK算是特例了（其实也能支持的）
 
-![image-20230217153948097](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202302171539143.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202302171539143.png)
 
 
 

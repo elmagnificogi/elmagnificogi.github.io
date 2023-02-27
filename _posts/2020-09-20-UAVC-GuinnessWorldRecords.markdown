@@ -53,15 +53,15 @@ tags:
 
 ## 现场图片
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/8zIDSA4ifxOYHaM.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/8zIDSA4ifxOYHaM.png)
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/8CynwcTzkgLEHJa.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/8CynwcTzkgLEHJa.png)
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/JdCLcD4OR16A9jY.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/JdCLcD4OR16A9jY.png)
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/Hfs4YzidpQJGwxW.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/Hfs4YzidpQJGwxW.png)
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/WigbCx5tIl6BJsn.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/WigbCx5tIl6BJsn.png)
 
 最后这张图里有我的背影
 
@@ -69,7 +69,7 @@ tags:
 
 最后结束以后，每个人能拿到一份证书，每份200
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/LEfAu52DWqdsnit.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/LEfAu52DWqdsnit.png)
 
 
 

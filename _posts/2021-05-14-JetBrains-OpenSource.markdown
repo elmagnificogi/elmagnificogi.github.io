@@ -30,13 +30,13 @@ tags:
 
 这里可以申请多个激活权限，具体多了不知道能不能通过。（目前已知我申请了一个激活次数，但是我在多个pc上都能激活）
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/3J1VvLCNn2ZTXga.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/3J1VvLCNn2ZTXga.png)
 
 这里可能还需要你的项目有一个license，github上的项目可以通过添加一个新文件，然后文件叫license就会自动出现右侧的Choose a license template，然后就可以选一个License。
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/OwaHPxgtVDXB35S.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/OwaHPxgtVDXB35S.png)
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/Bs6ogzJTIcqWLK2.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/Bs6ogzJTIcqWLK2.png)
 
 然后提交，等待邮件即可。
 
@@ -92,19 +92,19 @@ tags:
 
 这个License可以使用一年，一年后重新申请即可
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/PqiZAgxG3v8J6aB.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/PqiZAgxG3v8J6aB.png)
 
 接着点开链接登陆账号就能拿到对应的激活权限了。
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/jcWn1gMdAqIvNxC.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/jcWn1gMdAqIvNxC.png)
 
 接着正常登陆账号，就激活了
 
 
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/cetrCMVBf41vPXJ.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/cetrCMVBf41vPXJ.png)
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/VzmQRytWveIYkni.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/VzmQRytWveIYkni.png)
 
 
 
@@ -116,9 +116,9 @@ tags:
 
 如果是用的别人的激活码，则似乎通过Help-Register删除之前的License，然后改成自己的
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/MJ4rIA2LU8qdjoZ.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/MJ4rIA2LU8qdjoZ.png)
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/sF7wZjPzITHmcoO.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/sF7wZjPzITHmcoO.png)
 
 
 
@@ -138,7 +138,7 @@ Certificate used to sign the license is not signed by JetBrains root certifi
 
 彻底一些，搜索 `.vmoptions` 然后将文件内容中的关于jetbrains的都注释了
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/lTyD93cvtdUOL8b.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/lTyD93cvtdUOL8b.png)
 
 然后重启一下ide，再激活就正常了。
 
@@ -148,7 +148,7 @@ Certificate used to sign the license is not signed by JetBrains root certifi
 
 一般会在到期前2周，给你发送续签的邮件，只要点链接再申请一下就行了，非常简单（然而我没看到邮件错过了）
 
-![image-20220521000011272](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202205210000317.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202205210000317.png)
 
 如果忘记续签，其实他也会额外让你用一周，一周后才会真的到期。
 
@@ -156,7 +156,7 @@ Certificate used to sign the license is not signed by JetBrains root certifi
 
 我就是真的到期了，然后才发现没续，于是翻到了邮件，当天立马续签。大概五六个小时以后(可能是他们的早上八点)我就拿到了续签通知，又可以继续白嫖了，美滋滋
 
-![image-20220521000041844](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202205210000890.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202205210000890.png)
 
 
 

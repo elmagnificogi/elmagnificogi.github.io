@@ -22,7 +22,7 @@ tags:
 
 ## 情况
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/9gJSiHtAajWoMkQ.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/9gJSiHtAajWoMkQ.png)
 
 之前的问题是，这个传感器是不是就没数据返回了，然后通过重启传感器以后，又恢复了。由于不是大问题，就一直这么凑活用着。
 
@@ -54,7 +54,7 @@ tags:
 
 #### 中断处理
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/BZ8fEcnKbg2GST6.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/BZ8fEcnKbg2GST6.png)
 
 平常芯片可能会给你一个中断引脚，告诉你这个是data ready或者类似的作用，可用可不用，但是BNO这里非常诡异，他必须要用，必须在中断的时间内把数据读走，否则就会出现数据出错或者其他的问题。而显然我们的驱动里读数据根本没考虑这个问题，根本不管是否可读，无脑读。所以有时候没数据需要重启，大概就是因为这个中断和读的时间错位了，导致一直读不到数据，报错了。
 
@@ -70,11 +70,11 @@ tags:
 06 00 00 0C 01 0B 
 ```
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/kXYuSBNf1GbyOhP.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/kXYuSBNf1GbyOhP.png)
 
 我查了一下是说我在广播之前就发送了写，导致失败了，可是我明明是广播之后发送的。
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/TXtHg8pdj7IuKv6.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/TXtHg8pdj7IuKv6.png)
 
 然后在这个错误以后，继续读，还会发送BNO还在回信息给我，而且是F9的信息，非常奇怪。之后开始读数据，就一直返回00。
 
@@ -86,13 +86,13 @@ tags:
 
 后来发现其实是BNO的F9的产品信息包，实际是2个包，他是分别发送的，第一次是20个字节的包
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/ir3NP2WUp5cEhBC.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/ir3NP2WUp5cEhBC.png)
 
 第二次则是这个52字节的包，可是原厂的说明文档里没有说这是2个，只是说了可能会发送不完全包
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/pylZwiF786zV9No.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/pylZwiF786zV9No.png)
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/Ixv5afqmMnE48kN.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/Ixv5afqmMnE48kN.png)
 
 这个包里是上次芯片重启的原因，是Not Applicable的，而每次重启都会报告这个包。
 
@@ -106,7 +106,7 @@ BNO技术支持建议我参考官方驱动，我先看了一下流程，官方�
 
 于是重新写重启流程，硬等Reset的返回命令。
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/ZXOKsiSAPMWYvEb.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/ZXOKsiSAPMWYvEb.png)
 
 等到Reset返回以后，再进行读和设置。这里还有一个很奇怪的现象，传感器以及重启了，但是依然会发送广播包，等广播发完了，才能回Reset的信息，就很奇怪。
 

@@ -82,13 +82,13 @@ BT Controller：此部分指的是蓝牙芯片，包括BR/EDR芯片（蓝牙2.1�
 
 HCI架构的蓝牙会有以下几种架构
 
-![img](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208161332362.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202208161332362.png)
 
 
 
 详细架构图
 
-<img src="http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208162111676.png" alt="img"  />
+<img src="https://img.elmagnifico.tech/static/upload/elmagnifico/202208162111676.png" alt="img"  />
 
 基于HCI的时候，总体上是APP-HOST-Transport（算是中间协议层）-HW。
 
@@ -119,7 +119,7 @@ HCI架构的蓝牙会有以下几种架构
 - BCSP，也是基于UART的协议层，三线串口，但是他主要是给存储卡使用的接口
 - SDIO，基于SDIO的协议层
 
-![img](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208162151296.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202208162151296.png)
 
 HCI一共有5种数据类型
 
@@ -185,7 +185,7 @@ HOST这里就比较复杂了，HCI前面已经大概介绍了一下
 
 以上的介绍漏了一部分协议，就是3.0的AMP，由于蓝牙3.0某种程度上说其实不成熟或者说他给BLE打了个底，所以实际3.0应用比较少看到，要么是2.x，要么就是4.x起步了，3.x的反而很少。仔细看架构图，也会发现AMP直接重构了底层架构，这就导致了前期兼容了1.x和2.x的蓝牙如果要适配3.x就需要改芯片，那自然成本高了，没人弄了。
 
-![img](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208170051163.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202208170051163.png)
 
 
 
@@ -193,7 +193,7 @@ HOST这里就比较复杂了，HCI前面已经大概介绍了一下
 
 Bluetooth的一个很重要特性，就是所有的Bluetooth产品都无须实现全部 的Bluetooth规范，可能有的只实现了部分功能，比如部分手机根本不支持蓝牙HID。为了更容易的保持Bluetooth设备之间的兼容，Bluetooth规范中定义了Profile。Profile定义了设备如何实现一种连接或者应用，你可以把Profile理解为连接层或者应用层协。
 
-![image.png](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208240045656.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202208240045656.png)
 
 
 
@@ -204,7 +204,7 @@ Bluetooth的一个很重要特性，就是所有的Bluetooth产品都无须实�
 - SPP，能在蓝牙设备之间创建虚拟串口进行数据传输。
 - GOEP，从一个设备向另一个设备传输对象的规范。
 
-![image.png](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208240043016.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202208240043016.png)
 
 
 

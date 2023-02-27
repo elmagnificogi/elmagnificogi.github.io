@@ -24,11 +24,11 @@ tags:
 
 到手以后快递盒子是真的好小啊
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/XWuiSPtYZR3ONf4.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/XWuiSPtYZR3ONf4.png)
 
 完全展开，就得到了这么多
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/RmSxA39y5fTsZFY.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/RmSxA39y5fTsZFY.png)
 
 说明书纸片卡等等就有4张，充电线，S码和L码的耳塞，M码的已经在耳机上了
 
@@ -36,23 +36,23 @@ tags:
 
 耳塞是那种慢回弹的，不过他这个海绵还是比较薄的，我之前买的虽然不耐用但是海绵本体都比较厚实。
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/O8cM9eXhtbm1EYu.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/O8cM9eXhtbm1EYu.png)
 
 
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/AhHUuZ1d94qyjb5.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/AhHUuZ1d94qyjb5.png)
 
 
 
 取出来
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/T6vCfLlUEmtG4uZ.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/T6vCfLlUEmtG4uZ.png)
 
 
 
 充电
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/8QjKRtCsi6oenLf.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/8QjKRtCsi6oenLf.png)
 
 
 
@@ -100,11 +100,11 @@ tags:
 
 #### LDAC
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/mx1CrY49WZpPVgo.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/mx1CrY49WZpPVgo.png)
 
 需要APP里切换成声音质量优先，否则默认是SBC，小米可以切换成AAC，当然木耳朵啥也听不出来
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/ekcAT6GBZXvqiRK.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/ekcAT6GBZXvqiRK.png)
 
 
 
@@ -128,7 +128,7 @@ tags:
 
 挺好用的，体验就是基本说几句话，声音大一点就自动切到环境音了，不过在你说话之前有可能错过对方说的信息。
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/qUWN3BTrOKy5ZPb.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/qUWN3BTrOKy5ZPb.png)
 
 
 
@@ -174,7 +174,7 @@ x4带的时候扭一下，然后塞进去。我左耳没有肿胀的感觉，但
 
 他这个收纳仓盖的开启是两段式的，前一段比较松垮，随便一晃就能关上，后一段则是比较紧，不容易被盒盖。
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/T1PHczkxnKvDwQ8.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/T1PHczkxnKvDwQ8.png)
 
 但是我感觉前一段的实在是太松了，有点难受。
 
@@ -227,7 +227,7 @@ x4带的时候扭一下，然后塞进去。我左耳没有肿胀的感觉，但
 
 sony的这个headphone app 更新固件也太慢了。
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/nioR94BaYMS8WDs.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/nioR94BaYMS8WDs.png)
 
 分析耳朵形状，用拍照来识别有点难用，特别是耳朵特别平的人，让别人给你拍还差不多。
 
@@ -243,7 +243,7 @@ sony的这个headphone app 更新固件也太慢了。
 
 ## 时隔一年反馈
 
-![img](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/25aa20d7277f9e2fde70e7d15a30e924b999f342.jpg)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/25aa20d7277f9e2fde70e7d15a30e924b999f342.jpg)
 
 右耳充电发烫严重，刚好一年保修过期了，我没有及时去修，无奈了
 **平均每周使用5天，每天基本都是耗尽电量的使用时间**
@@ -253,7 +253,7 @@ sony的这个headphone app 更新固件也太慢了。
 
 看了下拆解，要加热以后拆开，电池也很小，估计250-300个循环就是极限了吧，稍微有点麻烦，还是给专业的人干吧
 
-![image-20220627105810205](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220627105810205.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20220627105810205.png)
 
 联系了一个单耳换电池40不包邮，换下来的电池明显鼓包了。
 

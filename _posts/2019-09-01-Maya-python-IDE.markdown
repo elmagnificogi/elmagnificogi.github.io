@@ -20,7 +20,7 @@ tags:
 
 #### script editor
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/9HglFrwbeidxPqc.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/9HglFrwbeidxPqc.png)
 
 原版的剧本编辑器呢，实在是有点难用，代码没有提示就算了，最近还经常出一个问题，不能复制粘贴，整个maya都不能了，不知道是怎么回事。
 
@@ -32,7 +32,7 @@ tags:
 
 > http://zurbrigg.com/charcoal-editor-2
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/HiCwlX4WzvLsabI.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/HiCwlX4WzvLsabI.png)
 
 这个编辑器比较有名，相当于是script editor的一个加强版，有了导航，补全，高亮。
 
@@ -50,7 +50,7 @@ tags:
 
 > https://packagecontrol.io/packages/MayaSublime
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/aRsjb4rdwch8k3p.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/aRsjb4rdwch8k3p.png)
 
 Sublime就是相当有名的编辑器了，然后有人基于他开发了maya的 script editor
 
@@ -72,7 +72,7 @@ MayaSublime 这个插件自然就是通过这个端口来完成充当剧本编�
 
 新时代的弄潮儿，VS code，从插件库里轻松一搜，就能看到对应的maya脚本的插件，其原理和sublime是一毛一样的
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/yTVreDzHbPh7wtg.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/yTVreDzHbPh7wtg.png)
 
 #### WingIDE
 
@@ -80,7 +80,7 @@ MayaSublime 这个插件自然就是通过这个端口来完成充当剧本编�
 
 > http://www.wingware.com/doc/howtos/maya
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/QN7vDU2g5YJOkEu.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/QN7vDU2g5YJOkEu.png)
 
 Wing就具备了一般编辑器没有的调试功能，给maya编辑器调试的功能，自然打断点，单步调试，过程调试什么的就都有了，就不是其他轻型编辑器可以比拟的了。
 
@@ -100,13 +100,13 @@ maya的开发包必须要有
 
 > https://www.autodesk.com/developer-network/platform-technologies/maya
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/EjptgalBcDIw9oW.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/EjptgalBcDIw9oW.png)
 
 在pycharm的settings中选择工程，然后设置project Interperter，第一次肯定是没有检测到maya python的，所以需要点加号手动添加mayapy的路径。
 
 如图选择已有环境添加mayapy.exe，勾选使其可以被所有工程使用
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/OIaRyHjZC1gnTAp.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/OIaRyHjZC1gnTAp.png)
 
 添加完了以后，就可以选择正确的interperter了，然后就会自动搜索看到这个python里安装了哪些包，maya本身的python当然没有这些包，这都是我后来自己加上去的。
 
@@ -122,7 +122,7 @@ maya的开发包必须要有
 
 #### 删除默认python路径
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/kcgEW7uRAdaGLeB.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/kcgEW7uRAdaGLeB.png)
 
 将这一条选中，然后点减号，之后会自动将该路径排除，这样才能正确解析mayapy
 
@@ -132,11 +132,11 @@ maya的开发包必须要有
 
 #### 添加maya python 扩展包
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/5LnM8couAEUri2t.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/5LnM8couAEUri2t.png)
 
 在对应的interperters中可以增加其扩展路径
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/XiJjrvmBZcKIH6f.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/XiJjrvmBZcKIH6f.png)
 
 主要是把 这个目录下的的东西加到解释器中，这样代码自动补全才能正常工作
 
@@ -152,27 +152,27 @@ maya的开发包必须要有
 
 - 需要注意这里的mayacharm目前最新支持到pycharm2019.2.4（2020.2.10），最新版本不支持
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/l91HQs6tbdIjp2A.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/l91HQs6tbdIjp2A.png)
 
 在插件中搜索maya，就能直接找到mayacharm，安装完成以后重启IDE
 
 然后在tools中就可以看到类似于MayaSublime的地方，这里就是通过maya的进程通信进行代码控制
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/PdiRr8CHDeZbAsN.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/PdiRr8CHDeZbAsN.png)
 
 #### 测试
 
 新建一个python文件，然后对世界问好，在run里面就能看到对应的maya执行命令
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/lANFYI9crqputf2.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/lANFYI9crqputf2.png)
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/uqDioS4lYhrJQBZ.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/uqDioS4lYhrJQBZ.png)
 
 这里如果点了connect to maya's log 那么就可以看到剧本编辑器里的内容，同样会输出到pycharm中的mayalog中，这样的话代码如果执行有问题，一眼就能看到出来了。
 
 我这里为什么把内容输出到了Output Window，那是因为我之前的python脚本重定向了print
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/GUvlhtdKMuEO2Nj.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/GUvlhtdKMuEO2Nj.png)
 
 这里就能看到 pycharm 作为IDE级别的强大了
 
@@ -203,7 +203,7 @@ if not cmds.commandPort(':4434', query=True):
 print "set the command port at 4434"
 ```
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/prhagYJofES1ZFb.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/prhagYJofES1ZFb.png)
 
 这样就能看到了自动开启了命令端口
 
@@ -211,7 +211,7 @@ print "set the command port at 4434"
 
 > https://github.com/cmcpasserby/MayaCharm
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/tSoGqcDn9Haj1MZ.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/tSoGqcDn9Haj1MZ.png)
 
 理论上还是使用mayaCharm，新建一个mayaCharm调试器，然后选择启动文件，ok就行了
 

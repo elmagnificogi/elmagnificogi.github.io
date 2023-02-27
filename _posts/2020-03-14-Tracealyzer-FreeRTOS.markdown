@@ -47,7 +47,7 @@ trcStreamingRecorder.c
 
 2.修改trcConfig.h，左图是修改后的，右图是原生的
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/gaePLmTkGxriEdX.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/gaePLmTkGxriEdX.png)
 
 
 
@@ -134,15 +134,15 @@ void ISR_handler(void)
 
 首先设置成SEGGER RTT
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/2dzSv9LWGqlxwFn.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/2dzSv9LWGqlxwFn.png)
 
 配置jlink，由于是流模式jlink的速度尽量高一些，太低的话数据流大了直接卡崩了。
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/YMDt5xGdjCr6yvK.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/YMDt5xGdjCr6yvK.png)
 
 然后就能开启流模式，体验Tracealyzer了
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/3CqIQhSFe4DH1zR.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/3CqIQhSFe4DH1zR.png)
 
 ## End
 

@@ -20,7 +20,7 @@ BLHeli支持自定义启动音乐，这样就可以玩出很多花样来，这�
 
 BLH里的参数或者说明都存于每次更新的log中，但是具体说明是作者自己回帖说的，log里说i的非常少
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/zjWuqrf4xbZQvwT.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/zjWuqrf4xbZQvwT.png)
 
 
 
@@ -110,7 +110,7 @@ A42 就是A4 1/2
 C52 D52 E52 C52 C52 D52 E52 C52 E52 F52 G51 E52 F52 G51
 ```
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/WdQHYLrc9vs4lRh.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/WdQHYLrc9vs4lRh.png)
 
 打开音乐编辑，然后输入上面的内容，设置好速度和间隔以后就可以点击播放了，这里都是通过电脑来播放的，实际电调播放需要烧写进去以后断开连接就会听到具体电调发出的音乐了。
 
@@ -317,13 +317,13 @@ B
 
 ## 简谱自动转换成BLH电音
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/rlgDSeYWsh1by2n.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/rlgDSeYWsh1by2n.png)
 
 
 
 这里以打上火花的这几个小节为例子，说明具体转换，首先简谱首部给出了这个使用F调，其实也就是C4，对应的音组也就是4，然后4/4以4分音符为一拍
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/IBzfLh3MWdYUwsk.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/IBzfLh3MWdYUwsk.png)
 
 可以看到这个谱中，音符最低都是1/16了，而BLH不支持，那么为了解决这个呢，可以选择升音符，让原本的1/4变成1/2，而1/8就变成了1/4，对应的这个1/16音符也就能表示出来的，下面给出两个升和不升的版本，不升的版本直接使用1/8音符代替所有1/16音符，然后可以看到实际是96拍一分钟，也就是说实际比length=8的0.5秒一拍，要慢一些大概是0.625一拍，那么对应的大概length=10左右吧
 
@@ -337,7 +337,7 @@ C44 E44 A44 C44 D44 E44 P4 C48 D48 E44 D48 C48 C44 A48 B48 C44 B48 A48 G44 E48 G
 
 不过由于这一小节没啥抓耳的地方，所以我又改了下面一段
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/XOb1NsTWIH8PZ4x.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/XOb1NsTWIH8PZ4x.png)
 
 由于是简体，对于我这个不熟悉音乐的人来说要从123转换到CDE还是有点麻烦的，所以这里记录一下这里音乐的raw数据
 

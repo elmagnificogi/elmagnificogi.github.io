@@ -46,7 +46,7 @@ tags:
 
 ## 参数
 
-![image-20220717142456125](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202207171424366.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202207171424366.png)
 
 型号：L55M5-AZ
 
@@ -68,7 +68,7 @@ WIFI：2.4G和5.8G全支持，协议支持到n，ac不支持
 
 
 
-![image-20220717142054560](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202207171420596.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202207171420596.png)
 
 小米电视的红外通病，时间长了红外接收器基本都挂了，所以刚开始弄了个红外遥控，没想到完全控不了，卖家从一开始就说遥控丢了，实际上是知道红外遥控控不了，不愿意补蓝牙遥控。**建议买的时候只要可以蓝牙的，都建议买个蓝牙遥控**
 
@@ -231,7 +231,7 @@ vv.play.aiseet.atianqi.com
 
 而如果可以的话，直接给电视设置一个全局过滤，黑名单加上上面的域名，简直完美
 
-![image-20220717132600501](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202207171326570.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202207171326570.png)
 
 
 

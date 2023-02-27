@@ -343,7 +343,7 @@ void HAL_PCD_SuspendCallback(PCD_HandleTypeDef *hpcd)
 
 而**GD这里是相反的，GD明确说了0是挂起状态，1是非挂起状态** 一定要注意，库里这个地方设置的是相反的。
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/3naA5oV8gxIjfLH.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/3naA5oV8gxIjfLH.png)
 
 
 

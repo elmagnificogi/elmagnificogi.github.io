@@ -94,7 +94,7 @@ SECTIONS
 
 嵌入式系统中, 经常存在加载地址和执行地址不同的情况： **比如将输出文件加载到开发板的flash中(由LMA指定)，而在运行时将位于flash中的输出文件复制到SDRAM中(由VMA指定)**。
 
-![img](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202301041702494.webp)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202301041702494.webp)
 
 说的简单一点，程序作为输入文件，被转换的时候，转换得到的地址是VMA，也就是虚拟地址，而实际运行以后，会得知这个虚拟地址对应的实际物理地址是什么，也就是换算出LMA，那么读取具体变量的时候就是从LMA读取。实际的变量，正常的情况下就是放在对应的LMA地址上，但是如果你通过 data section修改了变量的存储位置，比如偏移了4字节，那么就会出现，程序运行时输出的变量也直接错位了，下面的例子就是实际的情况。
 

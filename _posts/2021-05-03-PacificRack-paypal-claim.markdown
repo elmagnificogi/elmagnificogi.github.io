@@ -32,17 +32,17 @@ ToS不写清楚，模模糊糊，该你被争议，各种无法退款的活动�
 
 首先paypal找到当时的订单，然后选择报告问题
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/oX9MTrZuAQiB3xy.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/oX9MTrZuAQiB3xy.png)
 
 
 
 然后选择报告问题类型，我收到的物品与描述显著不符
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/mh5vxFu6je3kd4G.jpg)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/mh5vxFu6je3kd4G.jpg)
 
 剩下就是填写具体购买内容和描述问题，可以直接中文描述，paypal会有专人审核负责的，不用担心别人看不懂。
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/z57W8kUKNa6XYOF.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/z57W8kUKNa6XYOF.png)
 
 如果物品完全不可用，比如跑路，可以选择已损坏，如果是服务有问题但不给退款，可以选其他，然后详细描述有什么问题即可。接着是申请全额退还是部分，一般都是全额。
 
@@ -52,7 +52,7 @@ ToS不写清楚，模模糊糊，该你被争议，各种无法退款的活动�
 
 当时发的工单，不给退款就算了，你还成天失联，然后给我说切换到不会关机重启的母鸡上，依然关机
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/xE2NlcPrGvHwC5i.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/xE2NlcPrGvHwC5i.png)
 
 所以准确说就是关机问题，pr不会正面回复你，只会顾左右而言他，所以要你再次上报问题，让paypal仲裁
 
@@ -66,7 +66,7 @@ ToS不写清楚，模模糊糊，该你被争议，各种无法退款的活动�
 
 然后就是商家回应你一次，你再回应一次。
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/MJg5wx3AuVtB1s6.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/MJg5wx3AuVtB1s6.png)
 
 当你回应结束以后，就可以直接问题上报（其实就是让paypal当店小二，直接仲裁），然后paypal会自动切换成补偿申请。然后paypal会自己去联系商家后续问题，最终告诉你结果。
 
@@ -78,9 +78,9 @@ ToS不写清楚，模模糊糊，该你被争议，各种无法退款的活动�
 
 
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/13K7mzTq2B4YPni.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/13K7mzTq2B4YPni.png)
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/KalfSQrt6g7NWJd.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/KalfSQrt6g7NWJd.png)
 
 
 
@@ -88,7 +88,7 @@ ToS不写清楚，模模糊糊，该你被争议，各种无法退款的活动�
 
 历时13或者14天，也就2周时间，成功退款。
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/GRV29vNteTz6juM.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/GRV29vNteTz6juM.png)
 
 
 

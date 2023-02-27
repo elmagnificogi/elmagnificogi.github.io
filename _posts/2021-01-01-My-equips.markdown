@@ -49,13 +49,13 @@ tags:
 
 常年吃灰，就出差带一下，其他时间基本不用
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/EgB27WzmireIvdc.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/EgB27WzmireIvdc.png)
 
 
 
 - CVK扩展坞Typec接口
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/dkI7TzK9Ym3gPcH.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/dkI7TzK9Ym3gPcH.png)
 
 可以给笔记本用，同时switch也能用。
 
@@ -65,7 +65,7 @@ tags:
 
 - mouse - Logitech g900
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/WxqtXowfKlbSDjy.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/WxqtXowfKlbSDjy.png)
 
 Logitech g900的鼠标年纪大了，当初是图便宜买的夺宝岛的，现在电量经常不够，两三天就得冲一下。前面微动还坏了一次，然后我也自己动手更换了一次微动（刚换完其实又坏了一次，不小心摔地上了直接微动没反馈了）还换了一次滚轮，但是发现第三方的太难用了，又换了回来。
 
@@ -77,13 +77,13 @@ Logitech g900的鼠标年纪大了，当初是图便宜买的夺宝岛的，现�
 
 - keyboard - IKBC DC108
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/vicke1SrPAauxL5.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/vicke1SrPAauxL5.png)
 
 IKBC 的这个键盘，之前也有看到说，各种断连啊，卡顿啊，刚开始用的时候确实没有，用到后来就开始出现了，着实找不到干扰源，也不知道为什么。刚开始还挺耐用的，后来电池也不行，经常一个月就没电了，后来几周就没电了，最后没得办法还专门买了充电7号电池再加上充电器一起用的。我还买了2把，一把公司一把家里，公司的后来直接接线用了不然很麻烦。这个是单蓝牙+有线版本的，感觉蓝牙其实没啥用，以后应该只用2.4g版本的应该会好一些，确实不需要蓝牙的切换功能。
 
 紫米7号电池和充电器，同时还买了5号充电电池
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/5YSrcVHdoJpul6Z.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/5YSrcVHdoJpul6Z.png)
 
 
 
@@ -91,7 +91,7 @@ IKBC 的这个键盘，之前也有看到说，各种断连啊，卡顿啊，刚
 
 - headphone1 - B&O H9i 
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/Q95WpJmMqOwaGzY.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/Q95WpJmMqOwaGzY.png)
 
 耳机嘛，H9i当初是图好看买了，实际体验后来夹耳朵，他是圆形耳罩，导致不能长时间戴，就又换了 1000xm3。当初H9i也在实体店里试过，确实感觉很好才决定买的，但是没有长时间佩戴，导致后面翻了车。
 
@@ -99,7 +99,7 @@ IKBC 的这个键盘，之前也有看到说，各种断连啊，卡顿啊，刚
 
 - headphone2 - Sony WH-1000XM3
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/TxNKV9HgALPuC8B.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/TxNKV9HgALPuC8B.png)
 
 这个不夹耳朵，日常都用这个，H9i现在就完全纯落灰了。只有1000xm3没电的时候上场，其他时间坐冷板凳。
 
@@ -107,13 +107,13 @@ IKBC 的这个键盘，之前也有看到说，各种断连啊，卡顿啊，刚
 
 #### Console
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/IrgLoZcbWk93Jdt.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/IrgLoZcbWk93Jdt.png)
 
 - Nintendo Switch 二手收的，非续航版，那会非常新，价格也很便宜，机体本身的塑料香味都还在。
 
 刚买的时候由于是带数字账号一起买的，后来发现账号是黑号，游戏被回收，卖家被我人肉出了真实身份（一学生，然后被我邮件轰炸了整个学校老师和领导层，后来联系我退钱了），中间经历了很多，后来拆了底座，替换成了这样的加强散热
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/fIgYekjbvEWSRJU.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/fIgYekjbvEWSRJU.png)
 
 > https://detail.tmall.com/item.htm?id=609301030116&spm=a1z09.2.0.0.5b212e8dK4H9gB&_u=11g76mj9235f
 
@@ -128,7 +128,7 @@ IKBC 的这个键盘，之前也有看到说，各种断连啊，卡顿啊，刚
 
 - nintendo switch pro手柄
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/ZMAvnFQewijl6G7.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/ZMAvnFQewijl6G7.png)
 
 pro手柄还是可以的，虽然也用来落灰了，同时我还有2副joy-con，基本也落灰了。
 
@@ -144,7 +144,7 @@ pro手柄还是可以的，虽然也用来落灰了，同时我还有2副joy-con
 
 - ASUS华硕RT-AC66U双频AC1750M
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/o8RPB39NGVSgcMa.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/o8RPB39NGVSgcMa.png)
 
 洋垃圾，路由器，当时为了刷个梅林，然后游戏加速，实际上效果不太行，那会还是阿里云香港，还是不稳定吧。
 
@@ -158,7 +158,7 @@ pro手柄还是可以的，虽然也用来落灰了，同时我还有2副joy-con
 
 - 斐讯K3 A1
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/lIPiquHyMYCrasD.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/lIPiquHyMYCrasD.png)
 
 后来为了上v2ray，就又买了这个，支持openwrt，但是我都是斐讯倒了以后才买的。这个东西本身质量也不太行，偶尔会起不来，而且他有非常挑内存什么的，我都验证过了，非三星内存，但是他本身信号其实和上面的66U差不多，没有明显区别吧，就是k3固件实在太多了，而且很多固件自带私活，很烦人，最好找原生的固件。K3的性能不够，用了v2ray其实也跑不满vps的带宽，这个就有点坑爹了。
 
@@ -172,7 +172,7 @@ pro手柄还是可以的，虽然也用来落灰了，同时我还有2副joy-con
 
 - 树莓派 2b
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/zstJfhy6ETDIQSc.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/zstJfhy6ETDIQSc.png)
 
 完全闲置了，自从当年写过树莓派文章以后再也没咋用过了
 
@@ -180,7 +180,7 @@ pro手柄还是可以的，虽然也用来落灰了，同时我还有2副joy-con
 
 - TTGO T8V1.7wifi 蓝牙ESP32WROVER 4MB FLASH 8MB PSRAM开发板
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/4KYmGx1cfJWHbSz.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/4KYmGx1cfJWHbSz.png)
 
 本来就是打算用来给switch当作蓝牙自动脚本手柄用的，但是奈何蓝牙手柄的断连问题和延迟问题实在是太严重了，导致实际体验不好，不如Teensy的小板子，所以吃灰了。
 
@@ -188,7 +188,7 @@ pro手柄还是可以的，虽然也用来落灰了，同时我还有2副joy-con
 
 - Teensy2.0++
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/JFqID6iUpcm3aXY.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/JFqID6iUpcm3aXY.png)
 
 Switch 手柄模拟，还是很好用的。
 
@@ -196,7 +196,7 @@ Switch 手柄模拟，还是很好用的。
 
 - 36记智能手写本
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/Jjh9aqcuQGZS4W2.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/Jjh9aqcuQGZS4W2.png)
 
 其实就是个手写本，只不过可以同步到手机上而已，类似柔宇的手写本，只不过我是二手捡的全新的，便宜很多。实际上由于他的电磁笔写字的时候笔尖会回收，导致实际写字体验非常差，类似于你铺张纸在床上写字，基本用来落灰了，其本身也有pc的手写板功能，但是那个程序是个0.01版本，非常多bug，基本不能用，谁买谁是傻子。
 
@@ -204,7 +204,7 @@ Switch 手柄模拟，还是很好用的。
 
 - 天创恒达TC-UB90采集卡
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/dVHgyoU8hPpBiG9.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/dVHgyoU8hPpBiG9.png)
 
 本身支持4k，usb3.0接口，可以同时环出，但是实际上体验不太好，有色偏，工作时采集卡本身非常烫，用的时间长了以后会导致卡顿和延迟超高的情况，感觉这种卡不太行，还是得买pcie接口的内置卡，可能更好一些。
 

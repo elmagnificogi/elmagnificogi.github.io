@@ -22,9 +22,9 @@ SDMMC是STM32手册中对于整个SD/SDIO/MMC接口的统称。
 - SDIO卡：SDIO是在SD标准上定义了一种外设接口，它和SD卡规范间的一个重要区别是增加了低速标准。在SDIO卡只需要SPI和1位SD传输模式。低速卡的目标应用是以最小的硬件开销支持低速IO能力。
 - MCI：Multimedia Card Interface ，即多媒体卡接口，上面说的不同卡的接口都属于MCI接口。
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/20140901131422343.jpg)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/20140901131422343.jpg)
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/20140901131700068.jpg)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/20140901131700068.jpg)
 
 STM32中的SDMMC接口目前可以支持下面的协议：
 
@@ -261,7 +261,7 @@ SD_PowerON，获取SD卡的操作电压，操作时钟等信息
 也就是说判断是否可以传输不仅仅是看Programming State，还是取决于Transfer State
 在卡被编程（programming）时，禁止参数设置命令。参数设置命令包括：设置块长度（CMD16），擦除块开始(CMD32)和擦除块结束（CMD33）
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/701087_1350359875Re1r.jpg)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/701087_1350359875Re1r.jpg)
 
 如图所示，SD卡的状态机是这样的，如果在programming状态以后必然会回到Transfer，所以只需要在Transfer判断是否可以继续传输即可
 

@@ -146,7 +146,7 @@ git-filter-repo --invert-paths --path 'keyinfo.c' --use-base-name
 
 当删除完成以后，就能看到实际上相关被修改了的分支
 
-![image-20220520120218191](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220520120218191.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20220520120218191.png)
 
 当执行了这个操作以后，会自动抹除当前仓库的远程连接，所以接下来需要重新连接到远程，并且强制推送即可。
 
@@ -154,7 +154,7 @@ git-filter-repo --invert-paths --path 'keyinfo.c' --use-base-name
 
 然后在新仓库或者新clone的代码中就不会看到`replace`的提示了
 
-![image-20220520121243894](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220520121243894.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20220520121243894.png)
 
 ## BFG Repo-Cleaner
 

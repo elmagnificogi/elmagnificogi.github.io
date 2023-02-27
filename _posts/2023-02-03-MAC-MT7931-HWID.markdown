@@ -26,7 +26,7 @@ MAC地址的长度为48位(6个字节)，通常表示为12个16进制数，如�
 
 除此以外，MAC地址最高字节（MSB）的低第二位（LSb）表示这个MAC地址是全局的还是本地的，即U/L（Universal/Local）位，如果为0，表示是全局地址。所有的OUI这一位都是0。MAC地址最高字节（MSB）的低第一位(LSb），表示这个MAC地址是单播还是多播。0表示单播
 
-![image-20230203182617798](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20230203182617798.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20230203182617798.png)
 
 这个比较重要，大部分设备基本都是`unicast/global`，普通消费产品都是全局唯一mac，而部分非公网可能会出现很多local的mac地址。
 
@@ -40,7 +40,7 @@ MAC地址的长度为48位(6个字节)，通常表示为12个16进制数，如�
 
 MA-L就是买数量最多的（1600万个左右），MA-M中间数量（100万个左右），MA-S数量最少（4096个），其中MA-L的价格也只需要3000多美元就足够了，可以说非常便宜了。
 
-![image-20230203185937295](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20230203185937295.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20230203185937295.png)
 
 
 
@@ -100,7 +100,7 @@ wifi config set mc_address 0 00:08:22:2d:04:02
 
 找了半天，总算看到了芯片序列号在eFuse中，并且有16字节，而我们只需要取其中6字节即可（其实还是有点危险的，但是数量较少也就忽略了）
 
-![image-20230203184532496](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20230203184532496.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20230203184532496.png)
 
 翻遍了所有MT7933x的手册，发现都无法找到任何一个关于eFuse的完整描述，关于他的描述都是这种没有给出具体HUID位置的，蛋疼
 

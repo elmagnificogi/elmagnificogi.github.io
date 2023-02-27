@@ -21,13 +21,13 @@ tags:
 
 需要注意的是ESP32，必须是不带任何后缀的，才具有双模，S和C系列的都是单BLE蓝牙，无法使用经典蓝牙
 
-![image-20220824011800461](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208240118531.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202208240118531.png)
 
 
 
 ## Example
 
-![image-20220821231423318](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208212314350.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202208212314350.png)
 
 先看官方例程，经典蓝牙还是给了不少例子的，主要看一下`bt_hid_mouse_device`是如何实现的就行了
 
@@ -440,21 +440,21 @@ typedef enum {
 
 cod结构体
 
-![img](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208260047025.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202208260047025.png)
 
-![image-20220826004835024](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208260048067.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202208260048067.png)
 
 Major有以下几种：
 
-![image-20220826005417655](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208260054698.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202208260054698.png)
 
 Minor的类型比较多，他是根据Major的不同而不同的
 
-![image-20220826005016780](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208260050816.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202208260050816.png)
 
 第六位和第七位特指了鼠标、键盘或者混合设备或者两者都不是的设备，算是大的设备种类吧，然后在这个种类的情况下，再叠加上第2345位决定这个设备具体是哪种。Minor一般不是很重要，很多地方都会省略他。
 
-![image-20220826005112500](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208260051546.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202208260051546.png)
 
 最后是一点设置配对pin的类型，如果设置成了`ESP_BT_PIN_TYPE_VARIABLE`，那么pin最终是由GAP部分给出来，否则的话就是固定值，不会回调GAP部分的pin request
 
@@ -774,7 +774,7 @@ HID的Report Descriptor要怎么写，也记录一下
 
 首先Descriptor必须有`Usage Page`说明这个HID的大类，比如这里指代USB通用设备
 
-![image-20220828021639948](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208280216055.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202208280216055.png)
 
 
 
@@ -788,7 +788,7 @@ HID的Report Descriptor要怎么写，也记录一下
     0xA1, 0x01,                    # Collection (Application)    
 ```
 
-![image-20220828021729529](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208280217580.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202208280217580.png)
 
 开头的USAGE相当于是USAGE_PAGE的详细描述，说明当前设备是鼠标
 
@@ -796,7 +796,7 @@ HID的Report Descriptor要怎么写，也记录一下
 
 Collection也分类型，一般是Application统领全局，然后再用Physical在其内部做进一步区分，同时每个Collection要有对应的开始和结束
 
-![image-20220828022153779](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208280221837.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202208280221837.png)
 
 ```
     0xA1, 0x01,     # Collection (Application)
@@ -866,7 +866,7 @@ Collection可以嵌套，Physical Collection 则是指相当于是子Collection�
 
 除了说明了元数据的值，还需要说明你给的这个值对应到Host的时候，他们表示什么
 
-![image-20220828024009955](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208280240998.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202208280240998.png)
 
 根据键盘的Keyboard Page的定义，这里说明这三个元数据对应键盘的1-3，指代没啥用的按键
 
@@ -877,7 +877,7 @@ Collection可以嵌套，Physical Collection 则是指相当于是子Collection�
 
 上面还缺少一个描述，就是Logical元数据和Usage的按键，他们是怎么对应的，这个值是不是会变的，还是固定的，是一个bit来表示还是2个bit又或者是1个字节来表示的，这些都需要描述，Input就是描述这个东西的
 
-![image-20220828024549406](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208280245458.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202208280245458.png)
 
 实际描述这个元数据只需要1个report size（1bit），所以是`0x81`
 
@@ -966,7 +966,7 @@ uint8_t hid_descriptor_mouse_boot_mode[] = {
 
 看完以后，编译烧写测试了一下，基本ok
 
-![image-20220824014046300](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208240140345.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202208240140345.png)
 
 连接以后，鼠标开始左右平移
 

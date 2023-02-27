@@ -30,13 +30,13 @@ tags:
 - 同样下面的消息、联系人、空间，这里的空间是无法去掉的，qq空间着实太过老了，虽然很多人还是用着，并且嫌弃着朋友圈，不过与我而已已经不需要这个东西了。
 - 最下层的应用管理，这里就非常精简了，除了加人和设置是一定要有的，剩下腾讯文档是我自己加上去的，就相对比较完美。
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/yEBheX5D7Nl4wCP.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/yEBheX5D7Nl4wCP.png)
 
 这里只是qq的界面，而到了消息界面时，默认的qq秀真的太老了，而且就算缩小了，下次再点开对话依然会弹出，这里算是不需要的一点吧。
 
 - 当年给腾讯创造了巨幅收益的qq秀，真的该下线了
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/BiMPzHhLCNnS5f8.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/BiMPzHhLCNnS5f8.png)
 
 当然qq的每个小功能点进去以后可能会出现大量其他有的没的功能，但是感觉这都是边缘功能了，一个正常人总不能老是点错点进去了吧？总体来说有些功能点，还是要用的，虽然频率非常低。
 
@@ -44,7 +44,7 @@ tags:
 
 但是有没有人想过为什么微信要限制25MB，限制你传送大文件，真的是给他们节省钱，节省流量吗？我觉得不是。
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/25IZSno1W4NxPj6.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/25IZSno1W4NxPj6.png)
 
 微信做的很隐晦，为什么限制呢，因为你不是企业微信，你去用企业微信就没有这些难用的问题，正常人交流就不配发送超过25M的文件？微信某些时候某些痛点，在这个软件上体现出来了，只是为了让你切去用另一个软件，而不是在这个软件上一站式的解决，再看qq，完全没有这个问题，这也是为什么我讨厌微信，既然做了为什么不做得完备一些，而非要拆分成那么多的分支呢？说到底还是为了KPI，还是为了每年的利润增长，企业用户的可付费上限远高于普通用户，死命挖掘企业用户，才是生财之道啊。
 
@@ -64,7 +64,7 @@ Telegram极致简洁，不是通信所必需的，都砍掉！
 
 qq秀？广告？强制推送？统统不存在，他只有唯一的功能，那就是信息交互，就是尽可能简洁的完成人与人之间交流。
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/unNImqhixFoDYQL.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/unNImqhixFoDYQL.png)
 
 足够简洁，足够好用
 
@@ -87,7 +87,7 @@ Telegram也有小程序，不过非常类似机器人，比如LibreTaxi，暂时
 
 
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/Nkto9FacyngBjeU.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/Nkto9FacyngBjeU.png)
 
 Telegram自称不以营利为目的，后期可能会进行必要的收费来维持运营
 

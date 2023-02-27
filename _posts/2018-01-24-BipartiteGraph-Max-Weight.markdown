@@ -24,13 +24,13 @@ KM算法的基础也一样是匈牙利算法，但是在它的基础上融合了
 
 同时所有的可行顶标都满足：
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/5bffc86c14989.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/5bffc86c14989.png)
 
 lx表示左点集，ly表示右点集，lx(x)表示左点集中的x顶点的顶标值，该式表示的自然也就是任意两点的顶标和是大于等于其边权值的
 
 - 相等子图，从原图生成的具有相同顶点的图，不一定包含其所有边，这样的子图中的边与顶点满足下式：
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/5bffc89fd12dd.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/5bffc89fd12dd.png)
 
 相等子图中包含的原理：如果原图的一个相等子图中包含完备匹配，那么这个的匹配同时也是原图的最佳二分匹配.KM算法保证了顶标的基本式,从而得到的匹配权值之和肯定是小于等于所有顶标之和的,进而图中的完备匹配是最优的.
 

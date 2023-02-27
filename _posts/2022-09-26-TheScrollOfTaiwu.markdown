@@ -167,11 +167,11 @@ EA里战斗基本上是一个回合制，但是新版本的战斗其实已经变
 
 #### 画饼
 
-![image-20220926113227322](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202209261132424.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202209261132424.png)
 
 之前各种画饼，各种高级玩法，各种AI、太吾世界npc的演化，而现在我遇到的就是儿子追杀妈妈，妈妈找我求救，我打儿子的时候，妈妈还和儿子在一个队伍里？上来还给他护体？好家伙现实版溺爱是吧？
 
-![image-20220926113210653](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202209261132051.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202209261132051.png)
 
 
 

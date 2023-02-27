@@ -29,7 +29,7 @@ tags:
 
 如图所示，解压以后所有可能需要的文件都在RTT里面
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/h4MoPKEAlmRd2vC.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/h4MoPKEAlmRd2vC.png)
 
 主要就是这么几个文件
 
@@ -202,7 +202,7 @@ JLinkRTT开头的程序有不少，各有各的作用
 
 JLinkRTTViewer 看着比较好一点
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/QWf3jwIHYnClU1J.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/QWf3jwIHYnClU1J.png)
 
 
 
@@ -224,7 +224,7 @@ SEGGER_RTT_Conf.h
 
 由于我们系统比较大，Tracealyzer 毫无意外的不能直接输出所有进程的信息，只能分段输出。而这个限制本质上就是RTT本身带来的限制，实际带宽大概是1.5mbps左右（我的环境下），提高SWD的速度可以一定程度上提高带宽，具体要看实际的buffer大小，输出频率等等(总的来说带宽和内存只能二选一)
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/mWKbIGUt7u6kwEQ.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/mWKbIGUt7u6kwEQ.png)
 
 如果以JLinkRTTViewer来显示，基本可以看到速度过快的时候，JLinkRTTViewer也会提示他只有4KB的缓存，不足以支撑输出速度。
 
@@ -234,13 +234,13 @@ SEGGER_RTT_Conf.h
 
 需要注意的是 RTT 本身和 JLink调试占用的是同一根线，也就是说，要边调试边输出debug信息的话，你就不能太快，得留一部分宽度给 JLink 用。
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/Qcn5SNkJ3iV4ZHh.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/Qcn5SNkJ3iV4ZHh.png)
 
 #### 支持芯片有限
 
 有的系列是不支持的，所以...
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/fI2rMRPXeGOzA6E.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/fI2rMRPXeGOzA6E.png)
 
 
 

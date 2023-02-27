@@ -74,7 +74,7 @@ tags:
 
 核实确认以后，就多了一张代金券，退款我发现一共也就退了七八块钱的样子
 
-![image-20220726184806575](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202207261848740.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202207261848740.png)
 
 
 
@@ -134,7 +134,7 @@ wget --no-check-certificate -qO natcfg.sh http://www.arloor.com/sh/iptablesUtils
 
 这就遇到了一个新问题，香港的镜像，只能在香港区域内进行重建。想要去到新加坡，根据客服给的提示，可以这么操作一下。
 
-![image-20220801182915077](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208011829224.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202208011829224.png)
 
 ```
 首先，将香港轻量的镜像分享给云服务
@@ -149,7 +149,7 @@ wget --no-check-certificate -qO natcfg.sh http://www.arloor.com/sh/iptablesUtils
 
 
 
-![image-20220801182920270](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208011829030.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202208011829030.png)
 
 等弄过来发现了一个致命问题，价格低一些的套餐，**硬盘大小竟然是不够的**。我去，白折腾了半天。
 

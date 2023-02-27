@@ -24,7 +24,7 @@ tags:
 
 虽然我都代码没正式开源，但是本质上和开源区别不大。而且玩个游戏而已，kdc这点收益其实瞧不上，不过由于面对的是整个工作室或者说整个中老年群体，在他们的眼里就没啥免费的午餐，总是拿着过去几十年的经验来解读你，不可避免地沉沦在过去，主观上就恶意的揣测你的一切行为，总是从利益出发，这让人不屑，这样的人只配活在过去。
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/PyT4fewgFmKodGA.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/PyT4fewgFmKodGA.png)
 
 总有人觉得开源图个啥，有时候确实没图啥，真的就是做圣人了。hhhhhhh，感觉有点惨。
 
@@ -120,13 +120,13 @@ tags:
 
 但是那会CNDC本身就是以白嫖为目的建立的群，无论是白嫖国外还是国内，终归是白嫖别人，一上来就开了个坏头。最可笑的是白嫖别人，泄露别人ip，然后给自己人练手。
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/7euhsDH4Ckqja2z.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/7euhsDH4Ckqja2z.png)
 
 而这个CNDC的组织者刘澈，更是奇葩，在我第一次成功以后，就想白嫖我的工具，甚至想要源码。且不说我都不认识你，一上来就要白嫖，可真有你的。本身工具也不是多难的东西，随手写一个就是了，要不了半个小时，就这水平，实在是...
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/XOhdSzycV5koDlI.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/XOhdSzycV5koDlI.png)
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/KuJFCvgNdHarIkG.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/KuJFCvgNdHarIkG.png)
 
 当然事后他也没写，从github上拿了个开源的工具过来用
 
@@ -140,7 +140,7 @@ tags:
 
 在第一次车发车前几个小时，有一个备注凯恩版主的人加到了我群里，我那会倒没太注意，后来我觉得CNDC这么做不太对，反应给凯恩的实习版主的时候，实习版主直接装傻充楞，我继而说到被屏蔽的Mod贴，这个版主也满嘴胡话，最后竟然给我的来句你有鸟弓吗？
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/ZJ5hRgj8Lk2Aipw.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/ZJ5hRgj8Lk2Aipw.png)
 
 好家伙，挂着CN的旗号，白嫖国外的，然后美其名曰学习、练习，这样的不去管管，反倒是跑来我这里看看你是不是骗子。果断挂起来，立马这个版主就没了，后续这个人各种阴阳怪气，就不再提了。
 
@@ -192,7 +192,7 @@ It's a bad mode,I think everyone should resist him
 
 
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/U7PkZRXVaYerWKO.png)![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/mFKCsMXncbWNV5O.png)![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/54OuM7GfgwNDj1V.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/U7PkZRXVaYerWKO.png)![](https://img.elmagnifico.tech/static/upload/elmagnifico/mFKCsMXncbWNV5O.png)![](https://img.elmagnifico.tech/static/upload/elmagnifico/54OuM7GfgwNDj1V.png)
 
 
 
@@ -224,13 +224,13 @@ It's a bad mode,I think everyone should resist him
 
 由于一直忙不过来，收票流程每次都很长，也遇到有人没给票，但是强行截图混进来了。然后就遇到了这个奇葩，我已经反复提醒要截图了，还没截图，还好我留了一手，我帮他截图了，同时也录屏了。让他qq联系我，不联系我，游戏内强行撒泼，丢装备，最可笑的是丢的装备被路人捡走了。然后就要弃坑，还要把账号给我。
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/pk4EVPdya2wWsJR.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/pk4EVPdya2wWsJR.png)
 
 
 
 等过了一天，我觉得他应该冷静了，喊他来开车，因为本质上收他的soj还没退给他，好家伙，刚开始还是个正常人，后面直接变成正义使者，逼着问我哪里错了，他一点错没有，问我是不是和捡装备的是一伙的，死活就觉得自己没错，最后实在忍不住了只好退他soj，他说不要，我就扔地上了，然后他跟狗一样的进房间来捡，被我嘲讽两句，又退了，hhhhhhhh。
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/8OUMgH7zIRWvk4b.png)![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/9cR6nGNvm1iFlCL.png)![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/9hqI2UoHV1xTwfj.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/8OUMgH7zIRWvk4b.png)![](https://img.elmagnifico.tech/static/upload/elmagnifico/9cR6nGNvm1iFlCL.png)![](https://img.elmagnifico.tech/static/upload/elmagnifico/9hqI2UoHV1xTwfj.png)
 
 
 
@@ -248,7 +248,7 @@ It's a bad mode,I think everyone should resist him
 
 接到举报，有人找上车的人买ip，1soj买一个ip，然后他再找人帮他刷房间，他提供工具（我的）和ip，刷到的第一个房间需要给他，剩下多刷的都可以自己拿走。公然在各种交易群里拉人，然后给他打工，他拿到房间以后再以2soj卖给想上车的人。
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/W58SOEfGtYNqyIh.png)![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/4yvkjBtORS8nE2m.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/W58SOEfGtYNqyIh.png)![](https://img.elmagnifico.tech/static/upload/elmagnifico/4yvkjBtORS8nE2m.png)
 
 
 
@@ -326,9 +326,9 @@ Fake客户端的方案用了一次基本就放弃了，后来就是写了一个s
 
 #### 内鬼猖獗
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/5eCgxHrbYdOyk6U.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/5eCgxHrbYdOyk6U.png)
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/RbnMtQ4BGH7Kjmz.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/RbnMtQ4BGH7Kjmz.png)
 
 公益车开之前就被人威胁，如果放IP出来就把整个印尼爆给老外，让老外把印尼撑爆（当初印度就是被撑爆，扩容了）而实际上由于游戏热度消退，所以想要撑爆实在是太难了。琉璃直接当场自爆，自己发公益车IP，把鬼当场堵住了，不过由于是2个ip，琉璃把我的ip故意打错了，所以最后公益车上车的统计里，琉璃的ip上车的人数明显要少一些。
 
@@ -342,11 +342,11 @@ Fake客户端的方案用了一次基本就放弃了，后来就是写了一个s
 
 当鬼知道自己上当以后，又展开了一轮反击，谎称去各个群散布了ip，来混淆视听，从而解放之前被实锤的内鬼，可惜大家都懂什么情况，没人理他们了。
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/UXo84mrlsvkL9g7.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/UXo84mrlsvkL9g7.png)
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/2T4hmdLHIywt9bx.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/2T4hmdLHIywt9bx.png)
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/gUEtz5Y1OIrHyKn.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/gUEtz5Y1OIrHyKn.png)
 
 
 
@@ -368,7 +368,7 @@ Fake客户端的方案用了一次基本就放弃了，后来就是写了一个s
 
 本来想开个1soj车，但是没想到还遇到了工作室要搞我，事后，我的贡献者直接告诉我了，也有没告诉我的（都踢了），后续直接被人爆出来所有发言，然后又跑我群里装b，简单套了一下大概知道了目前1soj的工作室车是怎么开的了。
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/hVTJyv5BWEPAoCi.png)![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/SjFAlcza1KwOHPk.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/hVTJyv5BWEPAoCi.png)![](https://img.elmagnifico.tech/static/upload/elmagnifico/SjFAlcza1KwOHPk.png)
 
 
 
@@ -402,9 +402,9 @@ pk工作室可以稳定刷到200房左右，同时为了缩短开车时间，不
 
 
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/voFIfhyQjk1LKHx.png)![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/TmhLa2EF3yZsVW7.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/voFIfhyQjk1LKHx.png)![](https://img.elmagnifico.tech/static/upload/elmagnifico/TmhLa2EF3yZsVW7.png)
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/ndovkNYD5ViOJz9.png)![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/ryvM5RTJIKw21cq.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/ndovkNYD5ViOJz9.png)![](https://img.elmagnifico.tech/static/upload/elmagnifico/ryvM5RTJIKw21cq.png)
 
 
 
@@ -412,7 +412,7 @@ pk工作室可以稳定刷到200房左右，同时为了缩短开车时间，不
 
 由于我拒绝向工作室提供技术支持，接下来就是各种威胁，泼脏水了
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/xqATnfjPtWEYdQ6.png)![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/xkusDKFzLE3Jbt7.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/xqATnfjPtWEYdQ6.png)![](https://img.elmagnifico.tech/static/upload/elmagnifico/xkusDKFzLE3Jbt7.png)
 
 这个PK大概就是初中水平吧，一个word不会用，排版也不会，文字里前后矛盾，看着都别扭，但是断章取义竟然巧妙的会
 
@@ -430,11 +430,11 @@ pk工作室可以稳定刷到200房左右，同时为了缩短开车时间，不
 
 为了让工作室疑神疑鬼，疯狂猜忌，于是我将计就计故意卖很多毁灭，故意漏一些房间，让他们吃瘪难受。
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/uK5I9oq1aDSvQfl.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/uK5I9oq1aDSvQfl.png)
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/BAkJuvM2t6WlpZo.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/BAkJuvM2t6WlpZo.png)
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/9LQOJtwYfHvCeo6.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/9LQOJtwYfHvCeo6.png)
 
 怕不是他们开车都心惊胆战，怕遇到我，hhhhhhhhhh。
 
@@ -446,21 +446,21 @@ pk工作室可以稳定刷到200房左右，同时为了缩短开车时间，不
 
 先是要仓库截图，然后要指定位置的毁灭
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/HKgfaykP8nQRzu5.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/HKgfaykP8nQRzu5.png)
 
 还好我录视频了
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/NUjCE8KtPdS2qXB.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/NUjCE8KtPdS2qXB.png)
 
 
 
 还想买我耳朵给他献祭，真尼玛离谱
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/dZGcDhkftaC6O19.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/dZGcDhkftaC6O19.png)
 
 这是这大哥的仓库献祭流截图，真恐怖
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/JqbNSKoWRDz4rf8.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/JqbNSKoWRDz4rf8.png)
 
 
 
@@ -490,11 +490,11 @@ pk工作室可以稳定刷到200房左右，同时为了缩短开车时间，不
 
 所以开始的时候没有MH，当我看到MapAssist项目的时候，第一时间fork，然后翻译成中文，打好包、写好教程，扔了论坛一份。
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/h9kwbRFquAsylQe.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/h9kwbRFquAsylQe.png)
 
 论坛也没翻出啥水花，反倒是我群里基本都在用。后来论坛帖子还被屏蔽了，因为确实有风险。前几天，竟然有人挖坟，挖出来，然后我就被当朝的剑砍了。然后还是永封，笑死我了，版主在我群里，我反馈了一下，也没啥下文，估计不能解吧。算了吧，本来之前就不去论坛了，没想到无意间上去一趟，还看到这么个。
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/dEfxYTUsHyWeCzS.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/dEfxYTUsHyWeCzS.png)
 
 MH确实是外挂，但是您用了10年了，今天翻旧账说打倒就打倒了，这不是自欺欺人嘛，且不说现在也是人手一个啊。就好像明知对方是工作室，但是没有对方使用外挂的证据，所以没问题，这不就是睁眼硬说瞎话呗，法律还能推论呢，论坛的规矩都不能推论的？
 
@@ -540,4 +540,4 @@ MH确实是外挂，但是您用了10年了，今天翻旧账说打倒就打倒�
 
 KDC到此告一段落了，据说2.4之后变成一个global级别的event，不再基于ip了，那估计就没这些事情了。2.4的改动还是有点太小了，具体是否还要继续玩，待定吧，还有更多好游戏要体验。
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/e8OaGXSNdP26j1V.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/e8OaGXSNdP26j1V.png)

@@ -21,13 +21,13 @@ tags:
 
 Windows应用商店直接搜索安装
 
-![image-20221121141020604](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202211211410681.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202211211410681.png)
 
 
 
 同步的便笺也可以直接通过outlook的邮箱，直接看到，也可以修改什么的
 
-![image-20221121140840552](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202211211408641.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202211211408641.png)
 
 
 
@@ -37,7 +37,7 @@ Windows应用商店直接搜索安装
 
 一般情况下，只要不开启VPN，也就是V2ray，不使用局域网的代理设置，Windows商店就能正常打开，就可以正常同步
 
-![image-20221121141306875](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202211211413946.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202211211413946.png)
 
 
 
@@ -63,15 +63,15 @@ Timestamp: 2022-11-18T22:41:22Z
 
 想起来我的uu加速，貌似可以代理windows商店应用，所以试了一下
 
-![image-20221121141708027](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202211211417247.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202211211417247.png)
 
 Windows加速只有一个选项，就是Windows Xbox App，加速以后，再进行同步，果然全部正常了
 
-![image-20221121141916686](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202211211419752.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202211211419752.png)
 
 ## 解决代理问题
 
-![Win10 App如何走代理?Win10应用代理教程](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202211211516727.jpeg)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202211211516727.jpeg)
 
 比较有名的网络分析软件Fiddler有一个工具，`AppContainer Loopback Exemption Utility`，他可以实现将指定的windows uwp应用修改网络模式。当然也有一些命令行工具可以用，只是需要查询注册表，然后再去执行，比较麻烦
 
@@ -83,7 +83,7 @@ Windows加速只有一个选项，就是Windows Xbox App，加速以后，再进
 
 不过他没编译，所以我fork以后重新编译了一下
 
-![image-20221121151908935](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202211211519989.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202211211519989.png)
 
 可以在这里直接下载编译好的exe
 
@@ -93,17 +93,17 @@ Windows加速只有一个选项，就是Windows Xbox App，加速以后，再进
 
 没开启前，使用v2ray和pac协议
 
-![image-20221121154436558](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202211211544636.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202211211544636.png)
 
-![image-20221121154056991](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202211211540061.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202211211540061.png)
 
 可以看到有网络问题，搜索stick，勾选Exempt，然后Save
 
-![image-20221121154538175](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202211211545212.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202211211545212.png)
 
 重新打开便笺，就看到同步正常了
 
-![image-20221121154716343](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202211211547406.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202211211547406.png)
 
 
 
@@ -111,7 +111,7 @@ Windows加速只有一个选项，就是Windows Xbox App，加速以后，再进
 
 后来发现原来新版的V2rayN就自带了这个UWP解除代理的工具，也非常好用
 
-![image-20221203115605804](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212031156960.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202212031156960.png)
 
 
 

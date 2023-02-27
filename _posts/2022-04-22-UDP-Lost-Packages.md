@@ -55,7 +55,7 @@ tags:
 > 3. 内核从 ring buffer 中读取报文进行处理，执行 IP 和 TCP/UDP 层的逻辑，最后把报文放到应用程序的 socket buffer 中
 > 4. 应用程序从 socket buffer 中读取报文进行处理
 
-![img](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/006tKfTcgy1fnf8b0c64xj31hc0u0goa.jpg)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/006tKfTcgy1fnf8b0c64xj31hc0u0goa.jpg)
 
 #### 硬件缓冲不足
 
@@ -165,7 +165,7 @@ ARP过期会导致UDP丢包，这个是我没见过的
 
 udp包的内容如下：
 
-![image-20220422104641290](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220422104641290.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20220422104641290.png)
 
 ```
 0xfe 0x12 0xf5 0x01 0x01 0x77 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x78 0x51 0x02 0x00 0x00 0x00 0xec 0xbf
@@ -181,7 +181,7 @@ udp包的内容如下：
 
 之所以敢这么肯定，是因为当切换了路由器之后，这个问题直接就不存在了，这个包不会丢包了。
 
-![image-20220426103611519](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220426103611519.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20220426103611519.png)
 
 如果我在这个包之前加个字节或者包后加个字节，这个问题就直接不存在了，这个字节不限定是什么，只要加一个就不会被丢包了。
 

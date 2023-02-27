@@ -56,7 +56,7 @@ Dijkstra算法基本高中的数学课本就有了，算是最基础的算法之
 
 这里面Astar经常搭配一个启发函数，然后变成启发式搜索，相当于是给了一个粗略的可以估计目标所在方向的函数，让Astar朝着这个大致方向进行搜索，从而提高了搜索效率，启发式Astar被广泛的使用在游戏行业中。
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/U1m3seWGtH82VB4.gif)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/U1m3seWGtH82VB4.gif)
 
 
 
@@ -66,7 +66,7 @@ Dijkstra算法基本高中的数学课本就有了，算是最基础的算法之
 
 > https://blog.csdn.net/xyisv/article/details/79184815
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/EGFBR4gno1XfWkO.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/EGFBR4gno1XfWkO.png)
 
 
 
@@ -76,7 +76,7 @@ Dijkstra算法基本高中的数学课本就有了，算是最基础的算法之
 
 > https://zhuanlan.zhihu.com/p/66265861
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/wn1rAlRv2cQhbV8.gif)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/wn1rAlRv2cQhbV8.gif)
 
 但是这种方法往往也有一些问题，环境可能非常复杂，导致构建出来的场景中存在局部最小值，导致没到达目标点就停止移动了。
 
@@ -90,7 +90,7 @@ Dijkstra算法基本高中的数学课本就有了，算是最基础的算法之
 
 > http://qiao.github.io/PathFinding.js/visual/
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/P3lgJmceO5zDdwI.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/P3lgJmceO5zDdwI.png)
 
 
 

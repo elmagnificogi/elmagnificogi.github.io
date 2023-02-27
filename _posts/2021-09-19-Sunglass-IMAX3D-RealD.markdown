@@ -16,7 +16,7 @@ tags:
 
 扔了一半，还剩下这么多，头疼(这里面有一支墨镜)
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/1uQyaMTOemXs6Nc.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/1uQyaMTOemXs6Nc.png)
 
 ## 显示器区分大法
 
@@ -26,9 +26,9 @@ tags:
 
 首先上场的是墨镜，很明显墨镜有时候长得太像了，也容易拿混。
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/1D4rv3oI7hyn9Za.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/1D4rv3oI7hyn9Za.png)
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/IXA8RPge5GQz3HD.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/IXA8RPge5GQz3HD.png)
 
 横竖对着显示器观察，没有明显差别。
 
@@ -36,17 +36,17 @@ tags:
 
 圆偏-也就是Reald-普通影院的3D眼镜，明显，竖着的时候泛黄，横着的时候泛蓝
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/FqAblENZ8nKipOQ.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/FqAblENZ8nKipOQ.png)
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/RKzILdt2MrCNe1W.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/RKzILdt2MrCNe1W.png)
 
 
 
 线偏-IMAX眼镜，明显横着的时候右侧是黑的，竖着的时候左侧是黑的
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/DWYoTndvcgkEUuj.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/DWYoTndvcgkEUuj.png)
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/TLeH3A8DgYJftOj.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/TLeH3A8DgYJftOj.png)
 
 以上的眼镜都是针对影院的，一般是这两种格式的。不排除某些号称3d功能的电视，可能用特殊方法实现，需要配合独特的偏振眼镜。
 

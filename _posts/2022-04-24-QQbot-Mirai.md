@@ -238,7 +238,7 @@ login 你的qq qq密码
 
 windows会有一个弹窗
 
-![device-verify](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/device-verify-51685adea6b4490bb6bdcb91f338b849.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/device-verify-51685adea6b4490bb6bdcb91f338b849.png)
 
 linux下是命令行提示
 
@@ -275,7 +275,7 @@ linux下是命令行提示
 
 然后Mirai中会提示你对应的`请求码`或者是`Captcha link`，输入之后会弹出滑动验证，验证ok即可。
 
-![image-20220424160136720](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220424160136720.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20220424160136720.png)
 
 成功以后会获得一个`ticket`，继续在命令行输入`ticket`，然后回车
 

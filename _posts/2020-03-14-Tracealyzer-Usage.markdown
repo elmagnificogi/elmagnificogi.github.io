@@ -37,7 +37,7 @@ tags:
 
 建议在streaming模式下关闭可视化，主要是streaming模式下数据量大，可视化很卡，而且这个时候讲道理你也看不清啥，等数据记录完了以后再可视化
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/DRKbFG7xQXdkN8I.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/DRKbFG7xQXdkN8I.png)
 
 还有一点有时候开着可视化会莫名其妙的丢包，导致missed events突然就跳了
 
@@ -47,7 +47,7 @@ tags:
 
 ## Actor
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/S4OJHa7mKntvxBC.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/S4OJHa7mKntvxBC.png)
 
 在Actor Overview中可以看到各个线程的调用情况。
 
@@ -70,7 +70,7 @@ tags:
 
 如果系统比较小，可能不会有miss event发生，或者数量非常小，基本可以忽略。
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/IZMxNn3btvrm2So.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/IZMxNn3btvrm2So.png)
 
 根据当前数据计算所需要的数据速率有多少
 

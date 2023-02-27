@@ -28,11 +28,11 @@ tags:
 
 稍微有点我预判了你的方向的意思，我们方向不同，必然可以不碰撞。
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/2HL5kxwSVZvm43g.jpg)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/2HL5kxwSVZvm43g.jpg)
 
 同理对于更多的球来说，也一样适用，这个球的下一步运动只需要选择一个和其他所有人都满足这个条件并且距离目标最近的方向进行运动，即可保持距离。
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/JEx96IBsvagbRZ7.jpg)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/JEx96IBsvagbRZ7.jpg)
 
 但是VO算法有几个前提条件，这里主要做速度选择的球是主角，其他球的方向默认都是不会发生变化的，就会出现实际运动时球一直在切换方向，整个运动过程非常抖，这个就和我们的实际应用有点偏差。如果基于这样的基础去扩展，让每一个球都成为主角，都应用这一套理论，并且不再需要转向那么多，每个球都是一个智能体，基于此演化出了RVO，用来解决局域范围内避障的问题。
 
@@ -66,7 +66,7 @@ tags:
 
 流场寻路，首先是应用Dijkstra算法得到全图的的距离图，然后每个格子指向邻居节点中距离最小的格子，从而生成一个矢量热度图。
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/iTRmfLHA7Wj9O48.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/iTRmfLHA7Wj9O48.png)
 
 
 
@@ -86,7 +86,7 @@ tags:
 
 这个算法主要定义了集群的三大核心规则，分离，队列和内聚，然后所有鸟都根据规则进行运动，从而形成了一种看起来像是鸟群鱼群的运动
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/VP6nBbdGLwHcUpj.gif)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/VP6nBbdGLwHcUpj.gif)
 
 基于这样的规则再拓展就能创造出一些很有意思的集群运动
 

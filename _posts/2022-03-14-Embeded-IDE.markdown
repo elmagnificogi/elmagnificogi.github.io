@@ -27,7 +27,7 @@ tags:
 
 > https://www.iar.com/ewarm
 
-![image-20220314165236150](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202203141653902.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202203141653902.png)
 
 IAR 不必说，嵌入式老牌IDE了。但是由于当年对这个东西的厌恶，再加上现在和其他IDE比起来，也显得很老气，所以不推荐了。如非必要没必要选择IAR了。毕竟和Keil比起来不是亲儿子，编译虽然快了，但是又不如SES，而代码提示啥的又不如VS，代码优化不如Keil，总的来说非常中庸，各方面都不如别人，但是又没啥明显短板。
 
@@ -37,7 +37,7 @@ IAR 不必说，嵌入式老牌IDE了。但是由于当年对这个东西的厌�
 
 > https://www2.keil.com/mdk5/uvision/
 
-![image-20220314165717061](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202203141657151.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202203141657151.png)
 
 keil 更不用说了，从当年一个人维护的IDE，到后来被ARM官方收购了，能选择keil的地方，基本就没必要选择IAR，但是keil还是太老了啊，跟不上节奏就算了，~~编译速度基本上是所有编译器里最慢的，快的能比他快七八倍，老大哥，尚能饭否？~~ 基于最新的编译版本，目前Keil应该是最快的了，但是这都2022年了文件夹还不能嵌套，文件夹的结构间直要看死个人的。
 
@@ -47,7 +47,7 @@ keil 更不用说了，从当年一个人维护的IDE，到后来被ARM官方收
 
 #### Keil Studio
 
-![image-20220315173345057](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202203151733161.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202203151733161.png)
 
 > https://www.keil.arm.com/
 
@@ -61,7 +61,7 @@ keil 更不用说了，从当年一个人维护的IDE，到后来被ARM官方收
 
 ## Eclipse
 
-![image-20220315145812053](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202203151458133.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202203151458133.png)
 
 Eclipse 本身就是大杂烩，他能作为嵌入式IDE的核心是 gcc_arm_none_eabi，靠着他实现了嵌入式开发。
 
@@ -75,7 +75,7 @@ Eclipse 本身就是大杂烩，他能作为嵌入式IDE的核心是 gcc_arm_non
 
 ### STM32CubeIDE
 
-![image-20220315145849359](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202203151458410.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202203151458410.png)
 
 > https://www.st.com/zh/development-tools/stm32cubeide.html
 
@@ -85,7 +85,7 @@ Eclipse 本身就是大杂烩，他能作为嵌入式IDE的核心是 gcc_arm_non
 
 ### TrueSTUDIO
 
-![image-20220315150438728](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202203151504840.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202203151504840.png)
 
 > https://www.st.com/zh/development-tools/truestudio.html
 
@@ -103,7 +103,7 @@ Atollic 之前被ST收购了，于是出了这么一个整合ST嵌入式开发�
 
 > https://visualgdb.com
 
-![image-20220314180223747](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202203141802778.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202203141802778.png)
 
 VisualGDB不能算是个IDE，他只是个插件，但是当他和Visual Studio结合到一起以后，就可以作为一个嵌入式IDE了。借助于VS的强大代码补全、查看等特性，让VisualGDB+VS 这一组合大受欢迎。
 
@@ -115,7 +115,7 @@ VisualGDB不能算是个IDE，他只是个插件，但是当他和Visual Studio�
 
 ### Embedded Software Development
 
-![image-20220315174547490](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202203151745601.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202203151745601.png)
 
 > https://devblogs.microsoft.com/cppblog/visual-studio-embedded-development/
 
@@ -127,7 +127,7 @@ VisualGDB不能算是个IDE，他只是个插件，但是当他和Visual Studio�
 
 ## CLion
 
-![image-20220315145938578](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202203151459629.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202203151459629.png)
 
 使用CLion，就比较复杂一些，毕竟本身CLion本身是不支持嵌入式的，编译需要额外安装指定gcc-arm-one-eabi，然后如果要debug还需要指定OpenOCD，而要调用还需要MinGW的支持，所以集成度比较低。
 
@@ -145,7 +145,7 @@ VisualGDB不能算是个IDE，他只是个插件，但是当他和Visual Studio�
 
 ### PlatformIO
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202203151511321.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202203151511321.png)
 
 > https://platformio.org/
 
@@ -161,7 +161,7 @@ PlatformIO 本身没有编辑器，整个编辑器是靠VS Code来提供的，�
 
 ### gcc-arm-none-eabi
 
-![image-20220315161026450](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202203151610513.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202203151610513.png)
 
 依靠gcc-arm-none-eabi 这种方式就类似于CLion了，也需要MinGW，如果调试可能还需要OpenOCD。配置流程类似于CLion，都比较复杂一些。
 
@@ -169,7 +169,7 @@ PlatformIO 本身没有编辑器，整个编辑器是靠VS Code来提供的，�
 
 ### Ozone
 
-![image-20220315160843525](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202203151608781.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202203151608781.png)
 
 Ozone准确来说只是拿来调试的工具，很早的时候我倒是试过，不过后来就给忘记这个东西了。Ozone基本是一定要配合J-Link使用，毕竟亲儿子了。只要导入对应的elf、axf还有源码工程，就可以直接单步调试了，总体上还是很不错的。
 
@@ -195,13 +195,15 @@ IAR的版本就叫 IAR Embedded Workbench
 
 我之前开发的STM8等这种性能比较差的单片机，就可以使用这个插件
 
-![image-20220315195410042](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202203151954128.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202203151954128.png)
 
 不过他本身不支持调试，只是可以用来写代码和烧写而已。
 
 
 
-### Embedded Tools![image-20220315174810670](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202203151748762.png)
+### Embedded Tools
+
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202203151748762.png)
 
 同理VS中有了嵌入式开发环境，对应的VS Code里也会有，最后实现的效果类似于VS中的。
 
@@ -213,7 +215,7 @@ VS Code本身通过这种方式达到的效果就不够一体化，所以实际�
 
 ## SEGGER Embedded Studio
 
-![image-20220315162635446](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202203151626499.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202203151626499.png)
 
 > https://www.segger.com/products/development-tools/embedded-studio/
 
@@ -231,7 +233,7 @@ SES也有一点缺点，就是整体的高亮显示啊（其实是有点素，�
 
 ### CrossStudios
 
-![image-20220315165211130](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202203151652284.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202203151652284.png)
 
 > https://www.rowley.co.uk/arm/index.htm
 

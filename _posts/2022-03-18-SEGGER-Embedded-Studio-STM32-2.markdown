@@ -33,7 +33,7 @@ tags:
 
 打开Tools-Options-Environment，可以看到对应的http的代理设置，不需要的话留空就自动不生效了。
 
-![image-20220321102522665](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220321102522665.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20220321102522665.png)
 
 
 
@@ -41,7 +41,7 @@ tags:
 
 目录树取消大小显示，很多余。打开的文件自动同步展开目录树位置，也有点多余，所以也去掉
 
-![image-20220321155026990](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220321155026990.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20220321155026990.png)
 
 
 
@@ -55,7 +55,7 @@ tags:
 
 配置文件的设计，他这里给了Solution若干个配置文件，而Solution本身没有任何实际的工程文件，它相当于是一个父类，Project的配置全都是从Solution中继承来的，在实际操作的时候经常可以看到这个设置会有一个tag提示是inherited的
 
-![image-20220318181250149](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202203181812211.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202203181812211.png)
 
 从官方的解释来说，Project的所有路径都是相对的，而Solution则是绝对路径，基于继承关系，所以你可以自己弄出来多个Solution的配置，从而可以达到切换路径的效果，进而Project的路径不需要反复修改（当然，具体哪里用得上这种情况，我也不知道）
 
@@ -65,7 +65,7 @@ tags:
 
 然后对于一个层级中，还有Public和Private的区别
 
-![image-20220318182141212](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202203181821240.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202203181821240.png)
 
 简单说就是Public 继承 Private Configuration，举个例子，如果一个项目里Private Configuration 就是搞框架的人 第一次配好的，一个相当通用的配置。如果和他的环境相同，基本就可以直接使用Public Configurations继承它，然后直接编译就行了。但是如果你和的环境略有区别，那么就比较适合你自己在Public的配置上略作修改，但是Private的保持原样，同时git也不追踪Public的部分，这样就能兼顾总体和个体。
 
@@ -75,7 +75,7 @@ tags:
 
 继承关系可以从Build Configurations中看到
 
-![image-20220323185714648](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220323185714648.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20220323185714648.png)
 
 比如这里我想让OV3继承到External GNU中的External Build的C Compile Command的配置，我只要修改External GNU就行了，修改以后会自动有一个**modified**标签，然后再切换到OV3 External 中就能看到显示了**inherits**，并且值也保持相同。如果不要继承的话，右键自己修改一下就行了。
 
@@ -85,11 +85,11 @@ tags:
 
 #### Internal和External
 
-![image-20220321145355790](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220321145355790.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20220321145355790.png)
 
 同一个配置之中还有Internal和Extern的区别，其实会造成这个的原样的是导入的问题，如果导入选择了外部GNU，那么就全都是External，同理如果选了内置的，那就是Internal，如果2个都选了，那么就会出现又有内部又有外部的情况，这种就是自动生成的配置，自己改改就行了
 
-![image-20220321111448808](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220321111448808.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20220321111448808.png)
 
 
 
@@ -125,7 +125,7 @@ Clang其实只是一个编译器的前端，只是由于新的编译器前端都
 
 LLVM则是指编译器的后端，实际上在不同的地方可能指代不同，嵌入式这里某些时候指代的范围类似于Clang，这种基本都属于乱用，把概念搞模糊了。
 
-![Clang LLVM](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/Clang-LLVM.jpg)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/Clang-LLVM.jpg)
 
 随着时代的发展，很多单纯使用GCC的地方都被LLVM替代了，当然嵌入式常常落后一个时代，所以还有很多GCC的使用。
 
@@ -141,11 +141,11 @@ LLVM则是指编译器的后端，实际上在不同的地方可能指代不同�
 
 先说SES的gcc，可以清楚的看到版本4.2.1
 
-![image-20220323174046580](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220323174046580.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20220323174046580.png)
 
 实际上文件也就是用的gcc-arm-none-eabi，不但版本非常老，而且还是阉割版的，有很多编外的库文件，直接就没有，或者他内置到其他文件夹去了
 
-![image-20220323171121709](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220323171121709.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20220323171121709.png)
 
 从SES官方角度来说还是推荐你用SEGGER的编译器，而不是gcc，因为有很多东西没说明白，官方文档没说清楚，而论坛里竟然也搜不到相关的问题。
 
@@ -161,7 +161,7 @@ LLVM则是指编译器的后端，实际上在不同的地方可能指代不同�
 
 > https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-rm/downloads
 
-![image-20220321111448808](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220321111448808.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20220321111448808.png)
 
 
 
@@ -177,7 +177,7 @@ SES支持直接导入Eclipse工程或者Keil工程，但是导入Eclipse经常�
 
 将目录转换成常规文件夹，只有这样才能使用右键排除编译或者排除文件夹，否则这个目录右键以后没有排除选项
 
-![image-20220321112733672](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220321112733672.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20220321112733672.png)
 
 
 
@@ -206,7 +206,7 @@ signalr.c:(.text._kill_r+0xe): undefined reference to `_kill'
 --specs=nosys.specs
 ```
 
-![image-20220323183739883](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220323183739883.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20220323183739883.png)
 
 添加之后，编译就正常了
 
@@ -216,9 +216,9 @@ signalr.c:(.text._kill_r+0xe): undefined reference to `_kill'
 
 屮，又遇到了bug，明明使用的是GNU，C和C++混合的，但是没想到他这里的标签直接就出错了
 
-![image-20220321155906054](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220321155906054.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20220321155906054.png)
 
-![image-20220321155938570](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220321155938570.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20220321155938570.png)
 
 > https://forum.segger.com/index.php/Thread/8477-BUG-C-and-C-Language-Standard-upside-down/#post30892
 
@@ -234,7 +234,7 @@ signalr.c:(.text._kill_r+0xe): undefined reference to `_kill'
 
 如果是使用GCC的模式，那么就是用GCC的ld文件，这个ld文件一般在STM32的固件包里就能找到
 
-![image-20220325170947751](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220325170947751.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20220325170947751.png)
 
 类似于这样的
 
@@ -435,7 +435,7 @@ C:\Users\你的用户名\AppData\Local\SEGGER\SEGGER Embedded Studio\v3\packages
 
 ```
 
-![image-20220325171316135](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220325171316135.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20220325171316135.png)
 
 但是由于这个是静态的，带操作系统的部分自然就看不到了，需要结合操作系统实时看了。
 
@@ -445,11 +445,11 @@ C:\Users\你的用户名\AppData\Local\SEGGER\SEGGER Embedded Studio\v3\packages
 
 首先是创建一个library的工程
 
-![image-20220518163907567](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220518163907567.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20220518163907567.png)
 
 选择对应的Core
 
-![image-20220518163937354](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220518163937354.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20220518163937354.png)
 
 之后就是添加文件，添加函数之类的基础操作了，直接编译一般都不会报错
 
@@ -459,17 +459,17 @@ C:\Users\你的用户名\AppData\Local\SEGGER\SEGGER Embedded Studio\v3\packages
 
 如果要链接静态库，有一些不太一样的地方，首先静态库编译生成必须符合实际
 
-![image-20220518162753016](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220518162753016.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20220518162753016.png)
 
 对应使用的地方，是什么样的类型就选择什么样的类型。
 
 其次是如果是内部gcc直接通过`Standard Libraries Directory`加入即可，不需要额外的命令
 
-![image-20220518162855259](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220518162855259.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20220518162855259.png)
 
 但是如果是通过外部gcc(`arm-none-eabi-gcc`)，就需要手动指定静态库
 
-![image-20220518163019691](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220518163019691.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20220518163019691.png)
 
 在`C++ Link Command`中指定路径和文件
 
@@ -588,7 +588,7 @@ SES支持一些宏定义，可能有的项目需要，可以直接用
 
 > https://studio.segger.com/index.htm?https://studio.segger.com/ide_build_macros_help.htm
 
-![image-20220324155607174](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202203241556262.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202203241556262.png)
 
 一种是system一种是build，都可以直接利用。
 
@@ -604,7 +604,7 @@ debug的时候，有可能你看变量显示的是 `Restricted memory range` 看
 
 > https://forum.segger.com/index.php/Thread/5797-SOLVED-Restricted-memory-range-in-watch-window/
 
-![image-20220325160814900](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220325160814900.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20220325160814900.png)
 
 #### 显示外设寄存器
 
@@ -612,11 +612,11 @@ debug的时候，有可能你看变量显示的是 `Restricted memory range` 看
 
 这就需要设置一下寄存器定义文件
 
-![image-20221128230317160](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202211282303201.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202211282303201.png)
 
 这个文件一般都在对应的packages中，所以要先安装好对应的package，然后才能找到`Registers.xml`
 
-![image-20221128230257353](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202211282303451.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202211282303451.png)
 
 设置以后才能在调试的时候，打开对应的寄存器
 
@@ -628,23 +628,23 @@ debug的时候，有可能你看变量显示的是 `Restricted memory range` 看
 
 默认tab显示的是8个空格，非常蠢，修改成4个，同时建议关闭Tab的使用，用空格就好了
 
-![image-20220401164323946](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220401164323946.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20220401164323946.png)
 
 
 
 建议勾选上清除tab的保存，每次自动将tab替换成space，让这个世界永无tab吧。
 
-![image-20220401164520157](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220401164520157.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20220401164520157.png)
 
 
 
 代码格式化这里也是8个，修改为4个
 
-![image-20220401164403099](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220401164403099.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20220401164403099.png)
 
 将tab按键也调整为4
 
-![image-20221203112347219](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212031123330.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202212031123330.png)
 
 
 
@@ -652,11 +652,11 @@ debug的时候，有可能你看变量显示的是 `Restricted memory range` 看
 
 SES有个傻逼设定，他的全局替换只能在打开的文档中使用
 
-![image-20221202093228433](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212020932619.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202212020932619.png)
 
 而不能把整个工程的文件内容进行替换，如果选择当前工程或者其他不支持的选项，就会变灰，无法使用。
 
-![image-20221202093320003](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212020933087.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202212020933087.png)
 
 
 

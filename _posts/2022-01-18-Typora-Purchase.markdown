@@ -43,13 +43,13 @@ Typora现在是 14.99$ ，折合人民币 89￥，付费之后可以获得3个�
 
 直接卸载老版，然后安装新版，就能直接激活
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/4iMFh7PmEskjGCJ.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/4iMFh7PmEskjGCJ.png)
 
 
 
 激活动画还蛮好看的
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/gDXxqsrZiVpBKa9.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/gDXxqsrZiVpBKa9.png)
 
 
 
@@ -79,7 +79,7 @@ marktext，可以当作开源版的Typora来看
 
 > https://github.com/marktext/marktext
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/4dUDqPBHCpYchIg.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/4dUDqPBHCpYchIg.png)
 
 
 
@@ -89,7 +89,7 @@ obsidian，正儿八经的知识管理，类似于notion的本地版本，看起
 
 > https://obsidian.md/
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/1yrkWBU4vFqKYul.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/1yrkWBU4vFqKYul.png)
 
 
 

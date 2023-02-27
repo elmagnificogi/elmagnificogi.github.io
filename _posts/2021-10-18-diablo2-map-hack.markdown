@@ -16,7 +16,7 @@ tags:
 
 没想到短短几天，就有人弄出来了重制版地图显示，不得不说牛皮啊。
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/2Un4NxlSDjTABsz.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/2Un4NxlSDjTABsz.png)
 
 
 
@@ -65,7 +65,7 @@ A. How this thing works in layman terms, is that it is giving you an overlay map
 
 - 下不了的去群里下，我加上了key
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/i6F1t7uXVgQ34oJ.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/i6F1t7uXVgQ34oJ.png)
 
 解压以后可以看到如图所示内容。
 
@@ -95,15 +95,15 @@ XM98CC7FTFD6PPB62RHNM726KD
 
 下载然后解压，看到下面的文件夹
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/YaKR24mBJTcxuew.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/YaKR24mBJTcxuew.png)
 
 这里需要先修改一下mapapi启动的暗黑位置，这里编译bat，将其中的暗黑路径修改为刚才安装的位置
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/j97uWeaPNlSFqcr.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/j97uWeaPNlSFqcr.png)
 
 修改完了以后，通过Run.bat 启动，如果正常启动，就会像下图一样
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/zvQt1TgsfpCiZMc.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/zvQt1TgsfpCiZMc.png)
 
 - **这个命令行不能关闭**
 
@@ -115,7 +115,7 @@ D2RAssist.exe打开以后没有任何显示的，进游戏，然后切换地图 
 
 - **在安全区不会显示地图**
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/BFNJTv7jIgXwDcf.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/BFNJTv7jIgXwDcf.png)
 
 比如我这里是乱石旷野，红圈处的牛腿位置，一模一样
 
@@ -151,11 +151,11 @@ D2RAssist的作者有数字货币收款，对于赞助者有特殊服务，目�
 
 
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/yQcYJgfIt7POZCq.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/yQcYJgfIt7POZCq.png)
 
 直接运行，已经打包了需要的暗黑文件，打开以后保持不要关闭命令行就行了
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/O4frTuRZg5xlcGp.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/O4frTuRZg5xlcGp.png)
 
 
 
@@ -219,7 +219,7 @@ D2RAssist的作者有数字货币收款，对于赞助者有特殊服务，目�
 
 下图是别人放出来的，具体哪来的不知道
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/bcXS1yPsMBWqpak.gif)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/bcXS1yPsMBWqpak.gif)
 
 ### ReaperMH
 

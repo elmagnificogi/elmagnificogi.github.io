@@ -43,7 +43,7 @@ tags:
 
 
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/sCA2hwdDpykrgPK.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/sCA2hwdDpykrgPK.png)
 
 
 
@@ -51,31 +51,31 @@ tags:
 
 4号一大早，去了炮台山旁的厦门之星氦气球，然后告诉我走错了，预约的是椰风寨的热气球，跑过去一看，只能座4个人的热气球，飞行高度贼低，然后收费258一人，果断走人，去了五缘湾坐帆船（这里其实走错了，应该去香山坐帆船更合适一些，距离也更近一些），做完帆船，吃过饭，就去了植物园，逛了一大圈，大概5点多去钟鼓索道（在植物园旁边非常近），坐了最后一班缆车，看了夕阳下的厦门岛。晚上直接乘船鹭江夜游，然后错过了饭点只能点外卖了。
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/lJHNQetjCEmYBy7.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/lJHNQetjCEmYBy7.png)
 
 最坑的热气球，本身有绳索固定，飞行高度受限，完全不能水平移动，就是个直上直下，而且高度我目测只有10多米，说是60米，实际就是骗人的，安全性也不高。特别巧的是他们本身工作人员跟我说别坐，昨天湖南的一个一样的热气球摔死人了，然后纠缠了一会给我退票了。厦门之星氦气球说明是100m，然后本身可以乘20多个人，非常大，但是也是直上直下那种，由于和我预期差距有点大，就都没坐。
 
 
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/4jcGbCAEaQ5Fel6.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/4jcGbCAEaQ5Fel6.png)
 
 五缘湾或者香山坐帆船，里面各种黄牛卖票都贼贵，而实际上现场买票98即可，而黄牛看你要买票了可能给你更低的价格，比如90。帆船本身要看天气，海风大就能走的远一些，但是由于排班不是非常合理，本身40分钟的帆船大概只坐了30分钟。但是总体来说船夫本身是想服务更久的，但是要照顾到后面的游客，只能更早的回去了。没坐过还是挺有意思的，可以所有人坐在船的一侧，强行把船压斜，但是不会翻的程度，从而可以把脚伸到海里。
 
 
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/kDZWKOuvJYxwz9a.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/kDZWKOuvJYxwz9a.png)
 
 植物园非常大，我们走了最远的线路，而且逆向走的，逆向有个问题会出现非常多的登山路，不适合体力不好的人。总体来说一般吧，主要人都集中在会释放干冰的热带雨林区域，为了拍出仙仙的感觉，其他地方人不多，但是本身园区里关于植物的解释说明也不多，很多地方标注不清，随便逛逛就行了，门票也不是很贵。
 
 
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/1zjKm2TokIu6vyr.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/1zjKm2TokIu6vyr.png)
 
 钟鼓索道比较值得去，单人来回70，以前可以只选单程，但是疫情期间必须来回，比较值得去，本身处于最高点，然后一个来回40分钟不到，可以从高处概览到厦门岛，某种程度上比热气球更值一些，能看的范围更大。
 
 
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/KnZdjEXe8Y6ulSq.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/KnZdjEXe8Y6ulSq.png)
 
 鹭江夜游，由于十一期间，人非常多，光是取票就排了将近半个小时，然后又等了二十分钟才上船，船上待了90分钟，船上有广播讲解，同时中间还穿插了几个小剧场节目，比如木偶剧什么的。某种程度上比较值，船票76
 
@@ -87,13 +87,13 @@ tags:
 
 
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/Hu7zFMvJbBastxV.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/Hu7zFMvJbBastxV.png)
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/JpmKtgiLWAZXUxF.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/JpmKtgiLWAZXUxF.png)
 
 火山岛是真的没意思，全是网红打卡点，然后基本都在排队打卡，几个特殊建筑还需要100或者200多的门票才能进入，而这几个建筑并不大，完全是蹭网红热度的，整个岛本身也不大，大概沿边走一圈只用一个多小时就结束了。
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/kH3sMlVLJRywcA7.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/kH3sMlVLJRywcA7.png)
 
 这就是镇海角的灯塔，基本就是为了看这个，走了老远，然后景色一般般。火山岛和镇海角一日游是358/人，而实际上去这两个地方大概60以内就能解决。这个一日游选的时候就有预感会被坑，还好时间充裕可以试一下看，以后就有经验了。
 
@@ -105,7 +105,7 @@ tags:
 
 6号一早去了鼓浪屿，然后一路环岛走，先到了管风琴博物馆，然后买了5大核心景区的门票，就能进去了，实际上几个博物馆非常小，内容也少，不是非常值吧，但是如果不去的话那就不知道去哪里了，岛上还有一些意义不明的网红打卡点，很多人排队拍照。
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/Zsu47FwzXRWoLpk.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/Zsu47FwzXRWoLpk.png)
 
 鼓浪屿也不是很大，基本几个小时就能转完了，鼓浪屿都是些老建筑，但是也有很多不开放要么就是保存不怎么样，连个牌子都看不清的程度。感觉以前经常看别人说鼓浪屿，实际上一去，感觉也就那样，并没有什么非常特殊的地方。
 
@@ -131,7 +131,7 @@ tags:
 
 
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/GDeFBthdJ42wKis.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/GDeFBthdJ42wKis.png)
 
 ## 坑爹携程
 

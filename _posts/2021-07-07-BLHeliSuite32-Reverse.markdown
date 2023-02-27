@@ -27,11 +27,11 @@ tags:
 
 这里出现了问号，说明这个东西可能不准确，还要再查
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/sg8rfFEcya5IbeU.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/sg8rfFEcya5IbeU.png)
 
 通过DIE查壳，发现BLH这个exe是Delphi写的，Delphi我没接触过，只是听闻很多老程序或者病毒木马之类的都是出自Delphi。
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/kUSBmWV3gJGctpr.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/kUSBmWV3gJGctpr.png)
 
 接下里就是查找到底什么软件可以反编译Delphi
 
@@ -45,7 +45,7 @@ tags:
 
 DarkDe4，当场报错，整个处理完以后，forms，event啥的全都看不了，只好再换一个
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/Nl7XiFxTo2SUkWD.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/Nl7XiFxTo2SUkWD.png)
 
 
 
@@ -53,7 +53,7 @@ DarkDe4，当场报错，整个处理完以后，forms，event啥的全都看不
 
 DelphiDecompiler也是一样，当场报错
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/HfonjmFUcJrK24y.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/HfonjmFUcJrK24y.png)
 
 
 
@@ -61,7 +61,7 @@ DelphiDecompiler也是一样，当场报错
 
 Interactive Delphi Reconstructor，真神来了，反编译过程中没报错，查看各个Forms也都正常
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/qY6myESCkLMAVfT.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/qY6myESCkLMAVfT.png)
 
 
 
@@ -1937,7 +1937,7 @@ _Unit108.TBootloader.SendCMDKeepAlive
 
 这三个是不同方式的读取具体实现
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/qsplANMCH5OeUtL.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/qsplANMCH5OeUtL.png)
 
 ```
 TUniSerialInterface
@@ -2525,15 +2525,15 @@ _Unit102.TBLHeli.SetParameterValue
 
 把BLH的log功能打开
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/5jQ9DUfCwYgr3t1.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/5jQ9DUfCwYgr3t1.png)
 
 
 
 然后就能看到右侧窗口的日志了，不得不说这个日志有点东西，这个树状结构挺好的
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/vBVFR2uGHo5ltxP.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/vBVFR2uGHo5ltxP.png)
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/VZ1JP7CNiX3Ub4Y.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/VZ1JP7CNiX3Ub4Y.png)
 
 仔细一看这里实际上走的是BLB的模式，而不是UniSerial（我第一次追错地方了），也就是说我前面追的代码不太对。特别好的是这个树状结构其实和我从汇编里看到的调用层次是一致的。
 

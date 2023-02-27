@@ -35,7 +35,7 @@ tags:
 
 安装完成之后，秒启动，速度特别快
 
-![image-20220316162738954](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202203161627049.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202203161627049.png)
 
 
 
@@ -43,13 +43,13 @@ tags:
 
 这个对话框只有第一次启动或者重新打开的时候才会显示，软件内找不到启动的按钮
 
-![image-20220316195551438](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202203161955487.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202203161955487.png)
 
 以前版本还需要你去申请一下免费的License，现在版本不需要了，但是呢，你随便创建一个工程就会提示你需要PRO级别的License，
 
 感觉被坑了，虽然说是免费License。
 
-![image-20220316195914330](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202203161959365.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202203161959365.png)
 
 这里直接Continue就行了，不影响后续使用
 
@@ -65,7 +65,7 @@ tags:
 
 打开Tools-Options-Environment，可以看到对应的http的代理设置，不需要的话留空就自动不生效了。
 
-![image-20220321102522665](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220321102522665.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20220321102522665.png)
 
 
 
@@ -73,13 +73,13 @@ tags:
 
 新建项目之前，最好先安装一下对应的板级支持包。
 
-![image-20220317122028277](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202203171220384.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202203171220384.png)
 
-![image-20220317122121592](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202203171221654.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202203171221654.png)
 
 最好也能代理一下，不然速度也很慢。
 
-![image-20220316170005780](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202203161700828.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202203161700828.png)
 
 
 
@@ -87,19 +87,19 @@ tags:
 
 创建一个新项目
 
-![image-20220316163027936](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202203161630977.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202203161630977.png)
 
 选择ST评估版(**后来发现其实不应该使用评估板的，评估板的工程模板是非常老的，有些东西和最新版已经不同了，仅仅是个能编译能用的级别而已，建议还是使用下面的基于CPU的创建方式**)
 
-![image-20220317123648129](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202203171236178.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202203171236178.png)
 
 由于是评估板，所以芯片类型是固定的，不用需要选择，只用选文件就行了。
 
-![image-20220317123713170](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202203171237209.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202203171237209.png)
 
 然后就得到了预设工程
 
-![image-20220317123811783](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202203171238875.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202203171238875.png)
 
 第一次编译可能会报错，出现这个错误，是因为没有重启，重启一下电脑，环境变量应用上，这里编译就不会报错了
 
@@ -107,7 +107,7 @@ tags:
 Error starting process $(ARMGCCDIR)/arm-none-eabi-gcc
 ```
 
-![image-20220316164853770](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202203161648799.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202203161648799.png)
 
 
 
@@ -119,7 +119,7 @@ __vfprintf.h: No such file or directory
 
 将`SEGGER_RTT_Syscalls_SES.c `文件移除出工程，然后重新编译，就正常了
 
-![image-20220317123920345](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202203171239377.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202203171239377.png)
 
 
 
@@ -129,7 +129,7 @@ __vfprintf.h: No such file or directory
 
 Tools –> Options –> Text Editor，然后将对应的修改
 
-![image-20220317125643581](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202203171256638.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202203171256638.png)
 
 然后前后跳转的快捷键，是Alt+Left或者Alt+Right，但是本身也支持Back和Forward，但是实际上鼠标的侧键，并不能跳转，这个比较难受。从我测试来看，他本身IDE是不支持捕获鼠标侧键的，所以Back和Forward就基本不可能实现了
 
@@ -141,13 +141,13 @@ Tools –> Options –> Text Editor，然后将对应的修改
 
 ## 分析
 
-![image-20220317125643581](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202203171344491.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202203171344491.png)
 
 可以看到.s文件和Vectors.都存在，启动流程是没隐藏的，但是内存的分配文件竟然找不到了。
 
 点到配置里去看Linker，看到如下结果
 
-![image-20220317134711083](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202203171347156.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202203171347156.png)
 
 他是存储在`STM32H743ZI_MemoryMap.xml`文件中的，内容如下
 
@@ -267,7 +267,7 @@ The object file Ov3 Internal/motors.o has been supplied more than once
 
 官方的说法是这个obj文件的命名方式是可以修改的，但是他们不会改这个默认的
 
-![image-20220322102141172](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220322102141172.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20220322102141172.png)
 
 
 

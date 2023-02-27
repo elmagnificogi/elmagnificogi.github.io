@@ -23,13 +23,13 @@ tags:
 
 **ESCSlicer**
 
-![image-20220821145602550](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208211456575.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202208211456575.png)
 
-![image-20220821145443428](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208211454468.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202208211454468.png)
 
-![image-20220821145537221](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208211455251.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202208211455251.png)
 
-![image-20220821152054297](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208211520434.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202208211520434.png)
 
 
 
@@ -44,7 +44,7 @@ tags:
 
 文本对比有Compare，但是图片对比的时候，如果有类似的软件就好了。`DiffImg`就是用来做像素级对比的软件
 
-![image-20220821150316211](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208211503373.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202208211503373.png)
 
 
 
@@ -59,9 +59,9 @@ tags:
 
 `Resource Hacker`提取一些软件的Icon，或者静态资源，用起来非常方便
 
-![image-20220821145817685](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208211458746.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202208211458746.png)
 
-![image-20220821145846604](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208211458657.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202208211458657.png)
 
 
 
@@ -73,19 +73,19 @@ Carnac，录教程类视频的时候，平常不说的话，看不到具体的�
 
 不过原本的Carnac只能显示键盘的输入输出，鼠标的操作是完全看不到的。
 
-![image-20220821150833950](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208211508988.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202208211508988.png)
 
 针对这个问题，有人就出了一个改版的，支持鼠标显示
 
 > https://github.com/bfritscher/carnac
 
-![image-20220821150917921](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208211509972.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202208211509972.png)
 
-![image-20220821150924878](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208211509912.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202208211509912.png)
 
 同时他也会在鼠标点击的位置，自动生产一个类似水波纹的高亮效果，提醒观者注意
 
-![image-20220821151256243](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208211512273.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202208211512273.png)
 
 
 
@@ -93,7 +93,7 @@ Carnac，录教程类视频的时候，平常不说的话，看不到具体的�
 
 
 
-![logo](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208211510194.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202208211510194.png)
 
 > https://github.com/univrsal/input-overlay
 >
@@ -101,7 +101,7 @@ Carnac，录教程类视频的时候，平常不说的话，看不到具体的�
 >
 > https://www.bilibili.com/video/BV1sW4y1b7VT?spm_id_from=333.880.my_history.page.click&vd_source=fe2e37e9c6518671631012d39f18a581
 
-![image-20220821151441231](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208211514293.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202208211514293.png)
 
 ## Summary
 

@@ -25,15 +25,15 @@ tags:
 
 1\.  不要勾选 Load Application at Startup
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/5c00a87789ac1.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/5c00a87789ac1.png)
 
 2\.  在Debug选项中不要勾选 Reset after Connect 并且Connect:Normal 选项
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/5c00a88948672.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/5c00a88948672.png)
 
 3\.  不要勾选 Update Target before Debugging
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/5c00a8a609c0d.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/5c00a8a609c0d.png)
 
 4\.  以上完成其实可以直接连接飞机了,但是这种连接模式下,无法跳转代码无法加断点,只能用于查看内存和各种寄存器的情况.如果要查看代码,则需要完成Load文件,新建一个文件,起名随意,内容入下:
 

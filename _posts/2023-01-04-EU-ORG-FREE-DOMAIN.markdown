@@ -25,23 +25,23 @@ tags:
 
 先注册一个
 
-![image-20230104101135398](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202301041011475.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202301041011475.png)
 
 地址信息等等可以随便填，之后验证码激活账号
 
-![image-20230104101229274](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202301041012351.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202301041012351.png)
 
 申请的二级域名需要填完整，地址跟随注册即可
 
-![image-20230104101545270](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202301041015350.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202301041015350.png)
 
 name servers建议直接填CloudFlare的域名解析，这样后面可以直接转入CF，然后提交申请即可
 
-![image-20230104101623297](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202301041016366.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202301041016366.png)
 
 大概一天以后就能收到对应的域名激活信息
 
-![image-20230104101349773](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202301041013869.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202301041013869.png)
 
 
 
@@ -49,15 +49,15 @@ name servers建议直接填CloudFlare的域名解析，这样后面可以直接�
 
 当申请下来以后，先在CF中添加对应的域名，各种设置都设置好以后，再回到eu.org，修改为
 
-![image-20230104102310754](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202301041023840.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202301041023840.png)
 
 再进行提交，CF的验证就过了
 
-![image-20230104102356741](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202301041023842.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202301041023842.png)
 
 可以看到4个eu.org都已经通过了，可以直接三级域名顶上了，当成一级域名使用了。
 
-![image-20230104102554379](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202301041025445.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202301041025445.png)
 
 
 

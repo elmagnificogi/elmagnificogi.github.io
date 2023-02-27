@@ -17,7 +17,7 @@ tags:
 
 最初是看到PX4项目里，有打算用`i.MX RT1050`，H7系列早就量产了，反倒是这个RT1050迟迟没有动静，有点奇怪。
 
-![image-20221111150757850](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202211111508941.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202211111508941.png)
 
 搜搜新闻，也能看到当时NXP应该是和Pixhawk有联系，看他们的说明本身用途就是给无人机用的，只是迟迟没看到Pixhawk设计相关的内容出来。
 
@@ -37,7 +37,7 @@ NXP属于是闷声发大财的那种，现在RT系列好像更多的被用在了
 
 之前一直觉得ST在M7上性能算是做的比较强的了，对比NXP，直接吊打ST了，外设各方面也不见得比ST差，同比价格只有1/8的，可以说非常逆天了。
 
-![image-20221111152947840](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202211111529959.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202211111529959.png)
 
 ST被炒成天价，各种期货
 
@@ -49,7 +49,7 @@ ST被炒成天价，各种期货
 
 USB一插上电即可，可以看到还是自带了一个DAPLink，可以直接烧写和调试，还是挺方便的。板子上也留了JLink口，也能直接用。
 
-![image-20221111152501127](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202211111525215.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202211111525215.png)
 
 
 
@@ -67,7 +67,7 @@ DAPLink也有一些不方便的地方，一种芯片或者一种板子就需要�
 
 ### 架构
 
-![image-20221112144010298](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202211121440433.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202211121440433.png)
 
 整体架构大概是这样的，挺普通的吧，大部分都这么写的，当然这个是基于MCUXpresso SDK来说的，相当于是官方推荐的架构了。
 
@@ -79,7 +79,7 @@ DAPLink也有一些不方便的地方，一种芯片或者一种板子就需要�
 
 如果是使用DAPLink烧写，给的hello_world工程，需要先把默认配置切换成带有`flexspi_nor`的配置文件，才能顺利烧写
 
-![image-20221112113623431](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202211121136628.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202211121136628.png)
 
 ```c
 int main(void)
@@ -108,7 +108,7 @@ int main(void)
 
 ### 工程配置
 
-![image-20221112114755474](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202211121147539.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202211121147539.png)
 
 工程配置中，单独的debug是直接使用内置RAM块烧写，并且运行，而flexspi_nor_debug是XIP的方式运行代码，烧写的是外部flash
 
@@ -120,11 +120,11 @@ int main(void)
 
 这里说的不是很准确，XIP虽然代码是直接被运行的，但是本质上是需要NOR Flash的读写特性，同时他也需要RAM，程序运行过程中的变量，不可能存储在Flash本身上的，所以实际上XIP依然需要内存来存储变量等内容，只是程序的运行逻辑存储在了Flash而已，而不是加载到内存。这种特性只有NOR Flash才具有，NAND Flash不支持
 
-![image-20221112163612817](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202211121636939.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202211121636939.png)
 
 flexspi_nor的配置中都有加入XIP的相关设置，XIP的这几个设置可以通过不同的组合，达到不同的效果
 
-![image-20221112164001178](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202211121640281.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202211121640281.png)
 
 **FlexSPI**
 
@@ -138,7 +138,7 @@ RT105x系列有2个FlexSPI接口，A和B，由于是Flex，所以可以自由组
 
 Flash的选择可以通过板子上的拨码来调整
 
-![image-20221112154556144](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202211121545298.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202211121545298.png)
 
 默认使用的是0110，也就是使用IS26KS512S，HyperFlash 3V3
 
@@ -148,7 +148,7 @@ Flash的选择可以通过板子上的拨码来调整
 
 默认的电源配置是跳了5-6的，这意味着通过debug_usb供电，如果接在1-2，就是dc插口供电，3-4是另外两个USB OTG供电，他这个供电设计是不能同时供电的，选了就只有某一部分起作用。
 
-![image-20221112142418845](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202211121424938.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202211121424938.png)
 
 ### ARMGCC
 
@@ -166,7 +166,7 @@ Flash的选择可以通过板子上的拨码来调整
 
 经过测试，2.6.0的编译是OK的，根据这个修改即可
 
-![image-20221214115508208](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212141155368.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202212141155368.png)
 
 
 

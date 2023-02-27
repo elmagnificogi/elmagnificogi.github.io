@@ -28,7 +28,7 @@ tags:
 
 基于此，我先问了问客服是否有现成的脚本编辑器或者什么操作可以直接用的，当时自然是没有的，12月3号。
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/smPtRzEZc2aYlfr.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/smPtRzEZc2aYlfr.png)
 
 等我做出来的时候呢，我发现他也有了这个功能，不过基本可以确定他的比较麻烦，而且都是出厂刷固件，刷了以后改起来比较麻烦，而且他们硬件也不给API，不给写脚本的接口，想要自己实现任意功能显然是不行的。
 
@@ -72,17 +72,17 @@ Teensy v2.0 淘宝一下，包邮以后基本都是32+，所以买了一个。
 
 但是这个东西太老了，它本身是mini-usb，接了线以后是一个usb-a，如果没有采集卡就必须要转一个typec，找转接头的时候眼瞎了，找了个25的，实际上还有更便宜的
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/f6ACarnZyVDgMp9.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/f6ACarnZyVDgMp9.png)
 
 
 
 这个头才9.8，有一个这个就能用typec直接接到板子上了，或者是typec直接转mini-usb的也行
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/iekKITathnXSfb8.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/iekKITathnXSfb8.png)
 
 全家照：
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/HX4OIL1r2pZSD3j.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/HX4OIL1r2pZSD3j.png)
 
 这样就能无论是接采集卡然后usb-a直连，还是用掌机模式typec直连都能用了。
 
@@ -147,7 +147,7 @@ make: *** [obj/Joystick.o] Error 1
 
 打开D:\winavr\avr\include\avr目录下的power.h，如下
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/bEDstNVcw5ZAvTO.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/bEDstNVcw5ZAvTO.png)
 
 补充上16u2的宏定义，保存一下再make就发现没问题了。
 
@@ -155,7 +155,7 @@ make: *** [obj/Joystick.o] Error 1
 || defined(__AVR_ATmega16U2__) \
 ```
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/cFoIzl8pC1GvjwU.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/cFoIzl8pC1GvjwU.png)
 
 
 

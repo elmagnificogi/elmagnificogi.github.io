@@ -69,7 +69,7 @@ gcc version 10.3.1 20210621 (release) (15:10.3-2021.07-4)
 /usr/bin
 ```
 
-![image-20220616155831641](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220616155831641.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20220616155831641.png)
 
 
 
@@ -131,27 +131,27 @@ fi
 
 由于是从coding过来的，Jenkins的coding插件还过期不能用了。看了一下coding改用通用插件来对接Jenkins了，也就是`generic-webhook-trigger`
 
-![image-20220706142410802](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220706142410802.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20220706142410802.png)
 
-<img src="http://img.elmagnifico.tech:9514/static/upload/elmagnifico/129824834-bafcebd1-c408-40fa-8f82-b44bdcfc9f65.png" alt="image" style="zoom:50%;" />
+<img src="https://img.elmagnifico.tech/static/upload/elmagnifico/129824834-bafcebd1-c408-40fa-8f82-b44bdcfc9f65.png" alt="image" style="zoom:50%;" />
 
 唯一的问题是，Hook这里只有这么几种情况可以设置，其他细节可能得靠参数请求头之类的东西去实现了，但是coding给的参数又不是很多，总体不是很好用。
 
-![image-20220617094749030](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220617094749030.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20220617094749030.png)
 
-<img src="http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220617094223875.png" alt="image-20220617094223875" style="zoom: 80%;" />
+<img src="https://img.elmagnifico.tech/static/upload/elmagnifico/image-20220617094223875.png" alt="image-20220617094223875" style="zoom: 80%;" />
 
 
 
 Jenkins这边主要是把路径给过去，然后把token两边填一致，再把coding账号信息输入进去，保存一下设置
 
-<img src="http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220617094501615.png" alt="image-20220617094501615" style="zoom:80%;" />
+<img src="https://img.elmagnifico.tech/static/upload/elmagnifico/image-20220617094501615.png" alt="image-20220617094501615" style="zoom:80%;" />
 
 由于是嵌入式项目，所以没有SES可以用的插件，需要靠脚本去实现后续的编译和release
 
 再切回到了coding这边，点击测试，就能看到已经触发了Jenkins
 
-![image-20220706144038732](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220706144038732.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20220706144038732.png)
 
 
 

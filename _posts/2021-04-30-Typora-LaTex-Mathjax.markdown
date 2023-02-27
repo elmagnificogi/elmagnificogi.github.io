@@ -26,7 +26,7 @@ tags:
 
 首先，Typora显示公式，必须要使用Markdown 扩展语法，启用内联公式
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/Z3B9G4TrKgyNPJQ.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/Z3B9G4TrKgyNPJQ.png)
 
 
 
@@ -102,7 +102,7 @@ $ A = \{ \langle G \rangle \vert G \text{ is a connected undirected graph}\} $
 
 或者单独提出来作为一个include的文件
 
-![image-20220726185154888](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202207261851008.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202207261851008.png)
 
 #### page.mathjax
 
@@ -186,7 +186,7 @@ $ \Sigma= \\{ 0, 1 \\} $
 
 可是这样在Typora中又会显示错误，类似于这样：
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/y2JbXqmCTODv31B.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/y2JbXqmCTODv31B.png)
 
 #### 解决办法
 

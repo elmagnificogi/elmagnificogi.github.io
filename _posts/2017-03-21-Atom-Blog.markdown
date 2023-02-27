@@ -77,11 +77,11 @@ Atom 是 Github 专门为程序员推出的一个跨平台文本编辑器。具�
 
 - 打字特性
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/5c00a924d9b0d.gif)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/5c00a924d9b0d.gif)
 
 - 连击特效
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/5c00a950101b1.gif)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/5c00a950101b1.gif)
 
 ## Activate Power Mode
 
@@ -113,9 +113,9 @@ cmd无法正常安装，我已经试过了。
 
 默认是开启的，所以立马就有特效了
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/5c00a9731b44b.gif)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/5c00a9731b44b.gif)
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/5c00a98d34e36.gif)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/5c00a98d34e36.gif)
 
 #### 设置
 

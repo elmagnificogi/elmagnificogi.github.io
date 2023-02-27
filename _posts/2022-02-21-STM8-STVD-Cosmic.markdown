@@ -26,7 +26,7 @@ tags:
 
 > https://www.st.com/en/development-tools/stm8-software-development-tools.html
 
-![image-20220221170537504](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220221170537504.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20220221170537504.png)
 
 图中是可以点击的（哪个沙雕做的，乍一看都以为是张图，找半天没找到下载的地方），点击以后跳转到对应的区域（更恶心的是跳转以后的页面其实想找STVD也有点迷）。
 
@@ -44,7 +44,7 @@ ST Visual Develop (STVD)  就是主要开发的IDE了，只是它本身集成度
 
 整个软件风格比较像以前的Keil2，老的不行，在win10上还能运行，万幸。
 
-![image-20220226151336175](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220226151336175.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20220226151336175.png)
 
 
 
@@ -52,7 +52,7 @@ ST Visual Develop (STVD)  就是主要开发的IDE了，只是它本身集成度
 
 ST Visual Programmer(STVD)，这个有点类似于 JLink 中的 JFlash ，主要是读取和修改固件的，但是他还有一个额外功能，修改引脚的复用。
 
-![image-20220226151110068](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220226151110068.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20220226151110068.png)
 
 
 
@@ -60,7 +60,7 @@ ST Visual Programmer(STVD)，这个有点类似于 JLink 中的 JFlash ，主要
 
 不要下！我刚开始以为可以直接Cube生成代码，然后下完以后发现，只能生成report，毛用没有。这东西从17年出来到现在都5年了，根本没想集成STM8进去，所以别指望了。
 
-![image-20220226151304608](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220226151304608.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20220226151304608.png)
 
 
 
@@ -80,7 +80,7 @@ STVD需要Comic的编译器来完成编译，好家伙，绕一圈。
 
 通过这里下载安装-注册-得到License-激活。
 
-![image-20220222094527690](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220222094527690.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20220222094527690.png)
 
 拿到的license是1年有效期，功能上没有任何限制
 
@@ -96,7 +96,7 @@ STVD需要Comic的编译器来完成编译，好家伙，绕一圈。
 
 破解也很简单，安装完以后，使用补丁，替换文件即可
 
-![img](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202211161811194.jpeg)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202211161811194.jpeg)
 
 
 
@@ -106,23 +106,23 @@ STVD有点类似Eclipse，有一个工作环境的配置。
 
 创建一个新的工作环境和工程
 
-![image-20220221171622548](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220221171622548.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20220221171622548.png)
 
 选择workspace的目录和名称
 
-![image-20220221171703725](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220221171703725.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20220221171703725.png)
 
 工程的名称和目录
 
-![image-20220221171734723](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220221171734723.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20220221171734723.png)
 
 - 注意这里选择Cosmic的目录是CXSTM8
 
-![image-20220221171847859](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220221171847859.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20220221171847859.png)
 
 选择对应芯片，然后创建工程
 
-![image-20220221171934486](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220221171934486.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20220221171934486.png)
 
 使用编译，会发现ok，无报错。
 
@@ -130,7 +130,7 @@ STVD有点类似Eclipse，有一个工作环境的配置。
 
 ## 下载
 
-![image-20220224155453276](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220224155453276.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20220224155453276.png)
 
 通过IDE中的Programmer就可以下载，但是可能会出现闪退的情况。
 
@@ -138,15 +138,15 @@ STVD有点类似Eclipse，有一个工作环境的配置。
 
 选择ST-LINK，选择SWIM
 
-![image-20220224155723261](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220224155723261.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20220224155723261.png)
 
 由于是从flash启动，所以选择program memory 选择对应debug或者release中生成的文件
 
-![image-20220224155814685](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220224155814685.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20220224155814685.png)
 
 切换到Program 页面，然后start即可
 
-![image-20220224155905148](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220224155905148.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20220224155905148.png)
 
 
 
@@ -156,7 +156,7 @@ STVD有点类似Eclipse，有一个工作环境的配置。
 
 > https://github.com/elmagnificogi/MyTools/raw/master/STM8/tools.cnf
 
-![image-20220224155642450](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220224155642450.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20220224155642450.png)
 
 #### stm8_interrupt_vector.c
 
@@ -164,7 +164,7 @@ STVD有点类似Eclipse，有一个工作环境的配置。
 
 正确的添加方法是从工程设置中的Linker-Input里添加向量表，添加以后可能文件目录还是不显示。保存以后重启STVD就能正常显示了。
 
-![image-20220225163454136](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220225163454136.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20220225163454136.png)
 
 
 
@@ -180,7 +180,7 @@ STVD有点类似Eclipse，有一个工作环境的配置。
 
 
 
-![image-20220310185842663](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220310185842663.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20220310185842663.png)
 
 至少要勾选这两项优化，否则百分比会有下面的提示:
 
@@ -212,7 +212,7 @@ STM8和STM32比起来还是麻烦了一些，STM32管脚复用直接配置就行
 
 通过Light Programmer修改，右键选择
 
-![image-20220226152547342](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220226152547342.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20220226152547342.png)
 
 
 
@@ -220,7 +220,7 @@ STM8和STM32比起来还是麻烦了一些，STM32管脚复用直接配置就行
 
 下面是通过STVP修改
 
-![image-20220226151435926](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220226151435926.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20220226151435926.png)
 
 
 
@@ -282,7 +282,7 @@ void FLASH_Init(void)
 
 还有一个办法，修改烧写的设置，取消验证，这样无所谓是否修改Option Byte 都能正常烧写了
 
-![image-20220506161007245](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220506161007245.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20220506161007245.png)
 
 
 
@@ -331,7 +331,7 @@ With:
 
 
 
- ![image-20220507172807672](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220507172807672.png)
+ ![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20220507172807672.png)
 
 
 
@@ -353,11 +353,11 @@ STVP_CmdLine.exe -Port=USB -ProgMode=SWIM -Device=STM8S003F3 -progress -verif -F
 
 毕竟是老东西了，分辨率比较低，一旦行比较长了，就会超行显示红色的背景
 
-![image-20220225163647622](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220225163647622.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20220225163647622.png)
 
 可以通过Tools-Options 取消超行显示或者是自己重新设置超行数
 
-![image-20220225163735477](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220225163735477.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20220225163735477.png)
 
 
 
@@ -440,7 +440,7 @@ void TIM_IC_CaptureCallback(void)
 
 #### Failed to launch child process:<gdb.exe>
 
-![image-20220308173753430](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220308173753430.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20220308173753430.png)
 
 ```
 Failed to launch child process:<gdb.exe>
@@ -491,7 +491,7 @@ end
 
 第二个，运行库不兼容，导致直接STVD打不开了
 
-![image-20220308173929769](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220308173929769.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20220308173929769.png)
 
 重新安装Microsoft Visual C++ 2005 运行库即可
 

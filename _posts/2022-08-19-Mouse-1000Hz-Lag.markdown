@@ -91,7 +91,7 @@ BIOS上可能有bug，升级BIOS或者回退解决
 
 从1000Hz，切换到低一些的回报率，我是在500Hz的，感觉到明显ok了。Logitech Hub修改回500以后，再重新切换成1000Hz，就发现又不卡了。重启电脑以后，又卡了。只要切换过一次，他就正常了。
 
-![image-20220821144745163](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208211447255.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202208211447255.png)
 
 
 

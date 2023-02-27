@@ -52,7 +52,7 @@ tags:
 
 情况描述：
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/CSoAzDyLiTrRK36.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/CSoAzDyLiTrRK36.png)
 
 可以看到插入的视频，无法显示预览画面，而且播放的时候进度条在走，声音也有，但是就是画面不显示。
 
@@ -82,7 +82,7 @@ tags:
 
 经过查看,所有qq录屏得到的视频格式都是mp4v,而正常能播放的这里输入都是avc
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/nIM413GVbuwrS9y.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/nIM413GVbuwrS9y.png)
 
 而经过转码后的能播放的文件都是avc
 
@@ -90,13 +90,13 @@ tags:
 
 主要是把编码改成AVC,但是格式工厂支持的比特率太低了,导致高比特率的视频直接糊了,所以如果是低分辨率小视频可以用格式工厂,高分辨率(大于720P)就不行了
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/bOZ7KRz14AxJaEj.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/bOZ7KRz14AxJaEj.png)
 
 
 
 #### Adobe Media Encoder CC 转码
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/oZVlNOTLkfpyXjF.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/oZVlNOTLkfpyXjF.png)
 
 基本直接拖进去就默认转码H.264格式了,直接开始转码就行了,转码后的视频就能正常在Typora中播放了.
 

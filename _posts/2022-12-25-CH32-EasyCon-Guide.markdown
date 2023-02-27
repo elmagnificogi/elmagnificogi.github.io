@@ -36,7 +36,7 @@ EasyConMCU_CH32，目前最便宜，功能也是最完整的方案，不需要�
 
 
 
-![image-20221216220451721](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212162204792.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202212162204792.png)
 
 - Type-C和micro-usb都可以用，看你具体哪种线比较多
 
@@ -46,13 +46,13 @@ EasyConMCU_CH32，目前最便宜，功能也是最完整的方案，不需要�
 
 由于两个usb口过于接近，为了能同时插入两个USB，可能需要你把usb的柄削薄一些（注意不要过于用力，小心手）
 
-![image-20221225182417384](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212251824558.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202212251824558.png)
 
-![image-20221225182423908](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212251824005.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202212251824005.png)
 
 当然也可以直接买一根类似这种超薄的线，握柄厚度小于等于3mm的
 
-![image-20221225182906203](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212251829244.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202212251829244.png)
 
 
 
@@ -67,11 +67,11 @@ EasyConMCU_CH32，目前最便宜，功能也是最完整的方案，不需要�
 
 板子断电，然后将BOOT0接1，Boot1接0，如图所示
 
-![image-20221225184444921](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212251844048.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202212251844048.png)
 
 标记有HUSB的就是串口、也是烧写口，此时连接到HSUB到PC
 
-![image-20221225184550579](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212251845628.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202212251845628.png)
 
 
 
@@ -81,7 +81,7 @@ EasyConMCU_CH32，目前最便宜，功能也是最完整的方案，不需要�
 
 打开烧写软件WCHISPTool(V2.9)
 
-![image-20221225184100896](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212251841941.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202212251841941.png)
 
 1. 选择CH32F1系列
 2. 选择USB
@@ -94,7 +94,7 @@ EasyConMCU_CH32，目前最便宜，功能也是最完整的方案，不需要�
 
 断开USB，恢复boot，BOOT0接0，Boot1接0，如图所示
 
-![image-20221225185530391](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212251855488.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202212251855488.png)
 
 
 
@@ -104,7 +104,7 @@ HUSB连接PC，另外一个USB连接NS
 
 关闭刚才的烧写软件，点击自动连接，显示已连接说明成功，可以使用了。
 
-![image-20221205224440983](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212052244036.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202212052244036.png)
 
 - 第一次使用可能需要，远程停止，并且清除烧录一次，后续就正常了
 

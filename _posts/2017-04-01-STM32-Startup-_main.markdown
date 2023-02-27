@@ -16,7 +16,7 @@ tags:
 
 启动流程：
 
-![image-20230215155534582](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20230215155534582.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20230215155534582.png)
 
 
 

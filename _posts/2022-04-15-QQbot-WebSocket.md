@@ -51,7 +51,7 @@ aiohttp，异步http的框架，他同时具有服务端和客户端两边的功
 
 #### WebSocket与HTTP
 
-![img](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202204140001388.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202204140001388.png)
 
 他们俩非常像，在建立连接的时候，都需要握手，但是数据传输的时候，WebSocket就可以实现双向通信了。
 
@@ -67,7 +67,7 @@ WebSocket，看名字，就能看出来，其实是基于Web的Socket，本质�
 
 会看底层协议，主要是发现其实他可以替代目前我工作中的一个协议，并且他是一个变最大长协议，而嵌入式底层经常设计协议的时候都是设计成固定最大长度协议，这就导致有些时候可能比较大的包，就传输不了，要单独拆分。而这个包的协议就比较有意思，他根据第二字节的值来决定是否需要扩展长度。
 
-![image-20220414001309491](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202204140013529.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202204140013529.png)
 
 这个部分也比较简单，比如当第二字节Payload长度小于126时，就认为不需要扩展包，而当Payload长度等于126的时候，就认为长度扩展字节是2字节（16bit）。如果是127，那么就是8字节（64bit），从而达成一个动态最大包长度。
 

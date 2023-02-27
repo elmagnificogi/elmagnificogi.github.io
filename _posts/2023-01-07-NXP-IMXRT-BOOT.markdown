@@ -20,7 +20,7 @@ tags:
 
 ## Armv7-M Address Map
 
-![image-20230107154323300](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202301071543512.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202301071543512.png)
 
 一般来说 `0x00000000-0x1FFFFFFF`的范围程序ROM的地址，SRAM都是从`0x20000000-0x3FFFFFFF`开始的，一般这个空间上的RAM都是片内的RAM，之后紧接着的就是片上外设的地址。`0x60000000-0x7FFFFFFF`一般IMXRT系列用的外部RAM都分配在这个区域
 
@@ -46,7 +46,7 @@ IMXRT系列基本都是没有内部Flash的，所以他们都是二级启动，�
 
 存储器一般可以分成8块，每块各自还有细分
 
-![image-20230208155103118](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20230208155103118.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20230208155103118.png)
 
 0，一般是代码存储区域，片内存储，比如bootload
 
@@ -66,11 +66,11 @@ IMXRT系列基本都是没有内部Flash的，所以他们都是二级启动，�
 
 细分如下
 
-![image-20230107161931504](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202301071619636.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202301071619636.png)
 
 从参考手册里可以看到 `0x00200000-0x00217FFF`这个范围被保留了，实际上是BootROM，而他之后接着的就是ITCM区域，`0x80000000-0xDFFFFFFF`和`0x60000000-0x7F7FFFFF`则是分配给外设的区域
 
-![image6](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202301101733596.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202301101733596.png)
 
 （这个图是从野火等国内拿过来的，实际官方找不到这张图）
 
@@ -80,15 +80,15 @@ ROMCP是原厂的boot存储区域
 
 #### RAM Bank
 
-![image-20230215105217758](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20230215105217758.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20230215105217758.png)
 
 ITCM和DTCM以及OCRAM，三者的大小在芯片内部其实是可以调整的，并不是各自占用这么大，FlexRAM机制让我们可以调整这三者所占大小。
 
 三者是共享512KB的，有一个配置寄存器，可以调整各自的大小
 
-![image-20230215104949848](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20230215104949848.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20230215104949848.png)
 
-![image-20230215104929412](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20230215104929412.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20230215104929412.png)
 
 - 但是有一点要注意，OCRAM是必须要配置的，因为实际上BOOROM启动时也需要内存，这个部分用的就是OCRAM的，而且大小也不能小于64KB
 
@@ -98,17 +98,17 @@ ITCM和DTCM以及OCRAM，三者的大小在芯片内部其实是可以调整的�
 
 可以被Boot的设备也有说明：
 
-![image-20230107171511088](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202301071715183.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202301071715183.png)
 
 FLEXSPI_B接口是第二优先级，所以他不能作为启动接口
 
-![image-20230107164617417](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202301071646492.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202301071646492.png)
 
 
 
 #### Boot Mode
 
-![image-20230107165157575](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202301071651644.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202301071651644.png)
 
 一般情况下其实都是从`Internal Boot`启动，然后再根据选择不同有了不同走向
 
@@ -118,7 +118,7 @@ FLEXSPI_B接口是第二优先级，所以他不能作为启动接口
 
 `Internal Boot`这种方式比较像Fuse，但是他多考虑了一个Boot_CFG的配置，来决定最终启动的是什么，感觉上是产品从测试阶段转向成品时方便切换Boot配置使用的，具体的要参考手册的详细说明了。
 
-![image-20230214181635364](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20230214181635364.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20230214181635364.png)
 
 图中还有一种特殊的方式，就是从SD启动
 
@@ -126,7 +126,7 @@ FLEXSPI_B接口是第二优先级，所以他不能作为启动接口
 
 不同的CFG最终决定不同的Flash启动
 
-![image-20230107171151496](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202301071711577.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202301071711577.png)
 
 
 
@@ -134,23 +134,23 @@ FLEXSPI_B接口是第二优先级，所以他不能作为启动接口
 
 Boot Fuse的具体配置比较复杂，根据外设的不同，Fuse中的很多设置也不一样。
 
-![image-20230107171825262](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202301071718366.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202301071718366.png)
 
 
 
 比如启动设备的选择就是通过BOOT_CFG的选项中确定的，他们都是引脚直接确认，而不是烧写出来的
 
-![image-20230215110654716](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20230215110654716.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20230215110654716.png)
 
-![image-20230215110707986](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20230215110707986.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20230215110707986.png)
 
 这里可以看出来，被映射到了哪个引脚上面。启动时会从这些引脚上获取信息
 
-![image-20230215111528732](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20230215111528732.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20230215111528732.png)
 
 配合电路上的连接，这里就很明显了
 
-![image-20230215115843975](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20230215115843975.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20230215115843975.png)
 
 
 
@@ -158,7 +158,7 @@ Boot Fuse的具体配置比较复杂，根据外设的不同，Fuse中的很多�
 
 这里只说NorFlash的流程，这里是原厂BOOT ROM的启动流程
 
-![image-20230215141120178](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20230215141120178.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20230215141120178.png)
 
 1.第一步是根据引脚启动，然后时钟设置到30Mhz（低速率，为了兼容），读取配置信息，实际是从0x60000000中读取前512字节（Flash前512字节必然是配置信息）
 
@@ -170,7 +170,7 @@ Boot Fuse的具体配置比较复杂，根据外设的不同，Fuse中的很多�
 
 对应的Flash 512字节是什么内容：
 
-![image-20230215143205491](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20230215143205491.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20230215143205491.png)
 
 
 
@@ -260,7 +260,7 @@ const flexspi_nor_config_t Qspiflash_config =
 
 接着就是Image相关的内容，比如向量表、程序所在位置以及可能的外设配置和驱动
 
-![image-20230215150358529](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20230215150358529.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20230215150358529.png)
 
 这里前三个数据都存在`fls_flexspi_nor_boot.c`中
 

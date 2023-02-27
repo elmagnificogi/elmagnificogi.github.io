@@ -222,7 +222,7 @@ systemctl start firewalld
 
 腾讯云香港到Oracle日本，可以看到这边可以跑超过30M，但是实际上由于香港只有30M，所以最多也就是能跑满香港而已。
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/FLedAXhRq7aKDpM.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/FLedAXhRq7aKDpM.png)
 
 同时延迟等于10ms+40多，比直接访问香港高多了，而且由于Oracle本身的限制有一些网站是访问不了的，比如p站等，但是同时也可以让某些中转无法访问的网站变成可以被访问的状态，比如谷歌学术等。
 

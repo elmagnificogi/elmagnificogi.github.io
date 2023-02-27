@@ -66,7 +66,7 @@ HAL_GetTick一般情况都是ms计时器，也就是这里是判断一个ms超�
 
 SD的寄存器配置中，也有一个TimeOut，而这个值，也使用了相同的宏。
 
-![image-20221201111610156](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212011116341.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202212011116341.png)
 
 如果SD的时钟也是和HAL_GetTick相同，那就没问题（并不是），但是实际根本不是这样
 

@@ -16,7 +16,7 @@ tags:
 
 下图基本列举出了目前在用的各种方案，下文将按照图中的顺序来进行介绍。
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/5c00a78687365.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/5c00a78687365.png)
 
 # 物联网无线通信技术
 
@@ -74,7 +74,7 @@ eMTC是LTE-M（LTE-Machine-to-Machine）在3GPP R13中的叫法，是基于LTE�
 
 业内的争论直到2017年6月便正式休止了。在3GPP第76次全会上，业界就移动物联网技术（包括NB-IoT和eMTC）R15演进方向达成了共识：不再新增系统带宽低于1.4MHz的eMTC终端类型；不再新增系统带宽高于200KHz的NB-IoT终端类型。3GPP这一决议，推动了M-IoT有序发展，让eMTC与NB-IoT彻底划分开应用界限，转为混合组网、差异化互补的合作关系。
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/5bffcdb070432.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/5bffcdb070432.png)
 
 由图可以看到与NB-IoT技术相比，eMTC优势则在于传输速率更快，更低延时（100ms级，NB-IoT是秒级），支持移动性、FDD、定位、支持VoLTE语音通信,同时传输速率更快,传输内容也更多,虽然日后NB-IoT也会推出定位服务,不过相对而言eMTC更适合于对响应速率要求比较高的环境,而且其移动性较高也适合运动的情景.
 
@@ -99,7 +99,7 @@ eMTC是LTE-M（LTE-Machine-to-Machine）在3GPP R13中的叫法，是基于LTE�
 - V2I,Vehicle-To-Infrastructure
 - V2P,Vehicle-To-Pedestrian
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/5bffcdb07dfc2.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/5bffcdb07dfc2.png)
 
 其中涉及到人车安全的问题,所以对于通信要求比较高,延迟低,移动性高,数据同步要求高.
 

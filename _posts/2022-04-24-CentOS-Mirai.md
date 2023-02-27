@@ -424,7 +424,7 @@ localedef -c -f UTF-8 -i zh_CN zh_CN.utf8
 
 前面在群里说我用CentOS，被群里的小朋友一顿嘲笑，甚至惊为天人。给我莫名其妙了半天，总体来说，原因是CentOS要停止维护了，并且CentOS里有很多依赖库很久都不更新了，这就导致很多程序他们部署都是习惯在ubuntu的设备上，而ubuntu最近版本发的又比较勤，很多相关库都比较新，CentOS的库就很老了。这也就导致他们的工程依赖，在CentOS这里都需要重新编译安装，非常蛋疼。
 
-![image-20220424223654515](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202204242237620.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202204242237620.png)
 
 CentOS之前就看到了停止支持的新闻，也没在意，等到被人无情嘲笑，加上我实验了一下，发现CentOS确实不行了。我的VPS基本清一色的CentOS，而V2Ray等很多工具也经常都是优先支持CentOS的，估计日后支持可能会变吧。
 

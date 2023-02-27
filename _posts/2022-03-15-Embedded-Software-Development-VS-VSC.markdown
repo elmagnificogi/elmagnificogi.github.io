@@ -27,7 +27,7 @@ tags:
 
 ### 安装依赖
 
-![image-20220315175535479](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202203151755541.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202203151755541.png)
 
 启动Visual Studio Installer，然后勾选上`使用C++的Linux开发`
 
@@ -77,21 +77,21 @@ Start-Process "D:\Microsoft Visual Studio\2022\Community\Common7\IDE\devenv" .
 
 启动以后就能看到，整个工程正在对应CMake，配置相关内容，然后就可以随便打开其他内容进行编辑修改调试了。
 
-![image-20220315183808349](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202203151838437.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202203151838437.png)
 
 整个代码基本都可以按照VS的玩法来玩了
 
-![image-20220315184024781](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202203151840909.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202203151840909.png)
 
 编译生成
 
-![image-20220315185407253](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202203151854303.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202203151854303.png)
 
 ### debug
 
 将调试启动目标修改为Launch就可以刷写并调试了
 
-![image-20220315185125719](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202203151851753.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202203151851753.png)
 
 
 
@@ -220,7 +220,7 @@ Launch具体启动刷写和debug是调用了什么，现在还是隐藏的。这
 
 结合startup中的文件，文件的格式和ld这些，其实和Eclipse那边用的gcc-arm-none-eabi一模一样，目前来说用这个来开发还是太早了点，现在的完成度和目前其他集成度稍微高一些的插件比还是有些差距的，他只是一个简单的建立起来的联系而已。
 
-![image-20220315190021932](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202203151900960.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202203151900960.png)
 
 
 
@@ -232,7 +232,7 @@ Launch具体启动刷写和debug是调用了什么，现在还是隐藏的。这
 
 启动Visual Studio Code，然后添加Embedded Tools插件
 
-![Embedded Tools extension page screenshot](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202203151830144.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202203151830144.png)
 
 由于同样是测试版，所以也需要额外安装vcpkg和对应的工具包，下面的流程基本和VS一样
 
@@ -268,7 +268,7 @@ $env:HTTPS_PROXY="https://127.0.0.1:1081"
 
 打开工程文件夹`AZ3166`，然后就会看到提示，安装即可
 
-![image-20220315200248453](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202203152002486.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202203152002486.png)
 
 
 
@@ -276,7 +276,7 @@ $env:HTTPS_PROXY="https://127.0.0.1:1081"
 
 首先也是一样的，选择好对应的预设和输出目标，然后运行和调试切换成`Launch`
 
-![image-20220315200450134](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202203152004209.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202203152004209.png)
 
 在VS中看不到的Launch设置，这里点击设置就能看到了
 

@@ -29,13 +29,13 @@ XPS比较经典的设计就是BC面的碳纤外壳，摸起来也不错。但是
 
 找了半天，找到一个仿皮革，最贵的膜，单面都要37，非常离谱，买回来试试
 
-![image-20221204220745240](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212042207327.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202212042207327.png)
 
 贴上以后，稍微有一点点大，电源按键的膜没有缩小，贴上去不合适去掉了。触摸板的膜也是，非常影响手感，也去掉了。
 
 摸起来确实有反皮革的那种感觉，抗汉手也还行，没有明显印子，只是这个价格还是太高了不太值，细节做的不到位。
 
-![image-20221204220818420](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212042208662.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202212042208662.png)
 
 千万别买，用了还没一个月，这个键盘上的字就掉了，仔细看了下应该是贴上去的，根本不耐磨
 
@@ -57,9 +57,9 @@ XPS系列内存无法直接插一条上去，它本身是焊上去的，只有�
 
 > https://tieba.baidu.com/p/6380040609?pn=1
 
-![image-20221204234043994](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212042340056.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202212042340056.png)
 
-![image-20221204234104881](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212042341940.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202212042341940.png)
 
 有了这两个图，就能知道什么配置的内存，配置电阻需要怎么配了。
 
@@ -67,15 +67,15 @@ XPS系列内存无法直接插一条上去，它本身是焊上去的，只有�
 
 我是1866速率的镁光8g改海力士16g，所以只要一个0变1就行了，要修改149和145的电阻
 
-![image-20221204234631246](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212042346277.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202212042346277.png)
 
 有一个在这里，去掉这个电阻，移动到另外一个位置
 
-![image-20221204234506353](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212042345571.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202212042345571.png)
 
 还有一个应该在这里，具体是哪个忘记了
 
-![image-20221204235326537](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212042353949.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202212042353949.png)
 
 要自己弄这个还是有点困难的，没PCB的图就别想了
 
@@ -91,9 +91,9 @@ XPS系列内存无法直接插一条上去，它本身是焊上去的，只有�
 
 焊接前，先裸板连接电源，看下是不是能正常启动，电流跑到2A左右。可以的话再继续，把主板正反面都拍一下，要高清能看清的，防止一会焊接把什么东西弄没了，可以对比看一下
 
-![image-20221204235648375](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212042356577.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202212042356577.png)
 
-![image-20221204235616859](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212042356111.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202212042356111.png)
 
 
 
@@ -103,25 +103,25 @@ XPS系列内存无法直接插一条上去，它本身是焊上去的，只有�
 
 弄完这里以后，拿4个新的4G的颗粒，开始植球，植球前还是一样，要先把芯片的点位也拖平
 
-![image-20221205000551846](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212050005000.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202212050005000.png)
 
 拖平以后，就是上钢网，然后摸焊锡膏，大力快速就可以了。接着拿镊子压住芯片，用风枪把锡膏都吹成锡球，如果不压住那个钢网会热胀冷缩翘起来，直接就失败了，别问我咋知道的，能犯的错都来了一遍。
 
-![image-20221205001123073](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212050011254.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202212050011254.png)
 
 植球好了以后，取下来，继续用风枪吹一吹，巩固锡球位置。偶尔有不太行的，还需要手动加焊一下。
 
-![image-20221205001156302](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212050011379.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202212050011379.png)
 
 接着就是对位置了，对位置这个要求比较高，不能对的太偏了，而且观察视角一定要垂直，否则看起来是偏的。
 
 对好位置以后，风枪低风速加热，差不多以后用推子推一下（要非常小力，否则会被推飞的），焊接好的内存会自动归位，就像有弹性一样。
 
-![image-20221205001335033](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212050013126.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202212050013126.png)
 
 4个都归为以后，量一下有没有短路。这里老司机都翻车了，我第一个颗粒被推飞了，后面三个都还行。老哥重植第一个，焊接的时候焊接反了，没发现，把我的三个都拆完了以后还短路，才发现他的焊接反了，hhhhhhh，场面超级搞笑。
 
-![image-20221205001352775](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212050013876.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202212050013876.png)
 
 后面基本就是老哥快速重植，重新焊接了一遍。然后晾凉主板，再测了一下没问题，开始改电阻。电阻非常小，有点难弄，取下来一个，然后移动到反面，到这里基本就大功告成了。
 
@@ -129,11 +129,11 @@ XPS系列内存无法直接插一条上去，它本身是焊上去的，只有�
 
 临时装起来，跑一下内存测试，可以看到内存16G，跑了5分钟没有出现死机之类的问题就可以全部装起来了。
 
-![image-20221205002428448](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212050024641.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202212050024641.png)
 
 
 
-![image-20221205002536156](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212050025197.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202212050025197.png)
 
 
 
@@ -149,11 +149,11 @@ XPS系列内存无法直接插一条上去，它本身是焊上去的，只有�
 
 绿巨能的电池太贵了，够买2个普通电池还多了，就不考虑了，直接买了普通的电池替换，休眠待机撑不过一晚上就没了，BIOS都掉了。
 
-![image-20221208114955989](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212081150405.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202212081150405.png)
 
 换完以后，电池的信息
 
-![image-20221208115029046](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212081150127.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202212081150127.png)
 
 换之前默认开机以后最高性能待机时间10小时，换完以后8小时30分，但这个不准。
 
@@ -180,7 +180,7 @@ mWh = V * mAh
 
 但是硅脂本身随时间性能下降的太快了，远不如固态的相变，相变在受热以后会转变成接近硅脂的状态，冷了以后又会恢复固态，这让他的散热效果比较稳定，可以长期使用。
 
-![image-20221208115014830](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212081150984.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202212081150984.png)
 
 硅脂的包装还是非常不错的，东西给的也比较全，上手以后，发现硅脂片非常的薄，直接剪裁成合适的大小贴上去就行了
 

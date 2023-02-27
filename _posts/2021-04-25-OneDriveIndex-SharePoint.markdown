@@ -145,7 +145,7 @@ chmod +x ./cloudreve
 
 启动以后，就能看到对应的管理员账号和密码了，记得安全组里打开5212的端口，udp和tcp我都打开了
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/3VTpC4lxIU5Qq9f.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/3VTpC4lxIU5Qq9f.png)
 
 然后访问vps的5212端口，即可登陆，看效果了
 
@@ -254,17 +254,17 @@ server {
 
 接着就是在存储策略中添加onedrive
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/3FOSI6yWu9XPjb7.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/3FOSI6yWu9XPjb7.png)
 
 选择onedrive
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/t8NVKmRJPqb5FAv.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/t8NVKmRJPqb5FAv.png)
 
 这里可以看到以及给你了每一步如何做，按照对应的操作去建立一个应用，然后获取到应用程序ID和客户端密码。
 
 这里还要注意一下，其实还有一个API权限添加，应该在第5步以后（貌似不添加也能正常工作），这里没有说，我补充一下
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/sXob18cahzlMUHZ.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/sXob18cahzlMUHZ.png)
 
 通过上述操作添加权限，一共需要手动添加3个权限
 
@@ -274,7 +274,7 @@ server {
 
 剩下的权限是自动添加的，添加完成后如图所示
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/hNlra4pAdc5GJin.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/hNlra4pAdc5GJin.png)
 
 这里完成以后，剩下就是选择你对应的OneDrive账号类型了。
 
@@ -297,7 +297,7 @@ server {
 AADSTS700016: Application with identifier '211f238d-4057-4134-9d3d-69731c63e3a0' was not found in the directory 'e20c4664-0335-46c1-8043-3c1b77fac445'. This can happen if the application has not been installed by the administrator of the tenant or consented to by any user in the tenant. You may have sent your authentication request to the wrong tenant.
 ```
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/rTt5ZHfg3dX6uSO.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/rTt5ZHfg3dX6uSO.png)
 
 
 
@@ -309,7 +309,7 @@ AADSTS700016: Application with identifier '211f238d-4057-4134-9d3d-69731c63e3a0'
 
 要注意一下，如果不修改默认用户策略，那么用户上传是直接上传到了vps的本机上。
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/2UBH4j6wxE8mVzX.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/2UBH4j6wxE8mVzX.png)
 
 需要在用户组中修改存储策略，由于是免费版，单用户组只支持单存储策略。
 
@@ -348,7 +348,7 @@ ActiveDirectoryMenuBlade
 403
 ```
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/zGjIcaeMFHAmRd2.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/zGjIcaeMFHAmRd2.png)
 
 如果是这种情况，可以通过下面的商业试用，来新建一个世纪互联的账号，并且此账号会具有创建API的权限，用这个账号创建应用以后，授权给无法创建的账号使用即可
 
@@ -367,7 +367,7 @@ ActiveDirectoryMenuBlade
 3. 团队网站
 4.  起一个不重复的名字，然后记录下来站点地址，非常重要
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/cR4eSPXL6yjtJ1x.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/cR4eSPXL6yjtJ1x.png)
 
 后面就随意下一步，直到完成即可。
 
@@ -375,7 +375,7 @@ ActiveDirectoryMenuBlade
 
 此时回到之前的OneDrive存储策略中，然后用同样的应用id和密码再新建一条存储策略，并且通过编辑配置切换到专家模式，然后记录下来此时的AccessKey / 刷新Token
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/xiE1GSF9XYvy5Ok.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/xiE1GSF9XYvy5Ok.png)
 
 回到vps，我们需要获取SharePoint的siteid。
 
@@ -434,7 +434,7 @@ https://microsoftgraph.chinacloudapi.cn/v1.0/sites/universitytongji.sharepoint.c
 
 替换原来的server地址
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/Dg2BJZhzG9UbQ4a.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/Dg2BJZhzG9UbQ4a.png)
 
 然后保存即可，给用户切换到SharePoint策略，上传一个文件，可以看到对应的站点中添加了这个文件。
 

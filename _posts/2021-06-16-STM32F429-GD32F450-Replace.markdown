@@ -247,7 +247,7 @@ PLLSAI是时钟这里最大的不同，他专门用来给USB和SDIO提供48M的�
 
 这个寄存器是一样的，但是中文版中有写错的地方，我对比看了下英文版这里是正确的
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/pMPUu1QItBCDeyq.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/pMPUu1QItBCDeyq.png)
 
 APB2PSC应该是有3位，也就是15：13的分频位
 
@@ -297,11 +297,11 @@ GPIO的问题，同上
 
 中文还有一处错误这里保留的应该是28和29
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/tNU9wTM7WfJ3jID.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/tNU9wTM7WfJ3jID.png)
 
 下面接着出错了
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/B3ZcI4Tmsk9tloQ.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/B3ZcI4Tmsk9tloQ.png)
 
 | 地址偏移 | ST             | GD         |
 | -------- | -------------- | ---------- |
@@ -317,7 +317,7 @@ ST的BIT27：24是PLLI2SQ的，而GD由于没有SAI1直接保留了。同理造�
 
 但是这里GD多了BIT16和17,用来处理PPSAIP的分频
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/wM23q94RI5LNkoP.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/wM23q94RI5LNkoP.png)
 
 这里可以看到，CK_PPLSAIVCO是来自于CK_ PLLSAIVCOSRC × PLLSAIN
 

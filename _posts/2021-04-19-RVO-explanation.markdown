@@ -83,7 +83,7 @@ VO简单理解，只要两个点本身在未碰撞的情况下，将其中一个
 
 
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/miSKpZfb2Unw7he.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/miSKpZfb2Unw7he.png)
 
 比如上图中，将A当作一个质点，B是有半径的物体。A相对于B的速度就是$V_A - V_B$ ，那么他们的碰撞区域就是上图中的浅色三角区域，即
 
@@ -151,7 +151,7 @@ $$
 
 感觉上面就是简单的交换律和结合律就能验证的东西。
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/oYOgEe1KDjIkBbP.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/oYOgEe1KDjIkBbP.png)
 
 接着就是验证VO会发生速度抖动的情况：
 
@@ -172,11 +172,11 @@ $$
 
 这里的$V_A'$其实就是$(V_A+V_B)/2$ 
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/R5LtnaOAWpxrCmK.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/R5LtnaOAWpxrCmK.png)
 
 为什么这样，就没有抖动了，是因为选择后的$V_A'$在一下轮循环中依然是最接近目标速度的速度，而不会出现又切回到老速度的情况。
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/ULAZzTMbJS9rleq.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/ULAZzTMbJS9rleq.png)
 
 在过度拥挤的情况下，无法找到一个合适速度的时候，就会选择一个碰撞内的速度，按照惩罚函数，求得一个轻惩罚的速度。
 
@@ -210,13 +210,13 @@ $$
 
 
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/CyFuTXgVIqrL64D.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/CyFuTXgVIqrL64D.png)
 
 最优的速度是怎么选呢：
 
 $V_A^{opt}$ 和 $V_B^{opt}$  首先都满足$CA_{A\vert B}^\tau(V_B)$ , 同时最好他们又能满足$D(v^{opt},r^{opt})$ ，其中$v^{opt}$ 是最接近目标方向的速度，即V_pref ，$^{opt}$则是这个速度的允许的接近范围。最好的情况下A和B都能在范围内找到合适的并且接近目标速度的速度。
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/i4YMlJcn7sKytWL.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/i4YMlJcn7sKytWL.png)
 
 
 $$
@@ -260,7 +260,7 @@ $$
 
 他的整体思路就是这样：
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/jJiIxEV5NyzRuGY.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/jJiIxEV5NyzRuGY.png)
 
 1. 获取到位置和速度信息
 2. 计算每个附近的智能体的 $ORCA_{AB}$ ，然后选择一个最接近的速度

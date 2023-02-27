@@ -23,13 +23,13 @@ tags:
 
     last
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/5c131004820f7.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/5c131004820f7.png)
 
 查看失败登陆的信息，这里面基本全都是来暴力破解的选手
 
     lastb
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/5c131056b852a.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/5c131056b852a.png)
 
 查看每日登陆失败的次数
 
@@ -90,7 +90,7 @@ tags:
 
     fail2ban-client status sshd
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/5c131433ebef0.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/5c131433ebef0.png)
 
 查看登陆失败日志
 

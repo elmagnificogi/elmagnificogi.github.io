@@ -24,7 +24,7 @@ tags:
 
 直接用dnSpy加载SW Seed Calculator看到的就是混淆后的代码，所有字符串和变量名类名之类的都被混淆了一下，而且由于SW Seed Calculator用了Costura，所以dll啥的都是直接被压在exe里面的。
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/BMgrt6aOJqwGdjT.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/BMgrt6aOJqwGdjT.png)
 
 可以看到全都是类似的混淆后的代码
 
@@ -76,7 +76,7 @@ public class ?994?
 de4dot-x64.exe "E:\Download\sw\SW Seed Calculator.exe" -p un --strtyp delegate --strtok 0x0600034A
 ```
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/ZPmvXMUDheluTCb.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/ZPmvXMUDheluTCb.png)
 
 我们就拿到了，反混淆后的exe了
 
@@ -84,7 +84,7 @@ de4dot-x64.exe "E:\Download\sw\SW Seed Calculator.exe" -p un --strtyp delegate -
 
 将生成的SW Seed Calculator-cleaned.exe拖进dnSpy
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/1qPwSdiHVb23kxF.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/1qPwSdiHVb23kxF.png)
 
 就能看到原本的字符串已经被正确的反混淆了，代码可读性立马max
 

@@ -69,7 +69,7 @@ JoyCon配对流程，额外增加两步
 
 #### 报文序号
 
-![image-20220909165115549](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202209091651933.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202209091651933.png)
 
 需要注意报文序号需要实现，否则会出现发送HID报文，但是NS完全不识别的情况（只响应了第一次的报文）
 
@@ -250,11 +250,11 @@ uint32_t pro_color[][3] = {
 
 具体NS是识别成Pro还是JC还是通过上面的02 设备信息来区分的，你可以叫Pro，但却是一个JC
 
-![image-20220907172049286](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202209071720376.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202209071720376.png)
 
 虽然在标准报文中也存在当前的设备信息，但是经过测试，标准报文中的手柄信息并不会生效，不具有识别性。
 
-![image-20220907172129907](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202209071721961.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202209071721961.png)
 
 
 
@@ -262,7 +262,7 @@ uint32_t pro_color[][3] = {
 
 由于参考仓库里存在蓝牙的配对，存储密钥相关内容，导致我一直以为这个配对要手动完成。
 
-![image-20220907172805021](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202209071728069.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202209071728069.png)
 
 实际上这个流程完全可以忽略，ESP32或者是其他的现成的蓝牙模块，基本上都会自动完成这个配对存储的过程。其中关键的LTK也会自动生成并存储，所以完全不用开发者担心（当然一些非常原始的蓝牙栈或者是没实现这个部分的，可能需要手动完成）
 
@@ -289,7 +289,7 @@ uint32_t pro_color[][3] = {
 
 这里的准确理解应该是在弹出配对界面时，你需要长按下面的按钮多久，对应NS那边才会显示你的手柄
 
-![image-20220907173350305](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202209071733344.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202209071733344.png)
 
 而实际上全设置成0了，也就是随便按一下手柄，就会触发显示配对，再A一下，就成功配对了。
 
@@ -389,7 +389,7 @@ void reply_McuResume(uint8_t param)
 
 #### 写入命令
 
-![image-20220907182548495](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202209071825529.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202209071825529.png)
 
 由jc_toolkit这里可以知道，其实joycontrol中的写入结束，其实是刚好param[2]==0x08了
 

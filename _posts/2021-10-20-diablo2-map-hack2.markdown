@@ -44,11 +44,11 @@ tags:
 
 
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/yQcYJgfIt7POZCq.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/yQcYJgfIt7POZCq.png)
 
 直接运行，已经打包了需要的暗黑文件，打开以后保持不要关闭命令行就行了
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/O4frTuRZg5xlcGp.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/O4frTuRZg5xlcGp.png)
 
 
 

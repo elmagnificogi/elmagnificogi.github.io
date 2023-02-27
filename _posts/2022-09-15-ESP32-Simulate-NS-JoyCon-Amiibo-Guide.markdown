@@ -30,7 +30,7 @@ ESP32模拟JoyCon和Pro，兼容Amiibo使用指南
 
 通过ESP32来模拟 Joy-Con和Pro Controller，实现伊机控自动脚本，使用EasyConAPI，兼容所有伊机控衍生版本。
 
-![image-20220914002841981](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202209140028015.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202209140028015.png)
 
 **特性：**
 
@@ -53,17 +53,17 @@ ESP32建议购买ESP32-WROOM-32、ESP32-WROOM-32E、ESP32-WROOM-32D，任何使�
 
 #### 推荐
 
-![image-20220918205306450](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202209182053515.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202209182053515.png)
 
 - 按键是按照引脚15对齐的，正面和屏幕一致
 
 不差钱可以买这样的，带屏幕+按键，平常用起来也方便
 
-![image-20220918205817738](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202209182058913.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202209182058913.png)
 
 如果是4*4键盘，定义如图，其他按键时重复功能（IO不够用）
 
-![image-20220918205929241](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202209182059355.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202209182059355.png)
 
 省钱请搜以下关键词，找便宜的
 
@@ -91,7 +91,7 @@ ESP32建议购买ESP32-WROOM-32、ESP32-WROOM-32E、ESP32-WROOM-32D，任何使�
 
 **千万别买**，发的模块不一致，存在断联、卡连接、重启等问题，每个人买到的都可能不一样
 
-![image-20220914002257620](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202209140022682.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202209140022682.png)
 
 
 
@@ -105,17 +105,17 @@ ESP32建议购买ESP32-WROOM-32、ESP32-WROOM-32E、ESP32-WROOM-32D，任何使�
 
 选择ESP32
 
-![image-20220911091739733](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202209110917798.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202209110917798.png)
 
 如图烧写
 
-![image-20220911091755375](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202209110917406.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202209110917406.png)
 
 
 
 ## 配对
 
-![image-20220914130720512](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202209141307707.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202209141307707.png)
 
 当蓝灯闪烁时，表示此时没连接到NS，连接到NS以后会自动灭灯。
 
@@ -125,13 +125,13 @@ ESP32建议购买ESP32-WROOM-32、ESP32-WROOM-32E、ESP32-WROOM-32D，任何使�
 
 进入`更改握法/顺序`进行配对，会自动显示手柄并且自动A，不需要任何人为操作
 
-![image-20220911093355824](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202209110933907.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202209110933907.png)
 
 
 
 ## 重启
 
-![image-20220914130821172](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202209141308272.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202209141308272.png)
 
 
 
@@ -139,7 +139,7 @@ ESP32建议购买ESP32-WROOM-32、ESP32-WROOM-32E、ESP32-WROOM-32D，任何使�
 
 由于默认是自动连接配对的，要更换NS的时候，建议先连上伊机控，然后取消配对，成功以后，断电重启ESP32，之后再和新NS重新配对即可
 
-![image-20220911091919946](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202209110919971.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202209110919971.png)
 
 
 
@@ -151,11 +151,11 @@ ESP32建议购买ESP32-WROOM-32、ESP32-WROOM-32E、ESP32-WROOM-32D，任何使�
 
 手柄模式选择以后，设置，断电重启ESP32，就能看到对应的手柄了
 
-![image-20220914001357138](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202209140014214.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202209140014214.png)
 
 手柄颜色请先点击对应的位置，选好颜色以后，再设置，断电重启ESP32，就能看到对应的手柄了
 
-![image-20220911092201264](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202209110922295.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202209110922295.png)
 
 颜色可以自定义，随便什么数值都可以
 
@@ -165,7 +165,7 @@ ESP32建议购买ESP32-WROOM-32、ESP32-WROOM-32E、ESP32-WROOM-32D，任何使�
 
 Amiibo 内置了一个Mipha的，最多可以存储10个，通过手柄设置进行设置
 
-![image-20220914001736040](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202209140017073.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202209140017073.png)
 
 Amiibo的bin文件需要你自己下载，群文件就有，放在伊机控下的Amiibo文件夹中
 
@@ -194,7 +194,7 @@ AMIIBO 3 # 激活3号amiibo
 
 某些情况下需要取消ESP32和NS的配对（建议先让板子断开自动匹配）
 
-![image-20220911092606511](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202209110926582.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202209110926582.png)
 
 进入以后长按X，就可以断开所有手柄
 

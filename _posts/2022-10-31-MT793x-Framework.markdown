@@ -182,7 +182,7 @@ TOTAL BUILD: PASS
 
 ### SDK
 
-![image-20221031155728621](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202210311557761.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202210311557761.png)
 
 - config，主要是编译用的各种配置文件
 - doc，官方文档，看着有很多，其实有很多东西没有说明，比较有用的是官方API的本地web
@@ -232,7 +232,7 @@ TOTAL BUILD: PASS
 
 工程结构，比较简单，但是主要内容都在编译选项之中
 
-![image-20221031161901537](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202210311619603.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202210311619603.png)
 
 - GCC，工程相关的编译设置
 - inc，头文件
@@ -246,7 +246,7 @@ ps：源码lwip中的udp客户端并不能正常工作，api接口写错了
 
 #### GCC
 
-![image-20221031162011889](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202210311620958.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202210311620958.png)
 
 - feature.mk，middleware组件是否使用，全都在feature中配置
 - hal_feature.mk，hal层驱动是否使用，在hal_feature中配置

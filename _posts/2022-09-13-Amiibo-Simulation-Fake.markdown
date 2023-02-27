@@ -29,7 +29,7 @@ Amiibo本质上就是一个NTAG215标签，以前弄过超远距离RFID，所以
 
 NTAG215本身具有540字节的存储空间，其中Amiibo使用的空间和定义如下
 
-![image-20220913000427636](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202209130004683.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202209130004683.png)
 
 Amiibo有一些共性，如下
 
@@ -136,7 +136,7 @@ amiitool 直接用c实现了，我直接省事了
 
 上一秒还在考虑`mbedTLS`要移植2个算法出来太麻烦了，下一秒就看到了ESP32直接内部已经移植了这个库，可以直接调用了。
 
-![image-20220917013025615](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202209170130700.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202209170130700.png)
 
 
 
@@ -172,11 +172,11 @@ amiitool.exe -d -k amiibo_key_retail.bin -i Mipha.bin -o mipha_decryption.bin
 
 然后就得到了解密以后的bin，直接拉进对比
 
-![image-20220917021259620](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202209170212686.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202209170212686.png)
 
 可以看到只有最后一部分是相同的，也就是以下部分是固定值
 
-![image-20220917021505602](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202209170215627.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202209170215627.png)
 
 
 
@@ -201,13 +201,13 @@ amiitool.exe -d -k amiibo_key_retail.bin -i "Link (Archer).bin" -o Archer.bin
 
 可以看到0x58的地方实际上是对应的amiibo的识别位置
 
-![image-20220917024243393](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202209170242446.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202209170242446.png)
 
 
 
 同样解密以后，他们58的地方也是不同的，现在试着把他们修改成相同的，看一下结果
 
-![image-20220917024358081](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202209170243130.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202209170243130.png)
 
 加密回去右边的
 
@@ -221,17 +221,17 @@ amiitool.exe -e -k amiibo_key_retail.bin -i Archer.bin -o archer_en.bin
 
 仔细看了一下，发现其实03 54 不在0x58这个位置了，而是在0x1E0
 
-![image-20220917025354271](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202209170253308.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202209170253308.png)
 
 所以我应该改这个地方，重新调整以后再加密，已经修改为0x54了
 
-![image-20220917025458260](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202209170254319.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202209170254319.png)
 
 测试一下是否有效，测试修改为54以后，正确识别了，但是现在不能区分识别到的这个Amiibo到底是不是0x54 还是识别的是0x53
 
 经过cale纠正，一个amiibo的识别码，不仅仅是`0354`这么一点，实际上是
 
-![image-20220918224614698](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202209182246729.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202209182246729.png)
 
 这里的8字节共同决定的，所以要替换的内容还要再多一点。要实际看到Amiibo到底是哪个，可以借助动森或者是喷2、喷3，他们会显示具体是哪个amiibo。我这里就借用喷2试一下。
 
@@ -246,7 +246,7 @@ amiitool.exe -d -k amiibo_key_retail.bin -i "Inkling Girl.bin" -o girl_d.bin
 
 解密前
 
-![image-20220918235612084](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202209182356119.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202209182356119.png)
 
 结合amiibo api的数据一起看
 
@@ -293,19 +293,19 @@ amiitool.exe -d -k amiibo_key_retail.bin -i "Inkling Girl.bin" -o girl_d.bin
 amiitool.exe -e -k amiibo_key_retail.bin -i girl_d.bin -o girl_en.bin
 ```
 
-![image-20220919000131197](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202209190001244.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202209190001244.png)
 
 单纯和boy比的话，基本全都变了
 
-![image-20220919000200677](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202209190002735.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202209190002735.png)
 
 进入喷2，使用刚才伪造的boy，进入游戏，正常识别到了，但是这个对话名称稍微有点问题，男性角色却是女性名称了
 
-![image-20220919000952739](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202209190009995.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202209190009995.png)
 
 正常girl，应该是这样的
 
-![image-20220919001106908](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202209190011148.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202209190011148.png)
 
 验证成功，所以剩下的只要移植代码就行了，比较简单了。
 

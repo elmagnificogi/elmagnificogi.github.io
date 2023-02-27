@@ -21,21 +21,21 @@ tags:
 
 ESP32 IDF没有IDE，所以还是依赖VS code来完成，直接搜索esp32，安装对应插件
 
-![image-20220816004715027](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208160047129.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202208160047129.png)
 
 
 
 在下一步前，建议先把代理开起来，不然下载速度感人
 
-![image-20220816012240491](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208160122545.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202208160122545.png)
 
 
 
 根据教程，F1，输入`Select where to save configuration settings` 设置一下工程路径，然后下载对应的IDF
 
-![image-20220816011718561](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208160117614.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202208160117614.png)
 
-![image-20220816005131804](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208160051874.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202208160051874.png)
 
 需要注意的是这里插件其实已经把整个虚拟环境安装好了，包括各种编译需要的工具链。
 
@@ -91,31 +91,31 @@ error launching git:
 
 
 
-![image-20220819005334582](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208190053658.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202208190053658.png)
 
 ## Example
 
 `Ctrl+Shift+p` 然后`Show Example Projects`，就能看到各种例程了，选择一个编译一下
 
-![image-20220821204453239](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208212044330.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202208212044330.png)
 
 
 
 然后选择路径，对应的示例工程就创建好了
 
-![image-20220821204557031](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208212045132.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202208212045132.png)
 
 然后选择芯片，设置调试方式，`Set Espressif device target `，选择对应的芯片，然后选择调试的接口，可以是JTAG或者是USB或者是Uart，建议先用Uart，这里不会出错
 
 `Ctrl+E+B`编译工程
 
-![image-20220821205245758](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208212052067.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202208212052067.png)
 
 
 
 `Ctrl+E+S`查看编译后的固件信息，比如大小，sram使用情况什么的
 
-![image-20220821205307365](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208212053408.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202208212053408.png)
 
 烧写时需要指定串口`Ctrl+E+P`选择烧写串口
 
@@ -123,13 +123,13 @@ error launching git:
 
 `Ctrl+E+F`烧写，需要选择烧写的方式，这里是通过串口烧写，先不选择Jtag或者USB什么的
 
-![image-20220821205605584](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208212056622.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202208212056622.png)
 
 
 
 `Ctrl+E+M`连接串口输出的控制台，就能看到例程中的串口输出了
 
-![image-20220821205723409](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208212057447.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202208212057447.png)
 
 
 
@@ -147,7 +147,7 @@ VS code这里使用1和2比较简单，使用三需要单独配置
 
 直接对着工程`F5`即可，单步执行什么的都是没问题的
 
-![image-20220821225417163](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208212255957.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202208212255957.png)
 
 
 
@@ -165,9 +165,9 @@ Error: libusb_open() failed with LIBUSB_ERROR_NOT_FOUND
 
 还有一种简单的方法判断驱动是否正常，如果这里的驱动提供商是Microsoft而不是libwdi，那这个驱动肯定就不对
 
-![image](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208212307503.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202208212307503.png)
 
-![image-20220821230553232](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208212305266.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202208212305266.png)
 
 
 
@@ -181,15 +181,15 @@ Error: libusb_open() failed with LIBUSB_ERROR_NOT_FOUND
 
 勾选`List All Devices`，显示所有usb设备
 
-![image-20220821225942452](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208212259483.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202208212259483.png)
 
 然后就能看到，列出来了很多设备
 
-![image-20220821230041639](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208212300555.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202208212300555.png)
 
 这里有问题的就是这个`USB JTAG/serial debug unit(interface 2)`，一般情况，如果下面WCID这里✔了，那么就是他，另外一个Interface 0 是串口，这个一般没啥问题。
 
-![image-20220821230229831](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208212304906.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202208212304906.png)
 
 主要是这个驱动有问题，右侧三角选择**替换驱动**而不是安装WCID驱动，然后提示重启，重启以后再进入VS code调试，就发现一切正常了。
 
@@ -209,13 +209,13 @@ Error: libusb_open() failed with LIBUSB_ERROR_NOT_FOUND
 
 选择对应的芯片
 
-![SMMS](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202209091656142.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202209091656142.png)
 
 Develop是给一般人用的，如果是工厂可能需要批量烧写，那么可以选择，对应会出现支持很多个串口烧写的UI，平常完全没必要。
 
 Develop烧写固件界面
 
-![image-20220909165659188](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202209091656745.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202209091656745.png)
 
 由于ESP32比较复杂，所以可能有好几个固件需要烧写，并且要指定对应的地址。
 
@@ -305,7 +305,7 @@ CONFIG_LOG_BOOTLOADER_LEVEL=0
 
 ESP32使用的是FreeRTOS，但是他的FreeRTOS用的不是systick，这就导致操作系统的时钟精度是不够的，默认情况下工程创建的是100Hz的Tick，这就导致实际如果执行`vTaskDelay(4 / portTICK_PERIOD_MS);`，就会出现精度受影响的情况。
 
-![image-20220912200209819](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202209122002873.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202209122002873.png)
 
 如果一个循环中，没有什么可能阻塞的业务，那么`vTaskDelay`由于精度不够，会直接就跳过了，等于`vTaskDelay(0);`
 
@@ -319,21 +319,21 @@ ESP32使用的是FreeRTOS，但是他的FreeRTOS用的不是systick，这就导�
 
 默认设置里一般用的是`Single factory app,no OTA`，偏移是`0x8000`
 
-![image-20221113151821448](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202211131518499.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202211131518499.png)
 
 找到他的具体设置，可以看到应该是由CSV文件决定的
 
-![image-20221113151934279](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202211131519313.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202211131519313.png)
 
 csv中的内容如下：
 
-![image-20221113151750190](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202211131517257.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202211131517257.png)
 
 实际这个芯片是4M大小，给了APP 1MB，给了nvs 24KB
 
 但是实际可用大小，还需要考虑到实际存储头等消耗，所以具体应该只有20567大小
 
-![image-20221113152409588](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202211131524625.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202211131524625.png)
 
 但是，还不止这些。其实nvs里面可能还存储了很多wifi或者bt的相关设置，然后就实际可用大小其实只有7020左右。
 

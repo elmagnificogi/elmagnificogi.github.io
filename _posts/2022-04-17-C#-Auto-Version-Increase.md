@@ -29,7 +29,7 @@ TextTemplate的语法教程相关，看官方文档
 
 简单说在C#工程中增加一个文本模板，后缀是tt的文件
 
-![image-20220417145844662](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202204171458740.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202204171458740.png)
 
 然后输入下面的内容
 
@@ -145,7 +145,7 @@ using System.Resources;
 
 他生成的模板就像下面一样
 
-![image-20220417150856079](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202204171508103.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202204171508103.png)
 
 ```c#
 

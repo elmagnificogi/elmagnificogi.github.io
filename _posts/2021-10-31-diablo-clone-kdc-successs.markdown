@@ -48,7 +48,7 @@ tags:
 
 最后的Diablo Clone ，直接喊群里的琉璃大佬帮忙秒掉了，只是最后我的小咒符属性垫底了。
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/nkV7wzYR1jdTfGa.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/nkV7wzYR1jdTfGa.png)
 
 
 

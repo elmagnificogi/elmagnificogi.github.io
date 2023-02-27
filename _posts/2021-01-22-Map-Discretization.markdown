@@ -29,7 +29,7 @@ tags:
 
 简单说就是将地图栅格化，有些栅格是有障碍的，有的是没有的，从而让地图包含他们，将原本连续的地图变成离散的模式，一个二维数组就能装得下这个地图的数据，然后再用寻路算法根据这个来搜索。
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/Qu4zwPvBlNGirey.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/Qu4zwPvBlNGirey.png)
 
 但是对于游戏或者某些实际应用场景来说这样的栅格化还是不够，一方面是精度不够用，一方面是栅格后可能依然搜索范围太大了，导致实际无法完成。
 
@@ -45,7 +45,7 @@ tags:
 
 路图法，是基于Grid的，本身是在Grid后的地图上选择一些点，作为路径的途径点，然后再通过算法将途径点连接起来，从而形成寻路的。以前的老游戏甚至需要人工标注地图中的途径点，然后才能被配置到寻路中。
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/8gv6F5spY91XxaU.gif)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/8gv6F5spY91XxaU.gif)
 
 
 
@@ -65,7 +65,7 @@ tags:
 
 基于PRM的基础上，将整个图的结构变成树形的，然后基于树形进行扩展，最后得到一条路径，这种方法速率非常快，得到的线路也比PRM更合理一些
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/HMosyEAgpaf3NJI.gif)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/HMosyEAgpaf3NJI.gif)
 
 Road Maps还有一个问题就是得到的路径可能非常扭曲，不平滑，实际执行的时候需要再次进行平滑。
 
@@ -77,7 +77,7 @@ Road Maps还有一个问题就是得到的路径可能非常扭曲，不平滑�
 
 > https://blog.csdn.net/qq_36549512/article/details/80457777
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/DGBwe5ai4QRSPc8.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/DGBwe5ai4QRSPc8.png)
 
 可视图法比较特殊，它相当于是从上帝视角俯瞰整个地图，然后将地图中所有障碍物的边角连接起来，最终他们中不和障碍物穿插的边被留下了。再以这些边和顶点构建图，进行图搜索，从而得到最终的路径。同理于PRM，他得到的比较稳定一些，但是可能多数情况下都不是最优，还有一个问题就是凹多边形会出现问题。
 

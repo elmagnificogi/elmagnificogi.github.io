@@ -27,7 +27,7 @@ DMX是协议名称，后面的数字表示该协议携带的最大数据帧数�
 
 #### 协议格式
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/5tgU2Klz3FxbDPq.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/5tgU2Klz3FxbDPq.png)
 
 
 
@@ -50,7 +50,7 @@ DMX512，使用的波特率是250Kbps
 
 一个数据帧有11bits，其中第一bit是起始位，后接8bits数据位，最后还有2bit停止位，无校验。
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/5HteEf214Vv8QKj.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/5HteEf214Vv8QKj.png)
 
 由于波特率已经确定了，所以每bit时间->每帧数据时间也就规定好了
 

@@ -30,7 +30,7 @@ tags:
 
 意外RN中奖了，直接送10刀，等于我只花了1刀，开心
 
-![image-20221206130136828](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212061301991.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202212061301991.png)
 
 
 
@@ -62,7 +62,7 @@ tags:
 
 v2rayN目前线路列表
 
-![image-20230114110202283](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202301141102382.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202301141102382.png)
 
 
 

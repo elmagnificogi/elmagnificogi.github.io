@@ -31,7 +31,7 @@ K3有很多毛病
 
 这是运行2天后，我拆开的，可以看到硅油此时还处于液态，下面的PCB基本都处于硅油覆盖中了
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/2HFZC1xzyUKJ6AL.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/2HFZC1xzyUKJ6AL.png)
 
 
 
@@ -65,7 +65,7 @@ K3有很多毛病
 - 撬棍一个
 - 风扇如下
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/jnUXfRwSuxH8zIg.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/jnUXfRwSuxH8zIg.png)
 
 这里建议把2个5v的4010换成12v的，这样焊接都在同一个点也简单
 
@@ -89,7 +89,7 @@ K3有很多毛病
 
 在天线支架上，稍微倾斜安装两个4010风扇，然后用热熔胶直接固定，这两个风扇朝向电源USB网口那一面，向外排风。
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/LQVpUDTdnzBG6Ri.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/LQVpUDTdnzBG6Ri.png)
 
 
 
@@ -97,7 +97,7 @@ K3有很多毛病
 
 板子的背部有一个5v的接口，刚好可以用来接两个小风扇
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/cKedFIJbAnOWB1s.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/cKedFIJbAnOWB1s.png)
 
 而电源的12v，两个脚用来接12v的8010风扇，不过这个12v接口只要插上电源就开始转了，无法关闭的。
 
@@ -105,13 +105,13 @@ K3有很多毛病
 
 最终就是这样
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/UcabyDt1qXk3Tl5.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/UcabyDt1qXk3Tl5.png)
 
 
 
 ## 最终结果
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/c6wYk9hMo3VFIRJ.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/c6wYk9hMo3VFIRJ.png)
 
 虽然还不满一天，但是基本稳定了，68℃左右，比直接全裸温度还低一些，说明那个吹散热片的还是起到作用了，如果还想更低，就是再增加几个进风口，应该会更好一些。
 

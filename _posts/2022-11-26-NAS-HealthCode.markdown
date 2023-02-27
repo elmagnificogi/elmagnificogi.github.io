@@ -77,7 +77,7 @@ GitHub不安全，任何fork的仓库，当作者需要的时候，他都可以�
 
 > https://ilovexjp.pages.dev/
 
-![image-20221126230824437](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202211262308546.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202211262308546.png)
 
 也有一些不好的地方，首先他要联网，虽然可以离线，但是第一次必须联网这就有点蠢。
 
@@ -130,7 +130,7 @@ systemctl restart caddy
 
 > https://github.com/XFY9326/FloatPicture
 
-![image-20221127030122355](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202211270301421.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202211270301421.png)
 
 透明度设置为1，最好是打开触摸移动和允许超出屏幕，不用的时候可以将其拖到屏幕边缘，不影响，也不容易被发现
 
@@ -144,7 +144,7 @@ systemctl restart caddy
 
 #### Gallery:Floating Image and Vi
 
-![image-20221127030756603](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202211270307674.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202211270307674.png)
 
 这个APP也能悬浮图片，他不能移动到屏幕外，但是可以双击让图片消失，可以双指缩放图片
 

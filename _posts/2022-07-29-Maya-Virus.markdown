@@ -17,7 +17,7 @@ tags:
 
 最近开了一个别人的场景，突然发现保存文件多了一个提示
 
-![img](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202207291057106.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202207291057106.png)
 
 这东北大渣滓味，明显不是maya官方提示，随便搜了一下就发现了这东西传播非常广
 
@@ -29,7 +29,7 @@ tags:
 
 也正是这个病毒，导致maya从以前的不检测scripts文件变成了现在任何改动scripts都会有提示，可笑的是这个牛皮癣是不会触发maya的scripts检测机制，根本不提示脚本改变了。这就导致这个东西依然被传播。
 
-![image-20220729142712896](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202207291427028.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202207291427028.png)
 
 好一个，一旦泄露，我不负责
 

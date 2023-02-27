@@ -82,11 +82,11 @@ method指定发送的方法是啥
 
 #### 同步问题
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/oGVyBvfcNLetE9r.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/oGVyBvfcNLetE9r.png)
 
 这里可以看到这个css有一个层级关系，而在文件夹中实际上是两个并列且独立的文件
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/i7rcHjd96vDhUqM.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/i7rcHjd96vDhUqM.png)
 
 之前修改一个样式，修改了以后怎么都不起作用，反复查看代码，后来发现起作用的是带min后缀的，而他的上层样式无论我怎么修改都没用。
 

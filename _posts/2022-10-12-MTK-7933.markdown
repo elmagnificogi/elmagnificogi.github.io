@@ -21,7 +21,7 @@ ST的CubeMX自动生成GPIO等相关配置文件的代码已经非常简单易�
 
 Eays PinMux Tool，可以通过这个工具，直接配置GPIO的功能和上下拉以及方向，同时也可以自定义注释。
 
-![image-20221012151409286](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202210121514592.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202210121514592.png)
 
 之后就可以直接生成对应的.c和.h文件，只需要将对应的文件扔到工厂目录中，加入编译即可
 
@@ -270,7 +270,7 @@ int main(void)
 
 bsp的初始化使能是在hal_feature中设置的
 
-![image-20221012154118587](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202210121542660.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202210121542660.png)
 
 ## 离谱的点
 

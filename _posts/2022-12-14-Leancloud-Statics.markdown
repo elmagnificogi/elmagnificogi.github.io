@@ -43,7 +43,7 @@ setInterval("createtime()",250);
 
 效果还行
 
-![image-20221214175437773](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212141754884.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202212141754884.png)
 
 ## 统计文章字数
 
@@ -157,7 +157,7 @@ https://recukngv.api.lncldglobal.com/1.1/classes/Counter?where=%7B%22time%22%3A%
     <!-- waveoverlay end -->
 ```
 
-![image-20221214223410764](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212142234937.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202212142234937.png)
 
 引用自
 
@@ -174,7 +174,7 @@ https://recukngv.api.lncldglobal.com/1.1/classes/Counter?where=%7B%22time%22%3A%
 
 类似的效果
 
-![image-20221215014909539](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212150149640.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202212150149640.png)
 
 
 
@@ -219,7 +219,7 @@ https://recukngv.api.lncldglobal.com/1.1/classes/Counter?where=%7B%22time%22%3A%
 
 
 
-![image-20221215012240725](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212150122905.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202212150122905.png)
 
 引用自
 
@@ -265,7 +265,7 @@ https://recukngv.api.lncldglobal.com/1.1/classes/Counter?where=%7B%22time%22%3A%
 
 效果如下：
 
-![image-20221215012155801](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212150121828.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202212150121828.png)
 
 
 
@@ -334,7 +334,7 @@ new google.translate.TranslateElement({
 
 效果还行，至少UI上统一了
 
-![image-20221215012111815](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212150121858.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202212150121858.png)
 
 
 
@@ -344,11 +344,11 @@ new google.translate.TranslateElement({
 
 之前就加入了，只是一直忘了写，这里有各种中文博客，有需要可以自己提PR，格式模仿上一位即可，最好是带上自己的RSS订阅链接
 
-![image-20221223150455570](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212231505731.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202212231505731.png)
 
 Feeds Pub相当于也是一个RSS的阅览器，提交以后可以在设置里认证一下自己的网站
 
-![image-20221223150517769](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202212231505895.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202212231505895.png)
 
 目前使用Feeds Pub的人不是很多，不过如果有需要的话，完全可以通过爬这份列表，拿到各种技术文章更新
 

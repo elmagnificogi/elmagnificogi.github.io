@@ -142,7 +142,7 @@ http://xxx.xxx.xx.xx:9514
 
 然后就能看到首页了，这个时候直接拖拽上传还不行，因为设置里不允许匿名上传图片。先用刚才的管理身份登陆
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/pGDVyMsQk3qAS5i.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/pGDVyMsQk3qAS5i.png)
 
 
 
@@ -150,11 +150,11 @@ http://xxx.xxx.xx.xx:9514
 
 要使能，api访问，需要先建立一个token，进入到用户设置，然后个人资料里，创建token，保存
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/VwrqylinKtfHZhv.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/VwrqylinKtfHZhv.png)
 
 再进入到用户设置里，添加LinkToken，都默认即可。
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/w8l7XnVtgvpyINx.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/w8l7XnVtgvpyINx.png)
 
 两种方式可以访问，一种是token，相当于root密码级别，一个是LinkToken，相当于分权后的子用户。随便用哪个都行，但是某些地方支持LinkToken，所以LinkToken是必须的。
 
@@ -164,7 +164,7 @@ http://xxx.xxx.xx.xx:9514
 
 想要配合Picgo，需要先安装插件 web-uploader
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/cjC92dS6YD4zxA1.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/cjC92dS6YD4zxA1.png)
 
 安装好了以后通过自定义图床接口来用，和以前还不支持SMMS的token一样。
 
@@ -190,7 +190,7 @@ JSON路径: src
 
 - 官方教程里 "album" 漏了一个引号，导致如果你复制了，Picgo就会提示上传失败
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/Gbji5H2MkC7LZ3A.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/Gbji5H2MkC7LZ3A.png)
 
 
 
@@ -210,7 +210,7 @@ JSON路径: src
 自定义Body: {"album": "相册名或留空"}
 ```
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/qmoTsl2Xfhc6OVe.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/qmoTsl2Xfhc6OVe.png)
 
 
 
@@ -220,7 +220,7 @@ JSON路径: src
 
 把时间戳重命名打开，这样有助于某些图片的名称经常含义特殊字符会导致上传失败（说的就是你QQ截图）
 
-![image-20220128162506114](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202201281625154.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202201281625154.png)
 
 
 
@@ -236,13 +236,13 @@ JSON路径: src
 你的sapicli的存储路径\sapicli.exe -u http://你的服务器/api/upload -t 你的LinkToken -s typora file ${filepath}
 ```
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/K9aGV5tAJb3UgIY.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/K9aGV5tAJb3UgIY.png)
 
 
 
 点击验证图片上传，就能看到类似的提示，说明服务可以用。
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/YI5SxdGR9eTMBmZ.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/YI5SxdGR9eTMBmZ.png)
 
 
 

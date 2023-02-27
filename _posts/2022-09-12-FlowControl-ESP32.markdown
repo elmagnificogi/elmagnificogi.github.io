@@ -20,7 +20,7 @@ tags:
 
 ## 板子
 
-![image-20220912002318780](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202209120023808.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202209120023808.png)
 
 主要就是这个板子，看他便宜，ESP32-WROOm-32
 
@@ -51,7 +51,7 @@ tags:
 
 ESP32确实可以通过串口的流控制来让板子重启并进入boot，从而触发烧写等操作。
 
-![image-20220912002818599](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202209120028051.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202209120028051.png)
 
 通过电路可以看出来，只要控制DTR和RTS就能实现板子的上电和下电操作，非常简单。
 
@@ -85,7 +85,7 @@ C# 这边流控制协议是通过Handshake来实现的，理论上就四种情�
 
 运气比较好，我有2块板子，虽然不太一样，但是另外一块相同代码下完全不会触发
 
-![image-20220912003912829](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202209120039875.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202209120039875.png)
 
 左侧是便宜的有问题的，右侧是Lily Go的板子。都是三极管处理的，但是质量并不同。
 
@@ -109,7 +109,7 @@ C# 这边流控制协议是通过Handshake来实现的，理论上就四种情�
 
 用SSCOM不触发重启，SSCOM打开发完信息以后，再切换成python发送信息，当场重启....
 
-![image-20220912212004697](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202209122120737.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202209122120737.png)
 
 而如果插上以后，只用python打开过，那么就不会触发重启。
 

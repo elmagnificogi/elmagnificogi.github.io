@@ -22,13 +22,13 @@ tags:
 
 > http://mpic.lzhaofu.cn/
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/5bffc46b74708.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/5bffc46b74708.png)
 
 当然拖拽等操作也是可以的，然后截图与复制自动上传的功能可以右键关闭，只使用拖怪上传。
 
 ##### Config
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/5bffc46b72c99.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/5bffc46b72c99.png)
 
 配置自然也非常简单，只需要填入七牛的空间名以及授权码、域名即可。
 
@@ -36,7 +36,7 @@ tags:
 
 在使用前肯定需要注册一个七牛账号，并且实名认证通过，然后新建一个存储空间就能得到需要的东西了。
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/5bffc4c623802.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/5bffc4c623802.png)
 
 如图新建以后在内容管理里就可以看到外链的域名
 

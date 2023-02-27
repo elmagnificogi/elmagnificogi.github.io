@@ -104,7 +104,7 @@ reload(test)
 
 不行，pyd在maya中一旦加载以后，无法替换实际路径中的文件，文件处于被占用状态
 
-![](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/dy783ilkfvT9R64.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/dy783ilkfvT9R64.png)
 
 之前有说明过
 

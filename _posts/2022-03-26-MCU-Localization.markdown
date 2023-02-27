@@ -17,7 +17,7 @@ tags:
 
 目前总体来看，低性能芯片往往都能找到代替品，而靠近中端或者高端的芯片，则是没有替代品，国产的仿制水平还是差了些，估计还得再发展个几年才行。
 
-![image-20220326100620363](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220326100620363.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20220326100620363.png)
 
 由于近年芯片发展比较快，具体的产品型号要拿对应官网的最新选型表去确认，还要和销售二次确认是否有货，比较繁琐，就不列举了。
 

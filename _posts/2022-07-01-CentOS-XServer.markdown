@@ -51,7 +51,7 @@ sudo dnf config-manager --set-enabled PowerTools
 sudo dnf repolist
 ```
 
-![image-20220701113154348](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220701113154348.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20220701113154348.png)
 
 
 
@@ -69,7 +69,7 @@ yum groupinstall xfce -y
 sudo dnf group list
 ```
 
-![image-20220701113224375](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220701113224375.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20220701113224375.png)
 
 安装桌面
 
@@ -131,7 +131,7 @@ vncserver
 netstat -ntlp
 ```
 
-![img](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/6fb9a3858bc7451983ec6c16f3e38d7b.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/6fb9a3858bc7451983ec6c16f3e38d7b.png)
 
 安全组开启5901的端口
 
@@ -147,11 +147,11 @@ netstat -ntlp
 
 ## 测试
 
-![img](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/56bbdc3d1e144fabb97129a1cbf181d2.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/56bbdc3d1e144fabb97129a1cbf181d2.png)
 
 已经可以成功连上了
 
-![image-20220701113341518](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/image-20220701113341518.png)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20220701113341518.png)
 
 
 
