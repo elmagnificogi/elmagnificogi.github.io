@@ -1,0 +1,169 @@
+{
+  "main": {
+    "id": "319883df48688a52",
+    "type": "split",
+    "children": [
+      {
+        "id": "d81d5b3b629a312f",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "37d262ac28f788ba",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "2022-09-15-ESP32-Simulate-NS-JoyCon-Amiibo-Guide.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "e83a24239b2ebe49",
+    "type": "split",
+    "children": [
+      {
+        "id": "10d0488b751c6a95",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "c7ae28e8a3e5e150",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabeticalReverse"
+              }
+            }
+          },
+          {
+            "id": "57ff30ed2abebd40",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "5f3222d439ae3141",
+            "type": "leaf",
+            "state": {
+              "type": "starred",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "da128000e3591c89",
+    "type": "split",
+    "children": [
+      {
+        "id": "00f5c277d9f93c47",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "168be59121a8fca9",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "2022-09-15-ESP32-Simulate-NS-JoyCon-Amiibo-Guide.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "e2d11d3f80b66897",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "2022-09-15-ESP32-Simulate-NS-JoyCon-Amiibo-Guide.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "a15997c964eb6085",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "d38be721467068f4",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "2022-09-15-ESP32-Simulate-NS-JoyCon-Amiibo-Guide.md"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false
+    }
+  },
+  "active": "37d262ac28f788ba",
+  "lastOpenFiles": [
+    "2022-10-31-MT793x-Framework.md",
+    "2022-11-14-Netflix-Unlock.md",
+    "2022-12-01-STM32-SD-Timeout.md",
+    "2022-12-05-BlackFriday-VPS.md",
+    "2022-12-07-Best-Simulation-NS-Controller.md",
+    "2022-12-13-JLink-DAP-ERROR.md",
+    "2022-12-25-CH32-EasyCon-Guide.md",
+    "2022-12-04-XPS32-Upgrade.md",
+    "2022-12-03-STM32-SD-SDSC.md",
+    "2022-12-15-NXP-ARM-GCC-Compile.md",
+    "2022-06-16-Diablo-Ban.md",
+    "2022-06-14-STM32H7-ECC.md",
+    "2022-05-29-Vmq.md",
+    "2022-07-08-Agile-Development.md",
+    "2022-04-15-QQbot-WebSocket.md",
+    "2022-05-09-CF-Workers-Proxy.md",
+    "2022-04-24-CentOS-Mirai.md"
+  ]
+}
