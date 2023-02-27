@@ -9,7 +9,7 @@ header-img: "img/bg7.jpg"
 catalog:    true
 tags:
     - Embedded
-    - MTK793x
+    - MT793x
 ---
 
 ## Foreword

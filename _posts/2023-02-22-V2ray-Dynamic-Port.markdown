@@ -1,9 +1,9 @@
 ---
 layout:     post
-title:      "V2ray ws tls Caddy使用动态端口"
+title:      "V2ray ws tls Caddy使用动态端口并不可行"
 subtitle:   "VMESS,V2RAYN,nginx"
 date:       2023-02-22
-update:     2023-02-22
+update:     2023-02-25
 author:     "elmagnifico"
 header-img: "img/bg3.jpg"
 catalog:    true
@@ -14,13 +14,19 @@ tags:
 
 ## Foreword
 
-新买的2个BWG，没挺过一个月，443端口就被墙了，套了CF，感觉还是非常浪费的，于是打算做个实验，试一试动态端口是否还会被墙
+新买的2个BWG，没挺过一个月，443端口就被墙了，还有一个CN2的也是莫名其妙被墙了，套了CF，感觉还是非常浪费的，于是打算做个实验，试一试动态端口是否还会被墙。
+
+以目前的经验来看，墙是基于他的检测周期内（他的检测时间未知），如果有不明的大流量，tls套tls，那么这种不明流量，大概率会被直接封端口。但是他的检测到底是基于某一ip的总流量呢，还是某一端口的总流量，那就不知道了。最坏的情况也就是IP被封，然后再套CF，既然不能更差，那就试试动态端口吧。
 
 
 
 ## 配置动态端口
 
-配置动态端口，只需要服务端设置即可，客户端基本可以不变
+平常用动态端口的比较少，可以参考的ws+tls+caddy或者nginx的配置都很少，所以试了几次才弄好。
+
+
+
+配置动态端口，只需要服务端设置即可，客户端基本可以不变。首次通信还是原协议，然后沟通以后，通过detour重新约定协议和端口，之后就按照新端口进行通信了。
 
 
 
@@ -265,40 +271,85 @@ tcp        0      0 我的服务器:41290     142.250.68.110:443      ESTABLISHE
 tcp        0      0 我的服务器:58918     91.108.56.138:443       ESTABLISHED 26785/v2ray         
 tcp        0      0 我的服务器:41288     142.250.68.110:443      ESTABLISHED 26785/v2ray         
 tcp        0      0 我的服务器:43942     203.205.254.34:443      ESTABLISHED 26785/v2ray         
-tcp        0      0 我的服务器:40824     8.8.8.8:443             ESTABLISHED 26785/v2ray         
-tcp6       0      0 :::32788                :::*                    LISTEN      26785/v2ray         
-tcp6       0      0 :::32470                :::*                    LISTEN      26785/v2ray         
-tcp6       0      0 :::51926                :::*                    LISTEN      26785/v2ray         
-tcp6       0      0 :::58103                :::*                    LISTEN      26785/v2ray         
-tcp6       0      0 :::31322                :::*                    LISTEN      26785/v2ray         
-tcp6       0      0 :::57948                :::*                    LISTEN      26785/v2ray         
-tcp6       0      0 :::63966                :::*                    LISTEN      26785/v2ray         
-tcp6       0      0 :::41378                :::*                    LISTEN      26785/v2ray         
-tcp6       0      0 :::47075                :::*                    LISTEN      26785/v2ray         
-tcp6       0      0 :::40387                :::*                    LISTEN      26785/v2ray         
-tcp6       0      0 :::56644                :::*                    LISTEN      26785/v2ray         
-tcp6       0      0 :::56326                :::*                    LISTEN      26785/v2ray         
-tcp6       0      0 :::50790                :::*                    LISTEN      26785/v2ray         
-tcp6       0      0 :::40616                :::*                    LISTEN      26785/v2ray         
-tcp6       0      0 :::33738                :::*                    LISTEN      26785/v2ray         
-tcp6       0      0 :::41099                :::*                    LISTEN      26785/v2ray         
-tcp6       0      0 :::30220                :::*                    LISTEN      26785/v2ray         
-tcp6       0      0 :::35532                :::*                    LISTEN      26785/v2ray         
-tcp6       0      0 :::56717                :::*                    LISTEN      26785/v2ray         
-tcp6       0      0 :::37777                :::*                    LISTEN      26785/v2ray         
-tcp6       0      0 :::55987                :::*                    LISTEN      26785/v2ray         
-tcp6       0      0 127.0.0.1:63966         127.0.0.1:33524         ESTABLISHED 26785/v2ray         
+tcp        0      0 我的服务器:40824     8.8.8.8:443             ESTABLISHED 26785/v2ray                
 unix  3      [ ]         STREAM     CONNECTED     866036   26785/v2ray          
 
 ```
 
-可以看到已经有不同的端口连接着了，说明没问题
+可以看到已经有不同的端口连接着了，不过这都是出的端口，得看入口
+
+
+
+看到所有入口的ip，依然是4396端口，而实际上v2rayN根本没做多端口
+
+```
+tcp        0     36 我的服务器:29499     我的客户端:60503   ESTABLISHED 28295/sshd: root@pt 
+tcp6       0      0 我的服务器:4396      我的客户端:60338   ESTABLISHED 26768/caddy         
+tcp6       0      0 我的服务器:4396      我的客户端:59386   ESTABLISHED 26768/caddy         
+tcp6       0   2004 我的服务器:4396      我的客户端:59397   ESTABLISHED 26768/caddy         
+tcp6       0      0 我的服务器:4396      我的客户端:59993   ESTABLISHED 26768/caddy         
+tcp6       0      0 我的服务器:4396      我的客户端:59296   ESTABLISHED 26768/caddy
+```
+
+
+
+本地抓包发现，好像所有依然走的是4396，其他端口并没有走
+
+```
+  TCP    192.168.1.163:59386    我的服务器:4396     ESTABLISHED     5732
+  TCP    192.168.1.163:59397    我的服务器:4396     ESTABLISHED     5732
+  TCP    192.168.1.163:59993    我的服务器:4396     ESTABLISHED     5732
+  TCP    192.168.1.163:60338    我的服务器:4396     ESTABLISHED     5732
+  TCP    192.168.1.163:60503    我的服务器:29499    ESTABLISHED     438
+```
+
+29499是我的ssh端口，所以并不是v2ray
+
+
+
+## 客户端不支持动态端口
+
+之前从没注意过竟然不支持
+
+> https://github.com/2dust/v2rayN/issues/3342
+
+
+
+新版本种的V2rayN会一直报错，而老版本的V2rayN虽然不报错，但是实际上并没有走动态端口
+
+```
+2023/02/24 20:29:34 [Warning] [1402096796] app/proxyman/outbound: failed to process outbound traffic > proxy/vmess/outbound: failed to find an available destination > common/retry: [transport/internet/websocket: failed to dial WebSocket > transport/internet/websocket: failed to dial to (wss://我的服务器:44378/us6): > tls: first record does not look like a TLS handshake transport/internet/websocket: failed to dial WebSocket > transport/internet/websocket: failed to dial to (wss://我的服务器:31978/us6): > tls: first record does not look like a TLS handshake transport/internet/websocket: failed to dial WebSocket > transport/internet/websocket: failed to dial to (wss://我的服务器:56840/us6): > tls: first record does not look like a TLS handshake transport/internet/websocket: failed to dial WebSocket > transport/internet/websocket: failed to dial to (wss://我的服务器:34497/us6): > tls: first record does not look like a TLS handshake transport/internet/websocket: failed to dial WebSocket > transport/internet/websocket: failed to dial to (wss://我的服务器:40583/us6): > tls: first record does not look like a TLS handshake] > common/retry: all retry attempts failed
+```
+
+
+
+**实测Clash也不支持动态端口的设置**
+
+
+
+## 其他动态端口方式
+
+还有看到别人直接用iptable将所有动态端口的流量转发给v2ray工作端口，这种方式我没测试，可能也行。
+
+
+
+## 防封手段
+
+总结一些其他的防封手段，或许以后可以用得上
+
+- naiveproxy，一个小众的新协议，只是目前用的人少，没被针对，但是同样的各个软件的支持还不够好，不够普及，鲜少听到被封的
+- 禁止回国流量，总有小白开全局，导致大量回国流量，会带来额外风险吧
+- 启用fingerprint，目前只有较新版本的软件支持，老版本的还不支持，而且这个设置还没被加到订阅分享链接中
+- 禁止使用老版本的软件和core，可能有各种bug或者特征带来风险（其实反过来说也有可能，老协议可能没人针对了，反而放得松）
+- 不要用443端口，前置nginx或者其他代理伪装一个网页出来（其实没用，我被封的都是这种带伪装的）
+- 转发流量，国内使用某一个固定地址并做好备案等操作，然后出国到各种vps上
+- IPLC，直接不过墙，但其实也有监管，出问题的时候会被清退
 
 
 
 ## Summary
 
-使用动态端口也会有点顾虑，万一下次是封IP呢？
+所以目前来看动态端口应该是没啥用，除非是直接裸启动v2ray-core或者是在中继上配置动态端口，否则根本无法生效
 
 
 
@@ -309,4 +360,6 @@ unix  3      [ ]         STREAM     CONNECTED     866036   26785/v2ray
 > https://github.com/v2ray/v2ray-core/issues/634
 >
 > https://toutyrater.github.io/advanced/dynamicport.html
+>
+> https://v2xtls.org/xtls-vision%E4%BB%8B%E7%BB%8D%E5%8F%8A%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/
 
