@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "2023-02-27-Obsidian-trial.md",
+                "file": "_posts/2023-02-27-Obsidian-trial.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "2023-02-27-Obsidian-trial.md",
+                "file": "_posts/2023-02-27-Obsidian-trial.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "2023-02-27-Obsidian-trial.md",
+                "file": "_posts/2023-02-27-Obsidian-trial.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "2023-02-27-Obsidian-trial.md"
+                "file": "_posts/2023-02-27-Obsidian-trial.md"
               }
             }
           }
@@ -146,18 +146,18 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "1a7074031e5f777b",
+  "active": "2768451a5c07ee51",
   "lastOpenFiles": [
+    "2020-09-28-Typora-Video.md",
+    "2023-02-27-Obsidian-trial.md",
     "未命名.canvas",
     "新建文件夹/home-bg.jpg",
     "新建文件夹",
-    "2023-02-27-Obsidian-trial.md",
     "home-bg.jpg",
     "favicon.ico",
     "2025-04-05-thought.md",
     "选择j.md",
     "2018-02-08-Knapsack-problem.md",
-    "2020-09-28-Typora-Video.md",
     "2020-08-10-Typora-PicGo3.md",
     "2022-12-13-JLink-DAP-ERROR.md",
     "未命名",
