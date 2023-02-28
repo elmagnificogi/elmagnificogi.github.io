@@ -3,7 +3,7 @@
   "readableLineLength": true,
   "strictLineBreaks": false,
   "promptDelete": false,
-  "newLinkFormat": "absolute",
+  "newLinkFormat": "relative",
   "useMarkdownLinks": true,
   "alwaysUpdateLinks": true
 }
