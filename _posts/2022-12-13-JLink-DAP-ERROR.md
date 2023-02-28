@@ -19,7 +19,7 @@ tags:
 
 ## Dap error while reading AIRCR/CPUID register
 
-![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20230227131328355.png)
+![image-20230228091904817](https://img.elmagnifico.tech/static/upload/elmagnifico/202302280919896.png)
 
 出现的问题类似这个EFR32、BGM121，报错基本一模一样，只是换了个板子而已
 
