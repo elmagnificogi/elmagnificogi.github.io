@@ -15,6 +15,14 @@ tags:
 
 Obsidian很早之前就听说了，忍着很久都没用，也没试过，这次试一试，看看能否替换当前的组合
 
+
+
+使用Obsidian之前，建议先看看oldwinter关于他的介绍和你是否需要他，也有很多他关于Obsidian和JekyII的实践，可以作为参考，防止重复造轮子
+
+> https://github.com/oldwinter/knowledge-garden
+
+
+
 ## Obsidian
 ![image.png](https://img.elmagnifico.tech/static/upload/elmagnifico/202302280012678.png)
 
