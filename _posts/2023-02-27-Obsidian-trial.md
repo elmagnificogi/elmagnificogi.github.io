@@ -7,6 +7,7 @@ update:     2023-02-28
 author:     "elmagnifico"
 header-img: "img/bg1.jpg"
 catalog:    true
+permalink: Obsidian-trial
 tags:
     - Markdown
 ---
@@ -173,6 +174,11 @@ Obsidian只能识别`.md`后缀的文件，而`.markdown`就无法识别了，�
 所以如果要想文件可以被链接，最好是去掉文章名字前的年月日，并且双链存在的文章名也是不存在年月日的，否则这个跳转怎么都是错的
 [DualLinkTest](DualLinkTest.md) 这个链接就由于本文是带年月日，所以无法正常跳转
 
+```
+permalink: anything-you-want
+```
+
+当我给本文章一个固定链接以后，就可以去掉年月日了，同样的引用文章也需要固定链接
 
 #### Jekyll
 
