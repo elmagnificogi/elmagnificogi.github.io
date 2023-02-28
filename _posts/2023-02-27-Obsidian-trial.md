@@ -3,7 +3,7 @@ layout:     post
 title:      "Obsidian踩坑"
 subtitle:   "格式,链接,主题"
 date:       2023-02-27
-update:     2023-02-27
+update:     2023-02-28
 author:     "elmagnifico"
 header-img: "img/bg1.jpg"
 catalog:    true
@@ -57,6 +57,8 @@ Obsidian很早之前就听说了，忍着很久都没用，也没试过，这次
 
 
 ### 页面不能自动调整宽度
+
+后来想了想Obsidian的宽度这么窄，有一个好处，就是当你打开2个页面的时候，这种比较窄的宽度，排版看起来就比较适合，但是对于我这种带鱼屏，这种显示方式简直不要太难受。
 
 ![image-20230227231015936](https://img.elmagnifico.tech/static/upload/elmagnifico/202302272310336.png)
 
@@ -164,6 +166,18 @@ Obsidian只能识别`.md`后缀的文件，而`.markdown`就无法识别了，�
 
 
 
+#### Jekyll
+
+> https://github.com/Jekyll-Garden/jekyll-garden.github.io
+>
+> https://forum-zh.obsidian.md/t/topic/8852
+>
+> https://github.com/oldwinter/knowledge-garden
+
+发现了一个Jekyll的解决方案，他可以支持把Obsidian的双链接转换成对应的超链接，如果想和我自己的blog结合，确实可以用这种方案。
+
+
+
 ### 滚动条定位不准确
 
 基本Obsidian中的大部分跳转，在返回时都无法返回到之前的位置，要么错位，要么直接返回到了文章开始，体感非常差。
@@ -195,3 +209,9 @@ Obsidian的出路在哪里，目前我看不到，至少我基本不会再用了
 ## Quote
 
 > https://forum-zh.obsidian.md/t/topic/6161
+>
+> https://github.com/Jekyll-Garden/jekyll-garden.github.io
+>
+> https://forum-zh.obsidian.md/t/topic/8852
+>
+> https://github.com/oldwinter/knowledge-garden
