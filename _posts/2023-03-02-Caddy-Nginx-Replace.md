@@ -80,7 +80,6 @@ ttrss.elmagnifico.tech {
            roll_size 1gb
            roll_uncompressed
         }
-    }
 ```
 
 
