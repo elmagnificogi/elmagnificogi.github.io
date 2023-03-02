@@ -3,7 +3,7 @@ layout:     post
 title:      "i.MXRT1xxx系列启动分析"
 subtitle:   "MXRT1052，BootROM，BootMode"
 date:       2023-01-07
-update:     2023-02-16
+update:     2023-03-02
 author:     "elmagnifico"
 header-img: "img/bg8.jpg"
 catalog:    true
@@ -48,9 +48,9 @@ IMXRT系列基本都是没有内部Flash的，所以他们都是二级启动，�
 
 ![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20230208155103118.png)
 
-0，一般是代码存储区域，片内存储，比如bootload
+0，一般是代码存储区域，片内存储，比如bootload，ICTM
 
-1，一般是内存存储区域，片内存储
+1，一般是内存存储区域，片内存储，DTCM
 
 2，一般是各种外设，寄存器地址什么的
 
@@ -82,15 +82,101 @@ ROMCP是原厂的boot存储区域
 
 ![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20230215105217758.png)
 
-ITCM和DTCM以及OCRAM，三者的大小在芯片内部其实是可以调整的，并不是各自占用这么大，FlexRAM机制让我们可以调整这三者所占大小。
-
-三者是共享512KB的，有一个配置寄存器，可以调整各自的大小
+ITCM和DTCM以及OCRAM，三者是共享512KB的，FlexRAM机制让我们可以调整这三者所占大小。
 
 ![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20230215104949848.png)
 
 ![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20230215104929412.png)
 
 - 但是有一点要注意，OCRAM是必须要配置的，因为实际上BOOROM启动时也需要内存，这个部分用的就是OCRAM的，而且大小也不能小于64KB
+
+![image-20230302164945147](https://img.elmagnifico.tech/static/upload/elmagnifico/202303021649385.png)
+
+对应到ld文件，对于他们的分配，这里以配置0为例
+
+```
+/* Specify the memory areas */
+MEMORY
+{
+  m_flash_config        (RX)  : ORIGIN = 0x60000000, LENGTH = 0x00001000
+  m_ivt                 (RX)  : ORIGIN = 0x60001000, LENGTH = 0x00001000
+  m_interrupts          (RX)  : ORIGIN = 0x60002000, LENGTH = 0x00000400
+  m_text                (RX)  : ORIGIN = 0x60002400, LENGTH = 0x003FDC00
+  /* itcm */
+  m_qacode              (RX)  : ORIGIN = 0x00000000, LENGTH = 0x00020000
+  /* dtcm */
+  m_data                (RW)  : ORIGIN = 0x20000000, LENGTH = 0x00020000
+  /* oc ram */
+  m_data2               (RW)  : ORIGIN = 0x20200000, LENGTH = 0x00040000
+}
+```
+
+调整SRAM有两种方式，一种是烧写Fuse改变，一种是通过动态加载修改内存分配，可以立即生效，动态加载的话，这部分最好是写在Reset中，在程序搬运内存之前就完成。
+
+这里参考痞子衡，修改了一版给gnu arm交叉编译的
+
+```assembly
+Reset_Handler:
+	.equ __iomux_gpr14_adr, 0x400AC038
+    .equ __iomux_gpr16_adr, 0x400AC040
+    .equ __iomux_gpr17_adr, 0x400AC044
+    .equ __flexram_bank_cfg, 0x55555FAA
+
+    .equ __flexram_itcm_size, 0x0       /*   0KB*/
+    .equ __flexram_dtcm_size, 0x9        /* 256KB*/
+    /* adjust sram */
+    CPSID I                
+#define FLEXRAM_CFG_ENABLE
+#ifdef FLEXRAM_CFG_ENABLE
+    /*分配Bank，并且激活Bank配置*/
+    LDR R0,=__iomux_gpr17_adr
+    LDR R1,=__flexram_bank_cfg
+    STR R1,[R0]
+    LDR R0,=__iomux_gpr16_adr
+    LDR R1,[R0]
+    ORR R1,R1,#4
+    STR R1,[R0]
+
+#ifdef FLEXRAM_ITCM_ZERO_SIZE
+    /*禁掉ITCM*/
+    LDR R0,=__iomux_gpr16_adr
+    LDR R1,[R0]
+    AND R1,R1,#0xFFFFFFFE
+    STR R1,[R0]
+#endif
+
+#ifdef FLEXRAM_DTCM_ZERO_SIZE
+    /*禁掉DTCM*/
+    LDR R0,=__iomux_gpr16_adr
+    LDR R1,[R0]
+    AND R1,R1,#0xFFFFFFFD
+    STR R1,[R0]
+#endif
+
+    /*调整TCM容量*/
+    LDR R0,=__iomux_gpr14_adr
+    LDR R1,[R0]
+    MOVT R1,#0x0000
+    MOV R2,#__flexram_itcm_size
+    MOV R3,#__flexram_dtcm_size
+    LSL R2,R2,#16
+    LSL R3,R3,#20
+    ORR R1,R2,R3
+    STR R1,[R0]
+#endif
+
+    /* default reset handle */
+    .equ    VTOR, 0xE000ED08
+    ldr     r0, =VTOR
+    ldr     r1, =__isr_vector
+    str     r1, [r0]
+    ldr     r2, [r1]
+    msr     msp, r2
+#ifndef __NO_SYSTEM_INIT
+    ldr   r0,=SystemInit
+    blx   r0
+#endif
+```
 
 
 
@@ -229,7 +315,7 @@ const flexspi_nor_config_t Qspiflash_config =
         .deviceType = kFlexSpiDeviceType_SerialNOR,
         .sflashPadType = kSerialFlash_4Pads,
         .serialClkFreq = kFlexSpiSerialClk_100MHz,//80MHz for Winbond, 100MHz for GD, 133MHz for ISSI
-        .sflashA1Size = 16u * 1024u * 1024u,//4MBytes
+        .sflashA1Size = 4u * 1024u * 1024u,//4MBytes
         .dataValidTime = {16u, 16u},
         .lookupTable =
         {
@@ -317,7 +403,7 @@ const BOOT_DATA_T boot_data = {
 };
 ```
 
-dcd数据比较多，而且也没有解释后续我再分析。
+dcd数据比较多，关系到各种外设的初始配置，特别是RAM，建议直接使用工具生成
 
 ```c
 const uint8_t dcd_sdram[1072] = {
@@ -354,4 +440,6 @@ const uint8_t dcd_sdram[1072] = {
 > https://www.bilibili.com/video/BV1J54y1L7bJ
 >
 > https://blog.csdn.net/Oushuwen/article/details/109336329
+>
+> https://www.cnblogs.com/henjay724/p/12098657.html
 
