@@ -83,11 +83,19 @@ ipconfig /flushdns
 
 
 
+### Xbox自带修复
+
+![image-20230305122808631](https://img.elmagnifico.tech/static/upload/elmagnifico/202303051230207.png)
+
+设置中有Xbox网络，等他加载完，使用修复
+
+
+
 ### Xbox网络修复
 
 ![image-20230305121023516](https://img.elmagnifico.tech/static/upload/elmagnifico/202303051210545.png)
 
-UU等一众加速工具，Xbox网络修复
+UU等一众加速工具，Xbox网络修复，然后加速Xbox App，再尝试
 
 
 
