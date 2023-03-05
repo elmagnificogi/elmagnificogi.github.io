@@ -25,7 +25,9 @@ tags:
 
 
 
-## 地区不对
+## 解决方案
+
+### 地区不对
 
 一般来说地区不对是不提供游戏服务的，所以要把Windows地区修改到香港或者台湾，然后重启Xbox
 
@@ -33,7 +35,7 @@ tags:
 
 
 
-## 服务没启动
+### 服务没启动
 
 ![image-20230305120606510](https://img.elmagnifico.tech/static/upload/elmagnifico/202303051206544.png)
 
@@ -41,13 +43,13 @@ tags:
 
 
 
-## 重装Xbox
+### 重装Xbox
 
 大部分人不怎么用Xbox，所以很多Xbox特别老，某个服务已经无法用了，最好卸载重新装一下
 
 
 
-## 缺少认证程序
+### 缺少认证程序
 
 Xbox Identity Provider 这个程序很多人都没有，也会造成无法登陆，重新安装即可
 
@@ -55,7 +57,7 @@ Xbox Identity Provider 这个程序很多人都没有，也会造成无法登陆
 
 
 
-## 认证服务可能被运营商短暂屏蔽
+### 认证服务可能被运营商短暂屏蔽
 
 刷新DNS
 
@@ -65,7 +67,7 @@ ipconfig /flushdns
 
 
 
-## 开了代理
+### 开了代理
 
 取消系统内的代理，其实应该不走这里的，Xbox是UWP，需要专门工具处理
 
@@ -73,7 +75,7 @@ ipconfig /flushdns
 
 
 
-## Windows回环代理取消
+### Windows回环代理取消
 
 ![image-20230305120927003](https://img.elmagnifico.tech/static/upload/elmagnifico/202303051209039.png)
 
@@ -81,7 +83,7 @@ ipconfig /flushdns
 
 
 
-## Xbox网络修复
+### Xbox网络修复
 
 ![image-20230305121023516](https://img.elmagnifico.tech/static/upload/elmagnifico/202303051210545.png)
 
@@ -89,7 +91,7 @@ UU等一众加速工具，Xbox网络修复
 
 
 
-## 网络重置
+### 网络重置
 
 ![image-20230305121117372](https://img.elmagnifico.tech/static/upload/elmagnifico/202303051211410.png)
 
@@ -120,7 +122,7 @@ inetcpl.cpl
 
 
 
-## Xbox提示需要修复
+### Xbox提示需要修复
 
 这个是微软的Game services，可能需要安装
 
@@ -134,7 +136,7 @@ inetcpl.cpl
 
 
 
-## 切账户重新输入账号密码
+### 切账户重新输入账号密码
 
 ![image-20230305121723516](https://img.elmagnifico.tech/static/upload/elmagnifico/202303051217560.png)
 
@@ -142,7 +144,7 @@ inetcpl.cpl
 
 
 
-## 海外数据协议条款未勾选
+### 海外数据协议条款未勾选
 
 大部分被卡住其实就是因为这个，Xbox由于不对中国提供服务，涉及到数据的问题，需要单独同意一个协议。而老一点的用户，肯定都没有单独勾选过或者说遇到这个协议，自然不存在同意了。Xbox登录的时候直接会判断此协议，而默认认为这个协议是拒绝的，这就造成Xbox登录秒失败了。
 
@@ -154,7 +156,7 @@ inetcpl.cpl
 
 
 
-## 其他
+### 其他
 
 可能Windows有问题，缺少什么核心组件，最终大招，检测核心组件缺失，并进行修复
 
