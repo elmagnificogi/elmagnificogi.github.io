@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "Ubuntu安装gcc_arm_none_eabi"
-subtitle:   "eclipse,gnu arm plugin"
+subtitle:   "eclipse,gnu arm plugin,qv2ray"
 date:       2021-04-24
 update:     2021-09-13
 author:     "elmagnifico"
@@ -195,6 +195,8 @@ config debug
 
 ## 安装qv2ray
 
+可能一些包是国外的，为了下载最好先弄个翻墙，省得麻烦
+
 由于是老ubuntu 16.04 所以实际上qv2ray的官方教程根本不顶用。
 
 所以简单起见，直接用现成的，而不是通过包管理安装。
@@ -211,7 +213,13 @@ config debug
 
 ![](https://img.elmagnifico.tech/static/upload/elmagnifico/mp17O48BbnAcatF.png)
 
-**没想到没过多久，qv2ray就直接停止维护了，还搞了一堆破事。然后qv2ray确实也不够好用，只要用了一次就强行设置了系统代理，而退出却不能取消代理，这就很弱智了，所以还是别用了吧**
+
+
+订阅设置需要在分组里设置，系统代理建议开启，否则不一定能被代理到
+
+
+
+**没想到没过多久，qv2ray就直接停止维护了，还搞了一堆破事。然后qv2ray确实也不够好用，只要用了一次就强行设置了系统代理，而退出却不能取消代理，这就很弱智了，必须要手动操作才行**
 
 
 
