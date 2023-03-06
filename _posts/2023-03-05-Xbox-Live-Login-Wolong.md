@@ -146,6 +146,8 @@ inetcpl.cpl
 
 > https://www.microsoft.com/store/productId/9NKNC0LD5NN6
 
+同理Xbox Game bar 可以不更新不安装，并不会影响使用
+
 
 
 ### 切账户重新输入账号密码
@@ -205,6 +207,6 @@ sfc /SCANNOW
 >
 > https://answers.microsoft.com/zh-hans/windows/forum/all/microsoft/525d2d23-4a53-4f45-8677-ee5448b60053
 >
-> https://www.bilibili.com/video/BV1oY411s7rh/?spm_id_from=333.788.recommend_more_video.-1&vd_source=fe2e37e9c6518671631012d39f18a581
+> https://www.bilibili.com/video/BV1oY411s7rh
 >
-> https://www.bilibili.com/video/BV1SL411Z7DN/?vd_source=fe2e37e9c6518671631012d39f18a581
+> https://www.bilibili.com/video/BV1SL411Z7DN
