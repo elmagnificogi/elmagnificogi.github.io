@@ -3,7 +3,7 @@ layout:     post
 title:      "OnionIoT编译"
 subtitle:   "OpenWrt，make menuconfig，make kernel_menuconfig"
 date:       2023-03-06
-update:     2023-03-06
+update:     2023-03-07
 author:     "elmagnifico"
 header-img: "img/api-bg.jpg"
 catalog:    true
@@ -19,14 +19,14 @@ tags:
 
 ## 编译环境搭建
 
-
-
 必须使用`Ubuntu, 18.04`，然后更新软件，安装以下依赖
 
 ```
 sudo apt-get update
 sudo apt-get install -y build-essential vim git wget curl subversion build-essential libncurses5-dev zlib1g-dev gawk flex quilt git-core unzip libssl-dev python-dev python-pip libxml-parser-perl default-jdk rsync time
 ```
+
+- 建议重新弄一个虚拟机，硬盘记得稍微给多一点，编译一次大概整体在20G左右
 
 
 
@@ -188,6 +188,41 @@ feeds负责管理可能用到的源码包，由于所有包都是在变化中的
 ```
 ./scripts/feeds clean
 ```
+
+
+
+#### 使用本地源
+
+如果是常年不需要更新的源，那么可以选择使用本地的源，防止远端更新造成各种不能编译的情况。还有一种好处就是把可以编译过去的源备份了，不至于远端库都不存在了，备份都找不到
+
+```shell
+src-link packages ./feeds_local/packages
+src-link luci ./feeds_local/luci
+src-link routing ./feeds_local/routing
+src-link telephony ./feeds_local/telephony
+src-link onion ./feeds_local/onion
+
+# online source
+#src-git packages https://git.openwrt.org/feed/packages.git;openwrt-18.06
+#src-git luci https://git.openwrt.org/project/luci.git;openwrt-18.06
+#src-git routing https://git.openwrt.org/feed/routing.git;openwrt-18.06
+#src-git telephony https://git.openwrt.org/feed/telephony.git;openwrt-18.06
+#src-git onion https://github.com/OnionIoT/OpenWRT-Packages.git;openwrt-18.06
+```
+
+比较简单，修改feed.conf，改为`src-link`，并且修改为本地路径
+
+
+
+完成以后就可以使用feeds更新所有源
+
+```
+./scripts/feeds update -a
+```
+
+
+
+还有一种就是保存`./dl`文件夹和`package`文件夹，让这些文件有备份
 
 
 
