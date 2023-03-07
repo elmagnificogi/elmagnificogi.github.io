@@ -3,11 +3,11 @@ layout:     post
 title:      "翻墙节点合租-长期有效"
 subtitle:   "BlackFriday、IPLC"
 date:       2022-12-05
-update:     2023-01-14
+update:     2023-03-07
 author:     "elmagnifico"
 header-img: "img/drone-head-bg.jpg"
 catalog:    true
-top:        false
+top:        true
 tags:
     - VPS
 ---
@@ -18,7 +18,7 @@ tags:
 
 
 
-**2023.2目前已经满30人了，所以本月暂时不再收人了，下个月看情况决定是否再增加新人**
+~~**2023.2目前已经满30人了，所以本月暂时不再收人了，下个月看情况决定是否再增加新人**~~
 
 
 
