@@ -444,6 +444,8 @@ package/feeds.onion/bluez/makefile has a dependency on udev
 > https://openwrt.org/docs/guide-developer/overview
 >
 > https://blog.csdn.net/weixin_43025071/article/details/85265049
+>
+> https://openwrt.org/docs/guide-developer/feeds
 
 
 
