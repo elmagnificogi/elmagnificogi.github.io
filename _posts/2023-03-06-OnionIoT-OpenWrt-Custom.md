@@ -3,7 +3,7 @@ layout:     post
 title:      "OnionIoT编译"
 subtitle:   "OpenWrt，make menuconfig，make kernel_menuconfig"
 date:       2023-03-06
-update:     2023-03-07
+update:     2023-03-08
 author:     "elmagnifico"
 header-img: "img/api-bg.jpg"
 catalog:    true
@@ -196,11 +196,11 @@ feeds负责管理可能用到的源码包，由于所有包都是在变化中的
 如果是常年不需要更新的源，那么可以选择使用本地的源，防止远端更新造成各种不能编译的情况。还有一种好处就是把可以编译过去的源备份了，不至于远端库都不存在了，备份都找不到
 
 ```shell
-src-link packages ./feeds_local/packages
-src-link luci ./feeds_local/luci
-src-link routing ./feeds_local/routing
-src-link telephony ./feeds_local/telephony
-src-link onion ./feeds_local/onion
+src-link packages /home/feeds_local/packages
+src-link luci /home/feeds_local/luci
+src-link routing /home/feeds_local/routing
+src-link telephony /home/feeds_local/telephony
+src-link onion /home/feeds_local/onion
 
 # online source
 #src-git packages https://git.openwrt.org/feed/packages.git;openwrt-18.06
@@ -210,7 +210,7 @@ src-link onion ./feeds_local/onion
 #src-git onion https://github.com/OnionIoT/OpenWRT-Packages.git;openwrt-18.06
 ```
 
-比较简单，修改feed.conf，改为`src-link`，并且修改为本地路径
+比较简单，修改feed.conf，改为`src-link`，并且修改为本地路径，需要注意本地路径必须使用绝对路径，否则无法正常工作
 
 
 
