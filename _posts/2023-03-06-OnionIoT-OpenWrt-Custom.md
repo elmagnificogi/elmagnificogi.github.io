@@ -3,7 +3,7 @@ layout:     post
 title:      "OnionIoT编译"
 subtitle:   "OpenWrt，make menuconfig，make kernel_menuconfig"
 date:       2023-03-06
-update:     2023-03-08
+update:     2023-03-09
 author:     "elmagnifico"
 header-img: "img/api-bg.jpg"
 catalog:    true
@@ -44,6 +44,14 @@ cd source
 ```
 sh scripts/onion-feed-setup.sh
 python scripts/onion-setup-build.py
+```
+
+
+
+设置编译的配置文件
+
+```
+python scripts/onion-setup-build.py -c .config.O2
 ```
 
 
