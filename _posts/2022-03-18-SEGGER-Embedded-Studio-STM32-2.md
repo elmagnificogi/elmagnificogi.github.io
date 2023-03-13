@@ -3,7 +3,7 @@ layout:     post
 title:      "使用SEGGER Embedded Studio开发STM32进阶"
 subtitle:   "STM32，IDE"
 date:       2022-03-18
-update:     2022-12-03
+update:     2023-03-13
 author:     "elmagnifico"
 header-img: "img/desk-head-bg.jpg"
 catalog:    true
@@ -660,6 +660,16 @@ SES有个傻逼设定，他的全局替换只能在打开的文档中使用
 
 
 
+## SES启动，卡在Building
+
+SES启动以后，不弹出接受协议界面，直接卡住，什么也不能点，任务管理器里显示子线程已经无响应了
+
+大部分情况应该是Jlink可能莫名其妙没有正常启动，断开J-Link后，SES正常启动了
+
+SES启动的时候会检测很多第三方组件是否存在、是否正常，最终影响能否启动
+
+
+
 ## Summary
 
 差不多把可能遇到的问题都解决了，整个自动化的流程总算是好了点。
@@ -687,4 +697,6 @@ SES有个傻逼设定，他的全局替换只能在打开的文档中使用
 > https://devzone.nordicsemi.com/f/nordic-q-a/36692/segger-embedded-studio---makefile-alternatives-git-into-a-code-integration
 >
 > https://forum.segger.com/index.php/Thread/5044-SOLVED-Registry-view/
+>
+> https://forum.segger.com/index.php/Thread/5829-ABANDONED-Segger-Embedded-Studio-Hangs-on-Startup-with-Building-in-the-Title-Bar/
 
