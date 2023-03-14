@@ -22,6 +22,10 @@ tags:
 
 > https://github.com/moonlight-stream/moonlight-docs/wiki/NVIDIA-GameStream-End-Of-Service-Announcement-FAQ
 
+备胎方案看这里
+
+> https://elmagnifico.tech/2023/03/14/Sunshine-moonlight/
+
 
 
 ## NVIDIA Shield 消失的解决办法
