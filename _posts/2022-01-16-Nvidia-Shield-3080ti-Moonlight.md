@@ -3,7 +3,7 @@ layout:     post
 title:      "NVIDIA Shield 消失的解决办法和Moonlight串流"
 subtitle:   "3080ti，Geforce experience"
 date:       2022-01-16
-update:     2022-01-19
+update:     2023-03-14
 author:     "elmagnifico"
 header-img: "img/bg3.jpg"
 catalog:    true
@@ -15,6 +15,12 @@ tags:
 ## Foreword
 
 之前有用Moonlight串口pc的游戏到公司电脑，然后突然有一天串流就不可用了，NVIDIA Shield 就消失了，怎么都开不起来。串流就失败了。然后也记录一下Moonlight串流的操作。
+
+
+
+**由于NVIDIA单方面宣布停止NVIDIA Shield Service，我之前一直以为是停止Shield硬件支持，没想到这个老黄直接把PC端的都干掉了，所以本篇Blog也成了历史的眼泪，新的串流方法是使用Shunshine，依然是Moonlight的**
+
+> https://github.com/moonlight-stream/moonlight-docs/wiki/NVIDIA-GameStream-End-Of-Service-Announcement-FAQ
 
 
 
