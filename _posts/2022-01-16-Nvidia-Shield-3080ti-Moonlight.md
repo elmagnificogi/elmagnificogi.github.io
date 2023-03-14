@@ -18,7 +18,7 @@ tags:
 
 
 
-**由于NVIDIA单方面宣布停止NVIDIA Shield Service，我之前一直以为是停止Shield硬件支持，没想到这个老黄直接把PC端的都干掉了，所以本篇Blog也成了历史的眼泪，新的串流方法是使用Shunshine，依然是Moonlight的**
+**由于NVIDIA单方面宣布停止NVIDIA Shield Service，我之前一直以为是停止Shield硬件支持，没想到这个老黄直接把PC端的都干掉了，所以本篇Blog也成了历史的眼泪，新的串流方法是使用Sunshine，依然是Moonlight的，当然截止到今日20230-03-14 Shield依然正常工作**
 
 > https://github.com/moonlight-stream/moonlight-docs/wiki/NVIDIA-GameStream-End-Of-Service-Announcement-FAQ
 
