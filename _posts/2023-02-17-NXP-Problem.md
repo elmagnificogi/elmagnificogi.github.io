@@ -3,7 +3,7 @@ layout:     post
 title:      "NXP系列容易混淆的问题"
 subtitle:   "MXRT1052，CFX，下载算法"
 date:       2023-02-17
-update:     2023-02-17
+update:     2023-03-15
 author:     "elmagnifico"
 header-img: "img/bg4.jpg"
 catalog:    true
@@ -159,6 +159,105 @@ const flexspi_nor_config_t Qspiflash_config =
 
 #endif
 ```
+
+
+
+## SES动态分配FlexRam
+
+先说动态分配FlexRam会导致一些莫名其妙的现象，猜测和内部的ram有关系
+
+```assembly
+
+/* Reset Handler */
+
+    .thumb_func
+    .align 2
+    .globl   Reset_Handler
+    .weak    Reset_Handler
+    .type    Reset_Handler, %function
+
+Reset_Handler:
+    .equ __iomux_gpr14_adr, 0x400AC038
+    .equ __iomux_gpr16_adr, 0x400AC040
+    .equ __iomux_gpr17_adr, 0x400AC044
+
+
+    .equ __flexram_itcm_size, 0x7       
+    .equ __flexram_dtcm_size, 0x8       
+    .equ __flexram_bank_cfg, 0x55555FAA
+
+    /*.equ __flexram_bank_cfg,0xAAAA5555*/
+    /*.equ __flexram_itcm_size, 0x0       /*   0KB*/
+    /*.equ __flexram_dtcm_size, 0x9        /* 256KB*/
+    /* adjust sram */
+    CPSID I                
+#define FLEXRAM_CFG_ENABLE
+#ifdef FLEXRAM_CFG_ENABLE
+    /*分配Bank，并且激活Bank配置*/
+    LDR R0,=__iomux_gpr17_adr
+    LDR R1,=__flexram_bank_cfg
+    STR R1,[R0]
+    LDR R0,=__iomux_gpr16_adr
+    LDR R1,[R0]
+    ORR R1,R1,#4
+    STR R1,[R0]
+//#define FLEXRAM_ITCM_ZERO_SIZE
+#ifdef FLEXRAM_ITCM_ZERO_SIZE
+    /*禁掉ITCM*/
+    LDR R0,=__iomux_gpr16_adr
+    LDR R1,[R0]
+    AND R1,R1,#0xFFFFFFFE
+    STR R1,[R0]
+#endif
+
+#ifdef FLEXRAM_DTCM_ZERO_SIZE
+    /*禁掉DTCM*/
+    LDR R0,=__iomux_gpr16_adr
+    LDR R1,[R0]
+    AND R1,R1,#0xFFFFFFFD
+    STR R1,[R0]
+#endif
+
+    /*调整TCM容量*/
+    LDR R0,=__iomux_gpr14_adr
+    LDR R1,[R0]
+    MOVT R1,#0x0000
+    MOV R2,#__flexram_itcm_size
+    MOV R3,#__flexram_dtcm_size
+    LSL R2,R2,#16
+    LSL R3,R3,#20
+    ORR R1,R2,R3
+    STR R1,[R0]
+#endif
+
+    /* reset handle */
+    .equ    VTOR, 0xE000ED08
+    ldr     r0, =VTOR
+    ldr     r1, =__isr_vector
+    str     r1, [r0]
+    ldr     r2, [r1]
+    msr     msp, r2
+#ifndef __NO_SYSTEM_INIT
+    ldr   r0,=SystemInit
+    blx   r0
+#endif
+```
+
+
+
+这里遇到的问题是官方文档里没有解释的，在SES中全都会出现问题
+
+OC RAM必须在`IOMUXC_GPR_GPR17`的最高位处有一块，否则会出现无法烧写、debug的情况
+
+ITCM 必须有一块64K大小的，否则也会出现无法烧写、debug的情况
+
+
+
+然后仔细观察Fuse中一些默认的分配方式，怀疑和这个也有关系，如果ODI没有任何顺序问题，那为什么不是OODDII呢，而是这种奇奇怪怪的分布形式
+
+![image-20230315092647223](https://img.elmagnifico.tech/static/upload/elmagnifico/202303150935990.png)
+
+如果使用其他IDE可以正常烧写，唯独SES无法正常处理（还有一种可能是痞子衡写的烧写算法有问题，默认使用了ITCM，导致实际无法正常工作）
 
 
 

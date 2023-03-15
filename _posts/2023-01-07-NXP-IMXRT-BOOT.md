@@ -178,6 +178,12 @@ Reset_Handler:
 #endif
 ```
 
+痞子衡在文章里说如果ITCM或者DTCM设置为0，但是别禁用，实际这种方式是不行的，如果你使能了，那就必须不为0
+
+![image-20230314153813255](https://img.elmagnifico.tech/static/upload/elmagnifico/202303141538346.png)
+
+**实际这样会出现后续J-Link无法烧写、Debug(SES环境下，Keil有特殊处理可以无视)，程序确实能正常跑，正常用的话，该关就关**
+
 
 
 #### Boot Devices
