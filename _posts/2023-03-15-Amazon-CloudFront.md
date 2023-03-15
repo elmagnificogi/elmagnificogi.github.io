@@ -3,7 +3,7 @@ layout:     post
 title:      "Amazon免费12个月体验和CloudFront替代CF"
 subtitle:   "CloudFlare，WS，TLS，V2ray"
 date:       2023-03-15
-update:     2023-03-15
+update:     2023-03-16
 author:     "elmagnifico"
 header-img: "img/z8.jpg"
 catalog:    true
@@ -116,6 +116,35 @@ cloudfront和cloudflare都可以优选ip，来源参考这里
 > https://d7uri8nf7uskq.cloudfront.net/tools/list-cloudfront-ips
 
 优选以后速度会有提升，但是这个选ip太麻烦了，懒得弄
+
+
+
+#### 自定义端口
+
+cloudfront比cloudflare强的一点就是它可以自定义端口，也就是不会锁死你在某些特定的端口上
+
+众所周知cloudflare的https只能使用下面这些端口
+
+```
+443
+2053
+2083
+2087
+2096
+8443
+```
+
+如果服务器的443被封了或者整个ip被封了，那么就可以通过修改这里的端口设置，改到任意端口
+
+- cloudfront可以支持80, 443, 1024到65535中的任意端口
+
+
+
+![image-20230315233429618](https://img.elmagnifico.tech/static/upload/elmagnifico/202303152334684.png)
+
+注意这样修改完了以后，是访问cloudfront给出来的域名就等于直接访问你的源域名+端口了，所以代理里不需要设置你源域名的端口，而是设置为443，这一点非常关键
+
+![image-20230315233747063](https://img.elmagnifico.tech/static/upload/elmagnifico/202303152337099.png)
 
 
 
