@@ -296,6 +296,8 @@ signed char *pcTaskName 是溢出的任务名
 ```
 设置定时器任务的栈空间大小
 
+
+
 ###### 中断相关
 
 ```c
@@ -307,18 +309,24 @@ signed char *pcTaskName 是溢出的任务名
 ```
 这里设置是否定义了使用几位来设定优先级，如果没定义的话，默认使用4位
 
+
+
 ```c
 #define configLIBRARY_LOWEST_INTERRUPT_PRIORITY	15
 ```
 
 因为使用了4位，所以这里对应的最低优先级自然也就是15，这里是指硬件自身的最低优先级是多少。
 
-我们知道STM32是越大优先级越低，FreeRTOS则是越大优先级越高，他自己为了换算优先级，所以需要知道硬件最低是多少。
+我们知道STM32是越大优先级越低，FreeRTOS则是越大优先级越高，他自己为了换算优先级，所以需要知道硬件最低是多少
+
+
 
 ```c
 #define configLIBRARY_MAX_SYSCALL_INTERRUPT_PRIORITY	5
 ```
 用来设置RTOS可以管理的最大优先级，其数目对应的是STM32的5优先级，也就是说0/1/2/3/4优先级的不归RTOS管理
+
+
 
 ```c
 #define configKERNEL_INTERRUPT_PRIORITY (configLIBRARY_LOWEST_INTERRUPT_PRIORITY << (8 - configPRIO_BITS))
@@ -326,12 +334,15 @@ signed char *pcTaskName 是溢出的任务名
 这里用来定义系统的滴答定时器中断的优先级，其实这里经过一些列计算然后把他们的优先级设置为最低。
 
 
+
+
 ```c
 #define configMAX_SYSCALL_INTERRUPT_PRIORITY (configLIBRARY_MAX_SYSCALL_INTERRUPT_PRIORITY << (8 - configPRIO_BITS))
-##### INCLUDE可选函数
 ```
 
-这里经过一些计算得到了可以管理的最大优先级，进而防止板级高优先级被中断嵌套或者打断，使他们不受内核延迟的影响
+这里经过一些计算得到了RTOS可以管理的最大优先级，进而防止板级高优先级被中断嵌套或者打断，使他们不受内核延迟的影响
+
+
 
 ##### 中断处理函数相关
 
