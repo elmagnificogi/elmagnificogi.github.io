@@ -55,7 +55,7 @@ disqus_username: elmagnifico-1
 
 # Analytics settings
 # Baidu Analytics
-ba_track_id: '9d14c694ddec7e797a00c990e9e8312d'
+# ba_track_id: '9d14c694ddec7e797a00c990e9e8312d'
 
 # Google Analytics
 ga_track_id: 'UA-174663490-1'            # Format: UA-xxxxxx-xx
