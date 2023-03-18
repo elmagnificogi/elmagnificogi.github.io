@@ -54,7 +54,7 @@ disqus_username: elmagnifico-1
 
 
 # Analytics settings
-# Baidu Analytics 
+# Baidu Analytics
 ba_track_id: '9d14c694ddec7e797a00c990e9e8312d'
 
 # Google Analytics
@@ -102,9 +102,14 @@ friends: [
       href: "http://smilejing.cn/"
     },
     {
+        title: "晨曦的博客",
+        href: "https://blog.whuzfb.cn/"
+    },
+    {
         title: "等你成为我的朋友",
         href: "http://等你成为我的朋友"
-    },{
+    },
+    {
         title: "Wait for you",
         href: "http://Wait for you"
     }
