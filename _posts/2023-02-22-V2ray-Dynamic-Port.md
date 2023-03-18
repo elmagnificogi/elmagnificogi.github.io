@@ -318,7 +318,19 @@ tcp6       0      0 我的服务器:4396      我的客户端:59296   ESTABLISHE
 新版本种的V2rayN会一直报错，而老版本的V2rayN虽然不报错，但是实际上并没有走动态端口
 
 ```
-2023/02/24 20:29:34 [Warning] [1402096796] app/proxyman/outbound: failed to process outbound traffic > proxy/vmess/outbound: failed to find an available destination > common/retry: [transport/internet/websocket: failed to dial WebSocket > transport/internet/websocket: failed to dial to (wss://我的服务器:44378/us6): > tls: first record does not look like a TLS handshake transport/internet/websocket: failed to dial WebSocket > transport/internet/websocket: failed to dial to (wss://我的服务器:31978/us6): > tls: first record does not look like a TLS handshake transport/internet/websocket: failed to dial WebSocket > transport/internet/websocket: failed to dial to (wss://我的服务器:56840/us6): > tls: first record does not look like a TLS handshake transport/internet/websocket: failed to dial WebSocket > transport/internet/websocket: failed to dial to (wss://我的服务器:34497/us6): > tls: first record does not look like a TLS handshake transport/internet/websocket: failed to dial WebSocket > transport/internet/websocket: failed to dial to (wss://我的服务器:40583/us6): > tls: first record does not look like a TLS handshake] > common/retry: all retry attempts failed
+2023/02/24 20:29:34 [Warning] [1402096796] app/proxyman/outbound: failed to process outbound traffic 
+> proxy/vmess/outbound: failed to find an available destination 
+> common/retry: [transport/internet/websocket: failed to dial WebSocket 
+> transport/internet/websocket: failed to dial to (wss://我的服务器:44378/us6): 
+> tls: first record does not look like a TLS handshake transport/internet/websocket: failed to dial WebSocket 
+> transport/internet/websocket: failed to dial to (wss://我的服务器:31978/us6): 
+> tls: first record does not look like a TLS handshake transport/internet/websocket: failed to dial WebSocket 
+> transport/internet/websocket: failed to dial to (wss://我的服务器:56840/us6): 
+> tls: first record does not look like a TLS handshake transport/internet/websocket: failed to dial WebSocket 
+> transport/internet/websocket: failed to dial to (wss://我的服务器:34497/us6): 
+> tls: first record does not look like a TLS handshake transport/internet/websocket: failed to dial WebSocket 
+> transport/internet/websocket: failed to dial to (wss://我的服务器:40583/us6): 
+> tls: first record does not look like a TLS handshake] > common/retry: all retry attempts failed
 ```
 
 
