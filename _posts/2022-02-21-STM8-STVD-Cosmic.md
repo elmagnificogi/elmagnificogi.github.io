@@ -68,7 +68,7 @@ ST Visual Programmer(STVD)，这个有点类似于 JLink 中的 JFlash ，主要
 
 看着名字还以为是类似Visual Studio的IDE，然后实际上是个Debug工具，用来读内存、实时显示，也很废物。
 
-<video width=720 height=400 controls="controls" src='http://img.elmagnifico.tech:9514/static/upload/elmagnifico/STM32STM_Studio_-_.mp4' title=''></video>
+<video width=720 height=400 controls="controls" src='https://img.elmagnifico.tech/static/upload/elmagnifico/STM32STM_Studio_-_.mp4' title=''></video>
 
 
 
