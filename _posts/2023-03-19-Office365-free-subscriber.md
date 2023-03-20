@@ -3,7 +3,7 @@ layout:     post
 title:      "Office365订阅一次免费5年"
 subtitle:   "6T云存储，家庭组，Bug"
 date:       2023-03-19
-update:     2023-03-19
+update:     2023-03-20
 author:     "elmagnifico"
 header-img: "img/z5.jpg"
 catalog:    true
@@ -41,9 +41,11 @@ tags:
 
 就会提示你当前订阅已经延迟到xxx年xx月xx日了
 
+![image-20230320225350097](https://img.elmagnifico.tech/static/upload/elmagnifico/202303202253166.png)
 
+而这个取消订阅每过24小时都能来一遍，注意是24小时，不是过天，更关键的是这个2个月他会累加....
 
-而这个取消订阅，每天过了0点都能来一遍，关键是这个2个月他会累加....
+![image-20230320225404903](https://img.elmagnifico.tech/static/upload/elmagnifico/202303202254945.png)
 
 最多能累加5年，也是相当离谱了，相当于10块钱买了一年服务
 
