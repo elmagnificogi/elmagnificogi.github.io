@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "Office365订阅一次免费5年"
+title:      "无线HDMI还是有线HDMI，亦或是KVM?"
 subtitle:   "6T云存储，家庭组，Bug"
 date:       2023-03-21
 update:     2023-03-21
