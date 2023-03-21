@@ -3,7 +3,7 @@ layout:     post
 title:      "V2ray ws tls Caddy使用动态端口并不可行"
 subtitle:   "VMESS,V2RAYN,nginx"
 date:       2023-02-22
-update:     2023-02-25
+update:     2023-03-21
 author:     "elmagnifico"
 header-img: "img/bg3.jpg"
 catalog:    true
@@ -356,6 +356,11 @@ tcp6       0      0 我的服务器:4396      我的客户端:59296   ESTABLISHE
 - 不要用443端口，前置nginx或者其他代理伪装一个网页出来（其实没用，我被封的都是这种带伪装的）
 - 转发流量，国内使用某一个固定地址并做好备案等操作，然后出国到各种vps上
 - IPLC，直接不过墙，但其实也有监管，出问题的时候会被清退
+- REALITY ，最新的协议，可惜目前支持不够全，很多客户端不支持
+
+
+
+2023.3.21，距离本文发布刚好一个月后，新换的端口又被封了，后续还是得换成比较通用的小众协议或者换IP，否则还是会经常遇到被封端口
 
 
 
