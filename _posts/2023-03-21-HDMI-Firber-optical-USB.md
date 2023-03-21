@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "无线HDMI还是有线HDMI，亦或是KVM?"
-subtitle:   "6T云存储，家庭组，Bug"
+subtitle:   "毫米波，光纤HDMI，4线，8线，有源USB延迟线"
 date:       2023-03-21
 update:     2023-03-21
 author:     "elmagnifico"
