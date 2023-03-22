@@ -65,7 +65,9 @@ Words:&nbsp;{{ post.content | number_of_words }}
 
 这里作者说Jekyll超过4.1.0版本，这个问题就修复了，而实际上并没有，4.3.2版本这个问题依旧，所以还是要弄其他办法。
 
-我试了一下使用他说的插件办法，立马生效了，而且也不错的样子
+我试了一下使用他说的插件办法，立马生效了，而且也不错的样子，之前只显示大概1/10的字数
+
+![image-20230322234812941](https://img.elmagnifico.tech/static/upload/elmagnifico/202303222348980.png)
 
 在仓库创建一个这样的文件`_plugins/number_of_words.rb`，内容如下即可
 
