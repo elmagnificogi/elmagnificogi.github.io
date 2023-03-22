@@ -3,7 +3,7 @@ layout:     post
 title:      "博客增加文章点击统计和显示"
 subtitle:   "不蒜子、LeanCloud、谷歌翻译、动态效果"
 date:       2022-12-14
-update:     2022-12-23
+update:     2023-03-22
 author:     "elmagnifico"
 header-img: "img/docker-head-bg.jpg"
 catalog:    true
@@ -56,6 +56,42 @@ Words:&nbsp;{{ post.content | number_of_words }}
 ```
 
 {% endraw %}
+
+
+
+实际这里会有问题，Jekyll原生的统计字数是基于英文的，所以一旦遇到中文统计就失效了，就导致很多文字明明字很多，却显示一百多个字
+
+> https://zhuanlan.zhihu.com/p/433233271
+
+这里作者说Jekyll超过4.1.0版本，这个问题就修复了，而实际上并没有，4.3.2版本这个问题依旧，所以还是要弄其他办法。
+
+我试了一下使用他说的插件办法，立马生效了，而且也不错的样子
+
+在仓库创建一个这样的文件`_plugins/number_of_words.rb`，内容如下即可
+
+{% raw %}
+
+```ruby
+module Jekyll
+  module Filters
+    CJK_CLASS = '\p{Han}\p{Katakana}\p{Hiragana}\p{Hangul}'
+    CJK_REGEX = %r![#{CJK_CLASS}]!o
+    WORD_REGEX = %r![^#{CJK_CLASS}\s]+!o
+
+    def number_of_words(input)
+      cjk_count = input.scan(CJK_REGEX).length
+      return input.split.length if cjk_count.zero?
+      cjk_count + input.scan(WORD_REGEX).length
+    end
+  end
+end
+```
+
+{% endraw %}
+
+我另存了一份放在我的tools中了，防止万一丢失了
+
+> https://github.com/elmagnificogi/MyTools/blob/master/Jekyll_plugin/number_of_words.rb
 
 
 
@@ -379,6 +415,8 @@ Feeds Pub相当于也是一个RSS的阅览器，提交以后可以在设置里�
 > https://stackoverflow.com/questions/9306015/modifying-element-from-google-translate-translateelement-results/46306852#46306852
 >
 > https://github.com/zfb132/zfb132.github.com
+>
+> https://zhuanlan.zhihu.com/p/433233271
 
 
 
