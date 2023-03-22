@@ -3,7 +3,7 @@ layout:     post
 title:      "使用SEGGER Embedded Studio开发STM32进阶"
 subtitle:   "STM32，IDE"
 date:       2022-03-18
-update:     2023-03-13
+update:     2023-03-22
 author:     "elmagnifico"
 header-img: "img/desk-head-bg.jpg"
 catalog:    true
@@ -645,6 +645,14 @@ debug的时候，有可能你看变量显示的是 `Restricted memory range` 看
 将tab按键也调整为4
 
 ![](https://img.elmagnifico.tech/static/upload/elmagnifico/202212031123330.png)
+
+
+
+#### 折叠代码
+
+![image-20230322174746758](https://img.elmagnifico.tech/static/upload/elmagnifico/202303221747880.png)
+
+最新版支持了折叠代码，但是按键稍微有点奇怪，我修改成了和VS相同的快捷键，方便折叠
 
 
 
