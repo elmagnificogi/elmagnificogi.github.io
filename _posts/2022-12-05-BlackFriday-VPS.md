@@ -3,7 +3,7 @@ layout:     post
 title:      "翻墙节点合租-长期有效"
 subtitle:   "BlackFriday、IPLC"
 date:       2022-12-05
-update:     2023-03-07
+update:     2023-03-24
 author:     "elmagnifico"
 header-img: "img/drone-head-bg.jpg"
 catalog:    true
@@ -62,7 +62,7 @@ tags:
 
 v2rayN目前线路列表
 
-![](https://img.elmagnifico.tech/static/upload/elmagnifico/202301141102382.png)
+![image-20230324141142026](https://img.elmagnifico.tech/static/upload/elmagnifico/202303241411113.png)
 
 
 
@@ -86,10 +86,6 @@ v2rayN目前线路列表
 **由于是我实名认证的服务器，一切基于合租共享协议，切勿发表非法言论，浏览非法内容，否则责任自负**
 
 全平台支持，pc，ios，安卓，路由器，都能用，有订阅链接，有小问题可以找我解决。
-
-
-
-合租长期有效，坑位应该长期都不满的。
 
 
 
@@ -133,5 +129,5 @@ v2rayN目前线路列表
 
 有需要的欢迎联系，需要认识我或者当前已经合租的人，否则需要自我介绍以及报上大名。
 
-
+比如，你的工作，用途，你现在用的是什么？你用的什么客户端（PC、移动、路由器），以及你的目前网络状况（我的电信节点比较多一些）
 
