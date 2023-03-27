@@ -199,24 +199,11 @@
 </script>
 {% endif %}
 
-<!-- 不蒜子统计
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script> -->
+<!-- 不蒜子统计 -->
+<script defer src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 <!-- 弥补漏统计数量 -->
-<script>
-    async('{{ "//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"}}', function(){
-        var $nav = document.getElementById("busuanzi_value_site_uv");
-        if($nav){    
-            site_pv = document.getElementById("busuanzi_value_site_pv").innerHTML;
-            site_uv = document.getElementById("busuanzi_value_site_uv").innerHTML;
-            site_pv_num = parseInt(site_pv,10) + 1145147;
-            site_uv_num = parseInt(site_uv,10) + 981462;
-            document.getElementById("fix_site_pv").innerHTML = site_pv_num;
-            document.getElementById("fix_site_uv").innerHTML = site_uv_num;
-        }
-    })    
-
-</script>
+<script defer src="/js/statistics.js " ></script>
 
 <!-- 运行时间统计 -->
 <script>
