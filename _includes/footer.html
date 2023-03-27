@@ -206,6 +206,7 @@
 <script>
     var now = new Date();
     var getStatistics = false;
+    var changeDone = false;
     function createtime() {
         var grt= new Date("01/11/2015 20:01:26");
         now.setTime(now.getTime()+250);
@@ -218,15 +219,15 @@
         document.getElementById("timeDate").innerHTML = "本站已运行 "+dnum+" 天 ";
         document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
         // 补充统计
-        if(!getStatistics && ""!=document.getElementById("busuanzi_value_site_uv").innerHTML){getStatistics = true}
-        if(getStatistics) {
+        if(!getStatistics && ""!=document.getElementById("busuanzi_value_site_uv").innerHTML){getStatistics = true;}
+        if(getStatistics && !changeDone) {
             site_pv = document.getElementById("busuanzi_value_site_pv").innerHTML;
             site_uv = document.getElementById("busuanzi_value_site_uv").innerHTML;
             site_pv_num = parseInt(site_pv,10) + 1145147;
             site_uv_num = parseInt(site_uv,10) + 981462;
             document.getElementById("fix_site_pv").innerHTML = site_pv_num;
             document.getElementById("fix_site_uv").innerHTML = site_uv_num;
-            getStatistics = false
+            changeDone = true;
         }
     }
 setInterval("createtime()",250);
