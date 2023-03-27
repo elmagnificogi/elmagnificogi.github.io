@@ -217,16 +217,16 @@
         snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
         document.getElementById("timeDate").innerHTML = "本站已运行 "+dnum+" 天 ";
         document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
-        if(!getStatistics && !isNaN(document.getElementById("busuanzi_value_site_pv").innerHTML))
-        {getStatistics = true}
-        if(getStatistics)
-        {
+        // 补充统计
+        if(!getStatistics && !isNaN(document.getElementById("busuanzi_value_site_pv").innerHTML)){getStatistics = true}
+        if(getStatistics) {
             site_pv = document.getElementById("busuanzi_value_site_pv").innerHTML;
             site_uv = document.getElementById("busuanzi_value_site_uv").innerHTML;
             site_pv_num = parseInt(site_pv,10) + 1145147;
             site_uv_num = parseInt(site_uv,10) + 981462;
             document.getElementById("fix_site_pv").innerHTML = site_pv_num;
             document.getElementById("fix_site_uv").innerHTML = site_uv_num;
+            getStatistics = false
         }
     }
 setInterval("createtime()",250);
