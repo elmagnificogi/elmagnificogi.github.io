@@ -202,12 +202,10 @@
 <!-- 不蒜子统计 -->
 <script defer src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<!-- 弥补漏统计数量 -->
-<script defer src="/js/statistics.js " ></script>
-
 <!-- 运行时间统计 -->
 <script>
     var now = new Date();
+    var getStatistics = false;
     function createtime() {
         var grt= new Date("01/11/2015 20:01:26");
         now.setTime(now.getTime()+250);
@@ -219,6 +217,17 @@
         snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
         document.getElementById("timeDate").innerHTML = "本站已运行 "+dnum+" 天 ";
         document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+        if(!getStatistics && !isNaN(document.getElementById("busuanzi_value_site_pv").innerHTML))
+        {getStatistics = true}
+        if(getStatistics)
+        {
+            site_pv = document.getElementById("busuanzi_value_site_pv").innerHTML;
+            site_uv = document.getElementById("busuanzi_value_site_uv").innerHTML;
+            site_pv_num = parseInt(site_pv,10) + 1145147;
+            site_uv_num = parseInt(site_uv,10) + 981462;
+            document.getElementById("fix_site_pv").innerHTML = site_pv_num;
+            document.getElementById("fix_site_uv").innerHTML = site_uv_num;
+        }
     }
 setInterval("createtime()",250);
 </script>
