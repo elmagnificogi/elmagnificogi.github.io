@@ -376,6 +376,41 @@ new google.translate.TranslateElement({
 
 
 
+#### Jekyll支持Mermaid
+
+在`post.html`中增加
+
+```
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.0.0/mermaid.min.js"></script>
+<script>
+  var config = {
+    startOnLoad:true,
+    theme: 'forest',
+    flowchart:{
+            useMaxWidth:false,
+            htmlLabels:true
+        }
+  };
+  mermaid.initialize(config);
+  window.mermaid.init(undefined, document.querySelectorAll('.language-mermaid'));
+</script>
+```
+
+
+
+下面的代码就变成了mermaid图了
+
+```mermaid
+graph TD;
+A[Christmas] -->|Get money| B(Go shopping);
+B --> C{Let me think};TD
+C -->|One| D[Laptop];
+C -->|Two| E[iPhone];
+C -->|Three| F[fa:fa-car Car];
+```
+
+
+
 ## 中文独立博客列表
 
 > https://github.com/timqian/chinese-independent-blogs
