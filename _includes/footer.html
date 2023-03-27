@@ -97,8 +97,8 @@
                 </ul>
 
                 <p class="copyright text-muted">
-                    <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
-                    <span id="busuanzi_container_site_uv">访客数<span id="busuanzi_value_site_uv"></span>人</span>
+                    <span id="busuanzi_container_site_pv">本站总访问量<span id="fix_site_pv"></span>次<span id="busuanzi_value_site_pv" style="display: none;"></span></span>
+                    <span id="busuanzi_container_site_uv">访客数<span id="fix_site_uv"></span>人<span id="busuanzi_value_site_uv" style="display: none;"></span></span>
                     <br>
                     <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
                     <br>
@@ -201,6 +201,16 @@
 
 <!-- 不蒜子统计 -->
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!-- 弥补漏统计数量 -->
+<script>
+    site_pv = document.getElementById("busuanzi_value_site_pv").innerHTML;
+    site_uv = document.getElementById("busuanzi_value_site_pv").innerHTML;
+    site_pv_num = parseInt(site_pv,10) + 1145147;
+    site_uv_num = parseInt(site_uv,10) + 981462;
+    document.getElementById("fix_site_pv").innerHTML = site_pv_num;
+    document.getElementById("fix_site_uv").innerHTML = site_uv_num;
+</script>
 
 <!-- 运行时间统计 -->
 <script>
