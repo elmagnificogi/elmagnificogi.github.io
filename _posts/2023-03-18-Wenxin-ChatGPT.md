@@ -119,3 +119,5 @@ ChatGPT目前不仅仅是搬运文字而已，他是带有一定的推理和理�
 > https://zhuanlan.zhihu.com/p/613378443
 >
 > https://orangeblog.notion.site/GPT-4-AGI-8fc50010291d47efb92cbbd668c8c893
+>
+> https://www.bilibili.com/video/BV1Tc411L7UA
