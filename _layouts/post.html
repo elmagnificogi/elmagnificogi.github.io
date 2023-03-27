@@ -164,11 +164,13 @@ layout: default
 </article>
 
 
-<!-- add support for mathjax by voleking-->
+<!-- add support for mathjax -->
 {% if page.mathjax %}
   {% include mathjax_support.html %}
 {% endif %}
 
+<!-- add support for mermaid -->
+{% if page.mermaid %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.0.0/mermaid.min.js"></script>
 <script>
   var config = {
@@ -182,6 +184,7 @@ layout: default
   mermaid.initialize(config);
   window.mermaid.init(undefined, document.querySelectorAll('.language-mermaid'));
 </script>
+{% endif %}
 
 {% if site.disqus_username %}
 <!-- disqus 公共JS代码 start (一个网页只需插入一次) -->

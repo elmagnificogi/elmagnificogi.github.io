@@ -7,6 +7,7 @@ update:     2023-03-22
 author:     "elmagnifico"
 header-img: "img/docker-head-bg.jpg"
 catalog:    true
+mermaid:    true
 tags:
     - Blog
 ---
@@ -454,6 +455,8 @@ Feeds Pub相当于也是一个RSS的阅览器，提交以后可以在设置里�
 > https://github.com/zfb132/zfb132.github.com
 >
 > https://zhuanlan.zhihu.com/p/433233271
+>
+> https://eipi10.cn/others/2019/12/07/jekyll-markdown-skills/
 
 
 
