@@ -218,7 +218,7 @@
         document.getElementById("timeDate").innerHTML = "本站已运行 "+dnum+" 天 ";
         document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
         // 补充统计
-        if(!getStatistics && !isNaN(document.getElementById("busuanzi_value_site_pv").innerHTML)){getStatistics = true}
+        if(!getStatistics && ""!=document.getElementById("busuanzi_value_site_uv").innerHTML){getStatistics = true}
         if(getStatistics) {
             site_pv = document.getElementById("busuanzi_value_site_pv").innerHTML;
             site_uv = document.getElementById("busuanzi_value_site_uv").innerHTML;
