@@ -205,7 +205,7 @@
 <!-- 弥补漏统计数量 -->
 <script>
     async('{{ "//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"}}', function(){
-        var $nav = document.querySelector("busuanzi_value_site_uv");
+        var $nav = document.getElementById("busuanzi_value_site_uv");
         if($nav){    
             site_pv = document.getElementById("busuanzi_value_site_pv").innerHTML;
             site_uv = document.getElementById("busuanzi_value_site_uv").innerHTML;
