@@ -3,7 +3,7 @@ layout:     post
 title:      "Office365订阅一次免费5年"
 subtitle:   "6T云存储，家庭组，Bug"
 date:       2023-03-19
-update:     2023-03-20
+update:     2023-03-30
 author:     "elmagnifico"
 header-img: "img/z5.jpg"
 catalog:    true
@@ -14,6 +14,8 @@ tags:
 ## Foreword
 
 这Bug都1年多了吧，怎么还没修，真的离谱。简单说Office365订阅只需要付费一次，可以续订最多5年，非常离谱
+
+**本文已失效，时隔一年多微软终于把bug修了**
 
 
 
