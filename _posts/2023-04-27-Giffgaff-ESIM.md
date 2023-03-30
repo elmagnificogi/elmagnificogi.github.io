@@ -1,9 +1,9 @@
 ---
 layout:     post
 title:      "使用Giffgaff注册ChatGPT"
-subtitle:   "英国，虚拟电话卡，接码，ESIM"
+subtitle:   "英国，虚拟电话卡，接码，ESIM，Nobe，ChatGPT"
 date:       2023-03-27
-update:     2023-03-27
+update:     2023-03-30
 author:     "elmagnifico"
 header-img: "img/z1.jpg"
 catalog:    true
@@ -59,9 +59,19 @@ Giffgaff，本身可以免费获取的，只是需要邮寄，更别说转发到
 
 > https://www.giffgaff.com/activate
 
-套餐选择`no plan`，之后使用信用卡支付10英镑，账单地址需要填英国，否则有可能出问题
+![image-20230330210042272](https://img.elmagnifico.tech/static/upload/elmagnifico/202303302100362.png)
+
+套餐选择`no monthly plan`，之后使用信用卡支付10英镑，账单地址需要填英国，否则有可能出问题
+
+![image-20230330210242351](https://img.elmagnifico.tech/static/upload/elmagnifico/202303302102395.png)
 
 等一会就能看到自己的手机号
+
+![image-20230330210749788](https://img.elmagnifico.tech/static/upload/elmagnifico/202303302107835.png)
+
+会收到短信，充值成功，同时也会收到手机号的短信
+
+![image-20230330211406554](https://img.elmagnifico.tech/static/upload/elmagnifico/202303302114598.png)
 
 
 
@@ -92,6 +102,36 @@ ChatGPT其实也可以用ESIM注册，或者是各种接码平台也能注册，
 - ctmo
 - 泰国的ais2fly
 - 香港的Club sim
+
+
+
+## 支付手段
+
+
+
+#### Depay
+
+Depay好像出问题了，建议不要使用
+
+
+
+#### Nobe
+
+![image-20230330213148231](https://img.elmagnifico.tech/static/upload/elmagnifico/202303302131314.png)
+
+可以在这里开虚拟信用卡，开卡地是美国或者欧洲之类的地方，**但是这里需要实名认证、绑定微信号，并且最低充值也要500RMB**，可能会遇到很多地方用不了的情况下，比如前面的Giffgaff，Giffgaff我是用国内Visa支付的
+
+> https://nobepay.com/
+
+Nobe注册还需要一个邀请码，否则过不了
+
+```
+24BDCD
+```
+
+但是Nobe可以过ChatGPT的支付认证
+
+![image-20230330213032790](https://img.elmagnifico.tech/static/upload/elmagnifico/202303302130835.png)
 
 
 
