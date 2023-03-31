@@ -1,7 +1,7 @@
 ---
 layout:     post
-title:      "使用Giffgaff注册ChatGPT"
-subtitle:   "英国，虚拟电话卡，接码，ESIM，Nobe，ChatGPT"
+title:      "Giffgaff注册ChatGPT,Nobe支付"
+subtitle:   "英国，虚拟电话卡，接码，ESIM，Nobepay，ChatGPT"
 date:       2023-03-27
 update:     2023-03-30
 author:     "elmagnifico"
@@ -72,6 +72,8 @@ Giffgaff，本身可以免费获取的，只是需要邮寄，更别说转发到
 会收到短信，充值成功，同时也会收到手机号的短信
 
 ![image-20230330211406554](https://img.elmagnifico.tech/static/upload/elmagnifico/202303302114598.png)
+
+首次充值，赠送了5英镑，发送了一条激活短信，所以是14.7英镑
 
 
 
