@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "V2ray ws tls Caddy使用动态端口并不可行"
+title:      "V2ray ws tls Caddy使用动态端"
 subtitle:   "VMESS,V2RAYN,nginx"
 date:       2023-02-22
 update:     2023-03-21
@@ -339,9 +339,35 @@ tcp6       0      0 我的服务器:4396      我的客户端:59296   ESTABLISHE
 
 
 
-## 其他动态端口方式
+## iptables动态端口方式
 
-还有看到别人直接用iptable将所有动态端口的流量转发给v2ray工作端口，这种方式我没测试，可能也行。
+还有看到别人直接用iptable将所有动态端口的流量转发给v2ray工作端口
+
+
+
+如下是将本机的4444端口流量转发给本地的22端口
+
+```
+iptables -t nat -A PREROUTING -p tcp --dport 4444 -j REDIRECT --to-ports 22
+```
+
+删除刚才的规则
+
+```
+iptables -t nat -D PREROUTING -p tcp --dport 4444 -j REDIRECT --to-ports 22
+```
+
+
+
+批量转发，将40000到60000的端口全部转发给443端口（nginx或者caddy所在）
+
+```
+iptables -t nat -A PREROUTING -p tcp --dport 40000:60000 -j REDIRECT --to-ports 443
+```
+
+**实测，这样以后v2rayn在40000-60000端口之间随便选择一个端口即可，被封了换一个就是了**
+
+最差的情况就是整个IP被封了，动态端口就没啥用了。
 
 
 
@@ -366,7 +392,7 @@ tcp6       0      0 我的服务器:4396      我的客户端:59296   ESTABLISHE
 
 ## Summary
 
-所以目前来看动态端口应该是没啥用，除非是直接裸启动v2ray-core或者是在中继上配置动态端口，否则根本无法生效
+可惜的是客户端普遍不支持动态端口的设定，如果能自动随机选一个端口，那就好了
 
 
 
