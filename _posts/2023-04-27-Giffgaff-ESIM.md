@@ -137,6 +137,18 @@ Nobe注册还需要一个邀请码，否则过不了
 
 
 
+## ChatGPT
+
+如果注册以后出现下列问题，选择使用谷歌登录，而不是使用邮箱和密码登录
+
+```
+"xxxx@gmail.com" using a password, which is not the authentication method you used during sign up. Try again using the authentication method you used during sign up. (error=identity_provider_mismatch)
+```
+
+出这个问题以后，重置密码也不行，依然会报错
+
+
+
 ## Summary
 
 还是挺简单的
@@ -150,4 +162,6 @@ Nobe注册还需要一个邀请码，否则过不了
 > https://blog.xiaoz.org/archives/18506
 >
 > https://www.v2ex.com/t/927645#reply2
+>
+> https://www.reddit.com/r/OpenAI/comments/wd06am/comment/j59ieme/
 
