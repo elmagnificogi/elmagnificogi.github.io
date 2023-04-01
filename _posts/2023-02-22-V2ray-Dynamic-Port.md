@@ -365,7 +365,7 @@ iptables -t nat -D PREROUTING -p tcp --dport 4444 -j REDIRECT --to-ports 22
 iptables -t nat -A PREROUTING -p tcp --dport 40000:60000 -j REDIRECT --to-ports 443
 ```
 
-**实测，这样以后v2rayn在40000-60000端口之间随便选择一个端口即可，被封了换一个就是了**
+**实测，这样以后v2rayn在40000-60000端口之间随便选择一个端口即可，被封了换一个就是了**，也可以像评论里的办法，直接批量加一些端口，来回切就是了
 
 最差的情况就是整个IP被封了，动态端口就没啥用了。
 
