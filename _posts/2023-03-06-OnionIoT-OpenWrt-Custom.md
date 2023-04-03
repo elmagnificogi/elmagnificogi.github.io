@@ -85,6 +85,10 @@ make -j1 V=s
 
 
 
+编译后的固件在`bin/targets/ramips/mt76x8`路径中
+
+
+
 ## Custom
 
 更新feeds
