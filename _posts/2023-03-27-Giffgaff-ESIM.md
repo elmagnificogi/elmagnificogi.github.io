@@ -121,7 +121,7 @@ Depay好像出问题了，建议不要使用
 
 ![image-20230330213148231](https://img.elmagnifico.tech/static/upload/elmagnifico/202303302131314.png)
 
-可以在这里开虚拟信用卡，开卡地是美国或者欧洲之类的地方，**但是这里需要实名认证、绑定微信号，并且最低充值也要500RMB**，可能会遇到很多地方用不了的情况下，**Giffgaff无法使用Nobepay支付，会提示欺诈**，Giffgaff我是用国内Visa支付的
+可以在这里开虚拟信用卡，开卡地是美国或者欧洲之类的地方，**但是这里需要实名认证、绑定微信号，并且最低充值也要500RMB**，可能会遇到很多地方用不了的情况下，**Giffgaff无法使用Nobepay531847的卡支付，会提示欺诈，其他卡不一定**，Giffgaff我是用国内Visa支付的
 
 > https://nobepay.com/
 
