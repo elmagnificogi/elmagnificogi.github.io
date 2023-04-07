@@ -8,9 +8,8 @@ author:     "elmagnifico"
 header-img: "img/x1.jpg"
 catalog:    true
 tags:
-    - u-boot
-    - Onion
-    - OpenWrt
+    - DSHOT
+    - BLHeli
 ---
 
 ## Foreword
