@@ -3,7 +3,7 @@ layout:     post
 title:      "STM32 PWM DSHOT驱动"
 subtitle:   "HAL，DSHOT1200"
 date:       2020-06-03
-update:     2021-08-20
+update:     2023-04-07
 author:     "elmagnifico"
 header-img: "img/sensor-head-bg.jpg"
 catalog:    true
@@ -51,9 +51,9 @@ DSHOT本身一个完整控制帧，是16bits，其中11bits用来表示油门，
 | -------- | -------- | ---- | ----- |
 | 表示范围 | 0-2047   | 0-1  | 0-15  |
 
-油门的0，用于电调解锁，1-47是给telemetry用的，而从48到2047则是对应真实的油门1-2000，这样油门就有2000的分辨率，大部分情况下应该说够用了。
+油门的0，用于电调解锁，1-47是给telemetry用的，而从48到2047则是对应真实的油门0-1999，这样油门就有2000的分辨率，大部分情况下应该说够用了。
 
-然后后面的4bits crc校验可以防止给出错误帧导致电调给出错误的控制信号（实际电调内部还有一个根据输入PID电机输出的东西）
+然后后面的4bits crc校验可以防止给出错误帧导致电调给出错误的控制信号（实际电调内部还有一个根据输入，转换到PID电机输出的东西）
 
 ![](https://img.elmagnifico.tech/static/upload/elmagnifico/QVknPb7qy6Guplc.png)
 
@@ -128,13 +128,17 @@ DSHOT必须先给0，然后逐渐拉高，拉到最大2047，然后再拉回最�
 
 相当于是在没有编码器的情况，让这个电机成为半有感电机了，由于这些信息本质上是来自于电调，所以有可能是不准确的，甚至发生短路或者某些特定异常的时候电调不一定能检测出来。
 
-要使用telmetry，还需要电调支持一个输出接口，这个接口也使用相同的dshot协议进行数据传输。只有在输出的dshot里只为了telemetry，才会有信息返回。
+要使用telmetry，还需要电调支持一个输出接口，这个接口也使用相同的dshot协议进行数据传输。只有在输出的dshot里置位了telemetry，才会有信息返回。
 
 同时电调的设置里也要开启回应telmetry才行
 
 ![](https://img.elmagnifico.tech/static/upload/elmagnifico/D3rMEyWJnj7kpbR.png)
 
 有了这些基础，DSHOT基本就可以正常工作了
+
+DSHOT的telemtry的具体含义定义得去源码里参考，这里我没有使用，暂时给不了
+
+
 
 ## STM32 HAL DMA PWM 输出bug
 
