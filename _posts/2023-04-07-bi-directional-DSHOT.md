@@ -67,7 +67,7 @@ c c c c e e e m m m m m m m m m
 
 
 
-#### 词解释
+#### 名词解释
 
 - GCR，应该是一种编码方式，可以用来扩大数值所需要的bit数或者缩小数值所需要的bit数
 - bit bang/bit-bang 其实就是GPIO，比如软I2C，软SPI，这种用普通GPIO模拟某种协议的方式，就叫bit-bang
