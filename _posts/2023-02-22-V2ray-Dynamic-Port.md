@@ -3,7 +3,7 @@ layout:     post
 title:      "V2ray ws tls Caddy使用动态端"
 subtitle:   "VMESS,nginx,ss,封端口，封ip"
 date:       2023-02-22
-update:     2023-04-03
+update:     2023-04-08
 author:     "elmagnifico"
 header-img: "img/bg3.jpg"
 catalog:    true
@@ -368,6 +368,60 @@ iptables -t nat -A PREROUTING -p tcp --dport 40000:60000 -j REDIRECT --to-ports 
 **实测，这样以后v2rayn在40000-60000端口之间随便选择一个端口即可，被封了换一个就是了**，也可以像评论里的办法，直接批量加一些端口，来回切就是了
 
 最差的情况就是整个IP被封了，动态端口就没啥用了。
+
+
+
+#### centos
+
+iptables持久化，先把配置好的表保存起来
+
+```
+iptables-save > /etc/sysconfig/iptables
+```
+
+
+
+设置开机启动时自动恢复这个内容
+
+```
+vi /etc/rc.d/rc.local
+```
+
+加入下面的内容，从保存未知恢复iptables
+
+```
+iptables-restore < /etc/sysconfig/iptables
+```
+
+记得要给文件运行权限，否则可能无法执行脚本
+
+```
+chmod +x /etc/rc.d/rc.local
+```
+
+
+
+脚本化
+
+```
+iptables-save > /etc/sysconfig/iptables;echo "iptables-restore < /etc/sysconfig/iptables" >> /etc/rc.d/rc.local;chmod +x /etc/rc.d/rc.local
+```
+
+
+
+#### ubuntu
+
+安装持久化工具，一路保存即可
+
+```
+sudo apt-get install iptables-persistent -y
+```
+
+开机启动
+
+```
+sudo systemctl enable netfilter-persistent
+```
 
 
 
