@@ -7,6 +7,7 @@ update:     2023-04-07
 author:     "elmagnifico"
 header-img: "img/x1.jpg"
 catalog:    true
+tobecontinued: true
 tags:
     - DSHOT
     - BLHeli
