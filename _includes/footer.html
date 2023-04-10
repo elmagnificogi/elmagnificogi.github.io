@@ -182,20 +182,11 @@
 </script>
 {% endif %}
 
-
-<!-- Baidu Tongji -->
-{% if site.ba_track_id %}
+{% if if page.tobecontinued %}
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script type="text/javascript" src="/js/watermark.js"></script>
 <script>
-    var _baId = '{{ site.ba_track_id }}';
-
-    // Originial
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "//hm.baidu.com/hm.js?" + _baId;
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
+    watermark.set('To be continued...未完待续',300,250,"23px Brush Script MT")
 </script>
 {% endif %}
 
