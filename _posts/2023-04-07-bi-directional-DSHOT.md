@@ -30,7 +30,41 @@ tags:
 
 > https://github.com/betaflight/betaflight/pull/8554#issuecomment-512507625
 
-总结一下，这个DSHOT实现，是反转了DSHOT协议，并且有些和标准的DSHOT实现是不一样的，其实可以认为是一个变种DSHOT
+总结一下，这是birdir-DSHOT初次实现，反转了DSHOT协议，并且有些和标准的DSHOT实现是不一样的，其实可以认为是一个变种DSHOT，后续这种DSHOT也被BLH的最新固件支持，变成了DSHOT的基础实现。其实这个PR还有一个点也非强，他兼容了BLHS，以前老的16位单片机也能用上DSHOT，也能使用转速反馈，非常牛逼了。
+
+
+
+#### 代码分析
+
+```c
+FAST_CODE uint16_t prepareDshotPacket(dshotProtocolControl_t *pcb)
+{
+    uint16_t packet;
+
+    ATOMIC_BLOCK(NVIC_PRIO_DSHOT_DMA) {
+        packet = (pcb->value << 1) | (pcb->requestTelemetry ? 1 : 0);
+        pcb->requestTelemetry = false;    // reset telemetry request to make sure it's triggered only once in a row
+    }
+
+    // compute checksum
+    unsigned csum = 0;
+    unsigned csum_data = packet;
+    for (int i = 0; i < 3; i++) {
+        csum ^=  csum_data;   // xor data by nibbles
+        csum_data >>= 4;
+    }
+    // append checksum
+#ifdef USE_DSHOT_TELEMETRY
+    if (useDshotTelemetry) {
+        csum = ~csum;
+    }
+#endif
+    csum &= 0xf;
+    packet = (packet << 4) | csum;
+
+    return packet;
+}
+```
 
 
 
@@ -72,8 +106,9 @@ c c c c e e e m m m m m m m m m
 - bit bang/bit-bang 其实就是GPIO，比如软I2C，软SPI，这种用普通GPIO模拟某种协议的方式，就叫bit-bang
 - 3x，一般来说如果你想解码一个信号，最低要求你获取信号的频率是原始信号的3倍，你才能得到一个比较好的解码效果
 - 5/4，其实就是逆GCR，扩大数值的bit数
-- DSHOT bidir，双向DSHOT，也就是单线DSHOT，实现转速可读
+- bidir DSHOT，双向DSHOT，也就是单线DSHOT，实现转速可读
 - Run-length limited，其实就是在带宽有限的通信链路上，如何压缩数据，并且还能保证数据长度的传输方式
+- eRPM，电调回传的是磁极数，电机上磁极一定是成对出现的，一般电机是14或者12个，对应的数值也就需要/7或者/6得到RPM数
 
 
 
@@ -103,13 +138,23 @@ c c c c e e e m m m m m m m m m
 
 
 
+单线Dshot 由于检测时间比较少，Dshot 600 出现了大量报错，导致Betaflight直接不再支持Dshot 600
+
+> https://github.com/bitdump/BLHeli/issues/464
+>
+> https://github.com/betaflight/betaflight/issues/9886#issuecomment-655085419
+
+
+
 ## esc configurator
 
 > https://esc-configurator.com/
 >
 > https://github.com/stylesuxx/esc-configurator
 
-发现个有意思的，有人写了blh的配置器，还是web版本的，还开源，想想我的逆向，想死
+发现个有意思的，有人写了blh的配置器，还是web版本的，还开源，~~想想我的逆向，想死~~
+
+仔细看了下是中转协议，也就是通过Betaflight传递的，所以并没有实现直接配置。
 
 
 

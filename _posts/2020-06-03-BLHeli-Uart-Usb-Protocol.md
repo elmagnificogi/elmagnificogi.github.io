@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "BLHeli-Uart-Usb-Protocol"
-subtitle:   "4way-if，ardupilot"
+subtitle:   "4way-if，ardupilot， esc-configurator"
 date:       2020-06-03
 update:     2023-04-10
 author:     "elmagnifico"
@@ -70,9 +70,9 @@ BLHeli自从升级到了32位以后，就闭源了，而要做到ecs自动校准
 
 这个其实就是用来passthrough的，虽然接的是飞控的usb口，但是实际上是一个透传，而这个透传协议本身的实现也是基于GND和SIG的
 
+既然所有方式都可以只用GND和SIG，那这个协议我们就认为他是BLH的核心通信协议。
 
 
-既然所有方式都可以指用GND和SIG，那这个协议我们就认为他是BLH的核心通信协议。
 
 ## BLH Protocol
 
@@ -552,11 +552,25 @@ FD 00 40 90 C1 FD 00 40 90 C1 FD 00 40 90 C1 FD 00 40 90 C1 FD 00 40 90 C1 FD 00
 
 
 
+## esc-configurator
+
+> https://esc-configurator.com/
+>
+> https://github.com/stylesuxx/esc-configurator
+
+发现个有意思的，有人写了blh的配置器，还是web版本的，还开源，~~想想我的逆向，想死~~
+
+仔细看了下是中转协议，也就是通过Betaflight传递的，所以并没有实现直接配置。
+
+
+
 ## End
 
 最后三种interface可以支持的功能不太一样，4way-if显然可以支持多电调同时配置，同时查看。而usb/com则只能配置一个，betaflight则是可以不直接连接电调的情况下透传协议，但是呢比较复杂，需要实现betaflight本身的MSP协议，然后转成4way-if协议，然后再到BLH的核心协议，如果不需要的话，没必要弄这么麻烦的协议，写进去还丑的不行。
 
 最主要的还是BLH不给开源协议，不然就不用这么麻烦了
+
+
 
 ## Quote
 
