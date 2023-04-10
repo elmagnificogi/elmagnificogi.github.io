@@ -3,7 +3,7 @@ layout:     post
 title:      "BLHeli-Uart-Usb-Protocol"
 subtitle:   "4way-if，ardupilot"
 date:       2020-06-03
-update:     2022-01-13
+update:     2023-04-10
 author:     "elmagnifico"
 header-img: "img/drone-head-bg.jpg"
 catalog:    true
@@ -32,6 +32,8 @@ BLHeli自从升级到了32位以后，就闭源了，而要做到ecs自动校准
 如果只是要16位的BLH电调的协议，其本身是开源的，所以可以直接拿到
 
 > https://github.com/4712/BLHeliSuite/blob/master/Manuals/BLHeliSuite%204w-if%20protocol.pdf
+
+
 
 ## BLHeliSuite32协议介绍
 
@@ -571,3 +573,7 @@ FD 00 40 90 C1 FD 00 40 90 C1 FD 00 40 90 C1 FD 00 40 90 C1 FD 00 40 90 C1 FD 00
 > https://github.com/4712/BLHeliSuite/blob/master/Manuals/BLHeliSuite%204w-if%20protocol.pdf
 >
 > https://www.youtube.com/watch?v=np7xXY_e5sA
+>
+> https://blog.csdn.net/outbreakrmb/article/details/126218010
+>
+> https://www.cnblogs.com/Sky-seeker/p/14358676.html
