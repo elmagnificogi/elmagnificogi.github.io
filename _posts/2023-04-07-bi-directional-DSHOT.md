@@ -34,7 +34,18 @@ tags:
 
 
 
+birdir-DSHOT的一些特性
+
+- 单线
+- Telemetry 只有转速信息
+- 校验位和正常的是反的
+- DSHOT 600 及以上不太支持，实现困难
+
+
+
 #### 代码分析
+
+查看Betaflight中关于Dshot部分的源码，默认开启了`DSHOT_TELEMETRY`就会使用bi-directional DSHOT
 
 ```c
 FAST_CODE uint16_t prepareDshotPacket(dshotProtocolControl_t *pcb)
@@ -46,6 +57,7 @@ FAST_CODE uint16_t prepareDshotPacket(dshotProtocolControl_t *pcb)
         pcb->requestTelemetry = false;    // reset telemetry request to make sure it's triggered only once in a row
     }
 
+    // 这里求解出来普通Dshot的后4位的异或和
     // compute checksum
     unsigned csum = 0;
     unsigned csum_data = packet;
@@ -55,6 +67,7 @@ FAST_CODE uint16_t prepareDshotPacket(dshotProtocolControl_t *pcb)
     }
     // append checksum
 #ifdef USE_DSHOT_TELEMETRY
+    // 一旦使用了Telemetry 就会反转后四位
     if (useDshotTelemetry) {
         csum = ~csum;
     }
@@ -66,18 +79,28 @@ FAST_CODE uint16_t prepareDshotPacket(dshotProtocolControl_t *pcb)
 }
 ```
 
+飞控发送 DSHOT帧，但是最低的4bits=其他4bits做异或和，再取反
 
-
-飞控发送 DSHOT帧，但是最低的4bit，与另外4bit做异或
-
-如果ESC检测到了这个情况，也就是最低一字节的上半字节和下半字节是异或关系，那么就会发送一个telemetry 包
+如果ESC检测到了这个情况，也就是最低4bits是反的，就会切换模式在同一根线上发送一个Telemetry帧
 
 
 
-然后这个telemetry包是这么解析的
+```c
 
 ```
-c c c c e e e m m m m m m m m m
+
+然后这个telemetry包是这么解析的，Telemeter的原始数据，一共是21bits，其中第一bit一定是0，表示数据开始，而之后紧跟的20bits，其实是每4bits使用GCR转换成的，也就是每5bit解析成一个4bits，然后重新组装
+
+```
+0 aaaa bbbbb fffff ddddd
+c c c c e e e m m m m m m m m m 解码后原始16bits
+```
+
+
+
+```
+c c c c e e e m m m m m m m m m 解码后原始16bits
+e e e m m m m m m m m m 校验成功以后的转速数据 12bits
 ```
 
 前4个c是异或和的校验码
@@ -88,9 +111,28 @@ c c c c e e e m m m m m m m m m
 
 
 
-这样实现了仅仅用12位表示接近16位整数的范围的值，实际能表示大概为1-65408，对应可以测量到的电机最小转速就是`1000000/65408=15.28886Hz`
+如果仅仅使用12bits来表示转速，还是有点不够，最低转速太高了（主要是这里定义的是两个电极之间的延迟，而不是直接的转速，这样实时性比较高，12bit最大就是4096us，算下来大概最低能检测转速是244RPM，还是很快的）
 
-然后这个16bit的数值，会被GCR转换成20bit，转成的20bit，还非常特殊，他会让二进制中不会出现两个连续的0
+```c
+static uint32_t dshot_decode_eRPM_telemetry_value(uint16_t value)
+{
+    // eRPM range
+    if (value == 0x0fff) {
+        return 0;
+    }
+
+    // Convert value to 16 bit from the GCR telemetry format (eeem mmmm mmmm)
+    value = (value & 0x01ff) << ((value & 0xfe00) >> 9);
+    if (!value) {
+        return DSHOT_TELEMETRY_INVALID;
+    }
+
+    // Convert period to erpm * 100
+    return (1000000 * 60 / 100 + value / 2) / value;
+}
+```
+
+通过次方表示，这样实现了仅仅用12位表示接近16位整数的范围的值，实际能表示大概为1-65408，对应可以测量到的电机最小转速就是`1000000/65408=15.28886` 对于14电极的电机来说，大概相当于是转了2圈，2RPM
 
 
 
@@ -105,9 +147,9 @@ c c c c e e e m m m m m m m m m
 - GCR，应该是一种编码方式，可以用来扩大数值所需要的bit数或者缩小数值所需要的bit数
 - bit bang/bit-bang 其实就是GPIO，比如软I2C，软SPI，这种用普通GPIO模拟某种协议的方式，就叫bit-bang
 - 3x，一般来说如果你想解码一个信号，最低要求你获取信号的频率是原始信号的3倍，你才能得到一个比较好的解码效果
-- 5/4，其实就是逆GCR，扩大数值的bit数
+- 5/4，GCR编码从4bits变成了5bits，所以传输速度就提升了
 - bidir DSHOT，双向DSHOT，也就是单线DSHOT，实现转速可读
-- Run-length limited，其实就是在带宽有限的通信链路上，如何压缩数据，并且还能保证数据长度的传输方式
+- Run-length limited，其实就是在带宽有限的通信链路上，如何组织数据，从而提高数据传输速度
 - eRPM，电调回传的是磁极数，电机上磁极一定是成对出现的，一般电机是14或者12个，对应的数值也就需要/7或者/6得到RPM数
 
 
@@ -124,7 +166,53 @@ c c c c e e e m m m m m m m m m
 
 ## Run-length limited
 
-几种常见的压缩方式
+几种常见的编码方式
+
+
+
+FM:(0,1) RLL，这种方式看起来只是多了一个`1`，实际上这个1可以作为时钟的`1`，从而可以形成差分编码的方式，这种方式让编码变长了。
+
+其实是当年FM调配的物理实现有些不同，物理上写1的频率是写0的两倍，所以这里增加`1`刚好满足了写1的速度，让两边可以同步控制
+
+```
+0 -> 10
+1 -> 11
+```
+
+
+
+GCR:(0,2) RLL，这个是IBM提出来的一种编码方式，主要是用来提高传输的速率，通过这种编码方式，将最多相邻的0，控制在了2个以内，从而提高了传输速度
+
+```
+0000 -> 11001
+0001 -> 11011
+0010 -> 10010
+0011 -> 10011
+0100 -> 11101
+0101 -> 10101
+0110 -> 10110
+0111 -> 10111
+1000 -> 11010
+1001 -> 01001
+1010 -> 01010
+1011 -> 01011
+1100 -> 11110
+1101 -> 01101
+1110 -> 01110
+1111 -> 01111
+```
+
+
+
+比如传输下面的数据
+
+```
+1011 0010 -> 01011 10010
+```
+
+![image-20230410175001637](https://img.elmagnifico.tech/static/upload/elmagnifico/202304101750726.png)
+
+就变成了图中所示情况
 
 
 
@@ -146,15 +234,7 @@ c c c c e e e m m m m m m m m m
 
 
 
-## esc configurator
 
-> https://esc-configurator.com/
->
-> https://github.com/stylesuxx/esc-configurator
-
-发现个有意思的，有人写了blh的配置器，还是web版本的，还开源，~~想想我的逆向，想死~~
-
-仔细看了下是中转协议，也就是通过Betaflight传递的，所以并没有实现直接配置。
 
 
 
