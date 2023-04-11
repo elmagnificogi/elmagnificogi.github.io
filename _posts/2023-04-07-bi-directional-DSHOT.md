@@ -125,22 +125,22 @@ FAST_CODE uint16_t prepareDshotPacket(dshotProtocolControl_t *pcb)
 然后这个telemetry包是这么解析的，Telemeter的原始数据，一共是21bits，其中第一bit一定是0，表示数据开始，而之后紧跟的20bits，其实是每4bits使用GCR转换成的，也就是每5bit解析成一个4bits，然后重新组装
 
 ```
-0 aaaa bbbbb fffff ddddd
-c c c c e e e m m m m m m m m m 解码后原始16bits
+0 aaaa bbbbb fffff ddddd 原始21bits
+e e e m m m m m m m m m c c c c 解码后原始16bits
 ```
 
 
 
 ```
-c c c c e e e m m m m m m m m m 解码后原始16bits
+e e e m m m m m m m m m c c c c 解码后原始16bits
 e e e m m m m m m m m m 校验成功以后的转速数据 12bits
 ```
 
-前4个c是异或和的校验码
+后4个c是异或和的校验码
 
-中间3个e是预周期的位移量，叫做左移位数E
+前间3个e是预周期的位移量，叫做左移位数E
 
-最后9个m是预周期值，这个值需要左移E次，才能得到实际的周期数值
+中间9个m是预周期值，这个值需要左移E次，才能得到实际的周期数值
 
 
 
@@ -237,6 +237,51 @@ extern uint32_t bbOutputBuffer[MOTOR_DSHOT_BUF_CACHE_ALIGN_LENGTH * MAX_SUPPORTE
 这里的注释怀疑过时了，依然不能合理解释21bits的问题。但是大概可以知道，当发完一个DSHOT帧以后，有30us的时间去切换输入->输出。
 
 然后就是等待telemetry，拿到以后，还要空一点点时间给ESC切回去，等下一个帧。
+
+
+
+```c
+static uint32_t decode_bb_value(uint32_t value, uint16_t buffer[], uint32_t count, uint32_t bit)
+{
+#ifndef DEBUG_BBDECODE
+    UNUSED(buffer);
+    UNUSED(count);
+    UNUSED(bit);
+#endif
+#define iv 0xffffffff
+    // First bit is start bit so discard it.
+    value &= 0xfffff;
+    // 这里是GCR的字典匹配
+    static const uint32_t decode[32] = {
+        iv, iv, iv, iv, iv, iv, iv, iv, iv, 9, 10, 11, iv, 13, 14, 15,
+        iv, iv, 2, 3, iv, 5, 6, 7, iv, 0, 8, 1, iv, 4, 12, iv };
+	// 每5位转换成4位的实际值
+    uint32_t decodedValue = decode[value & 0x1f];
+    decodedValue |= decode[(value >> 5) & 0x1f] << 4;
+    decodedValue |= decode[(value >> 10) & 0x1f] << 8;
+    decodedValue |= decode[(value >> 15) & 0x1f] << 12;
+    
+    // 计算校验和
+    uint32_t csum = decodedValue;
+    csum = csum ^ (csum >> 8); // xor bytes
+    csum = csum ^ (csum >> 4); // xor nibbles
+
+    if ((csum & 0xf) != 0xf || decodedValue > 0xffff) {
+#ifdef DEBUG_BBDECODE
+        memcpy(dshotTelemetryState.inputBuffer, sequence, sizeof(sequence));
+        for (unsigned i = 0; i < count; i++) {
+            bbBuffer[i] = !!(buffer[i] & (1 << bit));
+        }
+#endif
+        value = DSHOT_TELEMETRY_INVALID;
+    } else {
+        // 计算正确，移除校验和的部分
+        value = decodedValue >> 4;
+    }
+
+    return value;
+}
+```
 
 
 
