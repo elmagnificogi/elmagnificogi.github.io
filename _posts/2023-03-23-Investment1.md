@@ -1,12 +1,13 @@
 ---
 layout:     post
-title:      "投资学习"
+title:      "价值投资学习"
 subtitle:   "有知有行，投资第一课"
 date:       2023-03-23
 update:     2023-03-30
 author:     "elmagnifico"
 header-img: "img/z2.jpg"
 catalog:    true
+tobecontinue: true
 tags:
     - Investment
 ---
