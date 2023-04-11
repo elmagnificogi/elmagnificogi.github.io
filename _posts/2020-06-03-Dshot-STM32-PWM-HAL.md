@@ -9,6 +9,7 @@ header-img: "img/sensor-head-bg.jpg"
 catalog:    true
 tags:
     - STM32
+    - DSHOT
 ---
 
 ## Foreword
@@ -341,6 +342,8 @@ static void TIM_DMAPeriodElapsedCplt(DMA_HandleTypeDef *hdma)
 
 基于这个原因，我就在前面的函数退出前直接加了一个htim->State = HAL_TIM_STATE_READY，强制让timer此时可以正常工作。
 
+
+
 ## DMA PWM输出第一个bit bug
 
 这里讨论的不再是DSHOT了，而是单纯这个DMA输出PWM，在启动的一瞬间会出现2个0的情况，这个情况目前我解不了，应该是DMA的bug。
@@ -365,17 +368,23 @@ static void TIM_DMAPeriodElapsedCplt(DMA_HandleTypeDef *hdma)
 
 这个问题无论怎么调整DMA或者timer的极性或者其他设置都没用，只会让第一个出错的变成2个1或者2个0，肯定会出错，只要DMA一启动这个错误的bit就会出现。
 
+
+
 ## DMA PWM输出切换延迟
 
 我实际想要实现的是单线DMA PWM模拟串口输入和输出，输出没有大问题，但是模拟输入的时候就有明显问题了，从DMA PWM输出模式切换到普通IO的模式的过程花费的时间超过了52us，导致实际使用19200波特率的情况下，单线串口输入的时候，信号丢失了。
 
 某种程度上说目前的HAL库还是太重型了，虽然带来了一部分好处，比如统一配置，统一回调，更多的东西变成了一种约定（类似于springboot），你知道你就能正常用，你不知道你就用的很奇怪。好处是HAL的代码至少写的比你健壮一些，但是坏处就是有很多冗余性的东西，导致了现在的性能问题，甚至有的HAL内部问题，如果不仔细看底层实现是发现不了的。
 
+
+
 ## End
 
 除了上面这个错以外，其实还有DMA帧错误，实际上帧错误是使用FIFO才会出现的，而FIFO是disable的，但是初始化以后还是默认开启了帧错误中断，这就是很多人明明没用FIFO但是却在DMA完成回调时看到了帧错误的错误回调，而这个问题貌似也已经好多年了都没修复，不知道为什么
 
 而我看到了chibiOS等系统直接将板级资源重新定义，然后自己实现一个hal库，剩下的就是根据硬件去实现对应的hal库这种方式感觉更集中一些，在应用层屏蔽底层更完全一些，而且可以调用的系统资源也相对更完整一些。
+
+
 
 ## Quote
 

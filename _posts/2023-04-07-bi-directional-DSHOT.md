@@ -3,7 +3,7 @@ layout:     post
 title:      "单线DSHOT with RPM feedback全指南"
 subtitle:   "bi-directional DSHOT，双向DSHOT"
 date:       2023-04-07
-update:     2023-04-07
+update:     2023-04-11
 author:     "elmagnifico"
 header-img: "img/x1.jpg"
 catalog:    true
@@ -38,15 +38,49 @@ tags:
 birdir-DSHOT的一些特性
 
 - 单线
-- Telemetry 只有转速信息
+- Telemetry 只有转速信息，并且传回的内容是eRPM/100以后的值
 - 校验位和正常的是反的
 - DSHOT 600 及以上不太支持，实现困难
+- BLH 需要32.7版本以后的 
+- BLH_S 需要使用Bluejay版本的固件
 
 
 
-#### 代码分析
+#### 死区
 
-查看Betaflight中关于Dshot部分的源码，默认开启了`DSHOT_TELEMETRY`就会使用bi-directional DSHOT
+显然，用单线做收发，不可避免地要遇到死区的问题，PWM的死区比普通GPIO好一点，是相对优化过的，但是普通GPIO，从输出转换到输入，需要一定时间，并且连接的器件也要同时切换，否则有可能出现小短路的情况。
+
+
+
+#### 名词解释
+
+- GCR，应该是一种编码方式，他可能扩大了传输的数据内容，提高了传输速率，但是更方便硬件去做检测和识别了
+- bit bang/bit-bang 其实就是GPIO，比如软I2C，软SPI，这种用普通GPIO模拟某种协议的方式，就叫bit-bang
+- 3x，一般来说如果你想解码一个信号，最低要求你获取信号的频率是原始信号的3倍，你才能得到一个比较好的解码效果
+- 5/4，GCR编码从4bits变成了5bits，所以传输速度就提升了
+- bidir DSHOT，双向DSHOT，也就是单线DSHOT，实现转速可读
+- Run-length limited，其实就是在带宽有限的通信链路上，如何组织数据，从而提高数据传输速度
+- eRPM，电调回传的是磁极数，电机上磁极一定是成对出现的，一般电机是14或者12个，对应的数值也就需要/7或者/6得到RPM数
+- RPM，转速每分钟
+- RPS，转速每秒
+
+
+
+#### 实现方式
+
+一般来说DSHOT都是通过PWM+DMA实现的，但是众所周知H7以下的STM32板子DMA通道都是固定的，如果一开始设计的时候没有考虑到这个事情，就很有可能会出现DMA冲突，PWM+DMA实现不了，进而导致DSHOT无法使用，也就没法推进了。
+
+
+
+看了一下老的issues，发现他们提出来了一种解决办法，通过普通GPIO+DMA实现DSHOT，这相当于是说就算PWM用不了，他也能直接做GPIO去实现，或者直接利用空闲的GPIO实现DSHOT，而不需要被DMA或者PWM通道绑定给卡住。
+
+
+
+### 代码分析
+
+#### DSHOT校验和
+
+查看Betaflight中关于DSHOT部分的源码，默认开启了`DSHOT_TELEMETRY`就会使用bi-directional DSHOT
 
 ```c
 FAST_CODE uint16_t prepareDshotPacket(dshotProtocolControl_t *pcb)
@@ -86,9 +120,7 @@ FAST_CODE uint16_t prepareDshotPacket(dshotProtocolControl_t *pcb)
 
 
 
-```c
-
-```
+#### 转速计算
 
 然后这个telemetry包是这么解析的，Telemeter的原始数据，一共是21bits，其中第一bit一定是0，表示数据开始，而之后紧跟的20bits，其实是每4bits使用GCR转换成的，也就是每5bit解析成一个4bits，然后重新组装
 
@@ -112,7 +144,7 @@ e e e m m m m m m m m m 校验成功以后的转速数据 12bits
 
 
 
-如果仅仅使用12bits来表示转速，还是有点不够，最低转速太高了（主要是这里定义的是两个电极之间的延迟，而不是直接的转速，这样实时性比较高，12bit最大就是4096us，算下来大概最低能检测转速是244RPM，还是很快的）
+如果仅仅使用12bits来表示转速，还是有点不够，最低转速太高了（主要是这里定义的是两个电极之间的延迟，而不是直接的转速，这样实时性比较高，12bit最大就是4096us，算下来大概最低能检测转速是34（14电极），还是很快的）
 
 ```c
 static uint32_t dshot_decode_eRPM_telemetry_value(uint16_t value)
@@ -135,43 +167,128 @@ static uint32_t dshot_decode_eRPM_telemetry_value(uint16_t value)
 
 通过次方表示，这样实现了仅仅用12位表示接近16位整数的范围的值，实际能表示大概为1-65408，对应可以测量到的电机最小转速就是`1000000/65408=15.28886` 对于14电极的电机来说，大概相当于是转了2圈
 
+传回的内容是eRPM/100以后的值，转换成rpm
 
-
-#### 死区
-
-显然，用单线做收发，不可避免地要遇到死区的问题，PWM的死区比普通GPIO好一点，是相对优化过的，但是普通GPIO，从输出转换到输入，需要一定时间，并且连接的器件也要同时切换，否则有可能出现小短路的情况。
-
-
-
-#### 名词解释
-
-- GCR，应该是一种编码方式，可以用来扩大数值所需要的bit数或者缩小数值所需要的bit数
-- bit bang/bit-bang 其实就是GPIO，比如软I2C，软SPI，这种用普通GPIO模拟某种协议的方式，就叫bit-bang
-- 3x，一般来说如果你想解码一个信号，最低要求你获取信号的频率是原始信号的3倍，你才能得到一个比较好的解码效果
-- 5/4，GCR编码从4bits变成了5bits，所以传输速度就提升了
-- bidir DSHOT，双向DSHOT，也就是单线DSHOT，实现转速可读
-- Run-length limited，其实就是在带宽有限的通信链路上，如何组织数据，从而提高数据传输速度
-- eRPM，电调回传的是磁极数，电机上磁极一定是成对出现的，一般电机是14或者12个，对应的数值也就需要/7或者/6得到RPM数
+```c
+// Used with serial esc telem as well as dshot telem
+uint32_t erpmToRpm(uint16_t erpm)
+{
+    //  rpm = (erpm * 100) / (motorConfig()->motorPoleCount / 2)
+    return (erpm * 200) / motorConfig()->motorPoleCount;
+}
+```
 
 
 
-#### 实现方式
+#### bit bang
 
-一般来说DSHOT都是通过PWM+DMA实现的，但是众所周知H7以下的STM32板子DMA通道都是固定的，如果一开始设计的时候没有考虑到这个事情，就很有可能会出现DMA冲突，PWM+DMA实现不了，进而导致DSHOT无法使用，也就没法推进了。
+这里注意是参考一下bit bang是怎么实现的，PWM版本以前就实现过了，不考虑了
 
 
 
-看了一下老的issues，发现他们提出来了一种解决办法，通过普通GPIO+DMA实现DSHOT，这相当于是说就算PWM用不了，他也能直接做GPIO去实现，或者直接利用空闲的GPIO实现DSHOT，而不需要被DMA或者PWM通道绑定给卡住。
+```c
+#define MOTOR_DSHOT_BIT_PER_SYMBOL         1
+
+#define MOTOR_DSHOT_STATE_PER_SYMBOL       3  // Initial high, 0/1, low
+#define MOTOR_DSHOT_BIT_HOLD_STATES        3  // 3 extra states at the end of transmission required to allow ESC to sample the last bit correctly.
+
+#define MOTOR_DSHOT_FRAME_BITS             16
+
+#define MOTOR_DSHOT_FRAME_TIME_NS(rate)    ((MOTOR_DSHOT_FRAME_BITS / MOTOR_DSHOT_BIT_PER_SYMBOL) * MOTOR_DSHOT_SYMBOL_TIME_NS(rate))
+
+#define MOTOR_DSHOT_TELEMETRY_WINDOW_US    (30000 + MOTOR_DSHOT_FRAME_TIME_NS(rate) * (1.1)) / 1000
+
+#define MOTOR_DSHOT_CHANGE_INTERVAL_NS(rate) (MOTOR_DSHOT_SYMBOL_TIME_NS(rate) / MOTOR_DSHOT_STATE_PER_SYMBOL)
+
+#define MOTOR_DSHOT_GCR_CHANGE_INTERVAL_NS(rate) (MOTOR_DSHOT_CHANGE_INTERVAL_NS(rate) * 5 / 4)
+```
+
+这里暂时解释不清为什么只有16bit，实际上明明是他自己定义的21bits
+
+
+
+```c
+// DMA buffers
+// Note that we are not sharing input and output buffers,
+// as output buffer is only modified for middle bits
+
+// DMA output buffer:
+// DShot requires 3 [word/bit] * 16 [bit] = 48 [word]
+extern uint32_t bbOutputBuffer[MOTOR_DSHOT_BUF_CACHE_ALIGN_LENGTH * MAX_SUPPORTED_MOTOR_PORTS];
+```
+
+同上
+
+
+
+```c
+// DMA input buffer
+// (30us + <frame time> + <slack>) / <input sampling clock period>
+// <frame time> = <DShot symbol time> * 16
+// Temporary size for DS600
+// <frame time> = 26us
+// <sampling period> = 0.44us
+// <slack> = 10%
+// (30 + 26 + 3) / 0.44 = 134
+// In some cases this was not enough, so we add 6 extra samples
+#define DSHOT_BB_PORT_IP_BUF_LENGTH 140
+```
+
+这里的注释怀疑过时了，依然不能合理解释21bits的问题。但是大概可以知道，当发完一个DSHOT帧以后，有30us的时间去切换输入->输出。
+
+然后就是等待telemetry，拿到以后，还要空一点点时间给ESC切回去，等下一个帧。
 
 
 
 ## Run-length limited
 
-几种常见的编码方式
+Run-length limited 这个概念国内搜起来很容易和游程搞混，其实是不一样的东西
 
 
 
-FM:(0,1) RLL，这种方式看起来只是多了一个`1`，实际上这个1可以作为时钟的`1`，从而可以形成差分编码的方式，这种方式让编码变长了。
+### 游程
+
+游程，一个序列中取值相同，连在一起的元素合起来叫做一个游程，连续元素的个数，叫做这个游程的长度
+
+```
+0 0 0 1 1 1 1 0 1 0 1 1 0 0 1
+  0      1    0 1 0  1   0  1
+```
+
+比如上述，一共15个bit，也就游程长度是8
+
+```
+其中长度为4的是：1111
+其中长度为3的是：000
+其中长度为2的是：11，00
+其中长度为1的是：0，1，0，1
+```
+
+
+
+#### 游程长度编码（RLC，Run-length Code）
+
+现在使用游程多半是用来压缩数据的，以前使用游程可能是为了兼容硬件上的某些情况而不得不用。游程长度编码是十分简单的压缩方式，编码速度也非常快，核心就是通过去除冗余字符，来减少数据文件所占存储空间的目的
+
+简单来说，游程长度编码的主要任务是统计连续相同字符的个数，解码时要根据字符及连续相同字符的个数，恢复原来的数据
+
+一般来说使用`(n,m)`来表示,就是说有m个形式为n的字符，对于比特流之类的东西，就可以用这种方式编码，来减少传输量
+
+
+
+### RLL
+
+RLL(n,m)，指定两个连续1之间，最少有n个0，最多有m个0。其实RLL还有2个参数，剩下这个两个其实就是编码前的bit数量，一般用来说明传输速度的改变
+
+RLL还有一个特性，**在调制解调中，只有电平变化，才表示bit发生了改变，否则认为是0**，如果没有这个前提，下面的图示根本看不懂
+
+![image-20230411120038480](https://img.elmagnifico.tech/static/upload/elmagnifico/202304111200542.png)
+
+
+
+#### 几种常见的编码方式
+
+**FM:(0,1) RLL**，这种方式看起来只是多了一个`1`，实际上这个1可以作为时钟的`1`，从而可以形成差分编码的方式，这种方式让编码变长了。
 
 其实是当年FM调配的物理实现有些不同，物理上写1的频率是写0的两倍，所以这里增加`1`刚好满足了写1的速度，让两边可以同步控制
 
@@ -180,9 +297,17 @@ FM:(0,1) RLL，这种方式看起来只是多了一个`1`，实际上这个1可�
 1 -> 11
 ```
 
+通过RLL(0,1)编码后，两个连续1之间最少是0个0 `11 11`，最多是1个0 `11 10 11`
+
+`10110010 -> 1110111110101110`
+
+![image-20230411111133673](https://img.elmagnifico.tech/static/upload/elmagnifico/202304111111728.png)
+
+图中下面的尖峰是表示编码后的1，而平表示没产生变化就是0，刚好是编码后的样子，同时符合RLL特性的
 
 
-GCR:(0,2) RLL，这个是IBM提出来的一种编码方式，主要是用来提高传输的速率，通过这种编码方式，将最多相邻的0，控制在了2个以内，从而提高了传输速度
+
+**GCR:(0,2) RLL**，这个是IBM提出来的一种编码方式，主要是用来提高传输的速率，通过这种编码方式，将最多相邻的0，控制在了2个以内，从而提高了传输速度
 
 ```
 0000 -> 11001
@@ -211,9 +336,19 @@ GCR:(0,2) RLL，这个是IBM提出来的一种编码方式，主要是用来提�
 1011 0010 -> 01011 10010
 ```
 
-![image-20230410175001637](https://img.elmagnifico.tech/static/upload/elmagnifico/202304101750726.png)
+![image-20230411112019756](https://img.elmagnifico.tech/static/upload/elmagnifico/202304111120811.png)
 
 就变成了图中所示情况
+
+
+
+这种编码方式，如果要进行检测，那么只需要在每个沿时间进行检测即可，比如下图中的绿色箭头所在即是`沿`检测
+
+![image-20230411114300590](https://img.elmagnifico.tech/static/upload/elmagnifico/202304111143652.png)
+
+红点是每一段的分割点，这个`沿`不进行检测。可以看到`沿`刚好是编码中隐藏的原始数据，电平发生翻转表示1，电平不动表示0
+
+有了这里的想法，用GPIO的跳变检测就更加简单了
 
 
 
