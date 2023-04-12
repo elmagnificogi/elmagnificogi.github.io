@@ -3,7 +3,7 @@ layout:     post
 title:      "Dap error while reading AIRCR/CPUID register"
 subtitle:   "STM32、JLink"
 date:       2022-12-13
-update:     2022-12-14
+update:     2023-04-12
 author:     "elmagnifico"
 header-img: "img/docker-head-bg.jpg"
 catalog:    true
@@ -178,9 +178,19 @@ J-Link>
 
 
 
+## Reset Pin
+
+![image-20230412091258054](https://img.elmagnifico.tech/static/upload/elmagnifico/202304120912108.png)
+
+修改Reset的方式为Reset Pin，并且把Jlink的Reset引脚连到板子的Reset上，就可以正常刷写了。只要成功一次，后续就正常了。
+
+当然也可以通过按住Reset，然后在下载的一瞬间松开，反复尝试，成功一次就好了。
+
+
+
 ## Summary
 
-解不了，等以后遇到了再说吧。还遇到盗版JLink被新驱动给直接lock了，无法使用了，正版的怎么更新都没事，蛋疼。
+还遇到盗版JLink被新驱动给直接lock了，无法使用了，正版的怎么更新都没事，蛋疼。
 
 
 
