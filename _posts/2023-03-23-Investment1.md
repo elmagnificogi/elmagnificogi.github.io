@@ -7,7 +7,7 @@ update:     2023-03-30
 author:     "elmagnifico"
 header-img: "img/z2.jpg"
 catalog:    true
-tobecontinue: true
+tobecontinued: true
 tags:
     - Investment
 ---
