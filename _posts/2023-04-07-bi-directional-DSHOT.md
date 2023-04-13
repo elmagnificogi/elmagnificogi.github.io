@@ -203,8 +203,6 @@ uint32_t erpmToRpm(uint16_t erpm)
 #define MOTOR_DSHOT_GCR_CHANGE_INTERVAL_NS(rate) (MOTOR_DSHOT_CHANGE_INTERVAL_NS(rate) * 5 / 4)
 ```
 
-这里暂时解释不清为什么只有16bit，实际上明明是他自己定义的21bits
-
 
 
 ```c
@@ -216,8 +214,6 @@ uint32_t erpmToRpm(uint16_t erpm)
 // DShot requires 3 [word/bit] * 16 [bit] = 48 [word]
 extern uint32_t bbOutputBuffer[MOTOR_DSHOT_BUF_CACHE_ALIGN_LENGTH * MAX_SUPPORTED_MOTOR_PORTS];
 ```
-
-同上
 
 
 
@@ -285,9 +281,178 @@ static uint32_t decode_bb_value(uint32_t value, uint16_t buffer[], uint32_t coun
 
 
 
+由于是3倍采样，所以还有一个函数是`decode_bb_bitband`用来从采样数据里筛选出来目标帧，并将其转换成raw数据
+
+```c
+uint32_t decode_bb_bitband( uint16_t buffer[], uint32_t count, uint32_t bit)
+{
+    uint8_t startMargin;
+
+#ifdef DEBUG_BBDECODE
+    memset(sequence, 0, sizeof(sequence));
+    sequenceIndex = 0;
+#endif
+    uint32_t value = 0;
+
+    bitBandWord_t* p = (bitBandWord_t*)BITBAND_SRAM((uint32_t)buffer, bit);
+    bitBandWord_t* b = p;
+    bitBandWord_t* endP = p + (count - MIN_VALID_BBSAMPLES);
+
+    // Jump forward in the buffer to just before where we anticipate the first zero
+    p += preambleSkip;
+
+    // 寻找头 第一bit必然是0，所以找一个下降沿
+    // Eliminate leading high signal level by looking for first zero bit in data stream.
+    // Manual loop unrolling and branch hinting to produce faster code.
+    while (p < endP) {
+        if (__builtin_expect((!(p++)->value), 0) ||
+            __builtin_expect((!(p++)->value), 0) ||
+            __builtin_expect((!(p++)->value), 0) ||
+            __builtin_expect((!(p++)->value), 0)) {
+            break;
+        }
+    }
+
+    startMargin = p - b;
+    DEBUG_SET(DEBUG_DSHOT_TELEMETRY_COUNTS, 3, startMargin);
+
+    if (p >= endP) {
+        // not returning telemetry is ok if the esc cpu is
+        // overburdened.  in that case no edge will be found and
+        // BB_NOEDGE indicates the condition to caller
+        return DSHOT_TELEMETRY_NOEDGE;
+    }
+
+    int remaining = MIN(count - (p - b), (unsigned int)MAX_VALID_BBSAMPLES);
+
+    bitBandWord_t* oldP = p;
+    uint32_t bits = 0;
+    // 重新标定结尾
+    endP = p + remaining;
+
+#ifdef DEBUG_BBDECODE
+    sequence[sequenceIndex++] = p - b;
+#endif
+
+    while (endP > p) {
+        // 寻找上升沿
+        do {
+            // Look for next positive edge. Manual loop unrolling and branch hinting to produce faster code.
+            if(__builtin_expect((p++)->value, 0) ||
+               __builtin_expect((p++)->value, 0) ||
+               __builtin_expect((p++)->value, 0) ||
+               __builtin_expect((p++)->value, 0)) {
+                break;
+            }
+        } while (endP > p);
+
+        if (endP > p) {
+
+#ifdef DEBUG_BBDECODE
+            sequence[sequenceIndex++] = p - b;
+#endif
+            // 找到一个上升沿
+            // A level of length n gets decoded to a sequence of bits of
+            // the form 1000 with a length of (n+1) / 3 to account for 3x
+            // oversampling.
+            const int len = MAX((p - oldP + 1) / 3, 1);
+            bits += len;
+            value <<= len;
+            value |= 1 << (len - 1);
+            oldP = p;
+            // 上升沿记录一下
+			
+            // 找下降沿
+            // Look for next zero edge. Manual loop unrolling and branch hinting to produce faster code.
+            do {
+                if (__builtin_expect(!(p++)->value, 0) ||
+                    __builtin_expect(!(p++)->value, 0) ||
+                    __builtin_expect(!(p++)->value, 0) ||
+                    __builtin_expect(!(p++)->value, 0)) {
+                    break;
+                }
+            } while (endP > p);
+
+            if (endP > p) {
+
+#ifdef DEBUG_BBDECODE
+                sequence[sequenceIndex++] = p - b;
+#endif
+                // 找到下降沿 记录一下
+                // A level of length n gets decoded to a sequence of bits of
+                // the form 1000 with a length of (n+1) / 3 to account for 3x
+                // oversampling.
+                const int len = MAX((p - oldP + 1) / 3, 1);
+                bits += len;
+                value <<= len;
+                value |= 1 << (len - 1);
+                oldP = p;
+            }
+        }
+    }
+
+    // 如果找到的bits 少于18，说明不正确
+    if (bits < 18) {
+        return DSHOT_TELEMETRY_NOEDGE;
+    }
+
+    // 由于最后一bit可能是高，所以会有一个额外的上升沿，就变成了21bits
+    // length of last sequence has to be inferred since the last bit with inverted dshot is high
+    const int nlen = 21 - bits;
+    if (nlen < 0) {
+        return DSHOT_TELEMETRY_NOEDGE;
+    }
+
+#ifdef DEBUG_BBDECODE
+    sequence[sequenceIndex] = sequence[sequenceIndex] + (nlen) * 3;
+    sequenceIndex++;
+#endif
+
+    // The anticipated edges were observed
+    preambleSkip = startMargin - DSHOT_TELEMETRY_START_MARGIN;
+
+    if (nlen > 0) {
+        value <<= nlen;
+        value |= 1 << (nlen - 1);
+    }
+
+    return decode_bb_value(value, buffer, count, bit);
+}
+```
+
+
+
+#### bit bang 驱动
+
+
+
+```c
+void bbGpioSetup(bbMotor_t *bbMotor);
+void bbTimerChannelInit(bbPort_t *bbPort);
+void bbDMAPreconfigure(bbPort_t *bbPort, uint8_t direction);
+void bbDMAIrqHandler(dmaChannelDescriptor_t *descriptor);
+void bbSwitchToOutput(bbPort_t * bbPort);
+void bbSwitchToInput(bbPort_t * bbPort);
+
+void bbTIM_TimeBaseInit(bbPort_t *bbPort, uint16_t period);
+void bbTIM_DMACmd(TIM_TypeDef* TIMx, uint16_t TIM_DMASource, FunctionalState NewState);
+void bbDMA_ITConfig(bbPort_t *bbPort);
+void bbDMA_Cmd(bbPort_t *bbPort, FunctionalState NewState);
+int  bbDMA_Count(bbPort_t *bbPort);
+
+```
+
+主要接口都在这里，Betaflight底层实现了一个bitbang的标准库还有一个lowlevel的库
+
+![image-20230412153201606](https://img.elmagnifico.tech/static/upload/elmagnifico/202304121532681.png)
+
+这里就是一些基本的硬件配置，主要就是通过DMA设置GPIO或者读取GPIO
+
+
+
 ## Run-length limited
 
-Run-length limited 这个概念国内搜起来很容易和游程搞混，其实是不一样的东西
+Run-length limited 这个概念国内搜起来很容易和游程搞混，其实是不一样的东西，游程在这里其实和Dshot GCR没啥关系
 
 
 
@@ -415,7 +580,27 @@ RLL还有一个特性，**在调制解调中，只有电平变化，才表示bit
 
 
 
+## 实测图像
 
+
+
+
+
+## 新驱动设计
+
+![image-20230412162933772](https://img.elmagnifico.tech/static/upload/elmagnifico/202304121629843.png)
+
+bit bang是通过三倍采样，来读取下面的每一个电平值的（红圈部分）
+
+但是其实我可以通过绿色箭头标明的沿来判断，当前数值，直接就能读取到原始bit中的所有1，其余位就自动是0了。
+
+这样的话，完全不需要3倍的采样timer，不会受到DSHOT频率的影响，无论多快的频率都能处理。
+
+核心想法：
+
+通过GPIO的上升沿、下降沿中断，记录所有1，并记录1产生的时间，只需要一个us定时器即可。
+
+如果us超时了，那么就认为本次失败了，直接关闭中断，切换回输出模式。只需要将每个1之间的时间除以固定的区间，就能到的1的位置了。
 
 
 
