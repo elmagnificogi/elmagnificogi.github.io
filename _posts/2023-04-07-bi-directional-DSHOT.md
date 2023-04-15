@@ -448,6 +448,8 @@ int  bbDMA_Count(bbPort_t *bbPort);
 
 这里就是一些基本的硬件配置，主要就是通过DMA设置GPIO或者读取GPIO
 
+TIM也有DMA，实际上前面的大部分配置和TIM DMA用作PWM是一样的，唯一不同的点在于，TIM DMA
+
 
 
 ## Run-length limited
