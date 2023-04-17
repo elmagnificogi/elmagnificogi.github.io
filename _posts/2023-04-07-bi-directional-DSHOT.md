@@ -586,13 +586,19 @@ RLL还有一个特性，**在调制解调中，只有电平变化，才表示bit
 
 ![image-20230417184900614](https://img.elmagnifico.tech/static/upload/elmagnifico/202304171849696.png)
 
-这是正常的DSHOT 300，没有反转校验位的
+这是正常的DSHOT 300，没有反转校验位、没有请求telemetry的`48` 0油门输出
 
 
 
+![image-20230417191513764](https://img.elmagnifico.tech/static/upload/elmagnifico/202304171915826.png)
+
+这是反转后、没有请求telemetry的图像
 
 
-这是反转后的图像
+
+![image-20230417191130930](https://img.elmagnifico.tech/static/upload/elmagnifico/202304171911008.png)
+
+这是反转后并且请求telemetry的
 
 
 
