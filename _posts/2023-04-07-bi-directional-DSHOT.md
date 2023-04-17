@@ -584,6 +584,14 @@ RLL还有一个特性，**在调制解调中，只有电平变化，才表示bit
 
 ## 实测图像
 
+![image-20230417175530860](https://img.elmagnifico.tech/static/upload/elmagnifico/202304171756551.png)
+
+这是正常的DSHOT 300，没有反转校验位的
+
+
+
+
+
 
 
 
