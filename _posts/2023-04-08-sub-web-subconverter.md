@@ -9,7 +9,7 @@ header-img: "img/x2.jpg"
 catalog:    true
 tags:
     - V2ray
-    - Vps
+    - VPS
 ---
 
 ## Foreword
