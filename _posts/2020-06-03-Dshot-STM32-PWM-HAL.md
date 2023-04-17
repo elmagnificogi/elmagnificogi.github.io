@@ -3,7 +3,7 @@ layout:     post
 title:      "STM32 PWM DSHOT驱动"
 subtitle:   "HAL，DSHOT1200"
 date:       2020-06-03
-update:     2023-04-10
+update:     2023-04-17
 author:     "elmagnifico"
 header-img: "img/sensor-head-bg.jpg"
 catalog:    true
@@ -132,13 +132,11 @@ uint16_t add_checksum_and_telemetry(uint16_t packet) {
 
 一般支持DSHOT的都是BLH的电调了，然后DSHOT解锁比较特殊，和平常的PWM直接给输出就转不一样。
 
-DSHOT必须先给0，然后逐渐拉高，拉到最大2047，然后再拉回最低0，这样才能解锁，然后给油才会正常转，否则直接给油门电机是不会转的
+DSHOT必须先给0，持续3s，不是0油门，而是全bit=0，对电调进行解锁以后才能开始运转
 
-当然也可以通过，给0油门3秒，然后给2047油门1秒，然后再给0油门3秒，就正常解锁了。
+平常的PWM是必须先给0解锁，保持一会就可以随意加油门了
 
-
-
-平常的PWM是必须先给0解锁，保持一会就可以随意加油门了，DHSOT这里是结合了BLH中的油门校准，每次启动都要这么来一下（切换了输出协议也要这样来一下，比如PWM切换到DSHOT或者OneSHOT切换到DSHOT）
+切换了输出协议也要这样来一下，比如PWM切换到DSHOT或者OneSHOT切换到DSHOT，都要重新做一次解锁
 
 
 
