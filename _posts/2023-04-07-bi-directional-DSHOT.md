@@ -3,7 +3,7 @@ layout:     post
 title:      "单线DSHOT with RPM feedback全指南"
 subtitle:   "bi-directional DSHOT，双向DSHOT"
 date:       2023-04-07
-update:     2023-04-11
+update:     2023-04-18
 author:     "elmagnifico"
 header-img: "img/x1.jpg"
 catalog:    true
@@ -44,6 +44,10 @@ birdir-DSHOT的一些特性
 - DSHOT 600 及以上不太支持，实现困难
 - BLH 需要32.7版本以后的 
 - BLH_S 需要使用Bluejay版本的固件
+
+
+
+**根据BLH最新的测试版说明，32.92.2版本扩展了birdir-DSHOT的telemetry信息，包含温度、电压、电流信息了，不再是单独的转速了。**
 
 
 
@@ -629,27 +633,31 @@ RLL还有一个特性，**在调制解调中，只有电平变化，才表示bit
 
 
 
+![image-20230418190834806](https://img.elmagnifico.tech/static/upload/elmagnifico/202304181908889.png)
+
 这是反转后、没有请求telemetry的图像
 
 
 
-这是反转后并且请求telemetry的
+这是反转后并且请求telemetry的，这里遇到问题了，实际发出了telemetry请求，但是收不到任何回复，而且也验证了翻转DSHOT可以被识别、可以解锁电机，电机也能正常转，可是电调就是没有任何回复。查看电调的固件，其版本也是32.90，理论上也不低。
 
 
 
 ## 新驱动设计
 
-![image-20230412162933772](https://img.elmagnifico.tech/static/upload/elmagnifico/202304121629843.png)
+![image-20230418192723771](https://img.elmagnifico.tech/static/upload/elmagnifico/202304181927844.png)
 
 bit bang是通过三倍采样，来读取下面的每一个电平值的（红圈部分）
 
 但是其实我可以通过绿色箭头标明的沿来判断，当前数值，直接就能读取到原始bit中的所有1，其余位就自动是0了。
 
+黄色箭头虽然也是沿，但是由于是4bit的分割点，所以不纳入计算。
+
 这样的话，完全不需要3倍的采样timer，不会受到DSHOT频率的影响，无论多快的频率都能处理。
 
-核心想法：
+**核心想法：**
 
-通过GPIO的上升沿、下降沿中断，记录所有1，并记录1产生的时间，只需要一个100ns定时器即可。
+通过GPIO的上升沿、下降沿中断，记录所有1，并记录1产生的时间，通过5bits时间，可以排除掉黄色的下降沿或者上升沿，只需要一个100ns定时器即可。
 
 如果定时器超时了，那么就认为本次失败了，直接关闭中断，切换回输出模式。只需要将每个1之间的时间除以固定的区间，就能得到1的位置了。
 
