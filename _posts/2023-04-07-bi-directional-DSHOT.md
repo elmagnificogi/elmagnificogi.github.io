@@ -31,7 +31,7 @@ tags:
 
 > https://github.com/betaflight/betaflight/pull/8554#issuecomment-512507625
 
-总结一下，这是birdir-DSHOT初次实现，反转了DSHOT协议，并且有些和标准的DSHOT实现是不一样的，其实可以认为是一个变种DSHOT，后续这种DSHOT也被BLH的最新固件支持，变成了DSHOT的基础实现。其实这个PR还有一个点也非强，他兼容了BLHS，以前老的16位单片机也能用上DSHOT，也能使用转速反馈，非常牛逼了。
+总结一下，这是birdir-DSHOT初次实现，反转了正常DSHOT协议，并且有些和标准的DSHOT实现是不一样的，其实可以认为是一个变种DSHOT，后续这种DSHOT也被BLH的最新固件支持，变成了DSHOT的基础实现。其实这个PR还有一个点也非强，他希望兼容了BLH_S，以前老的16位单片机也能用上DSHOT，也能使用转速反馈，非常牛逼了。
 
 
 
@@ -39,7 +39,8 @@ birdir-DSHOT的一些特性
 
 - 单线
 - Telemetry 只有转速信息，并且传回的内容是eRPM/100以后的值
-- 校验位和正常的是反的
+- 校验位计算最后需要翻转BIT
+- 最终DSHOT数据帧需要翻转
 - DSHOT 600 及以上不太支持，实现困难
 - BLH 需要32.7版本以后的 
 - BLH_S 需要使用Bluejay版本的固件
@@ -182,9 +183,7 @@ uint32_t erpmToRpm(uint16_t erpm)
 
 #### bit bang
 
-这里注意是参考一下bit bang是怎么实现的，PWM版本以前就实现过了，不考虑了
-
-
+这里主要是参考一下bit bang是怎么实现的
 
 ```c
 #define MOTOR_DSHOT_BIT_PER_SYMBOL         1
@@ -214,6 +213,16 @@ uint32_t erpmToRpm(uint16_t erpm)
 // DShot requires 3 [word/bit] * 16 [bit] = 48 [word]
 extern uint32_t bbOutputBuffer[MOTOR_DSHOT_BUF_CACHE_ALIGN_LENGTH * MAX_SUPPORTED_MOTOR_PORTS];
 ```
+
+这里主要理解`bbOutputBuffer`是怎么设计的
+
+首先DSHOT每一帧一共是16位，输出的时候，每一位，用一个`SYMBOL`表示。
+
+一个`SYMBOL`又有3个状态，也就是初始状态、数据状态、结束状态。 因为是反转了正常DSHOT的帧，所以初始状态一定是高、数据状态根据传输的情况定，结束状态一定是低
+
+每一帧的结尾为了让ESC可以完整采样，又额外加了一个`SYMBOL`，也就是3个状态。
+
+这样得到最后`bbOutputBuffer`的长度是51bits
 
 
 
@@ -448,7 +457,35 @@ int  bbDMA_Count(bbPort_t *bbPort);
 
 这里就是一些基本的硬件配置，主要就是通过DMA设置GPIO或者读取GPIO
 
-TIM也有DMA，实际上前面的大部分配置和TIM DMA用作PWM是一样的，唯一不同的点在于，TIM DMA
+TIM也有DMA，实际上前面的大部分配置和TIM DMA用作PWM是一样的，唯一不同的点在于，TIM DMA触发的不再是CCR寄存器，而是GPIO的寄存器
+
+
+
+在`bbWriteInt`中可以看到，给过来的DSHOT数据帧还需要再次被处理，会将整个DSHOT数据翻转
+
+```c
+static void bbOutputDataSet(uint32_t *buffer, int pinNumber, uint16_t value, bool inverted)
+{
+    uint32_t middleBit;
+	
+    // 使用telemetery 就需要翻转中间bit
+    if (inverted) {
+        // 是写入GPIO BSRR 所以低位写1置位
+        middleBit = (1 << (pinNumber + 0));
+    } else {
+        // 高位写1 复位
+        middleBit = (1 << (pinNumber + 16));
+    }
+
+    for (int pos = 0; pos < 16; pos++) {
+        // 这里则是翻转BIT
+        if (!(value & 0x8000)) {
+            buffer[pos * 3 + 1] |= middleBit;
+        }
+        value <<= 1;
+    }
+}
+```
 
 
 
@@ -614,9 +651,9 @@ bit bang是通过三倍采样，来读取下面的每一个电平值的（红圈
 
 核心想法：
 
-通过GPIO的上升沿、下降沿中断，记录所有1，并记录1产生的时间，只需要一个us定时器即可。
+通过GPIO的上升沿、下降沿中断，记录所有1，并记录1产生的时间，只需要一个100ns定时器即可。
 
-如果us超时了，那么就认为本次失败了，直接关闭中断，切换回输出模式。只需要将每个1之间的时间除以固定的区间，就能到的1的位置了。
+如果定时器超时了，那么就认为本次失败了，直接关闭中断，切换回输出模式。只需要将每个1之间的时间除以固定的区间，就能得到1的位置了。
 
 
 
@@ -628,8 +665,6 @@ bit bang是通过三倍采样，来读取下面的每一个电平值的（红圈
 
 ## Quote
 
-> https://www.bilibili.com/read/cv16042826/
->
 > https://github.com/betaflight/betaflight/pull/8554
 >
 > https://zhuanlan.zhihu.com/p/520878086
