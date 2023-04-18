@@ -7,7 +7,7 @@ update:     2023-04-17
 author:     "elmagnifico"
 header-img: "img/x4.jpg"
 catalog:    true
-tobecontinued: true
+tobecontinued: false
 tags:
     - Accounting
     - App
@@ -70,6 +70,10 @@ tags:
 
 
 首次使用可以免费用一个月，之后45包年或者96永久购买。
+
+
+
+更多功能待我体验一下再来汇总
 
 
 
