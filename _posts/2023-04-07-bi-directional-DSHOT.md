@@ -218,13 +218,15 @@ extern uint32_t bbOutputBuffer[MOTOR_DSHOT_BUF_CACHE_ALIGN_LENGTH * MAX_SUPPORTE
 
 首先DSHOT每一帧一共是16位，输出的时候，每一位，用一个`SYMBOL`表示。
 
-一个`SYMBOL`又有3个状态，也就是初始状态、数据状态、结束状态。 因为是反转了正常DSHOT的帧，所以初始状态一定是高、数据状态根据传输的情况定，结束状态一定是低
+一个`SYMBOL`又有3个状态，也就是初始-高状态、数据状态、低状态。 因为是birdir-DSHOT的帧，所以初始状态一定是高、数据状态根据传输的情况定（如果是正常DSHOT，初始应该是低）。
 
-每一帧的结尾为了让ESC可以完整采样，又额外加了一个`SYMBOL`，也就是3个状态。
+每一帧的结尾为了让ESC可以完整采样，又额外加了一个`SYMBOL`，也就是3个状态
 
-这样得到最后`bbOutputBuffer`的长度是51bits
+- 主要是如果MCU在输出结束以后立马切换到输入模式，可能会造成传输线上的电平立马被拉低，这可能会导致ESC那边还没采样到最后一位，这个数据就被破坏了，为了确保传输质量，多传输了1bit。
 
 
+
+这样得到最后`bbOutputBuffer`的长度是51bits，其实这个buffer只是方便控制引脚而已，每3bits的第一bit一定是让引脚设置高，第三bit一定是让引脚设置低，第二bit则是这次要输出的状态。
 
 ```c
 // DMA input buffer
@@ -627,13 +629,9 @@ RLL还有一个特性，**在调制解调中，只有电平变化，才表示bit
 
 
 
-![image-20230417191513764](https://img.elmagnifico.tech/static/upload/elmagnifico/202304171915826.png)
-
 这是反转后、没有请求telemetry的图像
 
 
-
-![image-20230417191130930](https://img.elmagnifico.tech/static/upload/elmagnifico/202304171911008.png)
 
 这是反转后并且请求telemetry的
 
