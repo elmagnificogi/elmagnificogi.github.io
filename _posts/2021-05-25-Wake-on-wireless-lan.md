@@ -1,9 +1,9 @@
 ---
 layout:     post
 title:      "无线网络唤醒，从入门到放弃"
-subtitle:   "wol,PCI Express WAKE"
+subtitle:   "wol,PCI Express WAKE,开机棒,AC Recover,米家mesh,ESP32"
 date:       2021-05-25
-update:     2022-12-24
+update:     2023-04-19
 author:     "elmagnifico"
 header-img: "img/springboot.jpg"
 catalog:    true
@@ -186,6 +186,8 @@ powercfg -lastwake
 
 ### 开机棒
 
+其实就是AC recovery
+
 比较常见的就是向日葵的开机插座，利用的方式比较简单，基本大多数主板都支持。主板中有一项上电检测的设置，相当于是说电源通电之后进行什么操作，可以是关机，可以是开机，也可以是断电前的状态。
 
 ![](https://img.elmagnifico.tech/static/upload/elmagnifico/JbiUNwpf46Kuv2h.png)
@@ -214,39 +216,7 @@ S5，全部断电
 
 ### HomeKit
 
-有一些HomeKit的开关，可以做通断控制
-
-
-
-## 米家mesh
-
-使用`AC recovery`有一点不好，就是沙雕键盘，每次都得重新插一下才能正常识别到，可能某些外设断电再上电可能会有影响。
-
-2022.12.24更新
-
-> https://item.taobao.com/item.htm?spm=a1z09.2.0.0.3aa32e8dpd1cS2&id=686930830876&_u=o1g76mj9ff46
-
-简单说用个ESP32，然后做个底板，模仿PCIE的接口用来供电，然后给出引脚可以插主板的Power Switch，同时还多一组可以将原本的重新输出回去，不影响实体按键，直接模拟实际按键进行开机关机。
-
-- 这个东西必须要有mesh网关才能正常使用，否则只能蓝牙直连
-
-![](https://img.elmagnifico.tech/static/upload/elmagnifico/RLhYevtpcKSrEwD.png)
-
-需要注意如果没有多余的PCIe的红色短接口，用黄色的长接口也可以正常使用
-
-![](https://img.elmagnifico.tech/static/upload/elmagnifico/202212242244459.png)
-
-
-
-我还顺带买了无线开关，这样就可以用无线按钮，远程的时候直接通过米家开机
-
-![](https://img.elmagnifico.tech/static/upload/elmagnifico/202212242240342.png)
-
-
-
-![](https://img.elmagnifico.tech/static/upload/elmagnifico/202212242241095.png)
-
-
+有一些HomeKit的开关，直接连接到主板可以做通断控制，就是模拟按下电源按键。
 
 
 
@@ -264,15 +234,57 @@ S5，全部断电
 
 缺点嘛，我5月25号下的单，6月14号我才收到，然后快递盒子破的不成样子，真的菜。
 
-可能的问题，如果来回切电源，切的太快了好像会导致跳闸？（我的情况是他接的另外一个排插直接跳了）
+可能的问题，如果来回切电源，切的太快了好像会导致跳闸？（我的情况是他接的另外一个小米排插直接跳了）
 
 
 
 但总体来说远程启动电脑不再是问题了
 
-（这里发现一个新问题，如果断电了，但是主板灯没灭，电容还有电，此时直接重新供电，这时无法启动。一定要主板耗尽电容里的电，然后再供电才能自动启动）
+（这里发现一个新问题，如果断电了，但是主板灯没灭，电容还有电，此时直接重新供电，这时无法启动。一定要主板耗尽电容里的电，然后再供电才能自动启动，这个过程大概要30-60s）
 
-同时还发现一个坑点，小米排插断电以后不能恢复供电，一定要手动按开关，简直废物。
+同时还发现一个坑点，小米排插（老款）断电以后不能恢复供电，一定要手动按开关，简直废物。
+
+
+
+## 米家mesh
+
+使用`AC recovery`有一点不好，就是沙雕键盘，每次都得重新插一下才能正常识别到，可能某些外设断电再上电可能会有影响，只是没发现。
+
+2022.12.24更新
+
+> https://item.taobao.com/item.htm?spm=a1z09.2.0.0.3aa32e8dpd1cS2&id=686930830876&_u=o1g76mj9ff46
+
+简单说用个ESP32，然后做个底板，模仿PCIE的接口用来供电，然后给出引脚可以插主板的Power Switch，同时还多一组IO可以将原本的重新接回去，不影响实体按键，直接模拟实际按键进行开机、关机。
+
+```
+机箱按键引脚接->ESP32---ESP32另外2个引脚->主板开机引脚
+```
+
+
+
+- 这个东西必须要有mesh网关才能正常使用，否则只能蓝牙直连
+
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/RLhYevtpcKSrEwD.png)
+
+需要注意如果没有多余的PCIe的红色短接口，用黄色的长接口也可以正常使用
+
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202212242244459.png)
+
+
+
+我还顺带买了无线开关，这样就可以用无线按钮（电脑可以放的比较远），远程的时候直接通过米家开机
+
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202212242240342.png)
+
+
+
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202212242241095.png)
+
+
+
+顺带实现了一个小智能触发，下班时间段如果发现有人移动，自动开机
+
+![image-20230419102030846](https://img.elmagnifico.tech/static/upload/elmagnifico/202304191020912.png)
 
 
 
