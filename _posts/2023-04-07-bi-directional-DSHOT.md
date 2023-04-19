@@ -31,11 +31,11 @@ tags:
 
 > https://github.com/betaflight/betaflight/pull/8554#issuecomment-512507625
 
-总结一下，这是birdir-DSHOT初次实现，反转了正常DSHOT协议，并且有些和标准的DSHOT实现是不一样的，其实可以认为是一个变种DSHOT，后续这种DSHOT也被BLH的最新固件支持，变成了DSHOT的基础实现。其实这个PR还有一个点也非强，他希望兼容了BLH_S，以前老的16位单片机也能用上DSHOT，也能使用转速反馈，非常牛逼了。
+总结一下，这是bidir-DSHOT初次实现，反转了正常DSHOT协议，并且有些和标准的DSHOT实现是不一样的，其实可以认为是一个变种DSHOT，后续这种DSHOT也被BLH的最新固件支持，变成了DSHOT的基础实现。其实这个PR还有一个点也非强，他希望兼容了BLH_S，以前老的16位单片机也能用上DSHOT，也能使用转速反馈，非常牛逼了。
 
 
 
-birdir-DSHOT的一些特性
+bidir-DSHOT的一些特性
 
 - 单线
 - Telemetry 只有转速信息，并且传回的内容是eRPM/100以后的值
@@ -47,7 +47,7 @@ birdir-DSHOT的一些特性
 
 
 
-**根据BLH最新的测试版说明，32.92.2版本扩展了birdir-DSHOT的telemetry信息，包含温度、电压、电流信息了，不再是单独的转速了。**
+**根据BLH最新的测试版说明，32.92.2版本扩展了bidir-DSHOT的telemetry信息，包含温度、电压、电流信息了，不再是单独的转速了。**
 
 
 
@@ -222,7 +222,7 @@ extern uint32_t bbOutputBuffer[MOTOR_DSHOT_BUF_CACHE_ALIGN_LENGTH * MAX_SUPPORTE
 
 首先DSHOT每一帧一共是16位，输出的时候，每一位，用一个`SYMBOL`表示。
 
-一个`SYMBOL`又有3个状态，也就是初始-高状态、数据状态、低状态。 因为是birdir-DSHOT的帧，所以初始状态一定是高、数据状态根据传输的情况定（如果是正常DSHOT，初始应该是低）。
+一个`SYMBOL`又有3个状态，也就是初始-高状态、数据状态、低状态。 因为是bidir-DSHOT的帧，所以初始状态一定是高、数据状态根据传输的情况定（如果是正常DSHOT，初始应该是低）。
 
 每一帧的结尾为了让ESC可以完整采样，又额外加了一个`SYMBOL`，也就是3个状态
 
