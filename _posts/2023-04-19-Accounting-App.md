@@ -2,8 +2,8 @@
 layout:     post
 title:      "记账APP-小星记账"
 subtitle:   "钱迹、薄荷记账、貔貅记账、随手记、beancount、moneythings"
-date:       2023-04-17
-update:     2023-04-17
+date:       2023-04-19
+update:     2023-04-19
 author:     "elmagnifico"
 header-img: "img/x4.jpg"
 catalog:    true
@@ -81,9 +81,13 @@ tags:
 
 小星记账的自动记账和我想的还不一样。前面以为他是自动识别通知，现在看来是需要你手动点一下账单，他才能自动识别并记录，免去了你手输入而已
 
-![image-20230419093454012](https://img.elmagnifico.tech/static/upload/elmagnifico/202304190934101.png)
+![image-20230419114757837](https://img.elmagnifico.tech/static/upload/elmagnifico/202304191147992.png)
 
 比如微信，你需要点微信支付，然后点击具体的账单，才能有这样的提示识别保存。同理支付宝也是通过这种方式记账的。
+
+
+
+收款这里比较蛋疼，他只能通过你进账单，然后详情点开识别，特别是我的vmq基本全都是i二维码收款的，每个都得进账单再识别
 
 
 
