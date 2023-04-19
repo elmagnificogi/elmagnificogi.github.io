@@ -742,4 +742,6 @@ RLL还有一个特性，**在调制解调中，只有电平变化，才表示bit
 > https://betaflight.com/docs/tuning/4.2-Tuning-Notes#dshot-settings
 >
 > https://github.com/bitdump/BLHeli/issues/685
+>
+> https://brushlesswhoop.com/dshot-and-bidirectional-dshot/
 
