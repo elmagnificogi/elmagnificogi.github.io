@@ -1,13 +1,13 @@
 ---
 layout:     post
 title:      "单线DSHOT with RPM feedback全指南"
-subtitle:   "bi-directional DSHOT，双向DSHOT"
+subtitle:   "Bidirectional DSHOT，双向DSHOT"
 date:       2023-04-07
-update:     2023-04-18
+update:     2023-04-19
 author:     "elmagnifico"
 header-img: "img/x1.jpg"
 catalog:    true
-tobecontinued: true
+tobecontinued: false
 tags:
     - DSHOT
     - BLHeli
@@ -15,39 +15,41 @@ tags:
 
 ## Foreword
 
-很久之前写过DSHOT，这次捡起来实现单线DSHOT
+很久之前写过DSHOT，这次捡起来实现双向DSHOT
 
 > https://elmagnifico.tech/2020/06/03/DSHOT-STM32-PWM-HAL/
 
 单线DSHOT由于单线复用，实现起来非常麻烦，要考虑的东西很多。而相关文章又非常少，只能挨个翻看git issues，搜索零星的信息组合在一起。
 
-某种程度上说DSHOT+BLH ESC有点类似现在的FOC驱动器，只不过是比较挫、弱化版、便宜版的FOC，任何使用BLH ESC的电机都能使用的。
+某种程度上说DSHOT+BLH ESC有点类似现在的FOC驱动器，只不过是比较挫、弱化版、单向版的FOC，任何使用BLH ESC的电机都能使用的。
 
 当然实际的DSHOT，无法精准控制电机的转速，得到的电机转速也是有限制的，不能趋近于0
 
 
 
-## bi-directional DSHOT
+## Bidirectional DSHOT
 
 > https://github.com/betaflight/betaflight/pull/8554#issuecomment-512507625
 
-总结一下，这是bidir-DSHOT初次实现，反转了正常DSHOT协议，并且有些和标准的DSHOT实现是不一样的，其实可以认为是一个变种DSHOT，后续这种DSHOT也被BLH的最新固件支持，变成了DSHOT的基础实现。其实这个PR还有一个点也非强，他希望兼容了BLH_S，以前老的16位单片机也能用上DSHOT，也能使用转速反馈，非常牛逼了。
+总结一下，这是Bidirectional DSHOT初次实现，反转了正常DSHOT协议，并且有些和标准的DSHOT实现是不一样的，其实可以认为是一个变种DSHOT，后续这种DSHOT也被BLH的最新固件支持，变成了DSHOT的基础实现。其实这个PR还有一个点也非强，他希望兼容了BLH_S，以前老的16位单片机也能用上DSHOT，也能使用转速反馈，非常牛逼了。
 
 
 
-bidir-DSHOT的一些特性
+Bidirectional DSHOT的一些特性
 
-- 单线
+- 单线、双向传输
 - Telemetry 只有转速信息，并且传回的内容是eRPM/100以后的值
+- Telemetry 返回的数据是GCR格式的，且起始位必然是拉低的
 - 校验位计算最后需要翻转BIT
-- 最终DSHOT数据帧需要翻转
+- 最终DSHOT数据帧需要翻转，0和1电平翻转
 - DSHOT 600 及以上不太支持，实现困难
 - BLH 需要32.7版本以后的 
 - BLH_S 需要使用Bluejay版本的固件
+- ESC上电以后需要稳定输出一会才能正确回复Telemetry，否则可能单次请求Telemetry不会回复
 
 
 
-**根据BLH最新的测试版说明，32.92.2版本扩展了bidir-DSHOT的telemetry信息，包含温度、电压、电流信息了，不再是单独的转速了。**
+**根据BLH最新的测试版说明，32.92.2版本扩展了Bidirectional DSHOT的Telemetry信息，包含温度、电压、电流信息了，不再是单独的转速了。**
 
 
 
@@ -85,7 +87,7 @@ bidir-DSHOT的一些特性
 
 #### DSHOT校验和
 
-查看Betaflight中关于DSHOT部分的源码，默认开启了`DSHOT_TELEMETRY`就会使用bi-directional DSHOT
+查看Betaflight中关于DSHOT部分的源码，默认开启了`DSHOT_TELEMETRY`就会使用Bidirectional DSHOT
 
 ```c
 FAST_CODE uint16_t prepareDshotPacket(dshotProtocolControl_t *pcb)
@@ -127,7 +129,7 @@ FAST_CODE uint16_t prepareDshotPacket(dshotProtocolControl_t *pcb)
 
 #### 转速计算
 
-然后这个telemetry包是这么解析的，Telemeter的原始数据，一共是21bits，其中第一bit一定是0，表示数据开始，而之后紧跟的20bits，其实是每4bits使用GCR转换成的，也就是每5bit解析成一个4bits，然后重新组装
+然后这个Telemetry包是这么解析的，Telemeter的原始数据，一共是21bits，其中第一bit一定是0，表示数据开始，而之后紧跟的20bits，其实是每4bits使用GCR转换成的，也就是每5bit解析成一个4bits，然后重新组装
 
 ```
 0 aaaa bbbbb fffff ddddd 原始21bits
@@ -222,7 +224,7 @@ extern uint32_t bbOutputBuffer[MOTOR_DSHOT_BUF_CACHE_ALIGN_LENGTH * MAX_SUPPORTE
 
 首先DSHOT每一帧一共是16位，输出的时候，每一位，用一个`SYMBOL`表示。
 
-一个`SYMBOL`又有3个状态，也就是初始-高状态、数据状态、低状态。 因为是bidir-DSHOT的帧，所以初始状态一定是高、数据状态根据传输的情况定（如果是正常DSHOT，初始应该是低）。
+一个`SYMBOL`又有3个状态，也就是初始-高状态、数据状态、低状态。 因为是Bidirectional DSHOT的帧，所以初始状态一定是高、数据状态根据传输的情况定（如果是正常DSHOT，初始应该是低）。
 
 每一帧的结尾为了让ESC可以完整采样，又额外加了一个`SYMBOL`，也就是3个状态
 
@@ -247,7 +249,7 @@ extern uint32_t bbOutputBuffer[MOTOR_DSHOT_BUF_CACHE_ALIGN_LENGTH * MAX_SUPPORTE
 
 这里的注释怀疑过时了，依然不能合理解释21bits的问题。但是大概可以知道，当发完一个DSHOT帧以后，有30us的时间去切换输入->输出。
 
-然后就是等待telemetry，拿到以后，还要空一点点时间给ESC切回去，等下一个帧。
+然后就是等待Telemetry，拿到以后，还要空一点点时间给ESC切回去，等下一个帧。
 
 
 
@@ -541,7 +543,11 @@ RLL还有一个特性，**在调制解调中，只有电平变化，才表示bit
 
 
 
-#### 几种常见的编码方式
+#### 常见的编码方式
+
+
+
+#### FM:(0,1) RLL
 
 **FM:(0,1) RLL**，这种方式看起来只是多了一个`1`，实际上这个1可以作为时钟的`1`，从而可以形成差分编码的方式，这种方式让编码变长了。
 
@@ -558,9 +564,11 @@ RLL还有一个特性，**在调制解调中，只有电平变化，才表示bit
 
 ![image-20230411111133673](https://img.elmagnifico.tech/static/upload/elmagnifico/202304111111728.png)
 
-图中下面的尖峰是表示编码后的1，而平表示没产生变化就是0，刚好是编码后的样子，同时符合RLL特性的
+图中下面的尖峰是表示电平翻转，而平表示没产生变化，红点则是每个数据之间的分割点，刚好是编码后的样子，同时符合RLL特性的
 
 
+
+#### GCR:(0,2) RLL
 
 **GCR:(0,2) RLL**，这个是IBM提出来的一种编码方式，主要是用来提高传输的速率，通过这种编码方式，将最多相邻的0，控制在了2个以内，从而提高了传输速度
 
@@ -627,47 +635,83 @@ RLL还有一个特性，**在调制解调中，只有电平变化，才表示bit
 
 ## 实测图像
 
+网上想找个DSHOT各种图像还是挺困难的，要么看不清，要么也没说明具体数值是多少，看的一脸懵逼，我给出一些实例，方便参考对比
+
+- 注意需要连续给Bidirectional DSHOT帧，并且让出传输线，ESC才会回复，刚开始只用一次帧来触发回复怎么都得到不，后来连续给就正常了。
+
+
+
+#### DSHOT 300
+
 ![image-20230417184900614](https://img.elmagnifico.tech/static/upload/elmagnifico/202304171849696.png)
 
-这是正常的DSHOT 300，没有反转校验位、没有请求telemetry的`48` 0油门输出
+这是正常的DSHOT 300，没有反转校验位、没有请求Telemetry的`48`油门输出
 
 
+
+#### Bidirectional DSHOT 300
 
 ![image-20230418190834806](https://img.elmagnifico.tech/static/upload/elmagnifico/202304181908889.png)
 
-这是反转后、没有请求telemetry的图像
+这是反转后、没有请求Telemetry的图像，油门值还是`48`
 
 
 
-![image-20230419104612860](https://img.elmagnifico.tech/static/upload/elmagnifico/202304191046928.png)
+#### Bidirectional DSHOT 300 with Telemetry
 
-这是反转后并且请求telemetry的，这里遇到问题了，实际发出了telemetry请求，但是收不到任何回复，而且也验证了翻转DSHOT可以被识别、可以解锁电机，电机也能正常转，可是电调就是没有任何回复。查看电调的固件，其版本也是32.90，理论上也不低。
+![image-20230419145052982](https://img.elmagnifico.tech/static/upload/elmagnifico/202304191450067.png)
+
+这是反转后并且请求Telemetry的，并且ESC回复了Telemetry，油门值还是`48`
 
 
 
-## 新驱动设计
+#### 解析Telemetry图像
+
+
+
+![image-20230419164812468](https://img.elmagnifico.tech/static/upload/elmagnifico/202304191648549.png)
+
+发送完Bidirectional DSHOT帧以后，大概就是30us的时间，留给IO切换到输入模式，并等待Telemetry返回
+
+整个Telemetry信号时间大概是47us，实际情况可能话要多一点
+
+
+
+![image-20230419161911069](https://img.elmagnifico.tech/static/upload/elmagnifico/202304191619177.png)
+
+第一bit必然是0，表示开始传输，所以跳过，然后根据GCR的编码方式，每次电平跳变就是数据1，否则是数据0。
+
+此时是在0速度的情况下，获取的Telemetry，所以最后解码得到的数值是`1111 1111 1111 0000` 后4位都是0，校验结果是`F`符合要求。
+
+换算以后是`0x0FFF`，在转换成转速的时候，这个特殊值，直接转换成了`0`，符合当前的实际情况
+
+
+
+## ~~新驱动设计~~
 
 ![image-20230418192723771](https://img.elmagnifico.tech/static/upload/elmagnifico/202304181927844.png)
 
-bit bang是通过三倍采样，来读取下面的每一个电平值的（红圈部分）
+~~bit bang是通过三倍采样，来读取下面的每一个电变化的（红圈部分）~~
 
-但是其实我可以通过绿色箭头标明的沿来判断，当前数值，直接就能读取到原始bit中的所有1，其余位就自动是0了。
+~~但是其实我可以通过绿色箭头标明的沿来判断，当前数值，直接就能读取到原始bit中的所有1，其余位就自动是0了。~~
 
-黄色箭头虽然也是沿，但是由于是4bit的分割点，所以不纳入计算。
+~~黄色箭头虽然也是沿，但是由于是4bit的分割点，所以不纳入计算。~~
 
-这样的话，完全不需要3倍的采样timer，不会受到DSHOT频率的影响，无论多快的频率都能处理。
+~~这样的话，完全不需要3倍的采样timer，不会受到DSHOT频率的影响，无论多快的频率都能处理。~~
 
-**核心想法：**
+~~**核心想法：**~~
 
-通过GPIO的上升沿、下降沿中断，记录所有1，并记录1产生的时间，通过5bits时间，可以排除掉黄色的下降沿或者上升沿，只需要一个100ns定时器即可。
+~~通过GPIO的上升沿、下降沿中断，记录所有1，并记录1产生的时间，通过5bits时间，可以排除掉黄色的下降沿或者上升沿，只需要一个100ns定时器即可。~~
 
-如果定时器超时了，那么就认为本次失败了，直接关闭中断，切换回输出模式。只需要将每个1之间的时间除以固定的区间，就能得到1的位置了。
+~~如果定时器超时了，那么就认为本次失败了，直接关闭中断，切换回输出模式。只需要将每个1之间的时间除以固定的区间，就能得到1的位置了。~~
+
+这个想法有点问题，IO中断非常频繁，会影响到其他地方，所以还是DMA来干这个事情更好点
 
 
 
 ## Summary
 
-未完待续
+到这里差不多整个Bidirectional DSHOT基本就解析完了，日后如果要移植双向DSHOT，可以参考
 
 
 
