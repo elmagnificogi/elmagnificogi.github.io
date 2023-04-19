@@ -677,7 +677,7 @@ RLL还有一个特性，**在调制解调中，只有电平变化，才表示bit
 
 
 
-![image-20230419161911069](https://img.elmagnifico.tech/static/upload/elmagnifico/202304191619177.png)
+![image-20230419170345087](https://img.elmagnifico.tech/static/upload/elmagnifico/202304191704619.png)
 
 第一bit必然是0，表示开始传输，所以跳过，然后根据GCR的编码方式，每次电平跳变就是数据1，否则是数据0。
 
