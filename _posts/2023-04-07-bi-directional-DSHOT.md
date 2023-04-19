@@ -1,7 +1,7 @@
 ---
 layout:     post
-title:      "单线DSHOT with RPM feedback全指南"
-subtitle:   "Bidirectional DSHOT，双向DSHOT"
+title:      "双向DSHOT with RPM feedback全指南"
+subtitle:   "Bidirectional DSHOT，单线DSHOT"
 date:       2023-04-07
 update:     2023-04-19
 author:     "elmagnifico"
@@ -740,4 +740,6 @@ RLL还有一个特性，**在调制解调中，只有电平变化，才表示bit
 > https://betaflight.com/docs/development/Dshot
 >
 > https://betaflight.com/docs/tuning/4.2-Tuning-Notes#dshot-settings
+>
+> https://github.com/bitdump/BLHeli/issues/685
 
