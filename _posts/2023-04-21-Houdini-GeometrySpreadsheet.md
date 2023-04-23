@@ -3,7 +3,7 @@ layout:     post
 title:      "Houdini python 入门"
 subtitle:   "Sop，Obj,Geometry Spreadsheet数据导出"
 date:       2023-04-21
-update:     2023-04-21
+update:     2023-04-23
 author:     "elmagnifico"
 header-img: "img/x5.jpg"
 catalog:    true
