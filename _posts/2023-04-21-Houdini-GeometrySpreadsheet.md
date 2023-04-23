@@ -7,7 +7,7 @@ update:     2023-04-21
 author:     "elmagnifico"
 header-img: "img/x5.jpg"
 catalog:    true
-tobecontinued: true
+tobecontinued: false
 tags:
     - Houdini
     - Python
@@ -47,6 +47,14 @@ C++，效率级别，但是开发起来比较麻烦
 
 ## 简单入门
 
+需要注意Houdini官方文档中很多示例和代码都是python2.7的，可能直接在python3运行会报错
+
+
+
+#### 名词解释
+
+HOM，Houdini Object Model，其实就是python的API接口，主要是取代之前的老脚本语言HScript，windows里和maya一样，Houdini使用的python是专门定制的。
+
 
 
 #### 外部python
@@ -57,11 +65,24 @@ C++，效率级别，但是开发起来比较麻烦
 
 显示指定节点下的子节点
 
-```
+```python
 import hou
 children = hou.node("/obj").children()
 for child in children:
     print(child.name())
+```
+
+
+
+显示节点树
+
+```python
+def print_tree(node, indent=0):
+    for child in node.children():
+        print (" " * indent + child.name())
+        print_tree(child, indent + 3)
+    # Press Enter to finish the definition
+print_tree(hou.node('/'))
 ```
 
 
@@ -126,6 +147,10 @@ for p in sel.parmTuples():
 
 查看节点拥有的属性有哪些，pram一般是指具有一个值属性，比如`tx、ty、tz`，而parmTuples则是具有一组值的属性，比如`t,r,s,p`
 
+也可以从Parameter Spreadsheet中看到各种参数
+
+![image-20230423145809664](https://img.elmagnifico.tech/static/upload/elmagnifico/202304231458760.png)
+
 
 
 ```python
@@ -163,21 +188,9 @@ houdini的属性一般是作为一个独立参数存在的，所以不能直接�
 
 ![image-20230421114434644](https://img.elmagnifico.tech/static/upload/elmagnifico/202304211144718.png)
 
-以前的教程里可能有很多通过这种方式来获取Geometry的点的
-
-```python
-point("对象名称",index)
-```
-
-实际上这个函数从18版本以后已经被取消了，现在应该是使用属性表达式来完成这个事情
-
-![image-20230421143824900](https://img.elmagnifico.tech/static/upload/elmagnifico/202304211438970.png)
-
-Point SOP由于性能太差，所以被以后的VEX和属性取代了
 
 
-
-只是简单获取通道属性，也可以通过ch获取
+只是简单获取通道属性，也可以通过ch获取，就不需要eval了
 
 ```python
 print(hou.ch("/obj/geo1/tx"))
@@ -185,9 +198,17 @@ print(hou.ch("/obj/geo1/tx"))
 
 
 
-连接节点
+也可以通过evalParm直接获取属性值
 
 ```
+hou.evalParm('/obj/geo1/tx')
+```
+
+
+
+连接节点
+
+```python
 obj = hou.node("obj")
 mygeo = obj.createNode('geo',run_init_scripts=False)
 mybox = mygeo.createNode('box')
@@ -205,11 +226,38 @@ mysur.setRenderFlag(True)
 
 
 
+将节点移动到一个不被遮挡的地方
+
+```python
+node.moveToGoodPosition()
+```
+
+
+
 houdini 清空Shell，稍微蠢了点，但是没办法，没给接口
 
-```
+```python
 print('\n' * 5000)
 ```
+
+
+
+- 尽量将获取到的节点、参数等等存储起来方便下次使用，这个获取操作的性能消耗是比较多的
+- 节点可以直接拖入Shell，可以直接获取到对应节点的路径和变量
+
+
+
+弹窗提示
+
+```
+hou.ui.displayMessage("hello world")
+```
+
+
+
+Houdini也有类似Maya的启动脚本，可以自定义添加内容，也有事件Hook，可以响应各种操作并执行代码
+
+Houdini有一个后台进程，可以把某些内容移动到后台去执行，然后通过EvenCallback返回进度之类的。
 
 
 
@@ -1618,6 +1666,61 @@ if hasattr(hou_node, "syncNodeVersionIfNeeded"):
 
 
 
+加载HIP文件
+
+```python
+try:
+    hou.hipFile.load("myfile.hip")
+except hou.LoadWarning, e:
+    print(e)
+```
+
+
+
+
+
+导出顶点数据
+
+![image-20230423181637640](https://img.elmagnifico.tech/static/upload/elmagnifico/202304231816702.png)
+
+```python
+import hou
+_geo = hou.node('/obj/geo1/box1').geometry()
+# 获得所有点
+_points = _geo.points()
+#打印每一个顶点的ID和POS
+for p in _points:
+    _pos = p.position()
+    print("(%d) -> x=%f, y=%f, z=%f" % (p.number(), _pos[0], _pos[1], _pos[2]))
+ 
+#获得序号30-39（不包括39），每隔一个的点的集合
+_glob = _geo.globPoints('30-39:2')
+for p in _glob:
+    _pos = p.position()
+    print("(%d) -> x=%f, y=%f, z=%f" % (p.number(), _pos[0], _pos[1], _pos[2]))
+ 
+ 
+# 获得每一个prim的顶点集合
+_prims = _geo.prims()
+for p in _prims:
+    _verts = p.vertices()
+    buff = '('
+    for i in range(p.numVertices()):
+        buff += str(_verts[i].point().number()) + ' '
+    buff += ')'
+    print("%d) -> %s" % (p.number(), buff))
+ 
+#将几何信息存成文件
+_geo.saveToFile('F:/temp/_geo.beo')
+ 
+ 
+#获得点的属性
+for attr in _geo.pointAttribs():
+    print(attr)
+```
+
+
+
 #### python sop
 
 python sop是通过直接在houdini中增加一个python节点，然后将代码写在节点中，并且执行，这种可以理解为内部python
@@ -1639,7 +1742,9 @@ geo = node.geometry()
 
 Geometry Spreadsheet 算是一个特殊的浏览方式，他能显示出来当前集合体的点线面的数据，可能有些时候我们需要将这一部分数据导出
 
+通过直接创建一个类似的结构，作为一个导出节点
 
+![image-20230423181335167](https://img.elmagnifico.tech/static/upload/elmagnifico/202304231813261.png)
 
 ```python
 node = hou.pwd()
@@ -1650,7 +1755,7 @@ filename = "test.csv"
 separator = "," 
 
 # Get File
-f = file(filename, "w")
+f = open(filename, "w")
 
 # Create Column
 for attrib in geo.pointAttribs():
@@ -1685,13 +1790,13 @@ f.close()
 
 
 
-
+- 由于没有指定路径，所以导出的test.csv 在`houdini安装路径\houdini\help\files`路径下
 
 
 
 ## Summary
 
-未完待续
+Houdini 只是写简单的python还是比较容易的
 
 
 
@@ -1714,3 +1819,13 @@ f.close()
 > https://blog.csdn.net/u013412391/article/details/109209593
 >
 > https://www.sidefx.com/forum/topic/28173/?page=1#post-129486
+>
+> https://www.sidefx.com/docs/houdini/hom/index.html
+>
+> https://www.sidefx.com/docs/houdini/hom/intro.html
+>
+> https://www.sidefx.com/docs/houdini/hom/expressions.html
+>
+> https://www.sidefx.com/docs/houdini/hom/locations.html
+>
+> https://www.sidefx.com/docs/houdini/hom/tool_script.html
