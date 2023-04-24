@@ -57,9 +57,9 @@ HOM，Houdini Object Model，其实就是python的API接口，主要是取代之
 
 
 
-#### 外部python
+#### 外部执行python
 
-这里先说外部python的方式，这种方式是凌驾在全局中的python，需要每次导入python包，并从场景中获取到信息，然后做一些修改或者数据导入导出，这种方式更像插件的工作方式
+这里先说外部执行python的方式，这种方式是凌驾在全局中的python，需要每次导入python包，并从场景中获取到信息，然后做一些修改或者数据导入导出，这种方式更像插件的工作方式
 
 
 
@@ -244,14 +244,6 @@ print('\n' * 5000)
 
 - 尽量将获取到的节点、参数等等存储起来方便下次使用，这个获取操作的性能消耗是比较多的
 - 节点可以直接拖入Shell，可以直接获取到对应节点的路径和变量
-
-
-
-弹窗提示
-
-```
-hou.ui.displayMessage("hello world")
-```
 
 
 
@@ -1721,6 +1713,22 @@ for attr in _geo.pointAttribs():
 
 
 
+设置当前帧
+
+```
+hou.setFrame(10)
+```
+
+
+
+设置FPS
+
+```
+hou.setFps(24)
+```
+
+
+
 #### python sop
 
 python sop是通过直接在houdini中增加一个python节点，然后将代码写在节点中，并且执行，这种可以理解为内部python
@@ -1738,7 +1746,7 @@ geo = node.geometry()
 
 
 
-### Geometry Spreadsheet
+#### Geometry Spreadsheet
 
 Geometry Spreadsheet 算是一个特殊的浏览方式，他能显示出来当前集合体的点线面的数据，可能有些时候我们需要将这一部分数据导出
 
@@ -1794,6 +1802,92 @@ f.close()
 
 
 
+#### 遗留问题
+
+如果使用外部python，并且操作了场景帧用来获取node数据，那么运行一部分还是正常的，但是稍微运行的长一点就开始报错了
+
+```
+循环	
+	获取节点
+	设置当前帧
+	获取数据
+```
+
+类似这种结构的代码在外部执行，120帧以内都是正常的，只要超过120帧就报错，手动在120帧跑又没错，甚至节点本身会直接报错，而你只要动一下时间轴又没错了
+
+![image-20230424101103177](https://img.elmagnifico.tech/static/upload/elmagnifico/202304241011307.png)
+
+```python
+The attempted operation failed.
+Traceback (most recent call last):
+  File "hou.session", line 115, in <module>
+  File "hou.session", line 32, in export_json
+  File "D:/SIDEEF~1/HOUDIN~1.569/houdini/python3.7libs\hou.py", line 36939, in points
+    return _hou.Geometry_points(self)
+hou.InvalidGeometry: The underlying geometry is not valid. Possibly caused by the source SOP Node failing to cook since the python geometry was assigned..
+```
+
+而这种报错单独测试又没有问题，只有连续运行才能报出来
+
+
+
+看了一下有类似的情况，基本都是说切换了场景时间，但是节点等等没有cook，就导致了数据没有更新。目前的解决办法是通过将获取数据的地方变成一个python节点，然后就没问题了
+
+
+
+## UI
+
+Houdini跟maya一样，都是可以用PySide2 QT那一套来建立UI
+
+
+
+具体看这里
+
+> https://github.com/kiryha/Houdini/wiki/python-for-artists
+
+
+
+简单交互可以通过这种方式进行
+
+
+
+输出对话框
+
+```python
+hou.ui.displayMessage("hello world")
+```
+
+
+
+输入对话框
+
+```python
+start_frame = int(hou.ui.readInput('start frame')[1])
+end_frame = int(hou.ui.readInput('end frame')[1])
+```
+
+
+
+文件选择对话框
+
+```python
+filepath = hou.ui.selectFile(title="Choose to save json", pattern="*.json")
+if(filepath==None or len(filepath)==0):
+    return
+```
+
+
+
+选择节点
+
+```python
+sel = hou.node(node_path)
+if sel==None :
+    return
+```
+
+
+
 ## Summary
 
 Houdini 只是写简单的python还是比较容易的
@@ -1829,3 +1923,7 @@ Houdini 只是写简单的python还是比较容易的
 > https://www.sidefx.com/docs/houdini/hom/locations.html
 >
 > https://www.sidefx.com/docs/houdini/hom/tool_script.html
+>
+> https://www.sidefx.com/forum/topic/60500/
+>
+> https://github.com/kiryha/Houdini/wiki/python-for-artists
