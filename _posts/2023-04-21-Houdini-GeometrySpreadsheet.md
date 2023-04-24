@@ -3,7 +3,7 @@ layout:     post
 title:      "Houdini python 入门"
 subtitle:   "Sop，Obj,Geometry Spreadsheet数据导出"
 date:       2023-04-21
-update:     2023-04-23
+update:     2023-04-24
 author:     "elmagnifico"
 header-img: "img/x5.jpg"
 catalog:    true
@@ -1827,11 +1827,15 @@ Traceback (most recent call last):
 hou.InvalidGeometry: The underlying geometry is not valid. Possibly caused by the source SOP Node failing to cook since the python geometry was assigned..
 ```
 
-而这种报错单独测试又没有问题，只有连续运行才能报出来
+而这种报错单独测试又没有问题，只有连续运行才能报出来（这种问题和上面的节点是和依赖于时间的也有关系，一旦依赖于时间，而脚本又会修改时间）
 
 
 
 看了一下有类似的情况，基本都是说切换了场景时间，但是节点等等没有cook，就导致了数据没有更新。目前的解决办法是通过将获取数据的地方变成一个python节点，然后就没问题了
+
+![image-20230424141130610](https://img.elmagnifico.tech/static/upload/elmagnifico/202304241411733.png)
+
+还有一种办法，直接加一个filecache，作为缓冲，将所有内容缓冲进去，这样就可以让程序跑的时候不会出现没有cook的情况了
 
 
 
