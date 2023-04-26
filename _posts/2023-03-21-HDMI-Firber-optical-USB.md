@@ -3,7 +3,7 @@ layout:     post
 title:      "无线HDMI还是有线HDMI，亦或是KVM?"
 subtitle:   "毫米波，光纤HDMI，4线，8线，有源USB延迟线"
 date:       2023-03-21
-update:     2023-03-21
+update:     2023-04-26
 author:     "elmagnifico"
 header-img: "img/z4.jpg"
 catalog:    true
@@ -106,11 +106,25 @@ tags:
 
 ## USB
 
+
+
+#### 延长线
+
 ![image-20230321221713924](https://img.elmagnifico.tech/static/upload/elmagnifico/202303212217979.png)
 
 USB这个比较好解决，绿联的单供电15m我也能正常工作，但是如果连接的设备是比较吃电的，那么还是建议使用终端带有独立供电的线，又或者是终端直接接一个有源USBhub，也能把电压拉起来。只是USB线竟然和HDMI线一个价格，让人无法接受。
 
 如果是USB3.0 或者连接高速设备，那么务必使用供电的线，而且有3.0标注的，否则可能会出现速度异常。
+
+
+
+#### RJ45网口转USB
+
+![image-20230426205705769](https://img.elmagnifico.tech/static/upload/elmagnifico/202304262057829.png)
+
+这种依靠网线进行延长，随便跑个50M-100M应该还是可以的。当然这种无源的，带不动大功率的设备。
+
+这种如果只需要USB1.0和2.0，可以买很便宜的，10快以内就能搞定。如果要求比较高，可以买贵一点的，两个转换头大概要50左右，再利用现成的网线，达成延长
 
 
 
@@ -151,4 +165,7 @@ KVM最大的问题在于，基本找不到4K60Hz的无线带Hub级别的产品
 > https://detail.tmall.com/item.htm?abbucket=8&id=579639869078
 >
 > https://item.taobao.com/item.htm?id=676902032190
-
+>
+> https://item.taobao.com/item.htm?id=552887082492
+>
+> https://detail.tmall.com/item.htm?id=529388031713
