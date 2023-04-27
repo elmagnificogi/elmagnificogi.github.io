@@ -3,7 +3,7 @@ layout:     post
 title:      "2022游戏短评"
 subtitle:   "Raft，Terraria，大侠立志传，活侠传"
 date:       2023-01-29
-update:     2023-01-30
+update:     2023-04-27
 author:     "elmagnifico"
 header-img: "img/play.jpg"
 catalog:    true
@@ -14,6 +14,12 @@ tags:
 ## Foreword
 
 仔细看了一下今年玩的游戏比较少，新游戏更少了，大多数都是观望或者云一下，有点电子阳痿的感觉。
+
+
+
+steam自建的2022年游戏回顾，简直不要太好了
+
+> https://store.steampowered.com/replay/76561198094167163/2022
 
 
 
