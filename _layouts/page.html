@@ -218,6 +218,16 @@ layout: default
                                 </a>
                             </li>
                             {% endif %}
+                            {% if site.steam_username %}
+                            <li>
+                                <a target="_blank" href="https://steamcommunity.com/id/{{ site.steam_username }}">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fa fa-circle fa-stack-2x"></i>
+                                        <i class="fa fa-steam fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            {% endif %}
                         </ul>
                     </div>
                 </section>
