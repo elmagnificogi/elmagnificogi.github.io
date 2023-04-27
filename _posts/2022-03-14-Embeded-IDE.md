@@ -3,7 +3,7 @@ layout:     post
 title:      "2022年嵌入式开发环境介绍"
 subtitle:   "STM32，IDE"
 date:       2022-03-14
-update:     2022-03-15
+update:     2023-04-27
 author:     "elmagnifico"
 header-img: "img/blackboard.jpg"
 catalog:    true
@@ -238,6 +238,52 @@ SES也有一点缺点，就是整体的高亮显示啊（其实是有点素，�
 > https://www.rowley.co.uk/arm/index.htm
 
 简单说 SEGGER Embedder Studio 的爹，就是 CrossStudios ，现在官网一般般，有些内容也有所缺失，反倒是被继承的SEGGER越做越好了。
+
+
+
+## CMkae等传统技能
+
+传统技能组合，基本上就不限制IDE，随便用什么都能编译，只是一体化的程度比较低。对于简单项目来说上手难度高，实施复杂，有点浪费生命。
+
+```
+手写 Makefile
+make 进行编译
+```
+
+小项目使用这种方式的也有，文件组织简单，直接手写也行
+
+
+
+```
+CMake->CMakeList->Makefile
+        跨平台      不跨平台
+make 进行编译
+```
+
+需要跨平台就要基础传统技能组合一下了
+
+
+
+```
+kconfig->CMake->CMakeList->Makefile
+                 跨平台       不跨平台
+make 进行编译
+kconfig 做系统配置 make menuconfig
+```
+
+再复杂一些，就需要kconfig来做配置管理，要有界面进行配置相关设置和生成
+
+
+
+```
+python->kconfig->CMake->CMakeList->Makefile
+                 跨平台       不跨平台
+make 进行编译
+kconfig 做系统配置 make menuconfig
+python 做简单的用户命令处理 其实就是调用make等命令
+```
+
+ESP32系列基本就是这样了
 
 
 
