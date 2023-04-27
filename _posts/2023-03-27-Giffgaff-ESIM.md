@@ -3,7 +3,7 @@ layout:     post
 title:      "Giffgaff注册ChatGPT,Nobe支付"
 subtitle:   "英国，虚拟电话卡，接码，ESIM，Nobepay，ChatGPT"
 date:       2023-03-27
-update:     2023-03-30
+update:     2023-04-28
 author:     "elmagnifico"
 header-img: "img/z1.jpg"
 catalog:    true
@@ -161,6 +161,58 @@ Nobe注册还需要一个邀请码，否则过不了
 
 
 GPT开通以后，绑定卡，然后会有一个5刀的`Pend`消费记录，这个属于是GPT预付费，实际还没扣费
+
+
+
+## 短信转发
+
+有了国外卡以后，可能还需要短信转发服务，可以使用下面的APP
+
+> https://github.com/pppscn/SmsForwarder
+
+SmsForwarder有非常详细的wiki，建议使用前先仔细看看
+
+> https://gitee.com/pp/SmsForwarder/wikis/pages
+
+
+
+它支持很多机器人或者接口，推荐使用pushplus，免费、而且使用起来非常简单，也可以使用短信转发，不过发短信要扣费，不太划算
+
+> https://www.pushplus.plus/
+
+
+
+![image-20230428000144595](https://img.elmagnifico.tech/static/upload/elmagnifico/202304280001696.png)
+
+首先是设置好转发的SIM卡，以及对应的设备信息，需要监控的信息都有哪些，我只需要短信，所以只勾选了短信
+
+然后是设置转发的通道，是通过短信转发还是plushplus，plushplus需要先获取一下token，微信扫码登录就可以拿到了，还是非常简单的
+
+![image-20230428000402124](https://img.elmagnifico.tech/static/upload/elmagnifico/202304280004208.png)
+
+- 测试可以直接发送短信或者推送到微信
+
+
+
+如果是转发国内手机，一定要注意需要加上国家号`+0086`否则短信发不出去的，编辑好的通道如下所示
+
+
+
+![image-20230428000711818](https://img.elmagnifico.tech/static/upload/elmagnifico/202304280007900.png)
+
+可以看到测试推送是正常的
+
+![image-20230428001139351](https://img.elmagnifico.tech/static/upload/elmagnifico/202304280011408.png)
+
+
+
+有了通道以后，再设置一下转发规则，比如所有信息都转发给pulshplus
+
+- 注意一下，如果短信转发会出现一个死循环，每次发短信都会有一个扣费通知，然后再转发这个扣费通知，再收到新扣费... 需要在规则里把扣费通知的短信给过滤出去
+
+![image-20230428000952512](https://img.elmagnifico.tech/static/upload/elmagnifico/202304280009596.png)
+
+比如这样，可以通过手机号`43431`排除扣费通知
 
 
 
