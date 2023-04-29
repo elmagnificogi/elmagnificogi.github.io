@@ -1,0 +1,25 @@
+{
+	"nodes":[
+		{"id":"ee9a7695cd0768e4","x":-402,"y":-500,"width":124,"height":60,"type":"text","text":"上市主体"},
+		{"id":"76b4fcce7d568cef","x":-402,"y":-400,"width":125,"height":60,"type":"text","text":"开曼公司"},
+		{"id":"8e4c9f14d7bddb95","x":-200,"y":-400,"width":125,"height":60,"type":"text","text":"投资方A"},
+		{"id":"a1f068df33f7bec6","x":-402,"y":-280,"width":125,"height":60,"type":"text","text":"香港公司"},
+		{"id":"0fdbee610c475093","x":-200,"y":-280,"width":125,"height":60,"type":"text","text":"投资方B"},
+		{"id":"4ff7b6170b98539e","x":-433,"y":-160,"width":187,"height":60,"type":"text","text":"国内实际运营公司"},
+		{"id":"1d22e25c82cbba43","x":-180,"y":-160,"width":120,"height":60,"type":"text","text":"投资方C"},
+		{"id":"b66d2f29136f7c43","x":-600,"y":-400,"width":120,"height":60,"type":"text","text":"核心团队"},
+		{"type":"text","text":"员工持股公司","id":"4da850e50df721fe","x":-700,"y":-160,"width":160,"height":60}
+	],
+	"edges":[
+		{"id":"de508a64a3c0f5df","fromNode":"76b4fcce7d568cef","fromSide":"bottom","toNode":"a1f068df33f7bec6","toSide":"top"},
+		{"id":"b2ec7d075658a608","fromNode":"0fdbee610c475093","fromSide":"left","toNode":"a1f068df33f7bec6","toSide":"right"},
+		{"id":"5dc8cf0d03d0a04e","fromNode":"a1f068df33f7bec6","fromSide":"bottom","toNode":"4ff7b6170b98539e","toSide":"top"},
+		{"id":"9d8661d3299d3b9a","fromNode":"1d22e25c82cbba43","fromSide":"left","toNode":"4ff7b6170b98539e","toSide":"right"},
+		{"id":"ce7a3ac713ed8fb7","fromNode":"76b4fcce7d568cef","fromSide":"top","toNode":"ee9a7695cd0768e4","toSide":"bottom"},
+		{"id":"f011028689d1141d","fromNode":"8e4c9f14d7bddb95","fromSide":"left","toNode":"76b4fcce7d568cef","toSide":"right"},
+		{"id":"7e6c9b2eda9b2bb0","fromNode":"4da850e50df721fe","fromSide":"right","toNode":"4ff7b6170b98539e","toSide":"left"},
+		{"id":"a376e9789994c64b","fromNode":"b66d2f29136f7c43","fromSide":"right","toNode":"76b4fcce7d568cef","toSide":"left"},
+		{"id":"4d1916e42a9f22ef","fromNode":"b66d2f29136f7c43","fromSide":"bottom","toNode":"4ff7b6170b98539e","toSide":"left"},
+		{"id":"788bce3caba7cb0f","fromNode":"b66d2f29136f7c43","fromSide":"bottom","toNode":"a1f068df33f7bec6","toSide":"left"}
+	]
+}

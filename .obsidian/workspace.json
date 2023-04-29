@@ -8,26 +8,17 @@
         "type": "tabs",
         "children": [
           {
-            "id": "2768451a5c07ee51",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "_posts/2023-02-27-Obsidian-trial.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
             "id": "4080d239994c22d8",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "canvas",
               "state": {
-                "file": "_posts/2020-09-28-Typora-Video.md",
-                "mode": "source",
-                "source": false
+                "file": "draw/股权结构.canvas",
+                "viewState": {
+                  "x": -125,
+                  "y": -108,
+                  "zoom": 0
+                }
               }
             }
           }
@@ -97,7 +88,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "_posts/2023-02-27-Obsidian-trial.md",
+                "file": "draw/股权结构.canvas",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -114,7 +105,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "_posts/2023-02-27-Obsidian-trial.md",
+                "file": "draw/股权结构.canvas",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -137,7 +128,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_posts/2023-02-27-Obsidian-trial.md"
+                "file": "draw/股权结构.canvas"
               }
             }
           }
@@ -158,9 +149,12 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "1a7074031e5f777b",
+  "active": "4080d239994c22d8",
   "lastOpenFiles": [
     "_posts/2020-09-28-Typora-Video.md",
+    "draw/股权结构.canvas",
+    "draw",
+    "新建文件夹",
     "_posts/2023-02-27-Obsidian-trial.md",
     "DualLinkTest.md",
     "_posts/2023-02-28-DualLinkTest.md",
@@ -168,9 +162,7 @@
     "_posts/2015-11-03-Pyhon-ProcedureOriented - 副本.md",
     "2020-09-28-Typora-Video.md",
     "2023-02-27-Obsidian-trial.md",
-    "未命名.canvas",
     "新建文件夹/home-bg.jpg",
-    "新建文件夹",
     "home-bg.jpg",
     "favicon.ico",
     "2025-04-05-thought.md",
@@ -190,7 +182,6 @@
     "2022-12-04-XPS32-Upgrade.md",
     "2023-02-17-NXP-Problem.md",
     "2023-02-24-OpenWRT-Crng.md",
-    "2021-04-23-APF-OpenCV.md",
-    "2021-03-13-Maya-DragSelect.md"
+    "2021-04-23-APF-OpenCV.md"
   ]
 }
