@@ -102,6 +102,45 @@ jdk目前支持11和17，太低的版本Jenkins不支持了
 
 
 
+![image-20230429162607769](https://img.elmagnifico.tech/static/upload/elmagnifico/202304291629819.png)
+
+
+
+使用`git fetch --all`可能会出现下面的报错，甚至其他git命令都会出现报错的情况
+
+```
+Fetching origin                                                                                                                 
+fatal: Failed to enumerate credentials. [0x520]                                                                                 
+fatal: 鎸囧畾鐨勭櫥褰曚細璇濅笉瀛樺湪銆傚彲鑳藉凡琚粓姝€?   fatal: Failed to write item to store. [0x520]                     
+fatal: 鎸囧畾鐨勭櫥褰曚細璇濅笉瀛樺湪銆傚彲鑳藉凡琚粓姝€? 
+```
+
+这个是由于`Windows Credential Manager`也就是平常Git存密码的地方，他是不能在远程的情况下工作的。所以这种情况就需要使用另外一种方式存储记录密码
+
+> https://github.com/git-ecosystem/git-credential-manager/blob/main/docs/credstores.md#dpapi-protected-files
+
+如果是比较新版本的git应该是内置了dpapi的，可以直接切换
+
+```
+SET GCM_CREDENTIAL_STORE="dpapi"
+或者
+git config --global credential.credentialStore dpapi
+```
+
+但是如果是老版本的，可能不行，这里需要额外安装git-credential-manager，然后才能使用dpapi
+
+> https://github.com/git-ecosystem/git-credential-manager/releases/tag/v2.0.935
+
+
+
+可以看到直接fetch不会报错了
+
+![image-20230429164208660](https://img.elmagnifico.tech/static/upload/elmagnifico/202304291642694.png)
+
+第一次切换以后需要重新输入一次账号密码
+
+
+
 ## Jenkins增加SSL证书
 
 Jenkins增加证书看起还挺麻烦的，实际操作非常简单
@@ -163,4 +202,8 @@ Jenkins折腾的人还是比较少的，windows就更别说了
 > https://blog.csdn.net/xiaoxin_OK/article/details/122441071
 >
 > https://www.cnblogs.com/EasonJim/p/6648552.html
+>
+> https://github.com/git-ecosystem/git-credential-manager/blob/main/docs/credstores.md#dpapi-protected-files
+>
+> https://stackoverflow.com/questions/70922628/how-to-fix-git-error-failed-to-enumerate-credentials-0x520#:~:text=The%20error%20being%20returned%20in,have%20an%20associated%20credential%20set.
 
