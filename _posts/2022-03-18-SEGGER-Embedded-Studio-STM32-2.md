@@ -678,6 +678,52 @@ SES启动的时候会检测很多第三方组件是否存在、是否正常，�
 
 
 
+## 工程配置解耦
+
+经常会碰到有些配置是公用的，有些是个人独立的，这些配置提交了容易影响到其他人，比如编译环境的路径之类的东西，默认emProject是都整理在同一个文件夹的，但是其实可以分开，单独处理
+
+- import标签，在ses这里主要是引用另一个工程的，而不是引入部分设置使用的
+
+
+
+比如我在工程开头直接使用`import`引入一个`test.xml`
+
+```xml
+<!DOCTYPE CrossStudio_Project_File>
+<solution Name="dmd_uav" target="8" version="2">
+  <configuration Name="Common" c_user_include_directories="" />
+  <import file_name="test.xml" />
+```
+
+test.xml的内容如下
+
+```xml
+<!DOCTYPE CrossStudio_Project_File>
+<configuration
+    Name="test"
+    inherited_configurations="common" />
+<configuration
+      Name="test"
+      armgnu_cl_cpu="cortex-m7"
+      armgnu_cl_fpabi="hard"
+      armgnu_cl_fpu="fpv5-sp-d16"
+      asm_additional_options_backup=";-mcpu=cortex-m7;-mfloat-abi=hard;-mfpu=fpv5-sp-d16"
+      c_additional_options_backup=";-Og;-g2;-mcpu=cortex-m7;-mfloat-abi=hard;-mfpu=fpv5-sp-d16"
+      debug_restrict_memory_access="No"
+      gcc_cl_enable_debug_info="Level 2"
+      link_dependent_projects="Yes"
+      link_linker_script_file=""
+      link_use_linker_script_file="Yes" />
+```
+
+实际打开工程就会看到多了一个test的工程配置，这种方式就完成了解耦。
+
+但是这个东西有一个问题，首先引用的xml，只能有一个configuration，第二个是识别不到的。其次总工程配置任何一个地方修改，都会导致这个import标签被替换，从而失效，所以这个实际用不了。
+
+除非是重来不修改总工程配置，永远只修改外部的xml，那倒是可以一直保持正确。
+
+
+
 ## Summary
 
 差不多把可能遇到的问题都解决了，整个自动化的流程总算是好了点。
@@ -707,4 +753,6 @@ SES启动的时候会检测很多第三方组件是否存在、是否正常，�
 > https://forum.segger.com/index.php/Thread/5044-SOLVED-Registry-view/
 >
 > https://forum.segger.com/index.php/Thread/5829-ABANDONED-Segger-Embedded-Studio-Hangs-on-Startup-with-Building-in-the-Title-Bar/
+>
+> https://studio.segger.com/index.htm?https://studio.segger.com/ide_section_placement_file_format.htm
 
