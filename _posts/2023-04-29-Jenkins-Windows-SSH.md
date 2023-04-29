@@ -106,6 +106,8 @@ jdk目前支持11和17，太低的版本Jenkins不支持了
 
 
 
+#### Failed to enumerate credentials. [0x520] 
+
 使用`git fetch --all`可能会出现下面的报错，甚至其他git命令都会出现报错的情况
 
 ```
