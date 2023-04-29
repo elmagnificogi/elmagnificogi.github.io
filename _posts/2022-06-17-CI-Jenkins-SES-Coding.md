@@ -3,7 +3,7 @@ layout:     post
 title:      "Jenkins搭建SES嵌入式CI/CD"
 subtitle:   "自动化编译"
 date:       2022-06-17
-update:     2022-07-11
+update:     2023-04-29
 author:     "elmagnifico"
 header-img: "img/z6.jpg"
 catalog:    true
@@ -35,7 +35,19 @@ cd arm_segger_embedded_studio_v630_linux_x64
 ./install_segger_embedded_studio
 ```
 
-然后直接启动`SEGGER Embeded Studio For Arm 6.30`，界面和Windows基本一模一样(缺少GUI的环境是无法正常安装的，所以一定要有X server之类的东西)
+然后直接启动`SEGGER Embeded Studio For Arm 6.30`，界面和Windows基本一模一样~~(缺少GUI的环境是无法正常安装的，所以一定要有X server之类的东西)~~
+
+- 后续发现其实可以无GUI安装的，带上下面的参数就可以了
+
+```
+Installing SEGGER Embedded Studio on a headless server
+================================================================================
+
+Run "./install_segger_embedded_studio --copy-files-to installation_directory" 
+and follow the instructions.
+```
+
+
 
 进到这边就会发现，由于使用了外部编译器编译，所以缺少了必要的编译器，就要安装`GNU Arm Embedded Toolchain`的ubuntu版本
 
