@@ -191,6 +191,20 @@ linux下可能经常要配合nginx使用
 
 
 
+## Windows使用虚拟硬盘VHD
+
+可能有人会遇到某些程序它必须要安装C盘或者D盘，但是有些电脑他就是没有C盘或者D盘，那这时候怎么办呢？可以直接使用Windows的虚拟磁盘，模拟建立一个，使用起来和真的一样
+
+![image-20230429164958510](https://img.elmagnifico.tech/static/upload/elmagnifico/202304291650157.png)
+
+选好未知设置好大小以后，就会出现一个新硬盘，然后只需要分配空间即可，这样可以直接创建出来需要的盘符，然后各种软件就能装进去了
+
+
+
+![image-20230429164745483](https://img.elmagnifico.tech/static/upload/elmagnifico/202304291650168.png)
+
+
+
 ## Summary
 
 Jenkins折腾的人还是比较少的，windows就更别说了
