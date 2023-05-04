@@ -3,7 +3,7 @@ layout:     post
 title:      "Windows下SSH和Jenkins"
 subtitle:   "Publish Over SSH，SSH plugin，openSSH，CI"
 date:       2023-04-29
-update:     2023-04-29
+update:     2023-05-04
 author:     "elmagnifico"
 header-img: "img/x7.jpg"
 catalog:    true
@@ -189,7 +189,63 @@ http://localhost:80/reload
 
 #### linux
 
-linux下可能经常要配合nginx使用
+如果只是单纯的docker，直接加上对应的参数就行了
+
+```shell
+docker run -d -v jenkins_home:/var/jenkins_home -v $(which docker):/usr/bin/docker -v /var/run/docker.sock:/var/run/docker.sock -p 443:8443 -p 50000:50000 jenkins/jenkins:lts --httpPort=-1 --httpsPort=8443 --httpsKeyStore=/var/jenkins_home/jenkins_keystore.jks --httpsKeyStorePassword=$password
+```
+
+
+
+如果是使用docker-compose，需要设置`JENKINS_OPTS`参数，类似windows的参数，写好端口，证书和密码就行了
+
+```yaml
+version: '3.7'
+services:
+  jenkins:
+    image: jenkins/jenkins
+    container_name: jenkins-docker
+    restart: always
+    privileged: true
+    user: root
+    ports:
+      - 443:8443
+      - 50000:50000
+    volumes:
+      - ./jenkins_home:/var/jenkins_home
+      - ../opt/cert/jenkins.jks:/var/lib/jenkins/jenkins.jks
+    environment:
+      JAVA_OPTS: -Duser.timezone=CET
+      JENKINS_OPTS: --httpPort=-1 --httpsPort=443 --httpsKeyStore=/var/lib/jenkins/jenkins.jks --httpsKeyStorePassword=password
+```
+
+
+
+可能还会配合nginx使用，顺带再带一份nginx配置
+
+```nginx
+    server {
+        listen       443 ssl;
+        server_name  linuxjenkins;
+        ssl_certificate /etc/nginx/ssl/linuxjenkins.com.pem;
+        ssl_certificate_key /etc/nginx/ssl/linuxjenkins.com.key;
+
+        ssl_session_timeout 5m;
+        ssl_protocols TLSv1 TLSv1.1 TLSv1.2; 
+        ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:HIGH:!aNULL:!MD5:!RC4:!DHE;
+        ssl_prefer_server_ciphers on;
+
+        ssl_session_cache shared:SSL:1m;
+
+        location / {
+            proxy_pass         https://linuxjenkins;
+            proxy_redirect     default;
+            proxy_set_header   Host $host:$server_port;
+            proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header   X-Forwarded-Proto $scheme;
+        }
+    }
+```
 
 
 
@@ -222,4 +278,8 @@ Jenkins折腾的人还是比较少的，windows就更别说了
 > https://github.com/git-ecosystem/git-credential-manager/blob/main/docs/credstores.md#dpapi-protected-files
 >
 > https://stackoverflow.com/questions/70922628/how-to-fix-git-error-failed-to-enumerate-credentials-0x520#:~:text=The%20error%20being%20returned%20in,have%20an%20associated%20credential%20set.
+>
+> https://www.dandelioncloud.cn/article/details/1474199404612710401
+>
+> https://stackoverflow.com/questions/29755014/setup-secured-jenkins-master-with-docker
 
