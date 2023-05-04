@@ -119,7 +119,7 @@ build选项中，在没完整编译之前，这里是不能点的。
 
 ![image-20230504233630244](https://img.elmagnifico.tech/static/upload/elmagnifico/202305042336267.png)
 
-对应web里的就是这里，可以5元的`完成`是我手动补单的，实际自动成功识别的就是上面的100
+对应web里的就是这里，5元的`完成`是我手动补单的，实际自动成功识别的就是上面的100
 
 ![image-20230504233749630](https://img.elmagnifico.tech/static/upload/elmagnifico/202305042337666.png)
 
