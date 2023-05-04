@@ -3,7 +3,7 @@ layout:     post
 title:      "Giffgaff注册ChatGPT,Nobe支付"
 subtitle:   "英国，虚拟电话卡，接码，ESIM，Nobepay，ChatGPT"
 date:       2023-03-27
-update:     2023-04-28
+update:     2023-05-04
 author:     "elmagnifico"
 header-img: "img/z1.jpg"
 catalog:    true
@@ -219,6 +219,16 @@ SmsForwarder有非常详细的wiki，建议使用前先仔细看看
 ![image-20230428002228692](https://img.elmagnifico.tech/static/upload/elmagnifico/202304280024439.png)
 
 如果是小米等手机，还有一个东西要注意，最好关闭免费的网络短信，并且关闭短信智能识别功能，防止他对验证码之列的东西进行屏蔽或者锁定，导致转发APP读不到。下面的显示预览等等也都需要，不要允许它折叠
+
+
+
+## 电池USB直供线
+
+闲置手机长时间插电一直充的话，电池迟早会鼓包，为了长期使用，可以考虑换用电池USB直供线
+
+![image-20230504144855399](https://img.elmagnifico.tech/static/upload/elmagnifico/202305041449636.png)
+
+根据手机型号搜类似的USB直供线，替代原装电池，直接供电，唯一不好的地方就是可能要拆壳，稍微要一点点动手能力
 
 
 
