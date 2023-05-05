@@ -295,7 +295,9 @@ if (content.contains("商家积分")||content.contains("积分")) {
 
 
 
-目前已经安装测试了，等等看这几天看看情况如何
+目前看支付宝的问题已经解决了，可以正常收到支付信息了
+
+> https://github.com/elmagnificogi/Vmq/releases
 
 
 
