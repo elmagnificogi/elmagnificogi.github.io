@@ -3,7 +3,7 @@ layout:     post
 title:      "Giffgaff注册ChatGPT,Nobe支付"
 subtitle:   "英国，虚拟电话卡，接码，ESIM，Nobepay，ChatGPT"
 date:       2023-03-27
-update:     2023-05-04
+update:     2023-05-08
 author:     "elmagnifico"
 header-img: "img/z1.jpg"
 catalog:    true
@@ -229,6 +229,44 @@ SmsForwarder有非常详细的wiki，建议使用前先仔细看看
 ![image-20230504144855399](https://img.elmagnifico.tech/static/upload/elmagnifico/202305041449636.png)
 
 根据手机型号搜类似的USB直供线，替代原装电池，直接供电，唯一不好的地方就是可能要拆壳，稍微要一点点动手能力
+
+
+
+#### 小米MIX改装USB直供电
+
+**这个供电线要注意供电一定要够，否则会出现机器反复重启的情况**
+
+
+
+供电线和电池排线IO对比，注意别接反了，会导致烧机的
+
+![image-20230508225154192](https://img.elmagnifico.tech/static/upload/elmagnifico/202305082252701.png)
+
+
+
+为了把线导入进去，先要把线焊下来，本来想两边开洞的，发现左侧黑色的是排线，不能断开。然后MIX1是陶瓷边框，以我的手艺估计100%会钻坏，还是算了吧
+
+![image-20230508230101592](https://img.elmagnifico.tech/static/upload/elmagnifico/202305082301889.png)
+
+然后发现下面的音腔的发声孔，大小刚好和线差不多，试了一下刚好能穿过来。右边又比较巧，刚好是个3触点，中间有缝隙可以走线，上方还有一个排线开口。
+
+弄好以后就把原来的下盖安装上了，发现还是防尘牙挡住了，又把防尘牙剪平了，最终盖上以后稍微还是有点鼓，这个是排线的地方他是用的海绵，顶起来了一点点，但是不影响扣盖和后盖安装
+
+![image-20230508230522586](https://img.elmagnifico.tech/static/upload/elmagnifico/202305082305828.png)
+
+安装好上盖，需要剪开回形口，否则会影响电源排线，到这里基本上就ok了，能正常开机、指纹摄像头都正常。
+
+
+
+![image-20230508230731718](https://img.elmagnifico.tech/static/upload/elmagnifico/202305082307844.png)
+
+再看一下侧面，完美
+
+
+
+配合转发和供电插座简直完美
+
+![image-20230508230819056](https://img.elmagnifico.tech/static/upload/elmagnifico/202305082308219.png)
 
 
 
