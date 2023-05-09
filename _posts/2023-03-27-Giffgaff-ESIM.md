@@ -285,4 +285,6 @@ SmsForwarder有非常详细的wiki，建议使用前先仔细看看
 > https://www.v2ex.com/t/927645#reply2
 >
 > https://www.reddit.com/r/OpenAI/comments/wd06am/comment/j59ieme/
+>
+> https://item.taobao.com/item.htm?id=677109556006
 
