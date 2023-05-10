@@ -3,7 +3,7 @@ layout:     post
 title:      "使用SEGGER Embedded Studio开发STM32进阶"
 subtitle:   "STM32，IDE"
 date:       2022-03-18
-update:     2023-03-22
+update:     2023-05-10
 author:     "elmagnifico"
 header-img: "img/desk-head-bg.jpg"
 catalog:    true
@@ -653,6 +653,20 @@ debug的时候，有可能你看变量显示的是 `Restricted memory range` 看
 ![image-20230322174746758](https://img.elmagnifico.tech/static/upload/elmagnifico/202303221747880.png)
 
 最新版支持了折叠代码，但是按键稍微有点奇怪，我修改成了和VS相同的快捷键，方便折叠
+
+
+
+## VCS Git
+
+![image-20230510171445772](https://img.elmagnifico.tech/static/upload/elmagnifico/202305101714851.png)
+
+SES有内置的版本管理，不过想要使用这个需要先设置一下
+
+![image-20230510171342260](https://img.elmagnifico.tech/static/upload/elmagnifico/202305101713330.png)
+
+设置好git路径以后，还是灰色的不能选，需要先Reload一次工程，然后git才能正常启动，这里各种才正确
+
+![image-20230510171532164](https://img.elmagnifico.tech/static/upload/elmagnifico/202305101715240.png)
 
 
 
