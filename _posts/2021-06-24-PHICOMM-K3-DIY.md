@@ -107,6 +107,8 @@ K3有很多毛病
 
 ![](https://img.elmagnifico.tech/static/upload/elmagnifico/UcabyDt1qXk3Tl5.png)
 
+2023.5.1 8cm风扇挂了，导致系统时不时重启一下，还好发现的早，拆掉了就好了。两个4cm的风扇倒是没啥问题
+
 
 
 ## 最终结果

@@ -3,7 +3,7 @@ layout:     post
 title:      "Vmq Android App编译修改"
 subtitle:   "V免签、安卓、支付宝、收款"
 date:       2023-05-04
-update:     2023-05-04
+update:     2023-05-10
 author:     "elmagnifico"
 header-img: "img/x9.jpg"
 catalog:    true
@@ -297,7 +297,7 @@ if (content.contains("商家积分")||content.contains("积分")) {
 
 目前看支付宝的问题已经解决了，可以正常收到支付信息了
 
-> https://github.com/elmagnificogi/Vmq/releases
+> https://github.com/elmagnificogi/vmqApk/releases
 
 
 
