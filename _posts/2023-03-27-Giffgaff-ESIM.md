@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "Giffgaff注册ChatGPT,Nobe支付"
+title:      "Giffgaff注册ChatGPT,Nobepay支付"
 subtitle:   "英国，虚拟电话卡，接码，ESIM，Nobepay，ChatGPT"
 date:       2023-03-27
 update:     2023-05-08
@@ -125,13 +125,15 @@ Depay好像出问题了，建议不要使用
 
 > https://nobepay.com/
 
-Nobe注册还需要一个邀请码，否则过不了
+Nobepay注册还需要一个邀请码，否则过不了，这个可能会过期，过期的话去谷歌搜一个新的即可
+
+下面这个邀请码是2023.5.11的最新邀请码
 
 ```
-24BDCD
+94D6E06C
 ```
 
-但是Nobe可以过ChatGPT的支付认证
+但是Nobepay可以过ChatGPT的支付认证
 
 ![image-20230330213032790](https://img.elmagnifico.tech/static/upload/elmagnifico/202303302130835.png)
 
