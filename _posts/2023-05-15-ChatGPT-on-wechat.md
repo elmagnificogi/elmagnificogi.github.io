@@ -94,6 +94,10 @@ Secret需要创建者号登录企微后查看系统发送的密钥
 
 #### Railway
 
+Railway免费用户有5刀的额度，并且每月可以使用500小时
+
+![image-20230515182728984](https://img.elmagnifico.tech/static/upload/elmagnifico/202305151827035.png)
+
 进入Deploy on Railway
 
 > https://railway.app/template/-FHS--?referralCode=RC3znh
@@ -175,7 +179,9 @@ https://xxxxx.up.railway.app/wxcomapp
 
 ## Summary
 
-默认的OpenAI拿到的key，其实是GPT3的接口，而3.5和4的接口都需要额外申请，并且还不一定能过
+默认的OpenAI拿到的key，其实是GPT3的接口，而3.5和4的接口都需要额外申请，并且还不一定能过，所以总体上是不如ChatGPT的
+
+- ChatGPT plus和OpenAI的API Key 是两个东西，二者互相独立，并不是说买了plus就能有对应的API了
 
 申请链接在这里，我的过了一个多月了还是没反应。
 
@@ -186,6 +192,10 @@ https://xxxxx.up.railway.app/wxcomapp
 ## Quote
 
 > https://github.com/zhayujie/chatgpt-on-wechat
+>
+> https://github.com/zhayujie/chatgpt-on-wechat/blob/master/channel/wechatcom/README.md
+>
+> https://open.work.weixin.qq.com/wwopen/devtool/interface/combine
 >
 > https://github.com/zhayujie/chatgpt-on-wechat/issues/1017
 >
