@@ -102,7 +102,11 @@ Railway免费用户有5刀的额度，并且每月可以使用500小时
 
 进入Deploy on Railway
 
+{% raw %}
+
 > https://railway.app/template/-FHS--?referralCode=RC3znh
+
+{% endraw %}
 
 需要填写的参数如下
 
