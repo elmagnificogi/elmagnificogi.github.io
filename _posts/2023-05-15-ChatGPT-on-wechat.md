@@ -3,7 +3,7 @@ layout:     post
 title:      "基于企业微信搭建一个ChatGPT应用"
 subtitle:   "微信、railway"
 date:       2023-05-15
-update:     2023-05-15
+update:     2023-05-17
 author:     "elmagnifico"
 header-img: "img/x12.jpg"
 catalog:    true
