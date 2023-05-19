@@ -1,9 +1,9 @@
 ---
 layout:     post
 title:      "Giffgaff注册ChatGPT,Nobepay支付"
-subtitle:   "英国，虚拟电话卡，接码，ESIM，Nobepay，ChatGPT"
+subtitle:   "英国，虚拟电话卡，接码，ESIM，短信转发，USB直供电"
 date:       2023-03-27
-update:     2023-05-08
+update:     2023-05-19
 author:     "elmagnifico"
 header-img: "img/z1.jpg"
 catalog:    true
@@ -226,7 +226,7 @@ SmsForwarder有非常详细的wiki，建议使用前先仔细看看
 
 ## 电池USB直供线
 
-闲置手机长时间插电一直充的话，电池迟早会鼓包，为了长期使用，可以考虑换用电池USB直供线
+闲置手机长时间插电一直充的话，电池迟早会鼓包，为了长期使用，可以考虑换用电池USB直供线，价格很低，几块钱就能买到
 
 ![image-20230504144855399](https://img.elmagnifico.tech/static/upload/elmagnifico/202305041449636.png)
 
