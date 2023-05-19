@@ -1,9 +1,9 @@
 ---
 layout:     post
-title:      "文心一言与ChatGPT短评"
+title:      "文心一言、通义千问与ChatGPT短评"
 subtitle:   "NewBing，GPT3，GPT3.5，GPT4"
 date:       2023-03-18
-update:     2023-03-27
+update:     2023-05-19
 author:     "elmagnifico"
 header-img: "img/z6.jpg"
 catalog:    true
@@ -40,6 +40,32 @@ tags:
 不是很清楚百度的数据源到底是什么，但是很明显百度这个实在是差太远了，基本等于胡扯。
 
 自然语言的理解也很明显，比ChatGPT差远了
+
+
+
+## 通义千问
+
+通义千问，过了一个月才给测试资格，还是用企业身份申请的
+
+> https://tongyi.aliyun.com/chat
+
+ChatGPT是阿里的，你tm咋好意思的，看到以前别人的测评还不会这么说的，现在直接就改了是吧
+
+![image-20230519111539554](https://img.elmagnifico.tech/static/upload/elmagnifico/202305191115734.png)
+
+
+
+建议文心一言和通义千问先打一架
+
+![image-20230519112032523](https://img.elmagnifico.tech/static/upload/elmagnifico/202305191120579.png)
+
+
+
+还好世界不是中国的
+
+![image-20230519111620538](https://img.elmagnifico.tech/static/upload/elmagnifico/202305191116715.png)
+
+通义千问，明显比文心一言要强很多，回答速度也快很多，感觉非常流畅，唯一的问题是AI会被灌输不正确的内容
 
 
 
