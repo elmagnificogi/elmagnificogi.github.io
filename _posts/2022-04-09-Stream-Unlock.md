@@ -3,7 +3,7 @@ layout:     post
 title:      "VPS流媒体解锁测试"
 subtitle:   "Netflix，HBO"
 date:       2022-04-09
-update:     2022-04-09
+update:     2023-05-29
 author:     "elmagnifico"
 header-img: "img/drone.jpg"
 catalog:    true
@@ -123,6 +123,16 @@ parse error: Invalid numeric literal at line 1, column 48
 ```
 
 还是相当方便的
+
+
+
+#### GPT和流媒体测试
+
+> wget -qO- https://github.com/yeahwu/check/raw/main/check.sh | bash
+
+
+
+![image-20230529092624974](https://img.elmagnifico.tech/static/upload/elmagnifico/202305290926116.png)
 
 
 
