@@ -3,7 +3,7 @@ layout:     post
 title:      "NXP的ARM-GCC编译分析与转SES工程"
 subtitle:   "Makefile、cmake、Ninja"
 date:       2022-12-15
-update:     2023-02-18
+update:     2023-05-29
 author:     "elmagnifico"
 header-img: "img/desk-head-bg.jpg"
 catalog:    true
@@ -1400,9 +1400,11 @@ Ninja相当于是直接把每个要编译的文件和对应的编译参数全都
 
 ## 问题
 
-后续发现就算NXP转成了SES，可以编译过，但是作为IDE，一体化的程度还是不够，最大的问题在于MIMXRT系列的板子都可以自定义FLASH或者RAM，这就导致要flash或者debug必须带有对应的驱动(cfx)，而SES并不具有烧写cfx的功能。
+~~后续发现就算NXP转成了SES，可以编译过，但是作为IDE，一体化的程度还是不够，最大的问题在于MIMXRT系列的板子都可以自定义FLASH或者RAM，这就导致要flash或者debug必须带有对应的驱动(cfx)，而SES并不具有烧写cfx的功能。~~
 
-同理如果debug在SES这里也不方便，相对比NXP自己的IDE MUCXpresso本身就具有cfx插件功能，并且在flash和ram的设置阶段就可以直接设置对应的文件，开发人员基本可以免去复杂的重写驱动之类的操作，这就很方便了。
+后续发现新版J-Link支持QSPI Flash烧写，无论是谁家的Flash都可以随意烧写了
+
+~~同理如果debug在SES这里也不方便，相对比NXP自己的IDE MUCXpresso本身就具有cfx插件功能，并且在flash和ram的设置阶段就可以直接设置对应的文件，开发人员基本可以免去复杂的重写驱动之类的操作，这就很方便了。~~
 
 MUCXpresso也有不好的地方，首先他是eclipse的二次开发，卡顿感还是非常明显的，然后调试的时候也是延迟非常明显，很难受。
 
@@ -1414,13 +1416,13 @@ MUCXpresso也有不好的地方，首先他是eclipse的二次开发，卡顿感
 
 
 
-#### 柳暗花明
+#### ~~柳暗花明~~
 
-通过痞子衡的J-Link算法，已经解决了J-Link下载缺少算法的问题，但是又遇到另外一个bUG，SES中JLink的设置无法生效
+~~通过痞子衡的J-Link算法，已经解决了J-Link下载缺少算法的问题，但是又遇到另外一个bUG，SES中JLink的设置无法生效~~
 
-已经在设置中设置了目标设备的具体名称，但是实际使用的时候发现JLink依然连接的是默认设备，导致实际算法应用不上去。
+~~已经在设置中设置了目标设备的具体名称，但是实际使用的时候发现JLink依然连接的是默认设备，导致实际算法应用不上去。~~
 
-然后就无法下载和调试，非常蛋疼，如果使用J-Link Commander 一切正常。
+~~然后就无法下载和调试，非常蛋疼，如果使用J-Link Commander 一切正常。~~
 
 ![](https://img.elmagnifico.tech/static/upload/elmagnifico/202302181001048.png)
 
@@ -1428,27 +1430,29 @@ MUCXpresso也有不好的地方，首先他是eclipse的二次开发，卡顿感
 
 ![](https://img.elmagnifico.tech/static/upload/elmagnifico/202302181001435.png)
 
-Commander 正常工作
+~~Commander 正常工作~~
 
 ![](https://img.elmagnifico.tech/static/upload/elmagnifico/202302181001580.png)
 
-就差一点点就能完全正常工作了。
+~~就差一点点就能完全正常工作了。~~
 
 
 
-关于这个问题已经在SES官方论坛提出了，就看什么时候能给解决一下
+~~关于这个问题已经在SES官方论坛提出了，就看什么时候能给解决一下~~
 
 > https://forum.segger.com/index.php/Thread/8928-SES-JLink-Device-config-not-work-in-Connect-download-or-debug/
 
+- **目前已经解决，是J-Link驱动问题，更新后，完全可以直接使用J-Link自带，而不需要痞子衡的插件**
 
 
-#### 临时解决
 
-通过临时将JLink脚本中的设备名修改为新算法的，并且用`JLinkDLLUpdater.exe`更新了目前的SES的dll以后，发现可以正常烧写了
+#### ~~临时解决~~
+
+~~通过临时将JLink脚本中的设备名修改为新算法的，并且用`JLinkDLLUpdater.exe`更新了目前的SES的dll以后，发现可以正常烧写了~~
 
 ![](https://img.elmagnifico.tech/static/upload/elmagnifico/202302181506240.png)
 
-至此使用SES来开发NXP已经不是什么问题了，基本通路都打通了
+~~至此使用SES来开发NXP已经不是什么问题了，基本通路都打通了~~
 
 
 

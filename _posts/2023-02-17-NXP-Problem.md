@@ -3,7 +3,7 @@ layout:     post
 title:      "NXP系列容易混淆的问题"
 subtitle:   "MXRT1052，CFX，下载算法"
 date:       2023-02-17
-update:     2023-03-15
+update:     2023-05-29
 author:     "elmagnifico"
 header-img: "img/bg4.jpg"
 catalog:    true
@@ -38,25 +38,27 @@ J-Link通用，但是NXP默认支持的都不是J-Link，MCUXPresso IDE 默认�
 
 #### J-Link解决方案
 
-这里就要推一下痞子衡做的工具了，还是非常好用的
+新版J-Link驱动直接兼容所有QSPI芯片，没必要第三方了
 
-> https://github.com/JayHeng/RT-UFL
+~~这里就要推一下痞子衡做的工具了，还是非常好用的~~
 
-RT-UFL，这个是给J-Link写的下载算法，添加到J-Link驱动以后，J-Link就直接支持各种NXP芯片适配的各种Flash下载了。再也不会被卡了。
+> ~~https://github.com/JayHeng/RT-UFL~~
 
-RT-UFL安装教程看这里，其实很简单，直接解压放进去就行了
+~~RT-UFL，这个是给J-Link写的下载算法，添加到J-Link驱动以后，J-Link就直接支持各种NXP芯片适配的各种Flash下载了。再也不会被卡了。~~
 
-> https://www.cnblogs.com/henjay724/p/14942574.html
+~~RT-UFL安装教程看这里，其实很简单，直接解压放进去就行了~~
 
-
-
-MCUXPresso IDE下使用看这里，主要就是给J-Link设置一下芯片型号就行了。
-
-> https://www.cnblogs.com/henjay724/p/15430619.html
+> ~~https://www.cnblogs.com/henjay724/p/14942574.html~~
 
 
 
-关键点就只有一个，Device 这里手动输入，默认选项中根本没有具体的算法
+~~MCUXPresso IDE下使用看这里，主要就是给J-Link设置一下芯片型号就行了。~~
+
+> ~~https://www.cnblogs.com/henjay724/p/15430619.html~~
+
+
+
+~~关键点就只有一个，Device 这里手动输入，默认选项中根本没有具体的算法~~
 
 ![](https://img.elmagnifico.tech/static/upload/elmagnifico/202302171515959.png)
 
@@ -83,6 +85,8 @@ MCUXPresso IDE下使用看这里，主要就是给J-Link设置一下芯片型号
 #### FlashConfig
 
 上面是具体的某类Flash，这里再谈的就是某个Flash了，同类的Flash 在初始化阶段会略有不通，寄存器可能不一样，大小也有可能不同。
+
+如果这里写错的话，会导致烧写正确，但是无法debug，芯片也跑不起来。
 
 ```c
 #if defined(HYPERFLASH_BOOT)    
@@ -257,7 +261,17 @@ ITCM 必须有一块64K大小的，否则也会出现无法烧写、debug的情�
 
 ![image-20230315092647223](https://img.elmagnifico.tech/static/upload/elmagnifico/202303150935990.png)
 
-如果使用其他IDE可以正常烧写，唯独SES无法正常处理（还有一种可能是痞子衡写的烧写算法有问题，默认使用了ITCM，导致实际无法正常工作）
+如果使用其他IDE可以正常烧写，唯独SES无法正常处理（~~还有一种可能是痞子衡写的烧写算法有问题，默认使用了ITCM，导致实际无法正常工作~~）
+
+
+
+## 1062和1052互相替换
+
+经过对比，两个芯片引脚是一模一样的，1062只是多了一个CAN，多了一个以太网的口，其他硬件和外设基本是一模一样的。
+
+如果要替换，基本可以pin2pin，直接换片子就行了。
+
+至于工程上，只是需要把烧写目标换一下，代码等各种宏定义甚至可以不用改动就能正常工作了。
 
 
 
