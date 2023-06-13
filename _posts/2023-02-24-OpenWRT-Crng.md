@@ -8,12 +8,12 @@ author:     "elmagnifico"
 header-img: "img/bg2.jpg"
 catalog:    true
 tags:
-    - OpenWRT
+    - OpenWrt
 ---
 
 ## Foreword
 
-OpenWRT系列遇到一个问题
+OpenWrt系列遇到一个问题
 
 ![](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20230224162225028.png)
 
@@ -29,7 +29,7 @@ random:crng init done
 
 
 
-## OpenWRT编译
+## OpenWrt编译
 
 更新所有相关包
 
