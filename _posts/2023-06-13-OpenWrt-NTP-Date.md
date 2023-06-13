@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "OpenWrt开启NTP同步"
-subtitle:   "时间，Date"
+subtitle:   "时间，Date，RouterOS，SNTP"
 date:       2023-06-13
 update:     2023-06-13
 author:     "elmagnifico"
@@ -22,7 +22,7 @@ tags:
 
 
 
-#### Win10开启NTP服务
+#### Win10开启NTP服务端
 
 修改注册表
 
@@ -129,13 +129,25 @@ config timeserver 'ntp'
 
 
 
+#### RouterOS客户端同步
+
+![image-20230613151247336](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20230613151247336.png)
+
+可以看到开启的一瞬间，时间就自动同步上去了
+
+
+
 ## OpenWrt同步问题
 
-现在就出现了，已经看到ntpd同步了，但是系统的date时间依然是错误的
+现在问题就出现了，已经看到ntpd同步了，但是系统的date时间依然是错误的
 
 有一种说法是系统时区不正确，导致的不能同步，但是这里是正确的，都切换到了`CST`
 
 还有一说要5分钟才能同步，根本不可能，半小时都没同步
+
+
+
+反查发现，编译的时候openWrt的nptd-package没有被添加进去，这就导致实际可能busybox里可以响应，但是内部不干活
 
 
 
