@@ -89,6 +89,56 @@ Art-Net控制器，在这里同时只能处理某一个方向的控制，要么�
 
 
 
+#### 灯光控制台
+
+简单说灯光控制台的设计原理
+
+首先是接入具体的灯具，设置好接入口、灯具的地址和通道数，一般灯具上会有说明。灯具上也可以调整自己的地址。
+
+然后在控制台的编辑区，对灯具第一次接入进行配接，在这里可以调试灯具的通道，看看具体效果是什么样的。
+
+看到效果以后，就可以把此时灯具的配置存储记录，作为一个效果片段，就可以在重演区进行调用了。
+
+
+
+灯光控制台本身也有一些现成的对于灯具控制的命令，可以直接使用，比如画圆、闪烁、流水等等常用效果
+
+
+
+#### 灯具
+
+帕灯，Parabolic Aluminum Reflector，染色灯，核心是通过反光杯进行照射
+
+![image-20230619154914694](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20230619154914694.png)
+
+摇头灯，一般可以x、y轴转动，可以达成追光等效果
+
+![image-20230619155056182](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20230619155056182.png)
+
+光束灯，打出明亮光束的灯，可以打非常远，聚光效果比较好
+
+切割灯，利用内部屏蔽，达成灯光出口切割的效果，所以命名为切割灯
+
+![image-20230619154537514](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20230619154537514.png)
+
+![image-20230619154818297](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20230619154818297.png)
+
+
+
+## WYSIWYG
+
+WYSIWYG，what you see is what you get
+
+灯光模拟软件，所见即所得，和我之前的设计思路一样
+
+
+
+## EasyView3D
+
+灯光模拟软件
+
+
+
 ## Summary
 
 Art-Net都是比较小众的东西，能搜到的内容比较少，相关从业的就更少了，后续如果实际使用了再补充
