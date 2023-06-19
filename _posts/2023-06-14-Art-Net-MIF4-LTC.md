@@ -1,9 +1,9 @@
 ---
 layout:     post
-title:      "ArtNet协议"
+title:      "ArtNet协议入门"
 subtitle:   "时间同步，Date，RouterOS，SNTP"
 date:       2023-06-14
-update:     2023-06-14
+update:     2023-06-19
 author:     "elmagnifico"
 header-img: "img/y2.jpg"
 catalog:    true
@@ -62,6 +62,30 @@ ArtNet 四代，对整体进行扩展，并且向前兼容各个版本。
 ## sACN
 
 ![image-20230614172315029](https://img.elmagnifico.tech/static/upload/elmagnifico/202306141723113.png)
+
+
+
+## 搭建Art-Net
+
+需要测试Art-Net接入和输出，所以要有双向的设备
+
+- Art-Net控制器，主要负责把DMX512转成Art-Net，之后通过网络发给其他设备
+- DMX512灯光控制台，主要是发出DMX512信号，通过DMX512输入口，传给Art-Net控制器，再转发给其他设备
+- LED柔性像素屏或者其他灯具+适配的电源，作为被控设备，显示控制结果
+
+
+
+Art-Net控制器，在这里同时只能处理某一个方向的控制，要么可以输入DMX512，要么是输出DMX512，不能既要又要。
+
+拓扑如下，这里是作为输入设备
+
+![image-20230619103431394](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20230619103431394.png)
+
+作为输出设备
+
+![image-20230619103223137](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20230619103223137.png)
+
+有了设备以后就可以接入测试，拿数据做处理了
 
 
 
