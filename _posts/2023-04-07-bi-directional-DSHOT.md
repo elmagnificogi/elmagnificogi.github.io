@@ -3,7 +3,7 @@ layout:     post
 title:      "双向DSHOT with RPM feedback全指南"
 subtitle:   "Bidirectional DSHOT，单线DSHOT"
 date:       2023-04-07
-update:     2023-04-19
+update:     2023-06-29
 author:     "elmagnifico"
 header-img: "img/x1.jpg"
 catalog:    true
@@ -84,6 +84,429 @@ Bidirectional DSHOT的一些特性
 
 
 ### 代码分析
+
+
+
+#### 驱动结构
+
+`motor.c`是总体电机控制的驱动
+
+```c
+// End point initialization is called from mixerInit before motorDevInit; can't use vtable...
+void motorInitEndpoints(const motorConfig_t *motorConfig, float outputLimit, float *outputLow, float *outputHigh, float *disarm, float *deadbandMotor3dHigh, float *deadbandMotor3dLow)
+{
+    checkMotorProtocol(&motorConfig->dev);
+
+    if (isMotorProtocolEnabled()) {
+        if (!isMotorProtocolDshot()) {
+            analogInitEndpoints(motorConfig, outputLimit, outputLow, outputHigh, disarm, deadbandMotor3dHigh, deadbandMotor3dLow);
+        }
+#ifdef USE_DSHOT
+        else {
+            dshotInitEndpoints(motorConfig, outputLimit, outputLow, outputHigh, disarm, deadbandMotor3dHigh, deadbandMotor3dLow);
+        }
+#endif
+    }
+}
+```
+
+在这里调用了dshot endpoints的初始化，可以认为只是初始化了一下前期使用的一些变量
+
+
+
+```c
+void motorDevInit(const motorDevConfig_t *motorDevConfig, uint16_t idlePulse, uint8_t motorCount)
+{
+    memset(motors, 0, sizeof(motors));
+
+    bool useUnsyncedPwm = motorDevConfig->useUnsyncedPwm;
+
+    if (isMotorProtocolEnabled()) {
+        if (!isMotorProtocolDshot()) {
+            motorDevice = motorPwmDevInit(motorDevConfig, idlePulse, motorCount, useUnsyncedPwm);
+        }
+#ifdef USE_DSHOT
+        else {
+#ifdef USE_DSHOT_BITBANG
+            if (isDshotBitbangActive(motorDevConfig)) {
+                motorDevice = dshotBitbangDevInit(motorDevConfig, motorCount);
+            } else
+#endif
+            {
+                motorDevice = dshotPwmDevInit(motorDevConfig, idlePulse, motorCount, useUnsyncedPwm);
+            }
+        }
+#endif
+    }
+
+    if (motorDevice) {
+        motorDevice->count = motorCount;
+        motorDevice->initialized = true;
+        motorDevice->motorEnableTimeMs = 0;
+        motorDevice->enabled = false;
+    } else {
+        motorNullDevice.vTable = motorNullVTable;
+        motorDevice = &motorNullDevice;
+    }
+}
+```
+
+接着就是电机设备的初始，这里就会根据实际使用的协议来初始化了。
+
+
+
+```c
+motorDevice_t *dshotBitbangDevInit(const motorDevConfig_t *motorConfig, uint8_t count)
+{
+    dbgPinLo(0);
+    dbgPinLo(1);
+
+    motorPwmProtocol = motorConfig->motorPwmProtocol;
+    bbDevice.vTable = bbVTable;
+    motorCount = count;
+    bbStatus = DSHOT_BITBANG_STATUS_OK;
+
+#ifdef USE_DSHOT_TELEMETRY
+    useDshotTelemetry = motorConfig->useDshotTelemetry;
+#endif
+
+    memset(bbOutputBuffer, 0, sizeof(bbOutputBuffer));
+
+    for (int motorIndex = 0; motorIndex < MAX_SUPPORTED_MOTORS && motorIndex < motorCount; motorIndex++) {
+        const unsigned reorderedMotorIndex = motorConfig->motorOutputReordering[motorIndex];
+        const timerHardware_t *timerHardware = timerGetConfiguredByTag(motorConfig->ioTags[reorderedMotorIndex]);
+        const IO_t io = IOGetByTag(motorConfig->ioTags[reorderedMotorIndex]);
+
+        uint8_t output = motorConfig->motorPwmInversion ?  timerHardware->output ^ TIMER_OUTPUT_INVERTED : timerHardware->output;
+        bbPuPdMode = (output & TIMER_OUTPUT_INVERTED) ? BB_GPIO_PULLDOWN : BB_GPIO_PULLUP;
+
+#ifdef USE_DSHOT_TELEMETRY
+        if (useDshotTelemetry) {
+            output ^= TIMER_OUTPUT_INVERTED;
+        }
+#endif
+
+        if (!IOIsFreeOrPreinit(io)) {
+            /* not enough motors initialised for the mixer or a break in the motors */
+            bbDevice.vTable.write = motorWriteNull;
+            bbDevice.vTable.updateStart = motorUpdateStartNull;
+            bbDevice.vTable.updateComplete = motorUpdateCompleteNull;
+            bbStatus = DSHOT_BITBANG_STATUS_MOTOR_PIN_CONFLICT;
+            return NULL;
+        }
+
+        int pinIndex = IO_GPIOPinIdx(io);
+
+        bbMotors[motorIndex].pinIndex = pinIndex;
+        bbMotors[motorIndex].io = io;
+        bbMotors[motorIndex].output = output;
+#if defined(STM32F4)
+        bbMotors[motorIndex].iocfg = IO_CONFIG(GPIO_Mode_OUT, GPIO_Speed_50MHz, GPIO_OType_PP, bbPuPdMode);
+#elif defined(STM32F7) || defined(STM32G4) || defined(STM32H7)
+        bbMotors[motorIndex].iocfg = IO_CONFIG(GPIO_MODE_OUTPUT_PP, GPIO_SPEED_FREQ_LOW, bbPuPdMode);
+#endif
+
+        IOInit(io, OWNER_MOTOR, RESOURCE_INDEX(motorIndex));
+        IOConfigGPIO(io, bbMotors[motorIndex].iocfg);
+        if (output & TIMER_OUTPUT_INVERTED) {
+            IOLo(io);
+        } else {
+            IOHi(io);
+        }
+
+        // Fill in motors structure for 4way access (XXX Should be refactored)
+        motors[motorIndex].io = bbMotors[motorIndex].io;
+    }
+
+    return &bbDevice;
+}
+```
+
+dshotBitbang设备初始化，根据实际的电机数量，依次获取对应的IO和Timer专门用于处理Bitbang，之后就是对IO进行初始化。通过代码看到实际使用的Timer就是`Tim1`和`Tim8`，他们的通道数量比较多，适合做电机使用
+
+```c
+const timerHardware_t bbTimerHardware[] = {
+#if defined(STM32F4) || defined(STM32F7)
+#if !defined(STM32F411xE)
+    DEF_TIM(TIM8,  CH1, NONE,  TIM_USE_NONE, 0, 1),
+    DEF_TIM(TIM8,  CH2, NONE,  TIM_USE_NONE, 0, 1),
+    DEF_TIM(TIM8,  CH3, NONE,  TIM_USE_NONE, 0, 1),
+    DEF_TIM(TIM8,  CH4, NONE,  TIM_USE_NONE, 0, 0),
+#endif
+    DEF_TIM(TIM1,  CH1, NONE,  TIM_USE_NONE, 0, 1),
+    DEF_TIM(TIM1,  CH1, NONE,  TIM_USE_NONE, 0, 2),
+    DEF_TIM(TIM1,  CH2, NONE,  TIM_USE_NONE, 0, 1),
+    DEF_TIM(TIM1,  CH3, NONE,  TIM_USE_NONE, 0, 1),
+    DEF_TIM(TIM1,  CH4, NONE,  TIM_USE_NONE, 0, 0),
+
+#elif defined(STM32G4) || defined(STM327H)
+    // XXX TODO: STM32G4 and STM32H7 can use any timer for pacing
+
+    // DMA request numbers are duplicated for TIM1 and TIM8:
+    //   - Any pacer can serve a GPIO port.
+    //   - For quads (or less), 4 pacers can cover the worst case scenario of
+    //     4 motors scattered across 4 different GPIO ports.
+    //   - For hexas (and larger), more channels may become necessary,
+    //     in which case the DMA request numbers should be modified.
+    DEF_TIM(TIM8,  CH1, NONE,  TIM_USE_NONE, 0, 0, 0),
+    DEF_TIM(TIM8,  CH2, NONE,  TIM_USE_NONE, 0, 1, 0),
+    DEF_TIM(TIM8,  CH3, NONE,  TIM_USE_NONE, 0, 2, 0),
+    DEF_TIM(TIM8,  CH4, NONE,  TIM_USE_NONE, 0, 3, 0),
+    DEF_TIM(TIM1,  CH1, NONE,  TIM_USE_NONE, 0, 0, 0),
+    DEF_TIM(TIM1,  CH2, NONE,  TIM_USE_NONE, 0, 1, 0),
+    DEF_TIM(TIM1,  CH3, NONE,  TIM_USE_NONE, 0, 2, 0),
+    DEF_TIM(TIM1,  CH4, NONE,  TIM_USE_NONE, 0, 3, 0),
+
+```
+
+后续的motor所有操作就是基于VTable来的了
+
+```c
+static motorVTable_t bbVTable = {
+    .postInit = bbPostInit,
+    .enable = bbEnableMotors,
+    .disable = bbDisableMotors,
+    .isMotorEnabled = bbIsMotorEnabled,
+    .updateStart = bbUpdateStart,
+    .write = bbWrite,
+    .writeInt = bbWriteInt,
+    .updateComplete = bbUpdateComplete,
+    .convertExternalToMotor = dshotConvertFromExternal,
+    .convertMotorToExternal = dshotConvertToExternal,
+    .shutdown = bbShutdown,
+};
+```
+
+唯一需要注意的地方就是，dshot需要先updateStart，再写值，然后再complete
+
+```c
+void motorWriteAll(float *values)
+{
+#ifdef USE_PWM_OUTPUT
+    if (motorDevice->enabled) {
+#if defined(USE_DSHOT) && defined(USE_DSHOT_TELEMETRY)
+        if (!motorDevice->vTable.updateStart()) {
+            return;
+        }
+#endif
+        for (int i = 0; i < motorDevice->count; i++) {
+            motorDevice->vTable.write(i, values[i]);
+        }
+        motorDevice->vTable.updateComplete();
+    }
+#else
+    UNUSED(values);
+#endif
+}
+```
+
+
+
+如何开启一次传输
+
+```c
+static bool bbUpdateStart(void)
+{
+#ifdef USE_DSHOT_TELEMETRY
+    if (useDshotTelemetry) {
+#ifdef USE_DSHOT_TELEMETRY_STATS
+        const timeMs_t currentTimeMs = millis();
+#endif
+
+        // 首先是等待上一次telemetry的完成
+        // Wait for telemetry reception to complete before decode
+        bool telemetryPending;
+        bool telemetryWait = false;
+        const timeUs_t startTimeUs = micros();
+
+        do {
+            telemetryPending = false;
+            for (int i = 0; i < usedMotorPorts; i++) {
+                telemetryPending |= bbPorts[i].telemetryPending;
+            }
+
+            telemetryWait |= telemetryPending;
+			// 如果超时了，就直接退出了，本次写失败
+            if (cmpTimeUs(micros(), startTimeUs) > DSHOT_TELEMETRY_TIMEOUT) {
+                return false;
+            }
+        } while (telemetryPending);
+
+        if (telemetryWait) {
+            DEBUG_SET(DEBUG_DSHOT_TELEMETRY_COUNTS, 2, debug[2] + 1);
+        } else {
+            for (int motorIndex = 0; motorIndex < MAX_SUPPORTED_MOTORS && motorIndex < motorCount; motorIndex++) {
+#ifdef USE_DSHOT_CACHE_MGMT
+                // 这里是处理ST的cache问题，将DMA缓存区域无效化，防止后续数据出问题
+                // Only invalidate the buffer once. If all motors are on a common port they'll share a buffer.
+                bool invalidated = false;
+                for (int i = 0; i < motorIndex; i++) {
+                    if (bbMotors[motorIndex].bbPort->portInputBuffer == bbMotors[i].bbPort->portInputBuffer) {
+                        invalidated = true;
+                    }
+                }
+                if (!invalidated) {
+                    SCB_InvalidateDCache_by_Addr((uint32_t *)bbMotors[motorIndex].bbPort->portInputBuffer,
+                                                 DSHOT_BB_PORT_IP_BUF_CACHE_ALIGN_BYTES);
+                }
+#endif
+
+#ifdef STM32F4
+                uint32_t rawValue = decode_bb_bitband(
+                    bbMotors[motorIndex].bbPort->portInputBuffer,
+                    bbMotors[motorIndex].bbPort->portInputCount - bbDMA_Count(bbMotors[motorIndex].bbPort),
+                    bbMotors[motorIndex].pinIndex);
+#else
+                // 解析上一次的值
+                uint32_t rawValue = decode_bb(
+                    bbMotors[motorIndex].bbPort->portInputBuffer,
+                    bbMotors[motorIndex].bbPort->portInputCount - bbDMA_Count(bbMotors[motorIndex].bbPort),
+                    bbMotors[motorIndex].pinIndex);
+#endif
+                if (rawValue == DSHOT_TELEMETRY_NOEDGE) {
+                    DEBUG_SET(DEBUG_DSHOT_TELEMETRY_COUNTS, 1, debug[1] + 1);
+                    continue;
+                }
+                DEBUG_SET(DEBUG_DSHOT_TELEMETRY_COUNTS, 0, debug[0] + 1);
+                dshotTelemetryState.readCount++;
+				
+                // 简单判断是否正确，更新Telmetry状态
+                if (rawValue != DSHOT_TELEMETRY_INVALID) {
+                    // Check EDT enable or store raw value
+                    if ((rawValue == 0x0E00) && (dshotCommandGetCurrent(motorIndex) == DSHOT_CMD_EXTENDED_TELEMETRY_ENABLE)) {
+                        dshotTelemetryState.motorState[motorIndex].telemetryTypes = 1 << DSHOT_TELEMETRY_TYPE_STATE_EVENTS;
+                    } else {
+                        dshotTelemetryState.motorState[motorIndex].rawValue = rawValue;
+                    }
+                } else {
+                    dshotTelemetryState.invalidPacketCount++;
+                }
+#ifdef USE_DSHOT_TELEMETRY_STATS
+                updateDshotTelemetryQuality(&dshotTelemetryQuality[motorIndex], rawValue != DSHOT_TELEMETRY_INVALID, currentTimeMs);
+#endif
+            }
+
+            dshotTelemetryState.rawValueState = DSHOT_RAW_VALUE_STATE_NOT_PROCESSED;
+        }
+#endif
+    }
+
+    for (int i = 0; i < usedMotorPorts; i++) {
+        bbDMA_Cmd(&bbPorts[i], DISABLE);
+        bbOutputDataClear(bbPorts[i].portOutputBuffer);
+    }
+
+    return true;
+}
+```
+
+基本可以看到start仅仅是对上一次telemetry的处理，开启一次新的DSHOT传输还不在这里。
+
+
+
+实际执行DSHOT写入的地方是在`bbWriteInt`
+
+```c
+static void bbWriteInt(uint8_t motorIndex, uint16_t value)
+{
+    bbMotor_t *const bbmotor = &bbMotors[motorIndex];
+
+    if (!bbmotor->configured) {
+        return;
+    }
+
+    // fetch requestTelemetry from motors. Needs to be refactored.
+    motorDmaOutput_t * const motor = getMotorDmaOutput(motorIndex);
+    bbmotor->protocolControl.requestTelemetry = motor->protocolControl.requestTelemetry;
+    motor->protocolControl.requestTelemetry = false;
+
+    // If there is a command ready to go overwrite the value and send that instead
+    if (dshotCommandIsProcessing()) {
+        value = dshotCommandGetCurrent(motorIndex);
+        if (value) {
+            bbmotor->protocolControl.requestTelemetry = true;
+        }
+    }
+
+    bbmotor->protocolControl.value = value;
+	// 准备数据
+    uint16_t packet = prepareDshotPacket(&bbmotor->protocolControl);
+
+    bbPort_t *bbPort = bbmotor->bbPort;
+
+#ifdef USE_DSHOT_TELEMETRY
+    if (useDshotTelemetry) {
+        bbOutputDataSet(bbPort->portOutputBuffer, bbmotor->pinIndex, packet, DSHOT_BITBANG_INVERTED);
+    } else
+#endif
+    {
+        bbOutputDataSet(bbPort->portOutputBuffer, bbmotor->pinIndex, packet, DSHOT_BITBANG_NONINVERTED);
+    }
+}
+```
+
+到这里也只是准备好了DSHOT准备写入的数据，实际发送还在后面
+
+
+
+```c
+static void bbUpdateComplete(void)
+{
+    // If there is a dshot command loaded up, time it correctly with motor update
+
+    if (!dshotCommandQueueEmpty()) {
+        if (!dshotCommandOutputIsEnabled(bbDevice.count)) {
+            return;
+        }
+    }
+
+#ifdef USE_DSHOT_CACHE_MGMT
+    for (int motorIndex = 0; motorIndex < MAX_SUPPORTED_MOTORS && motorIndex < motorCount; motorIndex++) {
+        // Only clean each buffer once. If all motors are on a common port they'll share a buffer.
+        bool clean = false;
+        for (int i = 0; i < motorIndex; i++) {
+            if (bbMotors[motorIndex].bbPort->portOutputBuffer == bbMotors[i].bbPort->portOutputBuffer) {
+                clean = true;
+            }
+        }
+        if (!clean) {
+            SCB_CleanDCache_by_Addr(bbMotors[motorIndex].bbPort->portOutputBuffer, MOTOR_DSHOT_BUF_CACHE_ALIGN_BYTES);
+        }
+    }
+#endif
+
+    for (int i = 0; i < usedMotorPorts; i++) {
+        bbPort_t *bbPort = &bbPorts[i];
+
+       // 切换到输出模式
+#ifdef USE_DSHOT_TELEMETRY
+        if (useDshotTelemetry) {
+            if (bbPort->direction == DSHOT_BITBANG_DIRECTION_INPUT) {
+                bbPort->inputActive = false;
+                bbSwitchToOutput(bbPort);
+            }
+        } else
+#endif
+        {
+#if defined(STM32G4)
+            // Using circular mode resets the counter one short, so explicitly reload
+            bbSwitchToOutput(bbPort);
+#endif
+        }
+		// 开启发送DMA
+        bbDMA_Cmd(bbPort, ENABLE);
+    }
+
+    // 开启TIM DMA
+    lastSendUs = micros();
+    for (int i = 0; i < usedMotorPacers; i++) {
+        bbPacer_t *bbPacer = &bbPacers[i];
+        bbTIM_DMACmd(bbPacer->tim, bbPacer->dmaSources, ENABLE);
+    }
+}
+```
+
+
 
 #### DSHOT校验和
 
@@ -191,7 +614,7 @@ uint32_t erpmToRpm(uint16_t erpm)
 
 
 
-#### bit bang
+#### bit bang实现
 
 这里主要是参考一下bit bang是怎么实现的
 
@@ -501,6 +924,52 @@ static void bbOutputDataSet(uint32_t *buffer, int pinNumber, uint16_t value, boo
 
 
 
+DMA中断处理程序，可以看到如果开启了Telemetry那么会在DMA完成以后切换到输入模式。
+
+```c
+FAST_IRQ_HANDLER void bbDMAIrqHandler(dmaChannelDescriptor_t *descriptor)
+{
+    dbgPinHi(0);
+
+    bbPort_t *bbPort = (bbPort_t *)descriptor->userParam;
+
+    bbDMA_Cmd(bbPort, DISABLE);
+
+    bbTIM_DMACmd(bbPort->timhw->tim, bbPort->dmaSource, DISABLE);
+
+    if (DMA_GET_FLAG_STATUS(descriptor, DMA_IT_TEIF)) {
+        while (1) {};
+    }
+
+    DMA_CLEAR_FLAG(descriptor, DMA_IT_TCIF);
+
+#ifdef USE_DSHOT_TELEMETRY
+    if (useDshotTelemetry) {
+        if (bbPort->direction == DSHOT_BITBANG_DIRECTION_INPUT) {
+            bbPort->telemetryPending = false;
+#ifdef DEBUG_COUNT_INTERRUPT
+            bbPort->inputIrq++;
+#endif
+        } else {
+#ifdef DEBUG_COUNT_INTERRUPT
+            bbPort->outputIrq++;
+#endif
+
+            // Switch to input
+
+            bbSwitchToInput(bbPort);
+            bbPort->telemetryPending = true;
+
+            bbTIM_DMACmd(bbPort->timhw->tim, bbPort->dmaSource, ENABLE);
+        }
+    }
+#endif
+    dbgPinLo(0);
+}
+```
+
+
+
 ## Run-length limited
 
 Run-length limited 这个概念国内搜起来很容易和游程搞混，其实是不一样的东西，游程在这里其实和Dshot GCR没啥关系
@@ -693,9 +1162,11 @@ RLL还有一个特性，**在调制解调中，只有电平变化，才表示bit
 
 ## ~~新驱动设计~~
 
+bit bang是通过三倍采样，来读取下面的每一个电变化的（红圈部分）
+
 ![image-20230418192723771](https://img.elmagnifico.tech/static/upload/elmagnifico/202304181927844.png)
 
-~~bit bang是通过三倍采样，来读取下面的每一个电变化的（红圈部分）~~
+
 
 ~~但是其实我可以通过绿色箭头标明的沿来判断，当前数值，直接就能读取到原始bit中的所有1，其余位就自动是0了。~~
 
@@ -716,6 +1187,10 @@ RLL还有一个特性，**在调制解调中，只有电平变化，才表示bit
 ## Summary
 
 到这里差不多整个Bidirectional DSHOT基本就解析完了，日后如果要移植双向DSHOT，可以参考
+
+
+
+有了Bidirectional DSHOT的基础协议，由于飞控方面的应用对于电机的控制必然是同时的，而非分时的，所以使用一个高性能TIM，3倍于DSHOT的频率进行采样，并将数据存储到DMA buffer之中，之后再对buffer滤波采样后，拿到实际的GCR编码，将其转换成真实的Telemetry，解析出转速即可。
 
 
 
