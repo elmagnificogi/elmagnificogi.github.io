@@ -3,7 +3,7 @@ layout:     post
 title:      "双向DSHOT with RPM feedback全指南"
 subtitle:   "Bidirectional DSHOT，单线DSHOT"
 date:       2023-04-07
-update:     2023-06-29
+update:     2023-07-03
 author:     "elmagnifico"
 header-img: "img/x1.jpg"
 catalog:    true
@@ -1110,7 +1110,7 @@ RLL还有一个特性，**在调制解调中，只有电平变化，才表示bit
 
 网上想找个DSHOT各种图像还是挺困难的，要么看不清，要么也没说明具体数值是多少，看的一脸懵逼，我给出一些实例，方便参考对比
 
-- 注意需要连续给Bidirectional DSHOT帧，并且让出传输线，ESC才会回复，刚开始只用一次帧来触发回复怎么都得不到，后来连续给就正常了。
+- 注意需要连续给Bidirectional DSHOT帧，并且让出传输线，ESC开始阶段是不能回复Telemetry的，需要正确输出一段时间电调解锁以后才能得到回复，刚开始只用一次帧来触发回复怎么都得不到，后来连续给就正常了。
 
 
 
