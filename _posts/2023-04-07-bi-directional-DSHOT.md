@@ -1116,6 +1116,8 @@ RLL还有一个特性，**在调制解调中，只有电平变化，才表示bit
 
 #### DSHOT 300
 
+以下所有图像都是基于DSHOT 300来说明的，其他频率会有所不同，需要单独测试
+
 ![image-20230417184900614](https://img.elmagnifico.tech/static/upload/elmagnifico/202304171849696.png)
 
 这是正常的DSHOT 300，没有反转校验位、没有请求Telemetry的`48`油门输出
@@ -1157,6 +1159,36 @@ RLL还有一个特性，**在调制解调中，只有电平变化，才表示bit
 此时是在0速度的情况下，获取的Telemetry，所以最后解码得到的数值是`1111 1111 1111 0000` 后4位都是0，校验结果是`F`符合要求。
 
 换算以后是`0x0FFF`，在转换成转速的时候，这个特殊值，直接转换成了`0`，符合当前的实际情况
+
+
+
+#### Timing
+
+检测和回复Telemetry各有一个关键时间
+
+![image-20230703161054914](https://img.elmagnifico.tech/static/upload/elmagnifico/202307031610970.png)
+
+Telemetry的回复时间是发送DSHOT帧之后，**31us左右**，就会回复，如果此时IO没切换到输入模式，则会丢失。
+
+
+
+![image-20230703160945176](https://img.elmagnifico.tech/static/upload/elmagnifico/202307031609336.png)
+
+第二个关键时间，是Telemetry回复以后，必须快速再切换回输出模式，比如上图中可以看到虽然正确切换到了输入，但是输入模式保留时间过长了，导致ESC无法识别DSHOT帧，电机就不会解锁，自然也就没有任何输出。
+
+![image-20230703161004821](https://img.elmagnifico.tech/static/upload/elmagnifico/202307031610901.png)
+
+这个图是极限切换时间，就是当Telemetry回复以后，2.4us内就切换到了输入模式，并且继续发下一个DSHOT帧，此时ESC可以正常响应。
+
+但是实际上不应该这么极限，最少要给ESC一帧的反应时间，也就是3.3us
+
+
+
+实际第一个DSHOT帧和第二个DSHOT帧之间需要保证时间在**87-106us**，否则会出现ESC长时间都无法解锁，更不会回复Telemetry。
+
+由于**回复响应是31us**左右，而Telemetry的**回复帧长度大概在52us**左右，那么剩下留给输入切换到输出的时间就是**4-23us**，尽量不要卡这种极限，容易出现无法识别的情况。
+
+**以上数值都是基于我的DSHOT300来测试的，我此时的DSHOT单bit是3.3us**
 
 
 
