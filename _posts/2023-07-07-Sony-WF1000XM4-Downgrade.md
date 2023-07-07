@@ -16,7 +16,7 @@ tags:
 
 ## Foreword
 
-Sony-WF1000XM4之前升级到了2.0，没想到降噪真的降低了，拉跨啊。和Apple Airpods Pro 比起来差远了，甚至最简单的空调声音都不能滤干净了。
+Sony-WF1000XM4之前升级到了2.0，没想到降噪真的降低了，人声听的清清楚楚，拉跨啊，和Apple Airpods Pro 比起来差远了，甚至最简单的空调声音都不能滤干净了。
 
 无意间看到了一个降级帖子，没想到还挺多人用的，就来试试。
 
@@ -84,7 +84,7 @@ MDR_Proxy就是用来代理升级链接的。
 
 ![image-20230708000220340](https://img.elmagnifico.tech/static/upload/elmagnifico/202307080002378.png)
 
-
+![image-20230708002938605](https://img.elmagnifico.tech/static/upload/elmagnifico/202307080029669.png)
 
 剩下就是等升级完成
 
