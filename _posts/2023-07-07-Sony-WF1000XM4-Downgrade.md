@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "Sony-WF1000XM4降级指南"
-subtitle:   "降级，Headphones，MDR_Proxy"
+subtitle:   "Headphones，MDR_Proxy,sidegrade tool"
 date:       2023-07-07
 update:     2023-07-07
 author:     "elmagnifico"
@@ -60,7 +60,9 @@ MDR_Proxy就是用来代理升级链接的。
 
 接着启动`run.cmd`，选择强刷自定义固件，然后根据耳机选择对应的固件，这里选了1.6.1版本
 
-- 如果选择2强制切换固件会让你选择地区，我建议体验一下日本，中国我已经体验过了，烂透了。
+- 切换固件是针对某些老设备不同地区用的固件不相同，具体要看情况
+
+  ![image-20230708011544906](https://img.elmagnifico.tech/static/upload/elmagnifico/202307080115950.png)
 
 ![image-20230708000324647](https://img.elmagnifico.tech/static/upload/elmagnifico/202307080003676.png)
 
@@ -110,7 +112,9 @@ MDR_Proxy就是用来代理升级链接的。
 
 ## Summary
 
-强行给1000XM4续命，垃圾产品
+强行给1000XM4续命，垃圾产品。不过2.0版本也有一个优点，就是支持2台设备了，垃圾这都2年了才支持基础功能，我服了。
+
+降级以后感觉好像降噪的变化也不大啊？
 
 
 
