@@ -1238,10 +1238,6 @@ bit bang是通过三倍采样，来读取下面的每一个电变化的（红圈
 
 
 
-有了Bidirectional DSHOT的基础协议，由于飞控方面的应用对于电机的控制必然是同时的，而非分时的，所以使用一个高性能TIM，3倍于DSHOT的频率进行采样，并将数据存储到DMA buffer之中，之后再对buffer滤波采样后，拿到实际的GCR编码，将其转换成真实的Telemetry，解析出转速即可。
-
-
-
 ## Quote
 
 > https://github.com/betaflight/betaflight/pull/8554
