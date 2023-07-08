@@ -3,7 +3,7 @@ layout:     post
 title:      "双向DSHOT with RPM feedback全指南"
 subtitle:   "Bidirectional DSHOT，单线DSHOT"
 date:       2023-04-07
-update:     2023-07-03
+update:     2023-07-07
 author:     "elmagnifico"
 header-img: "img/x1.jpg"
 catalog:    true
@@ -41,10 +41,10 @@ Bidirectional DSHOT的一些特性
 - Telemetry 只有转速信息，并且传回的内容是eRPM/100以后的值
 - Telemetry 返回的数据是GCR格式的，且起始位必然是拉低的
 - 校验位计算最后需要翻转BIT
-- 最终DSHOT数据帧需要翻转，0和1电平翻转
-- DSHOT 600 及以上不太支持，实现困难
-- BLH 需要32.7版本以后的 
-- BLH_S 需要使用Bluejay版本的固件
+- 最终DSHOT数据帧需要翻转，0和1电平翻转，可以通过修改PWM极限实现
+- DSHOT 600 及以上不太支持，实现困难，TIM采样困难
+- 32位 BLH 需要32.7版本以后的 
+- 8或者16位 BLH_S 需要使用Bluejay版本的固件
 - ESC上电以后需要稳定输出一会才能正确回复Telemetry，否则可能单次请求Telemetry不会回复
 
 
@@ -61,13 +61,13 @@ Bidirectional DSHOT的一些特性
 
 #### 名词解释
 
-- GCR，应该是一种编码方式，他可能扩大了传输的数据内容，提高了传输速率，但是更方便硬件去做检测和识别了
-- bit bang/bit-bang 其实就是GPIO，比如软I2C，软SPI，这种用普通GPIO模拟某种协议的方式，就叫bit-bang
-- 3x，一般来说如果你想解码一个信号，最低要求你获取信号的频率是原始信号的3倍，你才能得到一个比较好的解码效果
-- 5/4，GCR编码从4bits变成了5bits，所以传输速度就提升了
+- GCR，一种编码方式，他扩大了传输的数据量并且提高了传输速率，但是更方便硬件去做检测和识别了
+- bit bang/bit-bang 其实就是GPIO模拟DSHOT，比如软I2C，软SPI，这种用普通GPIO模拟某种协议的方式，就叫bit-bang
+- 3x，一般来说如果你想解码一个信号，要求你获取信号的频率是原始信号的x倍，你才能得到一个比较好的解码效果，这里默认使用3倍采样
+- 5/4，GCR编码后使得原来的4bits变成了5bits，所以传输速度就提升了
 - bidir DSHOT，双向DSHOT，也就是单线DSHOT，实现转速可读
 - Run-length limited，其实就是在带宽有限的通信链路上，如何组织数据，从而提高数据传输速度
-- eRPM，电调回传的是磁极数，电机上磁极一定是成对出现的，一般电机是14或者12个，对应的数值也就需要/7或者/6得到RPM数
+- eRPM，电调回传的是磁极数的间隔时间，电机上磁极一定是成对出现的，一般电机是14或者12个
 - RPM，转速每分钟
 - RPS，转速每秒
 
@@ -79,7 +79,9 @@ Bidirectional DSHOT的一些特性
 
 
 
-看了一下老的issues，发现他们提出来了一种解决办法，通过普通GPIO+DMA实现DSHOT，这相当于是说就算PWM用不了，他也能直接做GPIO去实现，或者直接利用空闲的GPIO实现DSHOT，而不需要被DMA或者PWM通道绑定给卡住。
+看了一下老的issues，发现他们提出来了一种解决办法，通过TIM+普通GPIO+DMA实现DSHOT，这相当于是说就算PWM用不了，他也能直接做GPIO去实现，或者直接利用空闲的GPIO实现DSHOT，而不需要被DMA或者PWM通道绑定给卡住。
+
+实际的实现是通过开启TIM的update事件作为DMA的触发器，触发去读取GPIO的IDR寄存器，进而将整个数据缓存下来，同理如果要输出也是可以使用类似的方法。多数情况下IO都会选择同组的，那么只需要一路TIM就能实现了，对于资源消耗也是相当小的，GPIO的DMA选择性就非常多了。
 
 
 
@@ -552,7 +554,7 @@ FAST_CODE uint16_t prepareDshotPacket(dshotProtocolControl_t *pcb)
 
 #### 转速计算
 
-然后这个Telemetry包是这么解析的，Telemeter的原始数据，一共是21bits，其中第一bit一定是0，表示数据开始，而之后紧跟的20bits，其实是每4bits使用GCR转换成的，也就是每5bit解析成一个4bits，然后重新组装
+然后这个Telemetry包是这么解析的，Telemetry的原始数据，一共是21bits，其中第一bit一定是0，表示数据开始，而之后紧跟的20bits，其实是每4bits使用GCR转换成的，也就是每5bit解析成一个4bits，然后重新组装
 
 ```
 0 aaaa bbbbb fffff ddddd 原始21bits
@@ -574,7 +576,7 @@ e e e m m m m m m m m m 校验成功以后的转速数据 12bits
 
 
 
-如果仅仅使用12bits来表示转速，还是有点不够，最低转速太高了（主要是这里定义的是两个电极之间的延迟，而不是直接的转速，这样实时性比较高，12bit最大就是4096us，算下来大概最低能检测转速是34（14电极），还是很快的）
+如果仅仅使用12bits来表示转速，还是有点不够，最低转速太高了（主要是这里定义的是两个电极之间的延迟，而不是直接的转速，这样实时性比较高，12bit最大就是4096us，算下来大概最低能检测转速是34，14电极，还是很快的），表示0转速传的值是0xFFF，而非0
 
 ```c
 static uint32_t dshot_decode_eRPM_telemetry_value(uint16_t value)
@@ -868,8 +870,6 @@ uint32_t decode_bb_bitband( uint16_t buffer[], uint32_t count, uint32_t bit)
 
 #### bit bang 驱动
 
-
-
 ```c
 void bbGpioSetup(bbMotor_t *bbMotor);
 void bbTimerChannelInit(bbPort_t *bbPort);
@@ -892,9 +892,7 @@ int  bbDMA_Count(bbPort_t *bbPort);
 
 这里就是一些基本的硬件配置，主要就是通过DMA设置GPIO或者读取GPIO
 
-TIM也有DMA，实际上前面的大部分配置和TIM DMA用作PWM是一样的，唯一不同的点在于，TIM DMA触发的不再是CCR寄存器，而是GPIO的寄存器
-
-
+TIM在这里触发的是UpdateEvent，而不是PWM通道，通过Update触发DMA传值给GPIO
 
 在`bbWriteInt`中可以看到，给过来的DSHOT数据帧还需要再次被处理，会将整个DSHOT数据翻转
 
@@ -970,6 +968,18 @@ FAST_IRQ_HANDLER void bbDMAIrqHandler(dmaChannelDescriptor_t *descriptor)
 
 
 
+#### 小结
+
+bitbang通过TIM的update事件，启动DMA，当DMA被触发时，读取或者写入值到GPIO的寄存器，从而实现GPIO模拟PWM。
+
+启动DMA写入时，DMA只是单次执行，执行完成以后立马将GPIO切换到输入模式，输入模式下的DMA也是单次执行。
+
+当DMA读取完成以后，立马将GPIO再切换回输出模式，继续DMA写，开始下一轮循环。
+
+读取到的GPIO变化后，再通过GCR解码，获取到解码后的Telemetry，然后计算出来erpm，再转成rpm。
+
+
+
 ## Run-length limited
 
 Run-length limited 这个概念国内搜起来很容易和游程搞混，其实是不一样的东西，游程在这里其实和Dshot GCR没啥关系
@@ -1004,15 +1014,19 @@ Run-length limited 这个概念国内搜起来很容易和游程搞混，其实�
 
 一般来说使用`(n,m)`来表示,就是说有m个形式为n的字符，对于比特流之类的东西，就可以用这种方式编码，来减少传输量
 
+这些概念其实和DSHOT这里要用的没啥关系，但是由于描述很像，容易搞混。
+
 
 
 ### RLL
+
+RLL，其实是以前的模电和数电转换的时候，都是通过电平变化来识别0或者1的，由于机械或者物理性能限制，导致这种方式想要表示0或者1，他们的物理实现频率是不同的。比如你1秒可以写1000次1，而写0的频率只能达到500次，在这种情况下限制波特率的就是写0的次数了，想要最大化带宽，就必须尽可能少的写0，RLL在此时就有用了。
 
 RLL(n,m)，指定两个连续1之间，最少有n个0，最多有m个0。其实RLL还有2个参数，剩下这个两个其实就是编码前的bit数量，一般用来说明传输速度的改变
 
 RLL还有一个特性，**在调制解调中，只有电平变化，才表示bit发生了改变，否则认为是0**，如果没有这个前提，下面的图示根本看不懂
 
-![image-20230411120038480](https://img.elmagnifico.tech/static/upload/elmagnifico/202304111200542.png)
+![image-20230708115638539](https://img.elmagnifico.tech/static/upload/elmagnifico/202307081156713.png)
 
 
 
@@ -1022,7 +1036,7 @@ RLL还有一个特性，**在调制解调中，只有电平变化，才表示bit
 
 #### FM:(0,1) RLL
 
-**FM:(0,1) RLL**，这种方式看起来只是多了一个`1`，实际上这个1可以作为时钟的`1`，从而可以形成差分编码的方式，这种方式让编码变长了。
+**FM:(0,1) RLL**，这种方式看起来只是多了一个`1`，实际上这个1可以作为时钟的`1`，从而可以形成差分编码的方式，这种方式让编码变长了，但是传输效率提升了。
 
 其实是当年FM调配的物理实现有些不同，物理上写1的频率是写0的两倍，所以这里增加`1`刚好满足了写1的速度，让两边可以同步控制
 
@@ -1044,6 +1058,8 @@ RLL还有一个特性，**在调制解调中，只有电平变化，才表示bit
 #### GCR:(0,2) RLL
 
 **GCR:(0,2) RLL**，这个是IBM提出来的一种编码方式，主要是用来提高传输的速率，通过这种编码方式，将最多相邻的0，控制在了2个以内，从而提高了传输速度
+
+这相邻的0，在后续的解包中提供了非常重要的作用，当0过多的时候，由于采样比较低，就容易出现无法识别清楚当前到底是出现了2个0还是1个0，同理当0最多只有2个的时候，低采样时就能轻易区分1个0和2个0的情况。
 
 ```
 0000 -> 11001
@@ -1188,7 +1204,7 @@ Telemetry的回复时间是发送DSHOT帧之后，**31us左右**，就会回复�
 
 由于**回复响应是31us**左右，而Telemetry的**回复帧长度大概在52us**左右，那么剩下留给输入切换到输出的时间就是**4-23us**，尽量不要卡这种极限，容易出现无法识别的情况。
 
-**以上数值都是基于我的DSHOT300来测试的，我此时的DSHOT单bit是3.3us**
+**以上数值都是基于我的DSHOT300来测试的，我此时的DSHOT单bit是3.3us周期**
 
 
 
