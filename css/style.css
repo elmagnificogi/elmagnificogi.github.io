@@ -88,7 +88,8 @@ blockquote {
 }
 
 blockquote p {
-  margin: 0
+  margin: 0;
+  word-wrap: break-word
 }
 
 small.img-hint {
