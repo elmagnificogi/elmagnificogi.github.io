@@ -137,6 +137,14 @@ interface和target等等，都在openocd安装路径中，多数常用的芯片�
 
 
 
+OpenOCD报错，其实就是`-f`路径出错了，如果是指定到自己的cfg文件，那么内部包含的各种文件路径都会对不上，解决这个问题最好的办法就是直接使用内置的cfg，或者把内部引用文件的路径改成绝对的，否则一定会出错的
+
+```
+Error: unable to select a session transport. Can't continue.
+```
+
+
+
 ## Summary
 
 Vllink基本可用，只是想要更深度配合SES有点困难了
