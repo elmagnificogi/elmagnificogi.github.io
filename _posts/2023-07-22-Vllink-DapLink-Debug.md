@@ -1,158 +1,189 @@
 ---
 layout:     post
-title:      "Vllink无线调试上手体验"
-subtitle:   "J-Link,CMSIS-DAP,SES,Keil,ST"
-date:       2023-07-22
-update:     2023-07-22
+title:      "体验网络配镜"
+subtitle:   "蔡司，智锐，铂金膜，焕色世界X"
+date:       2023-08-07
+update:     2023-08-07
 author:     "elmagnifico"
-header-img: "img/y4.jpg"
+header-img: "img/y5.jpg"
 catalog:    true
-tobecontinued: false
+tobecontinued: true
 tags:
-    - Embedded
-    - SES
-    - Debug
+    - Goods
 ---
 
 ## Foreword
 
-想尝试一下无线版本的J-Link，仔细调研了一下发现，实际上是CMSIS-DAP来实现的。而无线版本的J-Link全都断货了，只好找一些其他厂家的，于是看到了Vllink。比较巧的Vllink是基于AIC8800的，之前刚好调研过。
+很久之前就听说网络配镜了，上一次配镜已经是5年前了，刚好这破眼镜又出问题了，试一试网络配镜
 
 
 
-## Vllink
+## 配镜
 
-![img](https://img.elmagnifico.tech/static/upload/elmagnifico/202307221530992.png)
+眼镜本身价值并不高，但是碍于房租等等原因，反而造成实体店的溢价非常多。但是网络配镜也存在很多问题，试试就好，翻车也算正常吧。
 
-> http://vllogic.com/
 
-官方文档，介绍了主要功能。
 
-Vllink可以用有线模式，也可以用无线模式。
+#### 劝退
 
-有线的话就是一个DAP-Link，走CMSIS-DAP，无线需要两个模块，一个作为AP，一个做STA，二者配对以后才能进行无线调试（他竟然用的是wifi6的ap）。
+首先网络配镜缺少一部分试戴和调试的过程，这就导致可能最后结果产生非常大的偏差。如果只是想试试，可以先弄个便宜的眼镜看看行不行，再花高价配个好的。
 
-用起来还是比较方便的，双击两下按钮就能切模式，AP配对也只需要几秒钟就行了。
 
-Vllink 支持的IDE比较多，基本各个厂家的都支持了
 
+#### 验光
 
+一般来说大部分都是在验光环节出的问题，无论是实体店还是医院都有可能出现验光问题。一旦出问题，注定这次配镜会翻车。
 
-购买链接
+专业眼镜店的验光更为细致，会有更多的时间给你测试，体验，服务肯定是更好的。但是如果想让对方给出验光报告，就可能会出现验光报告出问题的情况，故意度数偏高或者漏测。
 
-> https://vllogic.taobao.com/shop/view_shop.htm?shop_id=216739170
+医院验光较少出现纰漏，但是医院毕竟不是服务你一个人的，试镜，测试的时间都非常短，不排除部分极端情况下，验光得到的数据是不准确的。
 
 
 
-## 配合Keil使用
+##### 宝岛验光
 
-![image-20230722141652122](https://img.elmagnifico.tech/static/upload/elmagnifico/202307221416243.png)
+听到最多的就是宝岛眼镜验光，但是实际操作发现还有很多地方不太行。
 
-很简单，直接连好SWD三根线，切换到DAP v1或者v2版本就能正常使用了。
+宝岛眼镜验光需要公众号上预约，然后要选专业验光筛查。
 
-无线单步调试也比较流程
+![image-20230807012645030](https://img.elmagnifico.tech/static/upload/elmagnifico/202308070126118.png)
 
-![img](https://img.elmagnifico.tech/static/upload/elmagnifico/202307221420327.gif)
+但是并不是每个店都可以付费验光
 
+![image-20230807012708956](https://img.elmagnifico.tech/static/upload/elmagnifico/202308070127983.png)
 
+需要去到特定的门店做验光，这就很不方便了
 
-## 配合SES使用
+![image-20230807012654997](https://img.elmagnifico.tech/static/upload/elmagnifico/202308070126027.png)
 
-建议不要配合SES使用，实际体验并不行
+在这里遇挫以后，我就想不折腾了，直接预约配镜+眼光好了。谁想宝岛公众号预约根本没人处理，可能就是想你直接去门店吧。那去门店也是去，去医院也是去，那我不如去医院好了，试错一下也没啥的。
 
+据说宝岛付费验光服务还是比较好的，但是大部分评论也都是来源于19年左右，后来就很少了。宝岛本身把验光也限制的比较多，本身还是不会推荐你只验光而不配镜的，毕竟会少了一个客户，损失可太大了。
 
 
-首先需要刷固件，只需要修改连接USB的电脑端固件即可
 
-![image-20230722142145181](https://img.elmagnifico.tech/static/upload/elmagnifico/202307221421214.png)
+##### 医院验光
 
-SES作为J-Link官方IDE，对于CMSIS-DAP支持十分有限，仅支持DAP v1版本，所以需要固件变更到这个版本。
+直接去三甲医院验光或者是专门的眼科医院验光，如果只是验光其实很便宜了，不过可能医生会说让你额外做些检查什么的，如果没有需求，你可以直接拒绝。
 
-升级也非常简单，直接访问在线升级即可
+挂号费是33，视力检查才2元，验光12。由于长期没做过眼部检查也顺带做了个，激光眼底检查，当然只是配镜可以不做，裂隙灯什么的也都可以不做。
 
-> https://devanlai.github.io/webdfu/dfu-util/
+![image-20230807014037375](https://img.elmagnifico.tech/static/upload/elmagnifico/202308070140510.png)
 
-![image-20230722153237120](https://img.elmagnifico.tech/static/upload/elmagnifico/202307221532175.png)
+这些费用其实都可以通过医保直接出，我没有额外支付。
 
-实际进度条走满以后可能会报错，这里就可以忽略了，重启即可。
+![image-20230807014250978](https://img.elmagnifico.tech/static/upload/elmagnifico/202308070142014.png)
 
+总体体验来说，医院验光确实更含糊一些，每一步做的都很快，验光这里一直排着很多人，试镜什么的也不像眼镜店会让你试戴十分钟甚至更久，只是试戴着再次做视力检查就草草结束了。眼底激光检查是专业设备扫描，然后给医生看片子，没啥问题就不说了。
 
+眼光报告倒是没啥问题就拿到了，度数又增高了，临走前医生说如果拿来配镜，度数可以适当降低一些。
 
-Vllink说只需要将工程的`Target Connection`修改为J-Link即可，默认就是了
+![image-20230807014649993](https://img.elmagnifico.tech/static/upload/elmagnifico/202308070146250.png)
 
-![image-20230722142508529](https://img.elmagnifico.tech/static/upload/elmagnifico/202307221425597.png)
+本身如果用完全符合自己度数的眼镜可能会造成眩晕的问题，所以一般都会往低配一点，大概会减少25或50度
 
-实际上不止于此，SES对于J-Link的延迟要求很高，这里的Speed需要降速，否则会一直提示J-Link连接失败，DAP 初始化失败什么的
 
-```
-SWD selected. Executing JTAG -> SWD switching sequence.
-Error: Failed to initialized DAP.
-```
 
-![image-20230722142524116](https://img.elmagnifico.tech/static/upload/elmagnifico/202307221425187.png)
+#### 挑镜框
 
-降速之后，就可以100%连接成功了。但是实际体验非常差，单步调试，每步都需要消耗三四秒才反应到下一步，非常的慢，基本可以说是不能用的级别了。
+挑镜框，就是去淘宝或者1688找各种网络配镜的店铺，问问能不能挑镜框试戴后退款，大部分都是可以这么操作的（后续得在这家配镜）。大部分眼镜货源都是丹阳的，所以从丹阳选个店问题一般不大。
 
+![image-20230807015433022](https://img.elmagnifico.tech/static/upload/elmagnifico/202308070154061.png)
 
+镜框主要就是看这个鼻间距，镜宽，腿长是不是合适
 
+![image-20230807015557050](https://img.elmagnifico.tech/static/upload/elmagnifico/202308070155090.png)
 
+有部分镜框的描述可能和实际存在误差，还是以实际佩带为主吧。
 
-## 配合OpenOCD使用
+同时也可以和自己目前的眼镜对比一下，找差不多的即可
 
-首先下载OpenOCD
+![undefined](https://img.elmagnifico.tech/static/upload/elmagnifico/202308070156116.jpeg)
 
-> https://gnutoolchains.com/arm-eabi/openocd/
 
-然后将`openocd.exe`所在文件夹加入`path`路径，比如`D:\OpenOCD-20230712-0.12.0\bin`
 
-- 注意新版的openocd只支持CMSIS-DAV v2 ，所以Vllink需要升级到新版本，而不能用v1的版本
+#### 试戴
 
-将SES中的调试配置切换到`GDB Server`
+镜框回来以后就可以试戴一下，看哪一款合适，我这家店只能选3副试戴，试好以后退款寄回就行了。
 
-![image-20230722155002389](https://img.elmagnifico.tech/static/upload/elmagnifico/202307221550451.png)
+除了验光报告以外，配镜还需要你的瞳高或者说要定位你眼睛位于这个镜框的哪个位置上，可能会需要你测量瞳高
 
+![image-20230807020027053](https://img.elmagnifico.tech/static/upload/elmagnifico/202308070200115.png)
 
+比较简单的方法就是，戴着选好的镜框，正常佩戴，然后自拍一个发给店家，店家会帮你处理好的。
 
-GBD server这里，使用OpenOCD，并且要自己写命令行，后面必须指定interface和target是什么，否则可能识别不了。
+镜框的鼻托什么的可能不太适合，这个后续可以调整。
 
-![image-20230722155017902](https://img.elmagnifico.tech/static/upload/elmagnifico/202307221550956.png)
 
 
+#### 选镜片/镀膜
 
-```
-openocd.exe -f interface\cmsis-dap.cfg  -f target\stm32h7x_dual_bank.cfg
-```
+镜片这里就比较好选了，就那么几家。一般都会选蔡司或者是依视路。国产的也行，性价比比较高。
 
-interface一律都是`cmsis-dap.cfg`，而目标芯片根据需要改就行了。
+镜片这里主要是看三个参数，一个是镜片本体是什么，一个是镜片镀膜是什么，还有一个就是折射率，还有其他参数，但是比较难以衡量，就略过了。非球面镜现在已经是标配了，就不说了。
 
-interface和target等等，都在openocd安装路径中，多数常用的芯片都有，所以不需要额外自行配置，找到合适的即可
+镜片本体有哪些
 
+![img](https://img.elmagnifico.tech/static/upload/elmagnifico/202308070210255.webp)
 
+镀膜有哪些选择
 
-经过测试可以正常使用，并且单步调试延迟也非常低
+![img](https://img.elmagnifico.tech/static/upload/elmagnifico/202308070211045.webp)
 
-![image-20230722155649283](https://img.elmagnifico.tech/static/upload/elmagnifico/202307221556344.png)
+- 有色彩需求的建议不要上任何防蓝光，会导致看到的颜色不正确
 
-也有一点缺点，就是**OpenOCD下载或者是读取的时候，没有进度反馈，SES处于假死状态，只有下完了才会提示**
+简单说这个膜的功能越多，价格也就越贵，还是按需选择吧。
 
+我对比了一下10年前的眼镜和5年前的，10年前的眼镜5年前就没有带过了，但是镜片上基本上满是划痕了。而5年前的镜片上基本没有任何划痕，工艺上的进步还是挺明显的。镀膜的有些功能都是有时限的，随着时间损耗某些膜层的功能基本就没了。
 
 
-OpenOCD报错，其实就是`-f`路径出错了，如果是指定到自己的cfg文件，那么内部包含的各种文件路径都会对不上，解决这个问题最好的办法就是直接使用内置的cfg，或者把内部引用文件的路径改成绝对的，否则一定会出错的
 
-```
-Error: unable to select a session transport. Can't continue.
-```
+折射率
+
+![img](https://img.elmagnifico.tech/static/upload/elmagnifico/202308070215599.webp)
+
+折射率和度数有关系，也会影响到最终镜片的厚度，1.74折射率的比较少见，而且性价比超低，就算了，折射率基本跳一个档就要贵150左右。
+
+![image-20230807021723617](https://img.elmagnifico.tech/static/upload/elmagnifico/202308070217692.png)
+
+
+
+焕色世界X
+
+![image-20230807023316966](https://img.elmagnifico.tech/static/upload/elmagnifico/202308070233007.png)
+
+简单说就是镜片本身会变色，在室外受到紫外线照射以后，镜片会自动变色。变换的颜色可以定制，一般是灰色、深灰、褐色、青色。
+
+这种额外功能自然也是要加钱的，没体验过，所以也想试试。
+
+
+
+我这里直接上了蔡司智锐铂金膜+焕色世界1.67，镜片的价格都是单片的，我这个大概是600多一片。
+
+
+
+#### 等眼镜
+
+下单以后大概要5-7天才能加工完成，坐等邮寄回来。
+
+
+
+#### 调试
+
+主要是掰一下镜腿和鼻托，其他的问题不大，不过要注意别掰断了。
 
 
 
 ## Summary
 
-Vllink基本可用，只是想要更深度配合SES有点困难了
+以前眼镜是无框镜，但是真的太脆弱了，轻是真的轻。就是基本上一年半就会断一次镜腿或者中间鼻托的位置，上一个实体店刚开始还帮忙免费维修，后来直接拒修，付费都不行，就是要你重新配一副。
+
+未完待续
 
 
 
 ## Quote
 
-> https://vllogic.com/software/segger_embedded_studio
+> https://www.zhihu.com/tardis/bd/art/409184683?source_id=1001
 >
-> https://wiki.segger.com/Embedded_Studio_with_GDB_Server
+> https://www.bilibili.com/video/BV1254y1573f
