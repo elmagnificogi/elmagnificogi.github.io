@@ -3,7 +3,7 @@ layout:     post
 title:      "双向DSHOT with RPM feedback全指南"
 subtitle:   "Bidirectional DSHOT，单线DSHOT"
 date:       2023-04-07
-update:     2023-07-07
+update:     2023-08-14
 author:     "elmagnifico"
 header-img: "img/x1.jpg"
 catalog:    true
@@ -651,9 +651,15 @@ extern uint32_t bbOutputBuffer[MOTOR_DSHOT_BUF_CACHE_ALIGN_LENGTH * MAX_SUPPORTE
 
 这里主要理解`bbOutputBuffer`是怎么设计的
 
-首先DSHOT每一帧一共是16位，输出的时候，每一位，用一个`SYMBOL`表示。
+首先DSHOT每一帧一共是16位数据，输出的时候，每一位，用一个`SYMBOL`表示。
 
-一个`SYMBOL`又有3个状态，也就是初始-高状态、数据状态、低状态。 因为是Bidirectional DSHOT的帧，所以初始状态一定是高、数据状态根据传输的情况定（如果是正常DSHOT，初始应该是低）。
+一个`SYMBOL`又有3个状态，也就是初始-高状态、数据状态、低状态。 
+
+其实它对应的就是DSHOT的帧
+
+
+
+因为是Bidirectional DSHOT的帧，所以初始状态一定是高、数据状态根据传输的情况定（如果是正常DSHOT，初始应该是低）。
 
 每一帧的结尾为了让ESC可以完整采样，又额外加了一个`SYMBOL`，也就是3个状态
 
