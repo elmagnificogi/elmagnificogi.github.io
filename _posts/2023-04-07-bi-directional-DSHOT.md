@@ -653,21 +653,21 @@ extern uint32_t bbOutputBuffer[MOTOR_DSHOT_BUF_CACHE_ALIGN_LENGTH * MAX_SUPPORTE
 
 首先DSHOT每一帧一共是16位数据，输出的时候，每一位，用一个`SYMBOL`表示。
 
-一个`SYMBOL`又有3个状态，也就是初始-高状态、数据状态、低状态。 
+一个`SYMBOL`又有3个状态，也就是**初始-高状态、数据状态、低状态**。 
 
 其实它对应的就是DSHOT的帧
 
+![image-20230814104138492](https://img.elmagnifico.tech/static/upload/elmagnifico/202308141041596.png)
 
+把bit1和bit0都分解成三份，第一份必然是高，第二份则是1和0的区分，第三份必然是0，当然这样会导致和原始的DSHOT帧的占空比略微不同（原版DSHOT是75%和25%的占空比，现在变成了66%和33%）
 
-因为是Bidirectional DSHOT的帧，所以初始状态一定是高、数据状态根据传输的情况定（如果是正常DSHOT，初始应该是低）。
-
-每一帧的结尾为了让ESC可以完整采样，又额外加了一个`SYMBOL`，也就是3个状态
+每一帧的结尾为了让ESC可以完整采样，又额外加了一个`SYMBOL`，不过这个是全高的状态
 
 - 主要是如果MCU在输出结束以后立马切换到输入模式，可能会造成传输线上的电平立马被拉低，这可能会导致ESC那边还没采样到最后一位，这个数据就被破坏了，为了确保传输质量，多传输了1bit。
 
+这样得到最后`bbOutputBuffer`的长度是51bits
 
 
-这样得到最后`bbOutputBuffer`的长度是51bits，其实这个buffer只是方便控制引脚而已，每3bits的第一bit一定是让引脚设置高，第三bit一定是让引脚设置低，第二bit则是这次要输出的状态。
 
 ```c
 // DMA input buffer
@@ -682,7 +682,7 @@ extern uint32_t bbOutputBuffer[MOTOR_DSHOT_BUF_CACHE_ALIGN_LENGTH * MAX_SUPPORTE
 #define DSHOT_BB_PORT_IP_BUF_LENGTH 140
 ```
 
-这里的注释怀疑过时了，依然不能合理解释21bits的问题。但是大概可以知道，当发完一个DSHOT帧以后，有30us的时间去切换输入->输出。
+通过注释大概可以知道，当发完一个DSHOT帧以后，有30us的时间去切换输入->输出。
 
 然后就是等待Telemetry，拿到以后，还要空一点点时间给ESC切回去，等下一个帧。
 
@@ -848,7 +848,7 @@ uint32_t decode_bb_bitband( uint16_t buffer[], uint32_t count, uint32_t bit)
         return DSHOT_TELEMETRY_NOEDGE;
     }
 
-    // 由于最后一bit可能是高，所以会有一个额外的上升沿，就变成了21bits
+    // 由于最后一bit可能是高，但是上面的流程可能记录不到，所以会有一个额外的上升沿
     // length of last sequence has to be inferred since the last bit with inverted dshot is high
     const int nlen = 21 - bits;
     if (nlen < 0) {
