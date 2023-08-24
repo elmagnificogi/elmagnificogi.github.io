@@ -8,7 +8,7 @@ author:     "elmagnifico"
 header-img: "img/y3.jpg"
 catalog:    true
 tags:
-    - SoftWare
+    - Software
 ---
 
 ## Foreword

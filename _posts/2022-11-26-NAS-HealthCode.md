@@ -8,7 +8,8 @@ author:     "elmagnifico"
 header-img: "img/led.jpg"
 catalog:    true
 tags:
-    - SoftWare
+    - Equips
+    - Software
 ---
 
 ## Foreword

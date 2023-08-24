@@ -8,7 +8,7 @@ author:     "elmagnifico"
 header-img: "img/line-head-bg.jpg"
 catalog:    true
 tags:
-    - SoftWare
+    - Software
 ---
 
 ## Foreword
