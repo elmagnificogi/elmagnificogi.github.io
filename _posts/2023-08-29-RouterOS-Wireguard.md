@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "RouterOS配置WireGuard"
-subtitle:   "DAM，BPM，pipeline，workflow，Git，Perforce，DevOps"
+subtitle:   "VPN,SD-WAN,Mikrotik"
 date:       2023-08-29
 update:     2023-08-29
 author:     "elmagnifico"
