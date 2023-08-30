@@ -7,11 +7,12 @@ update:     2023-08-29
 author:     "elmagnifico"
 header-img: "img/y6.jpg"
 catalog:    true
-tobecontinued: true
+tobecontinued: false
 tags:
     - RouterOS
     - Mikrotik
     - WireGuard
+    - Network
 ---
 
 ## Foreword
