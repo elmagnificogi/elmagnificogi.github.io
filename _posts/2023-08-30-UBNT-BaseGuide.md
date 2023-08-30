@@ -7,7 +7,7 @@ update:     2023-08-30
 author:     "elmagnifico"
 header-img: "img/y8.jpg"
 catalog:    true
-tobecontinued: true
+tobecontinued: false
 tags:
     - UBNT
     - Network
