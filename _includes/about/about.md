@@ -24,9 +24,9 @@
 
 - Independent Game Producer
 
-- TD
-- Product Manager
-- Full Stack Engineer/Designer
+- ~~TD~~
+- ~~Product Manager~~
+- ~~Full Stack Engineer/Designer~~
 
 
 
@@ -34,7 +34,7 @@
 
 - NS宝可梦怪猎等游戏交流群  [GTMD](https://qm.qq.com/cgi-bin/qm/qr?k=W1Jva7Zab2Xowhg1zd0Tuqbj9hByiiFc&jump_from=webapi)
 - Steam 游戏联机群  [GQL](https://qm.qq.com/cgi-bin/qm/qr?k=nx9DfE-t3LpqqgR4hyIV3AVq_4JVa8Rz&jump_from=webapi)
-- 我的游戏屋（重点培养社区）[QQ群组](https://qun.qq.com/qqweb/qunpro/share?_wv=3&_wwv=128&inviteCode=1Sfn6V&from=246610&biz=ka)
+- 我的游戏屋 [QQ群组](https://qun.qq.com/qqweb/qunpro/share?_wv=3&_wwv=128&inviteCode=1Sfn6V&from=246610&biz=ka)
 
 
 
