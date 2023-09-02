@@ -4,22 +4,15 @@
     "type": "split",
     "children": [
       {
-        "id": "f31c40980df81687",
+        "id": "4685fde8e299cc31",
         "type": "tabs",
         "children": [
           {
-            "id": "4080d239994c22d8",
+            "id": "8e17dfc5c6b8e2e6",
             "type": "leaf",
             "state": {
-              "type": "canvas",
-              "state": {
-                "file": "draw/股权结构.canvas",
-                "viewState": {
-                  "x": -125,
-                  "y": -108,
-                  "zoom": 0
-                }
-              }
+              "type": "empty",
+              "state": {}
             }
           }
         ]
@@ -88,7 +81,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "draw/股权结构.canvas",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -105,7 +97,6 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "draw/股权结构.canvas",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -127,9 +118,7 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "draw/股权结构.canvas"
-              }
+              "state": {}
             }
           }
         ],
@@ -149,10 +138,13 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "4080d239994c22d8",
+  "active": "8e17dfc5c6b8e2e6",
   "lastOpenFiles": [
-    "_posts/2020-09-28-Typora-Video.md",
+    "_posts/2023-09-02-Synology-GitLab.md",
+    "_posts/2023-09-02-Synology-Gitlab.md",
+    "_posts/2023-08-30-UBNT-BaseGuide - 副本.md",
     "draw/股权结构.canvas",
+    "_posts/2020-09-28-Typora-Video.md",
     "draw",
     "新建文件夹",
     "_posts/2023-02-27-Obsidian-trial.md",
@@ -180,8 +172,6 @@
     "2022-12-16-CH32-EasyConAPI-Dev.md",
     "2023-02-22-V2ray-Dynamic-Port.md",
     "2022-12-04-XPS32-Upgrade.md",
-    "2023-02-17-NXP-Problem.md",
-    "2023-02-24-OpenWRT-Crng.md",
-    "2021-04-23-APF-OpenCV.md"
+    "2023-02-17-NXP-Problem.md"
   ]
 }
