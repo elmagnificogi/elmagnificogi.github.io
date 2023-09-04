@@ -1,9 +1,9 @@
 ---
 layout:     post
-title:      "RouterOS配置WireGuard"
-subtitle:   "VPN,SD-WAN,Mikrotik"
+title:      "RouterOS配置WireGuard和ZeroTier"
+subtitle:   "VPN,SD-WAN,Mikrotik,ZeroTier"
 date:       2023-08-29
-update:     2023-08-29
+update:     2023-09-04
 author:     "elmagnifico"
 header-img: "img/y6.jpg"
 catalog:    true
@@ -13,11 +13,12 @@ tags:
     - Mikrotik
     - WireGuard
     - Network
+    - ZeroTier
 ---
 
 ## Foreword
 
-RouterOS 从7版本开始加入了WireGuard，方便用户做异地组网，当然如果有Zerotier，也能组网，作为RouterOS 力推的组网方式，试一试看效果如何。
+RouterOS 从7版本开始加入了WireGuard，方便用户做异地组网，当然如果有ZeroTier，也能组网，作为RouterOS 力推的组网方式，试一试看效果如何。
 
 
 
@@ -95,6 +96,20 @@ Endpoint Port填入对方的端口，Allowed Address写入允许连接的客户�
 
 
 完成以后就可以ping对方的WireGuard的IP来测试是否组网成功了
+
+
+
+## ZeroTier
+
+RouterOS安装ZeroTier比较简单，下载对应的Extra Packages 然后把里面ZeroTier的npk上传到File中，直接重启就自动安装好了
+
+![image-20230904131621133](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20230904131621133.png)
+
+输入Network ID然后在Instance中启动对应的controller即可
+
+![image-20230904131632643](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20230904131632643.png)
+
+实测电信的ZeroTier还是会被阻断，偶尔通一下，然后就阻断了，使用自建Moon节点都没用，直接阻断双方的端口
 
 
 
