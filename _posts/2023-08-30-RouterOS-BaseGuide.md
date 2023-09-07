@@ -3,7 +3,7 @@ layout:     post
 title:      "RouterOS的一些基础配置指南"
 subtitle:   "CAPsMAN,NStream,Bridge,Mikrotik"
 date:       2023-08-30
-update:     2023-08-30
+update:     2023-09-06
 author:     "elmagnifico"
 header-img: "img/y7.jpg"
 catalog:    true
@@ -47,6 +47,18 @@ RouterOS的一些知识库，可以参考这里
 #### 端口隔离
 
 > https://wiki.edcwifi.com/index.php?title=Bridge_%E5%AE%9E%E7%8E%B0%E4%BA%8C%E5%B1%82%E7%AB%AF%E5%8F%A3%E9%9A%94%E7%A6%BB
+
+
+
+#### 端口映射
+
+IP-Firewall-NAT中，选择`dstnat`，选好协议和目的端口，入口是外网端口也就是ppppoe，然后Action中也是`dst-nat`，转发到内网的目标地址和目标端口
+
+![image-20230906142952380](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20230906142952380.png)
+
+这种方式被称为无回流模式，其实就是说在内网环境中直接用外网地址和IP访问会出现无法访问的情况，但是外网直接访问是可以的
+
+- 如果想要外网可以正常访问，设置一下`Dst. Address`为公网IP即可
 
 
 
@@ -143,6 +155,12 @@ cAP XL ac 这种类型的设备，是专门用来给酒店或者医院、学校�
 这种是由于在快速向导的设置界面，有Bug，只要切换了就会自动切回来。
 
 要正确修改国家可以去`Wireless`中单独对射频端口设置国家
+
+
+
+#### DHCP关不干净
+
+有时候直接把DHCP服务关闭，并不一定真的能关掉，最好直接把DHCP直接删掉，包括IP池也是，否则很容易出现DHCP ip依然在使用。
 
 
 
