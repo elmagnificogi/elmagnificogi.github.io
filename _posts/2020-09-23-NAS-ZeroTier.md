@@ -124,6 +124,8 @@ uname -ar
 ```
 cd /var/packages/zerotier/target/bin/
 sudo ./zerotier-one -q join 网络id
+# 正确的话会返回200
+200 join OK
 ```
 
 
@@ -131,7 +133,8 @@ sudo ./zerotier-one -q join 网络id
 显示当前信息
 
 ```
-sudo ./zerotier-one info
+sudo ./zerotier-one -q info
+200 info 5484726175 1.8.7 ONLINE
 ```
 
 
