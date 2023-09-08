@@ -3,7 +3,7 @@ layout:     post
 title:      "RouterOS配置WireGuard和ZeroTier"
 subtitle:   "VPN,SD-WAN,Mikrotik,ZeroTier"
 date:       2023-08-29
-update:     2023-09-04
+update:     2023-09-09
 author:     "elmagnifico"
 header-img: "img/y6.jpg"
 catalog:    true
@@ -38,7 +38,7 @@ WireGuard最早听说是用来当VPN，翻墙用的，各种工具，UI封装以
 
 
 
-## RouterOS
+## RouterOS配置WireGuard
 
 > https://help.mikrotik.com/docs/display/ROS/WireGuard
 
@@ -99,7 +99,11 @@ Endpoint Port填入对方的端口，Allowed Address写入允许连接的客户�
 
 
 
-## ZeroTier
+WireGuard不好的地方就是必须要知道公网IP，这个东西很麻烦，公网IP本来就会变，这就要再加个DDNS才行，不够好。
+
+
+
+## RouterOS配置ZeroTier
 
 RouterOS安装ZeroTier比较简单，下载对应的Extra Packages 然后把里面ZeroTier的npk上传到File中，直接重启就自动安装好了
 
@@ -147,11 +151,69 @@ ZeroTier中添加一个静态路由，比如要访问`192.168.1.x`网络内的�
 \\10.244.179.68\公司xx
 ```
 
-类似于这样。
+类似于这样，ip总是有点难记，这里还可以用域名处理一下，就变得更好记了。
 
 
 
-如果想要可以直接看到对应的设备，那么就需要底下的每个设备都加入ZeroTier中，每个设备都有自己的ZeroTier IP，那么就可以直接发现NAS设备了。
+如果想要可以直接发现到对应的设备，那么就需要底下的每个设备都加入ZeroTier中，每个设备都有自己的ZeroTier IP，那么就可以直接发现NAS设备了，这样不适合大型网络，就算了。
+
+
+
+### 遇到问题
+
+实际操作就遇到了问题
+
+![image-20230908223458841](https://img.elmagnifico.tech/static/upload/elmagnifico/202309082234909.png)
+
+拓扑如上所示：
+
+尝试一，取消A的ZeroTier，直接用NAS与B组网，组网后B1同级的都可以通过10.244.179.68访问到NAS，但是无法通过192.168.1.7访问到。而A1同级则无法访问10.244.179.68，他确实实现了NAS异地共享，但是不够好，NAS连接要区分是A地还是B地，一套设置不能任何地方都使用。
+
+
+
+先发现了一个小问题，从B ping NAS 就会出现下面的效果，延迟高的爆炸。其他设备的ping都只有3ms左右。
+
+![image-20230908225442204](https://img.elmagnifico.tech/static/upload/elmagnifico/202309082254241.png)
+
+非常奇怪的是这里Ping 应答的Host都是10.244.251.109，而超时的Host都是192.168.1.7
+
+怀疑是和A网络中的被隔离的摄像头网络出现了冲突，于是修改NAS的IP地址到192.168.1.237，再重新测试，完全正常.... 
+
+
+
+而奇怪的问题接踵而来
+
+```
+A1 可以到 A，A 可以到 B，B能到B1
+
+B1 可以到B，B可以到A，A能到A1
+
+A1 可以到B，A1 能到B1
+
+B1 不能到A，B1 不能到A1
+```
+
+查看A1的路由表
+
+![image-20230908234856751](https://img.elmagnifico.tech/static/upload/elmagnifico/202309082348782.png)
+
+查看B1的路由表
+
+![image-20230908234926001](https://img.elmagnifico.tech/static/upload/elmagnifico/202309082349034.png)
+
+二者基本一模一样，判断没有问题。
+
+再次怀疑是B网络中的摄像头有和A1冲突的IP，于是更换A的子网，重新测试发现完全正常....
+
+```
+B1 能到A，B1 能到A1
+```
+
+直接使用B1 连接NAS，正常
+
+直接使用B1 连接NAS的ZeroTier IP，正常
+
+到此ZeroTier完美实现了两边组网，两边子网可以互相ping通了
 
 
 
@@ -183,7 +245,11 @@ print
 
 ## Summary
 
-总而言之，可以组网了，但是不够完美吧，距离好用还差一些
+总而言之，可以组网了。解决问题的过程中也获取到了一些额外的信息，比如在ZeroTier的链路上再进行一次OSPF加密之类的操作，挺多人提到ZeroTier的上限的，说是用其他的方式更好，比如sitetosite vpn 之类的方案，目前还没有需求，就不继续尝试了。
+
+
+
+网络配置的时候没考虑摄像头的问题，导致这层被隔离的东西没有完全隔离干净，一直影响两边组网和各种ping的结果，差点就放弃了。
 
 
 
