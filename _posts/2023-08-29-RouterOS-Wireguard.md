@@ -195,6 +195,10 @@ B1 不能到A，B1 不能到A1
 
 查看A1的路由表
 
+```
+route print -4
+```
+
 ![image-20230908234856751](https://img.elmagnifico.tech/static/upload/elmagnifico/202309082348782.png)
 
 查看B1的路由表
