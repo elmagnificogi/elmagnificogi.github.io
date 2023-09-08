@@ -115,6 +115,27 @@ uname -ar
 
 
 
+##### 新版不支持UI
+
+由于新版ZeroTier不再支持UI加入，只能通过命令行加入
+
+先进入zerotier的安装位置，然后命令加入
+
+```
+cd /var/packages/zerotier/target/bin/
+sudo ./zerotier-one -q join 网络id
+```
+
+
+
+显示当前信息
+
+```
+sudo ./zerotier-one info
+```
+
+
+
 #### 授权
 
 上面三个个设备添加以后，刷新一下ZeroTier网站，然后可以看到对应3个设备，已经显示在Members中了
@@ -238,4 +259,6 @@ windows开启远程，打开控制面板，选择系统，选择远程设置
 ## Quote
 
 > https://post.smzdm.com/p/741270/p3/#comments
+>
+> https://imnks.com/2482.html
 
