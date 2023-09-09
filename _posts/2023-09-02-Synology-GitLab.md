@@ -3,11 +3,11 @@ layout:     post
 title:      "群晖6.2.4 安装GitLab"
 subtitle:   "DS918+，Git，Docker，DSM6"
 date:       2023-09-02
-update:     2023-09-02
+update:     2023-09-09
 author:     "elmagnifico"
 header-img: "img/y9.jpg"
 catalog:    true
-tobecontinued: true
+tobecontinued: false
 tags:
     - GitLab
     - Synology
@@ -67,7 +67,7 @@ DS918+只有4盘位，所以实际操作是先插入2个8T盘，进行扩容。
 
 ## GitLab
 
-#### 默认套件
+### 默认套件
 
 一般来说NAS上搭建GitLab都是用的Docker，这样可以用到最新版的GitLab，群晖自己的套件中心的GitLab版本有点老，`13.12.2`这个大概是21年的GitLab了
 
@@ -95,7 +95,7 @@ GitLab启动非常慢，大概要七八分钟的样子，可以看NAS的cpu占�
 
 没启动好会一直提示502，多等一会即可
 
-![image-20230909164520144](C:\Users\elmag\AppData\Roaming\Typora\typora-user-images\image-20230909164520144.png)
+![image-20230909164520144](https://img.elmagnifico.tech/static/upload/elmagnifico/202309091659778.png)
 
 第一次进入会提示修改密码，默认账号是root
 
@@ -105,17 +105,73 @@ GitLab启动非常慢，大概要七八分钟的样子，可以看NAS的cpu占�
 
 
 
-默认安装的非最新版，汉化程度只有70%左右，而最新版的汉化已经93%了，所以还是用最新的吧
+默认安装的非最新版，汉化程度只有70%左右，而最新版的汉化已经98%了，所以还是用最新的吧
 
-#### Docker最新版
+### Docker最新版
+
+前提先安装Docker
+
+基本群晖Docker Hub UI是用不了的，国内的基本都不能用，能用的也搜不到GitLab，而手动安装则不会出现出现查询失败。
+
+```
+群晖Docker查询注册表识别
+```
+
+![image-20230909195041255](https://img.elmagnifico.tech/static/upload/elmagnifico/202309091950288.png)
 
 
+
+#### 开启代理
+
+还有一种方法，给群晖上代理，操作也很简单。
+
+V2rayN或者Clash开启局域网连接
+
+![image-20230909194713905](https://img.elmagnifico.tech/static/upload/elmagnifico/202309091947931.png)
+
+然后在群晖的代理中设置对应的地址和端口即可
+
+![image-20230909194743409](https://img.elmagnifico.tech/static/upload/elmagnifico/202309091947435.png)
+
+### 安装
+
+![image-20230909194830953](https://img.elmagnifico.tech/static/upload/elmagnifico/202309091949369.png)
+
+注册表中就能正常搜索到gitlab-ce了，然后下载最新版即可
+
+
+
+配置一下docker文件映射
+
+![image-20230909200232143](https://img.elmagnifico.tech/static/upload/elmagnifico/202309092002178.png)
+
+修改一下端口映射，注意不要和NAS本身的端口冲突了
+
+![image-20230909200244539](https://img.elmagnifico.tech/static/upload/elmagnifico/202309092002568.png)
+
+![image-20230909200311285](https://img.elmagnifico.tech/static/upload/elmagnifico/202309092003315.png)
+
+应用，等待启动
+
+![image-20230909200358456](https://img.elmagnifico.tech/static/upload/elmagnifico/202309092003493.png)
+
+如果首次登陆没有提示输入密码，可以通过下面的方式获取root的初始密码，前面映射的config文件中就有初始密码的文件
+
+![image-20230909203616698](https://img.elmagnifico.tech/static/upload/elmagnifico/202309092036732.png)
+
+然后就能进去修改密码了。
+
+![image-20230909203723550](https://img.elmagnifico.tech/static/upload/elmagnifico/202309092037583.png)
+
+
+
+![image-20230909204126828](https://img.elmagnifico.tech/static/upload/elmagnifico/202309092041897.png)
 
 
 
 ## Summary
 
-未完待续
+基本可用，只是感觉gitlab的网页响应好慢，不知道是NAS的问题，还是gitlab的问题
 
 
 
@@ -124,3 +180,7 @@ GitLab启动非常慢，大概要七八分钟的样子，可以看NAS的cpu占�
 > https://tieba.baidu.com/p/6321911736
 >
 > https://post.smzdm.com/p/and2g692/
+>
+> https://blog.csdn.net/qq_41627408/article/details/129192837
+>
+> https://zhuanlan.zhihu.com/p/638156039?utm_id=0
