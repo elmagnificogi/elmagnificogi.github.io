@@ -91,9 +91,25 @@ DS918+只有4盘位，所以实际操作是先插入2个8T盘，进行扩容。
 
 ![image-20230902170721563](https://img.elmagnifico.tech/static/upload/elmagnifico/202309021707602.png)
 
+GitLab启动非常慢，大概要七八分钟的样子，可以看NAS的cpu占用，启动好了cpu占用会降低。
 
+没启动好会一直提示502，多等一会即可
+
+![image-20230909164520144](C:\Users\elmag\AppData\Roaming\Typora\typora-user-images\image-20230909164520144.png)
+
+第一次进入会提示修改密码，默认账号是root
+
+![image-20230909164325762](https://img.elmagnifico.tech/static/upload/elmagnifico/202309091643830.png)
+
+建议关闭必须有SSH密钥才能push和pull的选项，太麻烦了
+
+
+
+默认安装的非最新版，汉化程度只有70%左右，而最新版的汉化已经93%了，所以还是用最新的吧
 
 #### Docker最新版
+
+
 
 
 
