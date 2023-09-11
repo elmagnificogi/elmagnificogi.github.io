@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "群晖6.2.4 安装GitLab"
+title:      "群晖6.2.4 安装GitLab和硬件升级"
 subtitle:   "DS918+，Git，Docker，DSM6"
 date:       2023-09-02
 update:     2023-09-09
@@ -166,6 +166,14 @@ V2rayN或者Clash开启局域网连接
 
 
 ![image-20230909204126828](https://img.elmagnifico.tech/static/upload/elmagnifico/202309092041897.png)
+
+
+
+实际测试push一个1g多的工程，上行只能跑到这个速度，但是cpu占用就接近一半了。
+
+![image-20230911113353211](https://img.elmagnifico.tech/static/upload/elmagnifico/202309111133272.png)
+
+这还是只是一个人push的情况，如果多人合作，这个gitlab其实没法用。终归他还是NAS，不是Server.
 
 
 
