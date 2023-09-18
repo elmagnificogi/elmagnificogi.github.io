@@ -3,11 +3,11 @@ layout:     post
 title:      "音频设备基础知识"
 subtitle:   "XLR"
 date:       2023-09-14
-update:     2023-09-14
+update:     2023-09-18
 author:     "elmagnifico"
 header-img: "img/bg3.jpg"
 catalog:    true
-tobecontinued: false
+tobecontinued: true
 tags:
     - Audio
 ---
@@ -100,8 +100,64 @@ RCA主要有两种类型，复合型和组件型。复合RCA（通常只称为�
 
 
 
+### 转换接口
+
+#### 声卡转换
+
+最常见的将各种接口输入进来的音频转换到PC可识别的方式就是声卡，声卡一般会有适配多种不同规格的接口，方便不同的设备接入。
+
+![Focusrite福克斯特声卡Scarlett 2i2三代](https://img.elmagnifico.tech/static/upload/elmagnifico/202309181319813.png)
+
+比如上图的Focusrite福克斯特声卡Scarlett 2i2，同时支持双通道的输入和输出，后置Type-C-USB-A 连接电脑。
+
+一般是人声和乐器各走一条通道接入
+
+
+
+#### 简单转换
+
+![image-20230918132718363](https://img.elmagnifico.tech/static/upload/elmagnifico/202309181327457.png)
+
+这种方式相当于是直接将XLR的音频信号作为麦克风输入，USB只是一个简单的信号转换模拟麦克风而已。
+
+
+
+### SMPTE
+
+可以通过硬件直接将SMPTE转换成MIDI或者USB的MIDI设备输出，同样如果是三者之一的任何一个接口输入，都可以转换成其他的方式输出
+
+![DOREMiDi SMPTE LTC转MIDI MTC USB](https://img.elmagnifico.tech/static/upload/elmagnifico/202309181348960.png)
+
+DOREMiDi SMPTE LTC转MIDI MTC USB
+
+
+
+c# SMPTE时间转换库
+
+> https://github.com/ailen0ada/Timecode4net
+
+
+
+libltc C读取和处理ltc的库
+
+> https://github.com/x42/libltc
+
+
+
 ## Quote
 
 > https://www.sohu.com/a/714819599_121466058
 >
 > https://blog.csdn.net/qq_39543984/article/details/121436422
+>
+> https://www.tejix.com/cn/PaperSMPTE.html
+>
+> https://en.wikipedia.org/wiki/SMPTE_timecode
+>
+> https://blog.csdn.net/cenzmin/article/details/44317575
+>
+> https://zhuanlan.zhihu.com/p/583094560
+>
+> https://www.cnblogs.com/us-wjz/articles/11578280.html
+>
+> https://stackoverflow.com/questions/33722080/c-sharp-read-ltc-timecode-from-audio-stream
