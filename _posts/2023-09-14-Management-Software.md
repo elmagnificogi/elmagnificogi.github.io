@@ -3,11 +3,11 @@ layout:     post
 title:      "管理软件"
 subtitle:   "DAM，SCUM，ERP，OA"
 date:       2023-09-14
-update:     2023-09-14
+update:     2023-09-19
 author:     "elmagnifico"
 header-img: "img/bg3.jpg"
 catalog:    true
-tobecontinued: false
+tobecontinued: true
 tags:
     - Management
 ---
@@ -39,6 +39,18 @@ tags:
 
 
 ## CRM
+
+
+
+## PLM
+
+
+
+#### enovia
+
+
+
+#### teamcenter
 
 
 

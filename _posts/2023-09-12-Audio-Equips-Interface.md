@@ -98,7 +98,7 @@ RCA主要有两种类型，复合型和组件型。复合RCA（通常只称为�
 
 这个音频领域很常见，简单说就是一种设备把不平衡信号转化成平衡信号的变换器，差分输出，从而扩展音频线的传输距离
 
-
+![img](https://img.elmagnifico.tech/static/upload/elmagnifico/202309191548549.jpeg)
 
 ### 转换接口
 
