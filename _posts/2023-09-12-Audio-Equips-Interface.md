@@ -132,18 +132,6 @@ DOREMiDi SMPTE LTC转MIDI MTC USB
 
 
 
-c# SMPTE时间转换库
-
-> https://github.com/ailen0ada/Timecode4net
-
-
-
-libltc C读取和处理ltc的库
-
-> https://github.com/x42/libltc
-
-
-
 ## Quote
 
 > https://www.sohu.com/a/714819599_121466058
