@@ -36,6 +36,8 @@ XLR有3口、4口、5口、6口的，平常3口最为常见
 
 XLR散装线缆采用95%覆盖双屏蔽设计和坚固的24 AWG导线，有点类似与网络设备，都有固定架、线材标准、屏蔽设计。
 
+XLR3口和DMX512使用的是相同的接口，不过传输的数据是不同的而已。
+
 
 
 #### TRS
@@ -122,6 +124,12 @@ RCA主要有两种类型，复合型和组件型。复合RCA（通常只称为�
 
 
 
+![image-20230920095600358](https://img.elmagnifico.tech/static/upload/elmagnifico/202309200956386.png)
+
+这个模拟出来是2个设备，一个是音频播放设备、一个是音频输入设备。
+
+
+
 ### SMPTE
 
 可以通过硬件直接将SMPTE转换成MIDI或者USB的MIDI设备输出，同样如果是三者之一的任何一个接口输入，都可以转换成其他的方式输出
@@ -129,6 +137,18 @@ RCA主要有两种类型，复合型和组件型。复合RCA（通常只称为�
 ![DOREMiDi SMPTE LTC转MIDI MTC USB](https://img.elmagnifico.tech/static/upload/elmagnifico/202309181348960.png)
 
 DOREMiDi SMPTE LTC转MIDI MTC USB
+
+
+
+通过REAPER播放带有LTC的音频
+
+![image-20230920165251908](https://img.elmagnifico.tech/static/upload/elmagnifico/202309201652006.png)
+
+将电脑输出转给`LTC IN`，然后就能看到MIDI-OX中采集到的音频帧，同时DOREMiDi 的显示屏上也有对应的数值显示
+
+![image-20230920165236563](https://img.elmagnifico.tech/static/upload/elmagnifico/202309201652631.png)
+
+![image-20230920165627582](https://img.elmagnifico.tech/static/upload/elmagnifico/202309201656683.png)
 
 
 
