@@ -7,7 +7,7 @@ update:     2023-09-23
 author:     "elmagnifico"
 header-img: "img/bg5.jpg"
 catalog:    true
-tobecontinued: true
+tobecontinued: false
 tags:
     - Maya
     - Python
