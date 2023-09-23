@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "RouterOS配置GRE和OSPF"
-subtitle:   "组网"
+subtitle:   "组网，RIP，静态路由,DDNS"
 date:       2023-09-24
 update:     2023-09-24
 author:     "elmagnifico"
@@ -98,7 +98,11 @@ GRE工作在第三层，网络层，有些层级比较低的协议也就能支�
 
 GRE 如果不配合OSPF，那可以配合静态路由进行组网
 
+![image-20230924002030647](https://img.elmagnifico.tech/static/upload/elmagnifico/202309240020709.png)
+
 分别在双方的路由表里加上对方的lan网络，端口就选择GRE的端口就行了
+
+- 注意关闭ZeroTier，否则会有路由冲突
 
 
 
@@ -124,6 +128,20 @@ OSPF要求每个路由器周期性的发送链路状态信息，使得区域内�
 3、使用情况不同，OSPF占用的实际链路带宽比RIP少，OSPF使用的CPU时间比RIP少，OSPF适用的内存比RIP大，RIP在网络上达到平衡用的时间比OSPF多。
 
 总的来说能用OSPF就别用RIP，只是RIP配起来比较简单而已
+
+
+
+## DDNS
+
+由于GRE需要对方的公网IP，所以RouterOS能跑一个DDNS最好
+
+
+
+RouterOS 7 新增了一个`IP-Cloud-DDNS`选项，开启以后就可以免费获得DDNS
+
+![image-20230924003205463](https://img.elmagnifico.tech/static/upload/elmagnifico/202309240032499.png)
+
+GRE中直接使用对方的DDNS域名即可直接组网了，方便了很多。
 
 
 
