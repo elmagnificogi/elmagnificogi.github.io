@@ -92,11 +92,17 @@ GRE工作在第三层，网络层，有些层级比较低的协议也就能支�
 
 实际测试发现无法发现对方，组网失败，怀疑是Interface没有出现`bdr`标志，也就是宣告端口没有做广播，原因就不知道了。
 
+![image-20230924135826079](https://img.elmagnifico.tech/static/upload/elmagnifico/202309241358151.png)
+
+OSPF测试了目前官方和一些blog的配置方式，结果全都不行，怀疑运营商有什么操作导致OSPF在GRE上无法完成广播。
+
+看到成功的案例，基本都是内网连接，直接成功
+
 
 
 ## 静态组网
 
-GRE 如果不配合OSPF，那可以配合静态路由进行组网
+GRE 如果不配合OSPF，那可以配合静态路由进行组网，告诉路由对方网络和接口即可
 
 ![image-20230924002030647](https://img.elmagnifico.tech/static/upload/elmagnifico/202309240020709.png)
 
@@ -142,6 +148,12 @@ RouterOS 7 新增了一个`IP-Cloud-DDNS`选项，开启以后就可以免费获
 ![image-20230924003205463](https://img.elmagnifico.tech/static/upload/elmagnifico/202309240032499.png)
 
 GRE中直接使用对方的DDNS域名即可直接组网了，方便了很多。
+
+
+
+但是实测本地电信的DNS解析有问题，故意屏蔽了`mynetname.net`的域名，全部解析都是`127.0.0.1`，但是用VPS或者非本地网络测试就是正确的IP地址，无奈套了一层CNAME，然后解析才正常。
+
+这种DDNS的TTL是60s，所以有可能在重新拨号或者换IP的时候，断开1分钟左右。
 
 
 
