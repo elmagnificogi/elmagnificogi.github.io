@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "RouterOS的一些基础配置指南"
-subtitle:   "CAPsMAN,NStream,Bridge,Mikrotik"
+subtitle:   "CAPsMAN,NStream,Bridge,Mikrotik,Roaming"
 date:       2023-08-30
 update:     2023-09-06
 author:     "elmagnifico"
@@ -110,6 +110,49 @@ CAPsMA基本就是RouterOS最接近AC的管理模式了，还有一个监控的�
 
 
 
+### CAPsMAN和漫游相关问题
+
+> https://mum.mikrotik.com/presentations/CN19/presentation_7181_1571792982.pdf
+
+简单说官方没有任何关于CAPsMAN是可以漫游的说明，但是从普遍测试的结果来看，实际CAPsMAN，在切换地点的时候，是明显可以降低丢包的的程度的，好的情况下是可以0丢包的。
+
+
+
+真正的漫游，应该是从支持 Wifi Wave2的设备开始，有了802.11 K、R协议以后才有可能支持漫游。
+
+
+
+### CAPsMAN自动剔除低信号客户端
+
+> https://timigate.com/2018/10/use-mikrotik-capsman-to-manage-all-access-points-and-enable-roaming.html
+
+
+
+### Wave2 成功漫游
+
+成功的参考对象，就是需要hAP ax3的新设备，老设备不太行
+
+> https://forum.mikrotik.com/viewtopic.php?t=199764
+
+
+
+成功漫游的log
+
+```
+0C:C6:FD:XX:XX:XX@distant-AP-wifi-2G roamed to 0C:C6:FD:XX:XX:XX@closer-AP-wifi-5G, signal strength -66
+```
+
+
+
+失败的漫游
+
+```
+0C:C6:FD:XX:XX:XX@distant-AP-wifi-5G disconnected, connection lost, signal strength -92
+0C:C6:FD:XX:XX:XX@closer-AP-wifi-5G connected, signal strength -75
+```
+
+
+
 ## 疑难问题
 
 
@@ -167,3 +210,13 @@ cAP XL ac 这种类型的设备，是专门用来给酒店或者医院、学校�
 ## Summary
 
 还有更多需要设置的东西，还会继续补充完善
+
+
+
+## Quote
+
+> https://forum.mikrotik.com/viewtopic.php?t=188815
+>
+> https://timigate.com/2018/10/use-mikrotik-capsman-to-manage-all-access-points-and-enable-roaming.html
+>
+> https://forum.mikrotik.com/viewtopic.php?t=199764
