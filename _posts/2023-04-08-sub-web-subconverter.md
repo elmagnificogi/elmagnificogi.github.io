@@ -3,7 +3,7 @@ layout:     post
 title:      "自建订阅转换"
 subtitle:   "sub-web，subconverter"
 date:       2023-04-08
-update:     2023-04-08
+update:     2023-10-09
 author:     "elmagnifico"
 header-img: "img/x2.jpg"
 catalog:    true
@@ -160,6 +160,60 @@ subconverter v0.7.2-4205dee backend
 
 
 
+进一步修改api模式和token
+
+```
+docker exec -it dc58f9c84811  /bin/sh
+```
+
+
+
+修改配置文件
+
+```
+vi pref.example.ini
+```
+
+
+
+开启api mode，并修改默认api密码，防止被入侵
+
+```
+[common]
+;API mode, set to true to prevent loading local subscriptions or serving local files directly
+api_mode=false
+
+;Access token used for performing critical action through Web interface
+api_access_token=password
+
+;Default URLs, used when no URL is provided in request, use "|" to separate multiple subscription links, supports local files/URL
+default_url=
+
+```
+
+
+
+修改完以后，通过下面的连接就进不去了
+
+```
+https://转换服务器/readconf?token=password
+```
+
+
+
+实际上述修改完成以后，还是不行，还有办法直接读取本地配置文件，一旦读到了，什么token全都暴露了
+
+```
+https://转换服务器/convert?url=pref.toml
+https://转换服务器/convert?url=pref.example.toml
+https://转换服务器/convert?url=pref.example.ini
+https://转换服务器/convert?url=pref.example.yml
+```
+
+所以最好在这里通过反代把convert接口屏蔽掉
+
+
+
 ## caddy
 
 再把前端和后端都加入caddy，允许直接外部访问
@@ -170,10 +224,17 @@ sub.elmagnifico.tech {
     file_server
 }
 cov.elmagnifico.tech {
-    reverse_proxy 127.0.0.1:25500
+    reverse_proxy /sub* 127.0.0.1:25500
 }
 
 ```
+
+
+
+- 注意这里一定只反代`/sub*`的接口，其他部分不进行反代，否则会出现整个转换后端都暴露进而造成可以直接读取本地文件、服务器被入侵等问题
+- sub-web只使用了sub接口，其他的一概不适用，所以可以放心禁用
+
+
 
 重启
 
@@ -201,6 +262,8 @@ systemctl restart caddy
 
 ## Quote
 
+多亏了群里的小伙伴告诉我sub converter直接部署有问题，也改了改，防止后续出问题
+
 > https://github.com/CareyWang/sub-web
 >
 > https://github.com/tindy2013/subconverter
@@ -210,3 +273,5 @@ systemctl restart caddy
 > https://github.com/tindy2013/subconverter
 >
 > https://ednovas.xyz/2021/06/06/subs/
+>
+> https://www.youtube.com/watch?v=FclVhxp1g0Y&ab_channel=%E4%B8%8D%E8%89%AF%E6%9E%97
