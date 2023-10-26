@@ -155,7 +155,7 @@ tags:
 006EA57A        call        Move
 ```
 
-可以看到偏移0x80个字节后的10个字节是ESC Name，由于我这里是没明名的，所以全空
+可以看到偏移0x80个字节后的16个字节是ESC Name，由于我这里是没命名的，所以全空，也就是space
 
 ![](https://img.elmagnifico.tech/static/upload/elmagnifico/vwURXtEmZ7sLB25.png)
 
