@@ -674,7 +674,7 @@ SSID，接入点名称
 
 ##### 美国手
 
-![](https://pics6.baidu.com/feed/7aec54e736d12f2e8c53dcef32fb5c6e843568b4.jpeg@f_auto?token=f96ca080265e694c6cb0d002f76610de)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202311220019331.jpeg)
 
 遥控器的左摇杆，负责无人机的上升下降、原地顺时针/逆时针旋转
 
@@ -682,7 +682,7 @@ SSID，接入点名称
 
 ##### 日本手
 
-![](https://pics2.baidu.com/feed/8b82b9014a90f6034cc16b87422b3a17b151ed47.jpeg@f_auto?token=39054b7ecbc4138372fd2d136f261c34)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202311220019784.jpeg)
 
 遥控器的左摇杆，负责无人机在水平位置上的前后、原地顺时针/逆时针旋转
 
@@ -690,7 +690,7 @@ SSID，接入点名称
 
 ##### 中国手
 
-![](https://pics4.baidu.com/feed/caef76094b36acafdc7fdc8d00e0041c00e99cee.jpeg@f_auto?token=28bd0f564b7a998fef14f2becb28ec86)
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202311220019369.jpeg)
 
 遥控器的左摇杆，负责无人机在水平位置上的前后左右移动
 
@@ -738,7 +738,7 @@ GPRS，General Packet Radio Service
 
 ## 负载系统
 
-无人机负载实现效果
+无人机负载实现各种效果
 
 
 
@@ -863,12 +863,20 @@ AOPA
 
 ## Quote
 
-> [https://baijiahao.baidu.com/s?id=1694684445344738639\&wfr=spider\&for=pc](https://baijiahao.baidu.com/s?id=1694684445344738639\&wfr=spider\&for=pc "https://baijiahao.baidu.com/s?id=1694684445344738639\&wfr=spider\&for=pc")
-> [https://zhuanlan.zhihu.com/p/503816407](https://zhuanlan.zhihu.com/p/503816407 "https://zhuanlan.zhihu.com/p/503816407")
-> [https://blog.csdn.net/yinxian5224/article/details/102744613](https://blog.csdn.net/yinxian5224/article/details/102744613 "https://blog.csdn.net/yinxian5224/article/details/102744613")
-> [https://docs.px4.io/main/zh/](https://docs.px4.io/main/zh/ "https://docs.px4.io/main/zh/")
-> [https://zhuanlan.zhihu.com/p/453454499](https://zhuanlan.zhihu.com/p/453454499 "https://zhuanlan.zhihu.com/p/453454499")
-> [https://blog.csdn.net/MOU\_IT/article/details/80361331](https://blog.csdn.net/MOU_IT/article/details/80361331 "https://blog.csdn.net/MOU_IT/article/details/80361331")
-> [http://www.crazepony.com/book/](http://www.crazepony.com/book/ "http://www.crazepony.com/book/")
-> [https://uavcoach.com/drone-flight-simulator/#guide-2](https://uavcoach.com/drone-flight-simulator/#guide-2 "https://uavcoach.com/drone-flight-simulator/#guide-2")
-> [http://www.gl-uav.com/index.php?id=879](http://www.gl-uav.com/index.php?id=879 "http://www.gl-uav.com/index.php?id=879")
+> https://baijiahao.baidu.com/s?id=1694684445344738639&wfr=spider&for=pc
+>
+> https://zhuanlan.zhihu.com/p/503816407
+>
+> https://blog.csdn.net/yinxian5224/article/details/102744613
+>
+> https://docs.px4.io/main/zh/
+>
+> https://zhuanlan.zhihu.com/p/453454499
+>
+> https://blog.csdn.net/MOU_IT/article/details/80361331
+>
+> http://www.crazepony.com/book/
+>
+> https://uavcoach.com/drone-flight-simulator/#guide-2
+>
+> http://www.gl-uav.com/index.php?id=879
