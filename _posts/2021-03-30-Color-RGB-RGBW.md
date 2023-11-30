@@ -143,10 +143,9 @@ import numpy as np
 RGB = np.array([[0.36653649, 0.07554075, 0.28952463], [0.69990608,0.53677301,0.61425992],[0.99,0.99,0.99]])
 #RGB = np.random.random((2, 1, 3))
 print(RGB)
-colour.plotting.plot_RGB_chromaticities_in_chromaticity_diagram_CIE1931(ijfijofjfgg
+colour.plotting.plot_RGB_chromaticities_in_chromaticity_diagram_CIE1931(
+    RGB, colourspace='ACES2065-1', colourspaces=['sRGB'], scatter_kwargs={'c': 'k', 'marker': '+'})
                                                                         
-                                                                        
-就挂机ogji
 ```
 
 更复杂一些的应用可以看我blog对应的代码仓库，一些小工具，小脚本就都直接写在这个里面了。
@@ -159,9 +158,7 @@ colour.plotting.plot_RGB_chromaticities_in_chromaticity_diagram_CIE1931(ijfijofj
 
 具体怎么转换有各种算法，选哪种都行，看需求吧
 
-这里有一些前提j'ji'ji'jii'j'tjjijijiijti'j'fi'j'o'f'j'f条件，这里的RGB准确说就是指想要表达的RGB颜色
-
-
+这里有一些前提条件，这里的RGB准确说就是指想要表达的RGB颜色
 
 
 
