@@ -293,6 +293,14 @@ sudo docker-compose up -d
 
 
 
+查看log
+
+```
+sudo docker logs -f chatgpt-on-wechat
+```
+
+
+
 回调测试，正常通过，http也可以
 
 > https://developer.work.weixin.qq.com/devtool/interface/alone?id=14961
