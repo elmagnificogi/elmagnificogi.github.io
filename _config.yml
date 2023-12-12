@@ -84,6 +84,15 @@ service-worker: true
 page-mathjax: false
 
 
+# Dynamic Effect
+dynamic-wave: false
+dynamic-ribbon: false
+dynamic-progress: false
+dynamic-time: false
+
+# google translate
+google-translate: false
+
 
 # Friends
 friends: [

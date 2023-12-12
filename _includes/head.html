@@ -24,8 +24,10 @@
     <!-- Pygments Github CSS -->
     <link rel="stylesheet" href="{{ "/css/syntax.css" | prepend: site.baseurl }}">
 
+    {% if dynamic-wave %}
     <!-- wave  -->
-    <!-- <link rel="stylesheet" href="/css/wave.css"/> -->
+    <link rel="stylesheet" href="/css/wave.css"/>
+    {% endif %}
 
     <!-- top processbar -->
     <link rel="preload" href="{{ site.BASE_PATH }}/css/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
