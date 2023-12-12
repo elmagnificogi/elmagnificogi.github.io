@@ -170,11 +170,11 @@ SES自己也能开启RTOS插件辅助
 
 - 注意Task过多的情况下需要将25的默认值调高，方便调试
 
-![image-20231207155557208](C:\Users\elmag\Pictures\2023120715535281.png)
+![image-20231207155557208](https://img.elmagnifico.tech/static/upload/elmagnifico/202312121312446.png)
 
-但是实测了以后，发现某些任务是识别不到的，这里只有27个任务，但是Ozone那边识别到了54个任务，这也是为什么SES挺不住了，任务数两边不对等导致的
+但是实测了以后，发现某些任务是识别不到的，这里只有27个任务，但是Ozone那边识别到了54个任务，这也是为什么SES停不住了，任务数两边不对等导致的
 
-![image-20231207160154313](C:\Users\elmag\Pictures\202312071601347.png)
+![image-20231207160154313](https://img.elmagnifico.tech/static/upload/elmagnifico/202312121312809.png)
 
 这个问题提交给官方了，看官方怎么处理吧
 
