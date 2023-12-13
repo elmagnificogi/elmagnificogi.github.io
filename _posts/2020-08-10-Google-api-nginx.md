@@ -163,7 +163,7 @@ server
 
         access_log  /home/wwwlogs/你的域名.log;
 
-        location /maps/ {
+        location / {
 
             #MIME TYPE
             default_type text/javascript;
