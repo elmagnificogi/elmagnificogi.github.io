@@ -21,6 +21,10 @@ tags:
 
 
 
+Copilot账号在开启时，建议关闭代码分享，否则可能涉及泄密等严重的问题
+
+
+
 ## CoCopilot
 
 > https://cocopilot.org/dash
