@@ -29,9 +29,7 @@ Copilot账号在开启时，建议关闭代码分享，否则可能涉及泄密�
 
 > https://cocopilot.org/dash
 
-CoCopilot可以把原本的Copilot的账号分享给大概10个人左右的小团队使用而无需额外的操作
-
-
+CoCopilot可以把原本的Copilot的账号分享给大概10个人左右的小团队使用而无需额外的操作。CoCopilot提供的公用token可以直接使用，但是还是建议使用自己的，更稳定一些
 
 由于这个操作等于是在白嫖Github，所以原作者相关的仓库和账号都被直接ban了
 
@@ -75,11 +73,43 @@ VScode安装插件的链接
 
 
 
-### 测试
+### 激活
+
+Cocopilot安装完成以后，在命令行中使能他，注意是`Enable CoCopilot`不是Copilot
+
+![image-20231223214829024](https://img.elmagnifico.tech/static/upload/elmagnifico/202312232148050.png)
+
+看到如下提示
+
+![image-20231223214805154](https://img.elmagnifico.tech/static/upload/elmagnifico/202312232148233.png)
+
+重新加载IDE，再次使能CoCopilot
+
+![image-20231223215100993](https://img.elmagnifico.tech/static/upload/elmagnifico/202312232151020.png)
+
+打开cocopilot的网页授权界面
+
+![image-20231223215407199](https://img.elmagnifico.tech/static/upload/elmagnifico/202312232154220.png)
+
+注意这里的验证码，后续需要使用
+
+![image-20231223215422321](https://img.elmagnifico.tech/static/upload/elmagnifico/202312232154343.png)
+
+填写验证码
+
+![image-20231223215443441](https://img.elmagnifico.tech/static/upload/elmagnifico/202312232154468.png)
+
+授权成功
+
+![image-20231223215453311](https://img.elmagnifico.tech/static/upload/elmagnifico/202312232154335.png)
+
+
+
+## 测试
 
 可以自动提示整个代码了
 
-![img](https://img.elmagnifico.tech/static/upload/elmagnifico/image.png)
+![image-20231223215344909](https://img.elmagnifico.tech/static/upload/elmagnifico/202312232153944.png)
 
 
 
