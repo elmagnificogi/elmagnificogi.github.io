@@ -71,6 +71,14 @@ VScode安装插件的链接
 
 
 
+### 测试
+
+可以自动提示整个代码了
+
+![img](https://img.elmagnifico.tech/static/upload/elmagnifico/image.png)
+
+
+
 ### 其他IDE
 
 其他IDE类似的操作即可，安装Copilot，然后使用Token脚本即可
