@@ -3,7 +3,7 @@ layout:     post
 title:      "反代谷歌地图API"
 subtitle:   "Nginx，谷歌地图"
 date:       2020-08-10
-update:     2022-04-25
+update:     2023-12-13
 author:     "elmagnifico"
 header-img: "img/desk-head-bg.jpg"
 catalog:    true
@@ -110,24 +110,20 @@ server
 
         access_log  /home/wwwlogs/maps.your-domain.com.log;
 
-        location /maps/ {
+        location / {
 
             #MIME TYPE
             default_type text/javascript;
 
             proxy_set_header Accept-Encoding '';
 
-            proxy_pass https://maps.googleapis.com/maps/;
+            proxy_pass https://maps.googleapis.com/;
 
             replace_filter_max_buffered_size 500k;
             replace_filter_last_modified keep;
             replace_filter_types  text/javascript application/javascript;
 
             include vhost/replace_cn.txt;
-        }
-
-        location /maps-api-v3/ {
-            proxy_pass  https://maps.googleapis.com/maps-api-v3/;
         }
 
         include vhost/location_cn.txt;
@@ -167,24 +163,20 @@ server
 
         access_log  /home/wwwlogs/你的域名.log;
 
-        location /maps/ {
+        location / {
 
             #MIME TYPE
             default_type text/javascript;
 
             proxy_set_header Accept-Encoding '';
 			# 这里注意是 http而不是https
-            proxy_pass http://maps.googleapis.com/maps/;
+            proxy_pass http://maps.googleapis.com/;
 
             replace_filter_max_buffered_size 500k;
             replace_filter_last_modified keep;
             replace_filter_types  text/javascript application/javascript;
 
             include vhost/replace_cn.txt;
-        }
-
-        location /maps-api-v3/ {
-            proxy_pass  http://maps.googleapis.com/maps-api-v3/;
         }
 
         include vhost/location_cn.txt;
@@ -268,6 +260,14 @@ systemctl restart nginx
 
 
 然后就可以通过maps.your-domain.com代替原本的google.cn或者www.google.cn来完成对应的反代了。
+
+
+
+2023.12.13
+
+之前有一次发现谷歌某些情况下还会走`http://maps.googleapis.com/maps-api-v3/`，于是加了`maps-api-v3`的路径代理
+
+而后面又发现他竟然还有一个路径`$rpc`用来验证跨域代理的，这个路径由于这个`$`导致实际写nginx非常麻烦，那干脆直接全路径反代好了，没必要纠结某些路径，后续就算还有变化也能适应，一劳永逸吧
 
 
 

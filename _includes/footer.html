@@ -193,7 +193,6 @@
 {% endif %}
 
 {% if page.tobecontinued %}
-<!-- Global site tag (gtag.js) - Google Analytics -->
 <script type="text/javascript" src="/js/watermark.js"></script>
 <script>
     watermark.set('To be continued...未完待续',320,280,"23px Brush Script MT")
@@ -231,7 +230,10 @@
             changeDone = true;
         }
     }
-setInterval("createtime()",250);
+    createtime();
+    {% if dynamic-wave %}
+    setInterval("createtime()",1000);
+    {% endif %}
 </script>
 
 <!-- back-top -->
@@ -254,6 +256,7 @@ setInterval("createtime()",250);
   });
   </script>
 
+{% if dynamic-progress %}
 <!-- 文章进度条 -->
 <script type="module">
     /* 顶部进度条 */
@@ -275,7 +278,9 @@ setInterval("createtime()",250);
     }
     }());
 </script>
+{% endif %}
 
+{% if google-translate %}
 <!-- google-translate -->
 <script async="async" type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 <script type="text/javascript">
@@ -291,10 +296,12 @@ new google.translate.TranslateElement({
 }, 'google_translate_element');
 }
 </script>
+{% endif %}
 
+{% if dynamic-ribbon %}
 <!-- ribbon -->
 <script type="text/javascript" src="/js/ribbonDynamic.js"></script>
-
+{% endif %}
 
 <!-- Side Catalog -->
 {% if page.catalog %}

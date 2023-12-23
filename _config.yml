@@ -56,7 +56,7 @@ disqus_username: elmagnifico-1
 # Analytics settings
 
 # Google Analytics
-ga_track_id: 'UA-174663490-1'            # Format: UA-xxxxxx-xx
+ga_track_id: 'G-0KN6WQKYCB'            # Format: G-xxxxxx
 
 
 
@@ -83,6 +83,15 @@ service-worker: true
 # MathJax rendering for layout:page (e.g. post preview)
 page-mathjax: false
 
+
+# Dynamic Effect
+dynamic-wave: false
+dynamic-ribbon: false
+dynamic-progress: false
+dynamic-time: false
+
+# google translate
+google-translate: false
 
 
 # Friends

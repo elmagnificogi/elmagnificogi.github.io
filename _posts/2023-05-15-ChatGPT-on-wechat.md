@@ -3,7 +3,7 @@ layout:     post
 title:      "基于企业微信搭建一个ChatGPT应用"
 subtitle:   "微信、railway"
 date:       2023-05-15
-update:     2023-05-17
+update:     2023-12-02
 author:     "elmagnifico"
 header-img: "img/x12.jpg"
 catalog:    true
@@ -143,6 +143,10 @@ https://xxxxx.up.railway.app/wxcomapp
 
 > https://open.work.weixin.qq.com/wwopen/devtool/interface/combine
 
+新地址
+
+> https://developer.work.weixin.qq.com/devtool/interface/alone?id=14961
+
 
 
 可以看到成功的回调必须能正常返回你输入的`EchoStr`，会失败的都是提示失败或者没有返回的
@@ -176,6 +180,134 @@ https://xxxxx.up.railway.app/wxcomapp
 最后给到所有人权限，就能在工作台里直接使用了
 
 ![image-20230515181109433](https://img.elmagnifico.tech/static/upload/elmagnifico/202305151811493.png)
+
+
+
+## 使用Docker部署
+
+拉取docker文件
+
+```
+wget https://open-1317903499.cos.ap-guangzhou.myqcloud.com/docker-compose.yml
+```
+
+
+
+修改docker-compose.yml
+
+```dockerfile
+version: '2.0'
+services:
+  chatgpt-on-wechat:
+    image: zhayujie/chatgpt-on-wechat
+    container_name: chatgpt-on-wechat
+    security_opt:
+      - seccomp:unconfined
+    environment:
+      OPEN_AI_API_KEY: 'sk-1234'
+      MODEL: 'gpt-3.5-turbo'
+      PROXY: ''
+      #SINGLE_CHAT_PREFIX: '["bot", "@bot"]'
+      #SINGLE_CHAT_REPLY_PREFIX: '"[bot] "'
+      #GROUP_CHAT_PREFIX: '["@bot"]'
+      #GROUP_NAME_WHITE_LIST: '["ALL_GROUP"]'
+      IMAGE_CREATE_PREFIX: '["画", "看", "找"]'
+      CONVERSATION_MAX_TOKENS: 1000
+      #SPEECH_RECOGNITION: 'False'
+      CHARACTER_DESC: '你是ChatGPT, 一个由OpenAI训练的大型语言模型, 你旨在回答并解决人们的任何问题，并且可以使用多种语言与人交流。'
+      EXPIRES_IN_SECONDS: 3600
+      USE_GLOBAL_PLUGIN_CONFIG: 'True'
+      USE_LINKAI: 'False'
+      LINKAI_API_KEY: ''
+      LINKAI_APP_CODE: ''
+    volumes:
+      - ./config.json:/app/config.json
+    ports:
+      - "40080:40080"
+
+```
+
+简易把docker-compose中的多数配置都给注释掉，然后利用映射出来的config.json来配置，不然docker是全局的会覆盖
+
+
+
+新建config.json 内容如下
+
+```json
+{
+    "channel_type": "wechatcom_app",
+    "model": "",
+    "open_ai_api_key": "sk-1234",
+    "text_to_image": "dall-e-2",
+    "voice_to_text": "openai",
+    "text_to_voice": "openai",
+    "proxy": "",
+    "hot_reload": false,
+    "single_chat_prefix": [
+      ""
+    ],
+    "single_chat_reply_prefix": "",
+    "group_chat_prefix": [
+      "@gpt"
+    ],
+    "group_name_white_list": [
+      "ALL_GROUP"
+    ],
+    "group_chat_in_one_session": [
+      "ALL_GROUP"
+    ],
+    "image_create_prefix": [
+      "画"
+    ],
+    "speech_recognition": true,
+    "group_speech_recognition": true,
+    "voice_reply_voice": false,
+    "conversation_max_tokens": 2500,
+    "expires_in_seconds": 3600,
+    "character_desc": "你是ChatGPT, 一个由OpenAI训练的大型语言模型, 你旨在回答并解决人们的任何问题，并且可以使用多种语言与人交流。",
+    "temperature": 0.7,
+    "top_p": 1,
+    "subscribe_msg": "感谢您的关注！\n这里是ChatGPT，可以自由对话。\n支持语音对话。\n支持图片输入。\n支持图片输出，画字开头的消息将按要求创作图片。\n支持tool、角色扮演和文字冒险等>丰富的插件。\n输入{trigger_prefix}#help 查看详细指令。",
+    "use_linkai": false,
+    "linkai_api_key": "",
+    "linkai_app_code": "",
+    "wechatcom_corp_id": "企业",
+    "wechatcomapp_token": "企业",
+    "wechatcomapp_secret": "企业",
+    "wechatcomapp_agent_id": "企业",
+    "wechatcomapp_aes_key": "企业",
+    "wechatcomapp_port": 40080
+  }
+
+```
+
+配置好对应的值
+
+
+
+启动
+
+```
+sudo docker-compose up -d
+```
+
+
+
+查看log
+
+```
+sudo docker logs -f chatgpt-on-wechat
+```
+
+
+
+回调测试，正常通过，http也可以
+
+> https://developer.work.weixin.qq.com/devtool/interface/alone?id=14961
+
+![image-20231202165707329](https://img.elmagnifico.tech/static/upload/elmagnifico/202312021657440.png)
+
+其他流程和railway基本一样，各种信任该加的都加上就行了
 
 
 

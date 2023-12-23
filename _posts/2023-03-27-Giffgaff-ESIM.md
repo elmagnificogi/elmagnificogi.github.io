@@ -3,7 +3,7 @@ layout:     post
 title:      "Giffgaff注册ChatGPT,Nobepay支付"
 subtitle:   "英国，虚拟电话卡，接码，ESIM，短信转发，USB直供电"
 date:       2023-03-27
-update:     2023-05-19
+update:     2023-12-21
 author:     "elmagnifico"
 header-img: "img/z1.jpg"
 catalog:    true
@@ -117,34 +117,36 @@ Depay好像出问题了，建议不要使用
 
 
 
-#### Nobepay
+#### ~~Nobepay~~
+
+2023.12.1，基本所有Nobepay都不可以支付了，无论客服怎么说肯定不行，卡不支持，换了七八张卡+七八个IP全都被拒，日本本地人直接在他的网络下都不能支付，卡直接拒绝，所以不要再尝试这个破东西了
 
 ![image-20230330213148231](https://img.elmagnifico.tech/static/upload/elmagnifico/202303302131314.png)
 
-可以在这里开虚拟信用卡，开卡地是美国或者欧洲之类的地方，**但是这里需要实名认证、绑定微信号，并且最低充值也要500RMB**，可能会遇到很多地方用不了的情况下，**Giffgaff无法使用Nobepay531847的卡支付，会提示欺诈，其他卡不一定**，Giffgaff最后我是用国内Visa支付的
+~~可以在这里开虚拟信用卡，开卡地是美国或者欧洲之类的地方，**但是这里需要实名认证、绑定微信号，并且最低充值也要500RMB**，可能会遇到很多地方用不了的情况下，**Giffgaff无法使用Nobepay531847的卡支付，会提示欺诈，其他卡不一定**，Giffgaff最后我是用国内Visa支付的~~
 
-> https://nobepay.com/
+> ~~https://nobepay.com/~~
 
-Nobepay注册还需要一个邀请码，否则过不了，这个可能会过期，过期的话去谷歌搜一个新的即可
+~~Nobepay注册还需要一个邀请码，否则过不了，这个可能会过期，过期的话去谷歌搜一个新的即可~~
 
-下面这个邀请码是2023.5.11的最新邀请码
+~~下面这个邀请码是2023.5.11的最新邀请码~~
 
 ```
 94D6E06C
 ```
 
-但是Nobepay可以过ChatGPT的支付认证
+~~但是Nobepay可以过ChatGPT的支付认证~~
 
 ![image-20230330213032790](https://img.elmagnifico.tech/static/upload/elmagnifico/202303302130835.png)
 
 
 
-交易中的
+~~交易中的~~
 
-- RESERVED，曾经扣费了，然后撤销了，类似支付验证，经常会这样
-- DECLINED_BY_VENDOR，商家拒付
-- EXPIRED，过期
-- PEND，已经支付了，但是还没扣款
+- ~~RESERVED，曾经扣费了，然后撤销了，类似支付验证，经常会这样~~
+- ~~DECLINED_BY_VENDOR，商家拒付~~
+- ~~EXPIRED，过期~~
+- ~~PEND，已经支付了，但是还没扣款~~
 
 ![image-20230407092829623](https://img.elmagnifico.tech/static/upload/elmagnifico/202304070931199.png)
 
