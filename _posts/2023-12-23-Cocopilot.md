@@ -81,7 +81,7 @@ VScode安装插件的链接
 
 ### 其他IDE
 
-其他IDE类似的操作即可，安装Copilot，然后使用Token脚本即可
+目前Copilot支持的IDE只有VScode、Visual Studio、Jetbrains全家桶、Neovim，使用方法类似，直接安装Copilot，然后使用token替换脚本后重启即可
 
 
 
