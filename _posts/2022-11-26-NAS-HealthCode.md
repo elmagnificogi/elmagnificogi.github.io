@@ -8,7 +8,7 @@ author:     "elmagnifico"
 header-img: "img/led.jpg"
 catalog:    true
 tags:
-    - Equips
+    - Equip
     - Software
 ---
 
