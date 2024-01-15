@@ -3,11 +3,11 @@ layout:     post
 title:      "生活家具选购"
 subtitle:   "电器、米家、智能家居、物联网"
 date:       2023-12-31
-update:     2024-01-14
+update:     2024-01-15
 author:     "elmagnifico"
 header-img: "img/z4.jpg"
 catalog:    true
-tobecontinued: true
+tobecontinued: false
 tags:
     - Equip
     - 米家
@@ -227,6 +227,9 @@ tags:
 
 一体式烘干洗衣机，最后选了小米（洗完热乎乎的，立马就能穿的程度，再加上柔顺剂，超级爽）
 
+- 小问题，烘干以后的衣服有股烘干的味道，原来洗衣液的香味没了
+- 毛巾、浴巾、浴衣这种毛毛特别多的衣服很容易造成洗衣机内部堆一堆毛毛
+
 
 
 ### 冰箱
@@ -237,6 +240,10 @@ tags:
 
 - 能效
 - 存储大小
+
+
+
+冰箱最后选了一个TCL的小冰箱，刚好能放下
 
 
 
