@@ -175,7 +175,7 @@ cAP XL ac 这种类型的设备，是专门用来给酒店或者医院、学校�
 
 #### winbox无法账号密码登录
 
-![img](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208051749589.png)
+![img](https://img.elmagnifico.tech/static/upload/elmagnifico/202208051749589.png)
 
 将WinBox中的`Legacy Mode`打勾即可
 
