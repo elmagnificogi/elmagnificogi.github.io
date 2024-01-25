@@ -3,7 +3,7 @@ layout:     post
 title:      "RouterOS的一些基础配置指南"
 subtitle:   "CAPsMAN,NStream,Bridge,Mikrotik,Roaming"
 date:       2023-08-30
-update:     2023-09-06
+update:     2024-01-22
 author:     "elmagnifico"
 header-img: "img/y7.jpg"
 catalog:    true
@@ -79,6 +79,18 @@ IP-Firewall-NAT中，选择`dstnat`，选好协议和目的端口，入口是外
 > https://docs.qq.com/doc/DYkZCRXl1c09JUEpz
 
 还有专业的网桥模式和网桥协议，适合超远距离的网络传输
+
+
+
+## POE
+
+Mikrotik很多老设备都是非标的POE，不支持POE，只有新设备才支持。
+
+cAP ax、ac等设备本身设计上是支持POE IN和POE OUT的，但是POE的输入和输出电流是有限的，所以不能无限串联，他的电流限制让他只能串联1个AP
+
+而且cAP ax实际直接没有桥接ether1，这就导致，默认作为AP，他是不好用的。只有ether2才桥接到了WIFI，ether2接入才能进行配置，这就很蠢了。
+
+正常使用的时候一定要先桥接ether1。
 
 
 
@@ -175,7 +187,7 @@ cAP XL ac 这种类型的设备，是专门用来给酒店或者医院、学校�
 
 #### winbox无法账号密码登录
 
-![img](http://img.elmagnifico.tech:9514/static/upload/elmagnifico/202208051749589.png)
+![img](https://img.elmagnifico.tech/static/upload/elmagnifico/202208051749589.png)
 
 将WinBox中的`Legacy Mode`打勾即可
 

@@ -3,7 +3,7 @@ layout:     post
 title:      "Netch 自建游戏加速器"
 subtitle:   "ss，iplc，v2ray"
 date:       2022-01-19
-update:     2022-10-25
+update:     2024-01-25
 author:     "elmagnifico"
 header-img: "img/bg5.jpg"
 catalog:    true
@@ -19,6 +19,10 @@ tags:
 > https://github.com/FQrabbit/SSTap-Rule
 
 不过我知道的比较晚，毕竟是腾讯加速器会员，平常也不靠自建的，但是之前八九月份的时候，游戏加速器被未成年搞了一波，腾讯加速器直接新游戏一个不加，外网游戏更别想了，我5月份才充的会员，就这么给我黑了。气得要死，那会要玩暗黑2，只好再弄个代理，那会还在用SSTap，然后发现提取规则好像不生效，掉线问题依旧(其实是暗黑服务器太多了，每次连接基本都是不同的ip，而且可能段都不同，根本没代理到)，直到后来发现了Netch，真是好用。
+
+
+
+**Netch基本被淘汰了，请别用了，现在大部分代理软件比如V2rayN、Clash等早就把类似Netch的功能做进去了，没有Netch这么多bug**
 
 
 

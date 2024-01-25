@@ -1,9 +1,9 @@
 ---
 layout:     post
 title:      "群晖NAS ESTAT扩容"
-subtitle:   "Synology"
+subtitle:   "Synology，SSL，证书"
 date:       2024-01-15
-update:     2024-01-15
+update:     2024-01-23
 author:     "elmagnifico"
 header-img: "img/z5.jpg"
 catalog:    true
@@ -48,6 +48,22 @@ tags:
 ![image-20240115161610668](https://img.elmagnifico.tech/static/upload/elmagnifico/202401151616722.png)
 
 更便宜一些，可惜支持最多5盘位，更多就不行了
+
+
+
+## 证书
+
+群晖添加证书
+
+![image-20240123155419033](https://img.elmagnifico.tech/static/upload/elmagnifico/202401231554107.png)
+
+这里的私钥和证书都用APACHE的格式，crt和key即可
+
+![image-20240123155440736](https://img.elmagnifico.tech/static/upload/elmagnifico/202401231554790.png)
+
+导入完成以后修改系统默认证书配置，然后使用域名登录即可看到证书已经被使用了
+
+![image-20240123155543801](https://img.elmagnifico.tech/static/upload/elmagnifico/202401231555847.png)
 
 
 
