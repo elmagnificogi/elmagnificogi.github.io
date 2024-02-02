@@ -231,10 +231,14 @@
         }
     }
     createtime();
-    {% if dynamic-time %}
-    setInterval("createtime()",1000);
-    {% endif %}
 </script>
+
+<!-- 动态时间 -->
+{% if dynamic-time %}
+<script>
+    setInterval("createtime()",1000);
+</script>    
+{% endif %}
 
 <!-- back-top -->
 <script type="module">
