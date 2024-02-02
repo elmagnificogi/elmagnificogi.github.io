@@ -231,14 +231,10 @@
         }
     }
     createtime();
-</script>
-
-<!-- 动态时间 -->
-{% if dynamic-time %}
-<script>
+    {% if site.dynamic-time %} 
     setInterval("createtime()",1000);
-</script>    
-{% endif %}
+    {% endif %}
+</script>
 
 <!-- back-top -->
 <script type="module">
@@ -260,7 +256,7 @@
   });
   </script>
 
-{% if dynamic-progress %}
+{% if site.dynamic-progress %}
 <!-- 文章进度条 -->
 <script type="module">
     /* 顶部进度条 */
@@ -302,7 +298,7 @@ new google.translate.TranslateElement({
 </script>
 {% endif %}
 
-{% if dynamic-ribbon %}
+{% if site.dynamic-ribbon %}
 <!-- ribbon -->
 <script type="text/javascript" src="/js/ribbonDynamic.js"></script>
 {% endif %}
