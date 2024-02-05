@@ -103,7 +103,7 @@ quit
 一样使用这个代码进行更新就行了
 
 ```
-app_update 2394010 validate
+steamcmd +login anonymous +app_update 2278520 validate +quit
 ```
 
 
@@ -149,18 +149,7 @@ app_update 2394010 validate
 
 服务器正常启动提示：
 
-```
-[OnlineProviderSteam] finished transition from 'Uninitialized' to 'Initialized' (current='Initialized')!
-[OnlineProviderSteam] 'JoinOrCreateGame' (up)!
-[OnlineProviderSteam] 'SetLobbyData' (up)!
-[OnlineProviderSteam] 'JoinLocalPlayers' (up)!
-[OnlineProviderSteam] 'ConnectToPeers' (up)!
-[savedata] Start 'Open Container' on container 3ad85aea
-[OnlineProviderSteam] finished transition from 'Initialized' to 'InGame' (current='InGame')!
-[savedata] Updating 'Open Container' on container 3ad85aea
-[savedata] Finished 'Open Container' on container 3ad85aea
-[Session] 'HostOnline' (up)!
-[Session] finished transition from 'Lobby' to 'Host_Online' (current='Host_Online')!
+```bat
 [ecss] TaskQueue:  workerCount:3   taskWorkerCount:2   0000000000000000000000000000000000000000000000000000000000000110
 [TerraformingEfficiencyRegistry] Finished loading.
 [ecs] Nobuild zones changed
@@ -175,9 +164,19 @@ app_update 2394010 validate
 [guid_registry] VoxelBlueprintRegistry: Finished loading entry ec28c5d5-9d23-413e-b238-781157fb2f65.
 [guid_registry] VoxelBlueprintRegistry: Finished loading entry 5d9bd376-5b7f-4db4-8f2e-6a3e564194b1.
 [guid_registry] VoxelBlueprintRegistry: Finished loading entry 34aa0c3c-9a88-4f8b-a070-64827a5fdabf.
-[server] Load deserialization took 2.88 s
-
-
+[online] Server connected to Steam successfully
+[online] Server is not VAC Secure!
+[online] Server SteamId: 90180418385690629
+[online] Public ipv4: 你的ip
+[OnlineProviderSteam] 'Initialize' (up)!
+[OnlineProviderSteam] 'JoinOrCreateGame' (up)!
+[OnlineProviderSteam] 'SetLobbyData' (up)!
+[OnlineProviderSteam] 'JoinLocalPlayers' (up)!
+[OnlineProviderSteam] 'ConnectToPeers' (up)!
+[OnlineProviderSteam] finished transition from 'Uninitialized' to 'InGame' (current='InGame')!
+[Session] 'HostOnline' (up)!
+[Session] finished transition from 'Lobby' to 'Host_Online' (current='Host_Online')!
+[server] Load deserialization took 2.83 s
 ```
 
 
@@ -196,6 +195,29 @@ app_update 2394010 validate
 
 
 
+正常进入后会有以下提示
+
+```bat
+[tracking] Post Request failed with error: request time out
+[online] Session accepted with peer ( id 你的steamid ).
+[online] Added Peer #0.
+[online] Client '你的steamid' authenticated by steam
+[session] Unable to find machine for peer 0.
+[SessionPlayer] started transition from 'Free' to 'Remote_InSession' (current='<invalid>')!
+[session] Remote player added. Player handle: 0(0)
+[SessionPlayer] 'Reserve' (up)!
+[SessionPlayer] 'WaitForJoin' (up)!
+[SessionPlayer] finished transition from 'Free' to 'Remote_InSession' (current='Remote_InSession')!
+Received new Character save game
+[server] Machine '1': Player '0(0)' logged in
+[ecs] readEntitySerializationContext: Templates: 2  Components: 169  Size: 41,064
+[ecss] message BuildingZones is big: 3,018
+[ecss] Send BuildingZones
+[g38_knowledge::handleUnlockEvents] New world knowledge unlocked '9841fa85'
+```
+
+
+
 ## 常见问题
 
 出现加入服务器提示错误，重启一下服务器，有个什么缓存不太正确
@@ -208,15 +230,17 @@ app_update 2394010 validate
 
 ![image-20240205184727843](https://img.elmagnifico.tech/static/upload/elmagnifico/202402051847881.png)
 
+还有一个可能显卡驱动会导致这里一直转圈，更新显卡驱动以后再进入就好了
 
 
-## 管理
 
-### 管理员指令
+服务器经常启动不了，建议多启动几次，说不定哪次就行了
+
+
 
 ## Summary
 
-...
+垃圾服务器
 
 
 
