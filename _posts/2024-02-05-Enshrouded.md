@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "雾锁王国"
+title:      "雾锁王国服务器搭建"
 subtitle:   "steam、Enshrouded、英灵神殿"
 date:       2024-02-05
 update:     2024-02-05
