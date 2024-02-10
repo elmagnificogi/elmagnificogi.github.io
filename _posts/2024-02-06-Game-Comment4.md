@@ -7,7 +7,7 @@ update:     2024-02-10
 author:     "elmagnifico"
 header-img: "img/play.jpg"
 catalog:    true
-tobecontinued: true
+tobecontinued: false
 tags:
     - Game
 ---
