@@ -3,7 +3,7 @@ layout:     post
 title:      "解决便笺及其他UWP无法同步问题"
 subtitle:   "Loopback,Sticky Notes,v2ray,uu"
 date:       2022-11-21
-update:     2023-02-04
+update:     2024-02-18
 author:     "elmagnifico"
 header-img: "img/line-head-bg.jpg"
 catalog:    true
@@ -13,7 +13,9 @@ tags:
 
 ## Foreword
 
-便笺，windows自带的程序，非常好用，可以自动同步，也简单易用。
+便笺，windows自带的程序，非常好用，可以自动同步，也简单易用，同时在One Note的手机端也可以同时同步。
+
+但是PC版本中One Note的UWP版本是不显示notes的，只有完整版One Note才能看到
 
 
 
@@ -68,6 +70,18 @@ Timestamp: 2022-11-18T22:41:22Z
 Windows加速只有一个选项，就是Windows Xbox App，加速以后，再进行同步，果然全部正常了
 
 ![](https://img.elmagnifico.tech/static/upload/elmagnifico/202211211419752.png)
+
+#### 登录失败
+
+还有一种情况会造成无法正常同步，会提示登录失败，这个是由于长期未登录造成的token过期了，这个时候重新登陆一次Microsoft就行了
+
+```
+https://login.live.com/
+```
+
+一般会要验证一下登录，手机或者二次验证，验证成功以后，Sticky就没问题了
+
+
 
 ## 解决代理问题
 
