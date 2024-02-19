@@ -3,7 +3,7 @@ layout:     post
 title:      "RouterOS的一些基础配置指南"
 subtitle:   "CAPsMAN,NStream,Bridge,Mikrotik,Roaming"
 date:       2023-08-30
-update:     2024-01-22
+update:     2024-02-19
 author:     "elmagnifico"
 header-img: "img/y7.jpg"
 catalog:    true
@@ -165,6 +165,58 @@ CAPsMA基本就是RouterOS最接近AC的管理模式了，还有一个监控的�
 
 
 
+## Firewall
+
+![image-20240219153330060](https://img.elmagnifico.tech/static/upload/elmagnifico/202402191533157.png)
+
+RouterOS禁止windows系列更新
+
+```
+/ip firewall raw
+add action=drop chain=prerouting content=update.microsoft.com comment=”Blocking Windows Update”
+add action=drop chain=prerouting content=download.microsoft.com
+add action=drop chain=prerouting content=download.windowsupdate.com
+add action=drop chain=prerouting content=windowsupdate.com
+add action=drop chain=prerouting content=wustat.windows.com
+add action=drop chain=prerouting content=ntservicepack.microsoft.com
+add action=drop chain=prerouting content=stats.microsoft.com
+add action=drop chain=prerouting content=wustat.windows.com
+add action=drop chain=prerouting content=windowsupdate.microsoft.com
+```
+
+或者通过filter过滤
+
+```
+FILTERS
+
+/ip firewall filter
+add action=reject chain=forward comment=”block_WinUp” content=update.microsoft.com disabled=no reject-with=icmp-network-unreachable
+add action=reject chain=forward comment=”block_WinUp” content=download.microsoft.com disabled=no reject-with=icmp-network-unreachable
+add action=reject chain=forward comment=”block_WinUp” content=download.windowsupdate.com disabled=no reject-with=icmp-network-unreachable
+add action=reject chain=forward comment=”block_WinUp” content=wustat.windows.com disabled=no reject-with=icmp-network-unreachable
+add action=reject chain=forward comment=”block_WinUp” content=ntservicepack.microsoft.com disabled=no reject-with=icmp-network-unreachable
+add action=reject chain=forward comment=”block_WinUp” content=stats.microsoft.com disabled=no reject-with=icmp-network-unreachable
+add action=reject chain=forward comment=”block_WinUp” content=windowsupdate.com disabled=no reject-with=icmp-network-unreachable
+```
+
+
+
+还有一种7层过滤REGEXP Layer 7
+
+```
+/ip firewall layer7-protocol
+add name=”windows update ” regexp=”^.+(http://windowsupdate.microsoft.com|http://.windowsupdate.microsoft.\ com|https://.windowsupdate.microsoft.com|http://.update.microsoft.com|https://.update.microsoft.com|\
+http://.windowsupdate.com|http://download.windowsupdate.com|http://download.microsoft.com|http://.dow\
+nload.windowsupdate.com).*\$”
+
+/ip firewall filter
+add action=drop chain=forward comment=”windows update Drop” layer7-protocol=”windows update ” src-address=\
+192.168.xxx.0/24
+add action=drop chain=input dst-port=21-23 protocol=tcp
+```
+
+
+
 ## 疑难问题
 
 
@@ -232,3 +284,5 @@ cAP XL ac 这种类型的设备，是专门用来给酒店或者医院、学校�
 > https://timigate.com/2018/10/use-mikrotik-capsman-to-manage-all-access-points-and-enable-roaming.html
 >
 > https://forum.mikrotik.com/viewtopic.php?t=199764
+>
+> https://forum.mikrotik.com/viewtopic.php?t=176390
