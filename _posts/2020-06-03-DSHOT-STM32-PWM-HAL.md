@@ -42,6 +42,12 @@ DSHOT将模拟信息作为数字信号来处理，自然就让电调也进一步
 
 
 
+#### DSHOT支持
+
+最初DSHOT是kiss飞控的电调开发者提出来的，后来大家广泛支持了DSHOT协议，由于BLHli使用的最广，后续大部分BLH32的电调都支持了。后续kiss还基于DSHOT开发一些私有的command，这一部分没有被BLH接受，所以存在两部分不同的DSHOT版本，Betafly的代码中可以看到类似的区分
+
+
+
 ## DSHOT协议
 
 DSHOT协议本身将原本的模拟信号转变成了数字信号，并且加入了校验位，其单loop时间足够快，分辨率高，有校验，同时还有telemetry作为反馈。
@@ -56,9 +62,10 @@ DSHOT本身一个完整控制帧，是16bits，其中11bits用来表示油门，
 
 - 0，用于电调解锁，1-47是给telemetry用的
 - 1-5，电调鸣叫，低频->高频
+- 6，ESC 版本信息或者是序列号，通过telemetry返回
 - 7，8是对应两个旋转方向
 - 9，10，3d模式开关，9关，10开
-- 11，设置esc 配置
+- 11，获取esc 配置
 - 12，保存esc 配置
 - 20，21也是切换自选方向，不知道和7，8有什么区别
 - 22-29，3个LED的亮灭控制
@@ -401,4 +408,8 @@ static void TIM_DMAPeriodElapsedCplt(DMA_HandleTypeDef *hdma)
 > https://www.speedgoat.com/help/slrt/page/io_main/refentry_dshot_usage_notes
 >
 > https://blck.mn/2016/11/dshot-the-new-kid-on-the-block/
+>
+> http://kiss.flyduino.net/dshot-new-digital-protocol-for-kiss/
+>
+> 
 
