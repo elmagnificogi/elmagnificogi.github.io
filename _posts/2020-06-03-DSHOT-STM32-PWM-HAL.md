@@ -1,9 +1,9 @@
 ---
 layout:     post
-title:      "STM32 PWM DSHOT驱动"
-subtitle:   "HAL，DSHOT1200"
+title:      "DSHOT指南"
+subtitle:   "HAL，DSHOT1200，STM32 PWM DSHOT驱动"
 date:       2020-06-03
-update:     2023-04-17
+update:     2023-04-23
 author:     "elmagnifico"
 header-img: "img/sensor-head-bg.jpg"
 catalog:    true
@@ -67,10 +67,12 @@ DSHOT本身一个完整控制帧，是16bits，其中11bits用来表示油门，
 - 9，10，3d模式开关，9关，10开
 - 11，获取esc 配置
 - 12，保存esc 配置
+- 13，telemetry扩展信息打开，就是反馈温度、电压、电流
+- 14，扩展信息关闭
 - 20，21也是切换自选方向，不知道和7，8有什么区别
 - 22-29，3个LED的亮灭控制
-- 30，音频流传输开关
-- 31，静音模式开关
+- 30，音频流传输开关，仅限kiss电调
+- 31，静音模式开关，仅限kiss电调
 
 - 48到2047则是对应真实的油门0-1999，这样油门就有2000的分辨率，大部分情况下应该说够用了。
 
@@ -200,7 +202,7 @@ HAL_StatusTypeDef HAL_TIM_PWM_Start(TIM_HandleTypeDef *htim, uint32_t Channel)
 
 
 
-这里是对应的DMA的PWM输出方式，可以看到DMA PWM开始工作的要求是timer必须是ready状态的，而实际上只要开了一个通道，就会导致他将timer状态修改成busy，然后其他通道全都用不了。
+这里是对应的DMA的PWM输出方式，DMA PWM开始工作的要求是timer必须是ready状态的，而实际上只要开了一个通道，就会导致他将timer状态修改成busy，然后其他通道全都用不了。
 
 无论DMA输出模式是normal还是circle模式，都会被这个busy给强制退出
 
@@ -411,5 +413,5 @@ static void TIM_DMAPeriodElapsedCplt(DMA_HandleTypeDef *hdma)
 >
 > http://kiss.flyduino.net/dshot-new-digital-protocol-for-kiss/
 >
-> 
+> https://github.com/bitdump/BLHeli/issues/234
 

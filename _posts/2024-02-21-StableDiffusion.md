@@ -1,9 +1,9 @@
 ---
 layout:     post
-title:      "代码格式化工具"
+title:      "AI辅助艺术设计"
 subtitle:   "Astyle、Artistic Style、Clang-Format、CoolFormat"
 date:       2024-02-19
-update:     2024-02-19
+update:     2024-02-23
 author:     "elmagnifico"
 header-img: "img/bg1.jpg"
 catalog:    true
@@ -14,7 +14,7 @@ tags:
 
 ## Foreword
 
-研究一下如何把Stability AI融合到目前的艺术设计的工作流中
+研究一下如何把Stability AI相关的AI产品融合到目前的艺术设计的工作流中
 
 
 
