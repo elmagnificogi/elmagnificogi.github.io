@@ -199,3 +199,5 @@ KVM最大的问题在于，基本找不到4K60Hz的无线带Hub级别的产品
 > https://item.taobao.com/item.htm?id=552887082492
 >
 > https://detail.tmall.com/item.htm?id=529388031713
+>
+> https://www.reddit.com/r/AskBattlestations/comments/wejqcv/someone_please_tell_me_excatly_how_linus_moved/
