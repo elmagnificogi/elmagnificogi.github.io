@@ -146,6 +146,8 @@ KVM最大的问题在于，基本找不到4K60Hz的无线带Hub级别的产品
 
 ## HDBaseT
 
+![image-20240301111940128](https://img.elmagnifico.tech/static/upload/elmagnifico/202403011119046.png)
+
 有一些投影或者屏幕支持了HDBaseT，简单说他就是可以用网线直接传输视频、USB、音频、串口、IR等信号，大概范围是100m
 
 目前也有一些成熟的产品了
