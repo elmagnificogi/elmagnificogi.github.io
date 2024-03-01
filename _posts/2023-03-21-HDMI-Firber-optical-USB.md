@@ -1,9 +1,9 @@
 ---
 layout:     post
 title:      "无线HDMI还是有线HDMI，亦或是KVM?"
-subtitle:   "毫米波，光纤HDMI，4线，8线，有源USB延迟线"
+subtitle:   "HDBaseT，雷电4，毫米波，光纤HDMI，4线，8线，有源USB延迟线"
 date:       2023-03-21
-update:     2023-04-26
+update:     2024-03-01
 author:     "elmagnifico"
 header-img: "img/z4.jpg"
 catalog:    true
@@ -141,6 +141,36 @@ KVM最大的问题在于，基本找不到4K60Hz的无线带Hub级别的产品
 其次就是价格，KVM的价格大概是HDMI线+USB线价格的三到四倍左右，功能集成了，就是太贵了。
 
 如果是有线KVM，虽然能解决无线的延迟问题，但是至今没看到一个能做到长距离4K60的有线KVM（有3m内60Hz的）
+
+
+
+## HDBaseT
+
+有一些投影或者屏幕支持了HDBaseT，简单说他就是可以用网线直接传输视频、USB、音频、串口、IR等信号，大概范围是100m
+
+目前也有一些成熟的产品了
+
+![image-20240301110704732](https://img.elmagnifico.tech/static/upload/elmagnifico/202403011107779.png)
+
+最高可以支持到4K60Hz，家庭使用绰绰有余
+
+
+
+## 光纤-雷电4
+
+![image-20240301111049751](https://img.elmagnifico.tech/static/upload/elmagnifico/202403011110871.png)
+
+这个是Linus实现人机分离的设备，这一套价格十分高，要求也非常严苛。
+
+首先是Caldigit TS4 Thunderbolt的类似KVM的集线器，只不过走的是雷电接口
+
+关键就Corning Optical Thunderbolt Cable，康宁的光纤雷电线，这个线国内基本买不到，而且国外价格也非常逆天，非常小众的领域。
+
+其次，想要用雷电接口就必须PC支持雷电，目前各大主板厂商原生主板并不一定有满血雷电口，想要满血口，必须这个厂商有对应的雷电拓展PCIE的板子，由于是专属，所以必须是谁的主板就用谁的，不能混用。
+
+再次Linus在这个上面又额外加了一条光纤的DP线，因为雷电口带宽还是有限的，会用这个的一定是有独显的，那么独显如果再转发给雷电口，再传到远端就显得有点多余了。所以这里的雷电就变成了一个简单的接口HUB，只是这个速度很高而已。
+
+这一套价格实在是太高了，除了Linus应该没人会用吧
 
 
 
