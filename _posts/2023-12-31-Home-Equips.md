@@ -3,7 +3,7 @@ layout:     post
 title:      "家具选购踩坑记录"
 subtitle:   "电器、米家、智能家居、物联网"
 date:       2023-12-31
-update:     2024-01-23
+update:     2024-03-04
 author:     "elmagnifico"
 header-img: "img/z4.jpg"
 catalog:    true
@@ -179,11 +179,15 @@ tags:
 
 还是选了个木质衣柜，整体看起来好看一点，其他一些简易金属衣柜要么太轻，要么不结实
 
+- 便宜没好货，面板上细看有很多瑕疵
+
 
 
 #### 鞋柜
 
 ![image-20240114124119962](https://img.elmagnifico.tech/static/upload/elmagnifico/202401141241023.png)
+
+- 层高还是偏低了（13cm），最好高一些18cm左右
 
 - 带座凳即可，鞋倒没几个
 
