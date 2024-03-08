@@ -3,7 +3,7 @@ layout:     post
 title:      "双向DSHOT with RPM feedback全指南"
 subtitle:   "Bidirectional DSHOT，单线DSHOT"
 date:       2023-04-07
-update:     2023-08-14
+update:     2024-03-08
 author:     "elmagnifico"
 header-img: "img/x1.jpg"
 catalog:    true
@@ -40,12 +40,19 @@ Bidirectional DSHOT的一些特性
 - 单线、双向传输
 - Telemetry 只有转速信息，并且传回的内容是eRPM/100以后的值
 - Telemetry 返回的数据是GCR格式的，且起始位必然是拉低的
-- 校验位计算最后需要翻转BIT
-- 最终DSHOT数据帧需要翻转，0和1电平翻转，可以通过修改PWM极限实现
+- 校验位计算最后需要翻转4位BIT
+- Bidirectional  DSHOT的最终数据输出电平是和普通DSHOT相反的
 - DSHOT 600 及以上不太支持，实现困难，TIM采样困难
 - 32位 BLH 需要32.7版本以后的 
 - 8或者16位 BLH_S 需要使用Bluejay版本的固件
 - ESC上电以后需要稳定输出一会才能正确回复Telemetry，否则可能单次请求Telemetry不会回复
+- **一旦发送的是Bidirectional DSHOT帧，那么必然会回复Telemetry，无论是否开启Telemetry**
+
+
+
+![image-20240308152416808](https://img.elmagnifico.tech/static/upload/elmagnifico/202403081524883.png)
+
+注意，由于Bidirectional DSHOT的帧是需要反转的，所以0，1的表示在这里反过来了
 
 
 
@@ -1211,6 +1218,12 @@ Telemetry的回复时间是发送DSHOT帧之后，**31us左右**，就会回复�
 由于**回复响应是31us**左右，而Telemetry的**回复帧长度大概在52us**左右，~~那么剩下留给输入切换到输出的时间就是**4-23us**，尽量不要卡这种极限，容易出现无法识别的情况。~~
 
 **以上数值都是基于我的DSHOT300来测试的，我此时的DSHOT单bit是3.3us周期**
+
+
+
+![image-20240308152530347](https://img.elmagnifico.tech/static/upload/elmagnifico/202403081525395.png)
+
+DSHOT600的情况下，一个循环大概是249.5us，换算下来DSHOT控制和获取Telemetry的频率是4000Hz （其实换成DSHOT300也是大概4000Hz，这个主要是受限于主控的GPIO和TIM在输入输出切换的时间，实际上具体是DSHOT反倒没多大影响）
 
 
 
