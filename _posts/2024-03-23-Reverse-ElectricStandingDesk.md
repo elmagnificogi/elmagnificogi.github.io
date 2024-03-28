@@ -224,9 +224,21 @@ LQFP封装，32脚
 
 ![image-20240327001841746](https://img.elmagnifico.tech/static/upload/elmagnifico/202403270018884.png)
 
+- 图中托架千万别买，非常软，有很大的坠落风险
+
 由于升降的问题，这个会导致如果有东西放在地上，可能会扯到线什么的，所以最好的办法是，附带一个主机托架，固定在桌下，随桌一起动，排插什么的自然也是，最后只有2根线是连接到墙插的，其他都是不受升降影响的。
 
 ![image-20240327001758586](https://img.elmagnifico.tech/static/upload/elmagnifico/202403270017639.png)
+
+
+
+由于升降桌中段必然会出现支架和桌面有一定缝隙，这个缝隙大概有2mm左右，刚好是各种布带或者魔术带可以穿过的距离
+
+![image-20240328235022388](https://img.elmagnifico.tech/static/upload/elmagnifico/202403282350483.png)
+
+建议直接买4cm宽的魔术带，然后直接把主机挂起来即可，稳当而且减震，多余的魔术带用来理线再好不过了
+
+
 
 ## Summary
 
