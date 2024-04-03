@@ -3,7 +3,7 @@ layout:     post
 title:      "电动升降桌逆向，接入米家"
 subtitle:   "STC，90°直接桌，拐角桌"
 date:       2024-03-23
-update:     2024-03-27
+update:     2024-04-04
 author:     "elmagnifico"
 header-img: "img/bg6.jpg"
 catalog:    true
@@ -52,6 +52,8 @@ tags:
 ![img](https://img.alicdn.com/imgextra/i4/1618172521/O1CN01oMd0Va1UUfPwPUhSk_!!1618172521-2-ampmedia.png)
 
 注意桌面背面最好也要抛光一下，可以不上漆，但是要抛光，不然全都是木屑渣滓，弄不干净的，抛光这个活个人做不了，最好是工厂做好
+
+如果自己有打磨器也可以自己磨，最好在还没安装前打磨，然后上漆，木漆很便宜，而且很多种颜色可以选
 
 
 
@@ -150,8 +152,6 @@ LQFP封装，32脚
 
 
 
-
-
 ## 米家模组
 
 ![image-20240323211835236](https://img.elmagnifico.tech/static/upload/elmagnifico/202403232118271.png)
@@ -238,7 +238,7 @@ LQFP封装，32脚
 
 由于升降桌中段必然会出现支架和桌面有一定缝隙，这个缝隙大概有2mm左右，刚好是各种布带或者魔术带可以穿过的距离
 
-![image-20240328235022388](https://img.elmagnifico.tech/static/upload/elmagnifico/202403282350483.png)
+![image-20240404012250541](https://img.elmagnifico.tech/static/upload/elmagnifico/202404040122655.png)
 
 建议直接买4cm宽的魔术带，然后直接把主机挂起来即可，稳当而且减震，多余的魔术带用来理线再好不过了
 
