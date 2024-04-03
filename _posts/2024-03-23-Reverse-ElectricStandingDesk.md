@@ -49,6 +49,10 @@ tags:
 
 这种图表都比较笼统，实际上同一种树也有不同亚种，也有很多细小分支，属性上还是有很大范围差异的，还是以实际体验为准。
 
+![img](https://img.alicdn.com/imgextra/i4/1618172521/O1CN01oMd0Va1UUfPwPUhSk_!!1618172521-2-ampmedia.png)
+
+注意桌面背面最好也要抛光一下，可以不上漆，但是要抛光，不然全都是木屑渣滓，弄不干净的，抛光这个活个人做不了，最好是工厂做好
+
 
 
 ## 控制器
@@ -237,6 +241,14 @@ LQFP封装，32脚
 ![image-20240328235022388](https://img.elmagnifico.tech/static/upload/elmagnifico/202403282350483.png)
 
 建议直接买4cm宽的魔术带，然后直接把主机挂起来即可，稳当而且减震，多余的魔术带用来理线再好不过了
+
+
+
+理线架
+
+![image-20240330003132502](https://img.elmagnifico.tech/static/upload/elmagnifico/202403300031645.png)
+
+价格极低，长度可以剪裁，沿桌边来一圈刚刚好
 
 
 
