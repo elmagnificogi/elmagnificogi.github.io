@@ -3,11 +3,14 @@ layout:     post
 title:      "Youtube 自动英文字幕"
 subtitle:   "GreasyFork,Tampermonkey,AutoSubtitles"
 date:       2019-03-27
+update:     2024-04-04
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"
 catalog:    true
 tags:
-    - Tools
+    - JS
+    - Chrome
+    - Tampermonkey
 ---
 
 ## Foreword
@@ -59,6 +62,10 @@ tags:
     $('video').on('loadstart', onLoadStart).trigger('loadstart');
 })();
 ```
+
+2024年更新了一下，之前中文也会默认点出来字幕很蠢，这次给他去掉了
+
+
 
 ## GreasyFork
 
