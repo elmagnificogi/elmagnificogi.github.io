@@ -36,11 +36,14 @@ tags:
     function translateToChinese(){
         var sub = $('[role="menuitem"]:contains("字幕")');
         if(!sub.length) return;
+        console.log("点击")
         sub.click();
         var subc = $('[role="menuitemradio"]:contains("英语（自动生成）")');
         if (subc.length) {
             subc.click();
         } else {
+            // clouse
+            sub.click();
             var autoTrans = $('[role="menuitemradio"]:contains("英语（自动生成）")');
             if (!autoTrans.length) return;
             autoTrans.click();
