@@ -142,7 +142,7 @@ reboot
 
 
 
-![image-20240405021603514](C:\Users\elmag\AppData\Roaming\Typora\typora-user-images\image-20240405021603514.png)
+![image-20240405021603514.png](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20240405021603514.png)
 
 现在就可以升级到最新版了，如果不小心出厂化了ssh密码会变回去，需要继续用sn计算，至于改密码就很简单了
 
