@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "电动升降桌逆向，接入米家"
-subtitle:   "STC，90°直接桌，拐角桌"
+subtitle:   "STC，90°直角桌，拐角桌"
 date:       2024-03-23
 update:     2024-04-04
 author:     "elmagnifico"
@@ -240,7 +240,7 @@ LQFP封装，32脚
 
 ![image-20240404012250541](https://img.elmagnifico.tech/static/upload/elmagnifico/202404040122655.png)
 
-建议直接买4cm宽的魔术带，然后直接把主机挂起来即可，稳当而且减震，多余的魔术带用来理线再好不过了
+建议直接买4cm宽的魔术带，然后把主机挂起来即可，稳当而且减震，多余的魔术带用来理线再好不过了
 
 
 
