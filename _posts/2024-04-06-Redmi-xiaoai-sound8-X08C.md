@@ -3,15 +3,13 @@ layout:     post
 title:      "Redmi小爱音响8刷机和安装第三方APP"
 subtitle:   "payload_dumper，mtkclient，root权限，adb"
 date:       2024-04-06
-update:     2024-04-06
+update:     2024-04-07
 author:     "elmagnifico"
 header-img: "img/bg9.jpg"
 catalog:    true
 tobecontinued: true
 tags:
     - 米家
-    - BE6500Pro
-    - Router
 ---
 
 ## Foreword
@@ -48,9 +46,15 @@ Redmi小爱音响8原价400多买的，上了大当，APP有限，而且视频�
 
  
 
-理论上说直接用最新版的去修改，也能开启root和adb，所以这里直接用最新的，而不用什么开发板了
+理论上说直接用最新版的去修改，也能开启root和adb，暂时还没掌握方法
 
 > https://cdn.cnbj1.fds.api.mi-img.com/xiaoqiang/rom/x08c/payload_2.19.102_09480.bin
+
+
+
+目前只有测试固件可以开启adb、安装第三方软件，而测试固件通过这里看到的都是增量更新，要整合比较麻烦，这里直接推荐一个完整测试包
+
+> https://cdn.cnbj1.fds.api.mi-img.com/xiaoqiang/rom/x08c/payload_2.10.61_5373b.bin
 
 
 
@@ -198,7 +202,7 @@ reconnecting to stage2 with highter speed
 
 
 
-这里使用`payload_2.17.31_5e8bb.bin`解开后的文件，将他们刷到其中
+这里使用`payload_2.10.61_5373b.bin`解开后的文件，将他们刷到其中
 
 ![image-20240406212210281](https://img.elmagnifico.tech/static/upload/elmagnifico/202404062122328.png)
 
@@ -228,7 +232,41 @@ reconnecting to stage2 with highter speed
 
 ## 开启adb、安装第三方软件
 
- 
+ 刷完进入系统以后，按住关机和音量+，即可打开安卓系统设置
+
+系统-高级-关于手机-版本号（连点七下），即可开启开发者模式
+
+返回上一级菜单，可以看到开发者选项，打开，找到默认USB设置，选择文件传输
+
+![image-20240407002414993](https://img.elmagnifico.tech/static/upload/elmagnifico/202404070024095.png)
+
+然后就可以通过电脑进入到系统内部存储空间中了，在这里把想要安装的APP，放进去即可
+
+
+
+再次回到设置里，打开存储，选择文件，就看到刚才的APP了，安装即可
+
+设置-关于与帮助-开发测试，这里选择第三方软件即可（如果啥都没安装，这里是黑屏）
+
+
+
+试了一下blibili HD版本装不上，正常版本装上去卡的要死，建议别装
+
+
+
+adb，在此时已经可以使用了
+
+![image-20240407004613713](https://img.elmagnifico.tech/static/upload/elmagnifico/202404070046740.png)
+
+
+
+安装bilibili
+
+```
+adb install bl2.apk
+```
+
+![image-20240407005142575](https://img.elmagnifico.tech/static/upload/elmagnifico/202404070051604.png)
 
 
 
@@ -250,14 +288,20 @@ reconnecting to stage2 with highter speed
 
 
 
-现在的线刷模式有点麻烦，过于浪费时间了
-
-
+试了一圈，发现非常难用，还是退回了正式版，正式版相对流畅太多了
 
 ## Quote
 
 > https://post.smzdm.com/p/a25dzm9d/
 >
-> https://www.bilibili.com/video/BV1d94y1s7oq/?vd_source=fe2e37e9c6518671631012d39f18a581
+> https://www.bilibili.com/video/BV1d94y1s7oq
 >
 > https://www.bilibili.com/read/cv25905108/
+>
+> https://www.bilibili.com/video/BV1g44y1e7Md
+>
+> https://blog.csdn.net/weixin_40883833/article/details/132266091
+>
+> https://blog.csdn.net/weixin_40883833/article/details/131258378
+>
+> https://blog.csdn.net/weixin_40883833/article/details/131258378
