@@ -186,27 +186,7 @@ reconnecting to stage2 with highter speed
 
 
 
-[17:35:14]: [Errno 10060] Operation timed out
-
-[17:35:16]: [Errno 10060] Operation timed out
-
-[17:35:18]: [Errno 10060] Operation timed out
-
-[17:35:19]: [Errno 10060] Operation timed out
-
-[17:35:21]: [Errno 10060] Operation timed out
-
-[17:35:23]: [Errno 10060] Operation timed out
-
-[17:35:25]: [Errno 10060] Operation timed out
-
-[17:35:27]: [Errno 10060] Operation timed out
-
-[17:35:28]: [Errno 10060] Operation timed out
-
-[17:35:30]: [Errno 10060] Operation timed out
-
-[17:35:30]: Please disconnect, start mtkclient and reconnect.
+正常情况下这里跳转以后就会进入Bootrom模式，然后就可以读取分区信息，重新写入了，想改啥都能行，但是他闪退了...
 
 
 
@@ -227,6 +207,10 @@ reconnecting to stage2 with highter speed
 > http://flying1008.top/
 
 之前应该是小爱音响留了一个推送固件的接口，被人发现了，就可以随便推送，这个网站就直接提供了这个功能，不过可惜后续都被封了
+
+
+
+现在的线刷模式有点麻烦，而且还不容易成功
 
 
 
