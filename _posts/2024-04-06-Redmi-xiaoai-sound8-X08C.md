@@ -158,7 +158,7 @@ PreLoad是MTKClient能识别的
 
 ![image-20240406163402929](https://img.elmagnifico.tech/static/upload/elmagnifico/202404061634953.png)
 
-DA不知道是什么模式的USB
+在上面的情况下，再次重启，按住音量+，又会切换到这个DA USB，DA不知道是什么模式的USB
 
 
 
