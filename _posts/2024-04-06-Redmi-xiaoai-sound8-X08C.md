@@ -194,13 +194,27 @@ reconnecting to stage2 with highter speed
 
 ![image-20240406201057823](https://img.elmagnifico.tech/static/upload/elmagnifico/202404062010872.png)
 
-所以这里的system_a、system_b、vendor_a、vendor_b、userdata都不进行备份
+最好备份一下，防止刷错了，直接变砖头了，就是备份速度感人
 
 
 
-#### 修改boot信息
+这里使用`payload_2.17.31_5e8bb.bin`解开后的文件，将他们刷到其中
+
+![image-20240406212210281](https://img.elmagnifico.tech/static/upload/elmagnifico/202404062122328.png)
+
+选择好固件以后，进行写入，由于是低速所以写如只有1MB左右的速度，要刷完这5G，得要5个多小时，非常离谱
+
+固件全部写完以后，再从闪存工具里写入对应的`preoloader.bin`，然后就可以断开连接，重启开机了
+
+
+
+## 修改boot信息
 
 稳定版也可以通过修改boot分区root并强行开启adb，然后安装第三方安装器安装软件，具体操作：解包boot分区，修改prop文件，persist.service.adb.enable=1 persist.service.debuggable=1 persist.sys.usb.config=mtp,adb .
+
+
+
+暂时没找到怎么解包boot，这些参数怎么修改还不知道
 
 
 
@@ -212,7 +226,7 @@ reconnecting to stage2 with highter speed
 
 
 
-现在的线刷模式有点麻烦，而且还不容易成功
+现在的线刷模式有点麻烦，过于浪费时间了
 
 
 
