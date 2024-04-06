@@ -208,7 +208,31 @@ reconnecting to stage2 with highter speed
 
 
 
-## 修改boot信息
+#### USB 提速
+
+可以确定的是MTKClient新版本对之前的老设备兼容性有问题，换到MTKClient的老版本以后，不再需要连接两次设备，而且也不是低速USB了
+
+![image-20240406221900873](https://img.elmagnifico.tech/static/upload/elmagnifico/202404062219931.png)
+
+由于这个beta版本非常难找，所以也一起放到我的仓库里了（实际上是从搞基猫的安装包里找到的，小孩子还成天不学好，劲搞些有的没的恶心人）
+
+基本网上全都是遇到类似问题的，都是缺少这个特定版本的MTKClient
+
+实际上这个版本来源于这里
+
+> MTK联发科专业工具下载合集（长期更新）：https://xinkid.lanzouv.com/b075nltgh 密:canxin
+
+> https://www.bilibili.com/opus/636328623649849351?spm_id_from=333.999.0.0
+
+
+
+## 开启adb、安装第三方软件
+
+ 
+
+
+
+## 稳定版修改boot信息
 
 稳定版也可以通过修改boot分区root并强行开启adb，然后安装第三方安装器安装软件，具体操作：解包boot分区，修改prop文件，persist.service.adb.enable=1 persist.service.debuggable=1 persist.sys.usb.config=mtp,adb .
 
