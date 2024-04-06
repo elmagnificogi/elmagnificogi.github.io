@@ -7,7 +7,7 @@ update:     2024-04-06
 author:     "elmagnifico"
 header-img: "img/bg9.jpg"
 catalog:    true
-tobecontinued: false
+tobecontinued: true
 tags:
     - 米家
     - BE6500Pro
@@ -46,7 +46,7 @@ Redmi小爱音响8原价400多买的，上了大当，APP有限，而且视频�
 
 - 老的MicoOTA4.5的升级方式已经全部失效了，软件甚至都找不到了
 
-
+ 
 
 理论上说直接用最新版的去修改，也能开启root和adb，所以这里直接用最新的，而不用什么开发板了
 
@@ -90,7 +90,7 @@ mtk的刷机工具
 
 > https://github.com/bkerler/mtkclient
 
-这个项目的python最低需要3.9，如果是3.8会无法打开，所以还得弄个3.9进来，然后再重新安装他的依赖
+这个项目的python最低需要3.9，如果是3.80会无法打开（pyside不支持，但是3.81就可以），所以还得弄个3.9进来，然后再重新安装他的依赖
 
 进入mtkclient，一个系统路径下只有一个python，所以第二个就要带全路径操作了，安装所有依赖
 
@@ -142,63 +142,65 @@ D:/Python/Python39/python.exe "%~dp0mtk_gui"
 
 ![image-20240406163201741](https://img.elmagnifico.tech/static/upload/elmagnifico/202404061632778.png)
 
-这里设备已经检测到了，但是此时还是无法操作的，需要断电一次，然后再按住电源和音量加，进入正式模式
+这里设备已经检测到了，但是此时还是无法操作的，**需要断电一次，然后再按住音量+，进入Boorom模式**
 
 
 
-按住音量+，上电以后系统依次会有3种USB连接
+按住音量+，上电以后系统依次会有3种USB连接，最好在显示第一种模式的时候就松开音量+
 
 ![image-20240406175557506](https://img.elmagnifico.tech/static/upload/elmagnifico/202404061756590.png)
 
-
-
 ![image-20240406175624854](https://img.elmagnifico.tech/static/upload/elmagnifico/202404061756878.png)
-
-PreLoad是MTKClient能识别的
 
 ![image-20240406163402929](https://img.elmagnifico.tech/static/upload/elmagnifico/202404061634953.png)
 
-在上面的情况下，再次重启，按住音量+，又会切换到这个DA USB，DA不知道是什么模式的USB
+在上面的情况下，再次重启，按住音量+，又会切换到这个DA USB，DA不知道是什么模式的USB，我们不需要这种模式
 
 
 
-闪退
+#### 闪退
 
-```
-Preloader mode
-brom mode
-
-
-Power off the phone before connecting.
-For brom mode, press and hold vol up, vol dwn, or all hw buttons and connect usb.
-For preloader mode, don't press any hw button and connect usb.
-If it is already connected and on, hold power for 10 seconds to reset.
-
-
-
-
-Jumping to 0x200000: ok.
-
-reconnecting to stage2 with highter speed
-```
+![image-20240406194542496](https://img.elmagnifico.tech/static/upload/elmagnifico/202404061945624.png)
 
 出现以上跳转以后MTKCLient就闪退了，重试了好多次都是一样的效果，暂时卡住了
-
-
 
 正常情况下这里跳转以后就会进入Bootrom模式，然后就可以读取分区信息，重新写入了，想改啥都能行，但是他闪退了...
 
 
 
+通过录屏，截下来了具体输出的信息逐个分析，这句的问题最大
+
+```
+reconnecting to stage2 with highter speed
+```
+
+还好MTKClient是开源的，这句log也是他自己输出的，找到了3个出处，改了其中2个就正常连接了
+
+![image-20240406200430793](https://img.elmagnifico.tech/static/upload/elmagnifico/202404062004842.png)
+
+![image-20240406200418301](https://img.elmagnifico.tech/static/upload/elmagnifico/202404062004358.png)
+
+修改以下两个代码中的代码，将这里stage2的提速给取消了
+
+> mtkclient\mtkclient\Library\DA\xflash\dalegacy_lib.py
+>
+> mtkclient\mtkclient\Library\DA\xflash\xflash_lib.py
+
+前面就看到有人出现了类似的问题，直接注释掉了，但是issue已经关闭了，我以为是问题解决了，实际上却没有
+
+大概看了一下，应该是如果是慢速的usb，会在这里进行一次提速，而不巧的是红米这个固件好像不能提速，只能用低速模式传输
+
+- 注意低速模式非常慢，大概每秒只有0.53MB的速度
+
+![image-20240406201057823](https://img.elmagnifico.tech/static/upload/elmagnifico/202404062010872.png)
+
+所以这里的system_a、system_b、vendor_a、vendor_b、userdata都不进行备份
 
 
-理论上稳定版也可以通过修改boot分区root并强行开启adb，然后安装第三方安装器安装软件，具体操作：解包boot分区，修改prop文件，persist.service.adb.enable=1 persist.service.debuggable=1 persist.sys.usb.config=mtp,adb .
 
+#### 修改boot信息
 
-
-
-
-
+稳定版也可以通过修改boot分区root并强行开启adb，然后安装第三方安装器安装软件，具体操作：解包boot分区，修改prop文件，persist.service.adb.enable=1 persist.service.debuggable=1 persist.sys.usb.config=mtp,adb .
 
 
 
