@@ -144,7 +144,21 @@ D:/Python/Python39/python.exe "%~dp0mtk_gui"
 
 这里设备已经检测到了，但是此时还是无法操作的，需要断电一次，然后再按住电源和音量加，进入正式模式
 
+
+
+按住音量+，上电以后系统依次会有3种USB连接
+
+![image-20240406175557506](https://img.elmagnifico.tech/static/upload/elmagnifico/202404061756590.png)
+
+
+
+![image-20240406175624854](https://img.elmagnifico.tech/static/upload/elmagnifico/202404061756878.png)
+
+PreLoad是MTKClient能识别的
+
 ![image-20240406163402929](https://img.elmagnifico.tech/static/upload/elmagnifico/202404061634953.png)
+
+DA不知道是什么模式的USB
 
 
 
@@ -168,7 +182,7 @@ Jumping to 0x200000: ok.
 reconnecting to stage2 with highter speed
 ```
 
-出现以上跳转以后MTKclient就闪退了，重试了好多次都是一样的效果，暂时卡住了
+出现以上跳转以后MTKCLient就闪退了，重试了好多次都是一样的效果，暂时卡住了
 
 
 
