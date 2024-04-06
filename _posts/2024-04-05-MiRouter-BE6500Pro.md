@@ -9,7 +9,7 @@ header-img: "img/bg8.jpg"
 catalog:    true
 tobecontinued: false
 tags:
-    - xiaomi
+    - 米家
     - BE6500Pro
     - Router
 ---
