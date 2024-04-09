@@ -10,7 +10,7 @@ header-img: "img/x1.jpg"
 catalog:    true
 tobecontinued: false
 tags:
-    - chatGPT
+    - ChatGPT
 ---
 
 ## Foreword
