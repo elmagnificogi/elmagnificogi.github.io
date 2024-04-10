@@ -4,7 +4,7 @@ layout:     post
 title:      "easy-panel基于cockroachai的chatGPT plus多人分享"
 subtitle:   "chatGPT"
 date:       2024-04-08
-update:     2024-04-08
+update:     2024-04-09
 author:     "elmagnifico"
 header-img: "img/x1.jpg"
 catalog:    true
@@ -100,13 +100,15 @@ http://服务器IP:9000
 
 
 
-## easy-panel
+## Easy Panel
 
 > https://github.com/chatpire/easy-panel
 
-一个快速基于cockroachai的管理面板，主要是对用户等信息进行快捷管理
+一个快速基于cockroachai的管理面板，主要是对cockroachai的实例进行管理，同时也可以多用户，每个用户分配不同的cockroachai使用
 
 
+
+#### 安装
 
 创建docker环境变量，填一下密码和相关配置信息
 
@@ -143,11 +145,27 @@ docker-compose up -d
 
 ![image-20240409014739886](https://img.elmagnifico.tech/static/upload/elmagnifico/202404090147946.png)
 
+创建完以后会提示你配置Cockroachai，再去修改Cockroachai的config
+
 
 
 ![image-20240409015007025](https://img.elmagnifico.tech/static/upload/elmagnifico/202404090150056.png)
 
+修改完以后，重启Cockroachai，再来到Easy Panel就能看到已经识别到对应的实例了
+
+
+
+一旦接入Easy Panel，那么Cockroachai里的user token都会失效
+
+![image-20240409015700396](https://img.elmagnifico.tech/static/upload/elmagnifico/202404090157448.png)
+
+要正确接入，就需要在Easy Panel中创建一个新用户，然后用他登录，登录以后就能看到对应的跳转链接了，稍微有点麻烦，但是可以用
+
+
+
 ## Summary
+
+略微有点麻烦，还好能用，建议Easy Panel直接内部集成一个cockroachai，一键部署好了，多个实例再说多个实例的部署方案
 
 
 
