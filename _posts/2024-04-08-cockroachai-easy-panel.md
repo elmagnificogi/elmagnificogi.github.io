@@ -2,7 +2,7 @@
 
 layout:     post
 title:      "easy-panel基于cockroachai的chatGPT plus多人分享"
-subtitle:   "chatGPT"
+subtitle:   "chatGPT，共享，cws"
 date:       2024-04-08
 update:     2024-04-09
 author:     "elmagnifico"
