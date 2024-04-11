@@ -83,6 +83,16 @@ set ca-certificate=auto enabled=yes
 
 这个一定要开，这是快速漫游的选项
 
+- 有些设备可能漫游有问题，会在高低信号强度之间来回切换，导致实际体验变差，此时需要关闭
+
+
+
+![image-20240411170738453](https://img.elmagnifico.tech/static/upload/elmagnifico/202404111707534.png)
+
+正常启用的话可以看到设备漫游到另外一个设备上
+
+
+
 ![image-20240411095914582](https://img.elmagnifico.tech/static/upload/elmagnifico/202404110959614.png)
 
 选择刚才的Datapath
