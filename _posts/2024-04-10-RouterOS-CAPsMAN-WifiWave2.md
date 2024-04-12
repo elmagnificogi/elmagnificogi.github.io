@@ -4,7 +4,7 @@ layout:     post
 title:      "RouterOS WiFiWave2 配置CAPsMAN"
 subtitle:   "WiFi5，WiFi6，WiFi7，漫游"
 date:       2024-04-10
-update:     2024-04-11
+update:     2024-04-12
 author:     "elmagnifico"
 header-img: "img/x2.jpg"
 catalog:    true
@@ -20,6 +20,18 @@ tags:
 RouterOS的CAPsMAN一直非常难用，要配置的东西很多，自从RouterOS 开始搞Wave2，CAPsMAN就分化成了2种，就变得更难用了。
 
 从RouterOS 7.13开始，总算是支持同时存在2种CAPsMAN了，一种老的WiFi4、WiFi5，另外一种WiFi5 Wave2和WiFi6
+
+
+
+7.13之后，所有WiFI都叫WiFi了，不再区分Wave2了，同样的扩展包直接叫qcom，高通了
+
+![image-20240412125115374](https://img.elmagnifico.tech/static/upload/elmagnifico/202404121251454.png)
+
+7.12之前的版本，WiFi是区分Type的，之前都叫Wave2，并且升级包也是同名
+
+![image-20240412125158324](https://img.elmagnifico.tech/static/upload/elmagnifico/202404121251353.png)
+
+7.12以下的固件要先升级到7.12，才能升级到7.13以后的版本，否则无法直接跨越式升级
 
 
 
@@ -162,6 +174,12 @@ Datapath中新建一个配置，主要是桥接配置
 ![image-20240411092714844](https://img.elmagnifico.tech/static/upload/elmagnifico/202404110927877.png)
 
 直接适用默认的CAPS Mode 就直接配好了
+
+
+
+## 疑难杂症
+
+iPhone IOS 16.x版本，会出现无法正常搜索到WiFi，此问题暂时无解，必须要通过升级版本才能搜索到WiFi
 
 
 
