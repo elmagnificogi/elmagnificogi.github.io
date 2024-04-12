@@ -41,7 +41,13 @@ CAPsMAN的好处是任何Mikrotik的设备都可以作为AC使用，Wave2的设�
 
 
 
-### AC端/CAPsMAN端
+### 7.12前设置方式
+
+以下是7.12前的设置方式
+
+
+
+#### AC端/CAPsMAN端
 
 CAPsMAN端配置比较复杂，他需要下发配置文件，所以所有WiFi的配置都需要在这里进行设置
 
@@ -71,7 +77,7 @@ set ca-certificate=auto enabled=yes
 
 
 
-#### UI版教程
+##### UI版教程
 
 ![image-20240411095936505](https://img.elmagnifico.tech/static/upload/elmagnifico/202404110959534.png)
 
@@ -129,7 +135,7 @@ WiFi Wave2中就可以看到具体射频的配置
 
 
 
-#### 快速升级
+##### 快速升级
 
 ![image-20240411101238114](https://img.elmagnifico.tech/static/upload/elmagnifico/202404111012172.png)
 
@@ -137,7 +143,7 @@ CAPsMAN本身对版本有要求，管理端这里可以快速给不同版本进�
 
 
 
-### AP端/CAP端
+#### AP端/CAP端
 
 CAP端比较简单，建议直接Reset，然后使能CAP和keep users，重启以后就进入CAP模式了，其他倒是不需要怎么配置
 
@@ -153,7 +159,7 @@ CAP端比较简单，建议直接Reset，然后使能CAP和keep users，重启�
 
 
 
-#### UI版教程
+##### UI版教程
 
 ![image-20240411092431763](https://img.elmagnifico.tech/static/upload/elmagnifico/202404110924853.png)
 
@@ -174,6 +180,30 @@ Datapath中新建一个配置，主要是桥接配置
 ![image-20240411092714844](https://img.elmagnifico.tech/static/upload/elmagnifico/202404110927877.png)
 
 直接适用默认的CAPS Mode 就直接配好了
+
+
+
+### 7.12后的设置方式
+
+需要安装2个安装包
+
+![image-20240412215219563](https://img.elmagnifico.tech/static/upload/elmagnifico/202404122152600.png)
+
+然后就有两个WiFi设置
+
+![image-20240412215400414](https://img.elmagnifico.tech/static/upload/elmagnifico/202404122154441.png)
+
+看着非常奇怪，只能说UI统一上还没做好吧，上面的是Wave2，下面的是老的WiFi5的模式
+
+![image-20240412215205644](https://img.elmagnifico.tech/static/upload/elmagnifico/202404122152738.png)
+
+两种WiFi模式都正常加进来管理了
+
+
+
+老的CAPsMAN参考
+
+> https://mp.weixin.qq.com/s?__biz=MzIwOTIzMzA4OQ==&mid=502469133&idx=1&sn=a2aee8e5b1a8e58292a9eb5e83aace53&scene=19#wechat_redirect
 
 
 
