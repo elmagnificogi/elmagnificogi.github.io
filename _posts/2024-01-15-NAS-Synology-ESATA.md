@@ -1,9 +1,9 @@
 ---
 layout:     post
-title:      "群晖NAS ESTAT扩容"
+title:      "群晖NAS ESATA扩容"
 subtitle:   "Synology，SSL，证书"
 date:       2024-01-15
-update:     2024-01-23
+update:     2024-04-15
 author:     "elmagnifico"
 header-img: "img/z5.jpg"
 catalog:    true
@@ -21,9 +21,13 @@ tags:
 
 
 
-## ESTAT
+## ESATA
 
 群晖ESATA是群晖网络存储设备中的一种接口，它是一种高速的数据传输接口，可以提供比USB和Firewire更快的传输速度。群晖ESATA接口可以通过连接ESATA设备来扩展存储容量，如硬盘、光驱等
+
+
+
+ESATA必须要配合RAID一起使用，否则拓展位只能认一个盘，就失去了ESATA的意义了
 
 
 
@@ -33,6 +37,8 @@ tags:
 
 群晖官方的ESATA硬盘扩展柜，但是价格十分离谱，基本就是一个5盘位的新NAS的价格，如果这种价格我为什么不再买一个NAS呢
 
+- 要注意一个问题ESATA是没有电源控制按钮的，如果ESATA意外断电或者是群晖意外断电，都有可能造成两边数据不同步，然后导致严重的数据问题
+
 
 
 ### 魅视 M517
@@ -40,6 +46,28 @@ tags:
 ![image-20240115160234695](https://img.elmagnifico.tech/static/upload/elmagnifico/202401151602847.png)
 
 只有DX517一半不到的价格，但是同样扩展5盘位，性价比拉满
+
+
+
+#### 连接
+
+![image-20240415192358486](https://img.elmagnifico.tech/static/upload/elmagnifico/202404151923724.png)
+
+用附赠的ESATA线连接二者，重新启动系统
+
+
+
+#### 配置
+
+![image-20240415191536836](https://img.elmagnifico.tech/static/upload/elmagnifico/202404151915954.png)
+
+连接以后就能在外接设备里看到了，他模仿的就是DX517
+
+
+
+![image-20240415191547168](https://img.elmagnifico.tech/static/upload/elmagnifico/202404151915226.png)
+
+进入存储池，动作-添加硬盘，选上新加入的两个硬盘即可，等待数据一致性检查完就行了
 
 
 
