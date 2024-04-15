@@ -1,10 +1,10 @@
 ---
 
 layout:     post
-title:      "Nintendo Switch 软破解"
-subtitle:   "Crack，SN，注入，串流，moonlight"
+title:      "Nintendo Switch 软破解，变安卓TV"
+subtitle:   "hekate，Android TV，SN，注入，串流，moonlight"
 date:       2024-04-11
-update:     2024-04-13
+update:     2024-04-16
 author:     "elmagnifico"
 header-img: "img/x3.jpg"
 catalog:    true
@@ -219,6 +219,25 @@ Steam Link总体来说比Moon Light难用一些，画面感觉也更卡一些，
 
 
 
+只要不适用系统的关机，只用安卓本身的重启，每次启动也进入的都是安卓系统，只有用电源关机以后重启的系统才会回到正版系统里
+
+
+
+## 更换大容量SD卡
+
+首先我是未破解的SD卡，128G更换到软破的512G
+
+先把128G完全克隆到512G有两种办法
+
+1. 先把512插到系统里，然后初始化一下SD卡，然后直接把128G卡的全部内容复制粘贴到512即可
+2. 128G直接利用磁盘工具直接克隆到PC，然后对512G进行还原即可
+
+两种操作格式都是exFAT
+
+软破所用到的hekate和安卓安装包什么的，都直接复制粘贴进去即可，然后走上面的流程安装
+
+
+
 ## Summary
 
 勉强能用，就是还不够好
@@ -232,3 +251,7 @@ Steam Link总体来说比Moon Light难用一些，画面感觉也更卡一些，
 > https://www.bilibili.com/video/BV1PK4y1e7t3
 >
 > https://www.bilibili.com/video/BV1qm411z72e
+>
+> https://www.cnblogs.com/backuper/p/17784515.html
+>
+> https://vincentko.top/archives/switch-update
