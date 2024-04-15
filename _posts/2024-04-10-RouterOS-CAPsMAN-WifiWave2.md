@@ -91,7 +91,7 @@ set ca-certificate=auto enabled=yes
 
 配置密码
 
-![image-20240411095858493](https://img.elmagnifico.tech/static/upload/elmagnifico/202404110958521.png)
+![image-20240412190025157](https://img.elmagnifico.tech/static/upload/elmagnifico/202404121900256.png)
 
 这个一定要开，这是快速漫游的选项
 
@@ -192,3 +192,6 @@ Mikrotik不争气啊，落后别人2个大版本了
 ## Quote
 
 > https://help.mikrotik.com/docs/pages/viewpage.action?pageId=46759946#WiFiWave2(7.12andolder)-WiFiWave2CAPsMAN
+>
+> https://forum.mikrotik.com/viewtopic.php?t=199764
+
