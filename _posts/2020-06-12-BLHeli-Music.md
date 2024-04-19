@@ -3,7 +3,7 @@ layout:     post
 title:      "BLHeli 自定义音乐与乐理常识"
 subtitle:   "esc"
 date:       2020-06-12
-udpate:     2021-07-13
+udpate:     2024-04-19
 author:     "elmagnifico"
 header-img: "img/drone-head-bg.jpg"
 catalog:    true
@@ -61,6 +61,8 @@ BLH支持的音调就是下面的这些，基本符合乐理常识
 - B
 
 实际对应简谱的就是1，2，3，4，5，6，7,唱起来就是do,re,mi,fa,so,la,xi七个音
+
+#对应是升高半音，b是降低半音，所以有了C#等于Db的效果
 
 ##### 音组
 
