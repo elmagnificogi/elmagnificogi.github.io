@@ -103,6 +103,10 @@ set ca-certificate=auto enabled=yes
 
 - 有些设备可能漫游有问题，会在高低信号强度之间来回切换，导致实际体验变差，此时需要关闭
 
+![image-20240419112637722](https://img.elmagnifico.tech/static/upload/elmagnifico/202404191126797.png)
+
+有部分设备的兼容性有问题，会出现这种只要一让他漫游，就会断开重连一个信号非常差的AP，然后再断开再重连，平均2分钟重连一次，非常恶心，最后还是得把FT选项全部关闭
+
 
 
 ![image-20240411170738453](https://img.elmagnifico.tech/static/upload/elmagnifico/202404111707534.png)
