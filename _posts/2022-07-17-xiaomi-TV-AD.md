@@ -3,7 +3,7 @@ layout:     post
 title:      "小米电视移除广告"
 subtitle:   "xiaomi,55,ad,adb"
 date:       2022-07-17
-update:     2022-07-17
+update:     2024-04-20
 author:     "elmagnifico"
 header-img: "img/z0.jpg"
 catalog:    true
@@ -90,7 +90,19 @@ WIFI问题：虽然支持5.8G，但是实测网卡只能跑到100Mbps，无法�
 
 ## 去广告
 
-小米电视各种去广告大法
+小米电视各种去广告大法基本都失效了，现在直接找人工客服就行了，其他方法大可不必了
+
+
+
+#### 人工客服关闭广告
+
+打开小米商城APP-我的-小米客服-在线客服，然后走下面的流程即可
+
+- 需要提供MAC地址和本人姓名电话
+
+![image-20240420225836734](https://img.elmagnifico.tech/static/upload/elmagnifico/202404202258891.png)
+
+大概2天后就可以自动关闭所有广告了
 
 
 
