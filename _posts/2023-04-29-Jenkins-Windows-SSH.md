@@ -94,7 +94,7 @@ jdk目前支持11和17，太低的版本Jenkins不支持了
 
 ### 使用请求头、请求链接、消息体等参数
 
-![image-20240422170636906](https://img.elmagnifico.tech/static/upload/elmagnifico/202404221706959.png)
+![image-20240422174315021](https://img.elmagnifico.tech/static/upload/elmagnifico/202404221743100.png)
 
 coding有以上三种参数的形式，对应到jenkins也有三种
 
