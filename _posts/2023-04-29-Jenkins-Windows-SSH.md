@@ -1,9 +1,9 @@
 ---
 layout:     post
 title:      "Windows下SSH和Jenkins"
-subtitle:   "Publish Over SSH，SSH plugin，openSSH，CI"
+subtitle:   "Publish Over SSH，SSH plugin，openSSH，CI，conding.net"
 date:       2023-04-29
-update:     2023-05-04
+update:     2024-04-22
 author:     "elmagnifico"
 header-img: "img/x7.jpg"
 catalog:    true
@@ -90,7 +90,63 @@ jdk目前支持11和17，太低的版本Jenkins不支持了
 
 后续就能直接使用Windows batch command 直接完成命令，这种调用失败了，就会提示CI失败
 
-![image-20230429155502328](https://img.elmagnifico.tech/static/upload/elmagnifico/202304291612128.png)
+![image-20240422170355775](https://img.elmagnifico.tech/static/upload/elmagnifico/202404221703879.png)
+
+### 使用请求头、请求链接、消息体等参数
+
+![image-20240422170636906](https://img.elmagnifico.tech/static/upload/elmagnifico/202404221706959.png)
+
+coding有以上三种参数的形式，对应到jenkins也有三种
+
+![image-20240422170753371](https://img.elmagnifico.tech/static/upload/elmagnifico/202404221707442.png)
+
+Post parameter对应的就是自定义消息体，注意这里需要使用JSONPath，其中的表达式的形式比较重要，否则找不到这个变量会报错。变量名称则是在之后的命令行或者其他地方使用的时候，这个JSONPath对应的名称是什么
+
+
+
+![企业微信截图_17136089459155](https://img.elmagnifico.tech/static/upload/elmagnifico/202404221709868.png)
+
+这里的请求参数对应的就是url中的链接参数
+
+
+
+如果是在SSH中使用
+
+```
+echo "${ARG}"
+echo "${asd}"
+```
+
+
+
+如果是在BAT中使用
+
+```
+echo %ARG%
+echo %asd%
+```
+
+
+
+### Debug
+
+具体的这种方式可以在conding中查到
+
+> https://coding.net/help/docs/project-settings/service-hook/intro.html#quick-start
+
+
+
+![image-20240422171654376](https://img.elmagnifico.tech/static/upload/elmagnifico/202404221716413.png)
+
+Jenkins调试时，可以开启Print，看到具体对方传过来的内容是什么
+
+![image-20240422171742749](https://img.elmagnifico.tech/static/upload/elmagnifico/202404221717795.png)
+
+
+
+同样的coding.net这边也能查看发送记录的内容
+
+![image-20240422171553495](https://img.elmagnifico.tech/static/upload/elmagnifico/202404221715554.png)
 
 
 
