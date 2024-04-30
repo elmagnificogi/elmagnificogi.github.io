@@ -1,9 +1,9 @@
 ---
 layout:     post
-title:      "RouterOS配置双WAN并根据IP分流"
+title:      "RouterOS配置多WAN并根据IP分流"
 subtitle:   "隔离,融合"
 date:       2024-03-19
-update:     2024-03-19
+update:     2024-04-30
 author:     "elmagnifico"
 header-img: "img/bg4.jpg"
 catalog:    true
@@ -20,7 +20,7 @@ tags:
 
 
 
-## Dual WAN
+## 多WAN
 
 先配置双WAN口
 
@@ -30,7 +30,7 @@ tags:
 
 ![image-20240319155714148](https://img.elmagnifico.tech/static/upload/elmagnifico/202403191557588.png)
 
-填写账号密码，此处需要注意默认路由距离改为2，WAN1的距离是1
+填写账号密码，此处需要注意默认路由距离改为2，WAN1的距离是1，如果有更多线，依次增多
 
 ![image-20240319155546805](https://img.elmagnifico.tech/static/upload/elmagnifico/202403191555845.png)
 
@@ -38,11 +38,13 @@ tags:
 
 ![image-20240319155301455](https://img.elmagnifico.tech/static/upload/elmagnifico/202403191553493.png)
 
-桥接中取消ether2的桥接，现在WAN2是独立口了
-
-
+桥接中取消ether2的桥接，现在WAN2是独立口了，稍微等一会slave的提示就消失了
 
 到这里其实WAN2已经可以了，插上光猫的线，此时可以看拨号的log，如果一直提示错误，可以重启一下光猫，就能看到已经可以正常拨号连接了
+
+
+
+同理，建立WAN3即可，有些变量对应增加即可
 
 
 
@@ -60,9 +62,11 @@ tags:
 
 
 
-![image-20240319160029829](https://img.elmagnifico.tech/static/upload/elmagnifico/202403191600863.png)
+进入IP-Route List
 
-路由中新建一个静态表，网关选择刚才的pppoe-out2，下面的路由表选择刚才新建的表
+![image-20240430154246735](https://img.elmagnifico.tech/static/upload/elmagnifico/202404301542787.png)
+
+路由中新建一个静态表，网关选择刚才的pppoe-out2，下面的路由表选择刚才新建的表，注意这里的Distance建议+1，变成2
 
 
 
@@ -74,23 +78,65 @@ tags:
 
 ![image-20240319160525134](https://img.elmagnifico.tech/static/upload/elmagnifico/202403191605178.png)
 
-由于要允许内网访问，所以这里先新建一个Mangle，允许当前子网范围进行访问
-
-
+由于要允许内网访问，所以这里先新建一个Mangle，Firewall-Mangle，允许当前子网范围进行访问
 
 ![image-20240319172124176](https://img.elmagnifico.tech/static/upload/elmagnifico/202403191721217.png)
 
+
+
 到这里总算是可以设置最终目标了，比如让这个ip的所有流量走向WAN2，这里设置他的路由标记到新路由表即可
-
-
 
 ![image-20240319182318265](https://img.elmagnifico.tech/static/upload/elmagnifico/202403191823312.png)
 
-更进一步，可以通过地址列表，将需要的IP都加进列表里，然后一个规则就能把所有ip处理了
+更进一步，可以通过地址列表Firewall-Address Lists，将需要的IP都加进列表里，然后一个规则就能把所有ip处理了
 
 
 
-## WAN性能问题
+## 多线分流
+
+主要是为了访问不同网络时自动选择最优路线，不是为了隔离的分流模式
+
+> https://www.bilibili.com/read/cv30033107/
+
+
+
+## 专线固定IP
+
+固定IP都是直接分配IP的，也就不存在拨号等情况，所以要配置静态IP
+
+
+
+先把专线网口断开桥接，这里是etner4-CMDL
+
+![image-20240430152205605](https://img.elmagnifico.tech/static/upload/elmagnifico/202404301522808.png)
+
+
+
+配置静态IP
+
+![image-20240430152356760](https://img.elmagnifico.tech/static/upload/elmagnifico/202404301523818.png)
+
+
+
+### 分流
+
+分流和多线分流内容相同，但是做完以后还有额外2项需要添加
+
+![image-20240430152548340](https://img.elmagnifico.tech/static/upload/elmagnifico/202404301525401.png)
+
+增加一条静态路由，让系统知道有专线这个端口和main连起来，注意Distance要对应增加
+
+![image-20240430154501681](https://img.elmagnifico.tech/static/upload/elmagnifico/202404301545727.png)
+
+防火墙的NAT这里，需要单独给专线增加一个，之前使用的是all_ppp，也就是所有pppoe端口，这里指定出地址给ether4端口
+
+
+
+剩下只需要在Adress Lists中添加需要走专线设备的IP即可
+
+
+
+## WAN性能Debug
 
 双WAN以后发现一个小问题，好像千兆跑不满了，任何一条单路千兆跑不满
 
@@ -139,4 +185,6 @@ tags:
 ## Quote
 
 > https://wiki.edcwifi.com/index.php?title=RouterOS_%E6%BA%90%E5%9C%B0%E5%9D%80%E7%AD%96%E7%95%A5%E8%B7%AF%E7%94%B1
+>
+> https://www.bilibili.com/read/cv30033107/
 
