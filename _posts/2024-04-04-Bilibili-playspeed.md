@@ -32,7 +32,7 @@ B站记不住用户倍率，大多数视频我基本都是2倍速播放的，每
 // ==UserScript==
 // @name         哔哩哔哩视频自动倍速播放（可记住用户设定值并自动设置播放速度）
 // @license MIT
-// @description  哔哩哔哩（bilibili.com）视频自动倍速播放，智能记忆用户设定的视频倍速并存储在本地，播放全站视频都会自动使用该倍速，例如全站视频都用1.25倍速播放，不用每次播放视频都要设置倍速。修正不能自己修改速率的问题，增加快捷键切换速率，shift 1 2 3 5 = 1 2 1.25 1.5
+// @description  哔哩哔哩（bilibili.com）视频自动倍速播放，智能记忆用户设定的视频倍速并存储在本地，播放全站视频都会自动使用该倍速，例如全站视频都用1.25倍速播放，不用每次播放视频都要设置倍速。。修正不能自己修改速率的问题，增加快捷键切换速率，shift 1 2 3 5 = 1 2 1.25 1.5
 // @icon         https://www.bilibili.com/favicon.ico
 // @namespace    https://greasyfork.org/zh-CN/users/875679-ijet
 // @version      1.1.6
@@ -100,7 +100,16 @@ B站记不住用户倍率，大多数视频我基本都是2倍速播放的，每
         }
         if(document.querySelector(".bpx-player-ctrl-playbackrate"))
         {
-            var speed = parseFloat((document.querySelector(".bpx-player-ctrl-playbackrate-result")).innerHTML);
+            var speed = (document.querySelector(".bpx-player-ctrl-playbackrate-result")).innerHTML;
+            if(speed == "倍速")
+            {
+                speed = 1;
+            }
+            else
+            {
+                speed = parseFloat(speed);
+            }
+
             if(speed != player_speed){
                 console.log("cur speed : " + speed);
                 console.log("speed not same,change to: " + player_speed);
