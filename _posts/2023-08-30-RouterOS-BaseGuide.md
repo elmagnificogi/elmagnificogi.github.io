@@ -3,7 +3,7 @@ layout:     post
 title:      "RouterOS的一些基础配置指南"
 subtitle:   "CAPsMAN,NStream,Bridge,Mikrotik,Roaming"
 date:       2023-08-30
-update:     2024-02-19
+update:     2024-05-07
 author:     "elmagnifico"
 header-img: "img/y7.jpg"
 catalog:    true
@@ -50,7 +50,9 @@ RouterOS的一些知识库，可以参考这里
 
 
 
-#### 端口映射
+### 端口映射
+
+#### 无回流
 
 IP-Firewall-NAT中，选择`dstnat`，选好协议和目的端口，入口是外网端口也就是ppppoe，然后Action中也是`dst-nat`，转发到内网的目标地址和目标端口
 
@@ -59,6 +61,16 @@ IP-Firewall-NAT中，选择`dstnat`，选好协议和目的端口，入口是外
 这种方式被称为无回流模式，其实就是说在内网环境中直接用外网地址和IP访问会出现无法访问的情况，但是外网直接访问是可以的
 
 - 如果想要外网可以正常访问，设置一下`Dst. Address`为公网IP即可
+
+
+
+#### 回流
+
+![image-20240507155606454](https://img.elmagnifico.tech/static/upload/elmagnifico/202405071556525.png)回流一定要有对应的masquerade，如果有问题，出口设置到桥上
+
+![image-20240507155722511](https://img.elmagnifico.tech/static/upload/elmagnifico/202405071557579.png)
+
+对应的配置中不要设置任何出口，这样就会自动回流了，完全不需要其他设置
 
 
 
