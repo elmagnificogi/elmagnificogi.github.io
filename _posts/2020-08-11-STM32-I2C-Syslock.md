@@ -3,6 +3,7 @@ layout:     post
 title:      "STM32 I2C 在FreeRTOS中造成的死锁"
 subtitle:   "HAL"
 date:       2020-08-11
+update:     2024-05-18
 author:     "elmagnifico"
 header-img: "img/freertos.jpg"
 catalog:    true
@@ -331,6 +332,22 @@ static HAL_StatusTypeDef I2C_WaitOnFlagUntilTimeout(I2C_HandleTypeDef *hi2c, uin
 可能会有人有疑问，这个不是有超时时间25ms吗？他肯定会释放cpu啊，但是实际上HAL_I2C_Mem_Write_IT被调用的频率是固定的，50Hz，也就是20ms执行一次，那么一旦出错了，这里TXIS标志位要等25ms。
 
 当他超时退出以后，这个任务的下次执行时间又到了，那他又比其他2级任务高，那么他必然又是排第一，他又要执行，然后由于I2C这个被拉低，导致这里TXIS一定获取不到，一定会超时，那么这里就直接形成了一个死循环。
+
+
+
+### Timeout
+
+这里就不得不仔细看一下HAL库这里为什么把i2c的timeout设置的这么长
+
+
+
+HAL 库本身的I2C是可以支持256字节通信的，这个timeout其实只管了一个字节的传输时长的，对应到I2C的速度，一般常用的都是100Kbps
+
+一个字节的时间其实非常短，1ms最多可以传输12.5字节，实际算上中间的stop或者ack之类的可能达不到这么多，但是传输个8字节/ms，还是很轻松的。
+
+所以等待一次发送完成，完全用不了25ms，这里给的太多了。
+
+基本上也没见过比100kbps低非常多的i2c了，这里建议官方库最好把这个内置的timeout调小一些，或者就让用户去设置，而不是内置
 
 
 
