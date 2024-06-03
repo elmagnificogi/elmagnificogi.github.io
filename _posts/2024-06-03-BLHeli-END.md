@@ -1,7 +1,7 @@
 ---
 
 layout:     post
-title:      "由于制裁，BLHeli停止开发，所有ESC产品停止维护"
+title:      "由于制裁，BLHeli停止开发，所有ESC产品停止支持"
 subtitle:   "制裁，BLHeli逆向，电调，ESC"
 date:       2024-06-03
 update:     2024-06-03
