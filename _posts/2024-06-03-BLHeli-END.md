@@ -21,7 +21,7 @@ tags:
 
 ## BLHeli被制裁
 
-![image-20240603204939127](https://img.elmagnifico.tech/static/upload/elmagnifico/202406032049280.png)
+![image-20240604095924947](https://img.elmagnifico.tech/static/upload/elmagnifico/202406040959986.png)
 
 简单说由于BLHeli广泛被无人机使用，搭载BLH的ESC并不能确定最终用途，所以整个BLH数据被禁止出口，包括BLH自身收款的银行都受到了影响，所以BLH停止开发和维护了。
 
