@@ -225,14 +225,6 @@ ok了，可以搜到了
 
 
 
-### 命令
-
-命令参考这里
-
-> https://github.com/StunlockStudios/vrising-dedicated-server-instructions/blob/master/1.0.x/INSTRUCTIONS.md
-
-
-
 ## Summary
 
 可以玩了
