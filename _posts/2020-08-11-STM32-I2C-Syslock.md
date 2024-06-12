@@ -339,7 +339,7 @@ static HAL_StatusTypeDef I2C_WaitOnFlagUntilTimeout(I2C_HandleTypeDef *hi2c, uin
 
 这里就不得不仔细看一下HAL库这里为什么把i2c的timeout设置的这么长
 
-
+![企业微信截图_17177504277171](https://img.elmagnifico.tech/static/upload/elmagnifico/202406121902055.png)
 
 HAL 库本身的I2C是可以支持256字节通信的，这个timeout其实只管了一个字节的传输时长的，对应到I2C的速度，一般常用的都是100Kbps
 
@@ -347,7 +347,9 @@ HAL 库本身的I2C是可以支持256字节通信的，这个timeout其实只管
 
 所以等待一次发送完成，完全用不了25ms，这里给的太多了。
 
-基本上也没见过比100kbps低非常多的i2c了，这里建议官方库最好把这个内置的timeout调小一些，或者就让用户去设置，而不是内置
+基本上也没见过比100kbps低非常多的i2c了，这里建议官方库最好把这个内置的timeout调小一些，或者就让用户去设置，而不是内置。
+
+但是在一些SMBus或者一些芯片手册中，这个出错判断的时延时间是很长的，如果调小了，然后立马开始第二次通讯，会导致从设备可能会卡到某个状态中不能正常跑出来，所以这里需要具体芯片具体分析。粗暴的单方面降低一方的timeout可能并不能解决问题
 
 
 
