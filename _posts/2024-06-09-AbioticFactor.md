@@ -111,7 +111,7 @@ steamapps\common\Abiotic Factor Dedicated Server\AbioticFactor\Saved\SaveGames\S
 #### 服务器参数
 
 ```
-steamapps\common\Abiotic Factor Dedicated Server\AbioticFactor\Saved\SaveGames\Server\Worlds\(世界名称，默认为Cascade)\SandboxSettings.ini
+steamapps\common\Abiotic Factor Dedicated Server\AbioticFactor\Saved\\SandboxSettings.ini
 ```
 
 修改即可，没有的话可以自己建一个，在服务器启动参数中添加
