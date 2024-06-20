@@ -3,7 +3,7 @@ layout:     post
 title:      "STM32 SD HAL库TimeOut问题"
 subtitle:   "SDMMC、HAL_GetTick、时钟"
 date:       2022-12-01
-update:     2022-12-01
+update:     2024-06-20
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"
 catalog:    true
@@ -193,6 +193,22 @@ Class 10
 ## 解决方案
 
 很简单，把所有非寄存器使用的`SDMMC_DATATIMEOUT`替换成另外一个宏，来设置超时时间
+
+
+
+## 官方回应和修改
+
+在我发现这个问题以后，就在github上提出了修改意见，经过几轮讨论，总算是说服了官方进一步确认此问题
+
+> https://github.com/STMicroelectronics/STM32CubeF7/issues/78
+
+
+
+时隔一年半，总算是回应了这个issue，并且按照我的想法修改了源码
+
+> https://github.com/STMicroelectronics/STM32CubeF7/commit/043a9bf77465a9442127aac7307fdb36c9d47a36
+
+至此算是小小为ST HAL库做了一点点贡献，总来地说这个问题早就有人提出并且发出修改意见了，但是每次都因为没有坚持被官方几句都糊弄回去了，我持续坚持下，总算得到了正确的结果
 
 
 
