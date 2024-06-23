@@ -3,7 +3,7 @@ layout:     post
 title:      "BLHeliSuite32逆向（五）"
 subtitle:   "Crack，Reverse"
 date:       2024-06-17
-update:     2024-06-17
+update:     2024-06-23
 author:     "elmagnifico"
 header-img: "img/x9.jpg"
 catalog:    true
@@ -1809,3 +1809,6 @@ BLHeli.sub_006ECD68
 
 ## Summary
 
+后续发现是个乌龙，测试版密钥和之前一样，只有BLHliSuite32因为代码更新，部分函数有些变化了而已
+
+实际上通过逆向确实看到了之前一些需要在线验证的内容和以前用的激活key的界面
