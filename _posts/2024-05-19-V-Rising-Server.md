@@ -4,7 +4,7 @@ layout:     post
 title:      "夜族崛起开服指南"
 subtitle:   "V-Rising，windows，steamCMD"
 date:       2024-05-19
-update:     2024-06-26
+update:     2024-07-08
 author:     "elmagnifico"
 header-img: "img/x5.jpg"
 catalog:    true
@@ -408,7 +408,7 @@ ServerGameSettings配置，具体就是游戏难度相关内容了
 
 ## Summary
 
-总体来说流程比较线性，后期肝度很高
+总体来说流程比较线性，后期肝度很高，整体难度还行
 
 
 
@@ -418,4 +418,4 @@ ServerGameSettings配置，具体就是游戏难度相关内容了
 >
 > https://steamcommunity.com/sharedfiles/filedetails/?id=2866093247
 >
-> https://wiki.lizigo.cn/d/50
+> https://www.bisecthosting.com/clients/index.php?rp=/knowledgebase/1213/How-to-adjust-the-difficulty-settings-on-a-V-Rising-server.html
