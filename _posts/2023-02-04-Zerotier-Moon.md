@@ -3,7 +3,7 @@ layout:     post
 title:      "ZeroTier使用自建Moon服务器加速"
 subtitle:   "p2p，nat"
 date:       2023-02-04
-update:     2023-02-04
+update:     2024-07-08
 author:     "elmagnifico"
 header-img: "img/bg6.jpg"
 catalog:    true
@@ -82,7 +82,7 @@ vi moon.json
 }
 ```
 
-需要注意如果vps有防火墙之类的，9993的端口也要对应给放行，否则可能不成功
+需要注意如果**vps有防火墙、安全组之类的，9993的端口也要对应给放行**，否则可能不成功
 
 
 
