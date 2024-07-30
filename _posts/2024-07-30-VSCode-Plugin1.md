@@ -117,6 +117,12 @@ yo code
 
 
 
+主工程的VS Code中可以看到对应的log提示
+
+![image-20240730234212706](https://img.elmagnifico.tech/static/upload/elmagnifico/202407302342736.png)
+
+
+
 ### 代码解析
 
 工程结构，相对比较简单
@@ -278,4 +284,5 @@ context.subscriptions.push
 
 > https://liiked.github.io/VS-Code-Extension-Doc-ZH/#/
 >
+> https://code.visualstudio.com/api
 
