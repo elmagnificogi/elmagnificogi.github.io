@@ -3,7 +3,7 @@ layout:     post
 title:      "VS Code插件入门一"
 subtitle:   "plugin"
 date:       2024-07-30
-update:     2024-07-30
+update:     2024-07-31
 author:     "elmagnifico"
 header-img: "img/x15.jpg"
 catalog:    true
@@ -109,7 +109,9 @@ yo code
     "@types/vscode": "^1.90.2",
 ```
 
-将依赖的包版本修改为对应的VS版本后重启`Ctrl+R`
+将依赖的包版本修改为对应的VS版本后重启
+
+如果是热修改，VS Code也支持热重启，在调试启动的VS Code使用`Ctrl+R`就会重新加载修改后的插件，立马就能验证插件了
 
 ![image-20240730223204740](https://img.elmagnifico.tech/static/upload/elmagnifico/202407302232805.png)
 
