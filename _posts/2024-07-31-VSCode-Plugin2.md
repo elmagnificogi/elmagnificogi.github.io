@@ -3,11 +3,11 @@ layout:     post
 title:      "VS Code插件入门二"
 subtitle:   "plugin"
 date:       2024-07-31
-update:     2024-07-31
+update:     2024-08-2
 author:     "elmagnifico"
 header-img: "img/y0.jpg"
 catalog:    true
-tobecontinued: false
+tobecontinued: true
 tags:
     - VS Code
 ---
@@ -227,7 +227,115 @@ Webview是有一个生命周期的，并且Webview的句柄是需要你自己保
 
 
 
+#### Debug
+
+`Developer: Toggle Developer Tools`可以看到这个webview的界面，就能清楚的看到这里其实嵌入式了iframe
+
+![image-20240801220306490](https://img.elmagnifico.tech/static/upload/elmagnifico/202408012203571.png)
+
+内部的网页就是cat coding
+
+![image-20240801220330253](https://img.elmagnifico.tech/static/upload/elmagnifico/202408012203284.png)
+
+
+
+#### 加载本地资源
+
+```js
+function getWebviewOptions(extensionUri: vscode.Uri): vscode.WebviewOptions {
+	return {
+		// Enable javascript in the webview
+		enableScripts: true,
+
+		// And restrict the webview to only loading content from our extension's `media` directory.
+		localResourceRoots: [vscode.Uri.joinPath(extensionUri, 'media')]
+	};
+}
+```
+
+需要注意在`getWebviewOptions`中的`localResourceRoots`中会限制可以读取的资源路径，比如这里就限制必须是在插件路径的media文件夹内才可以
+
+```js
+
+		const scriptPathOnDisk1 = vscode.Uri.joinPath(this._extensionUri, 'giphy.gif');
+		//const scriptPathOnDisk1 = vscode.Uri.joinPath(this._extensionUri, 'media', 'cat.gif');
+
+		const scriptUri1 = webview.asWebviewUri(scriptPathOnDisk1);
+```
+
+如果后续读取使用的是非media路径，webview会显示不了对应的gif
+
+
+
+#### 通信
+
+```js
+	context.subscriptions.push(
+		vscode.commands.registerCommand('catCoding.doRefactor', () => {
+			if (CatCodingPanel.currentPanel) {
+				CatCodingPanel.currentPanel.doRefactor();
+			}
+		})
+	);	
+	public doRefactor() {
+		// Send a message to the webview webview.
+		// You can send any JSON serializable data.
+		this._panel.webview.postMessage({ command: 'refactor' });
+	}
+```
+
+插件可以通过`postMessage`发送消息给实例化的webview，进而实现一些控制
+
+```js
+    // Handle messages sent from the extension to the webview
+    window.addEventListener('message', event => {
+        const message = event.data; // The json data that the extension sent
+        switch (message.command) {
+            case 'refactor':
+                currentCount = Math.ceil(currentCount * 0.5);
+                counter.textContent = `${currentCount}`;
+                break;
+        }
+    });
+```
+
+在`media/main.js`中可以看到对应事件的响应代码
+
+
+
+反过来，webview也可以通过vs插件接口发送消息给插件
+
+```js
+    setInterval(() => {
+        counter.textContent = `${currentCount++} `;
+
+        // Update state
+        vscode.setState({ count: currentCount });
+
+        // Alert the extension when the cat introduces a bug
+        if (Math.random() < Math.min(0.001 * currentCount, 0.05)) {
+            // Send a message back to the extension
+            vscode.postMessage({
+                command: 'alert',
+                text: '🐛  on line ' + currentCount
+            });
+        }
+    }, 100);
+```
+
+在`media/main.js`中可以看到webview加载的本地js直接调用了vs的api，进行post信息
+
+
+
 ### 显示markdown
+
+非常简单直接使用内置的markdown命令实现显示当前激活文档的markdown渲染视图
+
+```
+vscode.commands.executeCommand("markdown.showPreviewToSide", vscode.window.activeTextEditor.document.uri.path);
+```
+
+不过这种方式只能显示一个markdown，而且具体markdown能显示啥，不能显示啥，或者说markdown的扩展，就不是我能控制的了
 
 
 
