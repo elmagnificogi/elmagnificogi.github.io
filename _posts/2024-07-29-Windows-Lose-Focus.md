@@ -1,9 +1,9 @@
 ---
 layout:     post
 title:      "Windows系统异常失焦"
-subtitle:   "windows，chrome_widgetwin_0，Chrome，VPN"
+subtitle:   "windows，chrome_widgetwin_0，Chrome，Autodesk"
 date:       2024-07-29
-update:     2024-07-29
+update:     2024-08-01
 author:     "elmagnifico"
 header-img: "img/x14.jpg"
 catalog:    true
@@ -44,7 +44,7 @@ tags:
 
 打开以后，如果有程序主动切换焦点，就会被hook到，然后显示具体的句柄和窗体名称，这样就能抓到具体是哪个程序了。
 
-
+![image-20240801214008949](https://img.elmagnifico.tech/static/upload/elmagnifico/202408012140044.png)
 
 ![image-20240729203252037](https://img.elmagnifico.tech/static/upload/elmagnifico/202407292032061.png)
 
@@ -54,7 +54,11 @@ Chrome_WidgetWin_0，这个东西基本上是所有用了Electron架构的应用
 
 
 
-怀疑是最近的chrome升级可能出现了问题，再加上深信服的VPN之前卸载可能没弄干净，重新卸载一下，发现chrome的google账号有需要重新登陆了，重登以后似乎没有问题了
+~~怀疑是最近的chrome升级可能出现了问题，再加上深信服的VPN之前卸载可能没弄干净，重新卸载一下，发现chrome的google账号有需要重新登陆了，重登以后似乎没有问题了~~
+
+![image-20240801214715515](https://img.elmagnifico.tech/static/upload/elmagnifico/202408012147540.png)
+
+逐一退出右下角程序，发现Autodesk的启动项竟然影响到了这个，这是万万没想到的，这程序已经放了好几年了，第一次遇到。估计可能和哪个程序产生冲突了，才引起来的
 
 
 
@@ -76,7 +80,7 @@ Chrome_WidgetWin_0，这个东西基本上是所有用了Electron架构的应用
 
 ## Summary
 
-控制面板里把最近安装的东西卸载一下，突然就好了，后续再观察一下
+万万没想到自动桌，你个浓眉大眼的竟然搞小手段
 
 
 
