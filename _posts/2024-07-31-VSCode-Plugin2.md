@@ -3,7 +3,7 @@ layout:     post
 title:      "VS Code插件入门二"
 subtitle:   "plugin"
 date:       2024-07-31
-update:     2024-08-2
+update:     2024-08-02
 author:     "elmagnifico"
 header-img: "img/y0.jpg"
 catalog:    true
