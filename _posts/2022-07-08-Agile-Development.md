@@ -1,9 +1,9 @@
 ---
 layout:     post
 title:      "回顾我的敏捷流开发"
-subtitle:   "Agile Development,AM"
+subtitle:   "Scrum of Scrums，Agile Development"
 date:       2022-07-08
-update:     2022-07-08
+update:     2024-08-20
 author:     "elmagnifico"
 header-img: "img/z2.jpg"
 catalog:    true
@@ -67,7 +67,32 @@ tags:
 
 
 
+#### 规模化敏捷开发
+
+以上的敏捷大部分都是基于单团队的敏捷开发，如果多个团队配合，做规模化的敏捷开发时，又要怎么配合呢？
+
+Scrum of Scrums
+
+> 规模化敏捷中常强调的有效沟通和交付对齐。Scrum of Scrums是一种最早的规模化敏捷技术，简单且有效，用于集成多个（建议不超过3-9个）在同一产品上工作的Scrum团队的工作。Scrum of Scrums确保团队之间有效沟通，以使每个团队的输出与其他团队的输出很好地集成在一起并交付客户，尤其是在工作重叠或时间顺序很重要的地方；同时，为了共同讨论并决策，最直观的活动就是SoS会议，由各Scrum团队中派出主要代表参加。总体目标是使团队工作保持顺畅，并使总体交付成果保持在正常状态。通常组织将这种方法用于扩展敏捷性和组织大型复杂产品交付的第一步，然后在酌情考虑采用更成熟的规模化敏捷框架。
+
+
+
+SAFe（规模化敏捷框架），Scaled Agile Framework，是一套组织和工作流程模式，用于在企业规模上实施敏捷实践。该框架是一种知识体系，包括关于角色和责任、如何规划和管理工作以及要坚持的价值观的结构化指导。
+
+
+
+多团队敏捷时，每个敏捷周期较多的落在2周左右的时间，而偏向硬件或者制造业的周期往往在四周及以上
+
+
+
 ## Summary
 
 没有什么绝对的方法论，无论敏捷也好，瀑布也罢，他们只是一种工程上的经验教训的极致总结。实际项目并不都是外包，或者目标不明确的情况，每个项目都得顺势改变一些。
 
+
+
+## Quote
+
+> https://zhuanlan.zhihu.com/p/162779049
+>
+> https://www.atlassian.com/zh/agile/agile-at-scale/what-is-safe
