@@ -7,7 +7,7 @@ update:     2024-09-06
 author:     "elmagnifico"
 header-img: "img/guinness.jpg"
 catalog:    true
-tobecontinued: true
+tobecontinued: false
 tags:
     - UAV
     - GuinnessWorldRecords
@@ -57,7 +57,7 @@ tags:
 
 ![image-20240906010741842](https://img.elmagnifico.tech/static/upload/elmagnifico/202409060107128.png)
 
-7598之后，就是7998
+7598之后，就是7998，这也算是最短的记录了，破完第二天别人就又破了，起了个大早赶了个晚集
 
 ![image-20240906011313776](https://img.elmagnifico.tech/static/upload/elmagnifico/202409060113848.png)
 
