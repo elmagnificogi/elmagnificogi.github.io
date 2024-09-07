@@ -8,7 +8,7 @@ update:     2024-06-08
 author:     "elmagnifico"
 header-img: "img/x7.jpg"
 catalog:    true
-tobecontinued: true
+tobecontinued: false
 tags:
     - BLHeli
 ---
