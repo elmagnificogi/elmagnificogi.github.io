@@ -2,8 +2,8 @@
 layout:     post
 title:      "三破吉尼斯世界纪录"
 subtitle:   "无人机集群，DroneShow"
-date:       2024-10-13
-update:     2024-10-13
+date:       2024-10-11
+update:     2024-10-11
 author:     "elmagnifico"
 header-img: "img/guinness.jpg"
 catalog:    true
@@ -21,6 +21,8 @@ tags:
 
 ## 吉尼斯
 
+![image-20241010212641479](https://img.elmagnifico.tech/static/upload/elmagnifico/202410102126823.png)
+
 ![image-20241010191732490](https://img.elmagnifico.tech/static/upload/elmagnifico/202410101917986.png)
 
 这次就冲着万架级别破记录了
@@ -29,9 +31,11 @@ tags:
 >
 > The most multirotor/drones airborne simultaneously form a single computer(outdoors)，单地面站最多控制的无人机数量
 
-万架其实对各方面都提出了更高的要求，但是这次还是硬是推了一个新版本上去，强行把各种特性都优化上去了，而不是拿之前七千架的版本，方便日后作为新一年的基础版本。
+单地面站控制以前只有一条室内的记录，才一百多架飞机，这次这条记录是我新提出来的，但是吉尼斯方面依然嘴犟之前有这条记录（实际根本搜不到），不和其他人记录冲突，同时也能彰显技术实力。
 
-同时万架测试的时间也比之前七千架少了很多，彩排了三次就正式飞了，好在最后结果还可以接受
+万架其实对各方面都提出了更高的要求，但是这次还是硬是推了一个新版本上去，强行把各种特性都优化上去了，而不是拿之前七千架的版本，也方便日后作为新一年的基础版本。
+
+同时万架测试的时间也比之前七千架少了很多，彩排了三次就正式飞了，好在最后结果还可以接受，最终飞行10197架，少了3架补点，没有起飞成功，不然可以完美的
 
 
 
@@ -45,19 +49,19 @@ tags:
 
 现场执飞时还是出现了一点点意外，地面站竟然还崩溃了，还好没啥影响，重开就行了。
 
-网络依然是这里面最棘手的问题，DFS信道总是会被卫星扫到
+网络依然是这里面最棘手的问题，DFS信道总是会被卫星扫到，导致掉线一部分
 
 做这样的大项目缺点太多了，不过通过大项目可以发现很多之前没看出来的小问题，同时也极大优化的原本系统的效率
 
-
+![image-20241010212734842](https://img.elmagnifico.tech/static/upload/elmagnifico/202410102127171.png)
 
 #### 后续
 
-还好这次破记录，比他们之前做的宣发好多了，赶上了国庆，加上政府各种支持，总算是上了一次热门。
+这次破记录宣发比之前做的好多了，有各种方面推流，赶上了国庆，加上政府各种支持，总算是上了一次热门。
 
 国庆七天又是连续同城五地同飞，把热度续住了
 
-![32219656f451094e6ebc204e45ef844](https://img.elmagnifico.tech/static/upload/elmagnifico/202410101940869.jpg)
+![image-20241010213203250](https://img.elmagnifico.tech/static/upload/elmagnifico/202410102132287.png)
 
 顺带拿了马院士一个赞
 
