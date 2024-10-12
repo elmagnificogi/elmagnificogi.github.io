@@ -1,0 +1,57 @@
+<mxfile host="draw.dmduav.com" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36" version="24.7.5">
+  <diagram name="第 1 页" id="jvvij4ZjNNY_Bu0S0r1D">
+    <mxGraphModel dx="1215" dy="1189" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="Kq_c7fs-lclYe2ZRCGIc-7" value="&lt;b&gt;内核空间&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;labelPosition=right;verticalLabelPosition=middle;align=left;verticalAlign=middle;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="-292" y="23" width="443" height="314" as="geometry" />
+        </mxCell>
+        <mxCell id="Kq_c7fs-lclYe2ZRCGIc-6" value="&lt;b&gt;用户空间&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;labelPosition=right;verticalLabelPosition=middle;align=left;verticalAlign=middle;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="-292" y="-237" width="443" height="247" as="geometry" />
+        </mxCell>
+        <mxCell id="Kq_c7fs-lclYe2ZRCGIc-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="Kq_c7fs-lclYe2ZRCGIc-3" target="Kq_c7fs-lclYe2ZRCGIc-4">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="-61" y="25" />
+              <mxPoint x="-61" y="25" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Kq_c7fs-lclYe2ZRCGIc-3" value="POSIX标准" style="rounded=1;whiteSpace=wrap;html=1;labelPosition=right;verticalLabelPosition=middle;align=left;verticalAlign=middle;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="-166" y="-103" width="209" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="Kq_c7fs-lclYe2ZRCGIc-1" value="用户程序：Print(&quot;hello world&quot;)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="-234" y="-219" width="230" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Kq_c7fs-lclYe2ZRCGIc-2" value="标准库C、C++等" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="-157" y="-92" width="182" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Kq_c7fs-lclYe2ZRCGIc-4" value="系统接口" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fad9d5;strokeColor=#ae4132;" vertex="1" parent="1">
+          <mxGeometry x="-228" y="53" width="282" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Kq_c7fs-lclYe2ZRCGIc-8" value="硬件平台" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d0cee2;strokeColor=#56517e;" vertex="1" parent="1">
+          <mxGeometry x="-228" y="268" width="282" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Kq_c7fs-lclYe2ZRCGIc-9" value="内核" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#b0e3e6;strokeColor=#0e8088;" vertex="1" parent="1">
+          <mxGeometry x="-228" y="126" width="282" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Kq_c7fs-lclYe2ZRCGIc-10" value="虚拟驱动" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#b1ddf0;strokeColor=#10739e;" vertex="1" parent="1">
+          <mxGeometry x="-228" y="197" width="282" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Kq_c7fs-lclYe2ZRCGIc-11" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.116;exitY=0.96;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.073;entryY=-0.045;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="Kq_c7fs-lclYe2ZRCGIc-1" target="Kq_c7fs-lclYe2ZRCGIc-4">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-238" y="-81" as="sourcePoint" />
+            <mxPoint x="-207" y="24" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Kq_c7fs-lclYe2ZRCGIc-12" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.688;exitY=1.04;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.435;entryY=0.009;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="Kq_c7fs-lclYe2ZRCGIc-1" target="Kq_c7fs-lclYe2ZRCGIc-3">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-70" y="-101" as="sourcePoint" />
+            <mxPoint x="-20" y="-151" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
