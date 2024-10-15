@@ -3,7 +3,7 @@ layout:     post
 title:      "BE6500Pro刷机开启SSH"
 subtitle:   "1.0.46,固化,ShellClash,ShellCrash"
 date:       2024-04-05
-update:     2024-04-05
+update:     2024-10-16
 author:     "elmagnifico"
 header-img: "img/bg8.jpg"
 catalog:    true
@@ -178,13 +178,17 @@ sh -c "$(curl -kfsSl https://cdn.jsdelivr.net/gh/juewuy/ShellClash@master/instal
 
 这里有一个问题，yaml文件他这里不支持unicode，也就是说各种中文和表情符号什么的是不能用的，否则无法启动，会有类似的报错
 
+- 提前在规则生成中去掉emoj和中文符号
+
 ![image-20240405040232154](https://img.elmagnifico.tech/static/upload/elmagnifico/202404050402183.png)
 
 最好不要用这种内置的转换或者来路不明的在线转换，鬼知道他把链接弄哪里去了，他还不支持订阅模式，后面的面板也不能修改，很难用。
 
 
 
-安装Dashboard，选Yard面板
+安装Dashboard，~~选Yard面板~~，建议选Yacd-Meta魔改面板
+
+- Yacd面板打开规则会崩溃
 
 ![image-20240405040041301](https://img.elmagnifico.tech/static/upload/elmagnifico/202404050400333.png)
 

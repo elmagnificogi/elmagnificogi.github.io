@@ -8,7 +8,7 @@ author:     "elmagnifico"
 header-img: "img/z0.jpg"
 catalog:    true
 tags:
-    - xiaomi
+    - 米家
     - Equip
 ---
 
