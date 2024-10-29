@@ -3,7 +3,7 @@ layout:     post
 title:      "部署试用Orangescrum"
 subtitle:   "PingCode"
 date:       2024-10-28
-update:     2024-10-29
+update:     2024-10-30
 author:     "elmagnifico"
 header-img: "img/z5.jpg"
 catalog:    true
@@ -220,4 +220,6 @@ Orangescrum一共14种类型的任务，其中13种都可以在Scrum种体现，
 
 ## Summary
 
-看别人好像都跑的同，甚至官方的自动安装包都可以，但是我这里就不行
+看别人好像都跑的通，甚至官方的自动安装包都可以，但是我这里就不行
+
+Orangescrum的官方似乎不是很想对开源支持，还是想你用收费版本
