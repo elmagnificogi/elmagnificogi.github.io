@@ -150,6 +150,74 @@ chown -R www-data:www-data /var/www/html \
 
 
 
+### 自动安装
+
+> https://github.com/Orangescrum/orangescrum/releases/tag/V2.0.11
+
+官方的release中有自动安装包，但是ubuntu 18实际测试发现不行，会提示一个错误，很奇怪
+
+```
+os-scripts is a direct
+```
+
+
+
+切换到ubuntu 16，总算可以显示安装界面了
+
+![image-20241029162435792](https://img.elmagnifico.tech/static/upload/elmagnifico/202410291624863.png)
+
+![image-20241029164250295](https://img.elmagnifico.tech/static/upload/elmagnifico/202410291642330.png)
+
+![image-20241029165740485](https://img.elmagnifico.tech/static/upload/elmagnifico/202410291657542.png)
+
+继续往下部署就会发现这里报错了，无法继续
+
+![image-20241029170146591](https://img.elmagnifico.tech/static/upload/elmagnifico/202410291701648.png)
+
+看了一下，应该是数据库还是有问题，起不来
+
+
+
+## 试用
+
+![image-20241029143930798](https://img.elmagnifico.tech/static/upload/elmagnifico/202410291439856.png)
+
+项目列表中可以看到当前计划完成的情况，实时的
+
+
+
+![image-20241029142931375](https://img.elmagnifico.tech/static/upload/elmagnifico/202410291429450.png)
+
+Orangescrum一共14种类型的任务，其中13种都可以在Scrum种体现，只有epic是不能放在scrum中的
+
+![image-20241029143520976](https://img.elmagnifico.tech/static/upload/elmagnifico/202410291435038.png)
+
+规划任务或者是积压的任务都可以快速拖入到一个迭代中
+
+![image-20241029143623566](https://img.elmagnifico.tech/static/upload/elmagnifico/202410291436623.png)
+
+开始迭代以后就可以在看板视角看到具体哪个任务完成了或者没完成，每个任务的状态会在看板视角同步切换
+
+![image-20241029143803351](https://img.elmagnifico.tech/static/upload/elmagnifico/202410291438454.png)
+
+每个迭代结束以后可以在Reports中看到迭代的记录和情况
+
+迭代完成以后，Backlog中就不会再看到对应的迭代了，这个时候创建下一个即可，敏捷开发的循环就正常跑起来了
+
+
+
+![image-20241029144148896](https://img.elmagnifico.tech/static/upload/elmagnifico/202410291441984.png)
+
+项目模板中也支持多种模板模式，功能是比较完善的
+
+![image-20241029144243772](https://img.elmagnifico.tech/static/upload/elmagnifico/202410291442815.png)
+
+至于其他的wiki、文件存档、甘特图、工单、发票追踪等等也都支持
+
+![image-20241029144615279](https://img.elmagnifico.tech/static/upload/elmagnifico/202410291446326.png)
+
+整合上还差一点，不支持Gitlab，有点可惜
+
 ## Summary
 
-暂时跑不通
+看别人好像都跑的同，甚至官方的自动安装包都可以，但是我这里就不行
