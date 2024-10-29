@@ -3,7 +3,7 @@ layout:     post
 title:      "部署试用Orangescrum"
 subtitle:   "PingCode"
 date:       2024-10-28
-update:     2024-10-28
+update:     2024-10-29
 author:     "elmagnifico"
 header-img: "img/z5.jpg"
 catalog:    true
@@ -42,6 +42,8 @@ docker run -d -p 80:80 --name=osapp --link=osdb orangescrum/orangescrum-app
 本以为只能通过源码部署，看一下是否接近云端版本，多看了一眼有一个PR就是增加docker，刚好来试一下
 
 > https://github.com/Orangescrum/orangescrum/pull/45
+>
+> https://github.com/geraldbahati/orangescrum
 
 拉下来小黑的库
 
@@ -135,14 +137,16 @@ apache2ctl -M | grep headers
 
 ```
 chown -R www-data:www-data /var/www/html \
-    && chmod -R 775 /var/www/html/app/Config \
-    && chmod -R 775 /var/www/html/app/tmp \
-    && chmod -R 775 /var/www/html/app/webroot
+    && chmod -R 0777 /var/www/html/app/Config \
+    && chmod -R 0777 /var/www/html/app/tmp \
+    && chmod -R 0777 /var/www/html/app/webroot
 ```
 
 ![image-20241028193341441](https://img.elmagnifico.tech/static/upload/elmagnifico/202410281933482.png)
 
 变成了无限循环，F12看到似乎什么报错了，然后重定向死循环了，非常接近正常启动了
+
+- 到这里发现实际无法访问js路径，查了一下apache也没看到原因，单纯就是不行
 
 
 
