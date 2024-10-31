@@ -17,7 +17,7 @@ tags:
 
 很久之前写过DSHOT，这次捡起来实现双向DSHOT
 
-> https://elmagnifico.tech/2020/06/03/DSHOT-STM32-PWM-HAL/
+> https://elmagnifico.tech/2020/06/03/Dshot-STM32-PWM-HAL/
 
 单线DSHOT由于单线复用，实现起来非常麻烦，要考虑的东西很多。而相关文章又非常少，只能挨个翻看git issues，搜索零星的信息组合在一起。
 
