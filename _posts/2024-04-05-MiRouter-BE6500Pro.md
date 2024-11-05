@@ -3,7 +3,7 @@ layout:     post
 title:      "BE6500Pro刷机开启SSH"
 subtitle:   "1.0.46,固化,ShellClash,ShellCrash"
 date:       2024-04-05
-update:     2024-11-03
+update:     2024-11-05
 author:     "elmagnifico"
 header-img: "img/bg8.jpg"
 catalog:    true
@@ -197,8 +197,6 @@ Clash启动，面板地址
 ```
 http://192.168.31.1:9999/ui
 ```
-
-面板还是有问题，加载规则加不出来，直接utf8报错，只能说勉强能用吧，后面还得再折腾一下
 
 
 
