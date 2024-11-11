@@ -338,4 +338,6 @@ Jenkins折腾的人还是比较少的，windows就更别说了
 > https://www.dandelioncloud.cn/article/details/1474199404612710401
 >
 > https://stackoverflow.com/questions/29755014/setup-secured-jenkins-master-with-docker
+>
+> https://blog.csdn.net/qq_27575627/article/details/128924426
 
