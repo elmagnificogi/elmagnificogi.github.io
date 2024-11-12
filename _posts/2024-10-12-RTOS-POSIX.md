@@ -7,7 +7,7 @@ update:     2024-10-16
 author:     "elmagnifico"
 header-img: "img/y8.jpg"
 catalog:    true
-tobecontinued: false
+tobecontinued: true
 tags:
     - RTOS
 ---
