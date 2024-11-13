@@ -146,11 +146,25 @@ tags:
 
 
 
-## 其他
+## YF-DR-CM-V2
 
 ![image-20241111004506656](https://img.elmagnifico.tech/static/upload/elmagnifico/202411110045698.png)
 
+![image-20241113150312432](https://img.elmagnifico.tech/static/upload/elmagnifico/202411131503617.png)
+
+看了一下主要触发的方式，EL357N是一个光电耦合器模块，理论上是用来隔离输入和输出的，但是这里直接把输出给到了这个软的吸盘，而且这个吸盘竟然还导电
+
+![image-20241113150337729](https://img.elmagnifico.tech/static/upload/elmagnifico/202411131503781.png)
+
+主控是STC的8G1K08A，简单一个单片机，主要用来输出PWM给光电模块
+
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/202411131504697.png)
+
+给的PWM脉冲大概是3Hz，占空比是25%，然后就能触发屏幕的点击了
+
 其他的方式触发点击，本质上是一样的方案，所以没有尝试
+
+## 其他
 
 ![image-20241111005941319](https://img.elmagnifico.tech/static/upload/elmagnifico/202411110059357.png)
 
