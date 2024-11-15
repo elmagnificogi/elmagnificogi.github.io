@@ -2,8 +2,8 @@
 layout:     post
 title:      "STM32 MCU移植SSH"
 subtitle:   "SSL、SFTP、Crypto、Lwip"
-date:       2024-13-14
-update:     2024-13-14
+date:       2024-11-15
+update:     2024-11-15
 author:     "elmagnifico"
 header-img: "img/bg1.jpg"
 catalog:    true
@@ -18,10 +18,6 @@ tags:
 给MCU移植Crypto、SSL、SSH、SFTP等库，真的找不到一个例子，目前看到的库大部分都是商用的。
 
 比如wolfssh、CycloneSSH、libssh2、TinySSH、microSSH、Dropbear，这些库可能linux使用比较多，但是那边安装移植也方便多了，降到MCU一库难求，更别说详细的移植文档了，基本没有
-
-
-
-## SSH
 
 
 
@@ -106,23 +102,26 @@ SSL这里需要支持FreeRTOS
     /* Hardware Crypto - uncomment as available on hardware */
     //#define WOLFSSL_STM32_PKA
     //#define NO_STM32_RNG
-    #undef  NO_STM32_HASH
-    #undef  NO_STM32_CRYPTO
+    //#undef  NO_STM32_HASH
+    //#undef  NO_STM32_CRYPTO
     //#define WOLFSSL_GENSEED_FORTEST /* if no HW RNG is available use test seed */
     #define STM32_HAL_V2
 ```
 
+- H743是没有HASH，也没有CRYPTO的，但是有RNG
 
 
-在benchmark中定义一下不要显示多语言，否则keil文件乱码识别不了，编译过不去
 
-```c
-#define NO_MULTIBYTE_PRINT
+移除所有test相关代码，这个部分用gcc编译更容易过一些
+
+
+
+```
+..\include\stdio.h(372): error:  #2746: argument for attribute "nonnull" is larger than number of parameters
+                      const char * __restrict /*format*/, ...) __attribute__((__nonnull__(1,2)));
 ```
 
-
-
-会提示缺少`unistd.h`，复制一个空文件放进去即可
+这个错暂时解不掉，得用CubeIDE编译才行，Keil这里过不去
 
 
 
@@ -187,6 +186,8 @@ CycloneSSH的问题在于虽然他用demo可以直接编译，但是他底层调
 
 
 ## Summary
+
+带了安全的协议真的麻烦
 
 
 
