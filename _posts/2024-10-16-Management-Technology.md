@@ -2,8 +2,8 @@
 layout:     post
 title:      "技术？管理？该怎么选"
 subtitle:   "选择"
-date:       2024-11-16
-update:     2024-11-16
+date:       2024-13-16
+update:     2024-13-16
 author:     "elmagnifico"
 header-img: "img/z0.jpg"
 catalog:    true
