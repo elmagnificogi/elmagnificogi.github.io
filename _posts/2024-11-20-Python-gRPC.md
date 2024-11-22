@@ -2,8 +2,8 @@
 layout:     post
 title:      "Python gRPC"
 subtitle:   "RPC"
-date:       2024-11-20
-update:     2024-11-20
+date:       2024-11-30
+update:     2024-11-30
 author:     "elmagnifico"
 header-img: "img/bg3.jpg"
 catalog:    true
