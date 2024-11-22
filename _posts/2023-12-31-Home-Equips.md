@@ -3,7 +3,7 @@ layout:     post
 title:      "家具选购踩坑记录"
 subtitle:   "电器、米家、智能家居、物联网"
 date:       2023-12-31
-update:     2024-11-14
+update:     2024-11-22
 author:     "elmagnifico"
 header-img: "img/z4.jpg"
 catalog:    true
