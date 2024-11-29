@@ -96,7 +96,129 @@ Xmake ≈ Make/Ninja + CMake/Meson + Vcpkg/Conan + distcc + ccache/sccache
 
 
 
+SCons也做了类似的事情，使用python来写
+
+> https://scons.org/
+
+
+
 作为工具链的头头GNU也有一套构建工具GNU Autotools，但是对于其他平台的支持就不太行了
+
+
+
+## xmake
+
+试用一下xmake，主要是看看他的menu图形化是怎么做的，文档里也没有详细说明
+
+
+
+### 部署
+
+安装xmake，windows直接下载exe版本即可
+
+> https://github.com/xmake-io/xmake/releases
+
+
+
+## 测试
+
+拉下来xmake的代码，测试工程都在test/project中
+
+> https://github.com/xmake-io/xmake
+
+
+
+创建一个hello工程
+
+```
+xmake create -l c -P ./hello
+```
+
+
+
+如果正常的话，可以直接xmake，但是实际可能不行
+
+```
+xmake
+```
+
+xmake会自动检测设备环境，自动关联查找各种库，由于默认的xmake.lua中没有设定环境，所以导致实际上自动找的工具链大概率是错的，编译过不去
+
+
+
+首先指定环境
+
+```shell
+xmake f -p windows -a x64
+```
+
+他会自动找到对应安装的环境
+
+```shell
+checking for Microsoft Visual Studio (x64) version ... 2022
+checking for Microsoft C/C++ Compiler (x64) version ... 19.35.32019
+```
+
+再次xmake，这次编译成功了
+
+```shell
+[ 50%]: compiling.release src\main.c
+[ 75%]: linking.release hello.exe
+[100%]: build ok, spent 1.032s
+```
+
+运行程序，直接输出hello world
+
+```
+xmake run
+```
+
+
+
+再测试一下嵌入式环境，进入到`xmake\tests\projects\embed\mdk\hello\`路径中
+
+嵌入式环境比较复杂，xmake都算作交叉编译，参考这部分文档
+
+- -p是指定平台，比如交叉编译、windows、linux、mac，这种大平台级别
+- -a 基本可以理解为系统架构，比如x86、x64、cortex-m3、cortex-m4这样的
+- --toolchain 自动搜索对应的工具链，并且使用 `xmake show -l toolchains`可以显示当前支持的工具链
+- --sdk指定具体的工具链的库地址，根目录，大部分会自动识别库内结构，找到对应工具
+
+cross这里默认就是指交叉编译的库，具体sdk路径最好带上引号
+
+```
+xmake f -p cross -a cortex-m3 --toolchain=armcc -c
+xmake
+```
+
+armcc的方式可以正常编译过
+
+
+
+```
+xmake f -p cross -a cortex-m3 --toolchain=armclang -c
+xmake
+```
+
+armclang，也就是keil的v6编译，过不去
+
+
+
+cross这里默认就是指交叉编译的库，具体sdk路径最好带上引号
+
+```
+xmake f -p cross --toolchain=gnu-rm --sdk="D:\GNU Arm Embedded Toolchain\10 2021.10"
+xmake
+```
+
+
+
+如果遇到这种问题，实际就是你的编译工具链不完整，缺少内容
+
+```
+note: the following packages are unsupported on msys/x86_64:
+  -> gnu-rm 2021.10 [host]
+```
 
 
 
