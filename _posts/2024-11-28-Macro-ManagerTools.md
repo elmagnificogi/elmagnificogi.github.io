@@ -1,9 +1,9 @@
 ---
 layout:     post
-title:      "构建工具"
+title:      "构建工具之xmake"
 subtitle:   "Kconfig、menuconfig、makefile、macro"
-date:       2024-12-28
-update:     2024-12-28
+date:       2024-12-02
+update:     2024-12-02
 author:     "elmagnifico"
 header-img: "img/bg4.jpg"
 catalog:    true
@@ -50,7 +50,7 @@ tags:
 
 Buildroot是将一个个工程或者说应用，当作一个package单元，本质上就是把所有package编译好，打包到一起就得到了一个镜像，就可以烧给对应系统使用了
 
-一般工作流程是先拉下来所有需要依赖的源码或者包，然后进行配置，核心配置工具就是menuconfig，他就类似于VS中的整个Solution的配置，规定了各个工程要以什么样的方式进行编译，而之后进入到每个工程以后还有各自详细的makefile去管理这个工程怎么编译，最终编译完成输出到output中。
+一般工作流程是先拉下来所有需要依赖的源码或者包，然后进行配置，核心配置工具就是menuconfig，他就类似于VS中的整个Solution的配置，规定了各个工程要以什么样的方式进行编译，还有需要使用什么样的编译器来编译，同时对应的编译工具链都会直接拉到工程内，之后进入到每个工程以后还有各自详细的makefile去管理这个模块怎么编译，最终编译完成输出到output中。
 
 kconfig就是用来描述各种包的依赖关系、配置选型的，最终由menuconfig具象化。
 
@@ -122,6 +122,8 @@ SCons也做了类似的事情，使用python来写
 
 ## 测试
 
+#### hello
+
 拉下来xmake的代码，测试工程都在test/project中
 
 > https://github.com/xmake-io/xmake
@@ -184,7 +186,7 @@ xmake run
 - --toolchain 自动搜索对应的工具链，并且使用 `xmake show -l toolchains`可以显示当前支持的工具链
 - --sdk指定具体的工具链的库地址，根目录，大部分会自动识别库内结构，找到对应工具
 
-cross这里默认就是指交叉编译的库，具体sdk路径最好带上引号
+cross这里默认就是指交叉编译的库
 
 ```
 xmake f -p cross -a cortex-m3 --toolchain=armcc -c
@@ -222,9 +224,60 @@ note: the following packages are unsupported on msys/x86_64:
 
 
 
+#### menu
+
+看似可以一键直接
+
+```
+xmake f --menu
+```
+
+![img](https://img.elmagnifico.tech/static/upload/elmagnifico/202412021540966.png)
+
+看似很简单就能起来一个menu，但实际上不行，这里需要tui支持，windows这边的git bash客户端不支持这个界面，但是如果直接用cmd反而支持tui
+
+xmake.lua中添加下面的几个选型，即可在菜单中增加一些选型，后续可以和实际编译关联在一起
+
+```
+-- 'boolean' option
+option("test1")
+    set_default(true)
+    set_showmenu(true)
+    set_category("root menu/test1")
+
+-- 'choice' option with values: "a", "b", "c"
+option("test2")
+    set_default("a")
+    set_values("a", "b", "c")
+    set_showmenu(true)
+    set_category("root menu/test2")
+
+-- 'string' option
+option("test3")
+    set_default("xx")
+    set_showmenu(true)
+    set_category("root menu/test3/test3")
+
+-- 'number' option
+option("test4")
+    set_default(6)
+    set_showmenu(true)
+    set_category("root menu/test4")
+```
+
+
+
+![image-20241202160200487](https://img.elmagnifico.tech/static/upload/elmagnifico/202412021602539.png)
+
+实际这个menu中除了用户自定义的这一部分，剩下的选型基本就是xmake的参数配置，可以在menu中一层层配置好，就是操作起来有点麻烦。
+
+
+
 ## Summary
 
+回归初心，实际如果用类似这样的menu做构建，真的比直接用现成的IDE好了嘛，只能说这样的menu是一种通用的交互手段，可以跨平台服务各种代码，但是对于本身不太需要跨平台的项目来说，menu就是一种倒退。
 
+类似的linux，menu能用起来是建立在完善的配置项上，各种模块之间耦合或者冲突都需要完善到配置文件中，否则别人用起来也会出一堆问题。
 
 
 
@@ -235,4 +288,6 @@ note: the following packages are unsupported on msys/x86_64:
 > https://www.cnblogs.com/zzb-Dream-90Time/p/7111435.html
 >
 > https://cloud.tencent.com/developer/article/1825589
+>
+> https://tboox.org/cn/2018/02/03/update-v2.1.9/
 
