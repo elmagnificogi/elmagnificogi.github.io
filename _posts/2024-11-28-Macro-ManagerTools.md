@@ -226,7 +226,7 @@ note: the following packages are unsupported on msys/x86_64:
 
 #### menu
 
-看似可以一键直接
+看似可以一键直接使用
 
 ```
 xmake f --menu
@@ -234,7 +234,7 @@ xmake f --menu
 
 ![img](https://img.elmagnifico.tech/static/upload/elmagnifico/202412021540966.png)
 
-看似很简单就能起来一个menu，但实际上不行，这里需要tui支持，windows这边的git bash客户端不支持这个界面，但是如果直接用cmd反而支持tui
+但实际上不行，这里需要tui支持，windows这边的git bash客户端不支持这个界面，但是如果直接用cmd反而支持tui
 
 xmake.lua中添加下面的几个选型，即可在菜单中增加一些选型，后续可以和实际编译关联在一起
 
