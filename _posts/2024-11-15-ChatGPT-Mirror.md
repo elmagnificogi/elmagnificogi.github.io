@@ -3,7 +3,7 @@ layout:     post
 title:      "ChatGPT-Mirror部署和体验"
 subtitle:   "cws、dairoot、oaifree"
 date:       2024-11-15
-update:     2024-11-15
+update:     2024-12-03
 author:     "elmagnifico"
 header-img: "img/bg2.jpg"
 catalog:    true
@@ -87,6 +87,57 @@ gpt.你的域名.com {
 访问起来和GPT差不多，还可以
 
 ![image-20241115152054561](https://img.elmagnifico.tech/static/upload/elmagnifico/202411151520610.png)
+
+
+
+### 403 Forbidden
+
+![image-20241203143206491](https://img.elmagnifico.tech/static/upload/elmagnifico/202412031432543.png)
+
+> https://github.com/dairoot/ChatGPT-Mirror/blob/main/docs/faq-cn.md
+
+文档里有相关说明，换IP是最简单的，但是成本也是最高的，剩下就是用代理的方式
+
+测试了一下wrap可以用，直接用wrap代理
+
+直接启动wrap代理
+
+```
+docker-compose -f docker-compose-warp.yml up -d
+```
+
+验证局部模式的 warp 是否安装成功，如果 warp=off 则 warp 安装失败
+
+```
+curl -s --socks5-hostname 127.0.0.1:1080 https://cloudflare.com/cdn-cgi/trace |grep warp
+```
+
+
+
+如果验证成功了，修改环境变量，增加代理链接，然后重新启动
+
+```
+vi .env
+
+PROXY_URL_POOL=socks5://warp:1080
+
+./deploy.sh
+```
+
+
+
+外部验证代理成功的链接
+
+```
+http://你的域名/api/check-proxy?admin_password=环境变量中的ADMIN_PASSWORD
+https://你的域名/api/check-proxy?admin_password=环境变量中的ADMIN_PASSWORD
+```
+
+正确的话就会返回类似下面的200提示
+
+![image-20241203143325990](https://img.elmagnifico.tech/static/upload/elmagnifico/202412031433021.png)
+
+再登录ChatGPT-Mirror，已经可以正常登录了
 
 
 
