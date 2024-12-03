@@ -2,8 +2,8 @@
 layout:     post
 title:      "宏管理工具之lite-manager"
 subtitle:   "Kconfig、menuconfig、makefile、macro"
-date:       2024-12-22
-update:     2024-12-22
+date:       2024-12-03
+update:     2024-12-03
 author:     "elmagnifico"
 header-img: "img/bg5.jpg"
 catalog:    true
@@ -28,9 +28,7 @@ tags:
 
 ### 环境
 
-至少需要一个make和gun c的环境，之前系统里一直有一个MinGW32 13年的版本，gcc大概只有6，编译过不去
-
-
+至少需要一个make和gun c的环境，之前系统里一直有一个MinGW32 13年的版本，gcc大概只有6，编译过不去（后来发现应该不是这个问题）
 
 通过下面的方式在线安装MinGW64
 
@@ -65,6 +63,62 @@ https://github.com/Vuniverse0/mingwInstaller/releases/download/1.2.1/mingwInstal
 ![image-20241202191619373](https://img.elmagnifico.tech/static/upload/elmagnifico/202412021916406.png)
 
 - 如果不修改lm，make config时也显示不出来当前宏的状态
+
+
+
+### 规则
+
+![image-20241203110700613](https://img.elmagnifico.tech/static/upload/elmagnifico/202412031107687.png)
+
+lm.cfg，用来定义宏的定义以及宏之间的关系
+
+proj.cfg，用户定义实际想要的宏
+
+.lm.mk，缓存
+
+config.h，最终处理完约束条件后实际定义出来的宏
+
+
+
+lm.cfg中判断条件是自上而下的，遇到冲突点，首先会关闭自身，然后文件之间是从左向右流动的
+
+其中n，表示宏关闭，‘n’是正常使用n这个关键字
+
+同时下面的文件编译的约束也可以同时使用宏来管控
+
+
+
+多模块、多组件的工程目录
+
+```
+├───build
+├───subdirA
+|   ├───mac_a.c
+|   └───lm.cfg
+├───subdirB
+|   ├───mac_b.c
+|   └───lm.cfg
+└───lm.cfg
+```
+
+可以使用include直接把下面的配置加载进去
+
+```
+include "subdirA/lm.cfg"
+include "subdirB/lm.cfg"
+```
+
+
+
+lm的工程实例可以参考这里，有些技巧example里没有用到，可以看看实例是怎么跑的
+
+> https://gitee.com/li-shan-asked/ebraid
+
+
+
+lite-manager 同时也有类似tui的交互版本，不过作者说比较老、过时，所以不推荐用了
+
+![img](https://img.elmagnifico.tech/static/upload/elmagnifico/202412031159028.png)
 
 
 
