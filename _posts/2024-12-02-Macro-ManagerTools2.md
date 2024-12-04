@@ -3,7 +3,7 @@ layout:     post
 title:      "宏管理工具之lite-manager"
 subtitle:   "Kconfig、menuconfig、makefile、macro"
 date:       2024-12-03
-update:     2024-12-03
+update:     2024-12-04
 author:     "elmagnifico"
 header-img: "img/bg5.jpg"
 catalog:    true
@@ -23,6 +23,8 @@ tags:
 > https://gitee.com/li-shan-asked/lite-manager
 
 群友的宏管理工具，主要在gitee上更新，github更新不及时，release文件可能不能用
+
+主要是用来方便管理宏定义和生成Makefile，但是大部分设置还是要熟悉Makefile本身，你才能完成lm的配置文件编写，本质上并没有变换脚本语言或者什么的流程
 
 
 
@@ -63,6 +65,26 @@ https://github.com/Vuniverse0/mingwInstaller/releases/download/1.2.1/mingwInstal
 ![image-20241202191619373](https://img.elmagnifico.tech/static/upload/elmagnifico/202412021916406.png)
 
 - 如果不修改lm，make config时也显示不出来当前宏的状态
+
+
+
+先生成Makefile
+
+```
+./lm.exe -g Makefile -p hello
+```
+
+然后可以生成config文件，并且查看宏定义情况
+
+```
+make config
+```
+
+编译
+
+```
+make
+```
 
 
 
@@ -132,7 +154,7 @@ GNU Arm Embedded Toolchain\10 2021.10
 
 STM32F103的工程是无法正常编译的
 
-如果没有看过类似的例子或者直接参考makefile原工程，不可能上手直接使用
+如果没有看过类似的例子或者直接参考Makefile原工程，不可能上手直接使用
 
 如果使用`Arm GNU Toolchain arm-none-eabi\13.3 rel1` 确实可以直接编译过
 
