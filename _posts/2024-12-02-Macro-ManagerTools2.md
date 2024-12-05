@@ -271,7 +271,7 @@ clean:
 
 
 
-## lm.cfg解析
+### lm.cfg解析
 
 以stm32f103的工程为例，相当于Makefile是一个通用的Makefile，而lm.cfg 相当于是一个PreMakefile，在这里直接定义Makefile要用的一些参数即可，剩下就是Makefile足够项目通用即可
 
