@@ -3,7 +3,7 @@ layout:     post
 title:      "RTOS对比"
 subtitle:   "操作系统"
 date:       2024-10-16
-update:     2024-10-16
+update:     2024-12-06
 author:     "elmagnifico"
 header-img: "img/y8.jpg"
 catalog:    true
@@ -102,6 +102,16 @@ RT-Thread本身也使用了I/O设备的管理和驱动模型
 
 ## FreeRTOS
 
+FreeRTOS目前被Amazon接管
+
+![image-20241206170202630](https://img.elmagnifico.tech/static/upload/elmagnifico/202412061702681.png)
+
+FreeRTOS目前也有几个不同的版本，TCP顾名思义有了TCP/IP协议栈，主要是给物联网应用使用的。CLI则是一些外部模块，通过命令行控制的，Plus-IO，这个就升级到了统一应用层和硬件层接口的版本，各有各的好处，不知道有没有一个综合版本
+
+除了三个版本的RTOS，还有很多相关Lab和Core库，比较好的是这些Core完全不依赖FreeRTOS，用于其他操作系统也是一样的
+
+Lab库中相关性就高一些，但是有了POSIX的接口、FAT、统一的Boot等等
+
 
 
 ## 其他概念
@@ -143,3 +153,5 @@ POSIX更注重的是在操作系统方面保持一致，而不是具体
 > https://wiki.seeedstudio.com/cnXIAO-SAMD21-Zephyr-RTOS/
 >
 > https://blog.csdn.net/cnzzs/article/details/140409697
+>
+> https://freertos.org/zh-cn-cmn-s/Documentation/01-FreeRTOS-quick-start/01-Beginners-guide/00-Overview
