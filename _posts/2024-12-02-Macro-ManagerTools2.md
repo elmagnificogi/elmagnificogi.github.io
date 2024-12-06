@@ -26,6 +26,8 @@ tags:
 
 主要是用来方便管理宏定义和生成Makefile，但是大部分设置还是要熟悉Makefile本身，你才能完成lm的配置文件编写，本质上并没有变换脚本语言或者什么的流程
 
+lite-manager在这里有点类似于Kconfig
+
 
 
 ### 环境
@@ -152,7 +154,6 @@ lite-manager 同时也有类似tui的交互版本，不过作者说比较老、�
 TARGET    := hello
 BUILD_DIR := build
 
-
 # 定义一个伪指令，主要用来检测是否从lm的config中生成的
 # 简单说基本上只要不是最终生成的目标，那都是伪指令
 # 伪指令主要是完成一些辅助性的工作，比如clean，检测，切换配置，生成配置等等
@@ -272,6 +273,22 @@ clean:
 
 
 ### lm.cfg解析
+
+实际在hello的lm.cfg中只有一行，就是加了一个文件进去
+
+```
+SRC  += hello.c
+```
+
+这里指定了生成的目标是hello
+
+```
+./lm.exe -g Makefile -p hello
+```
+
+剩下的Makefile全都靠lm内部自动生成
+
+
 
 以stm32f103的工程为例，相当于Makefile是一个通用的Makefile，而lm.cfg 相当于是一个PreMakefile，在这里直接定义Makefile要用的一些参数即可，剩下就是Makefile足够项目通用即可
 
