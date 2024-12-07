@@ -105,6 +105,40 @@ qemu这里的参数含义
 
 
 
+## QEMU-STM32
+
+官方QEMU支持的STM32不是很多，而且用起来很麻烦，需要安装两个环境，而且很容易出问题
+
+所以有人打包了QEMU，并且加入了比较多的ST的开源板子，支持的型号比较多
+
+> https://github.com/beckus/qemu_stm32
+
+![image-20241207155204423](https://img.elmagnifico.tech/static/upload/elmagnifico/202412071552494.png)
+
+这个QEMU环境需要重新编译，耗时比较多，或者是从Ubuntu里调用，倒是不用打包成exe
+
+
+
+bule bill 的工程用QEMU模拟
+
+> https://github.com/beckus/stm32_p103_demos
+
+直接编译
+
+```
+make
+```
+
+编译完成以后每个demo下面都有对应的bin文件，可以直接拿来模拟使用
+
+```
+qemu-system-arm -M stm32-p103 -kernel main.bin
+```
+
+
+
+同时RT-Thread，他们的IDE里也集成了专属的QEMU版本，也可以快捷完成模拟
+
 ## Summary
 
 挺简单的，只是问题QEMU支持的现成芯片、板子比较少，需要自己去找对应的开发板，甚至自己开发，有点麻烦
@@ -118,4 +152,6 @@ qemu这里的参数含义
 > https://freertos.org/zh-cn-cmn-s/Documentation/02-Kernel/03-Supported-devices/04-Demos/03-Emulation-and-simulation/QEMU/freertos-on-qemu-mps2-an385-model
 >
 > https://www.cnblogs.com/asmer/p/16813129.html
+>
+> https://www.qemu.org/docs/master/system/arm/stm32.html
 

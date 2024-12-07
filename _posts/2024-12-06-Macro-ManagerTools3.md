@@ -2,8 +2,8 @@
 layout:     post
 title:      "宏管理工具之kconfig"
 subtitle:   "Kconfig、menuconfig、makefile、macro"
-date:       2024-12-07
-update:     2024-12-07
+date:       2024-12-17
+update:     2024-12-17
 author:     "elmagnifico"
 header-img: "img/bg6.jpg"
 catalog:    true
