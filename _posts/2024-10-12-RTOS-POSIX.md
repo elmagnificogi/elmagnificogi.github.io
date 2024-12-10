@@ -3,7 +3,7 @@ layout:     post
 title:      "RTOS对比"
 subtitle:   "操作系统"
 date:       2024-10-16
-update:     2024-12-06
+update:     2024-12-07
 author:     "elmagnifico"
 header-img: "img/y8.jpg"
 catalog:    true
