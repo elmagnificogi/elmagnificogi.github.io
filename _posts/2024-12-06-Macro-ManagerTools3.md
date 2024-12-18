@@ -20,8 +20,6 @@ tags:
 
 ## Kconfig
 
-
-
 ### 安装
 
 在windows下使用Kconfig，至少得有python，否则界面等内容无法正常显示
@@ -258,6 +256,16 @@ Kconfig发展了这么久，难道没有人想着用VScode来做一下可视化�
 > https://marketplace.visualstudio.com/items?itemName=nordic-semiconductor.nrf-kconfig
 
 nRF Kconfig想要用起来还稍微有点麻烦，直接启动不了，所以单独开个段落说明如何使用。
+
+
+
+至于非VScode的版本，基本上大部分都是依赖kconfiglib的python库完成显示，或者是结合一下TUI、Tkinter等比较轻量化的框架实现，而整体交互逻辑依然离不开比较原始的上下左右菜单式的
+
+> https://github.com/ulfalizer/Kconfiglib
+>
+> https://github.com/cuinixam/kspl
+>
+> https://github.com/CoryXie/SConf
 
 
 
