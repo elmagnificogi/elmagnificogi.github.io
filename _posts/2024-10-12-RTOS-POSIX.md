@@ -3,11 +3,11 @@ layout:     post
 title:      "RTOS对比"
 subtitle:   "操作系统"
 date:       2024-10-16
-update:     2024-12-07
+update:     2024-12-20
 author:     "elmagnifico"
 header-img: "img/y8.jpg"
 catalog:    true
-tobecontinued: true
+tobecontinued: false
 tags:
     - RTOS
 ---
@@ -138,11 +138,20 @@ POSIX更注重的是在操作系统方面保持一致，而不是具体
 
 #### BusyBox
 
- 
+Busybox是一个开源项目，遵循GPL v2协议。Busybox将众多的UNIX命令集合进一个很小的可执行程序中，可以用来替代GNU fileutils、shellutils等工具集。Busybox中各种命令与相应的GNU工具相比，所能提供的选项比较少，但是也足够一般的应用了。Busybox主要用于嵌入式系统。
+
+Busybox在编写过程中对文件大小进行了优化，并考虑了系统资源有限(比如内存等)的情况。与一般的GNU工具集动辄几M的体积相比，动态链接的Busybox只有几百K，即使是采用静态链接也只有1M左右。Busybox按模块设计，可以很容易地加入、去除某些命令，或增减命令的某些选项。
+
+在创建根文件系统的时候，如果使用Busybox的话，只需要在/dev目录下创建必要的设备节点，在/etc目录下增加一些配置文件即可，当然，如果Busybox使用动态链接，那么还需要再/lib目录下包含库文件。
+
+
+Busybox虽然已经小到1M多，但是还是有点大，如果能更小就更好了
 
 
 
 ## Summary
+
+后续可能还会对各个系统更深入体验，看他们的架构是如何搭建起来的
 
 
 
