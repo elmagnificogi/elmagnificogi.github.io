@@ -3,7 +3,7 @@ layout:     post
 title:      "Netch 自建游戏加速器"
 subtitle:   "ss，iplc，v2ray"
 date:       2022-01-19
-update:     2024-01-25
+update:     2024-12-30
 author:     "elmagnifico"
 header-img: "img/bg5.jpg"
 catalog:    true
@@ -23,6 +23,8 @@ tags:
 
 
 **Netch基本被淘汰了，请别用了，现在大部分代理软件比如V2rayN、Clash等早就把类似Netch的功能做进去了，没有Netch这么多bug**
+
+- 小白请直接使用uu，不要在这里浪费时间，你线路质量比专业加速器差了一大截，想用Netch取代专业加速器，你成本比他高10倍都不止
 
 
 
@@ -386,7 +388,7 @@ redirector则是整个进程重定向，加速的核心模块，netch本身只�
 
 ## Summary
 
-期待2.0吧
+期待2.0吧，Netch基本跑路，没有2.0了，不要浪费生命折腾这个了
 
 
 
