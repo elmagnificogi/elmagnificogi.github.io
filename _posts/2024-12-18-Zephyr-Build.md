@@ -236,6 +236,12 @@ endmenu
 source "Kconfig.zephyr"
 ```
 
+重新build一下，然后打开Kconfig GUI就能看到对应显示了
+
+![image-20250102155527389](https://img.elmagnifico.tech/static/upload/elmagnifico/20250102155527462.png)
+
+这里比较麻烦的地方就是这个工程每次重新打开，这个GUI就打不开了，必须要点开nRF Connect才能重新打开，非常难受
+
 
 
 ## Summary
