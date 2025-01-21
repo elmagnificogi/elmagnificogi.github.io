@@ -11,6 +11,10 @@ layout: null
     <pubDate>{{ site.time | date_to_rfc822 }}</pubDate>
     <lastBuildDate>{{ site.time | date_to_rfc822 }}</lastBuildDate>
     <generator>Jekyll v{{ jekyll.version }}</generator>
+    <follow_challenge>
+      <feedId>55855418052542483</feedId>
+      <userId>101522814280570880</userId>
+    </follow_challenge>
     {% for post in site.posts limit:10 %}
       <item>
         <title>{{ post.title | xml_escape }}</title>
