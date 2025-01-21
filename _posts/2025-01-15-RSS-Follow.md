@@ -90,6 +90,10 @@ layout: null
 
 ```
 
+认证完成以后就会有一个小勾了
+
+![image-20250121165407063](https://img.elmagnifico.tech/static/upload/elmagnifico/20250121165407096.png)
+
 
 
 ## 分享
@@ -97,6 +101,18 @@ layout: null
 这是我多年积攒下来的一些订阅源，直接用Follow就可以分享，甚至还可以出售
 
 > https://app.follow.is/share/lists/104444993002142720
+
+
+
+![image-20250121165600901](https://img.elmagnifico.tech/static/upload/elmagnifico/20250121165600955.png)
+
+看起来似乎Follow想通过这种订阅或者说活跃转化成对应的虚拟货币进而维持或者是激励？？
+
+
+
+这里是我自己的归类，似乎和上面的一样，只是订阅这个人可以订阅到他设置的所有订阅源？
+
+> https://app.follow.is/share/users/101522814280570880
 
 
 
