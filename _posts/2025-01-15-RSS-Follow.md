@@ -52,7 +52,7 @@ Follow整个界面也更加现代一些，TTRSS则是更简洁，更快，动效
 
 对应我Blog中的feed.xml增加标签即可
 
-```
+```xml
 ---
 layout: null
 ---
