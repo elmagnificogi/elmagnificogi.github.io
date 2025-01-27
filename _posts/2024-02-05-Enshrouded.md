@@ -3,7 +3,7 @@ layout:     post
 title:      "雾锁王国服务器搭建"
 subtitle:   "steam、Enshrouded、英灵神殿"
 date:       2024-02-05
-update:     2024-02-05
+update:     2024-01-27
 author:     "elmagnifico"
 header-img: "img/z8.jpg"
 catalog:    true
@@ -143,6 +143,85 @@ steamcmd +login anonymous +app_update 2278520 validate +quit
 
 
 
+新版存档需要设置用户权限，可以这里设置
+
+```json
+  // 用户组设置
+  "userGroups": [
+    {
+      "name": "Admin", // 用户组名称：管理员
+      "password": "AdminXXXXXXXX", // 用户组密码
+      "canKickBan": true, // 是否可以踢人和封禁，这里设置为可以
+      "canAccessInventories": true, // 是否可以访问库存，这里设置为可以
+      "canEditBase": true, // 是否可以编辑基地，这里设置为可以
+      "canExtendBase": true, // 是否可以扩展基地，这里设置为可以
+      "reservedSlots": 0 // 保留的插槽数量，这里设置为0
+    },
+    {
+      "name": "Friend", // 用户组名称：朋友
+      "password": "FriendXXXXXXXX", // 用户组密码
+      "canKickBan": false, // 是否可以踢人和封禁，这里设置为不可以
+      "canAccessInventories": true, // 是否可以访问库存，这里设置为可以
+      "canEditBase": true, // 是否可以编辑基地，这里设置为可以
+      "canExtendBase": false, // 是否可以扩展基地，这里设置为不可以
+      "reservedSlots": 0 // 保留的插槽数量，这里设置为0
+    },
+    {
+      "name": "Guest", // 用户组名称：访客
+      "password": "GuestXXXXXXXX", // 用户组密码
+      "canKickBan": false, // 是否可以踢人和封禁，这里设置为不可以
+      "canAccessInventories": false, // 是否可以访问库存，这里设置为不可以
+      "canEditBase": false, // 是否可以编辑基地，这里设置为不可以
+      "canExtendBase": false, // 是否可以扩展基地，这里设置为不可以
+      "reservedSlots": 0 // 保留的插槽数量，这里设置为0
+    }
+  ]
+```
+
+
+
+具体的游戏内的配置
+
+```json
+  // 自定义的游戏设置
+  "gameSettings": {
+    "playerHealthFactor": 1, // 玩家健康的影响因子，这里设置为1
+    "playerManaFactor": 1, // 玩家魔法的影响因子，这里设置为1
+    "playerStaminaFactor": 1, // 玩家耐力的影响因子，这里设置为1
+    "playerBodyHeatFactor": 1, // 玩家体温的影响因子，这里设置为1
+    "enableDurability": true, // 是否启用耐久度系统，这里设置为启用
+    "enableStarvingDebuff": false, // 是否启用饥饿减益，这里设置为不启用
+    "foodBuffDurationFactor": 1, // 食物增益持续时间的影响因子，这里设置为1
+    "fromHungerToStarving": 600000000000, // 从饥饿到饿死的时间（以纳秒为单位），这里设置为600亿纳秒
+    "shroudTimeFactor": 1, // 迷雾时间的影响因子，这里设置为1
+    "tombstoneMode": "AddBackpackMaterials", // 墓碑模式，这里设置为在玩家死亡时添加背包材料
+    "enableGliderTurbulences": true, // 是否启用滑翔伞湍流，这里设置为启用
+    "weatherFrequency": "Normal", // 天气现象频率，这里设置为正常
+    "miningDamageFactor": 1, // 采矿伤害的影响因子，这里设置为1
+    "plantGrowthSpeedFactor": 1, // 植物生长速度的影响因子，这里设置为1
+    "resourceDropStackAmountFactor": 1, // 资源掉落堆叠数量的影响因子，这里设置为1
+    "factoryProductionSpeedFactor": 1, // 工厂生产速度的影响因子，这里设置为1
+    "perkUpgradeRecyclingFactor": 0.500000, // 技能升级回收的影响因子，这里设置为0.5
+    "perkCostFactor": 1, // 技能成本的影响因子，这里设置为1
+    "experienceCombatFactor": 1, // 战斗经验的影响因子，这里设置为1
+    "experienceMiningFactor": 1, // 采矿经验的影响因子，这里设置为1
+    "experienceExplorationQuestsFactor": 1, // 探索任务经验的影响因子，这里设置为1
+    "randomSpawnerAmount": "Normal", // 随机生成怪物的数量，这里设置为正常
+    "aggroPoolAmount": "Normal", // 敌对生物池的数量，这里设置为正常
+    "enemyDamageFactor": 1, // 敌人伤害的影响因子，这里设置为1
+    "enemyHealthFactor": 1, // 敌人健康的影响因子，这里设置为1
+    "enemyStaminaFactor": 1, // 敌人耐力的影响因子，这里设置为1
+    "enemyPerceptionRangeFactor": 1, // 敌人感知范围的影响因子，这里设置为1
+    "bossDamageFactor": 1, // 首领伤害的影响因子，这里设置为1
+    "bossHealthFactor": 1, // 首领健康的影响因子，这里设置为1
+    "threatBonus": 1, // 威胁加成，这里设置为1
+    "pacifyAllEnemies": false, // 是否平息所有敌人，这里设置为不启用
+    "tamingStartleRepercussion": "LoseSomeProgress", // 驯服惊吓反应，这里设置为失去一些进度
+    "dayTimeDuration": 1800000000000, // 白天持续时间（以纳秒为单位），这里设置为1800亿纳秒
+    "nightTimeDuration": 720000000000 // 夜晚持续时间（以纳秒为单位），这里设置为720亿纳秒
+  },
+```
+
 
 
 ## 测试
@@ -220,6 +299,8 @@ Received new Character save game
 
 ## 常见问题
 
+#### 连接服务器
+
 出现加入服务器提示错误，重启一下服务器，有个什么缓存不太正确
 
 ![image-20240205183835618](https://img.elmagnifico.tech/static/upload/elmagnifico/202402051838702.png)
@@ -235,6 +316,12 @@ Received new Character save game
 
 
 服务器经常启动不了，建议多启动几次，说不定哪次就行了
+
+
+
+#### 迁移数据
+
+从本地Host迁移到服务器，搜索`3ad85aea` 找到路径，这里面的就是服务器存档信息，复制到savegame里即可
 
 
 
@@ -255,6 +342,8 @@ Received new Character save game
 >  https://www.bilibili.com/opus/890187140990763030
 >
 >  https://zhuanlan.zhihu.com/p/680928574
+>
+>  https://www.bilibili.com/opus/1000897915952037896
 
 
 
