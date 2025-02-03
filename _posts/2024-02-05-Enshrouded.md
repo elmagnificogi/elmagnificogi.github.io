@@ -3,7 +3,7 @@ layout:     post
 title:      "雾锁王国服务器搭建"
 subtitle:   "steam、Enshrouded、英灵神殿"
 date:       2024-02-05
-update:     2024-01-27
+update:     2025-02-03
 author:     "elmagnifico"
 header-img: "img/z8.jpg"
 catalog:    true
@@ -325,6 +325,22 @@ Received new Character save game
 
 
 
+#### 负载过高
+
+游戏内提示负载过高，似乎没有办法缓解，2个人还可以随便玩，但是三个人就不行了，内存占用不多6G都不到，cpu负载也跑不满，但是看起来大部分时间是一个核心在干活，总体来说应该是官方给的开服工具优化不够，或者说服务器优化不行，性能很差
+
+
+
+#### 延迟过高
+
+服务器延迟可能不高，但是游戏内的延迟是通过另一种方式计算得到的，延迟似乎是网络延迟的2倍以上，我十几秒的延迟，到了游戏里都会变成三四十左右，人一多，同时在多个地方同时操作，就更容易让这个延迟爆炸
+
+
+
+实际上游戏内置了服务器购买，有足够理由相信是官方为了吃这个回扣给了专门的优化，太多人是买服就不卡，自己服就卡的要死了，发售都过了一年了这个还不优化，属实离谱
+
+
+
 ## Summary
 
 垃圾服务器
@@ -344,6 +360,10 @@ Received new Character save game
 >  https://zhuanlan.zhihu.com/p/680928574
 >
 >  https://www.bilibili.com/opus/1000897915952037896
+>
+>  https://www.reddit.com/r/Enshrouded/comments/1aeeag0/dedicated_server_server_overloaded/
+>
+>  https://enshrouded.zendesk.com/hc/en-us/sections/16050842957085-Multiplayer-and-Server-Hosting
 
 
 
