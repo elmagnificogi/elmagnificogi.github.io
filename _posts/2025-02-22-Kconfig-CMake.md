@@ -111,26 +111,40 @@ pip install kconfiglib-2.2.2-py2.py3-none-any.whl
 
 #### 使用方法
 
+配置工程
+
 ```
-cmake -S . -B build/Debug --preset Debug
+python -m guiconfig
 ```
 
-
+生成头文件
 
 ```
 python tools/kconfig.py Kconfig .config autoconf.h kconfigLog.txt .config
 ```
 
+预设
 
+```
+cmake -S . -B build/Debug --preset Debug
+```
+
+make
 
 ```
 cmake --build build/Debug --target project-debug-make
 ```
 
-
+编译
 
 ```
 cmake --build build/Debug --target project-debug-build
+```
+
+清空
+
+```
+cmake --build build/Debug --target project-debug-clean
 ```
 
 
