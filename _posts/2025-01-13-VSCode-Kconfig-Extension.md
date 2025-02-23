@@ -3,7 +3,7 @@ layout:     post
 title:      "VSCode Kconfig插件"
 subtitle:   "Kconfig、VScode、Extension"
 date:       2025-01-23
-update:     2025-01-23
+update:     2025-02-23
 author:     "elmagnifico"
 header-img: "img/bg9.jpg"
 catalog:    true
@@ -99,6 +99,16 @@ NuttX似乎都是基于kconfig-qconf的
 > https://github.com/RT-Thread/rt-thread/pull/9050
 
 kconfig-frontends似乎长年不更新，而KconfigLib里有一些新特性可以简化Kconfig
+
+
+
+## kconfig_browser
+
+> https://github.com/TigranKhachatryan0/kconfig_browser/tree/main
+
+![Screenshot of KConfigBrowser with a selected configuration file, group and key](https://img.elmagnifico.tech/static/upload/elmagnifico/202502231500499.png)
+
+也有人写了一个python版本的，可惜了，还是依赖python，那为什么不用官方的呢
 
 
 

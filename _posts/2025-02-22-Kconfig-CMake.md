@@ -3,7 +3,7 @@ layout:     post
 title:      "Kconfig与CMake初步模块化工程"
 subtitle:   "APM32,ST,CMakeLists,arm-none-eabi"
 date:       2025-02-22
-update:     2025-02-22
+update:     2025-02-23
 author:     "elmagnifico"
 header-img: "img/docker-head-bg.jpg"
 catalog:    true
@@ -89,7 +89,9 @@ pip install kconfiglib-2.2.2-py2.py3-none-any.whl
 
 ## 架构
 
+> https://github.com/elmagnificogi/CMake_Kconfig_Example
 
+Demo示例写在这里，会随着我不断完善这个例子
 
 
 
