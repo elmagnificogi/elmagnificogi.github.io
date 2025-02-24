@@ -2,8 +2,8 @@
 layout:     post
 title:      "Kconfig与CMake初步模块化工程3"
 subtitle:   "APM32,ST,CMakeLists,arm-none-eabi"
-date:       2025-03-25
-update:     2025-03-25
+date:       2025-02-25
+update:     2025-02-25
 author:     "elmagnifico"
 header-img: "img/drone-head-bg.jpg"
 catalog:    true
