@@ -31,6 +31,10 @@ VSCode只需要一个CMake Tools，不需要安装其他CMake插件
 
 Kconfig格式化和代码高亮，还是用nRF的好一些，另外那个Kconfig会识别出错
 
+![image-20250225193642891](https://img.elmagnifico.tech/static/upload/elmagnifico/20250225193642935.png)
+
+C/C++提示全家桶也需要安装，会影响到代码提示和跳转体验
+
 
 
 #### 缺少 Select a Kit
@@ -281,6 +285,16 @@ CMake:Scan for compiles
         "**/Boot": true
     },
 ```
+
+
+
+### 常见问题
+
+第一次编译可能过不去，这是config没有正确生成
+
+VSCode第一次可能找不到编译器，需要使用Scan搜索一下
+
+第二次编译可能还是过不去，需要clean一下工程，然后重新再编译
 
 
 
