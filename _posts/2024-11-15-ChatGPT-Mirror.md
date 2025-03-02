@@ -3,7 +3,7 @@ layout:     post
 title:      "ChatGPT-Mirror部署和体验"
 subtitle:   "cws、dairoot、oaifree"
 date:       2024-11-15
-update:     2024-12-03
+update:     2025-03-02
 author:     "elmagnifico"
 header-img: "img/bg2.jpg"
 catalog:    true
@@ -150,6 +150,14 @@ https://你的域名/api/check-proxy?admin_password=环境变量中的ADMIN_PASS
 类似的镜像站还有始皇的，之前看好像也可以通过权限分享
 
 > new.oaifree.com
+
+
+
+### 2025.2 GPT大规模封禁
+
+我在3.2号收到了封禁通知，这次是针对账号工作时间、询问内容进行的大规模封禁，很多国内使用的账号都被封禁了（plus、pro、team）
+
+我使用的2个team账号都被封禁，账号全程都是挂在国外使用的，不存在国内登录的情况，CF warp代理，目前只能邮件反馈等待解禁消息
 
 
 
