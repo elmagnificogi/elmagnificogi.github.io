@@ -95,8 +95,6 @@ launch.json 主要给openocd输入调试配置
 
 ### JLink
 
-#### VSCode
-
 顾名思义JLink需要配合JLink来使用
 
 ![image-20250227114640546](https://img.elmagnifico.tech/static/upload/elmagnifico/20250227114640643.png)
@@ -107,7 +105,7 @@ launch.json 主要给openocd输入调试配置
 JLinkGDBServerCL.exe -singlerun -nogui -if swd -port 50000 -swoport 50001 -telnetport 50002 -device STM32H743VI
 ```
 
-主要是svd和elf路径，device填正确就行了
+在VSCode里新建一个launch，主要是svd和elf路径，device填正确就行了
 
 ```json
 {
@@ -137,6 +135,42 @@ JLinkGDBServerCL.exe -singlerun -nogui -if swd -port 50000 -swoport 50001 -telne
 
 
 
+## Embedded Tools
+
+之前用过的一个插件
+
+> https://elmagnifico.tech/2022/03/15/Embedded-Software-Development-VS-VSC/
+
+![img](https://img.elmagnifico.tech/static/upload/elmagnifico/20250227160920978.png)
+
+本质上还是调用gdb然后配合openocd来实现调试的
+
+```json
+        {
+            "name": "Launch",
+            "type": "cppdbg",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "program": "${workspaceFolder}/build/app/mxchip_azure_iot.elf",
+            "MIMode": "gdb",
+            "miDebuggerPath": "arm-none-eabi-gdb",
+            "miDebuggerServerAddress": "localhost:3333",
+            "debugServerPath": "openocd",
+            "debugServerArgs": "-f board/stm32f4discovery.cfg",
+            "serverStarted": "Listening on port .* for gdb connections",
+            "filterStderr": true,
+            "stopAtConnect": true,
+            "hardwareBreakpoints": {
+                "require": true,
+                "limit": 6
+            },
+            "preLaunchTask": "Flash",
+            "svdPath": "${workspaceFolder}/STM32F412.svd"
+        }
+```
+
+
+
 ## Ozone
 
 跳过VSCode，直接使用专业的Ozone来调试
@@ -146,6 +180,8 @@ JLinkGDBServerCL.exe -singlerun -nogui -if swd -port 50000 -swoport 50001 -telne
 配合我自己写的调用程序，很小30k，自动找到Ozone的路径，然后调用对应的调试文件，如果没有的话会自动新建一个
 
 同样的烧写我也用了自己的程序去调用jlink完成烧写，比调用第三方插件可控性高多了
+
+新建一个task，对应还有输入选择模板，否则一个配置要写一个task，太繁杂了
 
 ```json
 {
@@ -188,48 +224,6 @@ JLinkGDBServerCL.exe -singlerun -nogui -if swd -port 50000 -swoport 50001 -telne
     ]
 }
 ```
-
-
-
-## Embedded Tools
-
-之前用过的一个插件
-
-> https://elmagnifico.tech/2022/03/15/Embedded-Software-Development-VS-VSC/
-
-![img](https://img.elmagnifico.tech/static/upload/elmagnifico/20250227160920978.png)
-
-本质上还是调用gdb然后配合openocd来实现调试的
-
-```json
-        {
-            "name": "Launch",
-            "type": "cppdbg",
-            "request": "launch",
-            "cwd": "${workspaceFolder}",
-            "program": "${workspaceFolder}/build/app/mxchip_azure_iot.elf",
-            "MIMode": "gdb",
-            "miDebuggerPath": "arm-none-eabi-gdb",
-            "miDebuggerServerAddress": "localhost:3333",
-            "debugServerPath": "openocd",
-            "debugServerArgs": "-f board/stm32f4discovery.cfg",
-            "serverStarted": "Listening on port .* for gdb connections",
-            "filterStderr": true,
-            "stopAtConnect": true,
-            "hardwareBreakpoints": {
-                "require": true,
-                "limit": 6
-            },
-            "preLaunchTask": "Flash",
-            "svdPath": "${workspaceFolder}/STM32F412.svd"
-        }
-```
-
-
-
-## CMake
-
-以上的方式还可以通过CMake的launch预设来实现
 
 
 
