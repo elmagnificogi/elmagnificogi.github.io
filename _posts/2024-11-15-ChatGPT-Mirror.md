@@ -159,6 +159,10 @@ https://你的域名/api/check-proxy?admin_password=环境变量中的ADMIN_PASS
 
 我使用的2个team账号都被封禁，账号全程都是挂在国外使用的，不存在国内登录的情况，CF warp代理，目前只能邮件反馈等待解禁消息
 
+![image-20250302183758558](https://img.elmagnifico.tech/static/upload/elmagnifico/202503021838660.png)
+
+说明OpenAI目前有能力检测到Mirror的共享方式
+
 
 
 ## Quote
