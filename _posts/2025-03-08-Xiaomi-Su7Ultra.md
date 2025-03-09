@@ -157,11 +157,11 @@ Ultra的保险只有两种，一个基础版（13327），一个尊享版（1391
 
 ### 解禁
 
-![image-20250310001020140](https://img.elmagnifico.tech/static/upload/elmagnifico/202503100010188.png)
+![image-20250310011122062](https://img.elmagnifico.tech/static/upload/elmagnifico/202503100111124.png)
 
 当天就开满了300，在300公里的时候，停下来切到P档再切回D档，就会提示解锁安全模式，此时这个车就解锁了1500匹马力？并不是，需要你开启赛道模式，赛道模式需要一个学习和答题考试，大概十五分钟内就行了，我是在别人在开的时候答的题，基本都是常识，大概四五分钟就能考试通过了。默认的运动模式和Max是一样的673匹。
 
-
+![image-20250310001020140](https://img.elmagnifico.tech/static/upload/elmagnifico/202503100010188.png)
 
 赛道模式又分几种：
 
