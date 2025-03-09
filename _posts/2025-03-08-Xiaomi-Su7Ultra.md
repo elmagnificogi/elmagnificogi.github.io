@@ -122,7 +122,7 @@ Ultra的保险只有两种，一个基础版（13327），一个尊享版（1391
 
 - 目前很多地库、停车场都支持了无牌进入，所以用临牌也不是大问题，就是高速还是得人工服务一下
 
-
+![image-20250310012617093](https://img.elmagnifico.tech/static/upload/elmagnifico/202503100126300.png)
 
 ![image-20250309235407521](https://img.elmagnifico.tech/static/upload/elmagnifico/202503092354742.png)
 
@@ -221,7 +221,9 @@ Club说是只有2000会员，但是实际会员号能有1w个，按照顾问的�
 
 ![image-20250309235533978](https://img.elmagnifico.tech/static/upload/elmagnifico/202503092355133.png)
 
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/5c429b7569a428ce5b3b3e559e1ecc4.jpg)
 
+![7248f0f8ae6ba5d03b8be4a6ca55b29.jpg](https://img.elmagnifico.tech/static/upload/elmagnifico/7248f0f8ae6ba5d03b8be4a6ca55b29.jpg)
 
 ## Summary
 
