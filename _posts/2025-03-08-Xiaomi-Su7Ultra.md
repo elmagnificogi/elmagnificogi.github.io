@@ -175,6 +175,12 @@ Ultra的保险只有两种，一个基础版（13327），一个尊享版（1391
 
 
 
+### 回头率
+
+回头率不如当初的Su7发售，但是还是不错的，很多人都会回头看，殊不知车里三个长枪短炮拍着车外回头的人
+
+
+
 ## Ultra Club
 
 ![image-20250308185438136](https://img.elmagnifico.tech/static/upload/elmagnifico/202503081854230.png)
