@@ -7,7 +7,7 @@ update:     2025-03-10
 author:     "elmagnifico"
 header-img: "img/g2.jpg"
 catalog:    true
-tobecontinued: false
+tobecontinued: true
 tags:
     - Xiaomi
     - Su7Ultra
@@ -183,6 +183,16 @@ Ultra的保险只有两种，一个基础版（13327），一个尊享版（1391
 
 
 
+## 提车后续
+
+#### 购置税
+
+购置税金额=发票总额/11.3-3（万元）=17955多
+
+车牌还需要等指标下来以后才能去上牌
+
+
+
 ## Ultra Club
 
 ![image-20250308185438136](https://img.elmagnifico.tech/static/upload/elmagnifico/202503081854230.png)
@@ -237,7 +247,7 @@ Club说是只有2000会员，但是实际会员号能有1w个，按照顾问的�
 - su7 ultra实际续航里程应该不超过450km（长续航轮胎），对比MAX可能会有续航焦虑，大概少200km
 - 锁车不会自动关窗，之前租车就有这个问题，不知道为什么要这样设计
 - hud、左右镜子的调节似乎不会像座位一样设置独立保存，每次换人都要重新调节
-- 莫名其妙账号退出了登录，然后GPS定位被关闭
+- 莫名其妙账号退出了登录，然后后续开到哪里旅程回顾都看不到位置了
 
 
 
