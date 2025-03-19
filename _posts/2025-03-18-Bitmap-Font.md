@@ -116,6 +116,8 @@ tags:
 
 ## 其他字体
 
+> https://github.com/elmagnificogi/MyTools/tree/master/font
+
 这些字体来源不详，有可能是从老DOS，XP，老的电子设备上提取到的
 
 ![image-20250319125310676](https://img.elmagnifico.tech/static/upload/elmagnifico/20250319125310707.png)
