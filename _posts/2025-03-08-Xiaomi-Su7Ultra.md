@@ -7,7 +7,7 @@ update:     2025-03-19
 author:     "elmagnifico"
 header-img: "img/g2.jpg"
 catalog:    true
-tobecontinued: true
+tobecontinued: false
 tags:
     - Xiaomi
     - Su7Ultra
@@ -241,19 +241,30 @@ Ultra的保险只有两种，一个基础版（13327），一个尊享版（1391
 
 ![image-20250321210253587](https://img.elmagnifico.tech/static/upload/elmagnifico/202503212102646.png)
 
-气门芯
+气门芯，Ultra由于速度快，安装了这个气门芯以后需要重新做四轮定位，价格是156，要额外增加平衡块，慢车就无所谓装不装这个了。
 
 ![image-20250321210547171](https://img.elmagnifico.tech/static/upload/elmagnifico/202503212105205.png)
 
 底盘灯，需要去提车的交付中心安装，其他地方还安装不了，好像25年以后安装需要额外的安装费用，不知道Ultra给不给免费安
 
 - 安装需要提前预约
+- 25年后灯带安装费210，实际内部会减免90，也就是120
 
+灯带不建议安装，有点废，行车时不能打开，只有驻车P档才会亮，只亮3分钟，很挫。
 
+- 建议替换或者改装掉这个控制器（在安装的时候，自己去换控制器），把他变成普通灯带连进汽车内的米家，然后你就可以在任何时候点亮灯带了。
+- 灯带锁车时是会离线的，解锁以后也要过一会才能上线，这个体验也非常差
+
+![image-20250323012143450](https://img.elmagnifico.tech/static/upload/elmagnifico/202503230121508.png)
 
 车衣，小米官方没有车衣，看到了别人撕了拉花，银色确实会好看很多，主要是低调。
 
 ![image-20250321212711304](https://img.elmagnifico.tech/static/upload/elmagnifico/202503212127394.png)
+
+- 官方说法金标是贴在拉花上的，所以撕拉花需要围绕标切开，有点风险，官方不建议撕，因为撕了就和普通的Su7看起来区别不大了
+- 贴膜店说随便撕...
+
+
 
 ## Ultra Club
 
@@ -333,7 +344,7 @@ Club说是只有2000会员，但是实际会员号能有1w个，按照顾问的�
 
 ## Summary
 
-暂时就遇到这些问题，后续再补充吧，目前看好像Su7 Ultra没有车友群，也没任何组织，官方似乎也有意推动这样？不是很懂
+目前看好像Su7 Ultra没有车友群，也没任何组织，官方似乎也有意推动这样？不是很懂
 
 感谢我的小伙伴们一路肝爆到解禁
 
