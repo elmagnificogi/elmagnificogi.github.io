@@ -11,6 +11,7 @@ tobecontinued: false
 tags:
     - Xiaomi
     - Su7Ultra
+    - Car
 ---
 
 ## Foreword
