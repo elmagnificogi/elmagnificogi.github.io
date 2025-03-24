@@ -158,6 +158,26 @@ MCP简单说就是一个开发的标准协议，他主要是约定了如何让�
 
 
 
+### Sequential thinking
+
+连续思考，这个挺好的用的
+
+```
+cmd /c npx -y @modelcontextprotocol/server-sequential-thinking
+```
+
+安装起来也简单，主要是使用外部服务，相当于是一个套在LLM之外的一个prompt，可以让agent多思考几次，思考得更周全
+
+
+
+#### 问题
+
+当前MCP Server在Windows下比较特殊，必须用cmd启动，其他方式启动的检测不到，这个后续可能会改
+
+windows的cmd命令窗口还是不能关闭的状态，否则就会认为服务断开了
+
+
+
 ## Summary
 
 MCP的服务各种各样，目前还不是很统一，有python、nodejs的，也有docker、c#，还有一些需要先编译再运行的服务端级别的，这些就很复杂了。
