@@ -7,7 +7,7 @@ update:     2025-03-24
 author:     "elmagnifico"
 header-img: "img/line-head-bg.jpg"
 catalog:    true
-tobecontinued: true
+tobecontinued: false
 tags:
     - Cursor
     - AI
