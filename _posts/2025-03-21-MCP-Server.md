@@ -170,11 +170,31 @@ cmd /c npx -y @modelcontextprotocol/server-sequential-thinking
 
 
 
-#### 问题
+### 问题
 
 当前MCP Server在Windows下比较特殊，必须用cmd启动，其他方式启动的检测不到，这个后续可能会改
 
 windows的cmd命令窗口还是不能关闭的状态，否则就会认为服务断开了
+
+
+
+**改进：**使用powershell的方式，加上hidden指令，从而隐藏弹出的面板，就可以不用管命令行了
+
+```json
+{
+    "mcpServers": {
+      "filesystem": {
+        "command": "powershell",
+        "args": [
+          "-WindowStyle", 
+          "Hidden", 
+          "-Command", 
+          "npx -y @modelcontextprotocol/server-filesystem C:/Users/elmag/Desktop"
+        ]
+      }
+    }
+}
+```
 
 
 
