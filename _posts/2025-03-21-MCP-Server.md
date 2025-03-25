@@ -11,6 +11,7 @@ tobecontinued: false
 tags:
     - Cursor
     - AI
+    - MCP
 ---
 
 ## Foreword
@@ -48,6 +49,8 @@ MCP简单说就是一个开发的标准协议，他主要是约定了如何让�
 
 
 ## MCP Server
+
+![image-20250325191432237](https://img.elmagnifico.tech/static/upload/elmagnifico/20250325191432327.png)
 
 > https://www.pulsemcp.com/
 >
