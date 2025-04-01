@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "AI辅助艺术设计"
+title:      "AI模型生成对比"
 subtitle:   "SD、3DFY、Meshy、Genie、Midjounery"
 date:       2025-04-02
 update:     2025-04-02
@@ -14,7 +14,7 @@ tags:
 
 ## Foreword
 
-研究一下如何把AI相关的AI设计产品融合到目前的艺术设计的工作流中
+研究一下如何把AI相关的AI设计产品融合到目前的艺术设计的工作流中，对比了一下当前模型生成相关的AI，发现区别还是挺大的
 
 
 
@@ -110,6 +110,8 @@ Spline更像是一个浏览器级别的3D设计软件，可以做模型、动画
 ![image-20250328184624547](https://img.elmagnifico.tech/static/upload/elmagnifico/20250328184624594.png)
 
 3DFY的生成速度着实有点慢了，这样的话容错就很低，反复修改成本就很高
+
+- 一天过去了，这个模型还没生成好，放弃了
 
 
 
