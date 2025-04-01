@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "AI辅助艺术设计"
-subtitle:   "Astyle、Artistic Style、Clang-Format、CoolFormat"
+subtitle:   "SD、3DFY、Meshy、Genie、Midjounery"
 date:       2025-04-02
 update:     2025-04-02
 author:     "elmagnifico"
@@ -14,7 +14,7 @@ tags:
 
 ## Foreword
 
-研究一下如何把Stability AI相关的AI产品融合到目前的艺术设计的工作流中
+研究一下如何把AI相关的AI设计产品融合到目前的艺术设计的工作流中
 
 
 
@@ -22,13 +22,15 @@ tags:
 
 ### Stable Diffusion
 
+> https://github.com/AUTOMATIC1111/stable-diffusion-webui
+
 Stable Diffusion是一种图像模型，他背后是Stability AI
 
 
 
 ### Midjounery
 
-
+> https://www.midjourney.com/
 
 
 
@@ -67,11 +69,11 @@ tripo 3d 还有后处理流程，可以绑定骨骼，还是不错的
 
 
 
-### spline
+### Spline
 
 > https://app.spline.design/home
 
-spline更像是一个浏览器级别的3D设计软件，可以做模型、动画、渲染，不过总体上看是比较轻量、低质量的，仅仅适合网页用，本身这种也只有近似的卡通风格才合适，其他的很出戏。
+Spline更像是一个浏览器级别的3D设计软件，可以做模型、动画、渲染，不过总体上看是比较轻量、低质量的，仅仅适合网页用，本身这种也只有近似的卡通风格才合适，其他的很出戏。
 
 模型生成能力都是需要付费才行，看起来一般，就不深度研究了
 
@@ -111,13 +113,13 @@ spline更像是一个浏览器级别的3D设计软件，可以做模型、动画
 
 
 
-### alpha3d
+### Alpha3D
 
 > https://www.alpha3d.io/
 
 ![image-20250328185031548](https://img.elmagnifico.tech/static/upload/elmagnifico/20250328185031694.png)
 
-alpha3d，就非常抽象了，完全不知道在生成什么
+Alpha3D，就非常抽象了，完全不知道在生成什么
 
 ![image-20250328185328482](https://img.elmagnifico.tech/static/upload/elmagnifico/20250328185328585.png)
 
@@ -125,7 +127,67 @@ alpha3d，就非常抽象了，完全不知道在生成什么
 
 
 
+### Meshy
+
+> https://www.meshy.ai/
+
+![image-20250401152357340](https://img.elmagnifico.tech/static/upload/elmagnifico/20250401152357433.png)
+
+Meshy也是主要支持三种生成，文生模型、图生模型、材质生成
+
+![image-20250401152508879](https://img.elmagnifico.tech/static/upload/elmagnifico/20250401152509058.png)
+
+Meshy的中文提示词是理解的最好的，至少知道我说的是什么了，模型生成以后就可以生成贴图了，他是将这两步拆开进行的
+
+![image-20250401152832904](https://img.elmagnifico.tech/static/upload/elmagnifico/20250401152833169.png)
+
+Meshy的成品，还是有一些奇怪的地方，比如手指头生成畸形，烤串也稍微有点问题
+
+英文提示词达到的效果非常像tripo3D，感觉他们的素材库很接近
+
+
+
+### Genie
+
+> https://lumalabs.ai/genie?view=create
+
+![image-20250401154025523](https://img.elmagnifico.tech/static/upload/elmagnifico/20250401154025580.png)
+
+Genie是LumaAI的产品，Genie这个理解能力稍微有点挫，整个模型穿插就不说了，这个形态都不对劲，其次也不支持中文提示词
+
+
+
+### 混元3D
+
+> https://3d.hunyuan.tencent.com/
+
+腾讯的混元3D
+
+![image-20250401155019382](https://img.elmagnifico.tech/static/upload/elmagnifico/20250401155019474.png)
+
+出乎意料，腾讯的3D模型生成竟然意外的好，虽然肯定上了一些风格，但是效果算是这里最好的了，速度也很快。
+
+细节上比如手处理的就比Meshy好很多，可以自动骨骼绑定，还可以在生成以后做一定风格上的调整
+
+
+
+### Shapen
+
+> https://shapen.com/playground
+
+主要是通过图生模型
+
+![image-20250401161142776](https://img.elmagnifico.tech/static/upload/elmagnifico/20250401161142869.png)
+
+![image-20250401161335560](https://img.elmagnifico.tech/static/upload/elmagnifico/20250401161335700.png)
+
+在生成模型时，对于这种2D画风，生成模型会带着轮廓线，这个轮廓线就造成了破面，这里应该是可以优化一下的
+
+
+
 ## Summary
+
+图片生成的相对来说很成熟了，各种模型都有图片生成
 
 
 
