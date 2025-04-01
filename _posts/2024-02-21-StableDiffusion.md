@@ -7,7 +7,7 @@ update:     2025-04-02
 author:     "elmagnifico"
 header-img: "img/bg1.jpg"
 catalog:    true
-tobecontinued: true
+tobecontinued: false
 tags:
     - AI
 ---
