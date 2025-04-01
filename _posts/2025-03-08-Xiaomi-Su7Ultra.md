@@ -3,7 +3,7 @@ layout:     post
 title:      "记一次小米Su7 Ultra提车"
 subtitle:   "保险、临牌、补贴、限制"
 date:       2025-03-10
-update:     2025-03-19
+update:     2025-03-31
 author:     "elmagnifico"
 header-img: "img/g2.jpg"
 catalog:    true
@@ -45,6 +45,8 @@ Su7出的时候创始版没抢就有点后悔了，没想到后面一车难求�
 25.2.27，81w降到52w，犹豫了2分钟，还是在22.02下了大定，选了现车
 
 ![image-20250308185159000](https://img.elmagnifico.tech/static/upload/elmagnifico/202503081851081.png)
+
+- **此时小米汽车商店中的很多东西都可以提前买了，比如物理按键、氛围灯、双表盘，2周之后就变成普通人了需要抢这部分，不确定需不需要可以加入到购入车中，后续需要的时候直接下单，可以不受售罄影响**
 
 不是很喜欢大鼻孔，还是低调一点，银色更好看一些
 
