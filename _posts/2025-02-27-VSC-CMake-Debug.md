@@ -11,7 +11,7 @@ tobecontinued: false
 tags:
     - Kconfig
     - CMake
-    - VSCode
+    - VS Code
 ---
 
 ## Foreword
