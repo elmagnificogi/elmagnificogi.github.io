@@ -22,8 +22,6 @@ DeepSeek火了这么久，总算轮到我来部署一下了，部署小模型的
 
 ## DeepSeek
 
-
-
 #### 设备需求
 
 浪潮 NF5468M6 GPU服务器
@@ -53,14 +51,14 @@ CPU：2x6330（2G，28C/56T，42MB，Turbo，205W，3200），2x2400￥
 
 由于是新机器，很多东西没有，所以要先把基础环境配置一下
 
-```
+```sh
 apt install python3
 apt install python3.12-venv
 ```
 
 切换到一个新环境
 
-```
+```sh
 python3 -m venv hgf
 source hgf/bin/activate
 ```
@@ -69,7 +67,7 @@ source hgf/bin/activate
 
 安装huggingface，然后发现huggingface不能直接部署R1，尴尬了
 
-```
+```sh
 pip install huggingface_hub
 ```
 
@@ -77,7 +75,7 @@ pip install huggingface_hub
 
 安装docker环境，本想用docker直接启动，发现docker镜像里根本没有满血版本的，有的aixblock那个还是偷你算力的，蒸馏版本倒是挺多的，可以直接拉取
 
-```
+```sh
 apt install docker.io
 ```
 
@@ -89,39 +87,39 @@ apt install docker.io
 
 - 如果一开始新机器没安装驱动也可以利用CUDA安装，不过概率不高
 
-```
+```sh
 wget https://developer.download.nvidia.com/compute/cuda/12.8.0/local_installers/cuda_12.8.0_570.86.10_linux.run
 sudo sh cuda_12.8.0_570.86.10_linux.run
 ```
 
 由于驱动之前安装过了，所以这里不勾选驱动安装
 
-```
+```sh
 vi ~/.bashrc
 ```
 
 把cuda加入到环境变量中
 
-```
+```sh
 export PATH=$PATH:/usr/local/cuda-12.8/bin
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda-12.8/lib64
 ```
 
 刷新环境
 
-```
+```sh
 source ~/.bashrc
 ```
 
 测试一下
 
-```
+```sh
 nvcc -V
 ```
 
 说明安装正常
 
-```
+```sh
 nvcc: NVIDIA (R) Cuda compiler driver
 Copyright (c) 2005-2025 NVIDIA Corporation
 Built on Wed_Jan_15_19:20:09_PST_2025
@@ -135,13 +133,13 @@ Build cuda_12.8.r12.8/compiler.35404655_0
 
 安装ollama
 
-```
+```sh
 curl -fsSL https://ollama.com/install.sh | sh
 ```
 
 拉取模型
 
-```
+```sh
 ollama run deepseek-r1:671b
 ```
 
@@ -153,7 +151,7 @@ ollama run deepseek-r1:671b
 
 上面直接启动可能跑不起来，这个时候就需要修改一下默认的ollama的配置，用下面的方式来自定义配置
 
-```
+```sh
 ollama show --modelfile deepseek-r1:671b | sed -e 's/^FROM.*/FROM deepseek-r1:671b/' > Modelfile
 ```
 
@@ -201,7 +199,7 @@ deepseek-r1的模型是分了61层，这里实测384GB的显存，不改上下�
 
 如果显存不够用，会出现类似的错误，这种错就去调整num_gpu就可以了
 
-```
+```sh
 Error: llama runner process has terminated: error loading model: unable to allocate CUDA1 buffer
 llama_model_load_from_file_impl: failed to load model
 ```
@@ -222,7 +220,7 @@ ollama run deepseek-r1-multi-gpu
 
 正常的情况下就能看到已经可以响应了
 
-```
+```sh
 root@hello:~# ollama run deepseek-r1-multi-gpu
 >>> hello,who are you?
 <think>
@@ -243,7 +241,7 @@ assist you with any inquiries or tasks you may have.
 
 单独跑起来DeepSeek还不够，还得有个UI界面配合一起用
 
-```
+```sh
 docker run -d -p 3000:8080 --add-host=host.docker.internal:host-gateway -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:main
 ```
 
@@ -263,19 +261,19 @@ Open WebUI: Server Connection Error
 
 停止ollama服务
 
-```
+```sh
 systemctl stop ollama
 ```
 
 修改配置
 
-```
+```sh
 vi /etc/systemd/system/ollama.service
 ```
 
 主要是把OLLAMA_HOST改成任意网络，否则docker访问不到这个位置
 
-```
+```sh
 [Unit]
 Description=Ollama Service
 After=network-online.target
@@ -295,13 +293,13 @@ WantedBy=default.target
 
 重载配置文件
 
-```
+```sh
 systemctl daemon-reload
 ```
 
 
 
-```
+```sh
 systemctl start ollama
 ```
 
@@ -319,7 +317,7 @@ systemctl start ollama
 
 参考这里，在设置-函数中添加这个函数，然后打开全局使用
 
-```
+```python
 class Filter:
     detect_reasoning_content = {}
 
@@ -364,7 +362,7 @@ class Filter:
 
 可以通过ollama ps 查看占用情况
 
-```
+```sh
 root@hello:~# ollama ps
 NAME                            ID              SIZE      PROCESSOR          UNTIL              
 deepseek-r1-multi-gpu:latest    f1eca30714f3    432 GB    23%/77% CPU/GPU    4 seconds from now    
@@ -376,7 +374,7 @@ deepseek-r1-multi-gpu:latest    f1eca30714f3    432 GB    23%/77% CPU/GPU    4 s
 
 参考另一个博主的测试方式，我也对应测了一下，加上verbose参数，就会显示输出的一些细节信息
 
-```
+```sh
 ollama run deepseek-r1-multi-gpu --verbose
 ```
 
@@ -386,6 +384,9 @@ ollama run deepseek-r1-multi-gpu --verbose
 简述拉格朗日乘子法在生物学中的应用场景。
 ```
 
+测试结果
+
+```
 total duration:       2m16.440943797s
 load duration:        19.878741ms
 prompt eval count:    16 token(s)
@@ -394,6 +395,7 @@ prompt eval rate:     29.68 tokens/s
 eval count:           1225 token(s)
 eval duration:        2m8.612675382s
 eval rate:            9.52 tokens/s
+```
 
 缩短上下文token，我试一下看能否全部加载到GPU，实际还是不行，单纯这个432G的大小就不够，至少得10张卡才行，还有额外的一些缓存或者文件消耗内存，目前这个配置Q4还是不太合适，可以考虑配置动态Q2.51的，那个只用200G就可以。
 
