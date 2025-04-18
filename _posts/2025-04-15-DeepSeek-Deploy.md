@@ -307,6 +307,8 @@ systemctl start ollama
 
 ![image-20250418143237720](https://img.elmagnifico.tech/static/upload/elmagnifico/20250418143237754.png)
 
+第一次回答，需要启动模型，可能延迟很久，实际第二次回答也不咋快，对比官方或者其他大模型的速度来说
+
 
 
 ### 缺少思考
