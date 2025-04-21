@@ -3,7 +3,7 @@ layout:     post
 title:      "记一次小米Su7 Ultra提车"
 subtitle:   "保险、临牌、补贴、限制"
 date:       2025-03-10
-update:     2025-04-20
+update:     2025-04-21
 author:     "elmagnifico"
 header-img: "img/g2.jpg"
 catalog:    true
@@ -352,6 +352,10 @@ Club说是只有2000会员，但是实际会员号能有1w个，按照顾问的�
 会员活动对于深圳或者非北、上的=0，基本没有，就只能当成送钱的服务和赛道服务了
 
 
+
+Ultra Club的礼盒，没啥用，就是一个合金车模，冰箱贴，超大车牌，会员卡，盒子巨大，实际装的东西就是意思意思
+
+![image-20250421142521213](https://img.elmagnifico.tech/static/upload/elmagnifico/20250421142521334.png)
 
 ## 问题
 
