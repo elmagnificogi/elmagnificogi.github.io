@@ -3,7 +3,7 @@ layout:     post
 title:      "ArtNet协议入门"
 subtitle:   "时间同步，Date，RouterOS，SNTP，舞台灯光"
 date:       2023-06-14
-update:     2023-06-21
+update:     2025-04-21
 author:     "elmagnifico"
 header-img: "img/y2.jpg"
 catalog:    true
