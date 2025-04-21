@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "ArtNet协议入门"
-subtitle:   "时间同步，Date，RouterOS，SNTP"
+subtitle:   "时间同步，Date，RouterOS，SNTP，舞台灯光"
 date:       2023-06-14
 update:     2023-06-21
 author:     "elmagnifico"
@@ -207,7 +207,9 @@ Art-Net所谓的SPI口，在选择WS2812以后就变成串行输出了
 
 
 
-## WYSIWYG
+## 灯光模拟软件
+
+#### WYSIWYG
 
 WYSIWYG，what you see is what you get
 
@@ -221,9 +223,19 @@ WYSIWYG，what you see is what you get
 
 
 
-## EasyView3D
+#### EasyView3D
 
 灯光模拟软件
+
+
+
+#### Depence-R4
+
+> https://www.syncronorm.com/depence-r4
+
+Depence-R4也是一个舞台灯光模拟软件，支持了无人机灯光模拟，主要是来自于Skybrush的数据格式
+
+最近搜了一下发现这个灯光模拟软件最近也非常火，比其他几个软件效果都要好很多
 
 
 
