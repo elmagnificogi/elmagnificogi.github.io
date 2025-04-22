@@ -11,6 +11,11 @@ layout: null
     <pubDate>{{ site.time | date_to_rfc822 }}</pubDate>
     <lastBuildDate>{{ site.time | date_to_rfc822 }}</lastBuildDate>
     <generator>Jekyll v{{ jekyll.version }}</generator>
+    <image>
+      <url>{{ site.url }}{{ site.baseurl }}/img/track.png</url>
+      <title>{{ site.title | xml_escape }}</title>
+      <link>{{ site.url }}{{ site.baseurl }}/</link>
+    </image>
     <follow_challenge>
       <feedId>55855418052542483</feedId>
       <userId>101522814280570880</userId>
