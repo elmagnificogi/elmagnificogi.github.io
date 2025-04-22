@@ -18,7 +18,7 @@ layout: null
     {% for post in site.posts limit:10 %}
       <item>
         <title>{{ post.title | xml_escape }}</title>
-        <description>{{ post.content | xml_escape }}&lt;img src="{{ site.url }}{{ site.baseurl }}/img/track.png?post={{ post.url | uri_escape }}" width="1" height="1" alt="" /&gt;</description>
+        <description>{{ post.content | xml_escape }}&lt;img src="https://www.google-analytics.com/collect?v=1&amp;tid={{ site.ga_track_id }}&amp;cid=555&amp;t=pageview&amp;dp=%2Frss%2F{{ post.url | uri_escape }}" width="1" height="1" alt="" /&gt;</description>
         <pubDate>{{ post.date | date_to_rfc822 }}</pubDate>
         <link>{{ post.url | prepend: site.baseurl | prepend: site.url }}</link>
         <guid isPermaLink="true">{{ post.url | prepend: site.baseurl | prepend: site.url }}</guid>
