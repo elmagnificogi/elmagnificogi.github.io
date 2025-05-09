@@ -152,6 +152,10 @@ http://主机IP:15070
 
 ![image-20250509203221515](https://img.elmagnifico.tech/static/upload/elmagnifico/20250509203221539.png)
 
+简单的工作流已经可以了，速度很快
+
+![image-20250509204415752](https://img.elmagnifico.tech/static/upload/elmagnifico/20250509204415815.png)
+
 ## Python 虚拟环境管理工具
 
 折腾AI相关内容，很容易涉及到各种python包和python本身的版本变动，以前是用anaconda，后来anaconda商业化了，对于商用需要授权了，所以很多使用直接就抛弃anaconda，投向其他新的环境管理阵营了
