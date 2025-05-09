@@ -27,18 +27,21 @@ tags:
 
 ### 部署
 
-最好先安一下python 3.13的环境， ComfyUI的一些老库可能运行不了
+最好先安一下python 3.12的环境， ComfyUI的一些老库可能运行不了
+
+```
+uv python install 3.12
+uv venv
+source .venv/bin/activate
+uv python pin 3.12
+```
 
 拉取ComfyUI源码
 
 ```
 git clone https://github.com/comfyanonymous/ComfyUI.git
-git check v0.3.27
+git checkout v0.3.33
 ```
-
-Put your SD checkpoints (the huge ckpt/safetensors files) in: models/checkpoints
-
-Put your VAE in: models/vae
 
 
 
@@ -70,13 +73,13 @@ nvcc -V
 
 
 
-创建ComfyUI使用的python环境
+安装依赖包
 
 ```
-cd ComfyUI
-conda create -n comfyui python=3.10
-conda activate comfyui 
+uv pip install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu121
 ```
+
+
 
 安装依赖文件
 
@@ -91,6 +94,37 @@ pip install -r requirements.txt
 ```
 python main.py --port 15070 --listen 0.0.0.0
 ```
+
+
+
+#### 模型文件
+
+模型文件可以从官网拿，也可以从huggingface来
+
+> https://huggingface.co/stabilityai/stable-diffusion-3.5-large/tree/main
+
+比如SD3.5就可以在这里直接下载，下载完成以后把模型放入到`ComfyUI/models/checkpoints`目录下
+
+如果是SD就只需要这一个模型文件就可以了，如果其他模型可能还需要vae等模型
+
+![image-20250509194258637](https://img.elmagnifico.tech/static/upload/elmagnifico/20250509194258662.png)
+
+如果是从huggingface上直接拉，需要安装git lfs，这种适合大文件下载
+
+```
+git lfs install
+git clone https://huggingface.co/stabilityai/stable-diffusion-3.5-large
+```
+
+
+
+Flex.2预览版
+
+> https://huggingface.co/ostris/Flex.2-preview/tree/main
+
+![image-20250509194243451](https://img.elmagnifico.tech/static/upload/elmagnifico/20250509194250529.png)
+
+如果服务已经启动了，那么要重启一下ComfyUI
 
 
 
@@ -174,7 +208,7 @@ uv pip install -r requirements.txt
 uv 安装多个版本python
 
 ```
-uv python install 3.10 3.11 3.12
+uv python install 3.10 3.11 3.12 3.13
 ```
 
 
@@ -189,7 +223,7 @@ cd project_a && uv venv --python 3.8
 cd project_b && uv venv --python 3.11
 
 使用指定版本
-uv python pin 3.13
+uv python pin 3.12
 ```
 
 
@@ -203,3 +237,7 @@ uv python pin 3.13
 > https://blog.csdn.net/u013440574/article/details/146447378
 >
 > https://blog.csdn.net/2301_77717148/article/details/146208611
+>
+> https://comfyui-wiki.com/zh/news/2025-04-25-flex-2-preview-released
+>
+> https://comfyui-wiki.com/zh/install/install-comfyui/install-comfyui-on-linux
