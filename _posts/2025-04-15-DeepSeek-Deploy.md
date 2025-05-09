@@ -3,7 +3,7 @@ layout:     post
 title:      "DeepSeek-671b-Q4部署"
 subtitle:   "LLM,AI，Transform,Open Web GUI"
 date:       2025-04-18
-update:     2025-04-18
+update:     2025-05-09
 author:     "elmagnifico"
 header-img: "img/pen-head-bg.jpg"
 catalog:    true
@@ -50,6 +50,44 @@ nvidia-smi
 ![image-20250417144320176](https://img.elmagnifico.tech/static/upload/elmagnifico/20250417144320206.png)
 
 ### 部署
+
+#### 驱动安装
+
+> https://www.nvidia.com/Download/index.aspx?lang=cn
+
+官网找到对应驱动，然后下载
+
+查看驱动状态
+
+```
+lspci | grep -i nvidia
+```
+
+**查看内核模块,若无输出，说明模块未加载：**
+
+```
+lsmod | grep nvidia
+```
+
+查找已经安装的模块
+
+```
+find /lib/modules/$(uname -r)/kernel/drivers -name nvidia*
+```
+
+重新生成模块
+
+```
+sudo apt-get install dkms
+```
+
+重新安装模块，这里驱动版本号要全部的，不能省略
+
+```
+sudo dkms install -m nvidia -v 570.124.06
+```
+
+
 
 #### 基础环境
 
@@ -405,6 +443,8 @@ eval rate:            9.52 tokens/s
 
 
 
+
+
 ## Summary
 
 后续再测试一下动态Q2.51的模型速度，理论上应该比这个要快一些，现在用起来体验还是很差，虽然给一些小业务够用了。
@@ -426,3 +466,5 @@ eval rate:            9.52 tokens/s
 > https://mp.weixin.qq.com/s?__biz=MzIyNjM2MzQyNg==&mid=2247700014&idx=1&sn=7926c4c9af5ebba7b8d138c8832b32a1&scene=21#wechat_redirect
 >
 > https://mp.weixin.qq.com/s?__biz=MzIyNjM2MzQyNg==&mid=2247700063&idx=1&sn=3aeb9031728ab8d4ba2f23bb5fe921fd&scene=21&poc_token=HIILAmij7cnPVOGGXNYV4cuIkl2PZLkoiy7020_z
+>
+> https://blog.csdn.net/qq_40721108/article/details/145797337

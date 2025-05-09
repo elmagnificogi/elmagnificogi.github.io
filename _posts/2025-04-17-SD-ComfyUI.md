@@ -2,8 +2,8 @@
 layout:     post
 title:      "SD ComfyUI部署"
 subtitle:   "Stable Diffusion,Python 虚拟环境管理工具,uv,annaconda"
-date:       2026-04-18
-update:     2026-04-18
+date:       2025-05-10
+update:     2025-05-10
 author:     "elmagnifico"
 header-img: "img/pen-head-bg.jpg"
 catalog:    true
@@ -17,6 +17,8 @@ tags:
 
 ## Foreword
 
+顺便把SD ComfyUI搭建一下
+
 
 
 ## ComfyUI
@@ -26,6 +28,8 @@ tags:
 
 
 ### 部署
+
+#### 安装环境
 
 最好先安一下python 3.12的环境， ComfyUI的一些老库可能运行不了
 
@@ -128,6 +132,10 @@ Flex.2预览版
 
 
 
+后续发现，其实只要ComfyUI启动了，就可以让ComfyUI自己下载，不用提前放进去也可以
+
+
+
 ### 测试
 
 访问就能看到界面了
@@ -136,7 +144,13 @@ Flex.2预览版
 http://主机IP:15070
 ```
 
+一进来就有各种模板可以选了，缺少文件就能直接下载，而不用手动一个个找了
 
+![image-20250509203114129](https://img.elmagnifico.tech/static/upload/elmagnifico/20250509203114327.png)
+
+前面提前下的SD3.5对应这个模板
+
+![image-20250509203221515](https://img.elmagnifico.tech/static/upload/elmagnifico/20250509203221539.png)
 
 ## Python 虚拟环境管理工具
 
@@ -229,6 +243,8 @@ uv python pin 3.12
 
 
 ## Summary
+
+ComfyUI还是好用啊
 
 
 
