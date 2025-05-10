@@ -7,7 +7,7 @@ update:     2025-05-10
 author:     "elmagnifico"
 header-img: "img/pen-head-bg.jpg"
 catalog:    true
-tobecontinued: true
+tobecontinued: false
 tags:
     - AI
     - SD
@@ -248,7 +248,7 @@ uv python pin 3.12
 
 ## Summary
 
-ComfyUI还是好用啊 
+ComfyUI还是好用啊
 
 
 
