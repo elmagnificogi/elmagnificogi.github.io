@@ -148,13 +148,17 @@ http://主机IP:15070
 
 ![image-20250509203114129](https://img.elmagnifico.tech/static/upload/elmagnifico/20250509203114327.png)
 
-前面提前下的SD3.5对应这个模板
-
-![image-20250509203221515](https://img.elmagnifico.tech/static/upload/elmagnifico/20250509203221539.png)
-
 简单的工作流已经可以了，速度很快
 
 ![image-20250509204415752](https://img.elmagnifico.tech/static/upload/elmagnifico/20250509204415815.png)
+
+SD3.5的简单模板
+
+![image-20250512161405714](https://img.elmagnifico.tech/static/upload/elmagnifico/20250512161405814.png)
+
+目前看起来实际使用只有单GPU在工作，如果多任务可能用到多GPU，但是单任务多GPU的模式，似乎现在还不成熟，也只有部分测试的模块可以。
+
+
 
 ## Python 虚拟环境管理工具
 
