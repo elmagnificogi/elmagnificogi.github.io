@@ -3,6 +3,7 @@ layout:     post
 title:      "协程到底是怎么一回事"
 subtitle:   "嵌入式，FreeRTOS，croutine"
 date:       2017-03-23
+update:     2025-05-16
 author:     "elmagnifico"
 header-img: "img/Embedded-head-bg.jpg"
 catalog:    true
@@ -51,17 +52,17 @@ tags:
 #### 协程的本质
 ```c
 int function(void)
-{   
+{
     static int i, state = 0;
     switch (state)
-    {    
+    {
         case 0:
         for (i = 0; i < 10; i++)
-        {      
+        {
             state = 1;
-            return i;             
+            return i;
             case 1:;
-        }   
+        }
     }
 }
 ```
@@ -98,7 +99,7 @@ int function(void)
 
 实际上我们利用了 switch-case 的分支跳转特性，以及预编译的 __LINE__ 宏，实现了一种隐式状态机，最终实现了“yield 语义”。
 
-但是, 这就使得代码不具备可重入性和多线程应用,因为static是不可重入的,所以使用协程和多线程要注意,不能再两个任务中同时使用一个协程
+但是，这就使得代码不具备可重入性和多线程应用（因为static是不可重入的，协程函数再次进入跑的内容或者结果他是不一定的），所以使用协程和多线程要注意，不能再两个任务中同时使用一个协程
 
 其实之前对于FreeRTOS中的协程分析其实漏掉了最关键的部分，就是这个switch结构，他们都在 croutine.h 中
 
@@ -147,9 +148,9 @@ static const TickType_t uxFlashRates[ 2 ] = { 200, 400 };
 其基础和上面介绍的协程本质很类似，当然也有很多细节地方不同。
 
 croutine 进行多任务切换的唯一的方法就是调用 crDELAY ，这里宏展开后
-是 switch 的一个 case ，并且会把 xHandle 的状态更新，这样当该任务重新调度后，
-可以通过 case 跳转到这里，这就是 croutine 能模拟多任务切换的核心，本质上是
-任务函数的重新调用，这也是为什么参数不能用局部变量保存的原因。
+是 switch 的一个 case ，并且会把 xHandle 的状态更新，这样当该任务重新调度后，可以通过 case 跳转到这里，这就是 croutine 能模拟多任务切换的核心，本质上是任务函数的重新调用，这也是为什么参数不能用局部变量保存的原因。如果变量要跨case，必须变成静态，如果不跨只是临时使用，那可以用临时变量。其实看到这里，就会发现，如果我的变量都变成了static，那不就又增加了栈空间的使用吗？只是从原本的task栈空间，转变到了全局栈空间里去了，好像没啥改变。协程主要还是用来节省切换任务上下文的消耗的，栈空间真的不一定能节省多少。
+
+`vFlashCoRoutine`本身还会被系统内更大的一个协程函数调用，这里的Flash只是一个用户协程函数。
 
 
 ## Quote
