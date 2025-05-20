@@ -84,6 +84,8 @@ FIA8859-2024，是现行标准，对应到头盔，每个头盔寿命只有5年�
 
 #### Su7 Ultra改装四点式安全带
 
+![image-20250520101513442](https://img.elmagnifico.tech/static/upload/elmagnifico/20250520101513504.png)
+
 > https://www.bilibili.com/video/BV1rbQDY2Ejs
 
 先说明高翔的改装方式是完全错误的，四点式的安全带本来就不能被固定在座位自身上，这样这个安全带根本就没起作用。
@@ -98,7 +100,7 @@ FIA8859-2024，是现行标准，对应到头盔，每个头盔寿命只有5年�
 
 
 
-![image-20250520021540873](https://img.elmagnifico.tech/static/upload/elmagnifico/202505200215928.png)
+![image-20250520101543677](https://img.elmagnifico.tech/static/upload/elmagnifico/20250520101543727.png)
 
 腰部的安全带需要锚定椅子下方，这个板需要把座椅弄起来固定上去，可以让4S店帮忙弄一下，也很简单，到这里基本上这个4点式的安全带就完全弄好了
 
@@ -207,6 +209,8 @@ Ultra Club赛道的会员服务，不支持小赛道驻场，只有珠海这种�
 ![image-20250519194027662](https://img.elmagnifico.tech/static/upload/elmagnifico/20250519194027695.png)
 
 去赛道日前，预约上面检查，他就想你开去4S店检查，感觉让他上门服务也有点不情不愿的。别人up主那里就各种凌晨服务、很舔，到你手里就有点看人下菜的意思了。
+
+总的来说有点服务，四点式安全带让他们协助安装了
 
 
 
