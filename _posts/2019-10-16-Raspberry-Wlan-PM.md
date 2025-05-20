@@ -3,6 +3,7 @@ layout:     post
 title:      "树莓派无线网卡节能模式BUG"
 subtitle:   "Wlan，power_save off"
 date:       2019-10-16
+update:     2025-05-20
 author:     "elmagnifico"
 header-img: "img/Raspberrypi-head-bg.jpg"
 catalog:    true
@@ -172,6 +173,20 @@ sudo iw dev wlan0 set power_save off
 
 如果去查这个问题，还有不少解释和一劳永逸的办法，但是在我这里基本都不生效，最实用的办法就是直接在启动的rc.local里加上关闭节电模式。
 
+
+
+## AP的问题
+
+AP中其实有一个省电设置`UAPSDCapability`
+
+```
+Indicates whether this access point supports WMM Unscheduled Automatic Power Save Delivery (U-APSD). Note: U-APSD support implies WMM support.
+```
+
+它可以主动让客户端进入省电模式，如果有必要，建议AP端也关闭这个设置
+
+
+
 ## The end
 
 找这个沙雕问题，浪费了这么多时间，各种改程序，各种测试设备，而在最后一步的时候如果不怀疑iwconfig的显示的话，那估计就和电源问题擦肩而过了，那想再找到这个问题就非常难了。
@@ -191,7 +206,8 @@ sudo iw dev wlan0 set power_save off
 > https://raspberrypi.stackexchange.com/questions/96606/make-iw-wlan0-set-power-save-off-permanent
 >
 > https://unix.stackexchange.com/questions/269661/how-to-turn-off-wireless-power-management-permanently
-
+>
+> https://cwmp-data-models.broadband-forum.org/tr-181-2-11-0.html
 
 
 
