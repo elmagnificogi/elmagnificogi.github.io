@@ -3,7 +3,7 @@ layout:     post
 title:      "Su7 Ultra下赛道"
 subtitle:   "改装、赛道日、四点式安全带、漂移、头盔"
 date:       2025-05-20
-update:     2025-05-20
+update:     2025-05-21
 author:     "elmagnifico"
 header-img: "img/springboot.jpg"
 catalog:    true
@@ -96,9 +96,11 @@ FIA8859-2024，是现行标准，对应到头盔，每个头盔寿命只有5年�
 
 把这个插入到ISOFIX接口，然后四点式安全带连接到这个卡口即可，原本ISOFIX的带子就不要了
 
-![image-20250520020443491](https://img.elmagnifico.tech/static/upload/elmagnifico/202505200204750.png)
+![ ](https://img.elmagnifico.tech/static/upload/elmagnifico/202505212228011.png)
 
+这个地方可能角度也有点偏大了，也可以系在座椅放下以后的黄色卡口上
 
+![image-20250521223045968](https://img.elmagnifico.tech/static/upload/elmagnifico/202505212230025.png)
 
 ![image-20250520101543677](https://img.elmagnifico.tech/static/upload/elmagnifico/20250520101543727.png)
 
