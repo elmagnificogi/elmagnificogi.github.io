@@ -3,7 +3,7 @@ layout:     post
 title:      "Su7 Ultra下赛道"
 subtitle:   "改装、赛道日、四点式安全带、漂移、头盔"
 date:       2025-05-20
-update:     2025-05-26
+update:     2025-05-27
 author:     "elmagnifico"
 header-img: "img/springboot.jpg"
 catalog:    true
@@ -207,13 +207,17 @@ GIC之前说要拆掉的，后来又停了，由于这个名字和麻涌的都�
 
 GIC这个价格看起来挺便宜的，而且可以玩的时间，看日历很多，他一节30分钟，珠海15分钟，差距啊...
 
+![image-20250527101609151](https://img.elmagnifico.tech/static/upload/elmagnifico/20250527101616251.png)
+
+GIC赛道体验也是有活动的方式，报名需要询问对应的联系人，价格是750，时间不一定，需要每次问
+
 
 
 #### 广东竞速国际赛车场-麻涌赛车场
 
 ![图片](https://img.elmagnifico.tech/static/upload/elmagnifico/20250519151933958.webp)
 
-麻涌赛车场的活动需要关注公众号：`广东竞速国际赛车场`，有活动会发公告
+麻涌赛车场的活动需要关注公众号：`广东竞速国际赛车场`或者是`方舟赛车`，有活动会发公告
 
 麻涌赛道日大概是一个月一次，价格就是贵一些688，但是胜在时间长，相当于一伙人包一天了，然后不含头盔，需要你自己处理
 
