@@ -3,7 +3,7 @@ layout:     post
 title:      "Su7 Ultra下赛道"
 subtitle:   "改装、赛道日、四点式安全带、漂移、头盔"
 date:       2025-05-20
-update:     2025-06-01
+update:     2025-06-02
 author:     "elmagnifico"
 header-img: "img/springboot.jpg"
 catalog:    true
@@ -311,6 +311,12 @@ GIC赛道体验也是有活动的方式，报名需要询问对应的联系人�
 每组的前三可以得到一个小奖杯，可以上领奖台，有点意思。
 
 如果是第二次去玩，就是非新人身份，可以提前去了提前进去练习，晚上弄完了也有自由练习时间，甚至还有自由包场时间（价格也还行）。
+
+
+
+<iframe src="//player.bilibili.com/player.html?isOutside=true&aid=114608987708379&bvid=BV1iV7rziEKS&cid=30274029889&p=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="640" height="480" ></iframe>
+
+大佬指点说很多地方入弯太快了，一直响轮胎，可以更慢入，更快出弯。
 
 
 
