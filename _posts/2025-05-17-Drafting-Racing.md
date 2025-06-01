@@ -104,7 +104,7 @@ FIA8859-2024，是现行标准，对应到头盔，每个头盔寿命只有5年�
 
 ![image-20250521223045968](https://img.elmagnifico.tech/static/upload/elmagnifico/202505212230025.png)
 
-接这个黄色（也有可能是银色）的固定卡口，安全性上可能会更好一点？（这种方式是不需要ISOFIX的，直接安全带就能接了，长度也够）
+接这个黄色（也有可能是银色）的固定卡口，安全性上可能会更好一点（这种方式是不需要ISOFIX的，直接安全带就能接了，长度也够）
 
 ![image-20250520101543677](https://img.elmagnifico.tech/static/upload/elmagnifico/20250520101543727.png)
 
@@ -132,7 +132,7 @@ FIA8859-2024，是现行标准，对应到头盔，每个头盔寿命只有5年�
 
 这个L型扣板和座椅其实有点不适配，座椅的滑槽下面有一个卡位方块，需要卡到车底盘下面，这个东西，还挺长的，大概有1cm高度，扣板的孔是过不去的，直接放这个方块下面，那你螺丝都拧不上了
 
-![image-20250523000725506](https://img.elmagnifico.tech/static/upload/elmagnifico/202505230007573.png)
+![image-20250601122410996](https://img.elmagnifico.tech/static/upload/elmagnifico/image-20250601122410996.png)
 
 - 因为轨道两侧是比螺丝高的，所以L板无法直接放进去，高翔是把螺丝垫高了，然后L板架到了轨道上面，这样这个螺丝就没吃满，少了1cm左右，这其实有点危险
 
