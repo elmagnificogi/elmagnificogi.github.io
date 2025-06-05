@@ -3,7 +3,7 @@ layout:     post
 title:      "Nintendo Switch2"
 subtitle:   "港版、首发、同捆、马车世界"
 date:       2025-06-05
-update:     2025-06-05
+update:     2025-06-06
 author:     "elmagnifico"
 header-img: "img/typora.jpg"
 catalog:    true
@@ -91,7 +91,7 @@ NS2总算发布了，今天就直接拿到了
 
 ![image-20250605233234712](https://img.elmagnifico.tech/static/upload/elmagnifico/202506052332816.png)
 
-这个英标插头是真的恶心，转换头也大，合在一起超级难看
+这个英标插头是真的恶心，转换头也大，合在一起超级难看。适配器最大功率是60w，20V3A，基本上现在新一点的适配器都能做到这个功率了，甚至转换器本身都有65w的供电口
 
 
 
