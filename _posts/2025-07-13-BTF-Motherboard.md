@@ -181,7 +181,7 @@ CPU：AMD 9950x3D
 
 总体算下来价格1w出头
 
-![image-20250811015834995](C:\Users\el_magnifico\AppData\Roaming\Typora\typora-user-images\image-20250811015834995.png)
+![image-20250811015834995](https://img.elmagnifico.tech/static/upload/elmagnifico/202508120030387.png)
 
 唯一问题，显卡是黑色的，等60系出了弄个白色的或者巧克力色的，再把显卡线给隐藏掉，正面就很简洁了
 
@@ -233,9 +233,9 @@ LG，39GX90SA，39寸，3440*1440，240Hz，MLA+OLED，HDR400，淘汰
 
 LG，45GX90SA，45寸，3440*1440，240Hz，MLA+OLED，HDR400，淘汰
 
-LG，42C4，42寸，3840*2160，144Hz，OLED，由于是电视，启动很慢，启停要用遥控很不方便，淘汰
+LG，42C4/C5，42寸，3840*2160，144Hz，OLED，性价比很高，但是办公、文字、白屏问题很大，由于是电视，启动很慢，启停要用遥控很不方便，淘汰
 
-三星，42S90F，45寸，3840*2160，144Hz，OLED，淘汰
+三星，42S90F，42寸，3840*2160，144Hz，OLED，淘汰
 
 
 
@@ -247,13 +247,15 @@ LG，42C4，42寸，3840*2160，144Hz，OLED，由于是电视，启动很慢，
 
 纠结半天，找不到合适的产品，退而求其次，换成32寸的4k显示器，刷新率有120Hz就行，但是面板得要QD OLED或者MLA+OLED
 
-AOC，AG326UD,32寸，165Hz
+AOC，AG326UD，32寸，165Hz
 
 LG，32GS95UV，32寸，240Hz
 
 三星，S32FG812SC，32寸，240Hz
 
 三星，S32DG802SC，32寸，240Hz
+
+![image-20250812003136601](https://img.elmagnifico.tech/static/upload/elmagnifico/202508120031869.png)
 
 AOC最便宜，也能满足要求，其他的几个就算了，他们这个价格我再加点都能上戴尔的5K了
 
