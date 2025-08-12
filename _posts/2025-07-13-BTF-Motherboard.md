@@ -3,11 +3,11 @@ layout:     post
 title:      "2025新主机"
 subtitle:   "Amd Yes，背插，BTF"
 date:       2025-08-11
-update:     2025-08-11
+update:     2025-08-13
 author:     "elmagnifico"
 header-img: "img/x3.jpg"
 catalog:    true
-tobecontinued: true
+tobecontinued: false
 tags:
     - 主机
     - Amd
@@ -319,9 +319,31 @@ MLA OLED，LG的技术，对标QLED
 
 
 
+#### 分辨率/接口
+
+![image-20250812230327713](https://img.elmagnifico.tech/static/upload/elmagnifico/202508122303879.png)
+
+DP 1.4a，DP 1.4b
+
+DP接口为了提高带宽，推出了DSC的压缩技术，带了DSC的就是b，没带DSC的就是a
+
+但总的来说1.4支持到4K 144Hz 10bit
+
+
+
+HDMI则有点尴尬了，比较老的HDMI完全拉不动4K 120以上，还好我这里是DP1.4a和HDMI2.1，165Hz支持，如果买三星或者LG的240Hz，还有点点危险。
+
+DP好在可以双线同时连接来扩展带宽，也就不怕对未来的扩展性不够了。
+
+
+
 ## Summary
 
 后续等到Zen6出来以后，考虑再把9950x3D换掉，下一代GPU出来以后再把3080Ti换掉，等5K普及了再把这个显示器换了，还得好久。
+
+
+
+实测3080Ti还是能勉强4K 60Hz的，就是画面一激烈掉的有点厉害
 
 
 
