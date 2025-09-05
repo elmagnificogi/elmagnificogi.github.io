@@ -3,7 +3,7 @@ layout:     post
 title:      "DSHOT指南"
 subtitle:   "HAL，DSHOT1200，STM32 PWM DSHOT驱动"
 date:       2020-06-03
-update:     2023-04-23
+update:     2025-09-04
 author:     "elmagnifico"
 header-img: "img/sensor-head-bg.jpg"
 catalog:    true
@@ -63,7 +63,7 @@ DSHOT本身一个完整控制帧，是16bits，其中11bits用来表示油门，
 - 0，用于电调解锁，1-47是给telemetry用的
 - 1-5，电调鸣叫，低频->高频
 - 6，ESC 版本信息或者是序列号，通过telemetry返回
-- 7，8是对应两个旋转方向
+- 7，8是对应两个旋转方向，做双向控制使用的
 - 9，10，3d模式开关，9关，10开
 - 11，获取esc 配置
 - 12，保存esc 配置

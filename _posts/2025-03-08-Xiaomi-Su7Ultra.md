@@ -10,7 +10,7 @@ catalog:    true
 tobecontinued: false
 tags:
     - Xiaomi
-    - Su7Ultra
+    - Su7 Ultra
     - Car
 ---
 
