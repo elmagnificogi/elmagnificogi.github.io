@@ -7,7 +7,7 @@ update:     2025-09-05
 author:     "elmagnifico"
 header-img: "img/x6.jpg"
 catalog:    true
-tobecontinued: true
+tobecontinued: false
 tags:
     - Su7 Ultra
     - Car
