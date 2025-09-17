@@ -3,7 +3,7 @@ layout:     post
 title:      "冲出赛道"
 subtitle:   "小米Su7 Ultra、改装、底盘灯、刹车片、半热熔、轮胎"
 date:       2025-09-10
-update:     2025-09-10
+update:     2025-09-17
 author:     "elmagnifico"
 header-img: "img/x7.jpg"
 catalog:    true
@@ -48,6 +48,22 @@ tags:
 
 
 ## 改装
+
+#### 参考
+
+![581e8ca641db3974e1291548b0529d9a](https://img.elmagnifico.tech/static/upload/elmagnifico/20250917192206297.jpeg)
+
+先看看大佬的改装，改装都快比车贵了，离谱。大头是绞牙避震，这个东西价格是真高啊，基本改到顶了，有需要的可以参考一下
+
+
+
+#### 音响改装
+
+![image-20250917192834389](https://img.elmagnifico.tech/static/upload/elmagnifico/20250917192834534.png)
+
+Ultra本来声浪就不大，更新以后声浪更小了，于是有人利用了一下闲置的前备箱，放了一个可控喇叭进去，连到车内去了，只能说真的大胆，这玩意很容易被抓到。
+
+
 
 ### 底盘灯
 

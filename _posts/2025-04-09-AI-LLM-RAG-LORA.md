@@ -7,7 +7,7 @@ update:     2025-04-14
 author:     "elmagnifico"
 header-img: "img/pcb-head-bg.jpg"
 catalog:    true
-tobecontinued: true
+tobecontinued: false
 tags:
     - AI
     - LLM
