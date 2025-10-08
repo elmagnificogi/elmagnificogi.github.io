@@ -3,7 +3,7 @@ layout:     post
 title:      "翻墙节点合租"
 subtitle:   "BlackFriday、IPLC"
 date:       2022-12-05
-update:     2023-10-26
+update:     2025-10-09
 author:     "elmagnifico"
 header-img: "img/drone-head-bg.jpg"
 catalog:    true
@@ -135,3 +135,4 @@ v2rayN目前线路列表
 
 ~~比如，你的工作，用途，你现在用的是什么？你用的什么客户端（PC、移动、路由器），以及你的目前网络状况（我的电信节点比较多一些）~~
 
+不再收人了，请别继续联系我了
