@@ -2,14 +2,15 @@
 layout:     post
 title:      "车载智能屏幕"
 subtitle:   "Led,iPixel Color"
-date:       2026-10-30
-update:     2026-10-30
+date:       2025-10-31
+update:     2025-10-31
 author:     "elmagnifico"
-header-img: "img/x13.jpg"
+header-img: "img/x14.jpg"
 catalog:    true
-tobecontinued: true
+tobecontinued: false
 tags:
-    - CAN
+    - Car Life
+    - 米家
 ---
 
 ## Foreword
