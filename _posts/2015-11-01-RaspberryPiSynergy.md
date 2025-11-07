@@ -118,7 +118,7 @@ RaspberryPi：Raspberry Pi 2
 
 		/usr/bin/ld: cannot find -lxxx
 
-   是指缺少lab xxx 那么只要对应安装xxx就行了
+   是指缺少lib xxx 那么只要对应安装xxx就行了
 
 		sudo apt-get install libxxx-dev
 

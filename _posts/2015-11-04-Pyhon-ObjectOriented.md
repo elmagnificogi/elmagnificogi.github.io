@@ -26,7 +26,7 @@ IDE：IDLE3
 			self.age=age
 			self.name=name
 
-		def birth(self)
+		def birth(self):
 			self.age=self.age+1
 
 Python类中 __init__就是构造函数，默认这么写
@@ -34,7 +34,7 @@ self相当于是private 私有变量的声明
 
 ### 继承
 
-	class Parent(Person)
+	class Parent(Person):
 		def __init__(self,age,name):
 			Person.__init__(self,age,name)
 			self.children=[]
@@ -50,7 +50,7 @@ import就相当于是include 导入你自己写好的文件或者是系统的模
 	hello.py
 
 	def hello():
-		print（"hello world")
+		print("hello world")
 
 	main.py
 
@@ -67,7 +67,7 @@ import就相当于是include 导入你自己写好的文件或者是系统的模
 
 全部导入
 
-	from hello import
+	from hello import *
 
 需要注意一个问题，Python不存在重载，也就是说，同样的名字就会出现覆盖
 
@@ -108,7 +108,7 @@ import就相当于是include 导入你自己写好的文件或者是系统的模
 
 	import urllib.request,json
 
-	url="http://api.openweathermap.org/data/2.5/forecast/"+"daily?cnt=7&units=meteric&mode=json&q=London"
+	url="http://api.openweathermap.org/data/2.5/forecast/"+"daily?cnt=7&units=metric&mode=json&q=London"
 
 	url2="http://api.openweathermap.org/data/2.5/forecast/"+"city?id=524901&APPID=882d9218da4e33a23348bddf6d516d4f"
 

@@ -3,7 +3,7 @@ layout:     post
 title:      "博客十年-百万访问"
 subtitle:   "百万访问、PV、UV"
 date:       2025-09-25
-update:     2025-10-28
+update:     2025-11-07
 author:     "elmagnifico"
 header-img: "img/x10.jpg"
 catalog:    true
@@ -137,6 +137,14 @@ site_uv_num = parseInt(site_uv,10) + 490731;
 ```
 
 接入统计以后，3年大概就有40-50w的pv了
+
+
+
+## Folo
+
+![image-20251107150452433](https://img.elmagnifico.tech/static/upload/elmagnifico/20251107150452500.png)
+
+Folo上被订阅了2000多，直接减少了我n多pv和uv
 
 
 

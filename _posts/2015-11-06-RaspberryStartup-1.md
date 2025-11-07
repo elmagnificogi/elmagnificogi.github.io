@@ -24,7 +24,7 @@ RaspberryPi：Raspberry Pi 2
 
 首先是烧完系统以后，修改一下sd卡中的config.txt文件，这里面记录了boot的时候的启动参数
 
-这文件只有在树莓派没启动的时候才能修改，启动之后只能查看(而然并不是所有的都能看到，所以并没有什么卵用，还是乖乖的在启动前仔细看清吧)
+这文件只有在树莓派没启动的时候才能修改，启动之后只能查看(然而并不是所有的都能看到，所以并没有什么卵用，还是乖乖的在启动前仔细看清吧)
 
 	vcgencmd get_config <config> – displays a specific config value 
 	e.g:

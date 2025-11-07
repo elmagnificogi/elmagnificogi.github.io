@@ -24,11 +24,11 @@ IDE：IDLE3
 Python中的变量不需要声明，随用随定义
 
     score=0
-	print（score）
+	print(score)
 
 命名规则和其他语言一样：不能以数字或关键字为开头
 
-好的习惯是：驼峰命名发，首字母大写
+好的习惯是：驼峰命名法，首字母大写
 
 或者是用下划线分割单词，全小写 
 
@@ -50,7 +50,7 @@ Python会自动帮你确定你输入的常数/幻数是什么类型
 
 这里的bool也是0为假 非0为真
 	
-	Fasle
+	False
 	True
 
 
@@ -59,9 +59,9 @@ Python会自动帮你确定你输入的常数/幻数是什么类型
 
 比较、加减乘除等运算符都是常见的功能，特殊一点的有：
 
-	int（3.25）->3
-	float（3） ->3.0
-	str(23)    e->"23"
+	int(3.25)->3
+	float(3)->3.0
+	str(23)->"23"
 
 
 
@@ -76,11 +76,11 @@ string类型可以用单引号也能用双引号也进行创建,不过依我的�
 
 Python中的string可以直接当成数组来用,非常的方便
 
-由于Python是高级语言不涉及内存相关问题，注意string的len是不计算结尾的'/n'的要注意，该多长就多长
+由于Python是高级语言不涉及内存相关问题，注意string的len是不计算结尾的'\n'的要注意，该多长就多长
 
 	"123"[0]="1"
 	"123"[0：1]="12"
-	len（"123"）=3
+	len("123")=3
 	"123"+"456"="123456"
 
 ### 数据容器
@@ -130,9 +130,9 @@ Python有现成的数据结构体可以直接使用：list、tuples、dictionary
 	dic={
 			"hi":"nihao",
 			"hello":"nihao",
-			"konichiwa""nihao",
+			"konichiwa:"nihao",
 		}
-	dic[hi]="nihao"；
+	dic["hi"]="nihao"；
 
 #### 集合
 
@@ -168,7 +168,7 @@ in操作则是可以判断某值是否在集合之中
 
 在Python中变量分为局部变量和全局变量
 
-在函数中可以取到全局变量的值，但是如果要修改则必须在函数体内生命
+在函数中可以取到全局变量的值，但是如果要修改则必须在函数体内声明
 
 	global xxx 
 
@@ -186,7 +186,7 @@ break和continue依然是可以使用的
 
 ### While
 
-	While Ture：
+	While Ture:
 		print("缩进是必须的，其循环体的判断以缩进为依据")
 
 ### for
@@ -199,13 +199,13 @@ range(x,y,step)函数用于i的遍历范围，步长为step，从x到y(不包括
 集合set也能用来循环，但是会自动排序
 
 	for i in {1，2，4，3}
-		print（i）
+		print(i)
 
 输出的是 1234 而不是1243，要注意下，这种无序结构的循环特殊
 
 字典也能用来循环，只是用key，value来循环
 
-	for key，value in dic.item()
+	for key,alue in dic.item()
 
 
 ### if
@@ -251,7 +251,7 @@ if没什么太大变化，只是都是以冒号开始
 
 ## 函数
 
-Python的普通函数（参数为四大类型），是用值传递的
+Python的普通函数(参数为四大类型(，是用值传递的
 
 如果是其他的数据结构，用的是地址传递
 
@@ -399,7 +399,7 @@ import就是用来导入copy模块
 	for i in range(3,30,2):
 	    prime=True
 	    for k in range (2,i):
-	        if(i%k==0）:
+	        if(i%k==0):
 	            prime=False
 	            break
 	    if prime:
@@ -459,11 +459,11 @@ import就是用来导入copy模块
 	            else:
 	                student[1][subject]=mark
 	                return "student's mark added"
-	    return "studen not found"
+	    return "student not found"
 	#主函数 完成命令选择和参数输入
 	while True:
 	    print("welcome to the raspberry pi student database")
-	    print("what can i help you whti ?")
+	    print("what can i help you with ?")
 	    print("enter 1 to view all report cards")
 	    print("enter 2 to view the report card for a student")
 	    print("enter 3 to add a stuent")
@@ -478,7 +478,7 @@ import就是用来导入copy模块
 	    if user_choice==1:
 	        print_report_card()
 	    elif user_choice==2:
-	        enter_student=input("which studen?")
+	        enter_student=input("which student?")
 	        print_report_card(enter_student)
 	    elif user_choice==3:
 	        enter_student =input("student name")
@@ -498,7 +498,7 @@ import就是用来导入copy模块
 	    elif user_choice==5:
 	        break
 	    else:
-	        print("unknow choice")
+	        print("unknown choice")
 	    input("press enter to continue")
 	print("goodbye and thank you for using the raspberry pi ","student database") 
 	#不敲不知道，敲完就知道你错了多少           

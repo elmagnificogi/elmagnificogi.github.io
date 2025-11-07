@@ -24,10 +24,10 @@ RaspberryPi：Raspberry Pi 2
 
 ## 键盘
 
-在配置完成config之后，一定要第一时间设置键盘，不然后面会遇到各种打出来的符合不对劲的问题。
+在配置完成config之后，一定要第一时间设置键盘，不然后面会遇到各种打出来的符号不对劲的问题。
 
 	sudo raspi-config
-	选4 Internationnalisation Options
+	选4 Internationalisation Options
 	选3 Change Keyboard Layout （没弹出来下面的选项，多试几次就好了）
 	选 Generic 104-key PC （美式键盘，正常咱用的）
 	选 English（US）（一定要是这个不然会打出来奇怪的东西）
@@ -57,7 +57,7 @@ RaspberryPi：Raspberry Pi 2
 	sudo apt-get install ttf-arphic-uming
 	文鼎的明体
 
-	sudo apt-get install ibus ibus-pinyinibus 
+	sudo apt-get install ibus ibus-pinyin
 	输入法引擎 和 ibus 拼音输入法
 
 	sudo apt-get -y install scim-pinyin 
@@ -150,7 +150,7 @@ ntp有一个超时不同步的设定，就是如果当前时间和服务器时�
 	增加一条8.8.8.8
 	nameserver 8.8.8.8
 
-而然新的系统里，这样设置了没用，重启的时候系统会自动重写这个文件
+然而新的系统里，这样设置了没用，重启的时候系统会自动重写这个文件
 
 只有在resolvconf.conf中加上8.8.8.8 那么重启以后，resolv.conf中会自动增加上的
 	
@@ -296,7 +296,7 @@ rdate使用端口37，而我的37端口是被屏蔽的，所以这个方法我�
 
 ## 修改下载源
 
-这是我在装nptdate的时候发现，nptdate无法下载，debian的服务器上有一个包怎么也下不下来，没办法我好找其他下载源下载了。
+这是我在装nptdate的时候发现，ntpdate无法下载，debian的服务器上有一个包怎么也下不下来，没办法我只好找其他下载源下载了。
 
 	cd /etc/apt/
 	sudo mv sources.list sources.list.bak （备份现有的源文件）

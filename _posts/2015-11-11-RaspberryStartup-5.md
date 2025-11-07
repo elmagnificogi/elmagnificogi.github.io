@@ -202,7 +202,7 @@ update-rc.d命令用以维护不同级别下的启动脚本，它会自动在rc?
 	   /etc/rc4.d/S99foo -> ../init.d/foo
 	   /etc/rc5.d/S99foo -> ../init.d/foo
 
-实际上这样设定脚本的运行基本后来被LBS代替了，成为了必须写入脚本的固定格式，就像下面的设置
+实际上这样设定脚本的运行基本后来被LSB代替了，成为了必须写入脚本的固定格式，就像下面的设置
 
 	 # 1995-2002, 2008 SUSE Linux Products GmbH, Nuernberg, Germany.
 	 # All rights reserved.
@@ -233,7 +233,7 @@ update-rc.d命令用以维护不同级别下的启动脚本，它会自动在rc?
 	
 	l5:5:wait:/etc/init.d/rc 5
 
-其中15是指令标识符，5是运行级别，wait表示进入运行级别时就开始执行”/etc/init.d/rc 5“命令，在执行命令期间，init程序会停下来，直到命令执行完成后init才继续往下执行。
+其中l5是指令标识符，5是运行级别，wait表示进入运行级别时就开始执行”/etc/init.d/rc 5“命令，在执行命令期间，init程序会停下来，直到命令执行完成后init才继续往下执行。
 
 action有很多种，下面分别介绍：
 

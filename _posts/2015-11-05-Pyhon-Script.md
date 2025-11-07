@@ -81,7 +81,7 @@ IDE：IDLE3
 
 如果有正则表达式，则通过search找到匹配项，存入line输出
 
-正则表达式搜索有两种，serch是从字符串任何位置匹配就输出
+正则表达式搜索有两种，search是从字符串任何位置匹配就输出
 
 match则是从字符串头匹配，头匹配了才会输出
 
@@ -97,7 +97,7 @@ match则是从字符串头匹配，头匹配了才会输出
 	    text=p.stdout.read().decode()
 	    error=p.stderr.read().decode()
 	else:
-	    test=""
+	    text=""
 	    error="Filename not got"
 	if  len(error)>0:
 	    print("error")
