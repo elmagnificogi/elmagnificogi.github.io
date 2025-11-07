@@ -495,7 +495,7 @@ There is a more generic way of solving this problem.
 
 ### 36.Palindrome Number-Analysis
 
-判读是否是一个回文的数字串，说白了就是首尾相等
+判断是否是一个回文的数字串，说白了就是首尾相等
 
 如果是字符串，简单的循环就可以了
 

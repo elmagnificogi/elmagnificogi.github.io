@@ -23,7 +23,7 @@ Your algorithm should have a linear runtime complexity. Could you implement it w
 
 ### 1.Single Number-Analysis
  
-这个题好巧啊，碰到过好几次了，就是有一个重复的数组，每个元素都出现了2次或者是多次，但只有一个元素只出现了一次，然你找出来
+这个题好巧啊，碰到过好几次了，就是有一个重复的数组，每个元素都出现了2次或者是多次，但只有一个元素只出现了一次，让你找出来
 
 这个题值遍历一次，就找出来，就是靠位的统计，因为每个元素出现了固定次数，统计所有元素32个位上1的个数，然后%2,偶数个，所以正常应该为0，但是由于多了这么一个数，所以他的位是1，那么%2后 剩下的1 所组成的32位的整数则就是这个数自己了
 
@@ -116,7 +116,7 @@ Your algorithm should run in linear runtime complexity. Could you implement it u
 
 这个是一位博主由此题而引出来的通用方案，基本上和上面说的方法是相同原理，只是他的代码非常精简，而且也只用一次遍历就能得到想要的内容
 
-求异或合很简单，但是要找到某一位为1，这个有一点技巧；
+求异或和很简单，但是要找到某一位为1，这个有一点技巧；
 
 	xorsum &= -xorsum 
 	这样得到的结果 就是第一位为1的数的
@@ -128,7 +128,7 @@ Your algorithm should run in linear runtime complexity. Could you implement it u
 
 ### 2.Single Number III-Solution-C/C++
 
-闹不懂为什么c就会报错，单独测试都是没问题的，我也没用全局变量。
+搞不懂为什么c就会报错，单独测试都是没问题的，我也没用全局变量。
 
 看到返回的错误结果，应该就是弄错了ret的返回地址的问题，程序肯定没错，有错的就只能是leetcode了
 
@@ -279,14 +279,14 @@ Could you solve it with constant space complexity? (Note: The output array does 
 
 第一次遍历 当前元素=左边所有元素的乘积 从左往右遍历
 
-第二次遍历 当前元素=当前元素*右边所有元素的成绩 从右往左遍历  
+第二次遍历 当前元素=当前元素*右边所有元素的乘积 从右往左遍历  
 
 比如
 
 	[1,2,3,4]
 	 1 1 2 6 第一次 左到右
 	24 12 4 1 第二次右到左
-	24 12 8 6  第二次输出输出内容
+	24 12 8 6  第二次输出内容
 
 这样就得到了最后的值，但是这样的时间是2n 相对来说小了很多。
 

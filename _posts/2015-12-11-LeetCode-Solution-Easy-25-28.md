@@ -18,7 +18,7 @@ The order of elements can be changed. It doesn't matter what you leave beyond th
 
 ### 25.Remove Element-Analysis
 
-这个题目要求删除元素，但是呢，你删除后的长度，剩下的内容他是不管的，他只看你剩下长度的空间中内容是否正确
+这个题目要求删除元素，但是呢，你删除后的长度，剩下的内容它是不管的，它只看你剩下长度的空间中内容是否正确
 
 最后参考了这个题目的思路，才明白题目想干嘛
 

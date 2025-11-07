@@ -25,9 +25,9 @@ Here are few examples.
 
 ### 9.Search Insert Position-Analysis
 
-从一个有序数组中寻找某一值，如果找到了返回其引索，否则返回该值插入引索
+从一个有序数组中寻找某一值，如果找到了返回其索引，否则返回该值插入索引
 
-首先既然是有序数组，那就可以用二分搜索来寻找这个值，如果没找到，也能直接得到其插入引索的位置
+首先既然是有序数组，那就可以用二分搜索来寻找这个值，如果没找到，也能直接得到其插入索引的位置
 
 ### 9.Search Insert Position-Solution-C/C++
 
@@ -123,7 +123,7 @@ After calling your function, the tree should look like:
 
 给了一个完整树，同时在树节点中增加了一个next
 
-next表示是当前节点在树种右边节点的地址，现在需要对一个没有next节点的树完成所有next节点的初始化。
+next表示是当前节点在树中右边节点的地址，现在需要对一个没有next节点的树完成所有next节点的初始化。
 
 既然是完整树，那么只要按层遍历就行了，对每层的节点进行next赋值。
 
@@ -253,7 +253,7 @@ Your algorithm should have a linear runtime complexity. Could you implement it w
 	
 	one=one^nums[i];
 
-而然做完了这些还不行，因为只是计算了出现了这么多次数的，但是当计算完三次的时候，并没有把出现两次和出现一次中出现三次的位给置0，所以还需要一个清0的动作
+然而做完了这些还不行，因为只是计算了出现了这么多次数的，但是当计算完三次的时候，并没有把出现两次和出现一次中出现三次的位给置0，所以还需要一个清0的动作
 
 	one=one&(~three)
 	two=two&(~three)
