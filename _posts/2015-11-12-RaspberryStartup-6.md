@@ -213,7 +213,7 @@ Systemd会自动找到 /usr/lib/systemd/system 目录中的 hello.service 文件
 
 其实我们启动的服务已经在后台默默的输出“Hello World”了。
 
-Systemd通过其标准日志服务Journald将其管理的所有后台进程打印到到std:out（即控制台）的输出重定向到了日志文件。日志文件是二进制格式的，因此必须使用特定的工具才能查看。Journald提供了配套的程序Journalctl用于处理日志内容。Journalctl的使用非常简单，默认不带任何参数的时候会输出系统和所有后台进程的混合日志，常用的参数有--dmesg用于查看内核输出的日志，--system用于查看系统输出的日志，--unit加上Unit的名字来指定输出特定Unit的日志，例如以下命令。
+Systemd通过其标准日志服务Journald将其管理的所有后台进程重定向到stdout（即控制台）的输出重定向到了日志文件。日志文件是二进制格式的，因此必须使用特定的工具才能查看。Journald提供了配套的程序Journalctl用于处理日志内容。Journalctl的使用非常简单，默认不带任何参数的时候会输出系统和所有后台进程的混合日志，常用的参数有--dmesg用于查看内核输出的日志，--system用于查看系统输出的日志，--unit加上Unit的名字来指定输出特定Unit的日志，例如以下命令。
 
 	journalctl --unit hello.service
 

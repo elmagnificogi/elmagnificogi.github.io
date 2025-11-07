@@ -3,7 +3,7 @@ layout:     post
 title:      "记一次小米Su7 Ultra提车"
 subtitle:   "保险、临牌、补贴、限制"
 date:       2025-03-10
-update:     2025-04-21
+update:     2025-11-07
 author:     "elmagnifico"
 header-img: "img/g2.jpg"
 catalog:    true
@@ -238,9 +238,13 @@ Ultra的保险只有两种，一个基础版（13327），一个尊享版（1391
 
 #### 补贴
 
+![image-20251107153155772](https://img.elmagnifico.tech/static/upload/elmagnifico/20251107153155891.png)
+
 补贴是按照发票开的地方来算的，目前深圳宝安是有补贴政策的，就是宝安有点坑爹是少量金额+抽奖，别人都是发钱。
 
 大概宝安能给的就是2000-4000+一次抽奖，目前已经可以申领了，通过云闪付APP，就能看到深圳补贴的活动
+
+7.30发了一轮补贴，2050，8.28抽奖，中了二等奖，发了4000（5000还得扣税，离谱）
 
 
 

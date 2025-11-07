@@ -63,7 +63,7 @@ Linux 就是藉由配置 run level 来规定系统使用不同的服务来启动
 - 5 - X11 (与 runlevel 3 类似，但加载使用 X Window)
 - 6 - reboot (重新启动)
 
-由於 run level 0, 4, 6 不是关机、重新启动就是系统保留的，所以默认的run level并不能使这三个， 否则系统就会不断的自动关机或自动重新启动。那么我们启动时，是通过/etc/inittab取得系统的 run level,实际上debian没有规定像上面这样规定,debian的2-5都是多用户模式，这个要视系统来说，不一定。
+由於 run level 0, 4, 6 不是关机、重新启动就是系统保留的，所以默认的run level并不能是这三个， 否则系统就会不断的自动关机或自动重新启动。那么我们启动时，是通过/etc/inittab取得系统的 run level,实际上debian没有规定像上面这样规定,debian的2-5都是多用户模式，这个要视系统来说，不一定。
 
 ### inittab
 
@@ -211,7 +211,7 @@ update-rc.d命令用以维护不同级别下的启动脚本，它会自动在rc?
 	 #
 	 ### BEGIN INIT INFO
 	 # Provides:          esound
-	 # Required-Start:    alsasoun 89d $remote_fs
+	 # Required-Start:    alsasoun $remote_fs
 	 # Should-Start:      $network $portmap
 	 # Required-Stop:     alsasound $remote_fs
 	 # Should-Stop:       $network $portmap
@@ -431,7 +431,7 @@ Bash的设置之所以如此繁琐，是由于历史原因造成的。早期的�
 
 顺便提一下，除了Linux以外， Mac OS X 使用的shell也是Bash。但是，它只加载.bash_profile，然后在.bash_profile里面调用.bashrc。而且，不管是ssh登录，还是在图形界面里启动shell窗口，都是如此。
 
-#### inux或unix有两种方式的启动模式：System V和BSD 
+#### Linux或unix有两种方式的启动模式：System V和BSD 
 
 最大的不同就是：System V能够为不同的运行级别定义启动哪些服务，比如： 
 
@@ -469,7 +469,7 @@ Bash的设置之所以如此繁琐，是由于历史原因造成的。早期的�
 > http://www.ibm.com/developerworks/cn/linux/1407_liuming_init1/index.html
 
 
-#### Sysini总结
+#### Sys ini总结
 
 总体来说inittab的启动方式是串行的，单线程，按顺序的，那么带来的问题就是启动的时候非常慢，以及配置服务的时候需要注意前后关系，否则有可能因为缺少依赖服务而无法启动或者是启动出错。
 
