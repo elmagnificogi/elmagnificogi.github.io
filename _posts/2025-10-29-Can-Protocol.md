@@ -26,7 +26,7 @@ tags:
 
 CANaerospace是专为航空电子系统设计的通信协议，基于CAN总线技术，用于满足机载设备对实时性和可靠性的严苛要求。CANaerospace底层对CAN的payload重新定义了，将整个CAN总线设计成了网状，允许一对一和一对n通信。
 
-设计的思路还是比较简单的的，说白了就是给各个节点约定好的数据类型和数据值，具体这个数据干啥用的靠Service Code和Message Code区分
+设计的思路还是比较简单的，说白了就是给各个节点约定好的数据类型和数据值，具体这个数据干啥用的靠Service Code和Message Code区分
 
 
 
@@ -44,7 +44,7 @@ DDS主要是用在自动驾驶方面的技术栈，核心思路也是把传感�
 
 ![image-20251029161728083](https://img.elmagnifico.tech/static/upload/elmagnifico/20251029161728122.png)
 
-CANopen，类似的按照节点和对象字典来区分，CANopen把节点ID给固定死了，设备能用的一开始就规定死了
+CANopen，类似地按照节点和对象字典来区分，CANopen把节点ID给固定死了，设备能用的一开始就规定死了
 
 ```
 ┌──────────────┬─────────┬──────────────────┬─────────┐
@@ -62,11 +62,11 @@ CANopen，类似的按照节点和对象字典来区分，CANopen把节点ID给�
 
 > https://legacy.uavCAN.org/
 
-DroneCAN 和 Cyphal 都是早先一个叫做UAVCAN的项目。 在2022年，该项目分为两个部分：原始版本的 UAVCAN (UAVCAN v0) 更名为 DroneCAN，较新的 UAVCAN v1 更名为 Cyphal。 这两项协议之间的差异在[Cyphal vs. DroneCAN](https://forum.opencyphal.org/t/cyphal-vs-droneCAN/1814)中作了概述。
+DroneCAN 和 Cyphal 都是早先一个叫做UAVCAN的项目。在2022年，该项目分为两个部分：原始版本的 UAVCAN (UAVCAN v0) 更名为 DroneCAN，较新的 UAVCAN v1 更名为 Cyphal。这两项协议之间的差异在[Cyphal vs. DroneCAN](https://forum.opencyphal.org/t/cyphal-vs-droneCAN/1814)中作了概述。
 
 总体来说UAVCAN在当时的0.9版本已经较为广泛使用了，不好再做改动，所以在这里进行了分化。
 
-UAVCAN对于发布订阅模型支持是不太完善的，传输层和应用层的的解耦也没做好，还有一些其他缺点，最后导致了版本分化
+UAVCAN对于发布订阅模型支持是不太完善的，传输层和应用层的解耦也没做好，还有一些其他缺点，最后导致了版本分化
 
 
 
@@ -155,7 +155,7 @@ Cyphal核心机制还是发布订阅模型，也支持C/S模式下的请求响�
 | CANopen      | 64 KB      | 16 KB    | Cortex-M3  | STM32F1, STM32F4 |
 | CANaerospace | 48 KB      | 12 KB    | Cortex-M0+ | STM32F0, STM32G4 |
 
-占用比我想得还要大，如果只是一些小模块使用，确实有点太过了，特别是成本敏感性的
+占用比我想得还要大，如果只是一些小模块使用，确实有点太过了，特别是对成本敏感的项目
 
 
 
