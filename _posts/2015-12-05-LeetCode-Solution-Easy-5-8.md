@@ -256,8 +256,8 @@ class Solution(object):
         if (p==None and q==None) :
             return True
         return self.isSameTree(p.left, q.left) and self.isSameTree(p.right, q.right)
-    //如果加上下面的判断，就是对称相等也算相同
-    //or (self.isSameTree(p->left,q->right) and self.isSameTree(p->right,q->left))
+    # 如果加上下面的判断，就是对称相等也算相同
+    # or (self.isSameTree(p->left,q->right) and self.isSameTree(p->right,q->left))
 ```
 
 才发现，python的class中递归自身需要前置self，不然就会提示没找到
@@ -386,7 +386,7 @@ Google: 90% of our engineers use the software you wrote (Homebrew), but you can�
 
 #### 7.Analysis
 
-就是要翻转二叉树，用递归就是遍历到最后一个节点然后开始依次往上翻转，并且是做节点的交换，而不是值的交换（值交换，需要判读空的情况，并且新建节点，而且值交换的情况下，需要左右大子树交换的时候就很麻烦了，必须得用节点交换才比较方便）
+就是要翻转二叉树，用递归就是遍历到最后一个节点然后开始依次往上翻转，并且是做节点的交换，而不是值的交换（值交换，需要判断空的情况，并且新建节点，而且值交换的情况下，需要左右大子树交换的时候就很麻烦了，必须得用节点交换才比较方便）
 
 #### 7.Solution-C/C++
 
@@ -602,7 +602,7 @@ bool isAnagram(char* s, char* t)
 python就用第三种排序的方法来解决这个问题
 python的list有自带的排序功能比较好用，而c没有，c++就要用STL库的容器来弄。虽然python也需要转换一下容器。
 
-```pytho
+```python
 class Solution(object):
     def isAnagram(self, s, t):
         """

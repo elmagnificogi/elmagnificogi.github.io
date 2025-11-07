@@ -21,13 +21,13 @@ Given an array of integers, find if the array contains any duplicates. Your func
 
 本方法，python中可以直接统计数字重复出现的次数，就是需要整个数组遍历一遍。而python却有另外一个数据容器，set，也就是集合，而集合不可能出现重复，通过比较转化后的长度，利用这个特性则就能知道是否有重复元素了。
 
-查了一下别人都直接用java的hashset，可以通过插入元素得到结果，从而判读重复元素。
+查了一下别人都直接用java的hashset，可以通过插入元素得到结果，从而判断重复元素。
 
 #### Solution-C/C++
 
 用c完成这个难度有点大，所以用c++来写
 
-如果是java可以直接用hashset，并且可以直接判读insert插入的成功失败，但是，突然发现STL的insert不会返回bool值
+如果是java可以直接用hashset，并且可以直接判断insert插入的成功失败，但是，突然发现STL的insert不会返回bool值
 
 查了MSDN以后发现其实有返回值，但是不是bool 返回两个内容，ret.first是插入的元素所在位置，而ret.second是是否插入了新元素。
 如果为真，表示插入了新元素，就继续，如果为假就表示没有插入新元素，有重复元素，并且first返回那个元素的指针。
@@ -422,7 +422,7 @@ class Solution(object):
         :type root: TreeNode
         :type p: TreeNode
         :type q: TreeNode
-        :type paht: TreeNode list path
+        :type path: TreeNode list path
         :rtype: bool
         """
         l=[] #l用来遍历的时候存储节点
