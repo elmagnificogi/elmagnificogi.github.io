@@ -25,7 +25,7 @@ tags:
 
 #### 3D中控
 
-<iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=115535660451453&bvid=BV1zCCLBnEtj&cid=33941555541&autoplay=0 scrolling="no" border="0" frameborder="no" framespacing="0"  width=640 height=480 allowfullscreen="true"></iframe>
+<iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=115535660451453&bvid=BV1zCCLBnEtj&cid=33941555541&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0"  width=640 height=480 allowfullscreen="true"></iframe>
 
 简单说，米家总算是把你家加入了米家，智能家居才迈出了第二步吧。
 
