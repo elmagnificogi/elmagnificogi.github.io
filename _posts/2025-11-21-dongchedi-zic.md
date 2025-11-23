@@ -5,7 +5,7 @@ subtitle:   "金卡纳、叶政扬、PCCA、珠海、小米深圳总部、产品
 date:       2025-11-23
 update:     2025-11-23
 author:     "elmagnifico"
-header-img: "img/y3.jpg"
+header-img: "img/y4.jpg"
 catalog:    true
 tobecontinued: false
 tags:
