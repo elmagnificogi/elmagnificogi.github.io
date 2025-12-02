@@ -164,6 +164,39 @@ Helix QAC改名叫Perforce QAC了
 
 
 
+## TCA
+
+腾讯云的代码分析，非常像Coding中内嵌的代码分析
+
+> TCA 是由 TCA 平台端 + TCA 客户端组成：
+>
+> - 平台端主要用于相关配置，存储相关分析结果。
+> - 客户端承载代码分析任务，并在其所在的机器上执行分析。TCA 采用分布式客户端架构，可以灵活的将客户端部署到任意地域（需要能够访问 TCA 平台端），例如作为一次性临时节点、常驻节点使用。
+
+![TCA 架构](https://img.elmagnifico.tech/static/upload/elmagnifico/20251202172634088.png)
+
+>  https://tca.tencent.com/
+>
+> https://tca.tencent.com/document/
+
+![image-20251202172016489](https://img.elmagnifico.tech/static/upload/elmagnifico/20251202172016547.png)
+
+3年价格踩3500，一个月额不到100，感觉好像还行？
+
+TCA也支持直接集成到Jenkins中，Jenkins触发然后显示报告
+
+对于内部代码，也可以通过部署内部节点，对代码进行分析
+
+![image-20251202172504407](https://img.elmagnifico.tech/static/upload/elmagnifico/20251202172504442.png)
+
+节点接入的方式和Coding那会基本一模一样啊，说明这就是一套东西
+
+![image-20251202172835825](https://img.elmagnifico.tech/static/upload/elmagnifico/20251202172835852.png)
+
+不过内网分析就会看不到代码片段，这个稍微有点麻烦
+
+
+
 ## Summary
 
 没看到更好用的了，随着AI普及，代码类AI的出现，导致代码扫描直接变弱了，可以直接用AI来完成类似扫描的工作，虽然还是有差别，但是已经很不错了
