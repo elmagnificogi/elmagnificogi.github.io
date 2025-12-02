@@ -3,7 +3,7 @@ layout:     post
 title:      "懂车帝珠海赛道日与小米深圳总部参观"
 subtitle:   "金卡纳、叶政扬、PCCA、珠海、小米深圳总部、产品经理、小米大麻花"
 date:       2025-11-23
-update:     2025-11-24
+update:     2025-11-27
 author:     "elmagnifico"
 header-img: "img/y4.jpg"
 catalog:    true
@@ -113,6 +113,28 @@ tags:
 ![image-20251122013432488](https://img.elmagnifico.tech/static/upload/elmagnifico/202511220134548.png)
 
 正常是要抽奖才能体验的，但是小哥前面答应了带我飞一下，但最后时间不够了，就让别人带我飞了一圈。拆空的赛车，确实能直接感受到机械直接传导上来的路感，比较清晰，但是也没说特别颠，由于坐得很低，然后油车的马力又不大，很多弯可以在弯前100m甚至更晚刹车，给人的感觉确实更灵动一些，开车的车手走线也是很专业，该压到的都压到，不会放松。
+
+
+
+#### 车损
+
+冲出赛道很快就回来了，石头也没咋带到，后续又开了1节，基本车内没啥石头了
+
+![image-20251127231144245](https://img.elmagnifico.tech/static/upload/elmagnifico/202511272311277.png)
+
+但是第一节我开的时候，不知道啥时候被前车的石头崩到了超声波雷达，然后雷达就永久报障了
+
+![image-20251127231133016](https://img.elmagnifico.tech/static/upload/elmagnifico/202511272311132.png)
+
+维修完，只要不走保险，小米就会把换下来的件还给你，还挺有意思的，还好这个不贵，400多就修完了
+
+![image-20251127231037924](https://img.elmagnifico.tech/static/upload/elmagnifico/202511272310133.png)
+
+最后一节，一个鸟俯冲下来，直接撞我车头上了，那会一百多的速度，回看车头有点血渍，压过去还稍微打滑了一下...
+
+职业车手暖胎的时候开太猛了，石头弹起来，把另外一个Ultra的挡风玻璃砸了，挺搞的
+
+![image-20251127231547810](https://img.elmagnifico.tech/static/upload/elmagnifico/202511272315980.png)
 
 
 
