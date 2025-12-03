@@ -3,7 +3,7 @@ layout:     post
 title:      "静态代码分析扫描工具"
 subtitle:   "嵌入式，代码扫描，TscanCode，Helix QAC，SAST Coverity"
 date:       2023-05-22
-update:     2025-12-02
+update:     2025-12-03
 author:     "elmagnifico"
 header-img: "img/x14.jpg"
 catalog:    true
@@ -128,9 +128,11 @@ Coverity 目前和Github有合作，可以直接用Github登录，然后使用Gi
 
 SonarQube 支持社区版和付费版，社区版Java系使用一下没啥问题，但是如果给嵌入式用就不行了，缺少C系列语言的检测
 
-要支持C系，就得买开发版，开发版本看了一下买断的方式，也不是很贵，700多刀一年，不过支持的代码量稍微小了点，只有10W行，超了就要你买企业版了
+要支持C系，就得买开发版，开发版本看了一下买断的方式，也不是很贵，700多刀一年起步，不过支持的代码量稍微小了点，只有10W行，超了就要你就要掏钱买更大容量的了
 
 SonarQube 社区版是可以自己搭建在内部的，然后联动Jenkins或者是Gitlab即可
+
+代码行数是根据项目总计来算的，反而是社区版是没有代码行数的限制的，可以随便用
 
 
 
