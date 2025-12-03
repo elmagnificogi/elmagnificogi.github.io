@@ -3,7 +3,7 @@ layout:     post
 title:      "懂车帝珠海赛道日与小米深圳总部参观"
 subtitle:   "金卡纳、叶政扬、PCCA、珠海、小米深圳总部、产品经理、小米大麻花"
 date:       2025-11-23
-update:     2025-11-27
+update:     2025-12-03
 author:     "elmagnifico"
 header-img: "img/y4.jpg"
 catalog:    true
@@ -155,6 +155,12 @@ tags:
 挺大一个包，车衣看起来质量也不错，雷达摄像头的位置都留了透明罩，罩着车衣也能开哨兵模式，该监控的还能监控到
 
 ![image-20251124210819875](https://img.elmagnifico.tech/static/upload/elmagnifico/202511242108924.png)
+
+![image-20251203211708349](https://img.elmagnifico.tech/static/upload/elmagnifico/202512032117502.png)
+
+双层玻璃可用的破窗锤，可以刚好嵌入到扶手箱下面的位置上，还是挺好的
+
+
 
 ## 走进小米深圳总部
 
