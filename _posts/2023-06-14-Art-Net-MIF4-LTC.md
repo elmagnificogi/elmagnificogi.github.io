@@ -1,9 +1,9 @@
 ---
 layout:     post
 title:      "ArtNet协议入门"
-subtitle:   "时间同步，Date，RouterOS，SNTP，舞台灯光"
+subtitle:   "时间同步，Date，RouterOS，SNTP，舞台灯光，灯光设计"
 date:       2023-06-14
-update:     2025-04-21
+update:     2025-12-03
 author:     "elmagnifico"
 header-img: "img/y2.jpg"
 catalog:    true
@@ -11,6 +11,7 @@ tobecontinued: false
 tags:
     - Music
     - DMX512
+    - SFX
 ---
 
 ## Foreword
