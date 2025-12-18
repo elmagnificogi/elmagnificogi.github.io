@@ -10,6 +10,8 @@ catalog:    true
 tobecontinued: false
 tags:
     - 旅游
+    - Car
+    - Su7 Ultra
 ---
 
 ## Foreword
