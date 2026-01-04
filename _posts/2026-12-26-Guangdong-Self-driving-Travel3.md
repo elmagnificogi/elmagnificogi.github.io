@@ -1,13 +1,13 @@
 ---
 layout:     post
 title:      "广东自驾游之粤西篇"
-subtitle:   "罗定、风车岛、茂名、中山"
+subtitle:   "肇庆、风车、鼎湖山、茂名、中山"
 date:       2026-01-05
 update:     2026-01-05
 author:     "elmagnifico"
 header-img: "img/y8.jpg"
 catalog:    true
-tobecontinued: true
+tobecontinued: false
 tags:
     - 旅游
 ---
