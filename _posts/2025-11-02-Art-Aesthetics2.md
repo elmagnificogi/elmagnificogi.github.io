@@ -2,8 +2,8 @@
 layout:     post
 title:      "艺术与审美，第二阶段学习"
 subtitle:   "VSCode,Cursor,Manus"
-date:       2026-11-02
-update:     2026-01-05
+date:       2026-01-13
+update:     2026-01-13
 author:     "elmagnifico"
 header-img: "img/x15.jpg"
 catalog:    true
