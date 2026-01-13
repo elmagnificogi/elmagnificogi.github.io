@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "艺术与审美，第一阶段学习"
-subtitle:   "VSCode,Cursor,Manus"
+subtitle:   "Art，唯伟，艺术史，漫画，游戏，艺术展"
 date:       2025-08-28
 update:     2025-08-28
 author:     "elmagnifico"
