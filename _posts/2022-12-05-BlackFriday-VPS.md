@@ -2,8 +2,8 @@
 layout:     post
 title:      "翻墙节点合租"
 subtitle:   "BlackFriday、IPLC"
-date:       2022-12-05
-update:     2025-10-09
+date:       2027-12-05
+update:     2027-10-09
 author:     "elmagnifico"
 header-img: "img/drone-head-bg.jpg"
 catalog:    true
