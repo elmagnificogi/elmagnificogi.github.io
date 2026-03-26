@@ -27,7 +27,7 @@ tags:
 
 艺术与审美课的三阶段内容如下，价格是 1680，总共是 12 节大课，大概 36 小时，课程宣传视频也确实是他刚开课的时候发的。
 
-<iframe src="//player.bilibili.com/player.html?isOutside=true&aid=115423001517998&bvid=BV1EjsVzjE5e&cid=33327810551&p=1&autoplay=false" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="1280" height="720" ></iframe>
+<iframe src="//player.bilibili.com/player.html?isOutside=true&aid=115423001517998&bvid=BV1EjsVzjE5e&cid=33327810551&p=1&autoplay=false" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="640" height="480" ></iframe>
 
 从目录来看，这节课涉及到具体艺术落地，应该是比较有用的或者说能对生活中的一些设计细节有额外的启发或者思考。
 
