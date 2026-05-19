@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "制品库Gitlab"
+title:      "Gitlab制品库"
 subtitle:   "生产、Release、CI、打包"
 date:       2026-05-20
 update:     2026-05-20
@@ -9,62 +9,62 @@ header-img: "img/bg1.jpg"
 catalog:    true
 tobecontinued: false
 tags:
-    - AI
-    - OpenClaw
+    - Gitlab
 ---
 
 
 
-# 生产制造固件与治具 GitLab 管理规划
+## Forward
 
-> 基于 [治具更新内容模板](./治具更新内容模板.md) 中的条目整理。  
-> 原则：**各固件/工具独立仓库 + 制造包（Manufacturing Kit）统一发布 + 产线只认 kit_id**。
+之前理解的制品库就是把CI的中间过程进行存储，虽然也包含了最终发布的部分，但是总觉得没啥大用，就没在意。后续发现其实从工程到生产环节有很多东西都需要进行交付，之前只关注了最核心的产品内容，周边一些零碎的东西，其实也需要被统一管理。而这个时候如果有很多个仓库需要一起进行打包、管理，这个就非常复杂了，而借助CI和制品库就可以通过规则把这部分内容统一管理起来，发布时进行大包发布即可
 
----
 
-## 一、从模板里抽象出的「生产物料清单」
 
-模板本质是 **一次量产发布（Kit）** 的说明文档，包含约 **18 类** 可独立版本化的组件：
+## 背景
+
+生产时需要管理的不只是单个 `.bin`或者`.exe`，而是一套 **已验证可一起上线** 的产品组合：
+
+- 硬件烧录固件（SOC、MCU、FPGA等）
+- 测试治具固件
+- 其它治具与工具（RFID、MAC、IP、参数等配置工具）
+
+各组件由不同负责人维护、版本节奏不同，因此适合 **GitLab 多仓库独立开发**，再通过 **manufacturing-kits + manifest** 在发布时打成单一制造包，并自动生成与发布说明。
+
+
+
+##  生产物料清单
+
+首先需要确认实际生产需要的物料清单，并以此为准进行模板制作和规则约束
 
 | 分类 | 组件 ID（建议） | 负责人 | 是否必选 |
 |------|-----------------|--------|----------|
-| 飞控烧录 | `fc-main` 主控 | 廖俊翔 | 必选 |
-| 飞控烧录 | `fc-radio` 电台 | 罗品 | 可选 |
-| 飞控烧录 | `fc-wifi` 7931/洋葱派 | 陈帅帅 | 可选 |
-| 飞控烧录 | `fc-power-board` 开机控制板 | 周由 | 可选 |
-| 飞控烧录 | `fc-gps` GPS | 周由 | 可选 |
-| 测试治具 | `fixture-main` 主控治具 | 廖俊翔 | 必选 |
-| 测试治具 | `fixture-mag` 磁罗盘治具 | 廖俊翔 | 必选 |
-| 测试治具 | `fixture-imu` IMU治具 | 廖俊翔 | 必选 |
-| 测试治具 | `fixture-light` 灯板治具 | 廖俊翔 | 可选 |
-| 其它治具/配件 | `rfid-fixture` | 周由 | 可选 |
-| | `ir-remote` | 周由 | 可选 |
-| | `charger` | 周由 | 可选 |
-| | `power-tester` 测电器 | 周由 | 可选 |
-| | `ip-burn-tool` | 周荣鑫 | 可选 |
-| | `hf-head` 高频头 | 罗品 | 可选 |
-| | `r1-radio` | 周由 | 可选 |
-| | `r2-radio` | 罗品 | 可选 |
-| | `base-station` 基站 | 周由 | 可选 |
+| MCU烧录 | `fc-mcu` 主控 | A | 必选 |
+| SOC烧录 | `fc-soc` 核心 | B | 可选 |
+| 测试治具 | `fixture-mcu` 主控治具 | C | 必选 |
+| 测试治具 | `fixture-soc` 磁罗盘治具 | A | 必选 |
+| 其它治具/配件 | `rfid-fixture`RFID工具 | B | 可选 |
+| | `mac-fixture`MAC工具 | C | 可选 |
+| | `ip-fixture` IP工具 | A | 可选 |
 
-命名习惯（模板已写）：**`{产品线}-{YY.M.D}`**，例如 `X1-26.5.19` → 对应 Git tag / Release 名。
+命名规则：**`{产品线}-{YY.M.D}`**，例如 `P1-26.5.20` → 对应 Git tag / Release 名。
 
----
+- 一般来说生产是按批或者订单进行的，只涉及到生产改动时这个进行改动即可
+
+
 
 ## 二、GitLab 总体结构（仓库仍独立）
 
 ```mermaid
 flowchart TB
   subgraph component_repos [各组件独立 GitLab 项目]
-    R1[fc-main-firmware]
-    R2[fc-radio-firmware]
-    R3[fixture-main-firmware]
+    R1[fc-MCU-firmware]
+    R2[fc-SOC-firmware]
     Rn[... 每个组件一个或一类一个]
   end
 
   subgraph meta [发布与制造]
-    MR[manufacturing-kits<br/>产品线 X1 / X2 ...]
-    DOC[自动生成 X1-26.5.19.md<br/>即治具更新内容]
+    MR[manufacturing-kits<br/>产品线 P1 / P2 ...]
+    DOC[自动生成 X1-26.5.20.md<br/>即治具更新内容]
   end
 
   subgraph registry [制品]
@@ -78,12 +78,15 @@ flowchart TB
 
   R1 -->|tag + CI 上传 bin| PKG
   R2 --> PKG
-  R3 --> PKG
   MR -->|读 manifest 拉制品| PKG
   MR -->|打 Kit Release| PKG
   PKG --> OFF
   OFF --> LOG
 ```
+
+可以看到这种情况下生成制造发起打包，本质上需要一个manifest，这个里面规定了打包的内容
+
+
 
 ### 建议仓库划分
 
@@ -322,14 +325,14 @@ manufacturing-kits/
 - [ ] 生产 / 脱机升级设备已切换 `kit_id`
 - [ ] 追溯表能按 SN 查到 `X1-26.5.19`
 
----
 
-## 附录：背景说明
 
-生产时需要管理的不只是单个 `.bin`，而是一套 **已验证可一起上线** 的组合：
+## Summary
 
-- 飞控烧录固件（主控、电台、WIFI、开机板、GPS 等）
-- 测试治具固件（主控、磁罗盘、IMU、灯板等）
-- 其它治具与工具（RFID、充电器、IP 烧录工具、电台/基站等）
 
-各组件由不同负责人维护、版本节奏不同，因此适合 **GitLab 多仓库独立开发**，再通过 **manufacturing-kits + manifest** 在发布时打成单一制造包，并自动生成与《治具更新内容模板》同结构的发布说明。
+
+## Quote
+
+
+
+> Cursor
