@@ -5,7 +5,7 @@ subtitle:   "生产、Release、CI、打包"
 date:       2026-05-20
 update:     2026-05-20
 author:     "elmagnifico"
-header-img: "img/z5.jpg"
+header-img: "img/bg1.jpg"
 catalog:    true
 tobecontinued: false
 tags:
