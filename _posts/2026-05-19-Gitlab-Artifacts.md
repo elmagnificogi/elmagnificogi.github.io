@@ -7,6 +7,7 @@ update:     2026-05-20
 author:     "elmagnifico"
 header-img: "img/bg1.jpg"
 catalog:    true
+mermaid:    true
 tobecontinued: false
 tags:
     - Gitlab
@@ -30,6 +31,25 @@ tags:
 
 各组件由不同负责人维护、版本节奏不同，因此适合 **GitLab 多仓库独立开发**，再通过 **manufacturing-kits + manifest** 在发布时打成单一制造包，并自动生成与发布说明。
 
+#### 目标组件独立迭代方式
+
+```mermaid
+sequenceDiagram
+  participant Dev as 组件负责人
+  participant Repo as 组件 GitLab 仓库
+  participant PKG as Package Registry
+
+  Dev->>Repo: MR 合并 mcu
+  Dev->>Repo: 打 tag v123.123
+  Repo->>PKG: CI 构建并上传 .bin + Release Notes
+```
+
+理清思路：
+
+Gitlab 社区版没有制品库或者制品这个概念，但是我们可以通过Gitlab仓库本身的功能，建立一个制品仓库，把制品的menifest文件和对应的CI动作都集成在这个仓库里，需要发版的时候只需要触发这个仓库进行CI即可。
+
+而对于各个仓库来说，完全是不知道这个制品仓库的，从而实现解耦。
+
 
 
 ##  生产物料清单
@@ -40,8 +60,8 @@ tags:
 |------|-----------------|--------|----------|
 | MCU烧录 | `fc-mcu` 主控 | A | 必选 |
 | SOC烧录 | `fc-soc` 核心 | B | 可选 |
-| 测试治具 | `fixture-mcu` 主控治具 | C | 必选 |
-| 测试治具 | `fixture-soc` 磁罗盘治具 | A | 必选 |
+| 测试治具 | `fixture-mcu` MCU治具 | C | 必选 |
+| 测试治具 | `fixture-soc` SOC治具 | A | 必选 |
 | 其它治具/配件 | `rfid-fixture`RFID工具 | B | 可选 |
 | | `mac-fixture`MAC工具 | C | 可选 |
 | | `ip-fixture` IP工具 | A | 可选 |
@@ -52,7 +72,9 @@ tags:
 
 
 
-## 二、GitLab 总体结构（仓库仍独立）
+## 仓库结构
+
+往往一个仓库可能要应对多种产线的情况，此时仓库保持独立，而不是submodule就很关键
 
 ```mermaid
 flowchart TB
@@ -64,7 +86,7 @@ flowchart TB
 
   subgraph meta [发布与制造]
     MR[manufacturing-kits<br/>产品线 P1 / P2 ...]
-    DOC[自动生成 X1-26.5.20.md<br/>即治具更新内容]
+    DOC[自动生成 P1-26.5.20.md<br/>即治具更新内容]
   end
 
   subgraph registry [制品]
@@ -84,7 +106,7 @@ flowchart TB
   OFF --> LOG
 ```
 
-可以看到这种情况下生成制造发起打包，本质上需要一个manifest，这个里面规定了打包的内容
+可以看到这种情况下发布制造发起打包，本质上需要一个manifest，这个里面规定了打包的内容
 
 
 
@@ -92,51 +114,51 @@ flowchart TB
 
 | 类型 | 做法 |
 |------|------|
-| **产品固件** | 一类一仓，如 `x1/fc-main-firmware`、`x1/fc-radio-firmware` |
-| **治具固件** | 可合并为 `x1/fixture-firmware`（多 bin）或按治具拆分 |
-| **工具** | `x1/ip-burn-tool` 等独立仓（版本节奏与固件不同） |
-| **制造包** | 一个产品线一个 meta 仓：`x1/manufacturing-kits`（**无业务代码，只有 manifest + CI**） |
+| **产品固件** | 一类一仓，如 `P1/fc-mcu-firmware`、`P1/fc-soc-firmware` |
+| **治具固件** | 可合并为 `P1/fixture-firmware`（多 bin）或按治具拆分 |
+| **工具** | `P1/ip-burn-tool` 等独立仓（版本节奏与固件不同） |
+| **制造包** | 一个产品线一个 meta 仓：`P1/manufacturing-kits`（**无业务代码，只有 manifest + CI**） |
 | **文档** | 治具更新 Markdown **不手写维护**，由 CI 从 manifest + 各组件 CHANGELOG 生成 |
 
 「如有」组件：manifest 里 `required: false`，未参与本次 Kit 则整段在生成文档里标 **「本次未更新 / 沿用上一 Kit」**。
 
----
 
-## 三、核心：manifest（机器读）替代纯手写模板
+
+## manifest替代纯手写模板
 
 在 `manufacturing-kits` 仓库中，每个 Kit 一个 YAML，与模板一一对应：
 
 ```yaml
-# kits/X1-26.5.19.yaml
-kit_id: X1-26.5.19
-product_line: X1
-release_date: 2026-05-19
-previous_kit: X1-26.4.12        # 用于「相对上一正式版变更」
-validated_by: [廖俊翔, 罗品]     # 集成测试通过签字（可 MR 审批人）
-offline_upgrader_min: "2.1.0"   # 脱机升级设备最低版本（若有）
+# kits/P1-26.5.20.yaml
+kit_id: P1-26.5.20
+product_line: P1
+release_date: 2026-05-20
+previous_kit: P1-26.4.12        # 用于「相对上一正式版变更」
+validated_by: [A, B]            # 集成测试通过签字（审批人）
+offline_upgrader_min: "2.1.0"   # 升级设备最低版本（若有）
 
 components:
-  fc-main:
+  fc-mcu:
     project_id: 101
     git_ref: v123.123
-    artifact: fc-main-v123.123.bin
+    artifact: fc-mcu-v123.123.bin
     sha256: "..."
-    owner: 廖俊翔
+    owner: A
     required: true
     changelog_since_prev_kit:      # 或由 CI 从组件 Release Notes 自动合并
       - 支持了 xxx 功能
       - 修复了 xxxx bug
 
-  fc-radio:
+  fc-soc:
     project_id: 102
     git_ref: v45.6
-    artifact: fc-radio-v45.6.bin
-    required: false                # 本次未改则可 omit 或 inherit_from: X1-26.4.12
+    artifact: fc-soc-v45.6.bin
+    required: false                # 本次未改则可 omit 或 inherit_from: P1-26.4.12
 
-  fixture-main:
+  fixture-mcu:
     project_id: 201
     git_ref: v2.0.1
-    artifact: fixture-main-v2.0.1.bin
+    artifact: fixture-mcu-v2.0.1.bin
     required: true
   # ... 其余字段与模板章节同名
 ```
@@ -144,16 +166,16 @@ components:
 **规则：**
 
 - 必选组件：Kit 发布前必须在 manifest 里 **显式版本 + 制品已存在**。
-- 可选组件：未列则 CI 从 `previous_kit` **继承**上一版引用（文档里写清楚「沿用 X1-26.4.12 之 fc-radio v45.6」）。
+- 可选组件：未列则 CI 从 `previous_kit` **继承**上一版引用（文档里写清楚「沿用 P1-26.4.12 之 fc-soc v45.6」）。
 - 每个组件仓库打 tag 时 CI 自动：**编译 → 上传 Generic Package → 写 Release Notes**。
 
----
 
-## 四、与「治具更新内容模板」的对应关系
+
+#### 示例
 
 | 模板字段 | 来源 |
 |----------|------|
-| 文件名 `X1-26.5.19` | `kit_id` |
+| 文件名 `P1-26.5.20` | `kit_id` |
 | 版本：v123.123 | 各组件 `git_ref` |
 | 固件文件：a.bin | `artifact` + Package Registry 路径 |
 | 更新内容 1/2/3 | 组件 CHANGELOG ∩「自 `previous_kit` 以来」；CI 自动生成 |
@@ -164,13 +186,13 @@ components:
 **发布物目录示例（CI 打 zip）：**
 
 ```text
-X1-26.5.19/
+P1-26.5.20/
 ├── MANIFEST.yaml              # 机器读
-├── 治具更新内容-X1-26.5.19.md  # 人类读，版式同现模板
+├── 治具更新内容-P1-26.5.20.md  # 人类读，版式同现模板
 ├── CHECKSUMS.sha256
 ├── firmware/
-│   ├── fc-main-v123.123.bin
-│   ├── fc-radio-v45.6.bin
+│   ├── fc-mcu-v123.123.bin
+│   ├── fc-soc-v45.6.bin
 │   └── ...
 ├── fixture/
 │   └── ...
@@ -178,71 +200,31 @@ X1-26.5.19/
     └── ip-burn-tool-...
 ```
 
-产线 / 脱机升级设备：只部署 **`kit_id` 对应 zip**（或从内网 Registry 按 manifest 拉取）。
+产线 / 升级设备：只部署 **`kit_id` 对应 zip**（或从内网按manifest 拉取）。
 
----
 
-## 五、流程（谁、何时、做什么）
 
-### 日常：组件独立迭代
-
-```mermaid
-sequenceDiagram
-  participant Dev as 组件负责人
-  participant Repo as 组件 GitLab 仓库
-  participant PKG as Package Registry
-
-  Dev->>Repo: MR 合并 main
-  Dev->>Repo: 打 tag v123.123
-  Repo->>PKG: CI 构建并上传 .bin + Release Notes
-```
-
-### 量产前：组 Kit（对应写一份治具更新文档）
+各仓库的动作：
 
 | 步骤 | 动作 | 角色 |
 |------|------|------|
-| 1 | 在 `manufacturing-kits` 新建 `kits/X1-26.5.19.yaml`，填写/选择各组件 `git_ref` | 发布负责人（如廖俊翔牵头） |
+| 1 | 在 `manufacturing-kits` 新建 `kits/P1-26.5.20.yaml`，填写/选择各组件 `git_ref` | 发布负责人（如A牵头） |
 | 2 | 开 MR → 触发 **集成流水线**：下载全部 artifact、跑冒烟/治具联调（若有自动化） | CI + 各 owner 审批 |
-| 3 | MR 合并 → tag `X1-26.5.19` | 发布负责人 |
+| 3 | MR 合并 → tag `P1-26.5.20` | 发布负责人 |
 | 4 | CI：生成 Markdown、打 zip、创建 GitLab Release（附件 + Generic Package） | 自动 |
-| 5 | 通知生产：仅允许 `X1-26.5.19`；脱机设备刷入该包 | 生产 / 工艺 |
+| 5 | 通知生产：仅允许 `P1-26.5.20`；脱机设备刷入该包 | 生产 / 工艺 |
 | 6 | 每台（或每批）记录：`SN ↔ kit_id ↔ 时间 ↔ 工位` | 生产 / MES |
 
-### 「距离上一正式版本的所有变更」
 
-- manifest 里固定 `previous_kit: X1-26.4.12`。
-- CI 对比两个 manifest 的组件版本差异，对每个 **版本有变** 的组件拉 Release Notes，写入生成 Markdown 的「更新内容」。
-- **未变** 的组件在文档中折叠为：「沿用 X1-26.4.12，版本 vxx，无变更说明」。
 
----
-
-## 六、GitLab 能力映射（具体用什么）
-
-| 需求 | GitLab 用法 |
-|------|-------------|
-| 仓库独立 | 每组件一 Project，权限按 owner 组划分 |
-| 固件二进制 | **Generic Package Registry**（`@kit_id/component/version/file.bin`） |
-| 组合发布 | `manufacturing-kits` 的 CI：`curl` 拉各项目 Package + 打 zip |
-| 跨项目构建 | **Multi-project pipeline** 或 `trigger` + `needs:artifact` |
-| 审批 | Protected tag + MR 需 CODEOWNERS（对应模板里的 @人） |
-| 正式版 | Protected branch `main`，Kit 仅能从 MR 合并打 tag |
-| 追溯 | Release 页面保留 manifest；生产 DB 存 `kit_id` + `MANIFEST.sha256` |
-
-可选增强：
-
-- **Scheduled pipeline** 检查各组件 `main` 是否有未纳入 Kit 的新 tag（提醒该组 Kit 了）。
-- **Compliance**：导出 SBOM（若部分组件用开源库）。
-
----
-
-## 七、manufacturing-kits 仓库建议目录
+## manufacturing-kits 仓库建议目录
 
 ```text
 manufacturing-kits/
 ├── README.md
 ├── kits/
-│   ├── X1-26.4.12.yaml
-│   └── X1-26.5.19.yaml
+│   ├── P1-26.4.12.yaml
+│   └── P1-26.5.20.yaml
 ├── schema/
 │   └── kit.schema.json          # 校验 manifest 字段齐全
 ├── templates/
@@ -259,71 +241,19 @@ manufacturing-kits/
 1. `validate`：schema + 必选组件 artifact 存在
 2. `diff`：相对 `previous_kit` 生成变更摘要
 3. `collect`：下载所有 bin 到目录树
-4. `document`：渲染 `治具更新内容-X1-26.5.19.md`
+4. `document`：渲染 `治具更新内容-P1-26.5.20.md`
 5. `package`：zip + sha256
 6. `release`：GitLab Release + 上传 Generic Package
 
----
+注意`manufacturing-kits + manifest` 
 
-## 八、产线与脱机升级设备
+- 不是 GitLab 自带的产品功能，需要自建一个 GitLab 仓库 + 写一点 CI/脚本；GitLab 提供的是「存清单、跑流水线、存制品、发 Release、做审批」这些积木。
 
-模板已引用 [脱机固件升级设备](https://www.wolai.com/7b6dCyYPAL7bLs9JDvyLEM)。
 
-| 环节 | 建议 |
-|------|------|
-| 设备侧 | 只识别 `kit_id` 目录或 `MANIFEST.yaml`，按组件 ID 选 bin 烧录 |
-| 升级 Kit | U 盘 / 内网拉 zip；导入前校验 `CHECKSUMS.sha256` |
-| 禁止混用 | 工位配置锁定 `current_kit_id`，非本 Kit 拒绝烧录 |
-| 追溯 | 烧录完成上报：`SN + kit_id + component_id + firmware_version` |
 
-若脱机设备本身也有程序版本，在 manifest 增加 `offline-upgrader` 组件，与固件同等对待。
+## 实际测试
 
----
 
-## 九、角色与职责（对齐模板 @人）
-
-| GitLab 组 | 负责组件示例 |
-|-----------|----------------|
-| `team-fc` / 廖俊翔 | fc-main、fixture-main/mag/imu/light |
-| `team-radio` / 罗品 | fc-radio、hf-head、r2-radio |
-| `team-wifi` / 陈帅帅 | fc-wifi |
-| `team-embedded` / 周由 | gps、power-board、rfid、charger、r1、base… |
-| `team-tools` / 周荣鑫 | ip-burn-tool |
-| `release-managers` | 批准 `manufacturing-kits` 的 MR 与 tag |
-
-组件仓库：**owner 打 tag**；Kit 仓库：**release-managers + 相关 owner 审批**。
-
----
-
-## 十、实施分期（降低一次性迁移成本）
-
-| 阶段 | 目标 | 周期（示意） |
-|------|------|----------------|
-| **P0** | 必选 4 项先入仓：fc-main、fixture-main/mag/imu；手工 manifest + CI 只打 zip | 2–3 周 |
-| **P1** | 全 18 类组件 ID 定稿；自动生成治具更新 Markdown | 2 周 |
-| **P2** | 脱机设备读 MANIFEST；生产 SN 追溯 | 视设备能力 |
-| **P3** | 集成测试流水线、inherit 可选组件、未纳入 Kit 告警 | 持续 |
-
----
-
-## 十一、和现有习惯衔接
-
-- 继续用 **`X1-26.5.19` 这种文件名** → 即 `kit_id`，Markdown 由 CI 生成，避免 Wiki/飞书与 Git 两套真相。
-- 现有 `治具更新内容模板.md` → 放进 `manufacturing-kits/templates/`，作为 **Jinja2 母版**，字段占位符化。
-- 博客仓库里的模板文件可保留作说明，**正式发布以 GitLab `manufacturing-kits` 为准**。
-
----
-
-## 十二、一次完整发布检查清单
-
-- [ ] 各变更组件已打 tag，Package 中存在对应 `.bin`
-- [ ] `kits/X1-26.5.19.yaml` 中 `previous_kit` 正确
-- [ ] 必选组件全部有 `git_ref` + `sha256`
-- [ ] 可选未改组件已 `inherit_from` 或省略并触发继承逻辑
-- [ ] 集成测试 / 治具联调通过（MR 审批）
-- [ ] CI 产出 zip + `治具更新内容-X1-26.5.19.md`
-- [ ] 生产 / 脱机升级设备已切换 `kit_id`
-- [ ] 追溯表能按 SN 查到 `X1-26.5.19`
 
 
 
