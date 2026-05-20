@@ -1,5 +1,6 @@
 _site
 pagefind/
+vendor/
 node_modules
 npm-debug.log
 .DS_Store
