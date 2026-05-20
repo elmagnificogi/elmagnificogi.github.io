@@ -40,20 +40,11 @@
                     </li>
                     {% endif %}{% endfor %}
                     {% if site.pagefind %}
-                    <li class="nav-pagefind nav-pagefind-searchbox">
-                        <pagefind-searchbox
-                            placeholder="搜索文章…"
-                            debounce="200"
-                            max-results="8"
-                            hide-shortcut="true">
-                        </pagefind-searchbox>
-                    </li>
-                    <li class="nav-pagefind nav-pagefind-modal">
-                        <pagefind-modal-trigger
-                            placeholder="搜索"
-                            compact="true"
-                            hide-shortcut="true">
-                        </pagefind-modal-trigger>
+                    <li class="nav-search-item">
+                        <a href="#" class="nav-search-link" id="blog-nav-search" role="button" aria-label="搜索文章" title="搜索文章 (Ctrl+K)">
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                            <span class="nav-search-text">搜索</span>
+                        </a>
                     </li>
                     {% endif %}
                 </ul>

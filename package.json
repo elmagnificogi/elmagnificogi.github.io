@@ -4,6 +4,7 @@
   "scripts": {
     "build": "jekyll build",
     "pagefind": "pagefind",
+    "pagefind:ui": "pagefind --site pagefind-stub --output-path pagefind --quiet",
     "build:search": "jekyll build && pagefind"
   },
   "devDependencies": {

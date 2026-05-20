@@ -360,4 +360,25 @@ new google.translate.TranslateElement({
 {% if site.pagefind %}
 <script src="{{ '/pagefind/pagefind-component-ui.js' | prepend: site.baseurl }}" type="module"></script>
 <pagefind-modal reset-on-close="true"></pagefind-modal>
+<script>
+(function () {
+  var link = document.getElementById('blog-nav-search');
+  if (!link) return;
+  link.addEventListener('click', function (e) {
+    e.preventDefault();
+    var modal = document.querySelector('pagefind-modal');
+    if (modal && typeof modal.open === 'function') {
+      modal.open();
+      return;
+    }
+    console.warn('[search] Pagefind 未加载，请先执行 npm run build:search 或在服务器跑 deploy.sh');
+  });
+  document.addEventListener('keydown', function (e) {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+      e.preventDefault();
+      link.click();
+    }
+  });
+})();
+</script>
 {% endif %}

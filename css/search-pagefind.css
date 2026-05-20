@@ -1,37 +1,50 @@
-/* Pagefind search — match blog accent (#0085a1) */
+/* Blog nav search — always visible; opens Pagefind modal */
+.navbar-custom .nav-search-item {
+  display: list-item;
+}
+
+.navbar-custom .nav-search-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 15px;
+  font-size: 16px;
+  line-height: 20px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.navbar-custom .nav-search-link:hover,
+.navbar-custom .nav-search-link:focus {
+  color: #fff;
+  text-decoration: none;
+  outline: none;
+}
+
+.navbar-custom.is-fixed .nav-search-link,
+.navbar-custom.is-fixed .nav-search-link:hover,
+.navbar-custom.is-fixed .nav-search-link:focus {
+  color: #404040;
+}
+
+.navbar-custom.is-fixed .nav-search-link:hover {
+  color: #0085a1;
+}
+
+@media only screen and (max-width: 767px) {
+  #blog_navbar .nav-search-link {
+    font-size: 12px;
+    line-height: 24px;
+    padding: 10px 15px;
+  }
+}
+
+/* Pagefind modal theme */
 :root {
   --pf-accent: #0085a1;
   --pf-accent-hover: #006d85;
   --pf-font: -apple-system, "Helvetica Neue", Arial, "PingFang SC",
     "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-  --pf-searchbox-max-width: 220px;
-  --pf-radius: 4px;
-}
-
-.nav-pagefind li {
-  display: flex;
-  align-items: center;
-}
-
-.nav-pagefind-searchbox pagefind-searchbox {
-  --pf-searchbox-max-width: 220px;
-}
-
-/* Desktop: inline searchbox in navbar */
-.nav-pagefind-modal {
-  display: none;
-}
-
-@media only screen and (max-width: 767px) {
-  .nav-pagefind-searchbox {
-    display: none;
-  }
-
-  .nav-pagefind-modal {
-    display: list-item;
-  }
-
-  .nav-pagefind-modal pagefind-modal-trigger {
-    --pf-searchbox-max-width: 100%;
-  }
 }
