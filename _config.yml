@@ -26,7 +26,7 @@ steam_username:      elmagnificost
 highlighter: rouge
 permalink: pretty
 paginate: 10
-exclude: ["less","node_modules","Gruntfile.js","package.json","README.md"]
+exclude: ["less","node_modules","Gruntfile.js","package.json","package-lock.json","README.md","pagefind-stub","pagefind.yml","build.sh","deploy.sh","Gemfile","Gemfile.lock"]
 anchorjs: true                          # if you want to customize anchor. check out line:181 of `post.html`
 
 

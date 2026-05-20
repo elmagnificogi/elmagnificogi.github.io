@@ -1,11 +1,21 @@
-# Optional: build Jekyll + Pagefind for GitHub Pages (if you deploy from Actions).
-# VPS deploy uses deploy.sh instead.
-name: Build site with Pagefind
+# GitHub Pages: Jekyll + Pagefind（含全文搜索索引）
+# 仓库 Settings → Pages → Build and deployment → Source 选 "GitHub Actions"
+# 主站 VPS 仍用 deploy.sh，本 workflow 负责 github.io 镜像
+name: Deploy GitHub Pages
 
 on:
-  workflow_dispatch:
   push:
     branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
 
 jobs:
   build:
@@ -16,23 +26,33 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
+          cache: npm
 
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: "3.2"
-          bundler-cache: false
-
-      - name: Install Jekyll
-        run: gem install jekyll
+          bundler-cache: true
 
       - name: Jekyll build
-        run: jekyll build
+        run: bundle exec jekyll build
 
       - name: Pagefind index
         run: |
-          npm install --no-audit --no-fund
-          npx pagefind
+          npm ci --no-audit --no-fund
+          npx pagefind --site _site
 
-      - uses: actions/upload-pages-artifact@v3
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
         with:
           path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
