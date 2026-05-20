@@ -293,7 +293,7 @@ pre code {
 }
 
 .navbar-custom .nav li a:active {
-  background: rgba(0,0,0,0.12)
+  background: transparent
 }
 
 @media only screen and (min-width: 768px) {

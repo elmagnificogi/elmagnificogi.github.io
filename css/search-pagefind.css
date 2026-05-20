@@ -1,4 +1,23 @@
-/* Blog nav search — always visible; opens Pagefind modal */
+/* Nav: no focus ring / click highlight (Home, Tags, About, Search — unified) */
+.navbar-custom .navbar-brand,
+.navbar-custom .nav li a,
+.navbar-custom .nav-search-link {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.navbar-custom .navbar-brand:focus,
+.navbar-custom .navbar-brand:active,
+.navbar-custom .nav li a:focus,
+.navbar-custom .nav li a:active,
+.navbar-custom .nav-search-link:focus,
+.navbar-custom .nav-search-link:active {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+  background: transparent !important;
+}
+
+/* Blog nav search */
 .navbar-custom .nav-search-item {
   display: list-item;
 }
@@ -11,26 +30,30 @@
   font-size: 16px;
   line-height: 20px;
   text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: 1px;
   color: rgba(255, 255, 255, 0.9);
   text-decoration: none;
   cursor: pointer;
 }
 
-.navbar-custom .nav-search-link:hover,
-.navbar-custom .nav-search-link:focus {
+.navbar-custom .nav-search-link:hover {
   color: #fff;
   text-decoration: none;
-  outline: none;
 }
 
-.navbar-custom.is-fixed .nav-search-link,
-.navbar-custom.is-fixed .nav-search-link:hover,
-.navbar-custom.is-fixed .nav-search-link:focus {
+.navbar-custom.is-fixed .nav-search-link {
   color: #404040;
 }
 
 .navbar-custom.is-fixed .nav-search-link:hover {
   color: #0085a1;
+}
+
+@media only screen and (min-width: 768px) {
+  .navbar-custom .nav-search-link {
+    padding: 20px;
+  }
 }
 
 @media only screen and (max-width: 767px) {
