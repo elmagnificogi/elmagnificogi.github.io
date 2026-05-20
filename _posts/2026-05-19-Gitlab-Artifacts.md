@@ -85,8 +85,8 @@ flowchart TB
   end
 
   subgraph meta [发布与制造]
-    MR["manufacturing-kits<br>产品线 P1 / P2 ..."]
-    DOC["自动生成 P1-26.5.20.md<br>即治具更新内容"]
+    MR["manufacturing-kits<br/>产品线 P1 / P2 ..."]
+    DOC["自动生成 P1-26.5.20.md<br/>即治具更新内容"]
   end
 
   subgraph registry [制品]

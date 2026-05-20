@@ -174,18 +174,19 @@ layout: default
 
 <!-- add support for mermaid -->
 {% if page.mermaid %}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.0.0/mermaid.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.1/mermaid.min.js"></script>
 <script>
-  var config = {
-    startOnLoad:true,
+  mermaid.initialize({
+    startOnLoad: false,
     theme: 'forest',
-    flowchart:{
-            useMaxWidth:false,
-            htmlLabels:true
-        }
-  };
-  mermaid.initialize(config);
-  window.mermaid.init(undefined, document.querySelectorAll('.language-mermaid'));
+    flowchart: {
+      useMaxWidth: false,
+      htmlLabels: true
+    }
+  });
+  mermaid.run({
+    querySelector: '.language-mermaid'
+  });
 </script>
 {% endif %}
 
