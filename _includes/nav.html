@@ -4,7 +4,7 @@
 {% endif %}
 
 <!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top" data-pagefind-ignore>
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header page-scroll">
@@ -39,6 +39,23 @@
                         <a href="{{ page.url | prepend: site.baseurl }}">{{ page.title }}</a>
                     </li>
                     {% endif %}{% endfor %}
+                    {% if site.pagefind %}
+                    <li class="nav-pagefind nav-pagefind-searchbox">
+                        <pagefind-searchbox
+                            placeholder="搜索文章…"
+                            debounce="200"
+                            max-results="8"
+                            hide-shortcut="true">
+                        </pagefind-searchbox>
+                    </li>
+                    <li class="nav-pagefind nav-pagefind-modal">
+                        <pagefind-modal-trigger
+                            placeholder="搜索"
+                            compact="true"
+                            hide-shortcut="true">
+                        </pagefind-modal-trigger>
+                    </li>
+                    {% endif %}
                 </ul>
             </div>
         </div>

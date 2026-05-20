@@ -1,0 +1,37 @@
+/* Pagefind search — match blog accent (#0085a1) */
+:root {
+  --pf-accent: #0085a1;
+  --pf-accent-hover: #006d85;
+  --pf-font: -apple-system, "Helvetica Neue", Arial, "PingFang SC",
+    "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  --pf-searchbox-max-width: 220px;
+  --pf-radius: 4px;
+}
+
+.nav-pagefind li {
+  display: flex;
+  align-items: center;
+}
+
+.nav-pagefind-searchbox pagefind-searchbox {
+  --pf-searchbox-max-width: 220px;
+}
+
+/* Desktop: inline searchbox in navbar */
+.nav-pagefind-modal {
+  display: none;
+}
+
+@media only screen and (max-width: 767px) {
+  .nav-pagefind-searchbox {
+    display: none;
+  }
+
+  .nav-pagefind-modal {
+    display: list-item;
+  }
+
+  .nav-pagefind-modal pagefind-modal-trigger {
+    --pf-searchbox-max-width: 100%;
+  }
+}

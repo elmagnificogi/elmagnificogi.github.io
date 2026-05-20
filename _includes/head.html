@@ -35,6 +35,11 @@
 
     <link href="{{ "/css/font-awesome.min.css" | prepend: site.baseurl }}" rel="stylesheet" type="text/css">
 
+    {% if site.pagefind %}
+    <link rel="stylesheet" href="{{ '/css/search-pagefind.css' | prepend: site.baseurl }}">
+    <link href="{{ '/pagefind/pagefind-component-ui.css' | prepend: site.baseurl }}" rel="stylesheet">
+    {% endif %}
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>

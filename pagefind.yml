@@ -1,0 +1,8 @@
+site: _site
+exclude_selectors:
+  - "nav"
+  - "footer"
+  - ".sidebar-container"
+  - ".catalog-container"
+  - "#back-top"
+include_characters: "+#._-"

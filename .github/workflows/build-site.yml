@@ -1,0 +1,38 @@
+# Optional: build Jekyll + Pagefind for GitHub Pages (if you deploy from Actions).
+# VPS deploy uses deploy.sh instead.
+name: Build site with Pagefind
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [master]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.2"
+          bundler-cache: false
+
+      - name: Install Jekyll
+        run: gem install jekyll
+
+      - name: Jekyll build
+        run: jekyll build
+
+      - name: Pagefind index
+        run: |
+          npm install --no-audit --no-fund
+          npx pagefind
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site

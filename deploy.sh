@@ -8,5 +8,12 @@ else
   echo "`date '+%Y%m%d %H:%M'`: post update,start build"
   result=$(jekyll build --source /root/elmagnificogi.github.io --destination /usr/share/nginx/html)
   echo $result
-  echo "`date '+%Y%m%d %H:%M'`: build over"
+  cd /root/elmagnificogi.github.io
+  if command -v npm >/dev/null 2>&1; then
+    npm install --no-audit --no-fund 2>/dev/null || true
+    npx pagefind --site /usr/share/nginx/html
+  else
+    npx -y pagefind@latest --site /usr/share/nginx/html
+  fi
+  echo "`date '+%Y%m%d %H:%M'`: build over (jekyll + pagefind)"
 fi

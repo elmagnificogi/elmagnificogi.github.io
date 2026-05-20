@@ -74,6 +74,9 @@ featured-condition-size: 1              # A tag will be featured if the size of 
 
 
 
+# Site search (Pagefind — run `npm run build:search` or `./build.sh` after Jekyll)
+pagefind: true
+
 # Progressive Web Apps
 chrome-tab-theme-color: "#000000"
 service-worker: true

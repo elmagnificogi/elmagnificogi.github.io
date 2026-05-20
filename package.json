@@ -1,0 +1,12 @@
+{
+  "name": "elmagnificogi-blog",
+  "private": true,
+  "scripts": {
+    "build": "jekyll build",
+    "pagefind": "pagefind",
+    "build:search": "jekyll build && pagefind"
+  },
+  "devDependencies": {
+    "pagefind": "^1.5.2"
+  }
+}

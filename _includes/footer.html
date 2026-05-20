@@ -1,5 +1,5 @@
 <!-- Footer -->
-<footer>
+<footer data-pagefind-ignore>
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
@@ -355,4 +355,9 @@ new google.translate.TranslateElement({
     });
 </script>
 
+{% endif %}
+
+{% if site.pagefind %}
+<script src="{{ '/pagefind/pagefind-component-ui.js' | prepend: site.baseurl }}" type="module"></script>
+<pagefind-modal reset-on-close="true"></pagefind-modal>
 {% endif %}
