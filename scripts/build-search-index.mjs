@@ -1,13 +1,16 @@
 /**
- * Build a lightweight substring index for CJK queries Pagefind tokenizes poorly.
- * Output: <site>/search-index.json — [{ u, title, t }]
+ * Sharded CJK substring index (fallback when Jekyll plugin did not run).
+ * Output: _site/search-index/manifest.json + _site/search-index/YYYY.json
+ * Row format: [url, title, searchableText]
  */
 import fs from "fs";
 import path from "path";
 
 const site = process.argv[2] || "_site";
 const siteRoot = path.resolve(site);
-const outFile = path.join(siteRoot, "search-index.json");
+const indexDir = path.join(siteRoot, "search-index");
+const MAX_BODY_CHARS = 800;
+const INDEX_VERSION = 2;
 
 function stripTags(html) {
   return html
@@ -21,8 +24,13 @@ function stripTags(html) {
 function urlFromFile(file) {
   const rel = path.relative(siteRoot, file).replace(/\\/g, "/");
   const dir = path.dirname(rel);
-  if (dir === ".") return "/";
-  return "/" + dir + "/";
+  if (dir === "." || dir === "") return "/";
+  return "/" + dir.replace(/^\/+/, "") + "/";
+}
+
+function yearBucket(url) {
+  const m = url.match(/\/(\d{4})\//);
+  return m ? m[1] : "misc";
 }
 
 function processFile(file) {
@@ -40,20 +48,15 @@ function processFile(file) {
     html.match(/<title>([^<|]+)/i);
   const subtitleMatch = html.match(/data-pagefind-meta="subtitle"[^>]*>([^<]+)/i);
 
-  const text = stripTags(bodyMatch[1]);
+  let text = stripTags(bodyMatch[1]);
   if (!text) return null;
+  if (text.length > MAX_BODY_CHARS) text = text.slice(0, MAX_BODY_CHARS);
 
   const title = (titleMatch?.[1] || "").trim();
   const subtitle = (subtitleMatch?.[1] || "").trim();
-  const combined = [title, subtitle, text].filter(Boolean).join("\n");
+  const search = [title, subtitle, text].filter(Boolean).join("\n");
 
-  return {
-    u: urlFromFile(file),
-    title,
-    subtitle,
-    s: combined,
-    t: text,
-  };
+  return [urlFromFile(file), title, search];
 }
 
 function walk(dir, files = []) {
@@ -71,11 +74,41 @@ if (!fs.existsSync(siteRoot)) {
   process.exit(1);
 }
 
-const entries = [];
+const rows = [];
 for (const file of walk(siteRoot)) {
   const row = processFile(file);
-  if (row) entries.push(row);
+  if (row) rows.push(row);
 }
 
-fs.writeFileSync(outFile, JSON.stringify(entries));
-console.log(`[search-index] wrote ${entries.length} entries -> ${outFile}`);
+fs.mkdirSync(indexDir, { recursive: true });
+
+/** @type {Record<string, string[][]>} */
+const shards = {};
+for (const row of rows) {
+  const year = yearBucket(row[0]);
+  (shards[year] ||= []).push(row);
+}
+
+const manifestShards = [];
+let totalBytes = 0;
+
+for (const year of Object.keys(shards).sort((a, b) => Number(b) - Number(a) || b.localeCompare(a))) {
+  const data = shards[year];
+  const rel = `/search-index/${year}.json`;
+  const outPath = path.join(indexDir, `${year}.json`);
+  const json = JSON.stringify(data);
+  fs.writeFileSync(outPath, json);
+  totalBytes += Buffer.byteLength(json, "utf8");
+  manifestShards.push({ y: year, n: data.length, u: rel, b: Buffer.byteLength(json, "utf8") });
+}
+
+const manifest = { v: INDEX_VERSION, shards: manifestShards };
+fs.writeFileSync(path.join(indexDir, "manifest.json"), JSON.stringify(manifest));
+fs.writeFileSync(
+  path.join(siteRoot, "search-index.json"),
+  JSON.stringify({ v: INDEX_VERSION, manifest: "/search-index/manifest.json" })
+);
+
+console.log(
+  `[search-index] ${rows.length} posts -> ${manifestShards.length} shards (${totalBytes} bytes under search-index/)`
+);

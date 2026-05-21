@@ -1,10 +1,16 @@
 # frozen_string_literal: true
 
-# Build /search-index.json for CJK substring search fallback (Pagefind tokenizes short compounds poorly).
-# Runs on every `jekyll build` — no Node.js required on the server.
+require "fileutils"
+require "json"
+
+# Sharded CJK substring index: /search-index/manifest.json + /search-index/YYYY.json
+# Compact row: [url, title, searchableText] — no duplicate body fields.
 module Jekyll
   module SearchIndexGenerator
     module_function
+
+    MAX_BODY_CHARS = 800
+    INDEX_VERSION = 2
 
     def strip_tags(html)
       html
@@ -15,7 +21,7 @@ module Jekyll
         .strip
     end
 
-    def extract_entry(html, url_path)
+    def extract_row(html)
       return nil unless html.include?("data-pagefind-body")
 
       m = html.match(%r{<div[^>]*\bdata-pagefind-body\b[^>]*>([\s\S]*?)<hr\s+style="visibility:\s*hidden}i)
@@ -30,39 +36,74 @@ module Jekyll
       text = strip_tags(m[1])
       return nil if text.empty?
 
+      text = text[0, MAX_BODY_CHARS] if text.length > MAX_BODY_CHARS
       title = (title || "").strip
       subtitle = (subtitle || "").strip
-      combined = [title, subtitle, text].reject(&:empty?).join("\n")
+      search = [title, subtitle, text].reject(&:empty?).join("\n")
 
-      {
-        "u" => url_path,
-        "title" => title,
-        "subtitle" => subtitle,
-        "s" => combined,
-        "t" => text
-      }
+      [nil, title, search] # url filled by caller
     end
 
     def url_for_file(dest, file)
-      rel = file.delete_prefix(dest).tr("\\", "/")
+      rel = file.delete_prefix(dest).delete_prefix("/").tr("\\", "/")
       dir = File.dirname(rel)
       dir == "." ? "/" : "/#{dir}/"
+    end
+
+    def year_bucket(url_path)
+      m = url_path.match(%r{/(\d{4})/})
+      m ? m[1] : "misc"
+    end
+
+    def write_sharded_index(dest, rows)
+      index_dir = File.join(dest, "search-index")
+      FileUtils.mkdir_p(index_dir)
+
+      shards = Hash.new { |h, k| h[k] = [] }
+      rows.each do |url, title, search|
+        shards[year_bucket(url)] << [url, title, search]
+      end
+
+      manifest_shards = []
+      total_bytes = 0
+
+      shards.keys.sort.reverse.each do |year|
+        data = shards[year]
+        rel = "/search-index/#{year}.json"
+        path = File.join(index_dir, "#{year}.json")
+        json = JSON.generate(data)
+        File.write(path, json)
+        bytes = json.bytesize
+        total_bytes += bytes
+        manifest_shards << { "y" => year, "n" => data.length, "u" => rel, "b" => bytes }
+      end
+
+      manifest = { "v" => INDEX_VERSION, "shards" => manifest_shards }
+      File.write(File.join(index_dir, "manifest.json"), JSON.generate(manifest))
+
+      stub = { "v" => INDEX_VERSION, "manifest" => "/search-index/manifest.json" }
+      File.write(File.join(dest, "search-index.json"), JSON.generate(stub))
+
+      [manifest_shards.length, total_bytes, rows.length]
     end
   end
 
   Jekyll::Hooks.register :site, :post_write do |site|
     dest = site.dest
-    entries = []
+    rows = []
 
     Dir.glob(File.join(dest, "**", "index.html")).each do |file|
       html = File.read(file, encoding: "UTF-8")
       url = SearchIndexGenerator.url_for_file(dest, file)
-      row = SearchIndexGenerator.extract_entry(html, url)
-      entries << row if row
+      row = SearchIndexGenerator.extract_row(html)
+      next unless row
+
+      row[0] = url
+      rows << row
     end
 
-    out = File.join(dest, "search-index.json")
-    File.write(out, JSON.generate(entries))
-    Jekyll.logger.info "SearchIndex:", "wrote #{entries.length} entries -> #{out}"
+    shard_count, bytes, count = SearchIndexGenerator.write_sharded_index(dest, rows)
+    Jekyll.logger.info "SearchIndex:",
+                       "#{count} posts -> #{shard_count} shards (#{bytes} bytes under search-index/)"
   end
 end

@@ -1,14 +1,21 @@
 /**
- * CJK substring fallback — injects into a sibling list Pagefind will not overwrite.
- * Matches title + body via search-index.json.
+ * CJK exact-phrase fallback: sharded index + Web Worker (keeps UI thread free).
  */
 (function () {
-  var INDEX_URL = "/search-index.json";
-  var indexPromise = null;
-  var INJECTED_CLASS = "pf-cjk-injected";
+  var MANIFEST_URL = "/search-index/manifest.json";
+  var LEGACY_INDEX_URL = "/search-index.json";
+  var WORKER_URL = "/js/search-cjk-worker.js";
   var HOST_CLASS = "pf-cjk-results";
+  var INJECTED_CLASS = "pf-cjk-injected";
+
   var shadowStyleDone = false;
   var mergeTimer = null;
+  var hookedModal = null;
+  var worker = null;
+  var workerReady = false;
+  var workerLoading = false;
+  var pendingSearch = null;
+  var searchSeq = 0;
 
   function injectShadowStyles(shadowRoot) {
     if (!shadowRoot || shadowStyleDone || shadowRoot.getElementById("pf-cjk-style")) return;
@@ -21,24 +28,12 @@
       "." +
       HOST_CLASS +
       ":empty{display:none;margin:0}" +
+      "." +
+      HOST_CLASS +
+      " .pf-cjk-label{font-size:12px;color:var(--pf-muted,#888);margin:0 0 4px;padding:0 4px}" +
       ".pf-cjk-injected .pf-result-excerpt{white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}";
     shadowRoot.appendChild(style);
     shadowStyleDone = true;
-  }
-
-  function loadIndex() {
-    if (!indexPromise) {
-      indexPromise = fetch(INDEX_URL, { cache: "no-store" })
-        .then(function (r) {
-          if (!r.ok) throw new Error("search-index.json missing (HTTP " + r.status + ")");
-          return r.json();
-        })
-        .catch(function (err) {
-          console.warn("[search-cjk]", err.message);
-          return [];
-        });
-    }
-    return indexPromise;
   }
 
   function isCjkQuery(q) {
@@ -46,31 +41,95 @@
     return s.length >= 2 && /[\u4e00-\u9fff\u3400-\u4dbf\uf900-\ufaff]/.test(s);
   }
 
-  function searchableText(entry) {
-    return [entry.title, entry.subtitle, entry.s, entry.t].filter(Boolean).join("\n");
+  function getWorker() {
+    if (worker) return worker;
+    if (typeof Worker === "undefined") return null;
+    try {
+      worker = new Worker(WORKER_URL);
+      worker.onmessage = onWorkerMessage;
+      worker.onerror = function () {
+        console.warn("[search-cjk] worker failed");
+        worker = null;
+        workerReady = false;
+      };
+    } catch (_e) {
+      worker = null;
+    }
+    return worker;
   }
 
-  function matchesQuery(entry, q) {
-    return searchableText(entry).indexOf(q) !== -1;
-  }
-
-  function substringHits(q, index) {
-    var seen = {};
-    var ranked = [];
-    index.forEach(function (e) {
-      if (!matchesQuery(e, q) || seen[e.u]) return;
-      seen[e.u] = true;
-      ranked.push({
-        entry: e,
-        titleHit: (e.title || "").indexOf(q) !== -1,
+  function resolveManifest() {
+    return fetch(MANIFEST_URL, { cache: "no-store" })
+      .then(function (r) {
+        if (r.ok) return r.json();
+        return fetch(LEGACY_INDEX_URL, { cache: "no-store" }).then(function (r2) {
+          if (!r2.ok) throw new Error("search index HTTP " + r2.status);
+          return r2.json();
+        });
+      })
+      .then(function (data) {
+        if (data && data.manifest) {
+          return fetch(data.manifest, { cache: "no-store" }).then(function (r) {
+            return r.json();
+          });
+        }
+        if (data && data.shards) return data;
+        return { legacy: true, rows: Array.isArray(data) ? data : [] };
       });
+  }
+
+  function shardUrls(manifest) {
+    if (manifest.legacy) return null;
+    return (manifest.shards || []).map(function (s) {
+      return s.u;
     });
-    ranked.sort(function (a, b) {
-      return (b.titleHit ? 1 : 0) - (a.titleHit ? 1 : 0);
-    });
-    return ranked.slice(0, 8).map(function (x) {
-      return x.entry;
-    });
+  }
+
+  function ensureIndexLoaded() {
+    if (workerReady || workerLoading) return;
+    var w = getWorker();
+    if (!w) return;
+
+    workerLoading = true;
+    resolveManifest()
+      .then(function (manifest) {
+        if (manifest.legacy) {
+          w.postMessage({ type: "init", id: "legacy", rows: manifest.rows });
+          return;
+        }
+        var urls = shardUrls(manifest);
+        if (!urls || !urls.length) throw new Error("empty manifest");
+        w.postMessage({ type: "load", id: "shards", urls: urls });
+      })
+      .catch(function (err) {
+        workerLoading = false;
+        console.warn("[search-cjk]", err.message);
+      });
+  }
+
+  function onWorkerMessage(ev) {
+    var msg = ev.data || {};
+    if (msg.type === "loaded") {
+      workerReady = true;
+      workerLoading = false;
+      if (pendingSearch) {
+        var p = pendingSearch;
+        pendingSearch = null;
+        runWorkerSearch(p.modal, p.q, p.id);
+      }
+      return;
+    }
+    if (msg.type === "hits") {
+      var active = pendingSearch;
+      if (!active || msg.id !== active.id) return;
+      renderCjkResults(active.modal, active.q, msg.hits || []);
+      pendingSearch = null;
+      return;
+    }
+    if (msg.type === "error") {
+      workerLoading = false;
+      console.warn("[search-cjk]", msg.message);
+    }
   }
 
   function escapeHtml(s) {
@@ -102,26 +161,21 @@
     return (start > 0 ? "…" : "") + out + (end < text.length ? "…" : "");
   }
 
-  function excerptFor(entry, q) {
-    var blob = searchableText(entry);
-    var i = blob.indexOf(q);
-    var slice =
-      i >= 0 ? blob.slice(Math.max(0, i - 20), i + q.length + 80) : entry.t || "";
-    return highlightText(slice, q);
-  }
-
   function buildResultCard(entry, q) {
+    var href = entry.u || "";
+    if (href.indexOf("//") === 0) href = href.replace(/^\/+/, "/");
+
     var li = document.createElement("li");
     li.className = "pf-result " + INJECTED_CLASS;
     li.innerHTML =
       '<div class="pf-result-card"><div class="pf-result-content">' +
       '<p class="pf-result-title"><a class="pf-result-link" href="' +
-      escapeHtml(entry.u) +
+      escapeHtml(href) +
       '">' +
-      highlightText(entry.title || entry.u, q) +
+      highlightText(entry.title || href, q) +
       "</a></p>" +
       '<p class="pf-result-excerpt">' +
-      excerptFor(entry, q) +
+      highlightText(entry.s || "", q) +
       "</p></div></div>";
     return li;
   }
@@ -133,47 +187,53 @@
       root.querySelector("pagefind-results") ||
       root.querySelector("pagefind-modal-body") ||
       root;
-    var pagefindList = resultsPane.querySelector(".pf-results");
-    var input =
-      root.querySelector('input[type="search"]') ||
-      root.querySelector("input.pf-input") ||
-      root.querySelector("input");
     return {
-      root: root,
       resultsPane: resultsPane,
-      pagefindList: pagefindList,
-      input: input,
+      pagefindList: resultsPane ? resultsPane.querySelector(".pf-results") : null,
+      input:
+        root.querySelector('input[type="search"]') ||
+        root.querySelector("input.pf-input") ||
+        root.querySelector("input"),
     };
   }
 
   function ensureHost(parts) {
     if (!parts.resultsPane) return null;
     var host = parts.resultsPane.querySelector("." + HOST_CLASS);
-    if (!host) {
-      host = document.createElement("ol");
-      host.className = "pf-results " + HOST_CLASS;
-      if (parts.pagefindList) {
-        parts.resultsPane.insertBefore(host, parts.pagefindList);
-      } else {
-        parts.resultsPane.appendChild(host);
-      }
+    if (host) return host;
+
+    host = document.createElement("ol");
+    host.className = "pf-results " + HOST_CLASS;
+    host.setAttribute("aria-label", "精确匹配");
+
+    var list = parts.pagefindList;
+    if (list && list.parentNode === parts.resultsPane) {
+      parts.resultsPane.insertBefore(host, list);
+    } else {
+      parts.resultsPane.appendChild(host);
     }
     return host;
   }
 
   function renderCjkResults(modal, q, hits) {
+    if (!modal) return;
     var parts = findModalParts(modal);
     var host = ensureHost(parts);
     if (!host) return;
 
     host.innerHTML = "";
 
-    if (!isCjkQuery(q) || !hits.length) {
+    if (!isCjkQuery(q) || !hits || !hits.length) {
       host.hidden = true;
       return;
     }
 
     host.hidden = false;
+    var label = document.createElement("p");
+    label.className = "pf-cjk-label";
+    label.textContent = "精确匹配（" + hits.length + "）";
+    host.appendChild(label);
+
     var frag = document.createDocumentFragment();
     hits.forEach(function (entry) {
       frag.appendChild(buildResultCard(entry, q));
@@ -181,33 +241,46 @@
     host.appendChild(frag);
   }
 
+  function runWorkerSearch(modal, q, id) {
+    var w = getWorker();
+    if (!w) return;
+    w.postMessage({ type: "search", id: id, q: q, max: 8 });
+  }
+
   function mergeResults(modal, q) {
     if (!isCjkQuery(q)) {
       renderCjkResults(modal, q, []);
       return;
     }
-    loadIndex().then(function (index) {
-      renderCjkResults(modal, q, substringHits(q, index));
-    });
+
+    var w = getWorker();
+    if (!w) return;
+
+    searchSeq += 1;
+    var id = searchSeq;
+    pendingSearch = { modal: modal, q: q, id: id };
+
+    if (!workerReady) {
+      ensureIndexLoaded();
+      return;
+    }
+
+    runWorkerSearch(modal, q, id);
   }
 
   function scheduleMerge(modal, q) {
     clearTimeout(mergeTimer);
     mergeTimer = setTimeout(function () {
       mergeResults(modal, q);
-    }, 380);
-    setTimeout(function () {
-      mergeResults(modal, q);
-    }, 750);
+    }, 280);
   }
 
   function hookModalInput(modal) {
+    if (hookedModal === modal) return true;
     var parts = findModalParts(modal);
-    if (!parts.input || parts.input.dataset.cjkHook) {
-      return !!parts.input && !!parts.input.dataset.cjkHook;
-    }
-    parts.input.dataset.cjkHook = "1";
+    if (!parts.input) return false;
 
+    hookedModal = modal;
     var inputTimer;
     parts.input.addEventListener("input", function () {
       var q = parts.input.value.trim();
@@ -217,20 +290,15 @@
       }, 120);
     });
 
-    if (parts.pagefindList && typeof MutationObserver !== "undefined") {
-      var moTimer;
-      var obs = new MutationObserver(function () {
-        var q = parts.input.value.trim();
-        if (!isCjkQuery(q)) return;
-        clearTimeout(moTimer);
-        moTimer = setTimeout(function () {
-          mergeResults(modal, q);
-        }, 200);
-      });
-      obs.observe(parts.pagefindList, { childList: true, subtree: true });
-    }
-
     return true;
+  }
+
+  function onSearchOpen() {
+    tryHook();
+    ensureIndexLoaded();
+    [100, 400].forEach(function (ms) {
+      setTimeout(tryHook, ms);
+    });
   }
 
   function tryHook() {
@@ -238,27 +306,19 @@
     return modal ? hookModalInput(modal) : false;
   }
 
-  function scheduleHook() {
-    [50, 200, 500, 1200].forEach(function (ms) {
-      setTimeout(tryHook, ms);
-    });
-  }
-
   var searchLink = document.getElementById("blog-nav-search");
-  if (searchLink) searchLink.addEventListener("click", scheduleHook);
+  if (searchLink) searchLink.addEventListener("click", onSearchOpen);
 
   document.addEventListener("keydown", function (e) {
-    if ((e.ctrlKey || e.metaKey) && e.key === "k") scheduleHook();
+    if ((e.ctrlKey || e.metaKey) && e.key === "k") onSearchOpen();
   });
 
   var modal = document.querySelector("pagefind-modal");
   if (modal && typeof MutationObserver !== "undefined") {
     new MutationObserver(function () {
       if (modal.hasAttribute("open") || modal.classList.contains("open")) {
-        scheduleHook();
+        onSearchOpen();
       }
     }).observe(modal, { attributes: true, attributeFilter: ["open", "class"] });
   }
-
-  loadIndex();
 })();

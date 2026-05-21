@@ -15,16 +15,20 @@ else
   else
     npx -y pagefind@latest --site /usr/share/nginx/html
   fi
-  # search-index.json is normally created by _plugins/search_index_generator.rb during jekyll build.
-  # Node script is a fallback if the plugin did not run:
-  if [[ ! -f /usr/share/nginx/html/search-index.json ]] && command -v node >/dev/null 2>&1; then
+  # Sharded index is created by _plugins/search_index_generator.rb during jekyll build.
+  if [[ ! -f /usr/share/nginx/html/search-index/manifest.json ]] && command -v node >/dev/null 2>&1; then
     node /root/elmagnificogi.github.io/scripts/build-search-index.mjs /usr/share/nginx/html || \
-      echo "`date '+%Y%m%d %H:%M'`: WARN search-index.json build failed"
+      echo "`date '+%Y%m%d %H:%M'`: WARN search-index build failed"
   fi
-  if [[ -f /usr/share/nginx/html/search-index.json ]]; then
-    echo "`date '+%Y%m%d %H:%M'`: search-index.json ok ($(wc -c < /usr/share/nginx/html/search-index.json) bytes)"
+  if [[ -f /usr/share/nginx/html/search-index/manifest.json ]]; then
+    total=0
+    for f in /usr/share/nginx/html/search-index/*.json; do
+      [[ -f "$f" ]] || continue
+      total=$((total + $(wc -c < "$f")))
+    done
+    echo "`date '+%Y%m%d %H:%M'`: search-index ok ($(ls /usr/share/nginx/html/search-index/*.json 2>/dev/null | wc -l) files, ${total} bytes total)"
   else
-    echo "`date '+%Y%m%d %H:%M'`: ERROR search-index.json missing"
+    echo "`date '+%Y%m%d %H:%M'`: ERROR search-index/manifest.json missing"
   fi
   echo "`date '+%Y%m%d %H:%M'`: build over (jekyll + pagefind)"
 fi

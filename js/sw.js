@@ -9,7 +9,7 @@
 // CACHE_NAMESPACE
 // CacheStorage is shared between all sites under same domain.
 // A namespace can prevent potential name conflicts and mis-deletion.
-const CACHE_NAMESPACE = 'main-v3-'
+const CACHE_NAMESPACE = 'main-v5-'
 
 const CACHE = CACHE_NAMESPACE + 'precache-then-runtime';
 const PRECACHE_LIST = [
@@ -164,7 +164,13 @@ self.addEventListener('fetch', event => {
 
     // Pagefind index must always be fresh (stale SW cache caused search missing new posts)
     const reqUrl = new URL(event.request.url);
-    if (reqUrl.pathname.indexOf('/pagefind/') === 0) {
+    if (
+      reqUrl.pathname.indexOf('/pagefind/') === 0 ||
+      reqUrl.pathname.indexOf('/search-index/') === 0 ||
+      reqUrl.pathname === '/search-index.json' ||
+      reqUrl.pathname === '/js/search-cjk-fallback.js' ||
+      reqUrl.pathname === '/js/search-cjk-worker.js'
+    ) {
       event.respondWith(fetch(event.request, { cache: 'no-store' }));
       return;
     }
