@@ -33,13 +33,15 @@ module Jekyll
         html[%r{<title>([^<|]+)}i, 1]
       subtitle = html[/data-pagefind-meta="subtitle"[^>]*>([^<]+)/i, 1]
 
-      text = strip_tags(m[1])
-      return nil if text.empty?
+      body_html = m[1]
+      headings = body_html.scan(/<h[1-6][^>]*>([^<]+)</i).map { |h| strip_tags(h) }.reject(&:empty?)
+      text = strip_tags(body_html)
+      return nil if text.empty? && headings.empty?
 
       text = text[0, MAX_BODY_CHARS] if text.length > MAX_BODY_CHARS
       title = (title || "").strip
       subtitle = (subtitle || "").strip
-      search = [title, subtitle, text].reject(&:empty?).join("\n")
+      search = [title, subtitle, headings.join("\n"), text].reject(&:empty?).join("\n")
 
       [nil, title, search] # url filled by caller
     end

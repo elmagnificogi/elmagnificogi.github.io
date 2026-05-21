@@ -48,13 +48,17 @@ function processFile(file) {
     html.match(/<title>([^<|]+)/i);
   const subtitleMatch = html.match(/data-pagefind-meta="subtitle"[^>]*>([^<]+)/i);
 
-  let text = stripTags(bodyMatch[1]);
-  if (!text) return null;
+  const bodyHtml = bodyMatch[1];
+  const headings = [...bodyHtml.matchAll(/<h[1-6][^>]*>([^<]+)</gi)]
+    .map((m) => stripTags(m[1]))
+    .filter(Boolean);
+  let text = stripTags(bodyHtml);
+  if (!text && !headings.length) return null;
   if (text.length > MAX_BODY_CHARS) text = text.slice(0, MAX_BODY_CHARS);
 
   const title = (titleMatch?.[1] || "").trim();
   const subtitle = (subtitleMatch?.[1] || "").trim();
-  const search = [title, subtitle, text].filter(Boolean).join("\n");
+  const search = [title, subtitle, headings.join("\n"), text].filter(Boolean).join("\n");
 
   return [urlFromFile(file), title, search];
 }

@@ -284,6 +284,7 @@
     var inputTimer;
     parts.input.addEventListener("input", function () {
       var q = parts.input.value.trim();
+      if (!isCjkQuery(q)) renderCjkResults(modal, q, []);
       clearTimeout(inputTimer);
       inputTimer = setTimeout(function () {
         scheduleMerge(modal, q);
