@@ -38,13 +38,20 @@ function processFile(file) {
     html.match(/data-pagefind-meta="title"[^>]*>([^<]+)/i) ||
     html.match(/<h1[^>]*>([^<]+)<\/h1>/i) ||
     html.match(/<title>([^<|]+)/i);
+  const subtitleMatch = html.match(/data-pagefind-meta="subtitle"[^>]*>([^<]+)/i);
 
   const text = stripTags(bodyMatch[1]);
   if (!text) return null;
 
+  const title = (titleMatch?.[1] || "").trim();
+  const subtitle = (subtitleMatch?.[1] || "").trim();
+  const combined = [title, subtitle, text].filter(Boolean).join("\n");
+
   return {
     u: urlFromFile(file),
-    title: (titleMatch?.[1] || "").trim(),
+    title,
+    subtitle,
+    s: combined,
     t: text,
   };
 }

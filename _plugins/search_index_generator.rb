@@ -25,13 +25,20 @@ module Jekyll
         html[/data-pagefind-meta="title"[^>]*>([^<]+)/i, 1] ||
         html[/<h1[^>]*>([^<]+)<\/h1>/i, 1] ||
         html[%r{<title>([^<|]+)}i, 1]
+      subtitle = html[/data-pagefind-meta="subtitle"[^>]*>([^<]+)/i, 1]
 
       text = strip_tags(m[1])
       return nil if text.empty?
 
+      title = (title || "").strip
+      subtitle = (subtitle || "").strip
+      combined = [title, subtitle, text].reject(&:empty?).join("\n")
+
       {
         "u" => url_path,
-        "title" => (title || "").strip,
+        "title" => title,
+        "subtitle" => subtitle,
+        "s" => combined,
         "t" => text
       }
     end

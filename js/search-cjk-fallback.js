@@ -1,11 +1,22 @@
 /**
- * Substring fallback for Chinese queries when Pagefind splits terms (e.g. 限宽墩 -> 限+宽+墩).
- * Requires /search-index.json (built by _plugins/search_index_generator.rb on jekyll build).
+ * CJK substring fallback — same card UI as Pagefind; also matches titles.
+ * Requires /search-index.json from _plugins/search_index_generator.rb
  */
 (function () {
   var INDEX_URL = "/search-index.json";
   var indexPromise = null;
-  var styleInjected = false;
+  var INJECTED_CLASS = "pf-cjk-injected";
+  var shadowStyleDone = false;
+
+  function injectShadowStyles(shadowRoot) {
+    if (!shadowRoot || shadowStyleDone || shadowRoot.getElementById("pf-cjk-style")) return;
+    var style = document.createElement("style");
+    style.id = "pf-cjk-style";
+    style.textContent =
+      ".pf-cjk-injected .pf-result-excerpt{white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;text-overflow:unset}";
+    shadowRoot.appendChild(style);
+    shadowStyleDone = true;
+  }
 
   function loadIndex() {
     if (!indexPromise) {
@@ -13,12 +24,6 @@
         .then(function (r) {
           if (!r.ok) throw new Error("search-index.json missing (HTTP " + r.status + ")");
           return r.json();
-        })
-        .then(function (data) {
-          if (!Array.isArray(data) || !data.length) {
-            console.warn("[search-cjk] search-index.json is empty — rebuild site (jekyll build)");
-          }
-          return data;
         })
         .catch(function (err) {
           console.warn("[search-cjk]", err.message);
@@ -34,98 +39,33 @@
     return /[\u4e00-\u9fff\u3400-\u4dbf\uf900-\ufaff]/.test(s);
   }
 
-  function excerptAround(text, q, len) {
-    var i = text.indexOf(q);
-    if (i < 0) return text.slice(0, len) + (text.length > len ? "…" : "");
-    var start = Math.max(0, i - Math.floor(len / 2));
-    return (start > 0 ? "…" : "") + text.slice(start, start + len) + "…";
+  function searchableText(entry) {
+    return [entry.title, entry.subtitle, entry.s, entry.t]
+      .filter(Boolean)
+      .join("\n");
+  }
+
+  function matchesQuery(entry, q) {
+    var blob = searchableText(entry);
+    return blob.indexOf(q) !== -1;
   }
 
   function substringHits(q, index) {
-    return index
-      .filter(function (e) {
-        return e.t && e.t.indexOf(q) !== -1;
-      })
-      .slice(0, 8);
-  }
-
-  function injectShadowStyles(root) {
-    if (!root || styleInjected) return;
-    var link = document.querySelector('link[href*="search-cjk-fallback.css"]');
-    if (!link) return;
-    var style = document.createElement("style");
-    style.textContent =
-      ".pf-cjk-extra{margin:0 0 1rem;padding:.75rem 1rem;border-radius:8px;background:#e8f6f9;border:1px solid #b8dde6}" +
-      ".pf-cjk-extra-label{margin:0 0 .5rem;font-size:.85rem;color:#006d85;font-weight:600}" +
-      ".pf-cjk-extra-list{margin:0;padding:0;list-style:none}" +
-      ".pf-cjk-extra-link{display:block;padding:.5rem 0;color:#404040;text-decoration:none;border-top:1px solid #d0e8ee}" +
-      ".pf-cjk-extra-link:first-child{border-top:none}" +
-      ".pf-cjk-extra-link:hover{color:#0085a1}" +
-      ".pf-cjk-extra-link strong{display:block;font-size:1rem;margin-bottom:.2rem}" +
-      ".pf-cjk-extra-link span{display:block;font-size:.85rem;color:#666;line-height:1.4}";
-    root.appendChild(style);
-    styleInjected = true;
-  }
-
-  function findModalParts(modal) {
-    var root = modal.shadowRoot || modal;
-    injectShadowStyles(modal.shadowRoot);
-    var body =
-      root.querySelector("pagefind-modal-body") ||
-      root.querySelector(".pf-modal-body") ||
-      root.querySelector('[class*="modal-body"]') ||
-      root.querySelector('[class*="results"]') ||
-      root;
-    var input =
-      root.querySelector('input[type="search"]') ||
-      root.querySelector("input.pf-input") ||
-      root.querySelector('input[placeholder*="搜"]') ||
-      root.querySelector("input");
-    return { root: root, body: body, input: input };
-  }
-
-  function ensureExtraContainer(modal) {
-    var parts = findModalParts(modal);
-    if (!parts.body) return null;
-    var extra = parts.root.querySelector(".pf-cjk-extra");
-    if (!extra) {
-      extra = document.createElement("div");
-      extra.className = "pf-cjk-extra";
-      extra.setAttribute("data-cjk-fallback", "true");
-      parts.body.insertBefore(extra, parts.body.firstChild);
-    }
-    return extra;
-  }
-
-  function renderExtra(modal, q, hits) {
-    var extra = ensureExtraContainer(modal);
-    if (!extra) return;
-
-    if (!hits.length) {
-      extra.innerHTML = "";
-      extra.hidden = true;
-      return;
-    }
-
-    extra.hidden = false;
-    var html =
-      '<p class="pf-cjk-extra-label">包含「' +
-      escapeHtml(q) +
-      "」的精确匹配（" +
-      hits.length +
-      "）</p><ul class=\"pf-cjk-extra-list\">";
-    hits.forEach(function (h) {
-      html +=
-        '<li><a class="pf-cjk-extra-link" href="' +
-        escapeHtml(h.u) +
-        '"><strong>' +
-        escapeHtml(h.title || h.u) +
-        "</strong><span>" +
-        escapeHtml(excerptAround(h.t, q, 80)) +
-        "</span></a></li>";
+    var seen = {};
+    var hits = [];
+    index.forEach(function (e) {
+      if (!matchesQuery(e, q) || seen[e.u]) return;
+      seen[e.u] = true;
+      var titleHit = (e.title || "").indexOf(q) !== -1;
+      hits.push({ entry: e, titleHit: titleHit });
     });
-    html += "</ul>";
-    extra.innerHTML = html;
+    hits.sort(function (a, b) {
+      if (a.titleHit !== b.titleHit) return a.titleHit ? -1 : 1;
+      return 0;
+    });
+    return hits.slice(0, 8).map(function (h) {
+      return h.entry;
+    });
   }
 
   function escapeHtml(s) {
@@ -136,9 +76,141 @@
       .replace(/"/g, "&quot;");
   }
 
+  function highlightText(text, q) {
+    var i = text.indexOf(q);
+    if (i < 0) return escapeHtml(text.slice(0, 120)) + (text.length > 120 ? "…" : "");
+    var start = Math.max(0, i - 36);
+    var end = Math.min(text.length, i + q.length + 60);
+    var chunk = text.slice(start, end);
+    var out = "";
+    var pos = 0;
+    while (pos < chunk.length) {
+      var hit = chunk.indexOf(q, pos);
+      if (hit < 0) {
+        out += escapeHtml(chunk.slice(pos));
+        break;
+      }
+      out += escapeHtml(chunk.slice(pos, hit));
+      out += "<mark>" + escapeHtml(q) + "</mark>";
+      pos = hit + q.length;
+    }
+    return (start > 0 ? "…" : "") + out + (end < text.length ? "…" : "");
+  }
+
+  function excerptFor(entry, q) {
+    var blob = searchableText(entry);
+    var i = blob.indexOf(q);
+    if (i < 0) return highlightText(entry.t || "", q);
+    return highlightText(blob.slice(Math.max(0, i - 20), i + q.length + 80), q);
+  }
+
+  function buildResultCard(entry, q) {
+    var li = document.createElement("li");
+    li.className = "pf-result " + INJECTED_CLASS;
+    li.innerHTML =
+      '<div class="pf-result-card">' +
+      '<div class="pf-result-content">' +
+      '<p class="pf-result-title"><a class="pf-result-link" href="' +
+      escapeHtml(entry.u) +
+      '">' +
+      highlightText(entry.title || entry.u, q) +
+      "</a></p>" +
+      '<p class="pf-result-excerpt">' +
+      excerptFor(entry, q) +
+      "</p>" +
+      "</div></div>";
+    return li;
+  }
+
+  function findModalParts(modal) {
+    var root = modal.shadowRoot || modal;
+    injectShadowStyles(modal.shadowRoot);
+    var resultsRoot =
+      root.querySelector("pagefind-results") ||
+      root.querySelector(".pf-results") ||
+      root.querySelector('[class*="results"]');
+    var resultsList =
+      (resultsRoot && resultsRoot.querySelector(".pf-results")) ||
+      resultsRoot;
+    var input =
+      root.querySelector('input[type="search"]') ||
+      root.querySelector("input.pf-input") ||
+      root.querySelector('input[placeholder*="搜"]') ||
+      root.querySelector("input");
+    return { root: root, resultsList: resultsList, input: input };
+  }
+
+  function clearInjected(resultsList) {
+    if (!resultsList) return;
+    resultsList.querySelectorAll("." + INJECTED_CLASS).forEach(function (el) {
+      el.remove();
+    });
+    var legacy = resultsList.parentElement && resultsList.parentElement.querySelector(".pf-cjk-extra");
+    if (legacy) legacy.remove();
+  }
+
+  function renderInjected(modal, q, hits) {
+    var parts = findModalParts(modal);
+    if (!parts.resultsList) return;
+
+    clearInjected(parts.resultsList);
+
+    if (!hits.length) return;
+
+    var frag = document.createDocumentFragment();
+    hits.forEach(function (entry) {
+      frag.appendChild(buildResultCard(entry, q));
+    });
+    parts.resultsList.insertBefore(frag, parts.resultsList.firstChild);
+  }
+
+  function filterNoisyPagefindResults(modal, q) {
+    var parts = findModalParts(modal);
+    if (!parts.resultsList || !q) return;
+
+    parts.resultsList.querySelectorAll(".pf-result").forEach(function (el) {
+      if (el.classList.contains(INJECTED_CLASS)) {
+        el.style.display = "";
+        return;
+      }
+      var text = (el.textContent || "").replace(/\s+/g, "");
+      var needle = q.replace(/\s+/g, "");
+      var ok = text.indexOf(needle) !== -1;
+      el.style.display = ok ? "" : "none";
+    });
+
+    var chips = parts.resultsList.querySelectorAll(".pf-heading-chip");
+    chips.forEach(function (chip) {
+      var parentResult = chip.closest(".pf-result");
+      if (parentResult && parentResult.classList.contains(INJECTED_CLASS)) return;
+      var text = (chip.textContent || "").replace(/\s+/g, "");
+      var needle = q.replace(/\s+/g, "");
+      chip.style.display = text.indexOf(needle) !== -1 ? "" : "none";
+    });
+  }
+
+  function runSearch(modal, q) {
+    if (!isCjkQuery(q)) {
+      var parts = findModalParts(modal);
+      clearInjected(parts.resultsList);
+      filterNoisyPagefindResults(modal, "");
+      return;
+    }
+    loadIndex().then(function (index) {
+      var hits = substringHits(q, index);
+      renderInjected(modal, q, hits);
+      filterNoisyPagefindResults(modal, q);
+      setTimeout(function () {
+        filterNoisyPagefindResults(modal, q);
+      }, 450);
+    });
+  }
+
   function hookModalInput(modal) {
     var parts = findModalParts(modal);
-    if (!parts.input || parts.input.dataset.cjkHook) return !!parts.input && !!parts.input.dataset.cjkHook;
+    if (!parts.input || parts.input.dataset.cjkHook) {
+      return !!parts.input && !!parts.input.dataset.cjkHook;
+    }
     parts.input.dataset.cjkHook = "1";
 
     var timer;
@@ -146,15 +218,18 @@
       var q = parts.input.value.trim();
       clearTimeout(timer);
       timer = setTimeout(function () {
-        if (!isCjkQuery(q)) {
-          renderExtra(modal, q, []);
-          return;
-        }
-        loadIndex().then(function (index) {
-          renderExtra(modal, q, substringHits(q, index));
-        });
-      }, 220);
+        runSearch(modal, q);
+      }, 200);
     });
+
+    if (parts.resultsList && typeof MutationObserver !== "undefined") {
+      var obs = new MutationObserver(function () {
+        var q = parts.input.value.trim();
+        if (isCjkQuery(q)) filterNoisyPagefindResults(modal, q);
+      });
+      obs.observe(parts.resultsList, { childList: true, subtree: true });
+    }
+
     return true;
   }
 
@@ -171,24 +246,20 @@
   }
 
   var searchLink = document.getElementById("blog-nav-search");
-  if (searchLink) {
-    searchLink.addEventListener("click", scheduleHook);
-  }
+  if (searchLink) searchLink.addEventListener("click", scheduleHook);
 
   document.addEventListener("keydown", function (e) {
-    if ((e.ctrlKey || e.metaKey) && e.key === "k") {
-      scheduleHook();
-    }
+    if ((e.ctrlKey || e.metaKey) && e.key === "k") scheduleHook();
   });
 
   var modal = document.querySelector("pagefind-modal");
   if (modal && typeof MutationObserver !== "undefined") {
-    var obs = new MutationObserver(function () {
+    var openObs = new MutationObserver(function () {
       if (modal.hasAttribute("open") || modal.classList.contains("open")) {
         scheduleHook();
       }
     });
-    obs.observe(modal, { attributes: true, attributeFilter: ["open", "class"] });
+    openObs.observe(modal, { attributes: true, attributeFilter: ["open", "class"] });
   }
 
   loadIndex();
