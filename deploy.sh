@@ -15,8 +15,16 @@ else
   else
     npx -y pagefind@latest --site /usr/share/nginx/html
   fi
-  if command -v node >/dev/null 2>&1; then
-    node /root/elmagnificogi.github.io/scripts/build-search-index.mjs /usr/share/nginx/html
+  # search-index.json is normally created by _plugins/search_index_generator.rb during jekyll build.
+  # Node script is a fallback if the plugin did not run:
+  if [[ ! -f /usr/share/nginx/html/search-index.json ]] && command -v node >/dev/null 2>&1; then
+    node /root/elmagnificogi.github.io/scripts/build-search-index.mjs /usr/share/nginx/html || \
+      echo "`date '+%Y%m%d %H:%M'`: WARN search-index.json build failed"
+  fi
+  if [[ -f /usr/share/nginx/html/search-index.json ]]; then
+    echo "`date '+%Y%m%d %H:%M'`: search-index.json ok ($(wc -c < /usr/share/nginx/html/search-index.json) bytes)"
+  else
+    echo "`date '+%Y%m%d %H:%M'`: ERROR search-index.json missing"
   fi
   echo "`date '+%Y%m%d %H:%M'`: build over (jekyll + pagefind)"
 fi

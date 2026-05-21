@@ -1,17 +1,24 @@
 /**
  * Substring fallback for Chinese queries when Pagefind splits terms (e.g. 限宽墩 -> 限+宽+墩).
- * Requires /search-index.json from scripts/build-search-index.mjs
+ * Requires /search-index.json (built by _plugins/search_index_generator.rb on jekyll build).
  */
 (function () {
   var INDEX_URL = "/search-index.json";
   var indexPromise = null;
+  var styleInjected = false;
 
   function loadIndex() {
     if (!indexPromise) {
       indexPromise = fetch(INDEX_URL, { cache: "no-store" })
         .then(function (r) {
-          if (!r.ok) throw new Error("search-index.json missing");
+          if (!r.ok) throw new Error("search-index.json missing (HTTP " + r.status + ")");
           return r.json();
+        })
+        .then(function (data) {
+          if (!Array.isArray(data) || !data.length) {
+            console.warn("[search-cjk] search-index.json is empty — rebuild site (jekyll build)");
+          }
+          return data;
         })
         .catch(function (err) {
           console.warn("[search-cjk]", err.message);
@@ -42,20 +49,50 @@
       .slice(0, 8);
   }
 
-  function ensureExtraContainer(modal) {
-    var root = modal.shadowRoot;
-    if (!root) return null;
+  function injectShadowStyles(root) {
+    if (!root || styleInjected) return;
+    var link = document.querySelector('link[href*="search-cjk-fallback.css"]');
+    if (!link) return;
+    var style = document.createElement("style");
+    style.textContent =
+      ".pf-cjk-extra{margin:0 0 1rem;padding:.75rem 1rem;border-radius:8px;background:#e8f6f9;border:1px solid #b8dde6}" +
+      ".pf-cjk-extra-label{margin:0 0 .5rem;font-size:.85rem;color:#006d85;font-weight:600}" +
+      ".pf-cjk-extra-list{margin:0;padding:0;list-style:none}" +
+      ".pf-cjk-extra-link{display:block;padding:.5rem 0;color:#404040;text-decoration:none;border-top:1px solid #d0e8ee}" +
+      ".pf-cjk-extra-link:first-child{border-top:none}" +
+      ".pf-cjk-extra-link:hover{color:#0085a1}" +
+      ".pf-cjk-extra-link strong{display:block;font-size:1rem;margin-bottom:.2rem}" +
+      ".pf-cjk-extra-link span{display:block;font-size:.85rem;color:#666;line-height:1.4}";
+    root.appendChild(style);
+    styleInjected = true;
+  }
+
+  function findModalParts(modal) {
+    var root = modal.shadowRoot || modal;
+    injectShadowStyles(modal.shadowRoot);
     var body =
       root.querySelector("pagefind-modal-body") ||
       root.querySelector(".pf-modal-body") ||
-      root.querySelector('[class*="modal-body"]');
-    if (!body) return null;
-    var extra = root.querySelector(".pf-cjk-extra");
+      root.querySelector('[class*="modal-body"]') ||
+      root.querySelector('[class*="results"]') ||
+      root;
+    var input =
+      root.querySelector('input[type="search"]') ||
+      root.querySelector("input.pf-input") ||
+      root.querySelector('input[placeholder*="搜"]') ||
+      root.querySelector("input");
+    return { root: root, body: body, input: input };
+  }
+
+  function ensureExtraContainer(modal) {
+    var parts = findModalParts(modal);
+    if (!parts.body) return null;
+    var extra = parts.root.querySelector(".pf-cjk-extra");
     if (!extra) {
       extra = document.createElement("div");
       extra.className = "pf-cjk-extra";
       extra.setAttribute("data-cjk-fallback", "true");
-      body.insertBefore(extra, body.firstChild);
+      parts.body.insertBefore(extra, parts.body.firstChild);
     }
     return extra;
   }
@@ -76,7 +113,7 @@
       escapeHtml(q) +
       "」的精确匹配（" +
       hits.length +
-      "）</p><ul class="pf-cjk-extra-list">';
+      "）</p><ul class=\"pf-cjk-extra-list\">";
     hits.forEach(function (h) {
       html +=
         '<li><a class="pf-cjk-extra-link" href="' +
@@ -100,18 +137,13 @@
   }
 
   function hookModalInput(modal) {
-    var root = modal.shadowRoot;
-    if (!root) return false;
-    var input =
-      root.querySelector('input[type="search"]') ||
-      root.querySelector("input.pf-input") ||
-      root.querySelector("input");
-    if (!input || input.dataset.cjkHook) return !!input.dataset.cjkHook;
-    input.dataset.cjkHook = "1";
+    var parts = findModalParts(modal);
+    if (!parts.input || parts.input.dataset.cjkHook) return !!parts.input && !!parts.input.dataset.cjkHook;
+    parts.input.dataset.cjkHook = "1";
 
     var timer;
-    input.addEventListener("input", function () {
-      var q = input.value.trim();
+    parts.input.addEventListener("input", function () {
+      var q = parts.input.value.trim();
       clearTimeout(timer);
       timer = setTimeout(function () {
         if (!isCjkQuery(q)) {
@@ -128,24 +160,36 @@
 
   function tryHook() {
     var modal = document.querySelector("pagefind-modal");
-    if (!modal) return;
-    hookModalInput(modal);
+    if (!modal) return false;
+    return hookModalInput(modal);
+  }
+
+  function scheduleHook() {
+    [50, 150, 400, 900, 1500].forEach(function (ms) {
+      setTimeout(tryHook, ms);
+    });
   }
 
   var searchLink = document.getElementById("blog-nav-search");
   if (searchLink) {
-    searchLink.addEventListener("click", function () {
-      [80, 300, 800].forEach(function (ms) {
-        setTimeout(tryHook, ms);
-      });
-    });
+    searchLink.addEventListener("click", scheduleHook);
   }
 
   document.addEventListener("keydown", function (e) {
     if ((e.ctrlKey || e.metaKey) && e.key === "k") {
-      [80, 300, 800].forEach(function (ms) {
-        setTimeout(tryHook, ms);
-      });
+      scheduleHook();
     }
   });
+
+  var modal = document.querySelector("pagefind-modal");
+  if (modal && typeof MutationObserver !== "undefined") {
+    var obs = new MutationObserver(function () {
+      if (modal.hasAttribute("open") || modal.classList.contains("open")) {
+        scheduleHook();
+      }
+    });
+    obs.observe(modal, { attributes: true, attributeFilter: ["open", "class"] });
+  }
+
+  loadIndex();
 })();
