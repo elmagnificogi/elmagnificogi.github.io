@@ -15,4 +15,7 @@ else
 fi
 npx pagefind
 
+echo "==> CJK substring search index"
+node scripts/build-search-index.mjs _site
+
 echo "==> done. Preview: npx pagefind --site _site --serve"

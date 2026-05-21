@@ -358,7 +358,9 @@ new google.translate.TranslateElement({
 {% endif %}
 
 {% if site.pagefind %}
+<pagefind-config bundle-path="{{ '/pagefind/' | prepend: site.baseurl }}" meta-cache-tag="{{ site.time | date: '%s' }}"></pagefind-config>
 <script src="{{ '/pagefind/pagefind-component-ui.js' | prepend: site.baseurl }}" type="module"></script>
+<script src="{{ '/js/search-cjk-fallback.js' | prepend: site.baseurl }}" defer></script>
 <pagefind-modal reset-on-close="true"></pagefind-modal>
 <script>
 (function () {

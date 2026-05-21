@@ -9,7 +9,7 @@
 // CACHE_NAMESPACE
 // CacheStorage is shared between all sites under same domain.
 // A namespace can prevent potential name conflicts and mis-deletion.
-const CACHE_NAMESPACE = 'main-'
+const CACHE_NAMESPACE = 'main-v3-'
 
 const CACHE = CACHE_NAMESPACE + 'precache-then-runtime';
 const PRECACHE_LIST = [
@@ -161,6 +161,13 @@ self.addEventListener('fetch', event => {
 
   // Skip some of cross-origin requests, like those for Google Analytics.
   if (HOSTNAME_WHITELIST.indexOf(new URL(event.request.url).hostname) > -1) {
+
+    // Pagefind index must always be fresh (stale SW cache caused search missing new posts)
+    const reqUrl = new URL(event.request.url);
+    if (reqUrl.pathname.indexOf('/pagefind/') === 0) {
+      event.respondWith(fetch(event.request, { cache: 'no-store' }));
+      return;
+    }
 
     // Redirect in SW manually fixed github pages 404s on repo?blah
     if (shouldRedirect(event.request)) {

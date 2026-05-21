@@ -1,4 +1,5 @@
 site: _site
+force_language: zh-cn
 exclude_selectors:
   - "nav"
   - "footer"

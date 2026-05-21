@@ -15,5 +15,8 @@ else
   else
     npx -y pagefind@latest --site /usr/share/nginx/html
   fi
+  if command -v node >/dev/null 2>&1; then
+    node /root/elmagnificogi.github.io/scripts/build-search-index.mjs /usr/share/nginx/html
+  fi
   echo "`date '+%Y%m%d %H:%M'`: build over (jekyll + pagefind)"
 fi
