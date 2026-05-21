@@ -1,19 +1,27 @@
 /**
- * CJK substring fallback — same card UI as Pagefind; also matches titles.
- * Requires /search-index.json from _plugins/search_index_generator.rb
+ * CJK substring fallback — injects into a sibling list Pagefind will not overwrite.
+ * Matches title + body via search-index.json.
  */
 (function () {
   var INDEX_URL = "/search-index.json";
   var indexPromise = null;
   var INJECTED_CLASS = "pf-cjk-injected";
+  var HOST_CLASS = "pf-cjk-results";
   var shadowStyleDone = false;
+  var mergeTimer = null;
 
   function injectShadowStyles(shadowRoot) {
     if (!shadowRoot || shadowStyleDone || shadowRoot.getElementById("pf-cjk-style")) return;
     var style = document.createElement("style");
     style.id = "pf-cjk-style";
     style.textContent =
-      ".pf-cjk-injected .pf-result-excerpt{white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;text-overflow:unset}";
+      "." +
+      HOST_CLASS +
+      "{list-style:none;padding:0;margin:0 0 8px;display:flex;flex-direction:column;gap:8px}" +
+      "." +
+      HOST_CLASS +
+      ":empty{display:none;margin:0}" +
+      ".pf-cjk-injected .pf-result-excerpt{white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}";
     shadowRoot.appendChild(style);
     shadowStyleDone = true;
   }
@@ -35,36 +43,33 @@
 
   function isCjkQuery(q) {
     var s = (q || "").trim();
-    if (s.length < 2) return false;
-    return /[\u4e00-\u9fff\u3400-\u4dbf\uf900-\ufaff]/.test(s);
+    return s.length >= 2 && /[\u4e00-\u9fff\u3400-\u4dbf\uf900-\ufaff]/.test(s);
   }
 
   function searchableText(entry) {
-    return [entry.title, entry.subtitle, entry.s, entry.t]
-      .filter(Boolean)
-      .join("\n");
+    return [entry.title, entry.subtitle, entry.s, entry.t].filter(Boolean).join("\n");
   }
 
   function matchesQuery(entry, q) {
-    var blob = searchableText(entry);
-    return blob.indexOf(q) !== -1;
+    return searchableText(entry).indexOf(q) !== -1;
   }
 
   function substringHits(q, index) {
     var seen = {};
-    var hits = [];
+    var ranked = [];
     index.forEach(function (e) {
       if (!matchesQuery(e, q) || seen[e.u]) return;
       seen[e.u] = true;
-      var titleHit = (e.title || "").indexOf(q) !== -1;
-      hits.push({ entry: e, titleHit: titleHit });
+      ranked.push({
+        entry: e,
+        titleHit: (e.title || "").indexOf(q) !== -1,
+      });
     });
-    hits.sort(function (a, b) {
-      if (a.titleHit !== b.titleHit) return a.titleHit ? -1 : 1;
-      return 0;
+    ranked.sort(function (a, b) {
+      return (b.titleHit ? 1 : 0) - (a.titleHit ? 1 : 0);
     });
-    return hits.slice(0, 8).map(function (h) {
-      return h.entry;
+    return ranked.slice(0, 8).map(function (x) {
+      return x.entry;
     });
   }
 
@@ -100,16 +105,16 @@
   function excerptFor(entry, q) {
     var blob = searchableText(entry);
     var i = blob.indexOf(q);
-    if (i < 0) return highlightText(entry.t || "", q);
-    return highlightText(blob.slice(Math.max(0, i - 20), i + q.length + 80), q);
+    var slice =
+      i >= 0 ? blob.slice(Math.max(0, i - 20), i + q.length + 80) : entry.t || "";
+    return highlightText(slice, q);
   }
 
   function buildResultCard(entry, q) {
     var li = document.createElement("li");
     li.className = "pf-result " + INJECTED_CLASS;
     li.innerHTML =
-      '<div class="pf-result-card">' +
-      '<div class="pf-result-content">' +
+      '<div class="pf-result-card"><div class="pf-result-content">' +
       '<p class="pf-result-title"><a class="pf-result-link" href="' +
       escapeHtml(entry.u) +
       '">' +
@@ -117,93 +122,83 @@
       "</a></p>" +
       '<p class="pf-result-excerpt">' +
       excerptFor(entry, q) +
-      "</p>" +
-      "</div></div>";
+      "</p></div></div>";
     return li;
   }
 
   function findModalParts(modal) {
     var root = modal.shadowRoot || modal;
     injectShadowStyles(modal.shadowRoot);
-    var resultsRoot =
+    var resultsPane =
       root.querySelector("pagefind-results") ||
-      root.querySelector(".pf-results") ||
-      root.querySelector('[class*="results"]');
-    var resultsList =
-      (resultsRoot && resultsRoot.querySelector(".pf-results")) ||
-      resultsRoot;
+      root.querySelector("pagefind-modal-body") ||
+      root;
+    var pagefindList = resultsPane.querySelector(".pf-results");
     var input =
       root.querySelector('input[type="search"]') ||
       root.querySelector("input.pf-input") ||
-      root.querySelector('input[placeholder*="搜"]') ||
       root.querySelector("input");
-    return { root: root, resultsList: resultsList, input: input };
+    return {
+      root: root,
+      resultsPane: resultsPane,
+      pagefindList: pagefindList,
+      input: input,
+    };
   }
 
-  function clearInjected(resultsList) {
-    if (!resultsList) return;
-    resultsList.querySelectorAll("." + INJECTED_CLASS).forEach(function (el) {
-      el.remove();
-    });
-    var legacy = resultsList.parentElement && resultsList.parentElement.querySelector(".pf-cjk-extra");
-    if (legacy) legacy.remove();
+  function ensureHost(parts) {
+    if (!parts.resultsPane) return null;
+    var host = parts.resultsPane.querySelector("." + HOST_CLASS);
+    if (!host) {
+      host = document.createElement("ol");
+      host.className = "pf-results " + HOST_CLASS;
+      if (parts.pagefindList) {
+        parts.resultsPane.insertBefore(host, parts.pagefindList);
+      } else {
+        parts.resultsPane.appendChild(host);
+      }
+    }
+    return host;
   }
 
-  function renderInjected(modal, q, hits) {
+  function renderCjkResults(modal, q, hits) {
     var parts = findModalParts(modal);
-    if (!parts.resultsList) return;
+    var host = ensureHost(parts);
+    if (!host) return;
 
-    clearInjected(parts.resultsList);
+    host.innerHTML = "";
 
-    if (!hits.length) return;
+    if (!isCjkQuery(q) || !hits.length) {
+      host.hidden = true;
+      return;
+    }
 
+    host.hidden = false;
     var frag = document.createDocumentFragment();
     hits.forEach(function (entry) {
       frag.appendChild(buildResultCard(entry, q));
     });
-    parts.resultsList.insertBefore(frag, parts.resultsList.firstChild);
+    host.appendChild(frag);
   }
 
-  function filterNoisyPagefindResults(modal, q) {
-    var parts = findModalParts(modal);
-    if (!parts.resultsList || !q) return;
-
-    parts.resultsList.querySelectorAll(".pf-result").forEach(function (el) {
-      if (el.classList.contains(INJECTED_CLASS)) {
-        el.style.display = "";
-        return;
-      }
-      var text = (el.textContent || "").replace(/\s+/g, "");
-      var needle = q.replace(/\s+/g, "");
-      var ok = text.indexOf(needle) !== -1;
-      el.style.display = ok ? "" : "none";
-    });
-
-    var chips = parts.resultsList.querySelectorAll(".pf-heading-chip");
-    chips.forEach(function (chip) {
-      var parentResult = chip.closest(".pf-result");
-      if (parentResult && parentResult.classList.contains(INJECTED_CLASS)) return;
-      var text = (chip.textContent || "").replace(/\s+/g, "");
-      var needle = q.replace(/\s+/g, "");
-      chip.style.display = text.indexOf(needle) !== -1 ? "" : "none";
-    });
-  }
-
-  function runSearch(modal, q) {
+  function mergeResults(modal, q) {
     if (!isCjkQuery(q)) {
-      var parts = findModalParts(modal);
-      clearInjected(parts.resultsList);
-      filterNoisyPagefindResults(modal, "");
+      renderCjkResults(modal, q, []);
       return;
     }
     loadIndex().then(function (index) {
-      var hits = substringHits(q, index);
-      renderInjected(modal, q, hits);
-      filterNoisyPagefindResults(modal, q);
-      setTimeout(function () {
-        filterNoisyPagefindResults(modal, q);
-      }, 450);
+      renderCjkResults(modal, q, substringHits(q, index));
     });
+  }
+
+  function scheduleMerge(modal, q) {
+    clearTimeout(mergeTimer);
+    mergeTimer = setTimeout(function () {
+      mergeResults(modal, q);
+    }, 380);
+    setTimeout(function () {
+      mergeResults(modal, q);
+    }, 750);
   }
 
   function hookModalInput(modal) {
@@ -213,21 +208,26 @@
     }
     parts.input.dataset.cjkHook = "1";
 
-    var timer;
+    var inputTimer;
     parts.input.addEventListener("input", function () {
       var q = parts.input.value.trim();
-      clearTimeout(timer);
-      timer = setTimeout(function () {
-        runSearch(modal, q);
-      }, 200);
+      clearTimeout(inputTimer);
+      inputTimer = setTimeout(function () {
+        scheduleMerge(modal, q);
+      }, 120);
     });
 
-    if (parts.resultsList && typeof MutationObserver !== "undefined") {
+    if (parts.pagefindList && typeof MutationObserver !== "undefined") {
+      var moTimer;
       var obs = new MutationObserver(function () {
         var q = parts.input.value.trim();
-        if (isCjkQuery(q)) filterNoisyPagefindResults(modal, q);
+        if (!isCjkQuery(q)) return;
+        clearTimeout(moTimer);
+        moTimer = setTimeout(function () {
+          mergeResults(modal, q);
+        }, 200);
       });
-      obs.observe(parts.resultsList, { childList: true, subtree: true });
+      obs.observe(parts.pagefindList, { childList: true, subtree: true });
     }
 
     return true;
@@ -235,12 +235,11 @@
 
   function tryHook() {
     var modal = document.querySelector("pagefind-modal");
-    if (!modal) return false;
-    return hookModalInput(modal);
+    return modal ? hookModalInput(modal) : false;
   }
 
   function scheduleHook() {
-    [50, 150, 400, 900, 1500].forEach(function (ms) {
+    [50, 200, 500, 1200].forEach(function (ms) {
       setTimeout(tryHook, ms);
     });
   }
@@ -254,12 +253,11 @@
 
   var modal = document.querySelector("pagefind-modal");
   if (modal && typeof MutationObserver !== "undefined") {
-    var openObs = new MutationObserver(function () {
+    new MutationObserver(function () {
       if (modal.hasAttribute("open") || modal.classList.contains("open")) {
         scheduleHook();
       }
-    });
-    openObs.observe(modal, { attributes: true, attributeFilter: ["open", "class"] });
+    }).observe(modal, { attributes: true, attributeFilter: ["open", "class"] });
   }
 
   loadIndex();
