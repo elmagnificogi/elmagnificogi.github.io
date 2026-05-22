@@ -1,10 +1,27 @@
-_site
+# Jekyll / build output
+_site/
+_site-*/
+.jekyll-cache/
+.jekyll-metadata
+
+# Pagefind & local search test output
 pagefind/
+.pagefind-ui-bundle/
+
+# Ruby / Node
 vendor/
-node_modules
+node_modules/
 npm-debug.log
+Gemfile.lock
+
+# OS
 .DS_Store
 */.DS_Store
 */*/.DS_Store
-.jekyll-cache/
-.jekyll-metadata
+
+# Obsidian vault settings (local editor; posts live under _posts/)
+.obsidian/
+
+# Draw.io backups
+draw/**.bkp
+draw/.$*
