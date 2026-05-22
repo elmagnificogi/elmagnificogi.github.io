@@ -13,7 +13,8 @@ module Jekyll
     INDEX_VERSION = 2
 
     def strip_tags(html)
-      html
+      s = html.is_a?(Array) ? html.join(" ") : html.to_s
+      s
         .gsub(%r{<script[\s\S]*?</script>}i, " ")
         .gsub(%r{<style[\s\S]*?</style>}i, " ")
         .gsub(/<[^>]+>/, " ")
@@ -34,7 +35,7 @@ module Jekyll
       subtitle = html[/data-pagefind-meta="subtitle"[^>]*>([^<]+)/i, 1]
 
       body_html = m[1]
-      headings = body_html.scan(/<h[1-6][^>]*>([^<]+)</i).map { |h| strip_tags(h) }.reject(&:empty?)
+      headings = body_html.scan(/<h[1-6][^>]*>([^<]+)</i).flatten.map { |h| strip_tags(h) }.reject(&:empty?)
       text = strip_tags(body_html)
       return nil if text.empty? && headings.empty?
 
