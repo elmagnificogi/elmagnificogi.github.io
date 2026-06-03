@@ -18,10 +18,3 @@ Gemfile.lock
 .DS_Store
 */.DS_Store
 */*/.DS_Store
-
-# Obsidian vault settings (local editor; posts live under _posts/)
-.obsidian/
-
-# Draw.io backups
-draw/**.bkp
-draw/.$*
