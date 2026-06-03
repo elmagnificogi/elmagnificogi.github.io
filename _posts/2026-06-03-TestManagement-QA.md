@@ -7,7 +7,7 @@ update:     2026-06-03
 author:     "elmagnifico"
 header-img: "img/bg2.jpg"
 catalog:    true
-mermaid:    true
+mermaid:    false
 tobecontinued: false
 tags:
     - Test
