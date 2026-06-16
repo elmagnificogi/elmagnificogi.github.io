@@ -11,6 +11,7 @@ mermaid:    false
 tobecontinued: false
 tags:
     - AI
+    - 杂谈
 ---
 
 ## Foreword
