@@ -2,8 +2,8 @@
 layout:     post
 title:      "理想的AI工作流"
 subtitle:   "AI、Agent、Skill、workflow、未来"
-date:       2026-07-01
-update:     2026-07-01
+date:       2026-07-02
+update:     2026-07-02
 author:     "elmagnifico"
 header-img: "img/bg9.jpg"
 catalog:    true
