@@ -3,7 +3,7 @@ layout:     post
 title:      "AI工作流"
 subtitle:   "AI、Agent、Skill、workflow"
 date:       2026-06-26
-update:     2026-06-26
+update:     2026-07-06
 author:     "elmagnifico"
 header-img: "img/bg8.jpg"
 catalog:    true
@@ -569,6 +569,11 @@ AgentWorkflow/
 独自开发做了一个小需求，比较独立，和其他模块不耦合。看了一下实际 token 消耗，Cursor 大概用了 10% 的 Pro API 配额，折合约 2 美元，还能接受；一共交互了约 20 轮，耗时大概半天，等待间隙足够再开一条小需求。
 一个大型项目的中等需求，消耗了30%，算起来就是6刀，交互了50次左右，主要是补充技术文档
 
+
+
+![image-20260706204050425](https://img.elmagnifico.tech/static/upload/elmagnifico/20260706204655033.png)
+
+Claude的内部plan工作流，基本和我的一致，只是我的可以灵活修改，而Claude是用harness写死的
 
 ## Quote
 
