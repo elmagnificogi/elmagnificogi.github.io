@@ -49,9 +49,9 @@ CodeBind Docs：**代码文档绑定**，VS Code / Cursor 都能用。
 
 插件页面
 
-> https://marketplace.visualstudio.com/items?itemName=codebind.codebind-docs
+> https://marketplace.visualstudio.com/items?itemName=codebinddocs.codebinddocs
 >
-> https://open-vsx.org/extension/codebinddocs/codebind-docs
+> https://open-vsx.org/extension/codebinddocs/codebinddocs
 
 仓库
 
