@@ -31,6 +31,7 @@ tags:
 - 往源码里塞大段注释，污染代码，review 时噪音一大堆
 - 文档丢到云端 wiki，和仓库版本对不上，Agent 也摸不着
 - 靠人记得「这个函数的设计在某某页」，人会忘，Agent 更不会自己猜
+- 与Agent共同工作，某些时候框架设计都是堆在一起的，某一个文档，但是当你看代码的时候不一定会意识到对应的文档
 
 既然如此，为什么不把代码和文档绑紧一点？理想态当然是混在同一个文件里：上面文档（图、视频都行），下面代码，按顺序拼接，编译时再拆回去。Jupyter、Colab 某种程度上就是这条路。
 
@@ -44,16 +45,24 @@ tags:
 
 ![image-20260719233917717](https://img.elmagnifico.tech/static/upload/elmagnifico/202607192343632.png)
 
-CodeBind Docs：**旁路绑定的代码文档扩展**，VS Code / Cursor 都能用。
+CodeBind Docs：**代码文档绑定**，VS Code / Cursor 都能用。
+
+插件页面
 
 > https://marketplace.visualstudio.com/items?itemName=codebind.codebind-docs
+>
+> 
+
+仓库
+
+> https://github.com/elmagnificogi/CodeBindDocs
 
 - 文档落在仓库的 `docs/`（可改路径），跟代码一起进 Git
 - 绑定写在 Markdown 的 YAML 头里，不改被绑定的源码
 - 支持整文件绑定，也支持某个函数/类的行范围绑定
 - 打开已绑定的源文件 → 右侧自动打开对应文档；光标进到某个代码块，文档跟着切
 
-绑定后是这样：
+绑定后仅仅是在文档头增加了下面的内容，一般不影响显示：
 
 ```yaml
 ---
