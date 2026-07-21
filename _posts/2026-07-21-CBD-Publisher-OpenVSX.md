@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "插件上架：Publisher 那些破事"
+title:      "VSC/Cursor插件上架"
 subtitle:   "VS Code、Cursor、Open VSX、命名空间"
 date:       2026-07-21
 update:     2026-07-21
