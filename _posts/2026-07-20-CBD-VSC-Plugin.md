@@ -51,7 +51,7 @@ CodeBind Docs：**代码文档绑定**，VS Code / Cursor 都能用。
 
 > https://marketplace.visualstudio.com/items?itemName=codebind.codebind-docs
 >
-> 
+> https://open-vsx.org/extension/codebinddocs/codebind-docs
 
 仓库
 
@@ -84,8 +84,6 @@ cbd:
 
 ## 优势
 
-对照痛点看就清楚了：
-
 | 痛点 | CBD 怎么搞 |
 |------|------------|
 | 文档散、和代码对不上 | 绑定写在文档头，跟文件 / 行范围走 |
@@ -106,7 +104,7 @@ cbd:
 
 ## 五分钟上手
 
-1. 装扩展（[市场页](https://marketplace.visualstudio.com/items?itemName=codebind.codebind-docs)搜 CodeBind Docs，或装 VSIX / 源码目录），打开**文件夹工作区**（单文件模式扫不了绑定）
+1. 装扩展（[插件市场](https://marketplace.visualstudio.com/items?itemName=codebind.codebind-docs)搜 CodeBind Docs，或装 VSIX / 源码目录），打开**文件夹工作区**（单文件模式扫不了绑定）
 2. 命令面板跑 **`CBD: Initialize`**，创建 `docs/`、`assets/`、模板、`AGENTS.md`、`.cursor/rules/cbd.mdc` 等
 3. 打开一个源文件，跑 **`CBD: Bind Doc to Current File`**，选整文件或代码块（代码块尽量填 symbol）
 4. 之后切源文件就会左右分栏；左侧 Activity Bar 有 CodeBind Docs 图标，已绑定 / 待绑定一目了然
