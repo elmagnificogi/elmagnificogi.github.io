@@ -5,7 +5,7 @@ subtitle:   "VS Code、Cursor、Open VSX、命名空间"
 date:       2026-07-21
 update:     2026-07-21
 author:     "elmagnifico"
-header-img: "img/blackboard.jpg"
+header-img: "img/cap-head-bg.jpg"
 catalog:    true
 mermaid:    false
 tobecontinued: false
