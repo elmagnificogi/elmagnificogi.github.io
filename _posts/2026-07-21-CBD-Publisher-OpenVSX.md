@@ -136,6 +136,20 @@ CBD 这边 VS 市场页：
 
 
 
+### Token
+
+拿token，需要先新建一个组织，新建一个项目，然后就能拿到个人token了
+
+> https://go.microsoft.com/fwlink/?LinkId=307137
+
+![image-20260721191135472](https://img.elmagnifico.tech/static/upload/elmagnifico/20260721191135499.png)
+
+默认只能一年，而且由于政策变动，目前只支持到26年12月1号，后续看情况吧
+
+![image-20260721191259338](https://img.elmagnifico.tech/static/upload/elmagnifico/20260721191259363.png)
+
+
+
 ## Open VSX （Cursor / VSCodium）
 
 Cursor 扩展面板吃的是 Open VSX，步骤和 VS 平行、账号体系完全两套。
@@ -156,6 +170,14 @@ npx ovsx publish codebind-docs-x.y.z.vsix -p <token>
 ```
 
 仓库里 `publish:vsce` / `publish:ovsx` 两边各发一遍就行。注意：Open VSX 的 namespace 可以和 VS 的 publisher **不同**（我就是因为撞名被迫拆开的）。
+
+### Token
+
+![image-20260721190113470](https://img.elmagnifico.tech/static/upload/elmagnifico/20260721190113512.png)
+
+拿token比较简单，直接生成即可，后续给到CI流程进行自动化
+
+
 
 ### 认领 namespace
 
