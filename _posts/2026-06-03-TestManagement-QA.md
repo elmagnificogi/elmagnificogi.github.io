@@ -167,7 +167,7 @@ Qase的测试内容的描述更符合我预期一些，自动化的标签是有�
 
 ![image-20260603201047001](https://img.elmagnifico.tech/static/upload/elmagnifico/20260603201047036.png)
 
-AgileTest的这个价格稍微有点低，一个人1.5刀，这不是把其他人架起来烤嘛，不过Agile 也是ATLASSIAN公司的，需要配合Jira一起用，这个有点麻烦，我没有Jira，只能放弃了
+AgileTest的这个价格稍微有点低，一个人1.5刀，这不是把其他人架起来烤嘛，不过Agile也是ATLASSIAN公司的，需要配合Jira一起用，这个有点麻烦，我没有Jira，只能放弃了
 
 
 
