@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "Cursor、Claude、Codex对比"
+title:      "Cursor、Claude、Codex深度体验、对比"
 subtitle:   "AI、Agent、Skill、workflow、产品设计"
 date:       2027-07-16
 update:     2027-07-16
@@ -30,7 +30,31 @@ Cursor相对没有Claude和Codex那么激进，更偏向为已有工程和程序
 
 
 
+#### Agent模式
+
+Cursor虽然想主推Agent模式，每次启动默认就是Agent对话窗口，但是这东西还是有点难用，对于现有工程还是用IDE模式更好一些。
+
+
+
+#### 用量
+
+![image-20260727150119662](https://img.elmagnifico.tech/static/upload/elmagnifico/20260727150119694.png)
+
+由于Claude被5小时限制，大部分需求是Cursor做的，也只是轻度使用
+
+![image-20260727150218082](https://img.elmagnifico.tech/static/upload/elmagnifico/20260727150218114.png)
+
+满打满算也就700M token就耗尽了plan，如果全力用，估计一周就耗尽了。
+
+![image-20260728161440574](https://img.elmagnifico.tech/static/upload/elmagnifico/20260728161440619.png)
+
+Cursor发现我用尽了，还送了20刀，可以的
+
+
+
 ## Claude
+
+### 桌面应用
 
 Claude本身不是一个像 Cursor 那样的独立编辑器，它的核心是 agent 对话式工作方式，但并不是只有纯终端聊天——有几种带图形界面的用法：
 
@@ -38,7 +62,7 @@ Claude本身不是一个像 Cursor 那样的独立编辑器，它的核心是 ag
 Claude Code 有 VS Code 和 JetBrains（IntelliJ、PyCharm 等）的官方插件。你在自己熟悉的编辑器里写代码，Claude Code 以侧边栏面板的形式运行，它提出的修改会以 **inline diff 的形式直接显示在编辑器里**，你可以逐个审查、接受或拒绝改动。这和 Cursor 的 Agent/Composer 模式体验很像——区别在于你用的是原生 VS Code/JetBrains，而不是一个魔改的编辑器。
 
 **2. 桌面应用（Mac/Windows）**
-独立的 Claude Code 桌面应用，以会话为中心，可以并行跑多个任务，改动以 diff 视图呈现供你审查。
+独立的 Claude 桌面应用，以会话为中心，可以并行跑多个任务，改动以 diff 视图呈现供你审查。
 
 **3. 网页版**
 claude.ai/code，在云端环境跑任务，同样是对话 + diff 审查的模式。
@@ -88,11 +112,77 @@ Claude的联网搜索的意向似乎偏弱一些，有些功能或者能力网�
 
 
 
+### Claude Code
+
+Claude Code在VSCode或者Cursor插件中，就感觉比桌面APP响应快多了，而且反馈也比较好一些，不像APP端思考超久，感觉没干活的样子。
+
+Claude Code在干活过程中还能直接插话进去，也没有排队这种机制，不知道内部是怎么实现的，可以纠正中间跑偏的地方，这个还挺好的
+
+Claude Code和VSC的结合感觉总有一种不兼容的既视感，体验上能明显感觉他是额外的一块，融合的不是很好。
+
+Claude Code也少了很多插件或者交互的支持，明显不如Cursor原生的Agent好用
+
+
+
+#### 用量
+
+![image-20260727150107972](https://img.elmagnifico.tech/static/upload/elmagnifico/20260727150108046.png)
+
+Claude，一个月只用了50%多，主要还是这个时限太恶心了，Fable5还送了100刀，三个改动直接耗尽，太不经用了。
+
+![image-20260727150858211](https://img.elmagnifico.tech/static/upload/elmagnifico/20260727150858243.png)
+
+Claude主要是在两个机器上使用的，总用量差不多100M Tokens，可以看到实际和Cursor比，价格差不多，但是用量小太多了，就算全用完，估计也不到300M Tokens
+
+
+
 ## CodeX
+
+#### 注册
+
+自从上次被封了1000刀以后，再没弄过新的了，现在再弄一个还真麻烦。账号注册还是随便注册，但是需要短信激活验证
+
+![image-20260728164803628](https://img.elmagnifico.tech/static/upload/elmagnifico/20260728164803672.png)
+
+我的GiffGaff目前有点问题，收不到验证码，虽然号还是活着的
+
+- 最新消息：GiffGaff也开始回收国内的账号了，很多人被强制回收了，我还没收到邮件
+
+OpenAI目前看是安哥拉的短信是最容易过的，随便试了一个，确实可以过
+
+目前用的接码平台，短信收到失败，可以退款，最低充值3刀，刚好够用了
+
+> https://hero-sms.com/cn/purchases/numbers
+
+![image-20260728165241805](https://img.elmagnifico.tech/static/upload/elmagnifico/20260728165241838.png)
+
+一些其他路径，利用美区苹果ID，然后使用ApplePay绕过OpenAI的支付，实际上不行，试过了，虽然可以跳过短信验证的步骤，但是无法成功支付，国内的信用卡会被拒绝。
+
+- 同理、谷歌pay、paypal也都不行了，最后是让国外朋友直接信用卡帮我付了
+
+
+
+#### 使用
+
+![image-20260728180719202](https://img.elmagnifico.tech/static/upload/elmagnifico/20260728180719242.png)
+
+Codex还是有点无耻的，直接拿其他Agent工具的内容过来使用。
+
+![image-20260728194040531](https://img.elmagnifico.tech/static/upload/elmagnifico/20260728194040565.png)
+
+CodeX一上来就提示你安装插件，基本就是MCP，但是有很多软件都整合到里面了，对于小白用户来说不要太简单了
+
+总体感觉Codex确实反馈更快，比Cursor都快很多（基于`5.6 Sol 中`的模型强度），不过中性的情况下，感觉模型还是思考少一些，很容易思考不足或者写的代码是有问题的。拿来工作还是要偏向更智能一些，轻度的情况下，基本判断都有问题，就好像是个傻子，只看你给的东西，多一点点都不会思考。
+
+![image-20260728193129604](https://img.elmagnifico.tech/static/upload/elmagnifico/20260728193136685.png)
+
+比如让他检查我的文章，我给了路径，竟然告诉我没有文章，我服了。切换到极高以后，就具备自主性了，自己找文章，想尽一切办法完成目标。
 
 
 
 ## Summary
+
+Cursor和Claude基本是一起测试使用的，大概是3周左右，消耗了10亿Tokens。
 
 
 
