@@ -38,7 +38,7 @@ RGB或者RGBW类似的多通道光源数据校准流程总结一下，之前一�
 
 ![img](https://img.elmagnifico.tech/static/upload/elmagnifico/20260120114528556.png)
 
-人眼对亮度的感知是非线性的，所以要通过Gamma进行修正，一般选取标准 Gamma值：2.2（sRGB）或 2.4（Rec.709）
+人眼对亮度的感知是非线性的，所以要通过Gamma进行修正，一般选取标准Gamma值：2.2（sRGB）或2.4（Rec.709）
 
 ```python
 # Gamma校正公式

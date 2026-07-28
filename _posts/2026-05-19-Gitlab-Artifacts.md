@@ -27,7 +27,7 @@ tags:
 - 测试治具固件
 - 其它治具与工具（RFID、MAC、IP、参数等配置工具）
 
-各组件由不同负责人维护、版本节奏不同，因此适合 **GitLab 多仓库独立开发**，再通过 **manufacturing-kits + manifest** 在发布时打成单一制造包，并自动生成与发布说明。
+各组件由不同负责人维护、版本节奏不同，因此适合 **GitLab多仓库独立开发**，再通过 **manufacturing-kits + manifest** 在发布时打成单一制造包，并自动生成与发布说明。
 
 
 
@@ -46,7 +46,7 @@ sequenceDiagram
 
 理清思路：
 
-Gitlab 社区版没有制品库或者制品这个概念，但是我们可以通过Gitlab仓库本身的功能，建立一个制品仓库，把制品的manifest文件和对应的CI动作都集成在这个仓库里，需要发版的时候只需要触发这个仓库进行CI即可。
+Gitlab社区版没有制品库或者制品这个概念，但是我们可以通过Gitlab仓库本身的功能，建立一个制品仓库，把制品的manifest文件和对应的CI动作都集成在这个仓库里，需要发版的时候只需要触发这个仓库进行CI即可。
 
 而对于各个仓库来说，完全是不知道这个制品仓库的，从而实现解耦。
 
@@ -66,7 +66,7 @@ Gitlab 社区版没有制品库或者制品这个概念，但是我们可以通�
 | | `mac-fixture` MAC工具 | C | 可选 |
 | | `ip-fixture` IP工具 | A | 可选 |
 
-命名规则：**`{产品线}-{YY.M.D}`**，例如 `P1-26.5.20` → 对应 Git tag / Release 名。
+命名规则：**`{产品线}-{YY.M.D}`**，例如 `P1-26.5.20`，对应Git tag / Release名。
 
 - 一般来说生产是按批或者订单进行的，只涉及到生产改动时这个进行改动即可
 
@@ -122,13 +122,13 @@ flowchart TB
 | **制造包** | 一个产品线一个 meta 仓：`P1/manufacturing-kits`（**无业务代码，只有 manifest + CI**，也可以多产线一个仓库） |
 | **文档** | 治具更新 Markdown **不手写维护**，由 CI 从 manifest + 各组件 Release description 生成 |
 
-「如有」组件：manifest 里 `required: false`，未参与本次 Kit 则整段在生成文档里标 **「本次未更新 / 沿用上一 Kit」**。
+“如有”组件：manifest里 `required: false`，未参与本次Kit则整段在生成文档里标 **“本次未更新 / 沿用上一Kit”**。
 
 
 
 ## manifest模板
 
-在 `manufacturing-kits` 仓库中，每个 Kit 一个 YAML，与模板一一对应：
+在 `manufacturing-kits` 仓库中，每个Kit一个YAML，与模板一一对应：
 
 ```yaml
 # kits/P1-26.5.20.yaml
@@ -160,9 +160,9 @@ components:
 
 **规则：**
 
-- 必选组件：Kit 发布前必须在 manifest 里 **显式 `release_tag` + `artifact`，且组件仓库 Release 已存在**。
-- 可选组件：未列则 CI 从 `previous_kit` **继承**上一版引用（文档里写清楚「沿用 P1-26.4.12 之 fc-soc v45.6」）。
-- 各组件仓库由 owner **在 Release 页发布附件并填写说明**；制品库 CI **不编译**，只从 Release 拉文件。
+- 必选组件：Kit发布前必须在manifest里 **显式 `release_tag` + `artifact`，且组件仓库Release已存在**。
+- 可选组件：未列则CI从 `previous_kit` **继承**上一版引用（文档里写清楚“沿用P1-26.4.12之fc-soc v45.6”）。
+- 各组件仓库由owner **在Release页发布附件并填写说明**；制品库CI **不编译**，只从Release拉文件。
 
 
 
@@ -177,7 +177,7 @@ components:
 | @负责人 | manifest `owner` + GitLab CODEOWNERS |
 | 「如有」 | `required: false` + 继承策略 |
 
-**发布物目录示例（CI 打 zip）：**
+**发布物目录示例（CI打zip）：**
 
 ```text
 P1-26.5.20/
@@ -194,7 +194,7 @@ P1-26.5.20/
     └── ip-burn-tool-...
 ```
 
-产线 / 升级设备：只部署 **`kit_id` 对应 zip**（或从内网按manifest 拉取）。
+产线 / 升级设备：只部署 **`kit_id` 对应zip**（或从内网按manifest拉取）。
 
 
 
@@ -211,7 +211,7 @@ P1-26.5.20/
 
 
 
-#### manufacturing-kits 仓库目录
+#### manufacturing-kits仓库目录
 
 ```text
 manufacturing-kits/
@@ -236,15 +236,15 @@ manufacturing-kits/
 
 `.gitlab-ci.yml` 阶段示意：
 
-1. `validate`：schema + 检查各组件 Release 是否存在
-2. `collect`：按 manifest 从各组件 Release API 下载附件
-3. `document`：渲染 `更新内容-P1-26.5.20.md`（可合并 Release description）
+1. `validate`：schema + 检查各组件Release是否存在
+2. `collect`：按manifest从各组件Release API下载附件
+3. `document`：渲染 `更新内容-P1-26.5.20.md`（可合并Release description）
 4. `package`：zip + sha256
-5. `release`：制品库打 Kit 的 GitLab Release
+5. `release`：制品库打Kit的GitLab Release
 
 注意`manufacturing-kits + manifest` 
 
-- 不是 GitLab 自带的产品功能，需要自建一个 GitLab 仓库 + 写一点 CI/脚本；GitLab 提供的是「存清单、跑流水线、存制品、发 Release、做审批」这些积木。
+- 不是GitLab自带的产品功能，需要自建一个GitLab仓库 + 写一点CI/脚本；GitLab提供的是“存清单、跑流水线、存制品、发Release、做审批”这些积木。
 
 
 
@@ -305,7 +305,7 @@ AI默认你的制品库的CI流程是从各个仓库拉代码，然后编译，�
 
 #### Runner
 
-如果要用Gitlab的CI流水线，那么要先配置好 Runner。可以用 VPS，也可以在内网 Windows 机器上装（例如 `shell` executor + Git Bash），在 GitLab 项目里注册并授权即可
+如果要用Gitlab的CI流水线，那么要先配置好Runner。可以用VPS，也可以在内网Windows机器上装（例如 `shell` executor + Git Bash），在GitLab项目里注册并授权即可
 
 ![image-20260519170233610](https://img.elmagnifico.tech/static/upload/elmagnifico/20260519190645301.png)
 
@@ -355,7 +355,7 @@ Job运行时需要访问到各种项目的页面，对应的这些项目就得�
 
 
 
-除了这个问题，Gitlab还有一点不如Github，发布页面不能直接引用仓库内的文件，不能直接添加资源，不能直接上传，这就导致你要把发布页面包含仓库内的东西就必须走Gitlab CI或者是手写一个脚本利用API来上传文件，然后这里还有坑点。这个你后上传的文件，是有权限的，走CI的那个流水线似乎没权限，访问不到这个链接，而要解决这个问题就还得给CI的脚本配上 owner 的 token，一环扣一环。
+除了这个问题，Gitlab还有一点不如Github，发布页面不能直接引用仓库内的文件，不能直接添加资源，不能直接上传，这就导致你要把发布页面包含仓库内的东西就必须走Gitlab CI或者是手写一个脚本利用API来上传文件，然后这里还有坑点。这个你后上传的文件，是有权限的，走CI的那个流水线似乎没权限，访问不到这个链接，而要解决这个问题就还得给CI的脚本配上owner的token，一环扣一环。
 
 - 实际上如果走Gitlab内部的上传库，runner是可以正常访问的，生成物也是能正常访问的
 

@@ -56,27 +56,41 @@ Cursor发现我用尽了，还送了20刀，可以的
 
 ### 桌面应用
 
-Claude本身不是一个像 Cursor 那样的独立编辑器，它的核心是 agent 对话式工作方式，但并不是只有纯终端聊天——有几种带图形界面的用法：
+Claude本身不是一个像Cursor那样的独立编辑器，它的核心是agent对话式工作方式，但并不是只有纯终端聊天，主要有几种带图形界面的用法：IDE插件（最接近Cursor的体验）、桌面应用（Mac/Windows）
 
-**1. IDE 插件（最接近 Cursor 的体验）**
-Claude Code 有 VS Code 和 JetBrains（IntelliJ、PyCharm 等）的官方插件。你在自己熟悉的编辑器里写代码，Claude Code 以侧边栏面板的形式运行，它提出的修改会以 **inline diff 的形式直接显示在编辑器里**，你可以逐个审查、接受或拒绝改动。这和 Cursor 的 Agent/Composer 模式体验很像——区别在于你用的是原生 VS Code/JetBrains，而不是一个魔改的编辑器。
 
-**2. 桌面应用（Mac/Windows）**
-独立的 Claude 桌面应用，以会话为中心，可以并行跑多个任务，改动以 diff 视图呈现供你审查。
 
-**3. 网页版**
-claude.ai/code，在云端环境跑任务，同样是对话 + diff 审查的模式。
+#### 桌面应用（Mac/Windows）
 
-**4. 终端 CLI**
+独立的Claude Code桌面应用，以会话为中心，可以并行跑多个任务，改动以diff视图呈现供你审查。
+
+
+
+#### IDE插件
+
+Claude Code有VS Code和JetBrains（IntelliJ、PyCharm等）的官方插件。你在自己熟悉的编辑器里写代码，Claude Code以侧边栏面板的形式运行，它提出的修改会以inline diff的形式直接显示在编辑器里，你可以逐个审查、接受或拒绝改动。这和Cursor的Agent/Composer模式体验很像，区别在于你用的是原生VS Code/JetBrains，而不是一个魔改的编辑器。
+
+
+
+#### 网页版
+
+claude.ai/code，在云端环境跑任务，同样是对话 + diff审查的模式。
+
+
+
+#### 终端CLI
+
 最原始的形态，纯命令行对话。
 
-**和 Cursor 的主要区别：**
 
-- Claude Code **没有 Tab 自动补全**那种"边打字边补全"的功能，它的定位是把整个任务交给 agent 去完成（读代码、改多个文件、跑测试），而不是辅助你逐行手写。
-- Cursor 是"编辑器为主、AI 为辅"，Claude Code 是"agent 为主、你负责审查"。
-- 如果你想要"自己写代码 + AI 帮忙"的体验，用 VS Code + Claude Code 插件最合适；如果任务可以整个描述清楚丢给 AI，对话式反而效率更高。
 
-简单说：**不能在 Claude Code 里直接手动编辑代码**（它不是编辑器），但通过 IDE 插件，它可以嵌进你的编辑器，diff 审查体验和 Cursor 的 agent 模式基本一致。
+#### 和Cursor的主要区别
+
+- Claude Code没有Tab自动补全那种“边打字边补全”的功能，它的定位是把整个任务交给agent去完成（读代码、改多个文件、跑测试），而不是辅助你逐行手写。
+- Cursor是“编辑器为主、AI为辅”，Claude Code是“agent为主、你负责审查”。
+- 如果你想要“自己写代码 + AI帮忙”的体验，用VS Code + Claude Code插件最合适。如果任务可以整个描述清楚丢给AI，对话式反而效率更高。
+
+简单说，不能在Claude Code里直接手动编辑代码（它不是编辑器），但通过IDE插件，它可以嵌进你的编辑器，diff审查体验和Cursor的agent模式基本一致。
 
 
 
