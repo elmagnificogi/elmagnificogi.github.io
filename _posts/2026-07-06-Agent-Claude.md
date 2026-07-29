@@ -54,43 +54,23 @@ Cursor发现我用尽了，还送了20刀，可以的
 
 ## Claude
 
-### 桌面应用
+Claude本身不是一个像Cursor那样的独立编辑器，它的核心是agent对话式工作方式，但并不是只有纯终端聊天，主要有几种带图形界面的用法：
 
-Claude本身不是一个像Cursor那样的独立编辑器，它的核心是agent对话式工作方式，但并不是只有纯终端聊天，主要有几种带图形界面的用法：IDE插件（最接近Cursor的体验）、桌面应用（Mac/Windows）
+- 桌面应用（Mac/Windows），独立的Claude Code桌面应用，以会话为中心，可以并行跑多个任务，改动以diff视图呈现供你审查。
 
+- IDE插件，Claude Code有VS Code和JetBrains（IntelliJ、PyCharm等）的官方插件。你在自己熟悉的编辑器里写代码，Claude Code以侧边栏面板的形式运行，它提出的修改会以inline diff的形式直接显示在编辑器里，你可以逐个审查、接受或拒绝改动。这和Cursor的Agent/Composer模式体验很像，区别在于你用的是原生VS Code/JetBrains，而不是一个魔改的编辑器。
 
+- 网页版，claude.ai/code，在云端环境跑任务，同样是对话 + diff审查的模式。
 
-#### 桌面应用（Mac/Windows）
-
-独立的Claude Code桌面应用，以会话为中心，可以并行跑多个任务，改动以diff视图呈现供你审查。
-
-
-
-#### IDE插件
-
-Claude Code有VS Code和JetBrains（IntelliJ、PyCharm等）的官方插件。你在自己熟悉的编辑器里写代码，Claude Code以侧边栏面板的形式运行，它提出的修改会以inline diff的形式直接显示在编辑器里，你可以逐个审查、接受或拒绝改动。这和Cursor的Agent/Composer模式体验很像，区别在于你用的是原生VS Code/JetBrains，而不是一个魔改的编辑器。
+- 终端CLI，最原始的形态，纯命令行对话。
 
 
 
-#### 网页版
+### 桌面端
 
-claude.ai/code，在云端环境跑任务，同样是对话 + diff审查的模式。
+Cursor是“编辑器为主、AI为辅”，Claude Code是“agent为主、你负责审查”。如果你想要“自己写代码 + AI帮忙”的体验，用VS Code + Claude Code插件最合适。如果任务可以整个描述清楚丢给AI，对话式反而效率更高。
 
-
-
-#### 终端CLI
-
-最原始的形态，纯命令行对话。
-
-
-
-#### 和Cursor的主要区别
-
-- Claude Code没有Tab自动补全那种“边打字边补全”的功能，它的定位是把整个任务交给agent去完成（读代码、改多个文件、跑测试），而不是辅助你逐行手写。
-- Cursor是“编辑器为主、AI为辅”，Claude Code是“agent为主、你负责审查”。
-- 如果你想要“自己写代码 + AI帮忙”的体验，用VS Code + Claude Code插件最合适。如果任务可以整个描述清楚丢给AI，对话式反而效率更高。
-
-简单说，不能在Claude Code里直接手动编辑代码（它不是编辑器），但通过IDE插件，它可以嵌进你的编辑器，diff审查体验和Cursor的agent模式基本一致。
+简单说，不能在Claude里直接手动编辑代码（它不是编辑器），但通过IDE插件，它可以嵌进你的编辑器，diff审查体验和Cursor的agent模式基本一致。
 
 
 
@@ -111,6 +91,8 @@ Claude的上下文比Cursor默认要大很多，对应实际使用时跑偏的�
 
 
 #### 缺点
+
+Claude Code没有Tab自动补全那种“边打字边补全”的功能，它的定位是把整个任务交给agent去完成（读代码、改多个文件、跑测试），而不是辅助你逐行手写。
 
 Claude不太好的地方就是如果你想要看代码或者文档Claude把这部分UI隐藏得有点深，而且显示效果也比较差，给程序员用还是有点别扭，给纯小白或者是非编码类工作人员用是可以的。
 
@@ -192,11 +174,21 @@ CodeX一上来就提示你安装插件，基本就是MCP，但是有很多软件
 
 比如让他检查我的文章，我给了路径，竟然告诉我没有文章，我服了。切换到极高以后，就具备自主性了，自己找文章，想尽一切办法完成目标。
 
+Codex的整体UI，你能感觉出来更流畅，绘制得也更精细，对比Claude，那就是个傻大黑，只抄了个皮毛。
 
+
+
+#### 缺点
+
+Codex是基于windows商店的，安装贼慢，然后内置的浏览器还容易崩溃、出问题以后必须重装才行，这么明显的bug竟然没修有点不可思议。
+
+![image-20260729193543943](https://img.elmagnifico.tech/static/upload/elmagnifico/20260729193543993.png)
 
 ## Summary
 
 Cursor和Claude基本是一起测试使用的，大概是3周左右，消耗了10亿Tokens。
+
+Codex是最后用的，刚好是取消了5小时限制，只有周限制了，感觉也有点不耐用，但是每周能恢复，这一点很好
 
 
 
