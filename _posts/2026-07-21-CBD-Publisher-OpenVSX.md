@@ -38,7 +38,7 @@ CBD是正经VS Code扩展，跟Cursor Plugin那套无关。想让人在Cursor里
 
 
 
-## VS Code插件（Microsoft Marketplace）
+## VS Code插件
 
 官方文档：[Publishing Extensions](https://code.visualstudio.com/api/working-with-extensions/publishing-extension)。下面按我实际走过的顺序记。
 
@@ -150,7 +150,7 @@ CBD这边VS市场页：
 
 
 
-## Open VSX（Cursor / VSCodium）
+## Open VSX
 
 Cursor扩展面板吃的是Open VSX，步骤和VS平行、账号体系完全两套。
 
