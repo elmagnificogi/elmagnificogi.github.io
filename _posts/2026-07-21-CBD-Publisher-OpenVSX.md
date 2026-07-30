@@ -3,7 +3,7 @@ layout:     post
 title:      "VSC/Cursor插件上架"
 subtitle:   "VS Code、Cursor、Open VSX、命名空间"
 date:       2026-07-21
-update:     2026-07-21
+update:     2026-07-30
 author:     "elmagnifico"
 header-img: "img/cap-head-bg.jpg"
 catalog:    true
@@ -207,6 +207,8 @@ Open VSX和VS Marketplace不一样：
 管理员通过后，namespace变成verified，你就是owner，警告会消失（有时再发一个新版本才完全干净）。
 
 ![image-20260721172645599](https://img.elmagnifico.tech/static/upload/elmagnifico/20260721172645643.png)
+
+实际我已经获得授权了，但是依然未认证，这个需要github上继续联系对方，他应该只是设置了publisher，但是没把你设置为owner，导致这个命名空间一直没有被切换过来。
 
 
 
