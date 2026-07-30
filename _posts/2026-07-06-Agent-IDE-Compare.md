@@ -2,8 +2,8 @@
 layout:     post
 title:      "Cursor、Claude、Codex深度体验、对比"
 subtitle:   "AI、Agent、Skill、workflow、产品设计"
-date:       2027-07-30
-update:     2027-07-30
+date:       2026-07-30
+update:     2026-07-30
 author:     "elmagnifico"
 header-img: "img/cap-head-bg2.jpg"
 catalog:    true
