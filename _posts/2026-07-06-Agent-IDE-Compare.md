@@ -1,9 +1,9 @@
 ---
 layout:     post
-title:      "Cursor、Claude、Codex深度体验、对比"
+title:      "Cursor、Claude、CodeX深度体验、对比"
 subtitle:   "AI、Agent、Skill、workflow、产品设计"
 date:       2026-07-30
-update:     2026-07-30
+update:     2026-08-06
 author:     "elmagnifico"
 header-img: "img/cap-head-bg2.jpg"
 catalog:    true
@@ -26,7 +26,7 @@ tags:
 
 Cursor默认套餐的上下文大小实在是太小了才260多K，别人都1M+，大需求很容易就跑过了，还好内置了压缩上下文和长期记忆等，上下文比较大的时候会自动衔接处理，不需要特别注意。
 
-Cursor相对没有Claude和Codex那么激进，更偏向为已有工程和程序员协作方向服务，针对已有的工作流改动量比较小，适合循序渐进的切换到Agent工作流。
+Cursor相对没有Claude和CodeX那么激进，更偏向为已有工程和程序员协作方向服务，针对已有的工作流改动量比较小，适合循序渐进的切换到Agent工作流。
 
 
 
@@ -162,36 +162,56 @@ OpenAI目前看是安哥拉的短信是最容易过的，随便试了一个，�
 
 ![image-20260728180719202](https://img.elmagnifico.tech/static/upload/elmagnifico/20260728180719242.png)
 
-Codex还是有点无耻的，直接拿其他Agent工具的内容过来使用。
+CodeX还是有点无耻的，直接拿其他Agent工具的内容过来使用。
 
 ![image-20260728194040531](https://img.elmagnifico.tech/static/upload/elmagnifico/20260728194040565.png)
 
 CodeX一上来就提示你安装插件，基本就是MCP，但是有很多软件都整合到里面了，对于小白用户来说不要太简单了
 
-总体感觉Codex确实反馈更快，比Cursor都快很多（基于`5.6 Sol 中`的模型强度），不过中性的情况下，感觉模型还是思考少一些，很容易思考不足或者写的代码是有问题的。拿来工作还是要偏向更智能一些，轻度的情况下，基本判断都有问题，就好像是个傻子，只看你给的东西，多一点点都不会思考。
+总体感觉CodeX确实反馈更快，比Cursor都快很多（基于`5.6 Sol 中`的模型强度），不过中性的情况下，感觉模型还是思考少一些，很容易思考不足或者写的代码是有问题的。拿来工作还是要偏向更智能一些，轻度的情况下，基本判断都有问题，就好像是个傻子，只看你给的东西，多一点点都不会思考。
 
 ![image-20260728193129604](https://img.elmagnifico.tech/static/upload/elmagnifico/20260728193136685.png)
 
 比如让他检查我的文章，我给了路径，竟然告诉我没有文章，我服了。切换到极高以后，就具备自主性了，自己找文章，想尽一切办法完成目标。
 
-Codex的整体UI，你能感觉出来更流畅，绘制得也更精细，对比Claude，那就是个傻大黑，只抄了个皮毛。
+CodeX的整体UI，你能感觉出来更流畅，绘制得也更精细，对比Claude，那就是个傻大黑，只抄了个皮毛。
+
+
+
+#### Site
+
+CodeX的原型能力有点强，纯属意外，我只是提了一下我的想法，半小时内就能搭好前后端的小应用，直接就能公网发布使用。
+
+- 数据库都是serveless的，部署同理
+
+原型风格、图片审美都还可以，结合需求，再打磨打磨，就能拿去演示了，总体下来估计一小时内就做完，很不错，有些小需求或者试错性质的东西拿这个来实验很好。
+
+![image-20260805205233285](https://img.elmagnifico.tech/static/upload/elmagnifico/20260805205233468.png)
+
+![image-20260806191356944](https://img.elmagnifico.tech/static/upload/elmagnifico/20260806191357008.png)
+
+在已经做的任务中间插入一个提示或者改动，流程也很丝滑，也有对应的反馈，对比Claude，插入内容完全没反馈。
 
 
 
 #### 缺点
 
-Codex是基于windows商店的，安装贼慢，然后内置的浏览器还容易崩溃、出问题以后必须重装才行，这么明显的bug竟然没修有点不可思议。
+CodeX是基于windows商店的，安装贼慢，然后内置的浏览器还容易崩溃、出问题以后必须重装才行，这么明显的bug竟然没修有点不可思议。
 
 ![image-20260729193543943](https://img.elmagnifico.tech/static/upload/elmagnifico/20260729193543993.png)
+
+
 
 ## Summary
 
 Cursor和Claude基本是一起测试使用的，大概是3周左右，消耗了10亿Tokens。
 
-Codex是最后用的，刚好是取消了5小时限制，只有周限制了，感觉也有点不耐用，但是每周能恢复，这一点很好
+CodeX是最后用的，刚好是取消了5小时限制，只有周限制了，感觉也有点不耐用，但是每周能恢复，这一点很好
+
+CodeX交互业内领先确实没问题，其他人只够追在后面吃尘。
 
 
 
 ## Quote
 
-> cursor、claude、codex
+> cursor、claude、CodeX
