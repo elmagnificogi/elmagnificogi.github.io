@@ -3,12 +3,12 @@ layout:     post
 title:      "Cursor、Claude、CodeX深度体验、对比"
 subtitle:   "AI、Agent、Skill、workflow、产品设计"
 date:       2026-07-30
-update:     2026-08-06
+update:     2026-08-07
 author:     "elmagnifico"
 header-img: "img/cap-head-bg2.jpg"
 catalog:    true
 mermaid:    false
-tobecontinued: true
+tobecontinued: false
 tags:
     - AI
     - Agent
@@ -176,6 +176,12 @@ CodeX一上来就提示你安装插件，基本就是MCP，但是有很多软件
 
 CodeX的整体UI，你能感觉出来更流畅，绘制得也更精细，对比Claude，那就是个傻大黑，只抄了个皮毛。
 
+![image-20260807130511095](https://img.elmagnifico.tech/static/upload/elmagnifico/20260807130511119.png)
+
+Codex知道自己显示代码能力不够好，所以直接允许你打开对应的IDE去查看，但是总体设计逻辑上还是不鼓励你用IDE或者查看代码细节的，希望你用对话的方式进行设计。
+
+Codex也不能像Cursor那种指定或者随手把某个内容作为修改主体给到对话框中，这个还是差点意思
+
 
 
 #### Site
@@ -191,6 +197,10 @@ CodeX的原型能力有点强，纯属意外，我只是提了一下我的想法
 ![image-20260806191356944](https://img.elmagnifico.tech/static/upload/elmagnifico/20260806191357008.png)
 
 在已经做的任务中间插入一个提示或者改动，流程也很丝滑，也有对应的反馈，对比Claude，插入内容完全没反馈。
+
+![image-20260807130241600](https://img.elmagnifico.tech/static/upload/elmagnifico/20260807130248657.png)
+
+不过用量还是有点捉急，一个原型从site转向自建部署，就耗尽了，我一直开的是5.6 Sol 最智能的级别
 
 
 
