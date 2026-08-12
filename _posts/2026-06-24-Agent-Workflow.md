@@ -578,3 +578,7 @@ Claude的内部plan工作流，基本和我的一致，只是我的可以灵活�
 ## Quote
 
 > cursor
+>
+> https://mp.weixin.qq.com/s/MnEEHNCYnHGLK1g24KMlUA
+>
+> https://mp.weixin.qq.com/s/N1Mki1F3VX_PDwr_1jtRWA

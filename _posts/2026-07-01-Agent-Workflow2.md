@@ -242,3 +242,7 @@ flowchart TB
 ## Quote
 
 > 人手里有啥工具，就得给 Agent 配上对应的接口——不然所谓工作流，只是换了个写代码的实习生，谈不上什么新工种。
+>
+> https://mp.weixin.qq.com/s/MnEEHNCYnHGLK1g24KMlUA
+>
+> https://mp.weixin.qq.com/s/N1Mki1F3VX_PDwr_1jtRWA
