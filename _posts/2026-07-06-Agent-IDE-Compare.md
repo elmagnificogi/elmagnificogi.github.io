@@ -3,7 +3,7 @@ layout:     post
 title:      "Cursor、Claude、CodeX深度体验、对比"
 subtitle:   "AI、Agent、Skill、workflow、产品设计"
 date:       2026-07-30
-update:     2026-08-07
+update:     2026-08-26
 author:     "elmagnifico"
 header-img: "img/cap-head-bg2.jpg"
 catalog:    true
@@ -181,7 +181,7 @@ CodeX的整体UI，你能感觉出来更流畅，绘制得也更精细，对比C
 
 Codex知道自己显示代码能力不够好，所以直接允许你打开对应的IDE去查看，但是总体设计逻辑上还是不鼓励你用IDE或者查看代码细节的，希望你用对话的方式进行设计。
 
-Codex也不能像Cursor那种指定或者随手把某个内容作为修改主体给到对话框中，这个还是差点意思
+~~Codex也不能像Cursor那种指定或者随手把某个内容作为修改主体给到对话框中，这个还是差点意思~~，实际可以，Codex可以打开文件，然后和Cursor的用法差不多，只是没Cursor那种看起来好
 
 Codex内置浏览器可以让你直接登录对应的网站，然后他直接用你的session来操作网站，对于小白来说不要太友好，但是这个操作行为本身也有风险。
 
@@ -215,6 +215,10 @@ CodeX是基于windows商店的，安装贼慢，然后内置的浏览器还容�
 
 
 
+CodeX恢复5小时用量以后，太不经用了，一个小需求，直接就把5小时用量干完了，完全不够用。
+
+
+
 ## Summary
 
 Cursor和Claude基本是一起测试使用的，大概是3周左右，消耗了10亿Tokens。
@@ -227,4 +231,4 @@ CodeX交互业内领先确实没问题，其他人只够追在后面吃尘。
 
 ## Quote
 
-> cursor、claude、CodeX
+> Cursor、Claude、CodeX
