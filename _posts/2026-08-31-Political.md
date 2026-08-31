@@ -1,7 +1,7 @@
 ---
 layout:     post
-title:      "玩车日志"
-subtitle:   "小米Su7 Ultra、懂车帝、珠海赛道、灿哥"
+title:      "人类高质量思政课"
+subtitle:   ""
 date:       2027-08-31
 update:     2027-08-31
 author:     "elmagnifico"
