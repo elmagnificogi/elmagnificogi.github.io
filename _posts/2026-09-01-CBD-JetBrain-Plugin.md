@@ -5,7 +5,7 @@ subtitle:   "IntelliJ Platform、JCEF、跨IDE、CBD"
 date:       2026-09-01
 update:     2026-09-01
 author:     "elmagnifico"
-header-img: "img/blackboard.jpg"
+header-img: "img/drone.jpg"
 catalog:    true
 mermaid:    false
 tobecontinued: true
