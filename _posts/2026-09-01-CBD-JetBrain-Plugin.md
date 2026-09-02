@@ -93,14 +93,16 @@ JB版本的仓库也在用 CBD：`src/main/kotlin/**` 基本都挂了旁路文�
 
 ![image-20260901210048989](https://img.elmagnifico.tech/static/upload/elmagnifico/20260901210049013.png)
 
-上架前自动校验先打回来一圈，和 [Open VSX 那次](/2026/07/21/CBD-Publisher-OpenVSX/) 一个味：身份和命名比代码先卡死。
+上架前自动校验先打回来一圈，和 [Open VSX 那次](/2026/07/21/CBD-Publisher-OpenVSX/) 一个问题：身份和命名比代码先卡死。
 
 - 插件 ID 不能含 `intellij`。仓库包名是 `com.codebinddocs.intellij`，ID 必须改成 `com.codebinddocs.plugin`。ID 上架后基本改不了，幸好还没发出去
 - 简介必须以英文开头，中文可以跟在后面。市场审核按英文描述走
 - 名字里也不能出现 Plugin / IntelliJ / JetBrains 产品名。显示名继续叫 CodeBind Docs，没问题
 - JCEF 做成 optional 时，必须带 `config-file`，空依赖校验不过
 
-目前仍是 `gradlew buildPlugin` 出 zip，Settings → Plugins → 齿轮 → Install Plugin from Disk。市场页上线以后再补。
+目前仍是 `gradlew buildPlugin` 出 zip，Settings → Plugins → 齿轮 → Install Plugin from Disk。
+
+审核比较久，大概要2天，市场页上线以后再补。
 
 
 
@@ -111,6 +113,10 @@ JB版本的仓库也在用 CBD：`src/main/kotlin/**` 基本都挂了旁路文�
 审核以后还是能看到很多有问题的点，我只在26版本测了，之前的版本确实没验证。
 
 官方有这样的自动化的验证倒是挺好的，比VSC完善多了
+
+![image-20260902151416728](https://img.elmagnifico.tech/static/upload/elmagnifico/20260902151416773.png)
+
+修了几个版本，兼容性拉满
 
 
 
