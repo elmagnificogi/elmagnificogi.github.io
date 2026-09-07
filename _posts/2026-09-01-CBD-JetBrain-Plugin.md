@@ -8,7 +8,7 @@ author:     "elmagnifico"
 header-img: "img/drone.jpg"
 catalog:    true
 mermaid:    false
-tobecontinued: true
+tobecontinued: false
 tags:
     - AI
     - Agent
@@ -23,7 +23,7 @@ tags:
 
 > https://github.com/elmagnificogi/CodeBindDocs-IntelliJ
 
-绑定头和 VS Code 版完全兼容，同一个仓库两边都能开。目前JetBrains Marketplace审核还没过，本地打 zip 来装。
+绑定头和 VS Code 版完全兼容，同一个仓库两边都能开。 [Codebind ](https://plugins.jetbrains.com/plugin/33981-codebind-docs)已经过审，市场可直接按照
 
 
 
@@ -146,7 +146,9 @@ VSC可以直接打开JB的工程，反过来也可以。
 
 ## 五分钟上手
 
-1. JDK 21 下 `gradlew.bat buildPlugin`，把 `build/distributions/CodeBindDocs-IntelliJ-*.zip` 从磁盘装进 IDE，重启
+![image-20260907151706310](https://img.elmagnifico.tech/static/upload/elmagnifico/20260907151713361.png)
+
+1. 市场搜索 [Codebind ](https://plugins.jetbrains.com/plugin/33981-codebind-docs)
 2. 打开一个**项目文件夹**（单文件模式扫不了绑定）
 3. **Tools → CodeBind Docs → CBD: Initialize**，创建 `docs/cbd/`、`AGENTS.md`、Cursor rules、Junie guidelines
 4. 打开源文件，跑 **CBD: Bind Doc to Current File**（整文件或代码块）；或在项目树对文件夹 **CBD: Bind Doc to Folder**
