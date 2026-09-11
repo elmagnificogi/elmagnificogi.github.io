@@ -23,7 +23,7 @@ tags:
 
 > https://github.com/elmagnificogi/CodeBindDocs-IntelliJ
 
-绑定头和 VS Code 版完全兼容，同一个仓库两边都能开。 [Codebind ](https://plugins.jetbrains.com/plugin/33981-codebind-docs)已经过审，市场可直接按照
+绑定头和 VS Code 版完全兼容，同一个仓库两边都能开。 [Codebind ](https://plugins.jetbrains.com/plugin/33981-codebind-docs)已经过审，市场可直接找到
 
 
 
@@ -134,7 +134,7 @@ JB版本的仓库也在用 CBD：`src/main/kotlin/**` 基本都挂了旁路文�
 | 分栏 | 编辑器组 | 右侧工具窗，`Ctrl+Alt+Shift+D` 开关 |
 | 打开文档 | `Ctrl+Alt+D` | 同样 `Ctrl+Alt+D` |
 | Agent 脚手架 | `AGENTS.md` / Cursor rules | `.junie/guidelines.md` |
-| 安装 | Marketplace / Open VSX | 暂时本地 zip |
+| 安装 | Marketplace / Open VSX | Marketplace |
 
 目录绑定（`kind: directory`）、漂移、路径迁移、模板、资源目录，两边都有。打开已绑定仓库，换 IDE 不用改文档。
 
