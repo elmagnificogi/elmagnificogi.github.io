@@ -1,6 +1,6 @@
 ---
 name: chinese-natural-writing
-description: Draft, rewrite, or review Chinese articles, reports, proposals, emails, and documentation so they sound specific and natural rather than AI-generated. Use when the user wants to reduce AI味、套话、黑话、自造词、空泛书面腔 or asks for plain, human Chinese; preserve legitimate domain terminology and formal tone when needed.
+description: Draft, rewrite, or review Chinese articles so they sound specific and natural rather than AI-generated. Use when reducing AI味、套话、自造词, or when the text reads like a lecture (四段式、目标清单、复述式Summary). Preserve real terminology. For this blog, imitate older human posts, not the current Agent draft.
 ---
 
 # 中文自然写作
@@ -9,7 +9,7 @@ description: Draft, rewrite, or review Chinese articles, reports, proposals, ema
 
 「人话」= 完整句、常用词、单独读也懂。不是网络口语，也不是咨询腔。
 
-博客文章（文件名「年-月-日-标题」）的错字审查走 [ArticleReview](../ArticleReview/SKILL.md)：先改错字、汇报、等确认。润色时用本 skill 去 AI 腔，语气跟原文走。写插件、踩坑、工具的文章，不要改成公文；整理课程的文章，不要改成段子。
+博客文章（文件名「年-月-日-标题」）的错字审查走 [ArticleReview](../ArticleReview/SKILL.md)：先改错字、汇报、等确认。润色不要学当前这篇草稿；对照作者旧文。写插件、踩坑、工具的文章，不要改成公文；整理课程的文章，不要改成段子。结构规则见 [references/structure.md](references/structure.md)。
 
 ## 按任务工作
 
@@ -30,6 +30,9 @@ description: Draft, rewrite, or review Chinese articles, reports, proposals, ema
 4. **禁止省略读者没见过的上下文。** 不要用「如上所述」「这一点」假装读者看过工具过程或上一稿。单独抽出一段也应能读懂。
 5. **前后必须通顺。** 案例内部因果要接上，不要前言不搭后语。读不懂的先补事实，再压缩。
 6. **先写事实，再用对比。** 少用「这不是 X」当一段的开头；不要发明隐喻、成语或好听的新名字来概括技术/政策。
+7. **禁止上课骨架。** 不要「关键点写在前面」「所以目标很明确」加清单；不要每节案例/宏观/结论/应对；不要 Summary 复述全文。用户没要求就不要写成教程。段落可以一节三行、下一节老长。
+
+起草博客时先读 [references/structure.md](references/structure.md)。洗词不够，骨架仍假。
 
 ## 核心判断
 
@@ -86,3 +89,5 @@ description: Draft, rewrite, or review Chinese articles, reports, proposals, ema
 - 是否保留了确有必要的专业术语，而不是为了朴素牺牲准确性？
 - 有没有压缩黑话、无主语句、未交代的缩写？单独读一段能否懂？
 - 有没有为了显得口语而写半截话，或为了显得书面而堆术语？
+- 是不是在上课：四段式、目标清单、你该怎么做、Summary 在复习？
+- 有没有把当前 Agent 草稿当成要模仿的风格？
