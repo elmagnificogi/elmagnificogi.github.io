@@ -3,7 +3,7 @@ layout:     post
 title:      "Cursor、Claude、CodeX深度体验、对比"
 subtitle:   "AI、Agent、Skill、workflow、产品设计"
 date:       2026-07-30
-update:     2026-08-26
+update:     2026-09-14
 author:     "elmagnifico"
 header-img: "img/cap-head-bg2.jpg"
 catalog:    true
@@ -226,6 +226,8 @@ Cursor和Claude基本是一起测试使用的，大概是3周左右，消耗了1
 CodeX是最后用的，刚好是取消了5小时限制，只有周限制了，感觉也有点不耐用，但是每周能恢复，这一点很好
 
 CodeX交互业内领先确实没问题，其他人只够追在后面吃尘。
+
+这里面相对来说综合最好的其实是Cursor，Cursor注册、支付都比较简单，其次没有翻墙Cursor也能正常用，没有周限制，实际使用体验你会觉得比Codex要快一些，至少体验上是反应明显快一些的。很多人诟病觉得Cursor的能力不行，如果只是写代码方面，Cursor、Codex差距真的不大，只要你是正常工作流，上下文、背景给到是比较齐全的，用起来真的没啥问题。
 
 
 
