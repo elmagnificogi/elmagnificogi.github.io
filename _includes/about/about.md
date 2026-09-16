@@ -45,5 +45,8 @@
 [逆风笑](https://space.bilibili.com/2019740)，不知道是什么样的人玩游戏才能有这么强的代入感，看别人玩游戏比自己玩有意思的第一人，我的独立游戏启蒙导师。
 
 
+去过的地方：
+{% include travel-map.html mode="pins" %}
+
 
 **欢迎留下你的Blog，建立友链**
