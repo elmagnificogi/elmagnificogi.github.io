@@ -359,6 +359,8 @@ new google.translate.TranslateElement({
 
 {% if page.travel_map or page.travel_route %}
 <script src="{{ '/js/travel-map-land.js' | prepend: site.baseurl }}"></script>
+<script src="{{ '/js/travel-map-local.js' | prepend: site.baseurl }}"></script>
+<script src="{{ '/js/travel-map-paths.js' | prepend: site.baseurl }}"></script>
 <script src="{{ '/js/travel-map.js' | prepend: site.baseurl }}"></script>
 {% endif %}
 

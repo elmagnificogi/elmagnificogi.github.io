@@ -12,6 +12,6 @@
 {% elsif include.mode == "route" and travel_stops %}
 <div class="js-travel-map travel-map-wrap">
   <div class="travel-map-canvas travel-map-canvas--route" role="img" aria-label="行程路线"></div>
-  <script type="application/json">{"mode":"route","stops":{{ travel_stops | jsonify }}}</script>
+  <script type="application/json">{"mode":"route","route":{{ travel_route_id | jsonify }},"stops":{{ travel_stops | jsonify }}}</script>
 </div>
 {% endif %}

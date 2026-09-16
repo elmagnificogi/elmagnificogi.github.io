@@ -19,8 +19,6 @@ tags:
 
 物是人非，上一次匆匆地来，匆匆地走，很多东西都没怎么体验到，这次我在重庆很想你。
 
-{% include travel-map.html mode="route" %}
-
 
 
 ## 重庆
@@ -32,6 +30,8 @@ tags:
 
 
 #### 弹子石老街
+
+{% include travel-map.html mode="route" %}
 
 ![image-20250626005252396](https://img.elmagnifico.tech/static/upload/elmagnifico/202506260052710.png)
 

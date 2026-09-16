@@ -17,8 +17,6 @@ tags:
 
 五一越南行记录
 
-{% include travel-map.html mode="route" %}
-
 
 
 ## 前期准备
@@ -98,6 +96,8 @@ Quá đắt-太贵了-夸达一 或者是 麻瓜（南越和北越，也有一�
 
 
 ## 行程游记
+
+{% include travel-map.html mode="route" %}
 
 #### 去往胡志明
 

@@ -17,6 +17,8 @@ PS：Hux的blog有点对不起这么多star，长期不更新，而且讲道理�
   - 链接格式：`/年/月/日/标题/`，年月日看文章头的 `date`，不是文件名上的日期
   - 字叠在一起时用 `labelDx` / `labelDy` / `labelAnchor` 挪一下
   - 加路线：`_data/travel_routes.yml` 里加一组，文章头写 `travel_route: 名字`，正文放 `{% include travel-map.html mode="route" %}`
+  - 路线要沿路，不要点对点直线。改完站点后跑 `python scripts/build-travel-paths.py`，生成 `js/travel-map-paths.js`
+  - 近景底图（河、路）用 `python scripts/build-travel-local.py` 生成 `js/travel-map-local.js`
   - 文章头要有 `travel_map: true` 或 `travel_route`，才会加载地图的 css/js
   - 底图用 `python scripts/build-travel-land.py` 生成 `js/travel-map-land.js`
 

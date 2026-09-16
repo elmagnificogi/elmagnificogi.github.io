@@ -17,13 +17,13 @@ tags:
 
 据说十一开始的前后两天，路上都非常堵，那我只能等到人不多的时候再自驾，逛一下广东周边。时间还是有点紧张，边走边记。
 
-{% include travel-map.html mode="route" %}
-
 
 
 ## 自驾游
 
 粤东大致路线：
+
+{% include travel-map.html mode="route" %}
 
 ![image-20250930145715075](https://img.elmagnifico.tech/static/upload/elmagnifico/20250930145715142.png)
 

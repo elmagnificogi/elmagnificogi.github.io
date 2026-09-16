@@ -19,11 +19,11 @@ tags:
 
 继上次十一爆胎，行程中断以后，一直没找机会再去。这次刚好在MOC深圳小米车友会中有人组织去南澳，出发和返回时间也还行，就一起了。
 
-{% include travel-map.html mode="route" %}
-
 
 
 ## 南澳岛
+
+{% include travel-map.html mode="route" %}
 
 #### 出发
 

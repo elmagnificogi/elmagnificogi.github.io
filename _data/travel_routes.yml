@@ -1,4 +1,5 @@
 # 游记路线。label: true 的点会一直显示地名。
+# 改站点后跑 python scripts/build-travel-paths.py，线才会沿路而不是直线。
 g318:
   - name: 成都
     lat: 30.6570

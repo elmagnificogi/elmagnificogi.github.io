@@ -10,6 +10,8 @@ sys.setrecursionlimit(20000)
 
 COUNTRIES_URL = "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_50m_admin_0_countries.geojson"
 PROVINCES_URL = "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_50m_admin_1_states_provinces.geojson"
+RIVERS_URL = "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_10m_rivers_lake_centerlines.geojson"
+LAKES_URL = "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_10m_lakes.geojson"
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "js" / "travel-map-land.js"
 
@@ -62,6 +64,31 @@ def exteriors(geom):
     if gtype == "MultiPolygon":
         return [poly[0] for poly in geom["coordinates"]]
     return []
+
+
+def line_parts(geom):
+    gtype = geom["type"]
+    if gtype == "LineString":
+        return [geom["coordinates"]]
+    if gtype == "MultiLineString":
+        return geom["coordinates"]
+    return []
+
+
+def line_len(pts):
+    total = 0.0
+    for i in range(1, len(pts)):
+        total += math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1])
+    return total
+
+
+def round_line(pts):
+    out = []
+    for lng, lat in pts:
+        pt = [round(lng, 3), round(lat, 3)]
+        if not out or out[-1] != pt:
+            out.append(pt)
+    return out
 
 
 def ring_bbox(ring):
@@ -119,15 +146,41 @@ def collect_rings(features, codes, min_area, epsilon, east_asia_only=False):
     return rings
 
 
+def collect_lines(features, min_len, epsilon):
+    lines = []
+    for feat in features:
+        props = feat.get("properties") or {}
+        rank = props.get("scalerank", props.get("SCALERANK", 10))
+        try:
+            rank = float(rank)
+        except (TypeError, ValueError):
+            rank = 10
+        if rank > 8:
+            continue
+        for part in line_parts(feat["geometry"]):
+            pts = [(float(p[0]), float(p[1])) for p in part]
+            if not in_east_asia(pts) or line_len(pts) < min_len:
+                continue
+            simple = rdp(pts, epsilon)
+            if len(simple) < 2:
+                continue
+            lines.append(round_line(simple))
+    return lines
+
+
 def main():
     countries = fetch_json(COUNTRIES_URL)["features"]
     provinces = fetch_json(PROVINCES_URL)["features"]
+    rivers = fetch_json(RIVERS_URL)["features"]
+    lakes = fetch_json(LAKES_URL)["features"]
 
     groups = {
         "china": collect_rings(countries, CHINA, 0.04, 0.012),
         "japan": collect_rings(countries, JAPAN, 0.03, 0.02, True),
         "neighbor": collect_rings(countries, NEIGHBOR, 0.08, 0.035, True),
         "province": collect_rings(provinces, {"CHN"}, 0.08, 0.028),
+        "lake": collect_rings(lakes, None, 0.015, 0.02, True),
+        "river": collect_lines(rivers, 0.35, 0.02),
     }
 
     payload = json.dumps(groups, ensure_ascii=False, separators=(",", ":"))

@@ -18,3 +18,6 @@ Gemfile.lock
 .DS_Store
 */.DS_Store
 */*/.DS_Store
+
+# travel map source extracts
+scripts/.cache/

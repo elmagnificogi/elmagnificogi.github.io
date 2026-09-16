@@ -1,5 +1,5 @@
 (function () {
-  function viewFor(items, mode) {
+  function viewFor(items, mode, extras) {
     if (mode !== 'route' || !items.length) {
       return { west: 72, south: 8, east: 146, north: 54 };
     }
@@ -12,6 +12,13 @@
       maxLng = Math.max(maxLng, items[i].lng);
       minLat = Math.min(minLat, items[i].lat);
       maxLat = Math.max(maxLat, items[i].lat);
+    }
+    extras = extras || [];
+    for (var e = 0; e < extras.length; e++) {
+      minLng = Math.min(minLng, extras[e][0]);
+      maxLng = Math.max(maxLng, extras[e][0]);
+      minLat = Math.min(minLat, extras[e][1]);
+      maxLat = Math.max(maxLat, extras[e][1]);
     }
     var dLng = Math.max(maxLng - minLng, 0.08);
     var dLat = Math.max(maxLat - minLat, 0.05);
@@ -85,28 +92,63 @@
       .replace(/"/g, '&quot;');
   }
 
-  function ringPath(ring, proj) {
+  function polyPath(pts, proj, close) {
     var d = '';
-    for (var i = 0; i < ring.length; i++) {
-      var p = proj(ring[i][1], ring[i][0]);
+    for (var i = 0; i < pts.length; i++) {
+      var p = proj(pts[i][1], pts[i][0]);
       d += (i ? 'L' : 'M') + p.x.toFixed(1) + ',' + p.y.toFixed(1);
     }
-    return d + 'Z';
+    return close ? d + 'Z' : d;
   }
 
-  function landPaths(proj) {
+  function overlapsView(pts, view) {
+    if (!pts || !pts.length) return false;
+    var minLng = 180;
+    var maxLng = -180;
+    var minLat = 90;
+    var maxLat = -90;
+    for (var i = 0; i < pts.length; i++) {
+      minLng = Math.min(minLng, pts[i][0]);
+      maxLng = Math.max(maxLng, pts[i][0]);
+      minLat = Math.min(minLat, pts[i][1]);
+      maxLat = Math.max(maxLat, pts[i][1]);
+    }
+    var padLng = (view.east - view.west) * 0.08;
+    var padLat = (view.north - view.south) * 0.08;
+    return !(maxLng < view.west - padLng || minLng > view.east + padLng ||
+      maxLat < view.south - padLat || minLat > view.north + padLat);
+  }
+
+  function addPolys(html, lines, proj, view, className, close) {
+    if (!lines) return html;
+    for (var i = 0; i < lines.length; i++) {
+      if (view && !overlapsView(lines[i], view)) continue;
+      html += '<path class="' + className + '" d="' + polyPath(lines[i], proj, close) + '"></path>';
+    }
+    return html;
+  }
+
+  function landPaths(proj, view, opts) {
     var land = window.TRAVEL_LAND || {};
     var html = '';
-    function add(rings, className) {
-      if (!rings) return;
-      for (var i = 0; i < rings.length; i++) {
-        html += '<path class="' + className + '" d="' + ringPath(rings[i], proj) + '"></path>';
-      }
+    html = addPolys(html, land.neighbor, proj, view, 'travel-land travel-land--neighbor', true);
+    html = addPolys(html, land.japan, proj, view, 'travel-land', true);
+    html = addPolys(html, land.china, proj, view, 'travel-land', true);
+    html = addPolys(html, land.province, proj, view, 'travel-land travel-land--province', true);
+    if (!opts || !opts.skipWater) {
+      html = addPolys(html, land.lake, proj, view, 'travel-water', true);
+      html = addPolys(html, land.river, proj, view, 'travel-river', false);
     }
-    add(land.neighbor, 'travel-land travel-land--neighbor');
-    add(land.japan, 'travel-land');
-    add(land.china, 'travel-land');
-    add(land.province, 'travel-land travel-land--province');
+    return html;
+  }
+
+  function localPaths(local, proj) {
+    if (!local) return '';
+    var html = '';
+    html = addPolys(html, local.water, proj, null, 'travel-water', true);
+    html = addPolys(html, local.river, proj, null, 'travel-river', false);
+    html = addPolys(html, local.road, proj, null, 'travel-road', false);
+    html = addPolys(html, local.rail, proj, null, 'travel-rail', false);
     return html;
   }
 
@@ -178,7 +220,12 @@
     var canvas = wrap.querySelector('.travel-map-canvas');
     if (!canvas) return;
     var items = data.mode === 'route' ? (data.stops || []) : (data.places || []);
-    var view = viewFor(items, data.mode);
+    var pathInfo = (data.mode === 'route' && window.TRAVEL_PATHS && data.route)
+      ? window.TRAVEL_PATHS[data.route] : null;
+    var pathCoords = (pathInfo && pathInfo.coords) || [];
+    var local = (data.mode === 'route' && window.TRAVEL_LOCAL && data.route)
+      ? window.TRAVEL_LOCAL[data.route] : null;
+    var view = viewFor(items, data.mode, pathCoords);
     var size = sizeFor(view);
     var width = size.width;
     var height = size.height;
@@ -186,17 +233,27 @@
     var svg = '<svg viewBox="0 0 ' + width + ' ' + height + '" role="img" aria-label="' +
       (data.mode === 'route' ? '行程路线' : '走过的地方') + '">';
     svg += '<rect class="travel-sea" x="0" y="0" width="' + width + '" height="' + height + '"></rect>';
-    svg += landPaths(proj);
+    svg += landPaths(proj, view, { skipWater: !!(local && ((local.water && local.water.length) || (local.river && local.river.length))) });
+    svg += localPaths(local, proj);
 
     if (data.mode === 'route') {
       var stops = data.stops || [];
       var line = '';
-      for (var i = 0; i < stops.length; i++) {
-        var p = proj(stops[i].lat, stops[i].lng);
-        line += (i ? ' ' : '') + p.x.toFixed(1) + ',' + p.y.toFixed(1);
+      var linePts = pathCoords.length > 1 ? pathCoords : null;
+      if (linePts) {
+        for (var i = 0; i < linePts.length; i++) {
+          var p = proj(linePts[i][1], linePts[i][0]);
+          line += (i ? ' ' : '') + p.x.toFixed(1) + ',' + p.y.toFixed(1);
+        }
+      } else {
+        for (var i = 0; i < stops.length; i++) {
+          var p = proj(stops[i].lat, stops[i].lng);
+          line += (i ? ' ' : '') + p.x.toFixed(1) + ',' + p.y.toFixed(1);
+        }
       }
-      if (stops.length > 1) {
-        svg += '<polyline class="travel-route" points="' + line + '"></polyline>';
+      if (line) {
+        var routeClass = 'travel-route' + (pathInfo && pathInfo.kind === 'flight' ? ' travel-route--flight' : '');
+        svg += '<polyline class="' + routeClass + '" points="' + line + '"></polyline>';
       }
       for (var j = 0; j < stops.length; j++) {
         var q = proj(stops[j].lat, stops[j].lng);

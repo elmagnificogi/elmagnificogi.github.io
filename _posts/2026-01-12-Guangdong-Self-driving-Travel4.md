@@ -17,8 +17,6 @@ tags:
 
 这次往粤北走，补一下之前没去的地方，主要是为了跑山来玩一下。
 
-{% include travel-map.html mode="route" %}
-
 
 
 ## 环南昆山罗浮山
@@ -32,6 +30,8 @@ tags:
 #### 线路
 
 重新规划了一下线路，实际从油田收费站下高速，就开始往跑山线路上走，打算走一个外八侧线路，本来预计4-5个小时能跑完
+
+{% include travel-map.html mode="route" %}
 
 ![image-20260112015356570](https://img.elmagnifico.tech/static/upload/elmagnifico/202601120153647.png)
 
