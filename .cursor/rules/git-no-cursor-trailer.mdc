@@ -1,0 +1,13 @@
+---
+description: 本仓库 git commit 不要带 Cursor 署名
+alwaysApply: true
+---
+
+# Git commit 不要带 Cursor
+
+这个博客仓库的 commit 只保留作者自己的署名和说明。
+
+- 不要在 commit message 里写 `Co-authored-by: Cursor`
+- 不要写 `cursoragent@cursor.com`
+- 不要在提交说明、trailer、作者或提交者里出现 Cursor
+- 用 `git commit` 时只写改动本身，不要追加任何 AI/Agent 署名

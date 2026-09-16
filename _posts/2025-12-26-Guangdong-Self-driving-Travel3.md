@@ -8,6 +8,7 @@ author:     "elmagnifico"
 header-img: "img/y8.jpg"
 catalog:    true
 tobecontinued: false
+travel_route: yuexi
 tags:
     - 旅游
 ---
@@ -15,6 +16,8 @@ tags:
 ## Foreword
 
 元旦刚好只有三天工作，连着前后的周末，一下可以休八天，去玩小米活动以后就准备准备，出发继续之前的粤西自驾之路，刚好在群里看到了一些户外的营地，感觉位置也顺路，那就过去看看。
+
+{% include travel-map.html mode="route" %}
 
 
 

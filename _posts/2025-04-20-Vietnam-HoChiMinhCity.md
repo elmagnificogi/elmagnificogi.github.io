@@ -8,6 +8,7 @@ author:     "elmagnifico"
 header-img: "img/play.jpg"
 catalog:    true
 tobecontinued: false
+travel_route: vietnam
 tags:
     - 旅游
 ---
@@ -15,6 +16,8 @@ tags:
 ## Foreword
 
 五一越南行记录
+
+{% include travel-map.html mode="route" %}
 
 
 

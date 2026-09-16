@@ -357,6 +357,11 @@ new google.translate.TranslateElement({
 
 {% endif %}
 
+{% if page.travel_map or page.travel_route %}
+<script src="{{ '/js/travel-map-land.js' | prepend: site.baseurl }}"></script>
+<script src="{{ '/js/travel-map.js' | prepend: site.baseurl }}"></script>
+{% endif %}
+
 {% if site.pagefind %}
 <pagefind-config bundle-path="{{ '/pagefind/' | prepend: site.baseurl }}" meta-cache-tag="{{ site.time | date: '%s' }}"></pagefind-config>
 <script src="{{ '/pagefind/pagefind-component-ui.js' | prepend: site.baseurl }}" type="module"></script>

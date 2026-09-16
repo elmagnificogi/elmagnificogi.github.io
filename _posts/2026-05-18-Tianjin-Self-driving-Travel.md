@@ -8,6 +8,7 @@ author:     "elmagnifico"
 header-img: "img/balance.jpg"
 catalog:    true
 tobecontinued: false
+travel_route: tianjin
 tags:
     - 旅游
 ---
@@ -15,6 +16,8 @@ tags:
 ## Foreword
 
 周末小米举办了天津V1国际赛车场的活动，五一前就已经报名了1节练习+1天竞速，然而天公不作美，很多安排也不如预期，就改做自驾了。
+
+{% include travel-map.html mode="route" %}
 
 
 

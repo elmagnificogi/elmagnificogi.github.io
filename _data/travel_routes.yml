@@ -1,0 +1,449 @@
+# 游记路线。label: true 的点会一直显示地名。
+g318:
+  - name: 成都
+    lat: 30.6570
+    lng: 104.0660
+    label: true
+    labelDy: -11
+  - name: 雅安
+    lat: 29.9804
+    lng: 103.0133
+  - name: 泸定
+    lat: 29.9142
+    lng: 102.2346
+  - name: 康定
+    lat: 30.0507
+    lng: 101.9643
+    label: true
+    labelDy: 14
+  - name: 新都桥
+    lat: 30.0410
+    lng: 101.4870
+  - name: 雅江
+    lat: 30.0316
+    lng: 101.0145
+  - name: 理塘
+    lat: 29.9980
+    lng: 100.2694
+    label: true
+    labelDy: -11
+  - name: 巴塘
+    lat: 29.8887
+    lng: 99.1134
+  - name: 芒康
+    lat: 29.6798
+    lng: 98.5935
+    label: true
+    labelDy: 14
+  - name: 左贡
+    lat: 29.6713
+    lng: 97.8410
+  - name: 邦达
+    lat: 30.6180
+    lng: 97.1080
+  - name: 八宿
+    lat: 30.0534
+    lng: 96.9178
+    label: true
+    labelDx: 10
+    labelDy: 4
+    labelAnchor: start
+  - name: 然乌
+    lat: 29.2730
+    lng: 96.7480
+  - name: 波密
+    lat: 29.8590
+    lng: 95.7680
+    label: true
+    labelDy: 14
+  - name: 通麦
+    lat: 30.1000
+    lng: 95.0610
+  - name: 林芝
+    lat: 29.6490
+    lng: 94.3620
+    label: true
+    labelDy: -11
+  - name: 拉萨
+    lat: 29.6525
+    lng: 91.1721
+    label: true
+    labelDy: -11
+
+xiamen:
+  - name: 中华街
+    lat: 24.4455
+    lng: 118.0825
+    label: true
+    labelDx: 10
+    labelAnchor: start
+  - name: 八市
+    lat: 24.4612
+    lng: 118.0820
+  - name: 五缘湾
+    lat: 24.5240
+    lng: 118.1700
+    label: true
+    labelDx: 8
+    labelAnchor: start
+  - name: 植物园
+    lat: 24.4550
+    lng: 118.0900
+  - name: 钟鼓索道
+    lat: 24.4470
+    lng: 118.1020
+  - name: 鹭江
+    lat: 24.4490
+    lng: 118.0730
+  - name: 火山岛
+    lat: 24.1710
+    lng: 117.9980
+    label: true
+    labelDy: 14
+  - name: 镇海角
+    lat: 24.0270
+    lng: 117.8910
+    label: true
+    labelDy: 14
+  - name: 沙坡尾
+    lat: 24.4370
+    lng: 118.0920
+  - name: 鼓浪屿
+    lat: 24.4476
+    lng: 118.0669
+    label: true
+    labelDx: -8
+    labelAnchor: end
+
+yuedong:
+  - name: 深圳
+    lat: 22.5431
+    lng: 114.0579
+    label: true
+    labelDy: 14
+  - name: 广州
+    lat: 23.1291
+    lng: 113.2644
+    label: true
+    labelDx: -8
+    labelAnchor: end
+  - name: 增城
+    lat: 23.2610
+    lng: 113.8110
+  - name: 从化
+    lat: 23.5453
+    lng: 113.5870
+  - name: 云髻山
+    lat: 23.6460
+    lng: 113.7730
+  - name: 梅州
+    lat: 24.2886
+    lng: 116.1222
+    label: true
+    labelDy: -11
+  - name: 揭阳
+    lat: 23.5497
+    lng: 116.3727
+    label: true
+    labelDy: 14
+
+nanao:
+  - name: 深圳
+    lat: 22.5431
+    lng: 114.0579
+    label: true
+    labelDx: -8
+    labelAnchor: end
+  - name: 南澳
+    lat: 23.4217
+    lng: 117.0235
+    label: true
+    labelDy: -11
+  - name: 珠海
+    lat: 22.2710
+    lng: 113.5767
+    label: true
+    labelDy: 14
+
+yuexi:
+  - name: 深圳
+    lat: 22.5431
+    lng: 114.0579
+    label: true
+    labelDy: 14
+  - name: 肇庆
+    lat: 23.0472
+    lng: 112.4650
+    label: true
+    labelDy: -11
+  - name: 罗定
+    lat: 22.7690
+    lng: 111.5700
+  - name: 信宜
+    lat: 22.3550
+    lng: 110.9470
+  - name: 茂名
+    lat: 21.6629
+    lng: 110.9254
+    label: true
+    labelDx: -8
+    labelAnchor: end
+  - name: 海陵岛
+    lat: 21.6140
+    lng: 111.9550
+    label: true
+    labelDy: 14
+  - name: 开平
+    lat: 22.3762
+    lng: 112.6980
+  - name: 中山
+    lat: 22.5170
+    lng: 113.3928
+    label: true
+    labelDx: 8
+    labelAnchor: start
+
+yuebei:
+  - name: 深圳
+    lat: 22.5431
+    lng: 114.0579
+    label: true
+    labelDy: 14
+  - name: 惠州
+    lat: 23.1120
+    lng: 114.4160
+    label: true
+    labelDx: 8
+    labelAnchor: start
+  - name: 南昆山
+    lat: 23.6380
+    lng: 113.8500
+    label: true
+    labelDy: -11
+  - name: 永汉河
+    lat: 23.5900
+    lng: 114.0500
+    label: true
+    labelDx: -8
+    labelAnchor: end
+
+heyuan:
+  - name: 深圳
+    lat: 22.5431
+    lng: 114.0579
+    label: true
+    labelDy: 14
+  - name: 万绿湖
+    lat: 23.7780
+    lng: 114.5750
+    label: true
+    labelDx: -8
+    labelAnchor: end
+  - name: 河源
+    lat: 23.7435
+    lng: 114.7004
+    label: true
+    labelDx: 8
+    labelAnchor: start
+
+chongqing:
+  - name: 弹子石
+    lat: 29.5880
+    lng: 106.5850
+    label: true
+    labelDy: -11
+  - name: 龙门浩
+    lat: 29.5620
+    lng: 106.5900
+  - name: 长江索道
+    lat: 29.5580
+    lng: 106.5780
+  - name: 解放碑
+    lat: 29.5570
+    lng: 106.5770
+    label: true
+    labelDy: 14
+  - name: 洪崖洞
+    lat: 29.5624
+    lng: 106.5770
+  - name: 朝天门
+    lat: 29.5670
+    lng: 106.5870
+  - name: 李子坝
+    lat: 29.5560
+    lng: 106.5310
+    label: true
+    labelDx: -8
+    labelAnchor: end
+  - name: 十八梯
+    lat: 29.5520
+    lng: 106.5750
+  - name: 磁器口
+    lat: 29.5800
+    lng: 106.4470
+    label: true
+    labelDy: -11
+
+yangzhou:
+  - name: 文昌阁
+    lat: 32.3970
+    lng: 119.4360
+  - name: 东关街
+    lat: 32.3970
+    lng: 119.4490
+    label: true
+    labelDx: 8
+    labelAnchor: start
+  - name: 个园
+    lat: 32.4030
+    lng: 119.4490
+  - name: 瘦西湖
+    lat: 32.4100
+    lng: 119.4220
+    label: true
+    labelDy: -11
+  - name: 大运河博物馆
+    lat: 32.3750
+    lng: 119.4300
+    label: true
+    labelDy: 14
+
+beijing:
+  - name: 保定
+    lat: 38.8739
+    lng: 115.4648
+    label: true
+    labelDx: -8
+    labelAnchor: end
+  - name: 白洋淀
+    lat: 38.9410
+    lng: 116.0200
+  - name: 雄安
+    lat: 39.0430
+    lng: 115.8840
+  - name: 北京
+    lat: 39.9042
+    lng: 116.4074
+    label: true
+    labelDy: -11
+  - name: 长城
+    lat: 40.3540
+    lng: 116.0060
+    label: true
+    labelDx: -8
+    labelAnchor: end
+  - name: 十三陵
+    lat: 40.2540
+    lng: 116.2170
+  - name: 秦皇岛
+    lat: 39.8883
+    lng: 119.5202
+    label: true
+    labelDy: -11
+  - name: 北戴河
+    lat: 39.8340
+    lng: 119.4860
+    label: true
+    labelDy: 14
+
+tianjin:
+  - name: V1
+    lat: 39.1840
+    lng: 117.4280
+    label: true
+    labelDy: -11
+  - name: 静园
+    lat: 39.1170
+    lng: 117.2040
+  - name: 张园
+    lat: 39.1250
+    lng: 117.1960
+    label: true
+    labelDy: 14
+  - name: 五号院
+    lat: 39.1400
+    lng: 117.1980
+
+dongbei:
+  - name: 长春
+    lat: 43.8171
+    lng: 125.3235
+    label: true
+    labelDy: -11
+  - name: 延吉
+    lat: 42.8913
+    lng: 129.5094
+    label: true
+    labelDx: 8
+    labelAnchor: start
+  - name: 长白山
+    lat: 42.0060
+    lng: 128.0550
+    label: true
+    labelDy: 14
+  - name: 图们
+    lat: 42.9680
+    lng: 129.8440
+    label: true
+    labelDy: -11
+
+japan:
+  - name: 东京
+    lat: 35.6812
+    lng: 139.7671
+    label: true
+    labelDy: -11
+  - name: 横滨
+    lat: 35.4437
+    lng: 139.6380
+  - name: 富士山
+    lat: 35.3606
+    lng: 138.7278
+    label: true
+    labelDy: 14
+  - name: 京都
+    lat: 35.0116
+    lng: 135.7681
+    label: true
+    labelDy: -11
+  - name: 奈良
+    lat: 34.6851
+    lng: 135.8328
+  - name: 大阪
+    lat: 34.6937
+    lng: 135.5023
+    label: true
+    labelDy: 14
+  - name: 和歌山
+    lat: 34.2260
+    lng: 135.1675
+    label: true
+    labelDx: -8
+    labelAnchor: end
+
+vietnam:
+  - name: 胡志明
+    lat: 10.8231
+    lng: 106.6297
+    label: true
+    labelDx: 8
+    labelAnchor: start
+  - name: 河内
+    lat: 21.0278
+    lng: 105.8342
+    label: true
+    labelDx: -8
+    labelAnchor: end
+  - name: 下龙湾
+    lat: 20.9100
+    lng: 107.1830
+    label: true
+    labelDx: 8
+    labelAnchor: start
+  - name: 富国岛
+    lat: 10.2899
+    lng: 103.9840
+    label: true
+    labelDx: -8
+    labelAnchor: end
+

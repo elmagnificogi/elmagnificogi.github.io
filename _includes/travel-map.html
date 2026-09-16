@@ -1,0 +1,17 @@
+{% if include.mode == "route" %}
+  {% assign travel_route_id = include.route | default: page.travel_route %}
+  {% assign travel_stops = site.data.travel_routes[travel_route_id] %}
+{% else %}
+  {% assign travel_places = site.data.travel_places %}
+{% endif %}
+{% if include.mode == "pins" and travel_places %}
+<div class="js-travel-map travel-map-wrap">
+  <div class="travel-map-canvas" role="img" aria-label="走过的地方"></div>
+  <script type="application/json">{"mode":"pins","places":{{ travel_places | jsonify }}}</script>
+</div>
+{% elsif include.mode == "route" and travel_stops %}
+<div class="js-travel-map travel-map-wrap">
+  <div class="travel-map-canvas travel-map-canvas--route" role="img" aria-label="行程路线"></div>
+  <script type="application/json">{"mode":"route","stops":{{ travel_stops | jsonify }}}</script>
+</div>
+{% endif %}

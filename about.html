@@ -4,11 +4,14 @@ layout: page
 title: "About"
 description: "Adoring the girl within the photograph, yearning to carry her towards eternity, yet lamentably, it remains but a fleeting dream."
 header-img: "img/about-bg.jpg"
+travel_map: true
 ---
 
 <div class="zh post-container">
     {% capture about_zh %}{% include about/about.md %}{% endcapture %}
     {{ about_zh | markdownify }}
+
+    {% include travel-map.html mode="pins" %}
 </div>
 
 

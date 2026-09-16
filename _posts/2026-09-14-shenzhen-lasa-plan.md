@@ -9,6 +9,7 @@ header-img: "img/freertos.jpg"
 catalog:    true
 mermaid:    false
 tobecontinued: false
+travel_route: g318
 tags:
     - 旅游
     - Car
@@ -32,6 +33,10 @@ tags:
 
 
 ### 去程（计划）
+
+<div class="travel-map-slot">
+{% include travel-map.html mode="route" %}
+</div>
 
 - D1 9/25 飞成都取车。车到了、人还不晕，可以开到雅安（约 600 米）或泸定（约 1300 米）
 - D2 9/26 **成都到康定**：大约 320 公里。现在走雅安到康定的高速，不走老二郎山那条土路。康定约 2500 米。山路从泸定附近开始，施工段灰大、路窄。

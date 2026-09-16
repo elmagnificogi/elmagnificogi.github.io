@@ -6,6 +6,7 @@ date:       2020-10-03
 author:     "elmagnifico"
 header-img: "img/xiamen.jpg"
 catalog:    true
+travel_route: xiamen
 tags:
     - 旅游
     - Log
@@ -14,6 +15,8 @@ tags:
 ## Foreword
 
 十一参加同学婚礼，顺便去厦门转一圈。
+
+{% include travel-map.html mode="route" %}
 
 
 

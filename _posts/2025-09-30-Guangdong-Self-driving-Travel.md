@@ -8,6 +8,7 @@ author:     "elmagnifico"
 header-img: "img/x11.jpg"
 catalog:    true
 tobecontinued: false
+travel_route: yuedong
 tags:
     - 旅游
 ---
@@ -15,6 +16,8 @@ tags:
 ## Foreword
 
 据说十一开始的前后两天，路上都非常堵，那我只能等到人不多的时候再自驾，逛一下广东周边。时间还是有点紧张，边走边记。
+
+{% include travel-map.html mode="route" %}
 
 
 

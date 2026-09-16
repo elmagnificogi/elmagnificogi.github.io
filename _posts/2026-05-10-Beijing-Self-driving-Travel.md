@@ -8,6 +8,7 @@ author:     "elmagnifico"
 header-img: "img/api-bg.jpg"
 catalog:    true
 tobecontinued: false
+travel_route: beijing
 tags:
     - 旅游
 ---
@@ -15,6 +16,8 @@ tags:
 ## Foreword
 
 车在北京，顺便周边自驾转转，看看北方发展成什么样了。从北京去了保定，打算从西南边逛起，再回北京见同学，接着往西北边逛了一圈，然后直奔秦皇岛。
+
+{% include travel-map.html mode="route" %}
 
 
 

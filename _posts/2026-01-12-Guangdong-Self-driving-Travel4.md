@@ -8,6 +8,7 @@ author:     "elmagnifico"
 header-img: "img/y9.jpg"
 catalog:    true
 tobecontinued: false
+travel_route: yuebei
 tags:
     - 旅游
 ---
@@ -15,6 +16,8 @@ tags:
 ## Foreword
 
 这次往粤北走，补一下之前没去的地方，主要是为了跑山来玩一下。
+
+{% include travel-map.html mode="route" %}
 
 
 

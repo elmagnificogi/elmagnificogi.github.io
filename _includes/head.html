@@ -35,6 +35,10 @@
 
     <link href="{{ "/css/font-awesome.min.css" | prepend: site.baseurl }}" rel="stylesheet" type="text/css">
 
+    {% if page.travel_map or page.travel_route %}
+    <link rel="stylesheet" href="{{ '/css/travel-map.css' | prepend: site.baseurl }}">
+    {% endif %}
+
     {% if site.pagefind %}
     <link rel="stylesheet" href="{{ '/css/search-pagefind.css' | prepend: site.baseurl }}">
     <link rel="stylesheet" href="{{ '/css/search-cjk-fallback.css' | prepend: site.baseurl }}">

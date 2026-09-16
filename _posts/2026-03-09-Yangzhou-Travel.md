@@ -8,6 +8,7 @@ author:     "elmagnifico"
 header-img: "img/z6.jpg"
 catalog:    true
 tobecontinued: false
+travel_route: yangzhou
 tags:
     - 旅游
 ---
@@ -15,6 +16,8 @@ tags:
 ## Foreword
 
 “烟花三月下扬州”，但我去的是公历3月，真不算个合适的日子，如果是四五月份来，体验应该会好不少。
+
+{% include travel-map.html mode="route" %}
 
 
 

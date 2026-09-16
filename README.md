@@ -12,6 +12,20 @@ PS：Hux的blog有点对不起这么多star，长期不更新，而且讲道理�
 
 - update.sh和update_proxy.sh，用于平常小修小改的更新文章
 - deploy.sh，用于自动部署更新的脚本，注意：该脚本无法自己更新自己
+- 旅行地图：About 是走过的地方（图钉），游记是路线。底图自己画，不拉别人的瓦片。
+  - 加地点：改 `_data/travel_places.yml`。`url` 填文章路径，没有对应游记就不要写 `url`
+  - 链接格式：`/年/月/日/标题/`，年月日看文章头的 `date`，不是文件名上的日期
+  - 字叠在一起时用 `labelDx` / `labelDy` / `labelAnchor` 挪一下
+  - 加路线：`_data/travel_routes.yml` 里加一组，文章头写 `travel_route: 名字`，正文放 `{% include travel-map.html mode="route" %}`
+  - 文章头要有 `travel_map: true` 或 `travel_route`，才会加载地图的 css/js
+  - 底图用 `python scripts/build-travel-land.py` 生成 `js/travel-map-land.js`
+
+
+
+**2026.09.16**
+
+- 增加 About 走过的地方、游记路线图
+- 地图数据放在 `_data/travel_places.yml` 和 `_data/travel_routes.yml`
 
 
 

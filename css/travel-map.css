@@ -1,0 +1,96 @@
+.travel-map-wrap {
+  margin: 1.2em 0 1.6em;
+}
+
+.travel-map-canvas {
+  height: auto;
+  min-height: 240px;
+  border-radius: 6px;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  background: #f3f1ec;
+}
+
+.travel-map-canvas svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.travel-sea {
+  fill: #f3f1ec;
+}
+
+.travel-land {
+  fill: #d8d3c8;
+  stroke: #9f998e;
+  stroke-width: 1.1;
+  stroke-linejoin: round;
+}
+
+.travel-land--neighbor {
+  fill: #ece8e0;
+  stroke: #c4bfb6;
+}
+
+.travel-land--province {
+  fill: none;
+  stroke: #b9b2a6;
+  stroke-width: 0.75;
+}
+
+.travel-route {
+  fill: none;
+  stroke: #0085a1;
+  stroke-width: 2.4;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.travel-pin {
+  fill: #0085a1;
+  stroke: #fff;
+  stroke-width: 1.6;
+  cursor: pointer;
+}
+
+.travel-label {
+  font-size: 12px;
+  font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  fill: #3a3a3a;
+  stroke: #f3f1ec;
+  stroke-width: 3px;
+  stroke-linejoin: round;
+  paint-order: stroke;
+  pointer-events: none;
+}
+
+.travel-map-tip {
+  position: absolute;
+  transform: translate(-50%, calc(-100% - 8px));
+  background: #fff;
+  color: #333;
+  font-size: 13px;
+  line-height: 1.3;
+  padding: 4px 8px;
+  border-radius: 4px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.18);
+  white-space: nowrap;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.travel-map-tip.is-popup {
+  pointer-events: auto;
+}
+
+.travel-map-tip a {
+  color: #0085a1;
+}
+
+@media (max-width: 767px) {
+  .travel-label {
+    font-size: 11px;
+  }
+}

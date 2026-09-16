@@ -9,6 +9,7 @@ header-img: "img/g1.jpg"
 catalog:    true
 mermaid:    false
 tobecontinued: true
+travel_route: g318
 tags:
     - 旅游
     - Car
@@ -76,6 +77,10 @@ tags:
 ## 行程
 
 计划里 318 这条线上的点先按顺序搁这，走到哪补哪。
+
+<div class="travel-map-slot">
+{% include travel-map.html mode="route" %}
+</div>
 
 
 

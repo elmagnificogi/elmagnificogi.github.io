@@ -8,6 +8,7 @@ author:     "elmagnifico"
 header-img: "img/x1.jpg"
 catalog:    true
 tobecontinued: false
+travel_route: chongqing
 tags:
     - 旅游
 ---
@@ -17,6 +18,8 @@ tags:
 重庆十二日行，不过还是以工作为主，闲时去逛逛。距离我上次去重庆（2013.10）已经过去接近12年了，物是人非，很多地方是以前我都没听说过的，甚至以前都没有的地方。
 
 物是人非，上一次匆匆地来，匆匆地走，很多东西都没怎么体验到，这次我在重庆很想你。
+
+{% include travel-map.html mode="route" %}
 
 
 
