@@ -3,6 +3,7 @@
 result=$(cd /root/elmagnificogi.github.io && git pull origin master | grep "Already up-to-date" )
 if [[ "$result" != "" ]]
 then
+  echo "no update"
   exit 0
 else
   echo "`date '+%Y%m%d %H:%M'`: post update,start build"
