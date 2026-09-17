@@ -21,3 +21,4 @@ Gemfile.lock
 
 # travel map source extracts
 scripts/.cache/
+scripts/__pycache__/
