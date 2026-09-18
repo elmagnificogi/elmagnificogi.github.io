@@ -1,7 +1,7 @@
 ---
 layout:     post
-title:      "深圳-拉萨自驾-计划版"
-subtitle:   "成都，拉萨，桂林、云南、大理，滇藏，川藏，318，Su7 Ultra，边防证"
+title:      "深圳-拉萨/云南自驾-计划版"
+subtitle:   "成都，桂林、大理，滇藏，川藏，318，Su7 Ultra，边防证"
 date:       2026-09-15
 update:     2026-09-15
 author:     "elmagnifico"
