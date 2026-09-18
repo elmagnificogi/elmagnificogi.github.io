@@ -8,7 +8,7 @@ author:     "elmagnifico"
 header-img: "img/g2.jpg"
 catalog:    true
 mermaid:    false
-tobecontinued: true
+tobecontinued: false
 tags:
     - Cursor
     - AI
