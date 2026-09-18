@@ -138,7 +138,7 @@ npm run dev
 
 可以看到，你输入什么，就直接转发到了Cursor，那就可以远程用手机直接操作家里的PC了，体验真的不比小龙虾差。
 
-如果开启多个IDE，也可以通过命令显示哪个IDE，然后操作
+如果开了多个IDE，也可以用命令先列出有哪些，再选一个操作
 
 ![image-20260919012146556](https://img.elmagnifico.tech/static/upload/elmagnifico/202609190121587.png)
 
