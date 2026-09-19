@@ -192,6 +192,11 @@
 </script>
 {% endif %}
 
+<!-- Cloudflare Web Analytics -->
+{% if site.cf_beacon_token %}
+<script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "{{ site.cf_beacon_token }}"}'></script>
+{% endif %}
+
 {% if page.tobecontinued %}
 <script type="text/javascript" src="/js/watermark.js"></script>
 <script>
