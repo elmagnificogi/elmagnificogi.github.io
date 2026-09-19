@@ -4,7 +4,7 @@ title:      "深圳-拉萨自驾-在路上"
 subtitle:   "成都，拉萨，桂林、云南、大理，滇藏，川藏，318，Su7 Ultra，边防证"
 description: "深圳-拉萨自驾-在路上，成都、桂林、云南、大理。"
 date:       2026-09-16
-update:     2026-09-17
+update:     2026-09-19
 author:     "elmagnifico"
 header-img: "img/g1.jpg"
 catalog:    true
@@ -40,6 +40,12 @@ tags:
 15号就已经把车给到托车公司了，但是一直到19号凌晨车才上到拖车，才准备出发
 
 ![image-20260918233322439](https://img.elmagnifico.tech/static/upload/elmagnifico/202609182333787.png)
+
+![image-20260919203812647](https://img.elmagnifico.tech/static/upload/elmagnifico/202609192038861.png)
+
+这司机一口气开了20+小时，直接从广州干到重庆，距离成都也没多远了，估计20号早上就到了。
+
+- 这拖车都是这样，迟迟不出发，一出发没多会就要到了
 
 
 
