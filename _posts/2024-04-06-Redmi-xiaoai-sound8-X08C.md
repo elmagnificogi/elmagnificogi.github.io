@@ -2,6 +2,7 @@
 layout:     post
 title:      "Redmi小爱音响8刷机和安装第三方APP"
 subtitle:   "payload_dumper，mtkclient，root权限，adb"
+description: "Redmi 小爱音响 8 刷机：payload_dumper 拆固件、mtkclient 拿 root，再装第三方 APP。"
 date:       2024-04-06
 update:     2024-04-07
 author:     "elmagnifico"

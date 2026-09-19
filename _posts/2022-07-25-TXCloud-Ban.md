@@ -2,6 +2,7 @@
 layout:     post
 title:      "腾讯云封锁使用翻墙的轻量服务器"
 subtitle:   "v2ray,跨境访问节点"
+description: "腾讯云轻量因为做跨境访问节点被限制访问，文里有翻墙警告原文、工单过程，以及个人号和企业号待遇不一样。"
 date:       2022-07-25
 update:     2022-09-22
 author:     "elmagnifico"

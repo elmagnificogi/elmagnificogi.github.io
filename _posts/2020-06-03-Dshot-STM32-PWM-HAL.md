@@ -2,6 +2,7 @@
 layout:     post
 title:      "DSHOT指南"
 subtitle:   "HAL，DSHOT1200，STM32 PWM DSHOT驱动"
+description: "DSHOT 协议从 150 到 1200 是怎么来的，和 PWM、Oneshot 差在哪，以及 STM32 HAL 用 PWM 怎么发 DSHOT。"
 date:       2020-06-03
 update:     2025-09-04
 author:     "elmagnifico"
