@@ -1,0 +1,12 @@
+---
+layout: null
+sitemap: false
+---
+User-agent: *
+Allow: /
+
+Disallow: /offline.html
+Disallow: /pagefind/
+Disallow: /search-index/
+
+Sitemap: {{ "/sitemap.xml" | prepend: site.baseurl | prepend: site.url }}
