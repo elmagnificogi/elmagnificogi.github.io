@@ -35,6 +35,21 @@
     {% else %}
         {% assign og_image_url = og_image_path | prepend: '/' | replace: '//', '/' | prepend: site.url %}
     {% endif %}
+    {% assign og_ext = og_image_path | split: '.' | last | downcase %}
+    {% if og_ext == 'png' %}
+        {% assign og_image_type = 'image/png' %}
+    {% elsif og_ext == 'webp' %}
+        {% assign og_image_type = 'image/webp' %}
+    {% elsif og_ext == 'gif' %}
+        {% assign og_image_type = 'image/gif' %}
+    {% else %}
+        {% assign og_image_type = 'image/jpeg' %}
+    {% endif %}
+    {% if page.title %}
+        {% assign og_image_alt = page.title %}
+    {% else %}
+        {% assign og_image_alt = site.title %}
+    {% endif %}
 
     <!-- Canonical URL -->
     <link rel="canonical" href="{{ canonical_url }}">
@@ -46,11 +61,17 @@
     <meta property="og:description" content="{{ meta_description | strip_html | strip_newlines | escape }}">
     <meta property="og:url" content="{{ canonical_url }}">
     <meta property="og:image" content="{{ og_image_url }}">
+    <meta property="og:image:secure_url" content="{{ og_image_url }}">
+    <meta property="og:image:type" content="{{ og_image_type }}">
+    <meta property="og:image:alt" content="{{ og_image_alt | strip_html | escape }}">
     {% if page.collection == 'posts' %}
     <meta property="og:type" content="article">
     <meta property="article:published_time" content="{{ page.date | date_to_xmlschema }}">
     {% if page.update %}
     <meta property="article:modified_time" content="{{ page.update | date_to_xmlschema }}">
+    {% endif %}
+    {% if page.tags and page.tags.size > 0 %}
+    <meta property="article:section" content="{{ page.tags[0] | escape }}">
     {% endif %}
     {% else %}
     <meta property="og:type" content="website">
@@ -59,6 +80,7 @@
     <meta name="twitter:title" content="{{ og_title | strip_html | escape }}">
     <meta name="twitter:description" content="{{ meta_description | strip_html | strip_newlines | escape }}">
     <meta name="twitter:image" content="{{ og_image_url }}">
+    <meta name="twitter:image:alt" content="{{ og_image_alt | strip_html | escape }}">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="{{ "/css/bootstrap.min.css" | prepend: site.baseurl }}">
