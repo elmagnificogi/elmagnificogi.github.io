@@ -19,8 +19,46 @@
     <!-- Favicon -->
     <link rel="shortcut icon" href="{{ site.baseurl }}/img/favicon.ico">
 
+    {% assign canonical_url = page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url %}
+    {% if page.title %}
+        {% assign og_title = page.title | append: ' - ' | append: site.SEOTitle %}
+    {% else %}
+        {% assign og_title = site.SEOTitle %}
+    {% endif %}
+    {% if page.header-img %}
+        {% assign og_image_path = page.header-img %}
+    {% else %}
+        {% assign og_image_path = site.header-img %}
+    {% endif %}
+    {% if og_image_path contains '://' %}
+        {% assign og_image_url = og_image_path %}
+    {% else %}
+        {% assign og_image_url = og_image_path | prepend: '/' | replace: '//', '/' | prepend: site.url %}
+    {% endif %}
+
     <!-- Canonical URL -->
-    <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
+    <link rel="canonical" href="{{ canonical_url }}">
+
+    <!-- Open Graph -->
+    <meta property="og:site_name" content="{{ site.title | escape }}">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:title" content="{{ og_title | strip_html | escape }}">
+    <meta property="og:description" content="{{ meta_description | strip_html | strip_newlines | escape }}">
+    <meta property="og:url" content="{{ canonical_url }}">
+    <meta property="og:image" content="{{ og_image_url }}">
+    {% if page.collection == 'posts' %}
+    <meta property="og:type" content="article">
+    <meta property="article:published_time" content="{{ page.date | date_to_xmlschema }}">
+    {% if page.update %}
+    <meta property="article:modified_time" content="{{ page.update | date_to_xmlschema }}">
+    {% endif %}
+    {% else %}
+    <meta property="og:type" content="website">
+    {% endif %}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ og_title | strip_html | escape }}">
+    <meta name="twitter:description" content="{{ meta_description | strip_html | strip_newlines | escape }}">
+    <meta name="twitter:image" content="{{ og_image_url }}">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="{{ "/css/bootstrap.min.css" | prepend: site.baseurl }}">
