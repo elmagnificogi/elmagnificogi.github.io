@@ -6,7 +6,7 @@ description: "Vsprintf与Vsnprintf造成的栈越界，StackOverflow。"
 date:       2025-08-25
 update:     2025-08-25
 author:     "elmagnifico"
-header-img: "img/x4.jpg"
+header-img: "img/head-2025-08-25.jpg"
 catalog:    true
 tobecontinued: false
 tags:

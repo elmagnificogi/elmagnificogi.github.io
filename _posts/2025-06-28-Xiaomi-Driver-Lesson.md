@@ -6,7 +6,7 @@ description: "小米高阶驾驶培训体验，金卡纳练习、漂移、救车
 date:       2025-06-29
 update:     2025-06-29
 author:     "elmagnifico"
-header-img: "img/x2.jpg"
+header-img: "img/head-2025-06-28.jpg"
 catalog:    true
 tobecontinued: false
 tags:

@@ -6,7 +6,7 @@ description: "STM32 DMA数据丢失，Cursor、PWM、Bidir-DSHOT、Timer。"
 date:       2025-06-26
 update:     2025-06-26
 author:     "elmagnifico"
-header-img: "img/welding.jpg"
+header-img: "img/head-2025-06-26.jpg"
 catalog:    true
 tobecontinued: false
 tags:

@@ -6,7 +6,7 @@ description: "2025新主机，Amd Yes、背插、BTF、装机。"
 date:       2025-08-11
 update:     2025-08-13
 author:     "elmagnifico"
-header-img: "img/x3.jpg"
+header-img: "img/head-2025-07-13.jpg"
 catalog:    true
 tobecontinued: false
 tags:

@@ -6,7 +6,7 @@ description: "顺便把SD ComfyUI搭建一下，comfyui uv、comfyui uv install�
 date:       2025-05-10
 update:     2025-05-10
 author:     "elmagnifico"
-header-img: "img/pen-head-bg.jpg"
+header-img: "img/head-2025-04-17.jpg"
 catalog:    true
 tobecontinued: false
 tags:

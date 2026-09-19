@@ -6,7 +6,7 @@ description: "3D米家，智能家居未来，xiaomi home 3d、UWB、户型图�
 date:       2025-11-14
 update:     2025-11-15
 author:     "elmagnifico"
-header-img: "img/y0.jpg"
+header-img: "img/head-2025-11-13.jpg"
 catalog:    true
 tobecontinued: false
 tags:

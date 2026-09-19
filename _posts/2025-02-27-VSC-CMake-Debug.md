@@ -6,7 +6,7 @@ description: "VSCode CMake Debug 嵌入式MCU有好几种方案，cursor vsc、v
 date:       2025-02-27
 update:     2025-03-01
 author:     "elmagnifico"
-header-img: "img/freertos.jpg"
+header-img: "img/head-2025-02-27.jpg"
 catalog:    true
 tobecontinued: false
 tags:

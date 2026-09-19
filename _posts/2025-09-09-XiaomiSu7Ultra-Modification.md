@@ -6,7 +6,7 @@ description: "冲出赛道，小米Su7 Ultra、改装、底盘灯、刹车片。
 date:       2025-09-10
 update:     2025-09-17
 author:     "elmagnifico"
-header-img: "img/x7.jpg"
+header-img: "img/head-2025-09-09.jpg"
 catalog:    true
 tobecontinued: false
 tags:

@@ -6,7 +6,7 @@ description: "艺术与审美，第一阶段学习，唯伟老师聊绘画、唯
 date:       2025-08-28
 update:     2025-08-28
 author:     "elmagnifico"
-header-img: "img/pen-head-bg.jpg"
+header-img: "img/head-2025-04-08.jpg"
 catalog:    true
 tobecontinued: false
 tags:

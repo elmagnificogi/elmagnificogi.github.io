@@ -6,7 +6,7 @@ description: "Su7 Ultra下赛道，改装、赛道日、四点式安全带、漂
 date:       2025-05-20
 update:     2026-02-24
 author:     "elmagnifico"
-header-img: "img/springboot.jpg"
+header-img: "img/head-2025-05-17.jpg"
 catalog:    true
 tobecontinued: false
 tags:

@@ -6,7 +6,7 @@ description: "越南游记，签证、越南盾、胡志明、河内。"
 date:       2025-05-08
 update:     2025-05-08
 author:     "elmagnifico"
-header-img: "img/play.jpg"
+header-img: "img/head-2025-04-20.jpg"
 catalog:    true
 tobecontinued: false
 travel_route: vietnam

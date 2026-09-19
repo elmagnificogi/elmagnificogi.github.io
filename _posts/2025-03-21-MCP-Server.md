@@ -6,7 +6,7 @@ description: "MCP下一代软件接口，他可能是未来AI或者大模型发�
 date:       2025-03-24
 update:     2025-03-24
 author:     "elmagnifico"
-header-img: "img/line-head-bg.jpg"
+header-img: "img/head-2025-03-21.jpg"
 catalog:    true
 tobecontinued: false
 tags:

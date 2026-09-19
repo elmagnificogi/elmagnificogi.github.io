@@ -6,7 +6,7 @@ description: "Nintendo Switch2，港版、首发、同捆、马车世界。"
 date:       2025-06-05
 update:     2025-06-25
 author:     "elmagnifico"
-header-img: "img/typora.jpg"
+header-img: "img/head-2025-06-05.jpg"
 catalog:    true
 tobecontinued: false
 tags:

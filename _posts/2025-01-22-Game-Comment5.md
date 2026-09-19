@@ -6,7 +6,7 @@ description: "2024游戏短评，梦之形、大侠立志传、小丑牌、腐�
 date:       2025-01-22
 update:     2025-01-22
 author:     "elmagnifico"
-header-img: "img/play.jpg"
+header-img: "img/head-2025-01-22.jpg"
 catalog:    true
 tobecontinued: false
 tags:

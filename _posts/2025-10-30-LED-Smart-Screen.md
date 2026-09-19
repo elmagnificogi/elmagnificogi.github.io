@@ -6,7 +6,7 @@ description: "车载智能屏幕，ac23bp1、Led、iPixel Color。"
 date:       2025-10-31
 update:     2025-10-31
 author:     "elmagnifico"
-header-img: "img/x14.jpg"
+header-img: "img/head-2025-10-30.jpg"
 catalog:    true
 tobecontinued: false
 tags:

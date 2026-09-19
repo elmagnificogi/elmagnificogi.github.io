@@ -6,7 +6,7 @@ description: "RSS Follow体验，TTRss、RSSHub、订阅、激活码。"
 date:       2025-01-21
 update:     2025-01-21
 author:     "elmagnifico"
-header-img: "img/blackboard.jpg"
+header-img: "img/head-2025-01-15.jpg"
 catalog:    true
 tobecontinued: false
 tags:

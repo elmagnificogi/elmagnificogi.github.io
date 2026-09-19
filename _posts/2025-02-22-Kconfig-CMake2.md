@@ -6,7 +6,7 @@ description: "Kconfig与CMake初步模块化工程2，APM32、ST、CMakeLists、
 date:       2025-02-23
 update:     2025-02-23
 author:     "elmagnifico"
-header-img: "img/drone.jpg"
+header-img: "img/head-2025-02-22-cmake2.jpg"
 catalog:    true
 tobecontinued: false
 tags:

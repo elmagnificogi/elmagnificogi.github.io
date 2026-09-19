@@ -6,7 +6,7 @@ description: "广东自驾游之粤东篇，爆胎、广州、一饭封神、梅
 date:       2025-10-09
 update:     2025-10-31
 author:     "elmagnifico"
-header-img: "img/x11.jpg"
+header-img: "img/head-2025-09-30.jpg"
 catalog:    true
 tobecontinued: false
 travel_route: yuedong
