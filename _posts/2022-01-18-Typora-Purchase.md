@@ -2,6 +2,7 @@
 layout:     post
 title:      "Typora收费了"
 subtitle:   "Typora，markdown"
+description: "Typora收费了，typora 收費、typora破解版、typora密钥、markdown、期望。"
 date:       2022-01-18
 update:     2022-01-18
 author:     "elmagnifico"

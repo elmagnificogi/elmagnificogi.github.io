@@ -2,6 +2,7 @@
 layout:     post
 title:      "广东自驾游之粤西篇"
 subtitle:   "肇庆、风车、鼎湖山、茂名、中山"
+description: "广东自驾游之粤西篇，肇庆、风车、鼎湖山、茂名。"
 date:       2026-01-05
 update:     2026-01-05
 author:     "elmagnifico"

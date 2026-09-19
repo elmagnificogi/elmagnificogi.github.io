@@ -2,6 +2,7 @@
 layout:     post
 title:      "FreeRTOS中heap源文件分析(三)"
 subtitle:   "嵌入式，FreeRTOS，heap"
+description: "FreeRTOS中heap源文件分析(三)，\"xheaphasbeeninitialised\" \"heap_2.c\"、freertos configtotal_heap_size、嵌入式、heap3功能简介。"
 date:       2017-03-21
 author:     "elmagnifico"
 header-img: "img/freertos.jpg"

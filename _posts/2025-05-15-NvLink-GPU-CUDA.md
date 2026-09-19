@@ -2,6 +2,7 @@
 layout:     post
 title:      "GPU相关常识"
 subtitle:   "NvLink,NPU,HBM,GH200"
+description: "GPU相关常识，NvLink、NPU、HBM、GH200。"
 date:       2025-05-16
 update:     2025-05-16
 author:     "elmagnifico"

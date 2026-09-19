@@ -2,6 +2,7 @@
 layout:     post
 title:      "QEMU模拟运行FreeRTOS"
 subtitle:   "STM32"
+description: "测试一下QEMU模拟运行FreeRTOS，freertos qemu、qemu freertos、STM32。"
 date:       2024-12-07
 update:     2024-12-07
 author:     "elmagnifico"

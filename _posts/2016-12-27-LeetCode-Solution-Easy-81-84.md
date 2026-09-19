@@ -2,6 +2,7 @@
 layout:     post
 title:      "LeetCode Solution(Easy.81-84)"
 subtitle:   "c/c++，python，for work"
+description: "LeetCode Solution(Easy.81-84)，c++、python、84.Binary Watch。"
 date:       2016-12-27
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"

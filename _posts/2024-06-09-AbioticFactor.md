@@ -3,6 +3,7 @@
 layout:     post
 title:      "Abiotic Factor开服指南"
 subtitle:   "非生物因子，windows，steamCMD"
+description: "Abiotic Factor开服指南，非生物因子、windows、steamCMD、测试。"
 date:       2024-06-09
 update:     2024-06-09
 author:     "elmagnifico"

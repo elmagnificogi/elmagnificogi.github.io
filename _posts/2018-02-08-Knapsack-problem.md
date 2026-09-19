@@ -2,6 +2,7 @@
 layout:     post
 title:      "背包问题，动态规划"
 subtitle:   "0/1，DP,NPC"
+description: "背包问题，动态规划，DP、NPC、基本0/1背包、knapsack。"
 date:       2018-02-08
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"

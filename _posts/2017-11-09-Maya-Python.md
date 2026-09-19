@@ -2,6 +2,7 @@
 layout:     post
 title:      "Maya-Python"
 subtitle:   "pip, setuptools, plugin"
+description: "Maya-Python，pip、setuptools、plugin、Maya Python。"
 date:       2017-11-09
 author:     "elmagnifico"
 header-img: "img/python-head-bg.jpg"

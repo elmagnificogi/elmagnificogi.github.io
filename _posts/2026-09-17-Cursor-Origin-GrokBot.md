@@ -2,6 +2,7 @@
 layout:     post
 title:      "Origin、Grok Bot体验与Gantry（Courier）"
 subtitle:   "Courier，跑腿送信工具，Cursor，PC，IDE，远程，机器人"
+description: "Origin、Grok Bot体验与Gantry（Courier），跑腿送信工具、Cursor、PC、IDE。"
 date:       2026-09-19
 update:     2026-09-19
 author:     "elmagnifico"

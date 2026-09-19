@@ -545,6 +545,25 @@ pre code {
   letter-spacing: .5px
 }
 
+.post-container .related-posts {
+  clear: both;
+  margin: 36px 0 24px
+}
+
+.post-container .related-posts h5 {
+  margin: 0 0 12px;
+  scroll-margin-top: 80px
+}
+
+.post-container .related-posts ul {
+  margin: 0;
+  padding-left: 1.2em
+}
+
+.post-container .related-posts li {
+  margin: 0 0 8px
+}
+
 @media only screen and (max-width:767px) {
   .navbar-default .navbar-collapse {
     position: absolute;

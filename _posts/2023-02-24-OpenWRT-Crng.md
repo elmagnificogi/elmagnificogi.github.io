@@ -2,6 +2,7 @@
 layout:     post
 title:      "random:crng init done导致系统启动过长"
 subtitle:   "rng-tools,haveged,kernel"
+description: "random:crng init done导致系统启动过长，rng-tools、haveged。"
 date:       2023-02-24
 update:     2023-02-24
 author:     "elmagnifico"

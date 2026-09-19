@@ -2,6 +2,7 @@
 layout:     post
 title:      "Oracle用腾讯云中转"
 subtitle:   "轻量云，v2ray，安全组，转发"
+description: "Oracle用腾讯云中转，轻量云、v2ray。"
 date:       2021-01-06
 update:     2022-03-29
 author:     "elmagnifico"

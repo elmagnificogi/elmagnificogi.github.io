@@ -2,6 +2,7 @@
 layout:     post
 title:      "有点无语"
 subtitle:   "Dream"
+description: "有点无语，Dream、dreamcometrue。"
 date:       2026-09-13
 update:     2026-09-13
 author:     "elmagnifico"

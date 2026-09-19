@@ -2,6 +2,7 @@
 layout:     post
 title:      "UDP丢包分析"
 subtitle:   "AP，Socket"
+description: "UDP丢包分析，AP、Socket、外部因素、内部因素。"
 date:       2022-04-22
 update:     2022-07-25
 author:     "elmagnifico"

@@ -2,6 +2,7 @@
 layout:     post
 title:      "广播与多播对WIFI网络的影响"
 subtitle:   "Multicast，Broadcast"
+description: "广播与多播对WIFI网络的影响，wifi broadcast、broadcast wifi、wol wifi、wifi wol、Multicast、多播与广播介绍。"
 date:       2021-07-03
 update:     2021-07-03
 author:     "elmagnifico"

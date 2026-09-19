@@ -2,6 +2,7 @@
 layout:     post
 title:      "C++中Enum与array的最后一个逗号"
 subtitle:   "c/c++，enum,array,comma"
+description: "C++中Enum与array的最后一个逗号，这是怎么回事、這個有問題嗎、comma、编译没报错？？。"
 date:       2017-03-13
 author:     "elmagnifico"
 header-img: "img/python-head-bg.jpg"

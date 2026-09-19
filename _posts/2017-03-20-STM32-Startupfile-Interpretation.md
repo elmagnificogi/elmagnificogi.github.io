@@ -2,6 +2,7 @@
 layout:     post
 title:      "STM32启动文件分析"
 subtitle:   "嵌入式，bootloader，STM32"
+description: "STM32启动文件分析，嵌入式、bootloader、startupfile。"
 date:       2017-03-20
 author:     "elmagnifico"
 header-img: "img/Embedded-head-bg.jpg"

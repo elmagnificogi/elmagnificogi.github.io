@@ -2,6 +2,7 @@
 layout:     post
 title:      "小米高阶驾驶培训体验"
 subtitle:   "金卡纳练习、漂移、救车"
+description: "小米高阶驾驶培训体验，金卡纳练习、漂移、救车、北京。"
 date:       2025-06-29
 update:     2025-06-29
 author:     "elmagnifico"

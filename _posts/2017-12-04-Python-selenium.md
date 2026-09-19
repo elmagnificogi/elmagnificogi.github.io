@@ -2,6 +2,7 @@
 layout:     post
 title:      "Python selenium"
 subtitle:   "auto test,Firefox,"
+description: "Python selenium，auto test、Firefox、code、模拟按键与发送文本。"
 date:       2017-12-04
 author:     "elmagnifico"
 header-img: "img/python-head-bg.jpg"

@@ -2,6 +2,7 @@
 layout:     post
 title:      "OMPL 创建自己的采样器"
 subtitle:   "state,sampler"
+description: "OMPL 创建自己的采样器，state、sampler、自定义采样器、customsampler。"
 date:       2018-03-16
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"

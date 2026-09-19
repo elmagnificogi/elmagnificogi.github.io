@@ -2,6 +2,7 @@
 layout:     post
 title:      "2022游戏短评"
 subtitle:   "Raft，Terraria，大侠立志传，活侠传"
+description: "2022游戏短评，Raft、Terraria、大侠立志传、活侠传。"
 date:       2023-01-29
 update:     2023-04-27
 author:     "elmagnifico"

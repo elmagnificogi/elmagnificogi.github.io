@@ -2,6 +2,7 @@
 layout:     post
 title:      "CmBacktrace"
 subtitle:   "STM32"
+description: "CmBacktrace，STM32、Source Code、查错。"
 date:       2017-07-27
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"

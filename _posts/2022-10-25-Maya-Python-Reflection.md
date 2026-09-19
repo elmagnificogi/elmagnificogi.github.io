@@ -2,8 +2,9 @@
 layout:     post
 title:      "Maya Python 反射"
 subtitle:   "eval,getattr"
+description: "Maya Python 反射，eval、getattr、reflection。"
 date:       2022-10-25
-update:     2022-10-95
+update:     2022-10-29
 author:     "elmagnifico"
 header-img: "img/python-head-bg.jpg"
 catalog:    true

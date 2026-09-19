@@ -2,6 +2,7 @@
 layout:     post
 title:      "VPS SpeedTest"
 subtitle:   "centos 7"
+description: "VPS SpeedTest，centos 7。"
 date:       2018-08-14
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"

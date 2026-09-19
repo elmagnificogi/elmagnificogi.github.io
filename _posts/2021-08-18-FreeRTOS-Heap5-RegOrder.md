@@ -2,6 +2,7 @@
 layout:     post
 title:      "FreeRTOS Heap5内存分配之顺序"
 subtitle:   "FreeRTOS，Heap"
+description: "一直使用的FreeRTOS heap5作为内存分配，最近刚好遇到一个bug，仔细看了一下发现heap5的实现，发现这种情况无法处理，现象、分析。"
 date:       2021-08-18
 author:     "elmagnifico"
 header-img: "img/bg7.jpg"

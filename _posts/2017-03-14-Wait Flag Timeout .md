@@ -2,6 +2,7 @@
 layout:     post
 title:      "嵌入式底层驱动中时序等待超时处理"
 subtitle:   "嵌入式，驱动，Timeout"
+description: "嵌入式底层驱动中时序等待超时处理，Timeout、超时代码、简要分析、我的写法。"
 date:       2017-03-14
 author:     "elmagnifico"
 header-img: "img/Embedded-head-bg.jpg"

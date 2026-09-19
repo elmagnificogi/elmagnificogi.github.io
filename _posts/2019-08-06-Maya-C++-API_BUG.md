@@ -2,6 +2,7 @@
 layout:     post
 title:      "maya c++ API Bug"
 subtitle:   "API 学习"
+description: "maya c++ API Bug，API 学习、删除节点、数组类型属性、关键帧顶替。"
 date:       2019-08-06
 author:     "elmagnifico"
 header-img: "img/bg1.jpg"

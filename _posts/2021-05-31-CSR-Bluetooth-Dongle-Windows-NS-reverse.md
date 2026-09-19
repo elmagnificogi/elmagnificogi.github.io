@@ -2,6 +2,7 @@
 layout:     post
 title:      "CSR蓝牙适配器在windows上模拟NS手柄之逆向工程"
 subtitle:   "crack,bluetooth dongle"
+description: "CSR蓝牙适配器在windows上模拟NS手柄之逆向工程，凸包内部 蓝点 红点 绿点 最多、隱藏我的劇毒之血、硬改新机、自我改进、crack、bluetooth dongle。"
 date:       2021-05-31
 update:     2021-06-02
 author:     "elmagnifico"

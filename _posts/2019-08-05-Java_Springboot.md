@@ -2,6 +2,7 @@
 layout:     post
 title:      "Java_Springboot"
 subtitle:   "入门"
+description: "Java_Springboot，caddy vs spring boot、spring boot vs caddy、入门。"
 date:       2019-08-05
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"

@@ -2,6 +2,7 @@
 layout:     post
 title:      "无线网络唤醒，从入门到放弃"
 subtitle:   "wol,PCI Express WAKE,开机棒,AC Recover,米家mesh,ESP32"
+description: "无线网络唤醒，从入门到放弃，wake on lan wifi、wol 無線lan、wake on lan 無線lan、wake on wireless lan、PCI Express WAKE、开机棒。"
 date:       2021-05-25
 update:     2023-04-19
 author:     "elmagnifico"

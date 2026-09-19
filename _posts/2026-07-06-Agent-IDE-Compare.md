@@ -2,6 +2,7 @@
 layout:     post
 title:      "Cursor、Claude、CodeX深度体验、对比"
 subtitle:   "AI、Agent、Skill、workflow、产品设计"
+description: "Cursor、Claude、CodeX深度体验、对比，cursor和codex、codex vs claude code 对比、codex还是cursor、codex claude code cursor 对比、AI、Agent。"
 date:       2026-07-30
 update:     2026-09-14
 author:     "elmagnifico"

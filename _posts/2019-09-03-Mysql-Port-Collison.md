@@ -2,6 +2,7 @@
 layout:     post
 title:      "mySql、web的多个docker实例"
 subtitle:   "docker-compose"
+description: "mySql、web的多个docker实例，docker-compose、dockerfile、问题docker-compose、application配置。"
 date:       2019-09-04
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"

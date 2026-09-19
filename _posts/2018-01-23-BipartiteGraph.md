@@ -2,6 +2,7 @@
 layout:     post
 title:      "Bipartite Graph 二分图"
 subtitle:   "匈牙利算法，最大匹配"
+description: "Bipartite Graph 二分图，淘宝网ip、匈牙利算法、最大匹配。"
 date:       2018-01-23
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"

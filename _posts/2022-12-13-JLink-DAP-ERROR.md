@@ -2,6 +2,7 @@
 layout:     post
 title:      "Dap error while reading AIRCR/CPUID register"
 subtitle:   "STM32、JLink"
+description: "Dap error while reading AIRCR/CPUID register，STM32、JLink。"
 date:       2022-12-13
 update:     2023-04-12
 author:     "elmagnifico"

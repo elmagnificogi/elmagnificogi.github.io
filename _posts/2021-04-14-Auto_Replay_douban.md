@@ -2,6 +2,7 @@
 layout:     post
 title:      "豆瓣自动回复，自动顶帖"
 subtitle:   "超级鹰,验证码识别"
+description: "豆瓣自动回复，自动顶帖，超级鹰、验证码识别、前情、代码。"
 date:       2021-04-14
 update:     2023-02-09
 author:     "elmagnifico"

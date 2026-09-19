@@ -2,6 +2,7 @@
 layout:     post
 title:      "FreeRTOS深入理解优先级翻转"
 subtitle:   "互斥量、信号量、优先级继承"
+description: "FreeRTOS深入理解优先级翻转，优先级反转、互斥量、信号量。"
 date:       2024-07-08
 update:     2024-07-09
 author:     "elmagnifico"

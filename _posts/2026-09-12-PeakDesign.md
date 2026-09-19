@@ -2,6 +2,7 @@
 layout:     post
 title:      "PeakDesign Everyday Backpack换新"
 subtitle:   "淘宝、售后、v2"
+description: "19年买的PeakDesign Everyday Backpack，去年就已经出现涂层脱落了，只是没想起来这个是终身保修的，淘宝、售后、v2。"
 date:       2026-09-12
 update:     2026-09-12
 author:     "elmagnifico"

@@ -2,6 +2,7 @@
 layout:     post
 title:      "西双版纳/海南自驾游-计划版"
 subtitle:   "趣兜风，景洪，春节，海南自驾游"
+description: "西双版纳/海南自驾游-计划版，趣兜风、景洪、春节、去程（计划）。"
 date:       2026-02-05
 update:     2026-02-05
 author:     "elmagnifico"

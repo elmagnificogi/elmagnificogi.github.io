@@ -2,6 +2,7 @@
 layout:     post
 title:      "电动升降桌逆向，接入米家"
 subtitle:   "STC，90°直角桌，拐角桌"
+description: "电动升降桌逆向，接入米家，stc 8h1k16、90°直角桌、拐角桌。"
 date:       2024-03-23
 update:     2024-04-04
 author:     "elmagnifico"

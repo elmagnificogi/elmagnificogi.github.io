@@ -2,6 +2,7 @@
 layout:     post
 title:      "字符集与编码"
 subtitle:   "encode,deconde,character-set"
+description: "字符集与编码，encode、deconde、character-set、other。"
 date:       2017-12-01
 author:     "elmagnifico"
 header-img: "img/python-head-bg.jpg"

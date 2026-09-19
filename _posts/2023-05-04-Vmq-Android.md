@@ -2,6 +2,7 @@
 layout:     post
 title:      "Vmq Android App编译修改"
 subtitle:   "V免签、安卓、支付宝、收款"
+description: "Vmq Android App编译修改，V免签、安卓、支付宝、收款。"
 date:       2023-05-04
 update:     2023-05-10
 author:     "elmagnifico"

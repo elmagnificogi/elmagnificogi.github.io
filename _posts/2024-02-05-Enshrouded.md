@@ -2,6 +2,7 @@
 layout:     post
 title:      "雾锁王国服务器搭建"
 subtitle:   "steam、Enshrouded、英灵神殿"
+description: "雾锁王国服务器搭建，steam、Enshrouded、英灵神殿、服务器需求。"
 date:       2024-02-05
 update:     2025-02-03
 author:     "elmagnifico"

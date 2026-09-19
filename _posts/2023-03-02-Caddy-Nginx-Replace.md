@@ -2,6 +2,7 @@
 layout:     post
 title:      "Caddy平替Nginx，简单入门"
 subtitle:   "reverse_proxy"
+description: "Caddy平替Nginx，简单入门，caddy nginx 比較、c# vs caddy、caddy try_files、reverse_proxy。"
 date:       2023-03-02
 update:     2023-03-02
 author:     "elmagnifico"

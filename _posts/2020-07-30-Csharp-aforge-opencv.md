@@ -2,6 +2,7 @@
 layout:     post
 title:      "C# 高效视频采集"
 subtitle:   "Aforge，opencv"
+description: "C# 高效视频采集，Aforge、opencv、视频采集库、综合对比。"
 date:       2020-07-30
 author:     "elmagnifico"
 header-img: "img/python-head-bg.jpg"

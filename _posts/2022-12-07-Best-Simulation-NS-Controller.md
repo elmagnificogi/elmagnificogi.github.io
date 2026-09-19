@@ -2,6 +2,7 @@
 layout:     post
 title:      "模拟NS手柄的最佳方案"
 subtitle:   "CH9329、CH552G"
+description: "模拟NS手柄的最佳方案，nxmacrocontroller、CH9329、CH552G。"
 date:       2022-12-07
 update:     2022-12-07
 author:     "elmagnifico"

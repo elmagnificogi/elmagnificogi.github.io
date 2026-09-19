@@ -2,6 +2,7 @@
 layout:     post
 title:      "HTTPS自签证书与阿里云免费证书"
 subtitle:   "springboot,java"
+description: "HTTPS自签证书与阿里云免费证书，阿里云服务器翻墙、springboot、java。"
 date:       2019-09-05
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"

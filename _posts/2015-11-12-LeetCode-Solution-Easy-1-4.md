@@ -2,6 +2,7 @@
 layout:     post
 title:      "LeetCode Solution(Easy.1-4)"
 subtitle:   "c/c++，python，for work"
+description: "第一次做leetcode，先用c或者是c++写一遍解决算法（哪个方便用哪个），再用Python写一遍，正好练习一下Python，1.Nim Game、2.Add Digits。"
 date:       2015-11-12
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"

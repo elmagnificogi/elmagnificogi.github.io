@@ -2,6 +2,7 @@
 layout:     post
 title:      "OV系列摄像头对比"
 subtitle:   "OV7670，OV7725，OV7690，OV5640"
+description: "OV系列摄像头对比，ov7670、OV7725、OV7690。"
 date:       2021-07-21
 update:     2023-01-04
 author:     "elmagnifico"

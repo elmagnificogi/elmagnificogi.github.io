@@ -3,6 +3,7 @@
 layout:     post
 title:      "RouterOS WiFiWave2 配置CAPsMAN"
 subtitle:   "WiFi5，WiFi6，WiFi7，漫游"
+description: "RouterOS WiFiWave2 配置CAPsMAN，wifiwave2 capsman、openwrt capsman、WiFi5、WiFi6。"
 date:       2024-04-10
 update:     2024-04-12
 author:     "elmagnifico"

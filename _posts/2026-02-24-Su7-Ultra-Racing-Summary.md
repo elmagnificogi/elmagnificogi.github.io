@@ -2,6 +2,7 @@
 layout:     post
 title:      "Su7 Ultra 赛道总结"
 subtitle:   "小米Su7 Ultra、GT7、懂车帝、珠海赛道、保险"
+description: "Su7 Ultra 赛道总结，\"su7 ultra\" 两个相同字母、小米Su7 Ultra、GT7。"
 date:       2026-02-24
 update:     2026-02-24
 author:     "elmagnifico"

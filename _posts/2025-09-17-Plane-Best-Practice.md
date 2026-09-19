@@ -2,6 +2,7 @@
 layout:     post
 title:      "Plane最佳实践"
 subtitle:   "项目管理、敏捷、制造业、EVT、PVT、质量管理"
+description: "Plane最佳实践，makeplane、plane是什么、项目管理、敏捷。"
 date:       2025-09-18
 update:     2025-09-18
 author:     "elmagnifico"

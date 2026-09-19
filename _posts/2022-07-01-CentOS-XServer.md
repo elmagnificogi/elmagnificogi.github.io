@@ -2,6 +2,7 @@
 layout:     post
 title:      "Centos8.2安装Xfce，配置VNC远程桌面"
 subtitle:   "AP,Router"
+description: "Centos8.2安装Xfce，配置VNC远程桌面，install xfce centos 8、AP、Router。"
 date:       2022-07-01
 update:     2022-07-01
 author:     "elmagnifico"

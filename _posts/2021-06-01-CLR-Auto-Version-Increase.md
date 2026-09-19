@@ -2,6 +2,7 @@
 layout:     post
 title:      "C++ CLI/CLR版本号自动增加"
 subtitle:   "c#,c++"
+description: "C++ CLI/CLR版本号自动增加，c#、C++ 宏定义、app.rc bug、version。"
 date:       2021-06-01
 update:     2021-06-02
 author:     "elmagnifico"

@@ -2,6 +2,7 @@
 layout:     post
 title:      "LeetCode Solution(Easy.69-72)"
 subtitle:   "c/c++，python，for work"
+description: "LeetCode Solution(Easy.69-72)，c++、python、71.Fizz Buzz、72.Reverse String。"
 date:       2016-12-24
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"

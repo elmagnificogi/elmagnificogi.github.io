@@ -2,6 +2,7 @@
 layout:     post
 title:      "2022年嵌入式开发环境介绍"
 subtitle:   "STM32，IDE"
+description: "2022年嵌入式开发环境介绍，STM32、IDE、Keil、Eclipse。"
 date:       2022-03-14
 update:     2023-04-27
 author:     "elmagnifico"

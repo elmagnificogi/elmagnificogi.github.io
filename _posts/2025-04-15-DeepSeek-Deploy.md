@@ -2,6 +2,7 @@
 layout:     post
 title:      "DeepSeek-671b-Q4部署"
 subtitle:   "LLM,AI，Transform,Open Web GUI"
+description: "DeepSeek-671b-Q4部署，LLM、AI、Transform、Open Web GUI。"
 date:       2025-04-18
 update:     2025-05-09
 author:     "elmagnifico"

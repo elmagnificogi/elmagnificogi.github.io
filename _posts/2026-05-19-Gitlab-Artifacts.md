@@ -2,6 +2,7 @@
 layout:     post
 title:      "Gitlab制品库实践记录"
 subtitle:   "生产、Release、CI、打包、runner"
+description: "Gitlab制品库实践记录，gitlab duo、生产、Release。"
 date:       2026-05-20
 update:     2026-05-20
 author:     "elmagnifico"

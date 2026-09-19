@@ -2,6 +2,7 @@
 layout:     post
 title:      "翻墙节点合租"
 subtitle:   "BlackFriday、IPLC"
+description: "翻墙节点合租，阿里云vps翻墙、BlackFriday、IPLC。"
 date:       2027-12-05
 update:     2027-10-09
 author:     "elmagnifico"

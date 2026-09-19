@@ -2,6 +2,7 @@
 layout:     post
 title:      "FreeRTOS中port源文件分析"
 subtitle:   "嵌入式，FreeRTOS，port"
+description: "FreeRTOS中port源文件分析，嵌入式、portmacro.h、portable.h、interpretation。"
 date:       2017-03-24
 author:     "elmagnifico"
 header-img: "img/freertos.jpg"

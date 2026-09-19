@@ -2,6 +2,7 @@
 layout:     post
 title:      "NXP的ARM-GCC编译分析与转SES工程"
 subtitle:   "Makefile、cmake、Ninja"
+description: "NXP的ARM-GCC编译分析与转SES工程，Makefile、cmake、Ninja、builddebug.bat。"
 date:       2022-12-15
 update:     2023-05-29
 author:     "elmagnifico"

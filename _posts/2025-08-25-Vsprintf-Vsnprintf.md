@@ -2,6 +2,7 @@
 layout:     post
 title:      "Vsprintf与Vsnprintf造成的栈越界"
 subtitle:   "StackOverflow"
+description: "Vsprintf与Vsnprintf造成的栈越界，StackOverflow。"
 date:       2025-08-25
 update:     2025-08-25
 author:     "elmagnifico"

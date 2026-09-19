@@ -2,6 +2,7 @@
 layout:     post
 title:      "Git仓库移除关键信息"
 subtitle:   "git-filter-repo,BFG Repo-Cleaner"
+description: "Git仓库移除关键信息，git-filter-repo、BFG Repo-Cleaner、filter-branch、拆分仓库。"
 date:       2022-05-20
 update:     2022-05-20
 author:     "elmagnifico"

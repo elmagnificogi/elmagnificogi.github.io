@@ -2,6 +2,7 @@
 layout:     post
 title:      "BLHeli 自定义音乐与乐理常识"
 subtitle:   "esc"
+description: "BLHeli 自定义音乐与乐理常识，esc、参数含义、电调音乐例子、Motor 1。"
 date:       2020-06-12
 udpate:     2024-04-19
 author:     "elmagnifico"

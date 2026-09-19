@@ -2,6 +2,7 @@
 layout:     post
 title:      "Ubuntu安装gcc_arm_none_eabi"
 subtitle:   "eclipse,gnu arm plugin,qv2ray"
+description: "Ubuntu安装gcc_arm_none_eabi，arm-none-eabi-gcc ubuntu、ubuntu arm-none-eabi-gcc、gcc-arm-none-eabi ubuntu、ubuntu arm gcc、eclipse、gnu arm plugin。"
 date:       2021-04-24
 update:     2021-09-13
 author:     "elmagnifico"

@@ -2,6 +2,7 @@
 layout:     post
 title:      "NAS的DDNS与ZeroTier内网穿透"
 subtitle:   "Frp，群晖，花生壳"
+description: "NAS的DDNS与ZeroTier内网穿透，Frp、群晖、花生壳、远程。"
 date:       2020-09-23
 update:     2023-05-04
 author:     "elmagnifico"

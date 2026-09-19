@@ -2,6 +2,7 @@
 layout:     post
 title:      "Maya病毒清理"
 subtitle:   "你的文件贼健康,我就说一声没有别的意思"
+description: "Maya病毒清理，maya vaccine virus、maya virus、你的文件贼健康、我就说一声没有别的意思。"
 date:       2022-07-29
 update:     2022-07-29
 author:     "elmagnifico"

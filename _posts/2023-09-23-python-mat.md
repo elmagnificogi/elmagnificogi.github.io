@@ -2,6 +2,7 @@
 layout:     post
 title:      "python解析mat文件"
 subtitle:   "matlab、zlab、net4、pc64"
+description: "python解析mat文件，mat是matlab的数据集文件，zlab、net4、pc64。"
 date:       2023-09-23
 update:     2023-09-23
 author:     "elmagnifico"

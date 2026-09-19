@@ -2,6 +2,7 @@
 layout:     post
 title:      "体验网络配镜"
 subtitle:   "蔡司，智锐，铂金膜，焕色视界X"
+description: "体验网络配镜，蔡司、智锐、铂金膜、焕色视界X。"
 date:       2023-08-07
 update:     2023-09-01
 author:     "elmagnifico"

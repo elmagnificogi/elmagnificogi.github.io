@@ -2,6 +2,7 @@
 layout:     post
 title:      "小米模拟器冠军挑战赛"
 subtitle:   "Assetto Corsa,速魔、SIMAGIC、高翔、珠海、原型车"
+description: "小米模拟器冠军挑战赛，Assetto Corsa、速魔、SIMAGIC、高翔。"
 date:       2025-11-17
 update:     2025-11-17
 author:     "elmagnifico"

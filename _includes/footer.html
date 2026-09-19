@@ -192,6 +192,11 @@
 </script>
 {% endif %}
 
+<!-- Cloudflare Web Analytics -->
+{% if site.cf_beacon_token %}
+<script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "{{ site.cf_beacon_token }}"}'></script>
+{% endif %}
+
 {% if page.tobecontinued %}
 <script type="text/javascript" src="/js/watermark.js"></script>
 <script>
@@ -318,9 +323,12 @@ new google.translate.TranslateElement({
         // appending
         a.each(function () {
             n = $(this).prop('tagName').toLowerCase();
-            i = "#"+$(this).prop('id');
+            i = $(this).prop('id');
+            if (!i) {
+                return;
+            }
             t = $(this).text();
-            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            c = $('<a href="#'+i+'" rel="nofollow">'+t+'</a>');
             l = $('<li class="'+n+'_nav"></li>').append(c);
             $(selector).append(l);
         });

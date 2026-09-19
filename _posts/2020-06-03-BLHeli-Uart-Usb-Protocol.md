@@ -2,6 +2,7 @@
 layout:     post
 title:      "BLHeli-Uart-Usb-Protocol"
 subtitle:   "4way-if，ardupilot， esc-configurator"
+description: "BLHeli-Uart-Usb-Protocol，dmx512 protocol、4way-if、ardupilot。"
 date:       2020-06-03
 update:     2023-04-10
 author:     "elmagnifico"

@@ -2,6 +2,7 @@
 layout:     post
 title:      "HTPC客厅多媒体键盘大盘点"
 subtitle:   "罗技、雷柏、Rii、铂科、JOMAA、Roostand、小红点、机械键盘"
+description: "HTPC客厅多媒体键盘大盘点，htpc keyboard、罗技、雷柏。"
 date:       2024-02-25
 update:     2024-02-25
 author:     "elmagnifico"

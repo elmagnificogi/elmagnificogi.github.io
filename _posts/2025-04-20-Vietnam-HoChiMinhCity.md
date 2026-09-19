@@ -2,6 +2,7 @@
 layout:     post
 title:      "越南游记"
 subtitle:   "签证、越南盾、胡志明、河内、富国岛"
+description: "越南游记，签证、越南盾、胡志明、河内。"
 date:       2025-05-08
 update:     2025-05-08
 author:     "elmagnifico"

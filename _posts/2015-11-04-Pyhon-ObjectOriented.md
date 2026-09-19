@@ -2,6 +2,7 @@
 layout:     post
 title:      "Python学习第二章（面向对象）"
 subtitle:   "Python,类,import"
+description: "Python学习第二章（面向对象），import、代码环境、类、类=数据+函数。"
 date:       2015-11-04
 author:     "elmagnifico"
 header-img: "img/python-head-bg.jpg"

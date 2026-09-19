@@ -2,6 +2,7 @@
 layout:     post
 title:      "LeetCode Solution(Medium.17-20)"
 subtitle:   "c/c++，python，for work"
+description: "LeetCode Solution(Medium.17-20)，c++、python、17.Unique Paths。"
 date:       2015-12-22
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"

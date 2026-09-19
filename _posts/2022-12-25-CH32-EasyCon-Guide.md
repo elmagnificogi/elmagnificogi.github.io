@@ -2,6 +2,7 @@
 layout:     post
 title:      "CH32F103C8T6伊机控使用指南"
 subtitle:   "伊机控、NS、单片机"
+description: "CH32F103C8T6伊机控使用指南，NS、单片机、CH32F103C8T6双USB、准备。"
 date:       2022-12-25
 update:     2022-12-25
 author:     "elmagnifico"

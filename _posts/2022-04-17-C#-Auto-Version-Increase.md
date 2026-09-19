@@ -2,6 +2,7 @@
 layout:     post
 title:      "C#版本号自动增加与自定义版本号"
 subtitle:   "AssemblyInfo，Version"
+description: "C#版本号自动增加与自定义版本号，AssemblyInfo、Version、TextTemplate、increase。"
 date:       2022-04-17
 update:     2022-04-17
 author:     "elmagnifico"

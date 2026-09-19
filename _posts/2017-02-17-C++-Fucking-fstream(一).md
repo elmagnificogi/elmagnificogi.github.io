@@ -2,6 +2,7 @@
 layout:     post
 title:      "C++中坑人的fstream(一)"
 subtitle:   "c/c++，fstream"
+description: "C++中坑人的fstream(一)，起因、别人的问题、看明白fstream、fucking。"
 date:       2017-02-17
 author:     "elmagnifico"
 header-img: "img/python-head-bg.jpg"

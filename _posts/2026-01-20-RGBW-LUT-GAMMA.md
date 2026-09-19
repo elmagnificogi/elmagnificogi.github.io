@@ -2,6 +2,7 @@
 layout:     post
 title:      "RGB灯光修正"
 subtitle:   "Gamma、LUT"
+description: "RGB灯光修正，Gamma、LUT、RGB光源、感官层。"
 date:       2026-01-20
 update:     2026-01-20
 author:     "elmagnifico"

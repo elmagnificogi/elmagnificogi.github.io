@@ -58,6 +58,9 @@ disqus_username: elmagnifico-1
 # Google Analytics
 ga_track_id: 'G-0KN6WQKYCB'            # Format: G-xxxxxx
 
+# Cloudflare Web Analytics
+cf_beacon_token: '8b65981d00ba427a86370ce102886504'
+
 
 
 

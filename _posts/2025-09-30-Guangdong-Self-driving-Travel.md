@@ -2,6 +2,7 @@
 layout:     post
 title:      "广东自驾游之粤东篇"
 subtitle:   "爆胎、广州、一饭封神、梅州、揭阳、顺风车"
+description: "广东自驾游之粤东篇，爆胎、广州、一饭封神、梅州。"
 date:       2025-10-09
 update:     2025-10-31
 author:     "elmagnifico"

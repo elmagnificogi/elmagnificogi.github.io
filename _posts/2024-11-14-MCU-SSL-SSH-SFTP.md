@@ -2,6 +2,7 @@
 layout:     post
 title:      "STM32 MCU移植SSH"
 subtitle:   "SSL、SFTP、Crypto、Lwip"
+description: "给MCU移植Crypto、SSL、SSH、SFTP等库，真的找不到一个例子，目前看到的库大部分都是商用的，microssh、Lwip。"
 date:       2024-11-15
 update:     2024-11-15
 author:     "elmagnifico"

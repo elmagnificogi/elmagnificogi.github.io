@@ -2,6 +2,7 @@
 layout:     post
 title:      "Redmi小爱音响8刷机和安装第三方APP"
 subtitle:   "payload_dumper，mtkclient，root权限，adb"
+description: "Redmi小爱音响8刷机和安装第三方APP，小爱音箱刷机、小米音箱刷机、小爱音箱pro破解、payload_dumper、mtkclient。"
 date:       2024-04-06
 update:     2024-04-07
 author:     "elmagnifico"

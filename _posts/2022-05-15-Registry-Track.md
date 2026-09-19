@@ -2,6 +2,7 @@
 layout:     post
 title:      "注册表追踪"
 subtitle:   "Registry,regedit,监控"
+description: "注册表追踪，Registry、regedit、监控、EaseFilterSDK。"
 date:       2022-05-15
 update:     2022-05-15
 author:     "elmagnifico"

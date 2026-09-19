@@ -2,6 +2,7 @@
 layout:     post
 title:      "无人机基础知识"
 subtitle:   "四轴，定位，控制，科普"
+description: "无人机基础知识，四轴、定位、控制、科普。"
 date:       2023-11-21
 update:     2023-11-21
 author:     "elmagnifico"

@@ -2,6 +2,7 @@
 layout:     post
 title:      "Crypto++中的padding"
 subtitle:   "c++"
+description: "Crypto++中的pading似乎有点奇怪的问题，这里记录一下，crypto padding、c++、指定填充模式。"
 date:       2021-01-08
 author:     "elmagnifico"
 header-img: "img/zerotier.jpg"

@@ -2,6 +2,7 @@
 layout:     post
 title:      "哔哩哔哩视频自动倍率播放"
 subtitle:   "Chrome插件，js，油猴，Tampermonkey"
+description: "哔哩哔哩视频自动倍率播放，bilibili 倍速、Chrome插件、js。"
 date:       2024-04-04
 update:     2024-04-04
 author:     "elmagnifico"

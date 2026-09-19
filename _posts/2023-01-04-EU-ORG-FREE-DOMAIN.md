@@ -2,6 +2,7 @@
 layout:     post
 title:      "eu.org免费二级域名申请"
 subtitle:   "CloudFlare"
+description: "eu.org免费二级域名申请，CloudFlare、eu.org申请。"
 date:       2023-01-04
 update:     2023-01-04
 author:     "elmagnifico"

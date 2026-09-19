@@ -2,6 +2,7 @@
 layout:     post
 title:      "springboot使用Docker所需环境配置"
 subtitle:   "docker-compose,centos,maven,java"
+description: "springboot使用Docker所需环境配置，docker-compose、centos、maven、java。"
 date:       2019-09-04
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"

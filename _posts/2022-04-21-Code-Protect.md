@@ -2,6 +2,7 @@
 layout:     post
 title:      "工程管理之代码保护"
 subtitle:   "SVN，Git，加密狗，perforce"
+description: "工程管理之代码保护，SVN、Git、加密狗、perforce。"
 date:       2022-04-21
 update:     2022-04-21
 author:     "elmagnifico"

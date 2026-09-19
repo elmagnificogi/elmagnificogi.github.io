@@ -2,6 +2,7 @@
 layout:     post
 title:      "SM.MS图床配合PicGo使用"
 subtitle:   "图床"
+description: "SM.MS图床配合PicGo使用，其他图床。"
 date:       2018-12-27
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"

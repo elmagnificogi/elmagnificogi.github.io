@@ -2,6 +2,7 @@
 layout:     post
 title:      "Su7 Ultra下赛道"
 subtitle:   "改装、赛道日、四点式安全带、漂移、头盔"
+description: "Su7 Ultra下赛道，改装、赛道日、四点式安全带、漂移。"
 date:       2025-05-20
 update:     2026-02-24
 author:     "elmagnifico"

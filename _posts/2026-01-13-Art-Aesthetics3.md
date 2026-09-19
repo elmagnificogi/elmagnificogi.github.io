@@ -2,6 +2,7 @@
 layout:     post
 title:      "艺术与审美，第三阶段学习"
 subtitle:   "Art，唯伟，独立游戏，陶瓷，OOTD，Labubu，包豪斯"
+description: "艺术与审美，第三阶段学习，Art、唯伟、独立游戏、陶瓷。"
 date:       2026-03-27
 update:     2026-03-27
 author:     "elmagnifico"

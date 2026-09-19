@@ -2,6 +2,7 @@
 layout:     post
 title:      "LeetCode Solution(Easy.89-92)"
 subtitle:   "c/c++，python，for work"
+description: "LeetCode Solution(Easy.89-92)，c++、python、89.Power of Three、91.Path Sum III。"
 date:       2016-12-29
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"

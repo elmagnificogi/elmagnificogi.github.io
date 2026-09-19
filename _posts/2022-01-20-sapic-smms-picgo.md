@@ -2,6 +2,7 @@
 layout:     post
 title:      "继SMMS图床要求登陆后，使用sapic自建图床"
 subtitle:   "typora，picgo，图床，更新docker"
+description: "继SMMS图床要求登陆后，使用sapic自建图床，typora、picgo。"
 date:       2022-01-20
 update:     2022-02-11
 author:     "elmagnifico"

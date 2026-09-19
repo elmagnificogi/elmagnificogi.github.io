@@ -2,6 +2,7 @@
 layout:     post
 title:      "LeetCode Solution(Easy.17-20)"
 subtitle:   "c/c++，python，for work"
+description: "LeetCode Solution(Easy.17-20)，c++、python、17.Ugly Number、18.Happy Number。"
 date:       2015-12-9
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"

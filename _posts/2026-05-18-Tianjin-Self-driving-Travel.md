@@ -2,6 +2,7 @@
 layout:     post
 title:      "天津自驾游"
 subtitle:   "V1国际赛车场、张园、演出、相声、包子"
+description: "天津自驾游，V1国际赛车场、张园、演出、相声。"
 date:       2026-05-19
 update:     2026-05-19
 author:     "elmagnifico"

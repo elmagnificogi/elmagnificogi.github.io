@@ -2,6 +2,7 @@
 layout:     post
 title:      "CAN协议层对比"
 subtitle:   "uavCAN、CANopen、droneCAN"
+description: "CAN协议层对比，dmx512 protocol、uavCAN、CANopen。"
 date:       2025-10-29
 update:     2025-10-29
 author:     "elmagnifico"

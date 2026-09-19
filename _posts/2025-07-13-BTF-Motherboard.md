@@ -2,6 +2,7 @@
 layout:     post
 title:      "2025新主机"
 subtitle:   "Amd Yes，背插，BTF"
+description: "2025新主机，Amd Yes、背插、BTF、装机。"
 date:       2025-08-11
 update:     2025-08-13
 author:     "elmagnifico"

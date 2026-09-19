@@ -2,6 +2,7 @@
 layout:     post
 title:      "Skills进阶"
 subtitle:   "状态机、规则分级、模拟调用、接口定义"
+description: "Skills进阶，状态机、规则分级、模拟调用、接口定义。"
 date:       2026-06-05
 update:     2026-06-05
 author:     "elmagnifico"

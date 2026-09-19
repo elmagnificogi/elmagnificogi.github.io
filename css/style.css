@@ -886,6 +886,25 @@ img.emoji {
   text-transform: capitalize;
 }
 
+.post-container .related-posts {
+  clear: both;
+  margin: 36px 0 24px;
+}
+
+.post-container .related-posts h5 {
+  margin: 0 0 12px;
+  scroll-margin-top: 80px;
+}
+
+.post-container .related-posts ul {
+  margin: 0;
+  padding-left: 1.2em;
+}
+
+.post-container .related-posts li {
+  margin: 0 0 8px;
+}
+
 input[type=text] {
   width: 130px;
   box-sizing: border-box;

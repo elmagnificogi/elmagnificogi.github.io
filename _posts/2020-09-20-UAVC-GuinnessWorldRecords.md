@@ -2,6 +2,7 @@
 layout:     post
 title:      "记一次破吉尼斯世界纪录"
 subtitle:   "无人机集群，DroneShow"
+description: "记一次破吉尼斯世界纪录，无人机集群、DroneShow、条件、审查。"
 date:       2020-09-20
 author:     "elmagnifico"
 header-img: "img/guinness.jpg"

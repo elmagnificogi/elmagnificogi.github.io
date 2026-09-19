@@ -2,6 +2,7 @@
 layout:     post
 title:      "python import相关问题"
 subtitle:   "maya，同级目录"
+description: "python import相关问题，maya、同级目录、pyd的解决方案。"
 date:       2021-01-27
 author:     "elmagnifico"
 header-img: "img/bg2.jpg"

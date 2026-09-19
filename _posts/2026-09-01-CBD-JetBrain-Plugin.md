@@ -2,6 +2,7 @@
 layout:     post
 title:      "CodeBind Docs插件-JetBrains版本"
 subtitle:   "IntelliJ Platform、JCEF、跨IDE、CBD"
+description: "CodeBind Docs插件-JetBrains版本，intellij restore deleted file、intellij recover deleted file、IntelliJ Platform、JCEF。"
 date:       2026-09-01
 update:     2026-09-01
 author:     "elmagnifico"

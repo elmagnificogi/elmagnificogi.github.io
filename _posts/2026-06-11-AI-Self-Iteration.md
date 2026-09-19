@@ -2,6 +2,7 @@
 layout:     post
 title:      "AI自进化"
 subtitle:   "Anthropic"
+description: "AI自进化，Anthropic、iteration。"
 date:       2026-06-11
 update:     2026-06-11
 author:     "elmagnifico"

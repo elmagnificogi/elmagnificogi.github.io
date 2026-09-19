@@ -2,6 +2,7 @@
 layout:     post
 title:      "BLHeliSuite32逆向（一）"
 subtitle:   "Crack，Reverse"
+description: "BLHeliSuite32逆向（一），Crack、Reverse、查壳、反编译工具。"
 date:       2021-07-07
 update:     2021-07-13
 author:     "elmagnifico"

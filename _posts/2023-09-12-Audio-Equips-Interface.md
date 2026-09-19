@@ -2,6 +2,7 @@
 layout:     post
 title:      "音频设备基础知识"
 subtitle:   "XLR"
+description: "音频设备基础知识，XLR、Audio、物理接口、转换接口。"
 date:       2023-09-14
 update:     2023-09-18
 author:     "elmagnifico"

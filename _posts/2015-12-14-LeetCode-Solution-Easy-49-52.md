@@ -2,6 +2,7 @@
 layout:     post
 title:      "LeetCode Solution(Easy.49-52)"
 subtitle:   "c/c++，python，for work"
+description: "LeetCode Solution(Easy.49-52)，c++、python、49.Count and Say、52.Bulls and Cows。"
 date:       2015-12-14
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"

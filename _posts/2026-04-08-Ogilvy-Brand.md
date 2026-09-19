@@ -2,6 +2,7 @@
 layout:     post
 title:      "奥美品牌定位有感"
 subtitle:   "Ogilvy、营销、公司人格"
+description: "奥美品牌定位有感，Ogilvy、营销。"
 date:       2026-05-21
 update:     2026-05-21
 author:     "elmagnifico"

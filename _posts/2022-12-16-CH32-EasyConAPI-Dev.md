@@ -2,6 +2,7 @@
 layout:     post
 title:      "CH32快速开发移植EasyConAPI"
 subtitle:   "伊机控、NS、单片机"
+description: "开发一下CH32，快速移植一个EasyConAPI上去，伊机控、NS、单片机、CH32环境。"
 date:       2022-12-16
 update:     2022-12-25
 author:     "elmagnifico"

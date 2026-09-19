@@ -2,6 +2,7 @@
 layout:     post
 title:      "快速区分IMAX和普通3D眼镜"
 subtitle:   "sunglasses，Reald，偏振"
+description: "快速区分IMAX和普通3D眼镜，reald 3d 眼鏡、sunglasses、偏振。"
 date:       2021-09-19
 author:     "elmagnifico"
 header-img: "img/balance.jpg"

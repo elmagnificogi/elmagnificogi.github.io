@@ -2,6 +2,7 @@
 layout:     post
 title:      "高带机量AP设备选型介绍"
 subtitle:   "Ubnt，MikroTik"
+description: "高带机量AP设备选型介绍，Ubnt、MikroTik、常识、AP商家。"
 date:       2021-03-13
 update:     2021-05-28
 author:     "elmagnifico"

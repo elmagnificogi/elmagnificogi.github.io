@@ -2,6 +2,7 @@
 layout:     post
 title:      "协程到底是怎么一回事"
 subtitle:   "嵌入式，FreeRTOS，croutine"
+description: "协程到底是怎么一回事，freertos coroutine、嵌入式、croutine。"
 date:       2017-03-23
 update:     2025-05-16
 author:     "elmagnifico"

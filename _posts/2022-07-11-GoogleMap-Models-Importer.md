@@ -2,6 +2,7 @@
 layout:     post
 title:      "提取谷歌3D地图中的模型"
 subtitle:   "AP,Router"
+description: "提取谷歌3D地图中的模型，AP、Router、CADMAPPER、准备。"
 date:       2022-07-11
 update:     2022-07-11
 author:     "elmagnifico"

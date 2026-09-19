@@ -2,6 +2,7 @@
 layout:     post
 title:      "Tiny Tiny RSS"
 subtitle:   "docker,mercury,vps"
+description: "Tiny Tiny RSS，docker、mercury、vps、RSSHub。"
 date:       2018-10-22
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"

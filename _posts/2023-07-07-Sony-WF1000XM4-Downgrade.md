@@ -2,6 +2,7 @@
 layout:     post
 title:      "Sony-WF1000XM4降级指南"
 subtitle:   "Headphones，MDR_Proxy,sidegrade tool"
+description: "Sony-WF1000XM4降级指南，Headphones、MDR_Proxy、sidegrade tool、MDRProxy。"
 date:       2023-07-07
 update:     2023-07-07
 author:     "elmagnifico"

@@ -2,6 +2,7 @@
 layout:     post
 title:      "文心一言、通义千问与ChatGPT短评"
 subtitle:   "NewBing，GPT3，GPT3.5，GPT4"
+description: "文心一言、通义千问与ChatGPT短评，群晖安装chatgpt、chatpire/chatgpt-web-share、NewBing、GPT3。"
 date:       2023-03-18
 update:     2023-05-19
 author:     "elmagnifico"

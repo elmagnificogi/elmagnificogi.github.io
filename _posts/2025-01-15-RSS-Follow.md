@@ -2,6 +2,7 @@
 layout:     post
 title:      "RSS Follow体验"
 subtitle:   "TTRss，RSS，RSSHub，订阅，激活码"
+description: "RSS Follow体验，TTRss、RSSHub、订阅、激活码。"
 date:       2025-01-21
 update:     2025-01-21
 author:     "elmagnifico"

@@ -2,6 +2,7 @@
 layout:     post
 title:      "省电模式造成UDP广播大量丢包"
 subtitle:   "power save，MT793x，wifi"
+description: "省电模式造成UDP广播大量丢包，power save、MT793x、wifi、情况。"
 date:       2023-02-10
 update:     2023-02-13
 author:     "elmagnifico"

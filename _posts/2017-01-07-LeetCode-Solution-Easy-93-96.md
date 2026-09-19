@@ -2,6 +2,7 @@
 layout:     post
 title:      "LeetCode Solution(Easy.93-96)"
 subtitle:   "c/c++，python，for work"
+description: "LeetCode Solution(Easy.93-96)，c++、python、94.Keyboard Row。"
 date:       2017-01-07
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"

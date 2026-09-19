@@ -2,6 +2,7 @@
 layout:     post
 title:      "Amazon免费12个月体验和CloudFront替代CF"
 subtitle:   "CloudFlare，WS，TLS，V2ray"
+description: "Amazon免费12个月体验和CloudFront替代CF，cloudfront 优选、cloudfront 优选 ip、亚马逊cdn加速、cloudfront v2ray、CloudFlare、WS。"
 date:       2023-03-15
 update:     2023-03-16
 author:     "elmagnifico"

@@ -2,6 +2,7 @@
 layout:     post
 title:      "SES Threads 自定义JS脚本"
 subtitle:   "Ozone,ST"
+description: "SES Threads 自定义JS脚本，Ozone、Threads Script、其他。"
 date:       2025-01-21
 update:     2025-01-21
 author:     "elmagnifico"

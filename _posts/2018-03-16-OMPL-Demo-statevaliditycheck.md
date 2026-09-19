@@ -2,6 +2,7 @@
 layout:     post
 title:      "OMPL 有效状态检测"
 subtitle:   "state,CAD,Models"
+description: "OMPL 有效状态检测，state、CAD、Models、statevaliditycheck。"
 date:       2018-03-16
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"

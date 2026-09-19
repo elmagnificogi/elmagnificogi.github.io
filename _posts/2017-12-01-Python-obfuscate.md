@@ -2,6 +2,7 @@
 layout:     post
 title:      "Python 混淆"
 subtitle:   "obfuscate"
+description: "Python 混淆，oxyry python obfuscator、python 代码 混淆 在线、oxyry、pyob、pyc、pyinstaller。"
 date:       2017-12-01
 author:     "elmagnifico"
 header-img: "img/python-head-bg.jpg"

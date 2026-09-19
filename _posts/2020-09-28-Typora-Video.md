@@ -2,6 +2,7 @@
 layout:     post
 title:      "Typora视频无法正常显示与mp4格式"
 subtitle:   "mp4，H.264,xdiv,xvid,html5"
+description: "突然遇到需要在Typora中拆入视频，然后发现有部分视频插入以后Typora显示不正常，但是能播放，H.264、xdiv、xvid、html5。"
 date:       2020-09-28
 author:     "elmagnifico"
 header-img: "img/bg6.jpg"

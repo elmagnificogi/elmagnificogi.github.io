@@ -2,6 +2,7 @@
 layout:     post
 title:      "火绒防止D2R扫进程-实测无效"
 subtitle:   "Diablo,Process"
+description: "火绒防止D2R扫进程-实测无效，Diablo、Process、准备、设置防护。"
 date:       2022-06-18
 update:     2022-06-18
 author:     "elmagnifico"

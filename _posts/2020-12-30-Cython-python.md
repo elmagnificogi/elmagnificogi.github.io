@@ -2,6 +2,7 @@
 layout:     post
 title:      "Cython可能会遇到的坑"
 subtitle:   "python，加密，混淆"
+description: "Cython可能会遇到的坑，python、加密、混淆、解决办法。"
 date:       2020-12-30
 update:     2021-01-27
 author:     "elmagnifico"

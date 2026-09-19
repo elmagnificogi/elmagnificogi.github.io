@@ -2,6 +2,7 @@
 layout:     post
 title:      "在VS或者VS Code中做嵌入式开发"
 subtitle:   "STM32，IDE，VS官方支持"
+description: "在VS或者VS Code中做嵌入式开发，嵌入式开发工具、vscode embedded、vs code embedded development、STM32、IDE。"
 date:       2022-03-15
 update:     2022-03-15
 author:     "elmagnifico"

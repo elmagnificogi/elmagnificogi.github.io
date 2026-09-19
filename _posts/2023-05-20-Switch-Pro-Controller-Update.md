@@ -2,6 +2,7 @@
 layout:     post
 title:      "Switch Pro手柄更换摇杆和电池"
 subtitle:   "手柄漂移，指针自动移动，塞尔达王国之泪"
+description: "Switch Pro手柄更换摇杆和电池，easyswitch、nxmacrocontroller、手柄漂移、指针自动移动。"
 date:       2023-05-20
 update:     2023-05-20
 author:     "elmagnifico"

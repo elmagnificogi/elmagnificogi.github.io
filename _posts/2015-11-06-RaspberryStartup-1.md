@@ -2,6 +2,7 @@
 layout:     post
 title:      "树莓派启动那些事（一）"
 subtitle:   "树莓派，startup，config"
+description: "树莓派启动那些事（一），startup、config、环境、树莓派启动的相关问题。"
 date:       2015-11-06
 author:     "elmagnifico"
 header-img: "img/Raspberrypi-head-bg.jpg"

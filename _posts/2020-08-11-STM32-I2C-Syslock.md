@@ -2,6 +2,7 @@
 layout:     post
 title:      "STM32 I2C 在FreeRTOS中造成的死锁"
 subtitle:   "HAL"
+description: "STM32 I2C 在FreeRTOS中造成的死锁，freertos i2c、HAL、I2C自锁。"
 date:       2020-08-11
 update:     2024-05-18
 author:     "elmagnifico"

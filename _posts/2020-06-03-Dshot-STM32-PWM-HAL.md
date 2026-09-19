@@ -2,6 +2,7 @@
 layout:     post
 title:      "DSHOT指南"
 subtitle:   "HAL，DSHOT1200，STM32 PWM DSHOT驱动"
+description: "最近要用DSHOT，然后就发现一堆问题，首先是DSHOT没有那种特别详细的介绍手册，基本全靠几个帖子和博客的内容，剩下的就是代码里内容，dshot 協議、dshot protocol、dshot150、HAL、DMA PWM输出切换延迟。"
 date:       2020-06-03
 update:     2025-09-04
 author:     "elmagnifico"

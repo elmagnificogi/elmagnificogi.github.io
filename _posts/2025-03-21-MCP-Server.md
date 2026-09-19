@@ -2,6 +2,7 @@
 layout:     post
 title:      "MCP下一代软件接口"
 subtitle:   "VSCode,Cursor,Manus"
+description: "MCP下一代软件接口，他可能是未来AI或者大模型发展所必须的一个中间件了，stm32 mcp server、VSCode、Cursor。"
 date:       2025-03-24
 update:     2025-03-24
 author:     "elmagnifico"

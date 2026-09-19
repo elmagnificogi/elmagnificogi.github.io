@@ -2,6 +2,7 @@
 layout:     post
 title:      "LeetCode Solution(Easy.45-48)"
 subtitle:   "c/c++，python，for work"
+description: "LeetCode Solution(Easy.45-48)，c++、python、48.Word Pattern。"
 date:       2015-12-13
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"

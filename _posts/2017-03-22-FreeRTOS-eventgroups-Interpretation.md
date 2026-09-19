@@ -2,6 +2,7 @@
 layout:     post
 title:      "FreeRTOS中event_groups源文件分析"
 subtitle:   "嵌入式，FreeRTOS，heap"
+description: "FreeRTOS中event_groups源文件分析，嵌入式、heap、eventgroups源文件分析、eventgroups。"
 date:       2017-03-22
 author:     "elmagnifico"
 header-img: "img/freertos.jpg"

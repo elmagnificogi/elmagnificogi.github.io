@@ -2,6 +2,7 @@
 layout:     post
 title:      "宏管理工具之lite-manager"
 subtitle:   "Kconfig、menuconfig、makefile、macro"
+description: "宏管理工具之lite-manager，Kconfig、menuconfig、makefile、macro。"
 date:       2024-12-03
 update:     2024-12-06
 author:     "elmagnifico"

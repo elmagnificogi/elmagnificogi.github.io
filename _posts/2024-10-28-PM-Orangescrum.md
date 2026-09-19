@@ -2,6 +2,7 @@
 layout:     post
 title:      "部署试用Orangescrum"
 subtitle:   "PingCode"
+description: "部署试用Orangescrum，还是发现了一些问题，PingCode、新版部署、自动安装。"
 date:       2024-10-28
 update:     2024-10-30
 author:     "elmagnifico"

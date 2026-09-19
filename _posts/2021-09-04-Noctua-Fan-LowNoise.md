@@ -2,6 +2,7 @@
 layout:     post
 title:      "更换猫扇降噪"
 subtitle:   "Noctua，猫头鹰，风扇"
+description: "更换猫扇降噪，Noctua、猫头鹰。"
 date:       2021-09-04
 author:     "elmagnifico"
 header-img: "img/bg3.jpg"

@@ -2,6 +2,7 @@
 layout:     post
 title:      "树莓派 & Camera"
 subtitle:   "禁用红灯，vlc，网络流视频"
+description: "树莓派 & Camera，禁用红灯、vlc、网络流视频、环境。"
 date:       2015-11-04
 author:     "elmagnifico"
 header-img: "img/Raspberrypi-head-bg.jpg"

@@ -2,6 +2,7 @@
 layout:     post
 title:      "Inno Setup打包程序"
 subtitle:   "python"
+description: "Inno Setup打包程序，inno setup python、Inno Setup 介绍、配置向导。"
 date:       2020-08-18
 author:     "elmagnifico"
 header-img: "img/pen-head-bg.jpg"

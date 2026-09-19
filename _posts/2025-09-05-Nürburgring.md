@@ -2,6 +2,7 @@
 layout:     post
 title:      "纽博格林？"
 subtitle:   "小米Su7 Ultra,"
+description: "纽博格林，小米Su7 Ultra、小米纽北活动、申根签证、国际驾照。"
 date:       2025-09-05
 update:     2025-09-05
 author:     "elmagnifico"

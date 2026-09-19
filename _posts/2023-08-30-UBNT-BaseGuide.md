@@ -2,6 +2,7 @@
 layout:     post
 title:      "UBNT的一些基础配置指南"
 subtitle:   "UniFi，AC，Outdoor5，UAP-AC-M-Pro"
+description: "UBNT的一些基础配置指南，UniFi、AC、Outdoor5、UAP-AC-M-Pro。"
 date:       2023-08-30
 update:     2023-08-30
 author:     "elmagnifico"

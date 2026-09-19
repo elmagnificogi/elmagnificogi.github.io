@@ -2,6 +2,7 @@
 layout:     post
 title:      "RouterOS配置WireGuard和ZeroTier"
 subtitle:   "VPN,SD-WAN,Mikrotik,ZeroTier"
+description: "RouterOS配置WireGuard和ZeroTier，wireguard zerotier、mikrotik wireguard、irouteros、VPN、SD-WAN。"
 date:       2023-08-29
 update:     2023-09-09
 author:     "elmagnifico"

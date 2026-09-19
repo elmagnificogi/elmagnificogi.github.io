@@ -2,6 +2,7 @@
 layout:     post
 title:      "LeetCode Solution(Easy.37-40)"
 subtitle:   "c/c++，python，for work"
+description: "LeetCode Solution(Easy.37-40)，c++、python、40.Reverse Bits。"
 date:       2015-12-12
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"

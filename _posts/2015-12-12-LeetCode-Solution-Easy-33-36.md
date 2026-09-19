@@ -2,6 +2,7 @@
 layout:     post
 title:      "LeetCode Solution(Easy.33-36)"
 subtitle:   "c/c++，python，for work"
+description: "LeetCode Solution(Easy.33-36)，c++、python、35.Path Sum。"
 date:       2015-12-12
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"

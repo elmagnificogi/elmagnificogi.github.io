@@ -2,6 +2,7 @@
 layout:     post
 title:      "暗黑2重制版Kill Diablo Clone 日记"
 subtitle:   "diablo,d2r,kdc"
+description: "暗黑2重制版Kill Diablo Clone 日记，d2r、kdc、开源精神、历程。"
 date:       2021-12-14
 update:     2022-01-25
 author:     "elmagnifico"

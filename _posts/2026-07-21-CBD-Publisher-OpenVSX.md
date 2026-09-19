@@ -2,6 +2,7 @@
 layout:     post
 title:      "VSC/Cursor插件上架"
 subtitle:   "VS Code、Cursor、Open VSX、命名空间"
+description: "VSC/Cursor插件上架，openvsx cursor、VS Code、Open VSX。"
 date:       2026-07-21
 update:     2026-07-30
 author:     "elmagnifico"

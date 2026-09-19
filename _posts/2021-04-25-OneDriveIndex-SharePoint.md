@@ -2,6 +2,7 @@
 layout:     post
 title:      "搭建Cloudreve、挂载SharePoint"
 subtitle:   "同济,世纪互联,Oneindex"
+description: "搭建Cloudreve、挂载SharePoint，同济、世纪互联、Oneindex、挂载方案。"
 date:       2021-04-25
 update:     2021-04-27
 author:     "elmagnifico"

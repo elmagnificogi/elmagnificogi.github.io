@@ -2,6 +2,7 @@
 layout:     post
 title:      "ESP32与C#的串口流控导致的重启问题解析"
 subtitle:   "EasyCon,joycontrol,nxbt"
+description: "ESP32与C#的串口流控导致的重启问题解析，EasyCon、joycontrol、nxbt、板子。"
 date:       2022-09-12
 update:     2022-09-12
 author:     "elmagnifico"

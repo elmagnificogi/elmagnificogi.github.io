@@ -2,6 +2,7 @@
 layout:     post
 title:      "STM32 SD HAL库TimeOut问题"
 subtitle:   "SDMMC、HAL_GetTick、时钟"
+description: "STM32 SD HAL库TimeOut问题，SDMMC、HAL_GetTick、时钟、解决方案。"
 date:       2022-12-01
 update:     2024-06-20
 author:     "elmagnifico"

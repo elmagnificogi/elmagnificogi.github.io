@@ -2,6 +2,7 @@
 layout:     post
 title:      "de4dot 反混淆"
 subtitle:   "crack，de-obfuscate"
+description: "de4dot 反混淆，crack、de-obfuscate、环境、分析。"
 date:       2020-03-17
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"

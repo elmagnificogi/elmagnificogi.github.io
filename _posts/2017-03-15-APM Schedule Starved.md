@@ -2,6 +2,7 @@
 layout:     post
 title:      "APM中的Schedule Starved"
 subtitle:   "嵌入式，驱动，Timeout"
+description: "APM中的Schedule Starved，嵌入式、驱动、Timeout、相关代码。"
 date:       2017-03-15
 author:     "elmagnifico"
 header-img: "img/Embedded-head-bg.jpg"

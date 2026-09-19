@@ -2,6 +2,7 @@
 layout:     post
 title:      "Netch 自建游戏加速器"
 subtitle:   "ss，iplc，v2ray"
+description: "Netch 自建游戏加速器，netch 2.0、netch 加速器、ss、iplc。"
 date:       2022-01-19
 update:     2024-12-30
 author:     "elmagnifico"

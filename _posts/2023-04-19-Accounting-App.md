@@ -2,6 +2,7 @@
 layout:     post
 title:      "记账APP-小星记账"
 subtitle:   "钱迹、薄荷记账、貔貅记账、随手记、beancount、moneythings"
+description: "记账APP-小星记账，钱迹、薄荷记账。"
 date:       2023-04-19
 update:     2023-04-22
 author:     "elmagnifico"

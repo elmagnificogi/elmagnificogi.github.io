@@ -2,6 +2,7 @@
 layout:     post
 title:      "RouterOS配置多WAN并根据IP分流"
 subtitle:   "隔离,融合"
+description: "RouterOS配置多WAN并根据IP分流，routeros 分流、irouteros、ros bgp 分流、隔离、融合。"
 date:       2024-03-19
 update:     2024-04-30
 author:     "elmagnifico"

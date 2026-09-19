@@ -2,6 +2,7 @@
 layout:     post
 title:      "BLHeli ESC启动时串口必然无响应"
 subtitle:   "BLH32,Uart,ESC"
+description: "BLHeli ESC启动时串口必然无响应，BLH32、Uart、BUG、Debug。"
 date:       2021-12-09
 update:     2021-12-09
 author:     "elmagnifico"

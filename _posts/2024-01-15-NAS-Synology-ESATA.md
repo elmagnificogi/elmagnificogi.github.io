@@ -2,6 +2,7 @@
 layout:     post
 title:      "群晖NAS ESATA扩容"
 subtitle:   "Synology，SSL，证书"
+description: "群晖NAS ESATA扩容，synology nas ping tool、SSL、证书。"
 date:       2024-01-15
 update:     2024-04-15
 author:     "elmagnifico"

@@ -2,6 +2,7 @@
 layout:     post
 title:      "Diablo MapAssist 过滤器"
 subtitle:   "maphack,filter,mod"
+description: "MapAssist 的过滤太难用了，然后就优化了一下，写了个交互式的，d2r mapassist、maphack、filter。"
 date:       2022-05-07
 update:     2022-05-16
 author:     "elmagnifico"

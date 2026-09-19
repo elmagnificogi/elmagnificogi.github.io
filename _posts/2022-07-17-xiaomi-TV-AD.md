@@ -2,6 +2,7 @@
 layout:     post
 title:      "小米电视移除广告"
 subtitle:   "xiaomi,55,ad,adb"
+description: "小米电视移除广告，小米电视去广告、xiaomi、55。"
 date:       2022-07-17
 update:     2024-04-20
 author:     "elmagnifico"

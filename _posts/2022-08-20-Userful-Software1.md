@@ -2,6 +2,7 @@
 layout:     post
 title:      "分屏、资源提取、图片像素级对比、鼠标按键显示"
 subtitle:   "icon,资源,提取"
+description: "分屏、资源提取、图片像素级对比、鼠标按键显示，icon、像素对比、userful、software1。"
 date:       2022-08-20
 update:     2022-08-21
 author:     "elmagnifico"

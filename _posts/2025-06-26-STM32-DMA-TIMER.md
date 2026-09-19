@@ -2,6 +2,7 @@
 layout:     post
 title:      "STM32 DMA数据丢失"
 subtitle:   "Cursor，PWM，Bidir-DSHOT，Timer"
+description: "STM32 DMA数据丢失，Cursor、PWM、Bidir-DSHOT、Timer。"
 date:       2025-06-26
 update:     2025-06-26
 author:     "elmagnifico"

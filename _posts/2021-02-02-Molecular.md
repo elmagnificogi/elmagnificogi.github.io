@@ -2,6 +2,7 @@
 layout:     post
 title:      "Molecular 处理自碰撞源码解读"
 subtitle:   "blender，粒子"
+description: "Molecular 处理自碰撞源码解读，blender、粒子、介绍、原理分析。"
 date:       2021-02-02
 author:     "elmagnifico"
 header-img: "img/bg7.jpg"

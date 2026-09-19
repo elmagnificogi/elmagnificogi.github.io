@@ -2,6 +2,7 @@
 layout:     post
 title:      "STM32启动方式分析"
 subtitle:   "嵌入式，boot，STM32"
+description: "STM32启动方式分析，嵌入式、boot、STM32F767启动方式分析、startup。"
 date:       2017-03-20
 author:     "elmagnifico"
 header-img: "img/Embedded-head-bg.jpg"

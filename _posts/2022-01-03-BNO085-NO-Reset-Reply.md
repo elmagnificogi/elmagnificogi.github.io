@@ -2,6 +2,7 @@
 layout:     post
 title:      "BNO085异常，无Reset返回，无数据返回"
 subtitle:   "BNO080"
+description: "BNO085异常，无Reset返回，无数据返回，BNO080、情况、Debug、解决。"
 date:       2022-01-03
 update:     2022-02-22
 author:     "elmagnifico"

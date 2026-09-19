@@ -2,6 +2,7 @@
 layout:     post
 title:      "暗黑2重置版终极毒男Build全攻略"
 subtitle:   "Diablo 2 Resurrected,剧毒新星,P Nec"
+description: "暗黑2重置版终极毒男Build全攻略，剧毒新星、P Nec、介绍、视频。"
 date:       2022-01-12
 update:     2022-01-13
 author:     "elmagnifico"

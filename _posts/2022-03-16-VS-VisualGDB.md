@@ -2,6 +2,7 @@
 layout:     post
 title:      "在VS中使用VisualGDB开发STM32"
 subtitle:   "STM32，IDE"
+description: "以下是使用VisualGDB在VS中建立一个STM32的工程，st visual develop、st visual develop download、IDE。"
 date:       2022-03-16
 update:     2022-03-16
 author:     "elmagnifico"

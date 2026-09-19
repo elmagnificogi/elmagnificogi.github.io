@@ -2,6 +2,7 @@
 layout:     post
 title:      "遥控和香氛按钮接入米家失败"
 subtitle:   "遥控、香薰、电容按键、压力传感器、马桶冲水"
+description: "遥控和香氛按钮接入米家失败，香薰、电容按键、压力传感器、马桶冲水。"
 date:       2024-11-11
 update:     2024-11-11
 author:     "elmagnifico"

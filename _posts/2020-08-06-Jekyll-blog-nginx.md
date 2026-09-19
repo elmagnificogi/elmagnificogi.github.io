@@ -2,6 +2,7 @@
 layout:     post
 title:      "VPS上使用Jekyll搭建blog（转移github博客）"
 subtitle:   "rvm，git pages，nginx"
+description: "VPS上使用Jekyll搭建blog（转移github博客），rvm、git pages、nginx、搭建Jekyll环境。"
 date:       2020-08-06
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"

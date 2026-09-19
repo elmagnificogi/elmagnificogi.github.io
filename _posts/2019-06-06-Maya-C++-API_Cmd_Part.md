@@ -2,6 +2,7 @@
 layout:     post
 title:      "maya c++ API CMD部分"
 subtitle:   "API 学习"
+description: "maya c++ API CMD部分，这是什么 说出具体的实体名称并尽量提供出处、游戏代理、无人机地面站组成部分、这是什么字、API 学习。"
 date:       2019-06-06
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"

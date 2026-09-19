@@ -2,6 +2,7 @@
 layout:     post
 title:      "Tracealyzer FreeRTOS"
 subtitle:   "FreeRTOS，Trace，setup"
+description: "Tracealyzer FreeRTOS，setup、环境、准备工作、修改工程。"
 date:       2020-03-14
 author:     "elmagnifico"
 header-img: "img/Embedded-head-bg.jpg"

@@ -2,6 +2,7 @@
 layout:     post
 title:      "再破吉尼斯世界纪录"
 subtitle:   "无人机集群，DroneShow"
+description: "再破吉尼斯世界纪录，无人机集群、DroneShow。"
 date:       2024-09-05
 update:     2024-09-06
 author:     "elmagnifico"

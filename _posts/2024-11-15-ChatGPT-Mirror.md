@@ -2,6 +2,7 @@
 layout:     post
 title:      "ChatGPT-Mirror部署和体验"
 subtitle:   "cws、dairoot、oaifree"
+description: "ChatGPT-Mirror部署和体验，chatgpt mirror、github dairoot chatgpt-mirror、dairoot/chatgpt-mirror github、群晖安装chatgpt、cws、oaifree。"
 date:       2024-11-15
 update:     2025-03-02
 author:     "elmagnifico"

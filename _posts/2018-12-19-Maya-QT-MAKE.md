@@ -2,6 +2,7 @@
 layout:     post
 title:      "Maya QT MAKE"
 subtitle:   ".pro,makefile"
+description: "maya c++ qt plugin 例程编译过了，还需要看一下具体这个是怎么编译的，链接过程又是怎样的，maya qt、.pro、makefile。"
 date:       2018-12-19
 author:     "elmagnifico"
 header-img: "img/python-head-bg.jpg"

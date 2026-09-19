@@ -2,6 +2,7 @@
 layout:     post
 title:      "点阵字体合集"
 subtitle:   "凤凰点阵、丁卯点阵、观致、U8g2、猫啃"
+description: "点阵字体合集，丁卯点阵体、凤凰点阵体、寒蝉点阵体、观致、U8g2。"
 date:       2025-03-19
 update:     2025-03-19
 author:     "elmagnifico"

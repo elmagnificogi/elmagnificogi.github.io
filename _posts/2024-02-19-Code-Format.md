@@ -2,6 +2,7 @@
 layout:     post
 title:      "代码格式化工具"
 subtitle:   "Astyle、Artistic Style、Clang-Format、CoolFormat"
+description: "代码格式化工具，what is the format of a blog、Astyle、Artistic Style。"
 date:       2024-02-19
 update:     2024-02-19
 author:     "elmagnifico"

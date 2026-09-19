@@ -2,6 +2,7 @@
 layout:     post
 title:      "2024游戏短评"
 subtitle:   "梦之形、大侠立志传、小丑牌、腐朽默示、怪猎荒野"
+description: "2024游戏短评，梦之形、大侠立志传、小丑牌、腐朽默示。"
 date:       2025-01-22
 update:     2025-01-22
 author:     "elmagnifico"

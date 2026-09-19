@@ -2,6 +2,7 @@
 layout:     post
 title:      "厦门游记"
 subtitle:   "携程，旅游，私团"
+description: "厦门游记，携程、旅游、私团、行程安排。"
 date:       2020-10-03
 author:     "elmagnifico"
 header-img: "img/xiamen.jpg"

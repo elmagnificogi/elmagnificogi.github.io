@@ -2,6 +2,7 @@
 layout:     post
 title:      "Maya拖动选择插件"
 subtitle:   "maya，draga"
+description: "Maya拖动选择插件，draga、思路、实现、maya 图标等资源文件查看。"
 date:       2021-03-13
 author:     "elmagnifico"
 header-img: "img/blackboard.jpg"

@@ -2,6 +2,7 @@
 layout:     post
 title:      "暴雪封禁所有MapAssit玩家"
 subtitle:   "Diablo,MH"
+description: "暴雪封禁所有MapAssit玩家，Diablo、MH、正文、被封之后的现状。"
 date:       2022-06-16
 update:     2022-06-16
 author:     "elmagnifico"

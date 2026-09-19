@@ -2,6 +2,7 @@
 layout:     post
 title:      "Python gRPC"
 subtitle:   "RPC、stream、流式传输、protobuf"
+description: "Python gRPC，stream、流式传输、protobuf、example测试。"
 date:       2024-11-22
 update:     2024-11-22
 author:     "elmagnifico"

@@ -2,6 +2,7 @@
 layout:     post
 title:      "3D米家，智能家居未来"
 subtitle:   "UWB、户型图、3D中控、具身智能"
+description: "3D米家，智能家居未来，xiaomi home 3d、UWB、户型图。"
 date:       2025-11-14
 update:     2025-11-15
 author:     "elmagnifico"

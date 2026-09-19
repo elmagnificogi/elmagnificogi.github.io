@@ -2,6 +2,7 @@
 layout:     post
 title:      "Office365订阅一次免费5年"
 subtitle:   "6T云存储，家庭组，Bug"
+description: "Office365订阅一次免费5年，6T云存储、家庭组、Bug。"
 date:       2023-03-19
 update:     2023-03-30
 author:     "elmagnifico"

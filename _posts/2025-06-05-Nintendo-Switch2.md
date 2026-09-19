@@ -2,6 +2,7 @@
 layout:     post
 title:      "Nintendo Switch2"
 subtitle:   "港版、首发、同捆、马车世界"
+description: "Nintendo Switch2，港版、首发、同捆、马车世界。"
 date:       2025-06-05
 update:     2025-06-25
 author:     "elmagnifico"

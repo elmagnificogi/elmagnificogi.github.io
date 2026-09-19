@@ -2,6 +2,7 @@
 layout:     post
 title:      "记一次小米Su7 Ultra提车"
 subtitle:   "保险、临牌、补贴、限制"
+description: "记一次小米Su7 Ultra提车，保险、临牌、补贴、限制。"
 date:       2025-03-10
 update:     2025-11-07
 author:     "elmagnifico"

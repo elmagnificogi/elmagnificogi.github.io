@@ -2,6 +2,7 @@
 layout:     post
 title:      "百度地图LBS云V4踩坑记录"
 subtitle:   "api,maps，v3，云检索，javascript"
+description: "百度地图LBS云V4踩坑记录，api、maps、v3、云检索。"
 date:       2020-09-30
 author:     "elmagnifico"
 header-img: "img/baidu.jpg"

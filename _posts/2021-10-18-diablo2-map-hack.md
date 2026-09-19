@@ -2,6 +2,7 @@
 layout:     post
 title:      "暗黑2重置版地图显示插件"
 subtitle:   "maphack,hackmap,D2RAssist"
+description: "暗黑2重置版地图显示插件，d2r maphack、d2rmh、d2 maphack、maphack d2r、hackmap、D2RAssist。"
 date:       2021-10-18
 update:     2022-05-05
 author:     "elmagnifico"

@@ -2,6 +2,7 @@
 layout:     post
 title:      "CentOS安装Mirai准备"
 subtitle:   "nonebot2，mcl，中文乱码"
+description: "CentOS下强行安装Mirai，可能会遇到很多麻烦的地方，但是最终是可用的，不至于说安不好，asumirai usj、nonebot2、mcl。"
 date:       2022-04-24
 update:     2022-04-27
 author:     "elmagnifico"

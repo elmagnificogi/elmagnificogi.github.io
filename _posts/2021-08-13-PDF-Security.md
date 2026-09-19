@@ -2,6 +2,7 @@
 layout:     post
 title:      "移除PDF的Security"
 subtitle:   "安全，Foxit"
+description: "移除PDF的Security，cursor读取pdf、pdf security、cursor pdf、安全、Foxit。"
 date:       2021-08-13
 update:     2021-08-13
 author:     "elmagnifico"

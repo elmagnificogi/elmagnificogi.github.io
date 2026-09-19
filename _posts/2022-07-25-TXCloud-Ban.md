@@ -2,6 +2,7 @@
 layout:     post
 title:      "腾讯云封锁使用翻墙的轻量服务器"
 subtitle:   "v2ray,跨境访问节点"
+description: "腾讯云封锁使用翻墙的轻量服务器，腾讯云翻墙警告、腾讯云翻墙、腾讯云 梯子、阿里云翻墙警告、v2ray、跨境访问节点。"
 date:       2022-07-25
 update:     2022-09-22
 author:     "elmagnifico"

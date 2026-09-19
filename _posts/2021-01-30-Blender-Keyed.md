@@ -2,6 +2,7 @@
 layout:     post
 title:      "Blender 粒子系统架构"
 subtitle:   "Particle,Architecture"
+description: "Blender中也有类似于maya goal的功能，叫做keyed，中文叫键控，非常奇怪的名字，打算看一下这个功能底层是怎么实现的，Particle、Architecture、Blender Dev、缩写。"
 date:       2021-01-30
 author:     "elmagnifico"
 header-img: "img/bg5.jpg"
