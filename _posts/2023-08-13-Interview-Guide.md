@@ -2,6 +2,7 @@
 layout:     post
 title:      "2023了还有人不会面试"
 subtitle:   "interview，电话，远程"
+description: "2023了还有人不会面试，interview、电话、远程、面试官角度。"
 date:       2023-08-13
 update:     2023-09-28
 author:     "elmagnifico"

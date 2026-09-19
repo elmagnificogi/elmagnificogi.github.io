@@ -2,6 +2,7 @@
 layout:     post
 title:      "Springboot部署后WEB登录延迟很高"
 subtitle:   "random,tomcat"
+description: "Springboot部署后WEB登录延迟很高，random、tomcat、错误提示、session。"
 date:       2019-09-06
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"

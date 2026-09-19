@@ -2,6 +2,7 @@
 layout:     post
 title:      "北京自驾游"
 subtitle:   "鸟巢、长城、西二旗、秦皇岛、北戴河、阿那亚、雄安、白洋淀"
+description: "北京自驾游，鸟巢、长城、西二旗、秦皇岛。"
 date:       2026-05-11
 update:     2026-05-11
 author:     "elmagnifico"

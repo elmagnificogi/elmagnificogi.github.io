@@ -2,6 +2,7 @@
 layout:     post
 title:      "Eclipse 无法保存 Use active build configuration 的解决办法"
 subtitle:   "CDT，Indexer，exclude"
+description: "Eclipse 无法保存 Use active build configuration 的解决办法，CDT、Indexer、exclude、现象。"
 date:       2021-09-08
 author:     "elmagnifico"
 header-img: "img/bg2.jpg"

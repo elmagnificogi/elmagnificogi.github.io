@@ -2,6 +2,7 @@
 layout:     post
 title:      "JetBrains数据恢复"
 subtitle:   "git，DataRecover"
+description: "JetBrains数据恢复，git、DataRecover、误删。"
 date:       2020-08-19
 author:     "elmagnifico"
 header-img: "img/cap-head-bg.jpg"

@@ -2,6 +2,7 @@
 layout:     post
 title:      "LeetCode Solution(Easy.41-44)"
 subtitle:   "c/c++，python，for work"
+description: "LeetCode Solution(Easy.41-44)，c++、python、41.Valid Sudoku、44.Rectangle Area。"
 date:       2015-12-13
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"

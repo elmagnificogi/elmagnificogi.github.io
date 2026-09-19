@@ -2,6 +2,7 @@
 layout:     post
 title:      "集群运动"
 subtitle:   "VO,RVO,Coordinated"
+description: "集群运动，VO、RVO、Coordinated、RVO2/ORCA。"
 date:       2021-01-29
 author:     "elmagnifico"
 header-img: "img/bg4.jpg"

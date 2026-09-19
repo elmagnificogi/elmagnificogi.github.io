@@ -2,6 +2,7 @@
 layout:     post
 title:      "VSCode CMake Debug"
 subtitle:   "launch,workflow"
+description: "VSCode CMake Debug 嵌入式MCU有好几种方案，cursor vsc、vscode eide、launch、workflow。"
 date:       2025-02-27
 update:     2025-03-01
 author:     "elmagnifico"

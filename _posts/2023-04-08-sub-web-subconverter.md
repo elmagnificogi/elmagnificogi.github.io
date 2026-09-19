@@ -2,6 +2,7 @@
 layout:     post
 title:      "自建订阅转换"
 subtitle:   "sub-web，subconverter"
+description: "自建订阅转换，api.wcc.best、wcc.best、api wcc best、tindy2013/subconverter:latest、sub-web、caddy。"
 date:       2023-04-08
 update:     2023-10-09
 author:     "elmagnifico"

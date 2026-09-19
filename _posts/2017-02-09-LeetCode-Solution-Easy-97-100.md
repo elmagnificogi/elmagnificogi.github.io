@@ -2,6 +2,7 @@
 layout:     post
 title:      "LeetCode Solution(Easy.97-100)"
 subtitle:   "c/c++，python，for work"
+description: "LeetCode Solution(Easy.97-100)，c++、python、98.Relative Ranks。"
 date:       2017-02-09
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"

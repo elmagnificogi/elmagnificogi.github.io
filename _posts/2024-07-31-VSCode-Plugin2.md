@@ -2,6 +2,7 @@
 layout:     post
 title:      "VS Code插件入门二"
 subtitle:   "plugin"
+description: "VS Code插件入门二，plugin、获取文件路径、创建一个新的显示区域。"
 date:       2024-07-31
 update:     2024-08-02
 author:     "elmagnifico"

@@ -2,6 +2,7 @@
 layout:     post
 title:      "i.MXRT1xxx系列启动分析"
 subtitle:   "MXRT1052，BootROM，BootMode"
+description: "与ST对比，i.MXRT1xxx系列的启动方式和流程都有很大不同，对比ST来说有一部分可以说相当麻烦，MXRT1052、BootROM、BootMode、IMXRT Boot启动分析。"
 date:       2023-01-07
 update:     2023-03-02
 author:     "elmagnifico"

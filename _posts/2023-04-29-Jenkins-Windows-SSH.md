@@ -2,6 +2,7 @@
 layout:     post
 title:      "Windows下SSH和Jenkins"
 subtitle:   "Publish Over SSH，SSH plugin，openSSH，CI，conding.net"
+description: "Windows下SSH和Jenkins，Publish Over SSH、SSH plugin、openSSH、CI。"
 date:       2023-04-29
 update:     2024-04-22
 author:     "elmagnifico"

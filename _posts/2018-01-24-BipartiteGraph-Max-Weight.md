@@ -2,6 +2,7 @@
 layout:     post
 title:      "二分图带权最大匹配"
 subtitle:   "KM，完备匹配"
+description: "二分图带权最大匹配，二分图最大匹配、二分图匹配、KM、完备匹配。"
 date:       2018-01-24
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"

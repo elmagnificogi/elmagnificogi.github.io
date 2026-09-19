@@ -2,6 +2,7 @@
 layout:     post
 title:      "2025游戏短评"
 subtitle:   "梦之形、恶意不息、鸭科夫、腐朽默示、怪猎荒野"
+description: "2025游戏短评，梦之形、恶意不息、鸭科夫、腐朽默示。"
 date:       2026-01-28
 update:     2026-01-28
 author:     "elmagnifico"

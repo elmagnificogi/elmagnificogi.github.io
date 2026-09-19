@@ -2,6 +2,7 @@
 layout:     post
 title:      "OMPL 安装"
 subtitle:   "app,python,ubuntu"
+description: "OMPL 安装，pip install ompl、app、python。"
 date:       2018-03-15
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"

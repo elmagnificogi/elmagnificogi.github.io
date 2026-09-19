@@ -2,6 +2,7 @@
 layout:     post
 title:      "FreeRTOS中heap源文件分析(二)"
 subtitle:   "嵌入式，FreeRTOS，heap"
+description: "FreeRTOS中heap源文件分析(二)，freertos heap4、嵌入式、heap2功能简介。"
 date:       2017-03-21
 author:     "elmagnifico"
 header-img: "img/freertos.jpg"

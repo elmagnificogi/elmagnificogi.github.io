@@ -2,6 +2,7 @@
 layout:     post
 title:      "maya c++ API 创建一个polySphere"
 subtitle:   "API 学习"
+description: "maya c++ API 创建一个polySphere，API 学习、create。"
 date:       2019-06-06
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"

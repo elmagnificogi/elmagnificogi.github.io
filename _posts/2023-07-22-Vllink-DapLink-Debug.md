@@ -2,6 +2,7 @@
 layout:     post
 title:      "Vllink无线调试上手体验"
 subtitle:   "J-Link,CMSIS-DAP,SES,Keil,ST"
+description: "Vllink无线调试上手体验，J-Link、CMSIS-DAP。"
 date:       2023-07-22
 update:     2023-07-22
 author:     "elmagnifico"

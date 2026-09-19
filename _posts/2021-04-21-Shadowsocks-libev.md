@@ -2,6 +2,7 @@
 layout:     post
 title:      "适用于小内存vps的Shadowsocks-libev"
 subtitle:   "小伞云,NAT,IPLC"
+description: "适用于小内存vps的Shadowsocks-libev，shadowsocks libev、shadowsocks rust、shadowsocks.tar.gz、小伞云、NAT。"
 date:       2021-04-21
 author:     "elmagnifico"
 header-img: "img/desk-head-bg.jpg"

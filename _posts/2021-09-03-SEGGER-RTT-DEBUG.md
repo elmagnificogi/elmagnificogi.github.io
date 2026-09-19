@@ -2,6 +2,7 @@
 layout:     post
 title:      "SEGGER_RTT当调试串口输出"
 subtitle:   "jlink，swd，Tracealyzer"
+description: "SEGGER_RTT当调试串口输出，segger_rtt.c、jlink、swd。"
 date:       2021-09-03
 author:     "elmagnifico"
 header-img: "img/bg4.jpg"

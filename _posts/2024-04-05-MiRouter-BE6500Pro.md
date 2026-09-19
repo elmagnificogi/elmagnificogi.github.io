@@ -2,7 +2,7 @@
 layout:     post
 title:      "BE6500Pro刷机开启SSH"
 subtitle:   "1.0.46,固化,ShellClash,ShellCrash"
-description: "小米 BE6500Pro 刷 1.0.46 解锁 SSH，固化后再升新版，可以装 ShellClash / ShellCrash。"
+description: "BE6500Pro刷机开启SSH，be6500pro ssh、小米be6500刷机、小米be6500pro openwrt、1.0.46、固化。"
 date:       2024-04-05
 update:     2024-11-05
 author:     "elmagnifico"

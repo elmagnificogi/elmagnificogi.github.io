@@ -2,6 +2,7 @@
 layout:     post
 title:      "BLHeliSuite32逆向（二）"
 subtitle:   "Crack，Reverse"
+description: "BLHeliSuite32逆向（二），Crack、Reverse、串口读取、CheckStrACK。"
 date:       2021-07-16
 update:     2021-10-18
 author:     "elmagnifico"

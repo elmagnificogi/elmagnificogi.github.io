@@ -2,6 +2,7 @@
 layout:     post
 title:      "Windows系统异常失焦"
 subtitle:   "windows，chrome_widgetwin_0，Chrome，Autodesk"
+description: "Windows系统异常失焦，chrome_widgetwin_0、Chrome、Autodesk、现象。"
 date:       2024-07-29
 update:     2024-08-01
 author:     "elmagnifico"

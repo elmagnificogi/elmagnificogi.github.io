@@ -2,6 +2,7 @@
 layout:     post
 title:      "5%的利润率能否过得下去？"
 subtitle:   "work，life"
+description: "5%的利润率能否过得下去，work、life、5%利润率、免费与收费软件。"
 date:       2020-08-13
 author:     "elmagnifico"
 header-img: "img/balance.jpg"

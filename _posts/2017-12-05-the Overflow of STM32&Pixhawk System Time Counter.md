@@ -2,6 +2,7 @@
 layout:     post
 title:      "APM与STM32中系统时间计数器溢出"
 subtitle:   "APM，Copter loop，Overflow"
+description: "APM与STM32中系统时间计数器溢出，我指的是這個、systemctl raspberry pi、Copter loop、Overflow。"
 date:       2017-12-05
 author:     "elmagnifico"
 header-img: "img/Embedded-head-bg.jpg"

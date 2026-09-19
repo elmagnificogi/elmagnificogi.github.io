@@ -2,6 +2,7 @@
 layout:     post
 title:      "罗技G Pro X Superlight与G900、G903、gpw深度对比"
 subtitle:   "powerplay,无线充电"
+description: "罗技G Pro X Superlight与G900、G903、gpw深度对比，powerplay、无线充电、罗技G系列、G903 老款。"
 date:       2021-10-11
 update:     2023-05-07
 author:     "elmagnifico"

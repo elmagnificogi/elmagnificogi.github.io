@@ -2,6 +2,7 @@
 layout:     post
 title:      "keil debug 不重启连接硬件"
 subtitle:   "嵌入式，debug，STM32"
+description: "keil debug 不重启连接硬件，嵌入式、STM32、修改配置、withoutreset。"
 date:       2017-12-01
 author:     "elmagnifico"
 header-img: "img/cap-head-bg.jpg"

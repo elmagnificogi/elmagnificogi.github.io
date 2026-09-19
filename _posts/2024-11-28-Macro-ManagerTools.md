@@ -2,6 +2,7 @@
 layout:     post
 title:      "构建工具之xmake"
 subtitle:   "Kconfig、menuconfig、makefile、macro"
+description: "构建工具之xmake，Kconfig、menuconfig、makefile、macro。"
 date:       2024-12-02
 update:     2024-12-02
 author:     "elmagnifico"

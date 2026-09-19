@@ -2,6 +2,7 @@
 layout:     post
 title:      "深圳-拉萨自驾-在路上"
 subtitle:   "成都，拉萨，桂林、云南、大理，滇藏，川藏，318，Su7 Ultra，边防证"
+description: "深圳-拉萨自驾-在路上，成都、桂林、云南、大理。"
 date:       2026-09-16
 update:     2026-09-17
 author:     "elmagnifico"

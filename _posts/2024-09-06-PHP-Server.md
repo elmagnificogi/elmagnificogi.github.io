@@ -2,6 +2,7 @@
 layout:     post
 title:      "PHP"
 subtitle:   "天下第一"
+description: "PHP，palserver、天下第一、数据库。"
 date:       2024-09-06
 update:     2024-09-06
 author:     "elmagnifico"

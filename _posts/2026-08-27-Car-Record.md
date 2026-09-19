@@ -2,6 +2,7 @@
 layout:     post
 title:      "玩车日志"
 subtitle:   "小米Su7 Ultra、懂车帝、珠海赛道、灿哥"
+description: "玩车日志，小米Su7 Ultra、懂车帝、珠海赛道、灿哥。"
 date:       2026-08-27
 update:     2026-08-27
 author:     "elmagnifico"

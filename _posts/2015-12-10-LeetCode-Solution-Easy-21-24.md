@@ -2,6 +2,7 @@
 layout:     post
 title:      "LeetCode Solution(Easy.21-24)"
 subtitle:   "c/c++，python，for work"
+description: "LeetCode Solution(Easy.21-24)，c++、python、21.Climbing Stairs、22.Power of Two。"
 date:       2015-12-10
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"

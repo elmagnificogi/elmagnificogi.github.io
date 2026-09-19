@@ -2,6 +2,7 @@
 layout:     post
 title:      "RouterOS配置GRE和OSPF"
 subtitle:   "组网，RIP，静态路由,DDNS"
+description: "RouterOS配置GRE和OSPF，凸包内部 蓝点 红点 绿点 最多、隱藏我的劇毒之血、硬改新机、自我改进、组网、RIP。"
 date:       2023-09-24
 update:     2023-09-24
 author:     "elmagnifico"

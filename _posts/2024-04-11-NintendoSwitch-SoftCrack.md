@@ -3,6 +3,7 @@
 layout:     post
 title:      "Nintendo Switch 软破解，变安卓TV"
 subtitle:   "hekate，Android TV，SN，注入，串流，moonlight"
+description: "Nintendo Switch 软破解，变安卓TV，switch 破解 軟 改、switch 軟改教學、hekate、Android TV。"
 date:       2024-04-11
 update:     2024-04-16
 author:     "elmagnifico"

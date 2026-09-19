@@ -2,6 +2,7 @@
 layout:     post
 title:      "OpenWrt开启NTP同步"
 subtitle:   "时间，Date，RouterOS，SNTP"
+description: "OpenWrt开启NTP同步，openwrt ntp、openwrt ntp server、sysntpd、ntp server openwrt、时间、Date。"
 date:       2023-06-13
 update:     2025-11-26
 author:     "elmagnifico"

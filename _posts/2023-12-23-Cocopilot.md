@@ -2,6 +2,7 @@
 layout:     post
 title:      "Copilot单账号共享合租服务"
 subtitle:   "OpenAI，CoCopilot"
+description: "Copilot单账号共享合租服务，cocopilot、openai、VScode、激活。"
 date:       2023-12-23
 update:     2023-12-23
 author:     "elmagnifico"

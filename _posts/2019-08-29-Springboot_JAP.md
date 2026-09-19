@@ -2,6 +2,7 @@
 layout:     post
 title:      "Springboot中数据映射到数据库"
 subtitle:   "JAP，mySQL"
+description: "记录一下之前遇到的一个问题，Springboot中在映射实体到数据库的时候有一个映射方式，之前没注意，caddy vs spring boot、spring boot vs caddy、JAP、mySQL。"
 date:       2019-08-29
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"

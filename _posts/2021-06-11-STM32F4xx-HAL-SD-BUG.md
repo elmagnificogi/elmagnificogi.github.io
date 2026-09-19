@@ -2,6 +2,7 @@
 layout:     post
 title:      "STM32F4 CubeMX HAL库 SD初始化BUG"
 subtitle:   "GD32F450"
+description: "STM32F4 CubeMX HAL库 SD初始化BUG，GD32F450、环境、现象、解决。"
 date:       2021-06-11
 update:     2021-06-11
 author:     "elmagnifico"

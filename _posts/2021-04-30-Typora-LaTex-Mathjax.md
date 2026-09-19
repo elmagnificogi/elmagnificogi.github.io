@@ -2,6 +2,7 @@
 layout:     post
 title:      "Typora下使用LaTex公式，Jekyll使用Mathjax显示公式"
 subtitle:   "Markdown,blog"
+description: "Typora下使用LaTex公式，Jekyll使用Mathjax显示公式，Markdown、blog、jekyll 支持公式、花括号问题。"
 date:       2021-04-30
 update:     2021-04-30
 author:     "elmagnifico"

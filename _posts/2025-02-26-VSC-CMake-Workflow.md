@@ -2,6 +2,7 @@
 layout:     post
 title:      "VSCode CMake工作流"
 subtitle:   "CPack,CTest,launch,workflow"
+description: "VSCode CMake工作流，CPack、CTest、launch、workflow。"
 date:       2025-02-27
 update:     2025-02-27
 author:     "elmagnifico"

@@ -2,6 +2,7 @@
 layout:     post
 title:      "Mysql binlog 数据恢复"
 subtitle:   "误删,删库,跑路"
+description: "Mysql binlog 数据恢复，误删、删库、跑路、实际恢复。"
 date:       2021-11-08
 update:     2021-11-08
 author:     "elmagnifico"

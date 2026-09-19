@@ -2,6 +2,7 @@
 layout:     post
 title:      "测试管理工具"
 subtitle:   "test、management、autotest、unit test"
+description: "测试管理工具，test、management。"
 date:       2026-06-03
 update:     2026-06-04
 author:     "elmagnifico"

@@ -2,6 +2,7 @@
 layout:     post
 title:      "LeetCode Solution(Easy.73-76)"
 subtitle:   "c/c++，python，for work"
+description: "LeetCode Solution(Easy.73-76)，c++、python、76.Assign Cookies。"
 date:       2016-12-25
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"

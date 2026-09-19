@@ -2,6 +2,7 @@
 layout:     post
 title:      "OMPL 2D规划Demo"
 subtitle:   "motion planning"
+description: "OMPL 2D规划Demo，motion planning、source code。"
 date:       2018-03-15
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"

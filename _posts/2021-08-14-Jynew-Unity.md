@@ -2,6 +2,7 @@
 layout:     post
 title:      "unity入门与金庸群侠传"
 subtitle:   "cg，jynew"
+description: "看到了金庸群侠传的3d重置，刚好也是unity入门的机会，于是试一试，jynew、jyx2、cg、金庸群侠传3D重制版。"
 date:       2021-08-14
 update:     2021-08-17
 author:     "elmagnifico"

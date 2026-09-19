@@ -2,6 +2,7 @@
 layout:     post
 title:      "AI大模型笔记"
 subtitle:   "LLM,RAG,LoRA，Transform"
+description: "AI大模型笔记，LLM、RAG、LoRA、Transform。"
 date:       2025-04-14
 update:     2025-04-14
 author:     "elmagnifico"

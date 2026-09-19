@@ -2,6 +2,7 @@
 layout:     post
 title:      "RGB转换到RGBW"
 subtitle:   "HDR，色域，色品图，颜色空间"
+description: "RGB转换到RGBW，rgb to rgbw、HDR、色域。"
 date:       2021-03-30
 update:     2024-08-03
 author:     "elmagnifico"

@@ -2,6 +2,7 @@
 layout:     post
 title:      "NXP系列容易混淆的问题"
 subtitle:   "MXRT1052，CFX，下载算法"
+description: "NXP系列容易混淆的问题，MXRT1052、CFX、下载算法、DAP-Link与J-Link。"
 date:       2023-02-17
 update:     2023-05-29
 author:     "elmagnifico"

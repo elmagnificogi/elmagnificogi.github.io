@@ -2,6 +2,7 @@
 layout:     post
 title:      "为什么我们需要一个NAS"
 subtitle:   "健康码、开源、悬浮图片"
+description: "为什么我们需要一个NAS，健康码、开源、悬浮图片、为什么你需要一个NAS。"
 date:       2022-11-26
 update:     2022-12-16
 author:     "elmagnifico"

@@ -2,6 +2,7 @@
 layout:     post
 title:      "RVO算法详解"
 subtitle:   "RVO2,OV"
+description: "RVO算法详解，rvo-04、apa itu rvo、apa arti rvo、OV、先说一下实际应用的坑。"
 date:       2021-04-19
 update:     2021-04-29
 author:     "elmagnifico"

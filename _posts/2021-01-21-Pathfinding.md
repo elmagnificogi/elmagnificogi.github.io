@@ -2,6 +2,7 @@
 layout:     post
 title:      "常见寻路算法介绍"
 subtitle:   "pathfinding"
+description: "常见寻路算法介绍，pathfinding、寻路与轨迹规划、基础算法、Dijkstra。"
 date:       2021-01-21
 author:     "elmagnifico"
 header-img: "img/maze.jpg"

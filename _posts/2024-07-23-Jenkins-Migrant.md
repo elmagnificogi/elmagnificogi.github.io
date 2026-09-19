@@ -2,6 +2,7 @@
 layout:     post
 title:      "Jenkins迁移"
 subtitle:   "windows，linux，腾讯云，镜像"
+description: "Jenkins迁移，windows、linux、腾讯云、镜像。"
 date:       2024-07-23
 update:     2024-07-23
 author:     "elmagnifico"

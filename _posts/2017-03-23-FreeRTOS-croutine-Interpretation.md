@@ -2,6 +2,7 @@
 layout:     post
 title:      "FreeRTOS中croutine源文件分析"
 subtitle:   "嵌入式，FreeRTOS，croutine"
+description: "FreeRTOS中croutine源文件分析，嵌入式、协程。"
 date:       2017-03-23
 author:     "elmagnifico"
 header-img: "img/freertos.jpg"

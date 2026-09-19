@@ -2,6 +2,7 @@
 layout:     post
 title:      "Maya python转Cython"
 subtitle:   "pyd，c"
+description: "最近需要把.py或者.pyc转成pyd，也就是转成cython，如果只是普通的python，直接安装cython，然后就能正常用了，maya 2018 python version、python -> cython、踩坑。"
 date:       2020-12-28
 update:     2022-11-24
 author:     "elmagnifico"

@@ -2,6 +2,7 @@
 layout:     post
 title:      "Houdini python 入门"
 subtitle:   "Sop，Obj，Geometry Spreadsheet数据导出"
+description: "Houdini python 入门，Sop、Obj、新老版本切换、简单入门。"
 date:       2023-04-21
 update:     2023-04-24
 author:     "elmagnifico"

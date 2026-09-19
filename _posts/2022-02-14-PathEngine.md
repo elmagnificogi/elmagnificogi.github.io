@@ -2,6 +2,7 @@
 layout:     post
 title:      "路径规划中间件 PathEngine"
 subtitle:   "pathfind，game"
+description: "路径规划中间件 PathEngine，pathengine pricing、pathfind、game。"
 date:       2022-02-14
 update:     2022-02-14
 author:     "elmagnifico"

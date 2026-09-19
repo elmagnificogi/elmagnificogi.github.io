@@ -2,6 +2,7 @@
 layout:     post
 title:      "车载智能屏幕"
 subtitle:   "Led,iPixel Color"
+description: "车载智能屏幕，ac23bp1、Led、iPixel Color。"
 date:       2025-10-31
 update:     2025-10-31
 author:     "elmagnifico"

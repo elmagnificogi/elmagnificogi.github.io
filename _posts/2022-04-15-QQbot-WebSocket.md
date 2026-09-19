@@ -2,6 +2,7 @@
 layout:     post
 title:      "QQ频道botpy框架解析"
 subtitle:   "WebSocket，aiohttp"
+description: "QQ频道botpy框架解析，WebSocket、aiohttp。"
 date:       2022-04-15
 update:     2022-04-20
 author:     "elmagnifico"

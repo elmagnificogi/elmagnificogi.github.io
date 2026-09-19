@@ -2,6 +2,7 @@
 layout:     post
 title:      "投资公司前学习"
 subtitle:   "公司、上市、期权、原始股"
+description: "投资公司前学习，上市、期权、原始股、交易所。"
 date:       2023-04-30
 update:     2023-05-07
 author:     "elmagnifico"

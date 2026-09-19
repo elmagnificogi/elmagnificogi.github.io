@@ -2,6 +2,7 @@
 layout:     post
 title:      "Typora"
 subtitle:   "Markdown"
+description: "Typora，typora plantuml、typora crack、typora 收費、typora破解版、Markdown、Atom。"
 date:       2019-08-08
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"

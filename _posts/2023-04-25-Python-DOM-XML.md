@@ -2,6 +2,7 @@
 layout:     post
 title:      "Python读取XML并修改导出"
 subtitle:   "xml.dom.minidom"
+description: "Python读取XML并修改导出，xml.dom.minidom。"
 date:       2023-04-25
 update:     2023-04-25
 author:     "elmagnifico"

@@ -2,6 +2,7 @@
 layout:     post
 title:      "USB-Redirector"
 subtitle:   "Tools"
+description: "USB-Redirector，USB over Network、Usb over Ip、USB Network Gate。"
 date:       2017-07-25
 author:     "elmagnifico"
 header-img: "img/Embedded-head-bg.jpg"

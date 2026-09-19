@@ -2,6 +2,7 @@
 layout:     post
 title:      "静态代码分析扫描工具"
 subtitle:   "嵌入式，代码扫描，TscanCode，Helix QAC，SAST Coverity"
+description: "静态代码分析扫描工具，tscancode、嵌入式、代码扫描。"
 date:       2023-05-22
 update:     2025-12-03
 author:     "elmagnifico"

@@ -2,6 +2,7 @@
 layout:     post
 title:      "暗黑2重置版物品过滤"
 subtitle:   "diablo2 resurrected loot filter"
+description: "暗黑2重置版物品过滤，elmagnifico、mydiablo2、简易修改教程、自定义颜色。"
 date:       2021-10-10
 update:     2022-05-05
 author:     "elmagnifico"

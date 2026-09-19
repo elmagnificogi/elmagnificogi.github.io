@@ -2,6 +2,7 @@
 layout:     post
 title:      "Ubuntu Xrdp"
 subtitle:   "远程"
+description: "Ubuntu 使用window的rdp协议进行远程，测试。"
 date:       2024-03-04
 update:     2024-03-04
 author:     "elmagnifico"

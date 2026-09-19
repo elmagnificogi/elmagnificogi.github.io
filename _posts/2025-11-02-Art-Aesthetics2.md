@@ -2,6 +2,7 @@
 layout:     post
 title:      "艺术与审美，第二阶段学习"
 subtitle:   "Art，唯伟，艺术史，书法，国画，观呼吸，梵高，人性，个性"
+description: "艺术与审美，第二阶段学习，唯伟老师聊绘画、唯伟 知乎、Art、艺术史。"
 date:       2026-01-13
 update:     2026-01-13
 author:     "elmagnifico"

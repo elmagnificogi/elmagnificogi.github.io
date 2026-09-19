@@ -2,6 +2,7 @@
 layout:     post
 title:      "Nintendo Switch相关的代码仓库介绍"
 subtitle:   "crack,dock,pro controllor"
+description: "Nintendo Switch相关的代码仓库介绍，easyswitch、zerotier nintendo switch、crack、dock。"
 date:       2021-05-28
 update:     2021-05-28
 author:     "elmagnifico"

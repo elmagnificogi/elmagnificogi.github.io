@@ -2,6 +2,7 @@
 layout:     post
 title:      "Paypal争议PacificRack-成功下车"
 subtitle:   "失联,关机"
+description: "Paypal争议PacificRack-成功下车，失联、关机。"
 date:       2021-05-03
 update:     2021-05-03
 author:     "elmagnifico"

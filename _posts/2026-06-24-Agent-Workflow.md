@@ -2,6 +2,7 @@
 layout:     post
 title:      "AI工作流"
 subtitle:   "AI、Agent、Skill、workflow"
+description: "AI工作流，ai agent 工作流 重构 案例、Skill、workflow。"
 date:       2026-06-26
 update:     2026-07-06
 author:     "elmagnifico"

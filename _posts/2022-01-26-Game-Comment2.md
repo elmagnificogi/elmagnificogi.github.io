@@ -2,6 +2,7 @@
 layout:     post
 title:      "2021游戏短评"
 subtitle:   "国产游戏，宝可梦"
+description: "2021游戏短评，国产游戏、宝可梦、2021年国产单机、永劫无间。"
 date:       2022-01-26
 update:     2022-03-10
 author:     "elmagnifico"

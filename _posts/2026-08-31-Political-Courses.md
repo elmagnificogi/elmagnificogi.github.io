@@ -2,6 +2,7 @@
 layout:     post
 title:      "人类高质量思政课"
 subtitle:   "沈辛成、中国马克思主义与当代、上海交大、经济、供需关系"
+description: "人类高质量思政课，沈辛成、中国马克思主义与当代、上海交大、经济。"
 date:       2026-09-01
 update:     2026-09-01
 author:     "elmagnifico"

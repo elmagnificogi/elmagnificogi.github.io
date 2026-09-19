@@ -2,6 +2,7 @@
 layout:     post
 title:      "部署试用OpenProject"
 subtitle:   "PingCode"
+description: "部署试用OpenProject，还是发现了一些问题，enterprise_token.rb、openproject crack、openproject enterprise mode for free、openproject 教學、PingCode、破解。"
 date:       2024-10-28
 update:     2024-10-28
 author:     "elmagnifico"

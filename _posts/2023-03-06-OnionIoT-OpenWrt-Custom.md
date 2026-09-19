@@ -2,6 +2,7 @@
 layout:     post
 title:      "OnionIoT编译"
 subtitle:   "OpenWrt，make menuconfig，make kernel_menuconfig"
+description: "OnionIoT编译，OpenWrt、make menuconfig、编译环境搭建、Custom。"
 date:       2023-03-06
 update:     2023-03-09
 author:     "elmagnifico"

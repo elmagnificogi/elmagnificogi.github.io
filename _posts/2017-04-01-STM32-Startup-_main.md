@@ -2,6 +2,7 @@
 layout:     post
 title:      "STM32 _main 里做了什么"
 subtitle:   "嵌入式，bootloader，_main"
+description: "STM32 _main 里做了什么，嵌入式、bootloader、STM32 main 里做了什么、startup。"
 date:       2017-04-01
 update:     2023-02-15
 author:     "elmagnifico"

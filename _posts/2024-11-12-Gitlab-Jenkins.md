@@ -2,6 +2,7 @@
 layout:     post
 title:      "GitLab联动Jenkins"
 subtitle:   "集成、action、构建"
+description: "GitLab联动Jenkins完成CI\\\\CD流程，集成、action、构建、webhooks方式。"
 date:       2024-11-12
 update:     2024-11-12
 author:     "elmagnifico"

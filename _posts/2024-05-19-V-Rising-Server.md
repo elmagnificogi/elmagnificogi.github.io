@@ -3,6 +3,7 @@
 layout:     post
 title:      "夜族崛起开服指南"
 subtitle:   "V-Rising，windows，steamCMD"
+description: "夜族崛起开服指南，palserver、夜族崛起 伺服器、palserver-agent、V-Rising、windows。"
 date:       2024-05-19
 update:     2024-07-08
 author:     "elmagnifico"

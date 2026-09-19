@@ -2,6 +2,7 @@
 layout:     post
 title:      "AI模型生成对比"
 subtitle:   "SD、3DFY、Meshy、Genie、Midjounery"
+description: "AI模型生成对比，SD、3DFY、Meshy、Genie。"
 date:       2025-04-02
 update:     2025-04-02
 author:     "elmagnifico"

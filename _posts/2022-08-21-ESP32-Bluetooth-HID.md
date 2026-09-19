@@ -2,6 +2,7 @@
 layout:     post
 title:      "ESP32经典蓝牙HID开发"
 subtitle:   "Classic Bluetooth Hid"
+description: "ESP32经典蓝牙HID开发，Example、appmain、测试、bluetooth。"
 date:       2022-08-21
 update:     2022-08-28
 author:     "elmagnifico"

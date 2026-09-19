@@ -2,6 +2,7 @@
 layout:     post
 title:      "树莓派 & Synergy & 笔记本"
 subtitle:   "开机启动，Synergy，共用鼠键"
+description: "树莓派 & Synergy & 笔记本，开机启动、共用鼠键、Windows & Synergy、环境。"
 date:       2015-11-01
 author:     "elmagnifico"
 header-img: "img/Raspberrypi-head-bg.jpg"

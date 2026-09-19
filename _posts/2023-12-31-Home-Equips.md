@@ -2,6 +2,7 @@
 layout:     post
 title:      "家具选购踩坑记录"
 subtitle:   "电器、米家、智能家居、物联网"
+description: "家具选购踩坑记录，电器、米家、智能家居、物联网。"
 date:       2023-12-31
 update:     2024-12-23
 author:     "elmagnifico"

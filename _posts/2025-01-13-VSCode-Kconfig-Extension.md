@@ -2,6 +2,7 @@
 layout:     post
 title:      "VSCode Kconfig插件"
 subtitle:   "Kconfig、VScode、Extension"
+description: "VSCode Kconfig插件，Extension、KconfigLib、测试、kconfig-frontends。"
 date:       2025-01-23
 update:     2025-02-23
 author:     "elmagnifico"

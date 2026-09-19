@@ -2,6 +2,7 @@
 layout:     post
 title:      "小米人在传感器Pro踩坑"
 subtitle:   "379"
+description: "小米人在传感器Pro踩坑，379、标称覆盖。"
 date:       2024-09-13
 update:     2024-09-18
 author:     "elmagnifico"

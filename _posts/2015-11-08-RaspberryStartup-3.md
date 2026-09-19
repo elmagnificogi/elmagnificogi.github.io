@@ -2,6 +2,7 @@
 layout:     post
 title:      "树莓派启动那些事（三）"
 subtitle:   "键盘，编码，中文,时间，远程"
+description: "树莓派启动那些事（三），键盘、编码、中文、时间。"
 date:       2015-11-08
 author:     "elmagnifico"
 header-img: "img/Raspberrypi-head-bg.jpg"

@@ -2,6 +2,7 @@
 layout:     post
 title:      "Nintendo Switch 自动手柄"
 subtitle:   "Switch-Fightstick，auto，AVR USB"
+description: "Nintendo Switch 自动手柄，Switch-Fightstick、auto、AVR USB、类似工具。"
 date:       2019-12-15
 update:     2022-07-31
 author:     "elmagnifico"

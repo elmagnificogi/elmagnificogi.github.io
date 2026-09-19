@@ -2,6 +2,7 @@
 layout:     post
 title:      "AC录像转行车线与轨迹分析"
 subtitle:   "神力科莎，AILine，acreplay，Cursor"
+description: "AC录像转行车线与轨迹分析，神力科莎、AILine、acreplay、Cursor。"
 date:       2026-04-06
 update:     2026-04-07
 author:     "elmagnifico"

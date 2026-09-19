@@ -2,6 +2,7 @@
 layout:     post
 title:      "广东自驾游之南澳篇"
 subtitle:   "潮汕、小米su7 Ultra、MOC深圳车友会、珠海赛道"
+description: "广东自驾游之南澳篇，潮汕、小米su7 Ultra、MOC深圳车友会、珠海赛道。"
 date:       2025-12-10
 update:     2025-12-10
 author:     "elmagnifico"

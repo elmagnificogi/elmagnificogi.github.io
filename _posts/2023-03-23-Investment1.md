@@ -2,6 +2,7 @@
 layout:     post
 title:      "价值投资学习"
 subtitle:   "有知有行，投资第一课"
+description: "价值投资学习，有知有行、投资第一课、现状、Investment。"
 date:       2023-03-23
 update:     2023-03-30
 author:     "elmagnifico"

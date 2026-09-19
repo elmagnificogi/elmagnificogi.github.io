@@ -2,6 +2,7 @@
 layout:     post
 title:      "OMPL Benchmark Planner"
 subtitle:   "cfg,log,database"
+description: "OMPL Benchmark Planner，cfg、log、database、code。"
 date:       2018-03-17
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"

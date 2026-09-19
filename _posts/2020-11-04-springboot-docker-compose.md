@@ -2,6 +2,7 @@
 layout:     post
 title:      "docker-compose部署springboot项目"
 subtitle:   "mysql,oauth,java"
+description: "docker-compose部署springboot项目，mysql、oauth、java、Dockfile。"
 date:       2020-11-04
 author:     "elmagnifico"
 header-img: "img/docker-head-bg.jpg"

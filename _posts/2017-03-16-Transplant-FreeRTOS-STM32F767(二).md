@@ -2,6 +2,7 @@
 layout:     post
 title:      "FreeRTOS移植到STM32F767(二)"
 subtitle:   "嵌入式，FreeRTOS，STM32F767"
+description: "FreeRTOS移植到STM32F767(二)，嵌入式、transplant。"
 date:       2017-03-16
 author:     "elmagnifico"
 header-img: "img/freertos.jpg"

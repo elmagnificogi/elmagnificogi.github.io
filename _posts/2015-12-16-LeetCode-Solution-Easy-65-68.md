@@ -2,6 +2,7 @@
 layout:     post
 title:      "LeetCode Solution(Easy.65-68)"
 subtitle:   "c/c++，python，for work"
+description: "LeetCode Solution(Easy.65-68)，c++、python、66.Rotate Array、The end。"
 date:       2015-12-16
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"

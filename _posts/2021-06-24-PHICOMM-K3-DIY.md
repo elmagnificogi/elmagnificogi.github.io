@@ -2,6 +2,7 @@
 layout:     post
 title:      "斐讯K3改散热"
 subtitle:   "PHICOMM，DIY"
+description: "斐讯K3改散热，升降桌 diy、PHICOMM、过热。"
 date:       2021-06-24
 update:     2023-10-08
 author:     "elmagnifico"

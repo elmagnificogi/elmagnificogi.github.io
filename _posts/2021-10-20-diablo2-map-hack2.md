@@ -2,6 +2,7 @@
 layout:     post
 title:      "我的暗黑2重置版地图插件"
 subtitle:   "maphack,hackmap,D2RAssist"
+description: "我的暗黑2重置版地图插件，d2rmh、d2r maphack 2026、暗黑破壞神2輔助程式、暗黑破壞神2重製版地圖全開、hackmap、D2RAssist。"
 date:       2021-10-20
 update:     2022-05-16
 author:     "elmagnifico"

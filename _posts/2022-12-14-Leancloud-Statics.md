@@ -2,6 +2,7 @@
 layout:     post
 title:      "博客增加文章点击统计和显示"
 subtitle:   "不蒜子、LeanCloud、谷歌翻译、动态效果"
+description: "博客增加文章点击统计和显示，不蒜子、LeanCloud、谷歌翻译、动态效果。"
 date:       2022-12-14
 update:     2023-03-27
 author:     "elmagnifico"

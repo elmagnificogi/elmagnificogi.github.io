@@ -2,6 +2,7 @@
 layout:     post
 title:      "RTOS对比"
 subtitle:   "操作系统"
+description: "RTOS对比，nuttx rtos、操作系统、Zephyr。"
 date:       2024-10-16
 update:     2024-12-20
 author:     "elmagnifico"

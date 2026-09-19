@@ -2,6 +2,7 @@
 layout:     post
 title:      "单片机跑分"
 subtitle:   "ST，GD，Coremark，DMIPS"
+description: "单片机跑分，ST、GD、Coremark、DMIPS。"
 date:       2021-07-31
 update:     2021-07-31
 author:     "elmagnifico"

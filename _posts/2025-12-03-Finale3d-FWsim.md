@@ -2,6 +2,7 @@
 layout:     post
 title:      "Finale 3D与FWsim 烟花设计软件"
 subtitle:   "灯光设计、舞美设计、烟花模拟"
+description: "Finale 3D与FWsim 烟花设计软件，3d圖片、fwsim crack、3d未来家、灯光设计、舞美设计。"
 date:       2025-12-04
 update:     2025-12-04
 author:     "elmagnifico"

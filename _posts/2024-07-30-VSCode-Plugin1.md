@@ -2,6 +2,7 @@
 layout:     post
 title:      "VS Code插件入门一"
 subtitle:   "plugin"
+description: "VS Code插件入门一，plugin、构建插件、准备。"
 date:       2024-07-30
 update:     2024-07-31
 author:     "elmagnifico"

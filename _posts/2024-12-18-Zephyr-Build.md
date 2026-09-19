@@ -2,6 +2,7 @@
 layout:     post
 title:      "Zephyr build 架构"
 subtitle:   "Kconfig、CMake、nRF SDK"
+description: "Zephyr build 架构，nuttx vs zephyr、zephyr vs nuttx、Kconfig、CMake。"
 date:       2024-12-20
 update:     2024-12-20
 author:     "elmagnifico"

@@ -2,6 +2,7 @@
 layout:     post
 title:      "Atom插件"
 subtitle:   "pdf,packages,view"
+description: "Atom插件，pdf、packages、view、Atom安装。"
 date:       2017-03-29
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"

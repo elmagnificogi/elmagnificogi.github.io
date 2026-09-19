@@ -2,6 +2,7 @@
 layout:     post
 title:      "Springboot @PathVariable注解导致的参数错误bug"
 subtitle:   "java，DataRecover"
+description: "Springboot @PathVariable注解导致的参数错误bug，java、DataRecover、出错代码、修复。"
 date:       2020-09-03
 author:     "elmagnifico"
 header-img: "img/springboot.jpg"

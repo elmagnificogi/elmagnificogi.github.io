@@ -2,6 +2,7 @@
 layout:     post
 title:      "暗黑2重置版相关软件与源码仓库"
 subtitle:   "Diablo 2 Resurrected,Github"
+description: "暗黑2重置版相关软件与源码仓库，casclib、Github、MOD。"
 date:       2022-01-10
 update:     2022-01-10
 author:     "elmagnifico"

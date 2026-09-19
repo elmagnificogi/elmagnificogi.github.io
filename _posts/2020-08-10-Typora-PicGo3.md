@@ -2,6 +2,7 @@
 layout:     post
 title:      "Typora配合PicGo（三）"
 subtitle:   "图床，wolai，我来"
+description: "Typora配合PicGo（三），图床、wolai、我来、Typora & PicGo。"
 date:       2020-08-10
 author:     "elmagnifico"
 header-img: "img/line-head-bg.jpg"

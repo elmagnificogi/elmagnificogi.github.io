@@ -2,6 +2,7 @@
 layout:     post
 title:      "Kconfig与CMake初步模块化工程2"
 subtitle:   "APM32,ST,CMakeLists,arm-none-eabi"
+description: "Kconfig与CMake初步模块化工程2，APM32、ST、CMakeLists、arm-none-eabi。"
 date:       2025-02-23
 update:     2025-02-23
 author:     "elmagnifico"

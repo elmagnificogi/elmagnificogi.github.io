@@ -2,6 +2,7 @@
 layout:     post
 title:      "Youtube 自动英文字幕"
 subtitle:   "GreasyFork,Tampermonkey,AutoSubtitles"
+description: "Youtube 自动英文字幕，GreasyFork、Tampermonkey、AutoSubtitles、Script。"
 date:       2019-03-27
 update:     2024-04-04
 author:     "elmagnifico"

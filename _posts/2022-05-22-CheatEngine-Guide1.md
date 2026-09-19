@@ -2,6 +2,7 @@
 layout:     post
 title:      "CheatEngine基础之找地址"
 subtitle:   "battle.net,d2r"
+description: "上次使用可能还是在小时候了，当时还玩过CheatEngine的小游戏，cheat engine search manager、cheat engine base address、cheat engine 找不到數值、cheat engine mcp、battle.net、d2r。"
 date:       2022-05-22
 update:     2023-04-17
 author:     "elmagnifico"

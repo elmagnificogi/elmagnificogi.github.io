@@ -2,6 +2,7 @@
 layout:     post
 title:      "LeetCode Solution(Easy.61-64)"
 subtitle:   "c/c++，python，for work"
+description: "LeetCode Solution(Easy.61-64)，c++、python、61.Count Primes、62.Summary Ranges。"
 date:       2015-12-16
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"

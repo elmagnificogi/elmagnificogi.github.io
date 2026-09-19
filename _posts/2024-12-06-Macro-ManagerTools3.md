@@ -2,6 +2,7 @@
 layout:     post
 title:      "配置管理工具之kconfig"
 subtitle:   "Kconfig、menuconfig、makefile、macro、nRF SDK"
+description: "配置管理工具之kconfig，menuconfig、makefile、macro、nRF SDK。"
 date:       2024-12-18
 update:     2024-12-18
 author:     "elmagnifico"

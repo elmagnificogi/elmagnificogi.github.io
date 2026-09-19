@@ -2,6 +2,7 @@
 layout:     post
 title:      "重庆游记"
 subtitle:   "我在重庆很想你"
+description: "重庆游记，我在重庆很想你、chongqing。"
 date:       2025-06-27
 update:     2025-06-27
 author:     "elmagnifico"

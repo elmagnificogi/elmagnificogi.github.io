@@ -2,6 +2,7 @@
 layout:     post
 title:      "项目管理之PingCode"
 subtitle:   "PingCode"
+description: "项目管理之PingCode，产品管理。"
 date:       2024-10-23
 update:     2024-10-30
 author:     "elmagnifico"

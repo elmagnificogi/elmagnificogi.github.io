@@ -2,6 +2,7 @@
 layout:     post
 title:      "懂车帝珠海赛道日与小米深圳总部参观"
 subtitle:   "金卡纳、叶政扬、PCCA、珠海、小米深圳总部、产品经理、小米大麻花"
+description: "懂车帝珠海赛道日与小米深圳总部参观，金卡纳、叶政扬、PCCA、产品经理。"
 date:       2025-11-23
 update:     2025-12-03
 author:     "elmagnifico"

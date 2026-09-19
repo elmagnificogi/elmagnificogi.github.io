@@ -2,6 +2,7 @@
 layout:     post
 title:      "回顾我的敏捷流开发"
 subtitle:   "Scrum of Scrums，Agile Development"
+description: "回顾我的敏捷流开发，Scrum of Scrums、Agile Development、何为敏捷、何时使用敏捷。"
 date:       2022-07-08
 update:     2024-08-20
 author:     "elmagnifico"

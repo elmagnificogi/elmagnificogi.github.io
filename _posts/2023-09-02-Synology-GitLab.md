@@ -2,6 +2,7 @@
 layout:     post
 title:      "群晖6.2.4 安装GitLab和硬件升级"
 subtitle:   "DS918+，Git，Docker，DSM6"
+description: "群晖6.2.4 安装GitLab和硬件升级，DS918+、Docker、DSM6、默认套件。"
 date:       2023-09-02
 update:     2023-09-09
 author:     "elmagnifico"

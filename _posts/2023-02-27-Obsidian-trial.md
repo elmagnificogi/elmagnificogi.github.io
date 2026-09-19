@@ -2,6 +2,7 @@
 layout:     post
 title:      "Obsidian踩坑"
 subtitle:   "格式,链接,主题"
+description: "Obsidian踩坑，obsidian 页面宽度、trilium notes vs obsidian、obsidian 宽度、格式、主题。"
 date:       2023-02-27
 update:     2023-02-28
 author:     "elmagnifico"

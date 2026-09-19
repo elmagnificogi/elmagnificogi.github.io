@@ -2,6 +2,7 @@
 layout:     post
 title:      "暗黑2重制版Diablo Clone Kill Event募集成功"
 subtitle:   "maphack,hackmap,D2RAssist"
+description: "暗黑2重制版Diablo Clone Kill Event募集成功，cyclonessh、maphack、hackmap。"
 date:       2021-10-31
 update:     2021-10-31
 author:     "elmagnifico"

@@ -2,6 +2,7 @@
 layout:     post
 title:      "小米珠海官方赛道日与Ultra年度之夜"
 subtitle:   "小米su7 Ultra、模拟器大赛、珠海赛道"
+description: "小米珠海官方赛道日与Ultra年度之夜，小米su7 Ultra、模拟器大赛、珠海赛道、小米官方赛道日。"
 date:       2025-12-29
 update:     2026-01-05
 author:     "elmagnifico"

@@ -2,6 +2,7 @@
 layout:     post
 title:      "Giffgaff注册ChatGPT,Nobepay支付"
 subtitle:   "英国，虚拟电话卡，接码，ESIM，短信转发，USB直供电"
+description: "Giffgaff注册ChatGPT,Nobepay支付，giffgaff chatgpt、giffgaff 卡 用途 英国手机号 chatgpt 订阅 虚拟卡、giffgaff 可以 注册 什么、giffgaff平替、虚拟电话卡、接码。"
 date:       2023-03-27
 update:     2023-12-21
 author:     "elmagnifico"

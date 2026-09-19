@@ -2,6 +2,7 @@
 layout:     post
 title:      "Python PDF to JPEG"
 subtitle:   "Wand, PIL, PyPDF2"
+description: "Python PDF to JPEG，python convert pdf to jpg、Wand、PIL。"
 date:       2017-07-31
 author:     "elmagnifico"
 header-img: "img/python-head-bg.jpg"

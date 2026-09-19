@@ -2,6 +2,7 @@
 layout:     post
 title:      "CodeBind Docs插件"
 subtitle:   "AI、Agent、CBD"
+description: "CodeBind Docs插件，AI、Agent、CBD、为什么要做。"
 date:       2026-07-20
 update:     2026-07-20
 author:     "elmagnifico"

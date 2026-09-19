@@ -2,6 +2,7 @@
 layout:     post
 title:      "2020游戏短评"
 subtitle:   "鬼谷八荒，戴森球"
+description: "2020游戏短评，鬼谷八荒、戴森球、2020年国产单机、枪火重生。"
 date:       2021-02-07
 author:     "elmagnifico"
 header-img: "img/play.jpg"

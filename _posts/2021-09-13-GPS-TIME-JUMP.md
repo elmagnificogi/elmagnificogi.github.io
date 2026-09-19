@@ -2,6 +2,7 @@
 layout:     post
 title:      "GPS 时间中的那些坑"
 subtitle:   "u-blox，iTow，utc"
+description: "GPS 时间中的那些坑，u-blox、iTow、utc、问题起源。"
 date:       2021-09-17
 author:     "elmagnifico"
 header-img: "img/bg1.jpg"

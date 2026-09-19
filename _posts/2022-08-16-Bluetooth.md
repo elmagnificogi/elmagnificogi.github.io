@@ -2,6 +2,7 @@
 layout:     post
 title:      "蓝牙学习"
 subtitle:   "Bluetooth"
+description: "蓝牙学习，Bluetooth、历史、架构、HCI架构。"
 date:       2022-08-16
 update:     2022-08-24
 author:     "elmagnifico"

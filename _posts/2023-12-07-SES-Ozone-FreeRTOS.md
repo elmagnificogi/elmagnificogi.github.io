@@ -2,6 +2,7 @@
 layout:     post
 title:      "SES使用Ozone调试FreeRTOS"
 subtitle:   "STM32"
+description: "SES使用Ozone调试FreeRTOS，chibios vs freertos、nuttx vs freertos、freertos ssh、freertos emulator、STM32、单步失效。"
 date:       2023-12-07
 update:     2023-12-07
 author:     "elmagnifico"

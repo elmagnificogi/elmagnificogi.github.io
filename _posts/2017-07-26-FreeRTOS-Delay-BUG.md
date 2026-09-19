@@ -2,6 +2,7 @@
 layout:     post
 title:      "FreeRTOS Delay Bug"
 subtitle:   "STM32，FreeRTOS"
+description: "FreeRTOS Delay Bug，STM32、Analysis、Modification。"
 date:       2017-07-26
 author:     "elmagnifico"
 header-img: "img/Embedded-head-bg.jpg"

@@ -2,6 +2,7 @@
 layout:     post
 title:      "ZeroTier使用自建Moon服务器加速"
 subtitle:   "p2p，nat"
+description: "ZeroTier使用自建Moon服务器加速，zerotier moon搭建、p2p、nat。"
 date:       2023-02-04
 update:     2024-07-08
 author:     "elmagnifico"

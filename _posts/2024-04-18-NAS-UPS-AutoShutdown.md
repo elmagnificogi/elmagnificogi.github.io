@@ -3,6 +3,7 @@
 layout:     post
 title:      "山特UPS控制群晖关机"
 subtitle:   "C6K，关机，SSH"
+description: "山特UPS控制群晖关机，C6K、SSH、群晖开启SSH、winpower。"
 date:       2024-04-18
 update:     2024-04-18
 author:     "elmagnifico"

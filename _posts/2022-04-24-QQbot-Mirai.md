@@ -2,6 +2,7 @@
 layout:     post
 title:      "QQ机器人Mirai及其相关框架"
 subtitle:   "nonebot2，YiriMirai"
+description: "一开始没搞清楚现在的qqbot mirai相关的是怎么玩的，先说一下大概的，asumirai usj、nonebot2、YiriMirai。"
 date:       2022-04-24
 update:     2022-04-27
 author:     "elmagnifico"

@@ -2,6 +2,7 @@
 layout:     post
 title:      "Ubuntu安装OpenCV,Python2.7,测试APF"
 subtitle:   "pip,软件源,xlrd"
+description: "Ubuntu安装OpenCV,Python2.7,测试APF，pip、软件源、xlrd、环境。"
 date:       2021-04-23
 update:     2021-04-27
 author:     "elmagnifico"

@@ -2,7 +2,7 @@
 layout:     post
 title:      "Netch 自建游戏加速器"
 subtitle:   "ss，iplc，v2ray"
-description: "Windows 开源游戏加速器 Netch：进程代理或 TUN，可接 ss、v2ray，用来替代已经停更的 SSTap。现在 V2rayN、Clash 也能做同样的事，坑少一些。"
+description: "Netch 自建游戏加速器，netch 2.0、netch 加速器、ss、iplc。"
 date:       2022-01-19
 update:     2024-12-30
 author:     "elmagnifico"

@@ -2,6 +2,7 @@
 layout:     post
 title:      "Vim 指令"
 subtitle:   "Linux"
+description: "Vim 指令，paldefender 指令、Linux、增删改查。"
 date:       2017-05-26
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"

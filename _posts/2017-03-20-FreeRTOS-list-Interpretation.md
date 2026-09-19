@@ -2,6 +2,7 @@
 layout:     post
 title:      "FreeRTOS中list源文件分析"
 subtitle:   "嵌入式，FreeRTOS，list"
+description: "FreeRTOS中list源文件分析，嵌入式、注释、源码。"
 date:       2017-03-20
 author:     "elmagnifico"
 header-img: "img/Embedded-head-bg.jpg"

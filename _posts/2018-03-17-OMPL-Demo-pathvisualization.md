@@ -2,6 +2,7 @@
 layout:     post
 title:      "OMPL 路径输出"
 subtitle:   "app,visualization"
+description: "OMPL 路径输出，app、visualization、pathvisualization。"
 date:       2018-03-17
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"

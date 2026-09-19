@@ -2,6 +2,7 @@
 layout:     post
 title:      "Tracealyzer Crack"
 subtitle:   "FreeRTOS，Trace"
+description: "最近要用到Tracealyzer来分析FreeRTOS，又刚好看到了新手破解文，所以尝试了一下，几经折腾总算是成功了，前提、准备工作。"
 date:       2020-03-13
 author:     "elmagnifico"
 header-img: "img/Embedded-head-bg.jpg"

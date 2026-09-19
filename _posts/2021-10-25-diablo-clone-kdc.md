@@ -2,6 +2,7 @@
 layout:     post
 title:      "暗黑2重制版Diablo Clone Kill Event募集准备"
 subtitle:   "ip,tcpview,kdc"
+description: "暗黑2重制版Diablo Clone Kill Event募集准备，cyclonessh、ip、tcpview。"
 date:       2021-10-25
 update:     2021-10-31
 author:     "elmagnifico"

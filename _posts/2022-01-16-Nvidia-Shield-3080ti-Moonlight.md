@@ -2,6 +2,7 @@
 layout:     post
 title:      "NVIDIA Shield 消失的解决办法和Moonlight串流"
 subtitle:   "3080ti，Geforce experience"
+description: "之前有用Moonlight串口pc的游戏到公司电脑，然后突然有一天串流就不可用了，NVIDIA Shield 就消失了，怎么都开不起来，moonlight nvidia shield、3080ti、Geforce experience。"
 date:       2022-01-16
 update:     2023-03-14
 author:     "elmagnifico"

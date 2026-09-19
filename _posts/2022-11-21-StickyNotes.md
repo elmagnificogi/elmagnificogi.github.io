@@ -2,6 +2,7 @@
 layout:     post
 title:      "解决便笺及其他UWP无法同步问题"
 subtitle:   "Loopback,Sticky Notes,v2ray,uu"
+description: "解决便笺及其他UWP无法同步问题，Loopback、Sticky Notes、v2ray、uu。"
 date:       2022-11-21
 update:     2024-02-18
 author:     "elmagnifico"

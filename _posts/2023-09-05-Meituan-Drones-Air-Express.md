@@ -2,6 +2,7 @@
 layout:     post
 title:      "美团无人机技术沙龙简评"
 subtitle:   "智能感知，导航定位，数字孪生"
+description: "美团无人机技术沙龙简评，无人机是什么、无人机的、无人机结构、无人机的优缺点、智能感知、导航定位。"
 date:       2023-09-06
 update:     2023-09-06
 author:     "elmagnifico"

@@ -2,6 +2,7 @@
 layout:     post
 title:      "Sunshine替代NVIDIA Shiled串流"
 subtitle:   "moonlight"
+description: "Sunshine替代NVIDIA Shiled串流，sunshine shield、linux moonlight sunshine。"
 date:       2023-03-14
 update:     2023-03-14
 author:     "elmagnifico"

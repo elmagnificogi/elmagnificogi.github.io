@@ -2,6 +2,7 @@
 layout:     post
 title:      "Maya workspaceControl造成的崩溃"
 subtitle:   "崩溃，ui刷新"
+description: "Maya workspaceControl造成的崩溃，ui刷新、现象、崩溃代码、解决。"
 date:       2021-01-25
 update:     2021-01-26
 author:     "elmagnifico"

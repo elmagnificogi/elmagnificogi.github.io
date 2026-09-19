@@ -2,6 +2,7 @@
 layout:     post
 title:      "LeetCode Solution(Medium.5-8)"
 subtitle:   "c/c++，python，for work"
+description: "LeetCode Solution(Medium.5-8)，c++、python、7.Missing Number。"
 date:       2015-12-18
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"

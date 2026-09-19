@@ -2,6 +2,7 @@
 layout:     post
 title:      "SD ComfyUI部署"
 subtitle:   "Stable Diffusion,Python 虚拟环境管理工具,uv,annaconda"
+description: "顺便把SD ComfyUI搭建一下，comfyui uv、comfyui uv install、uv comfyui、install comfyui with uv、Stable Diffusion、Python 虚拟环境管理工具。"
 date:       2025-05-10
 update:     2025-05-10
 author:     "elmagnifico"

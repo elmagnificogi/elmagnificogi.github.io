@@ -2,6 +2,7 @@
 layout:     post
 title:      "ERP是如何管理企业的"
 subtitle:   "DAM，SCUM，ERP，OA"
+description: "ERP是如何管理企业的，DAM、SCUM、OA、财务。"
 date:       2023-09-14
 update:     2023-09-19
 author:     "elmagnifico"

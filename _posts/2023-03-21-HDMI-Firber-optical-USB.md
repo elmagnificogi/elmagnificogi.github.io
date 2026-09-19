@@ -2,6 +2,7 @@
 layout:     post
 title:      "无线HDMI还是有线HDMI，亦或是KVM?"
 subtitle:   "HDBaseT，雷电4，毫米波，光纤HDMI，4线，8线，有源USB延迟线"
+description: "无线HDMI还是有线HDMI，亦或是KVM?，還是不行、HDBaseT、雷电4。"
 date:       2023-03-21
 update:     2024-03-01
 author:     "elmagnifico"

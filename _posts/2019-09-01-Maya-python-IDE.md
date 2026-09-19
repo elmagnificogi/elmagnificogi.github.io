@@ -2,6 +2,7 @@
 layout:     post
 title:      "maya python脚本编辑器"
 subtitle:   "IDE，Script editor"
+description: "maya python脚本编辑器，maya ide、Script editor、python编辑器。"
 date:       2019-09-01
 update:     2021-05-07
 author:     "elmagnifico"

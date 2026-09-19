@@ -2,6 +2,7 @@
 layout:     post
 title:      "使用SEGGER Embedded Studio开发STM32"
 subtitle:   "STM32，IDE"
+description: "使用SEGGER Embedded Studio开发STM32，embedded visual studio code、segger embedded studio stm32、IDE、激活。"
 date:       2022-03-16
 update:     2022-03-22
 author:     "elmagnifico"

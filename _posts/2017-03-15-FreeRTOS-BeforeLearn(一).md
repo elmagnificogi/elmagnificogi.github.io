@@ -2,6 +2,7 @@
 layout:     post
 title:      "FreeRTOS学习准备(一)"
 subtitle:   "嵌入式，FreeRTOS，学习"
+description: "FreeRTOS学习准备(一)，嵌入式、操作系统、嵌入式操作系统、beforelearn(一)。"
 date:       2017-03-15
 author:     "elmagnifico"
 header-img: "img/Embedded-head-bg.jpg"

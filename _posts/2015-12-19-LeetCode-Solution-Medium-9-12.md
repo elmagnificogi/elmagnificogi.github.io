@@ -2,6 +2,7 @@
 layout:     post
 title:      "LeetCode Solution(Medium.9-12)"
 subtitle:   "c/c++，python，for work"
+description: "LeetCode Solution(Medium.9-12)，c++、python。"
 date:       2015-12-19
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"

@@ -2,6 +2,7 @@
 layout:     post
 title:      "基于企业微信搭建一个ChatGPT应用"
 subtitle:   "微信、railway"
+description: "基于企业微信搭建一个ChatGPT应用，railway、chatgpt-on-wechat、使用railway搭建、使用Docker部署。"
 date:       2023-05-15
 update:     2023-12-02
 author:     "elmagnifico"

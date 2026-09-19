@@ -2,6 +2,7 @@
 layout:     post
 title:      "Python in VS2017并且使用Pyinstaller打包成exe"
 subtitle:   "Anaconda,VS2017,Pyinstaller"
+description: "Python in VS2017并且使用Pyinstaller打包成exe，Anaconda、Python Version、插件管理。"
 date:       2017-07-31
 author:     "elmagnifico"
 header-img: "img/python-head-bg.jpg"

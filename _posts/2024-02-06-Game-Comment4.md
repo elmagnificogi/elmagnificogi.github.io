@@ -2,6 +2,7 @@
 layout:     post
 title:      "2023游戏短评"
 subtitle:   "幻兽帕鲁，清零计划2：天启派对，Grounded，绝世好武功"
+description: "2023游戏短评，幻兽帕鲁、清零计划2：天启派对、Grounded、绝世好武功。"
 date:       2024-02-05
 update:     2024-02-16
 author:     "elmagnifico"

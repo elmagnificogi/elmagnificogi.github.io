@@ -2,6 +2,7 @@
 layout:     post
 title:      "搭建GitHub加速站"
 subtitle:   "proxy，Cloudflare，Workers"
+description: "搭建GitHub加速站，hunshcn/gh-proxy、naiveproxy 被 封、Cloudflare、Workers。"
 date:       2022-01-27
 update:     2022-01-27
 author:     "elmagnifico"

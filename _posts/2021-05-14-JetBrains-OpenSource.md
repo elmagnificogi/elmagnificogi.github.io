@@ -2,6 +2,7 @@
 layout:     post
 title:      "开源项目免费获取JetBrains全家桶"
 subtitle:   "github,license"
+description: "开源项目免费获取JetBrains全家桶，github、license、获取免费license、失败。"
 date:       2021-05-14
 update:     2022-05-21
 author:     "elmagnifico"

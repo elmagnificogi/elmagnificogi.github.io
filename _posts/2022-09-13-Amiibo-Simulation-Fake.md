@@ -2,6 +2,7 @@
 layout:     post
 title:      "Amiibo Fake"
 subtitle:   "Nintendo Switch,EasyCon"
+description: "Amiibo Fake，fake amiibo、amiibo emulator、amiibo hack device、Nintendo Switch、EasyCon。"
 date:       2022-09-13
 update:     2022-09-19
 author:     "elmagnifico"

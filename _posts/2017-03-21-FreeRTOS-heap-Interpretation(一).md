@@ -2,6 +2,7 @@
 layout:     post
 title:      "FreeRTOS中heap源文件分析(一)"
 subtitle:   "嵌入式，FreeRTOS，heap"
+description: "FreeRTOS中heap源文件分析(一)，\"xheaphasbeeninitialised\" \"heap_2.c\"、freertos configtotal_heap_size、xportgetfreeheapsize()、freertos heap4、嵌入式、heap介绍。"
 date:       2017-03-21
 author:     "elmagnifico"
 header-img: "img/freertos.jpg"

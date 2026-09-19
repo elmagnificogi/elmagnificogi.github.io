@@ -2,6 +2,7 @@
 layout:     post
 title:      "嵌入式内存溢出检测"
 subtitle:   "Stack Overflow，踩内存"
+description: "嵌入式内存溢出检测，Stack Overflow、踩内存、笨方法、canary。"
 date:       2025-04-10
 update:     2025-04-10
 author:     "elmagnifico"

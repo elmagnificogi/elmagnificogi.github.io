@@ -2,6 +2,7 @@
 layout:     post
 title:      "OMPL 2D刚体规划Demo"
 subtitle:   "RRT,Rigidbody,SE2"
+description: "OMPL 2D刚体规划Demo，RRT、Rigidbody、SE2、source code。"
 date:       2018-03-16
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"

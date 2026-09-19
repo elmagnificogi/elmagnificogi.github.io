@@ -2,6 +2,7 @@
 layout:     post
 title:      "Vim 插件"
 subtitle:   "Linux"
+description: "Vim 中有些插件非常好用，这里记录一些我正在用的，以及当前配置，Linux、Vundle、YouCompleteMe。"
 date:       2017-07-26
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"

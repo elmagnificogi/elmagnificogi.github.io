@@ -2,6 +2,7 @@
 layout:     post
 title:      "根据IP获取地区API"
 subtitle:   "淘宝"
+description: "根据IP获取地区API，淘宝、淘宝API、IP地理位置库、其他IP库。"
 date:       2020-09-02
 author:     "elmagnifico"
 header-img: "img/api-bg.jpg"

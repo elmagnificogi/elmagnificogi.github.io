@@ -2,6 +2,7 @@
 layout:     post
 title:      "Chirp CH201超声波测距从入门到放弃"
 subtitle:   "SonicLib,tof"
+description: "Chirp CH201超声波测距从入门到放弃，SonicLib、tof、名词、移植。"
 date:       2022-01-05
 update:     2022-01-05
 author:     "elmagnifico"

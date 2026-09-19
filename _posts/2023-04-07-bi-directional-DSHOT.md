@@ -2,6 +2,7 @@
 layout:     post
 title:      "双向DSHOT with RPM feedback全指南"
 subtitle:   "Bidirectional DSHOT，单线DSHOT"
+description: "双向DSHOT with RPM feedback全指南，dshot 協議、dshot protocol、bi-directional dshot、代码分析、Run-length limited。"
 date:       2023-04-07
 update:     2026-01-30
 author:     "elmagnifico"

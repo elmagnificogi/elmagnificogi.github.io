@@ -2,6 +2,7 @@
 layout:     post
 title:      "新装显卡后AE、PR、MAYA、C4D等无法启动"
 subtitle:   "OpenCL"
+description: "新装显卡后AE、PR、MAYA、C4D等无法启动，OpenCL、禁用OpenCL、aeprmayac4d。"
 date:       2019-03-21
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"

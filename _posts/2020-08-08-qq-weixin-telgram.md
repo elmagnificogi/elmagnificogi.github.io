@@ -2,6 +2,7 @@
 layout:     post
 title:      "微信、QQ、Telegram对比"
 subtitle:   "work，life"
+description: "微信、QQ、Telegram对比，qq telegram、telegram qq、qqfile telegram、qq bot telegram、work、life。"
 date:       2020-08-08
 author:     "elmagnifico"
 header-img: "img/pen-head-bg.jpg"

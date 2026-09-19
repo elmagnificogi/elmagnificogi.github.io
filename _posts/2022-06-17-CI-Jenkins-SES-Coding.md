@@ -2,6 +2,7 @@
 layout:     post
 title:      "Jenkins搭建SES嵌入式CI/CD"
 subtitle:   "自动化编译"
+description: "Jenkins搭建SES嵌入式CI/CD，自动化编译、搭建环境、release、coding。"
 date:       2022-06-17
 update:     2023-04-29
 author:     "elmagnifico"

@@ -2,6 +2,7 @@
 layout:     post
 title:      "网络流，最大流"
 subtitle:   "增广路，EK"
+description: "网络流，最大流，增广路、EK、基础概念、network。"
 date:       2018-01-25
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"

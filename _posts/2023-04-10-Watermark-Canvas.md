@@ -2,6 +2,7 @@
 layout:     post
 title:      "给Blog增加水印"
 subtitle:   "Canvas，js"
+description: "给Blog增加水印，Canvas、js、增加到Blog页面、watermark。"
 date:       2023-04-10
 update:     2023-04-10
 author:     "elmagnifico"

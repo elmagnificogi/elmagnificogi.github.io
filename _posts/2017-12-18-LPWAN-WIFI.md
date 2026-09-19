@@ -2,6 +2,7 @@
 layout:     post
 title:      "IoT-WIFI"
 subtitle:   "无线物联网，WLAN，近距离"
+description: "IoT-WIFI，iot 無線lan、无线物联网、WLAN。"
 date:       2017-12-18
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"

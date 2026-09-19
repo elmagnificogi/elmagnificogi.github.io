@@ -2,6 +2,7 @@
 layout:     post
 title:      "MT793x编译与框架指南"
 subtitle:   "build,env"
+description: "MT793x编译与框架指南，build、env、MT793x代码框架、SDK。"
 date:       2022-10-31
 update:     2022-10-31
 author:     "elmagnifico"

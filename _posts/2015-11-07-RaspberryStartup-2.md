@@ -2,6 +2,7 @@
 layout:     post
 title:      "树莓派启动那些事（二）"
 subtitle:   "超频，ondemand，多机配置"
+description: "树莓派启动那些事（二），超频、ondemand、多机配置、环境。"
 date:       2015-11-07
 author:     "elmagnifico"
 header-img: "img/Raspberrypi-head-bg.jpg"

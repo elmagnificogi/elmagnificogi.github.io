@@ -2,6 +2,7 @@
 layout:     post
 title:      "LeetCode Solution(Easy.25-28)"
 subtitle:   "c/c++，python，for work"
+description: "LeetCode Solution(Easy.25-28)，c++、python、25.Remove Element、28.House Robber。"
 date:       2015-12-11
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"

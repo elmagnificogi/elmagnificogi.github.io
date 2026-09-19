@@ -2,6 +2,7 @@
 layout:     post
 title:      "Tracealyzer指南和注意事项"
 subtitle:   "FreeRTOS，Trace，setup"
+description: "Tracealyzer指南和注意事项，FreeRTOS、setup、环境、内存不够。"
 date:       2020-03-14
 author:     "elmagnifico"
 header-img: "img/Embedded-head-bg.jpg"

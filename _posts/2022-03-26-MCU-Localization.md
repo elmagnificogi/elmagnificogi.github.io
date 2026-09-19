@@ -2,6 +2,7 @@
 layout:     post
 title:      "STM32替代-MCU国产化-厂商介绍"
 subtitle:   "STM32，单片机"
+description: "STM32替代-MCU国产化-厂商介绍，国产mcu替代、单片机、国内。"
 date:       2022-03-26
 update:     2022-11-07
 author:     "elmagnifico"

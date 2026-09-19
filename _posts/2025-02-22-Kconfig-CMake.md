@@ -2,6 +2,7 @@
 layout:     post
 title:      "Kconfig与CMake初步模块化工程"
 subtitle:   "APM32,ST,CMakeLists,arm-none-eabi"
+description: "使用CMkae+Kconfig最小化的创建一个可以模块化的工程，可以适用于大部分MCU类型的工程，并且有一定程度的扩展性，APM32、ST、CMakeLists、arm-none-eabi。"
 date:       2025-02-22
 update:     2025-02-23
 author:     "elmagnifico"

@@ -2,6 +2,7 @@
 layout:     post
 title:      "STM8开发环境搭建"
 subtitle:   "STVD，Cosmic"
+description: "STM8开发环境搭建，stvd、st visual programmer stm8、stvd stm8 download、stvd download、Cosmic、新建工程。"
 date:       2022-02-21
 update:     2022-11-27
 author:     "elmagnifico"

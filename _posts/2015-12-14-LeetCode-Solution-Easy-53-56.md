@@ -2,6 +2,7 @@
 layout:     post
 title:      "LeetCode Solution(Easy.53-56)"
 subtitle:   "c/c++，python，for work"
+description: "LeetCode Solution(Easy.53-56)，c++、python、53.Add Binary。"
 date:       2015-12-14
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"

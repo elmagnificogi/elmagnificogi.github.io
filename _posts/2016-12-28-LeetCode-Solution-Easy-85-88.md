@@ -2,6 +2,7 @@
 layout:     post
 title:      "LeetCode Solution(Easy.85-88)"
 subtitle:   "c/c++，python，for work"
+description: "LeetCode Solution(Easy.85-88)，c++、python、86.Add Strings。"
 date:       2016-12-28
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"

@@ -2,6 +2,7 @@
 layout:     post
 title:      "LeetCode Solution(Easy.5-8)"
 subtitle:   "c/c++，python，for work"
+description: "LeetCode Solution(Easy.5-8)，c++、python、5.Move Zeroes、6.Same Tree。"
 date:       2015-12-5
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"

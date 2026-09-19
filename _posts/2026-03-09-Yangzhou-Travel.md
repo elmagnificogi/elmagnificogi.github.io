@@ -2,6 +2,7 @@
 layout:     post
 title:      "烟花三月下扬州"
 subtitle:   "瘦西湖、园林、柳岸垂荫"
+description: "烟花三月下扬州，扬州烟花三月的天气、瘦西湖、园林。"
 date:       2026-03-09
 update:     2026-03-09
 author:     "elmagnifico"

@@ -2,6 +2,7 @@
 layout:     post
 title:      "Maya 环境自动重配置"
 subtitle:   "python"
+description: "Maya 环境自动重配置，python、默认配置目录、maya\\\\2017、zhCN。"
 date:       2020-06-11
 author:     "elmagnifico"
 header-img: "img/line-head-bg.jpg"

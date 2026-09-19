@@ -2,6 +2,7 @@
 layout:     post
 title:      "LeetCode Solution(Easy.77-80)"
 subtitle:   "c/c++，python，for work"
+description: "LeetCode Solution(Easy.77-80)，c++、python、77.Ransom Note。"
 date:       2016-12-26
 author:     "elmagnifico"
 header-img: "img/git-head-bg.jpg"

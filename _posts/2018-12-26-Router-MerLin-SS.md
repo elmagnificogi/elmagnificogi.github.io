@@ -2,6 +2,7 @@
 layout:     post
 title:      "MIPSEL架构-梅林固件中小宝软件中心的shadowsocks"
 subtitle:   "MerLin,Asus RT-AC66u"
+description: "MIPSEL架构-梅林固件中小宝软件中心的shadowsocks，rt-ac66u b1、MerLin、Asus RT-AC66u。"
 date:       2018-12-26
 author:     "elmagnifico"
 header-img: "img/python-head-bg.jpg"

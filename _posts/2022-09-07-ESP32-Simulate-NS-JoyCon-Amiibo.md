@@ -2,6 +2,7 @@
 layout:     post
 title:      "ESP32模拟JoyCon和Pro，兼容Amiibo"
 subtitle:   "EasyCon,joycontrol,nxbt"
+description: "ESP32模拟JoyCon和Pro，兼容Amiibo，esp32 joycon、esp32 amiibo、esp32 amiibo emulator、joycontrol、EasyCon、nxbt。"
 date:       2022-09-07
 update:     2022-09-09
 author:     "elmagnifico"

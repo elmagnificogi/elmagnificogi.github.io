@@ -2,6 +2,7 @@
 layout:     post
 title:      "太吾绘卷短评"
 subtitle:   "RPG,沙盒"
+description: "太吾绘卷短评，RPG、沙盒、4年前EA评价、新版短评。"
 date:       2022-09-26
 update:     2022-09-26
 author:     "elmagnifico"

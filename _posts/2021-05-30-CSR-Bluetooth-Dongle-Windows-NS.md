@@ -2,6 +2,7 @@
 layout:     post
 title:      "CSR蓝牙适配器在windows上模拟NS手柄"
 subtitle:   "controller,bluetooth dongle"
+description: "CSR蓝牙适配器在windows上模拟NS手柄，nx macro controller、nx macro controller bluetooth、bluetooth dongle、设备需求。"
 date:       2021-05-30
 update:     2021-05-30
 author:     "elmagnifico"

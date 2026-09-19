@@ -2,6 +2,7 @@
 layout:     post
 title:      "凸包与凹包求边界轮廓"
 subtitle:   "滚球法,alpha shape,Delaunay三角化"
+description: "凸包与凹包求边界轮廓，恰有 2013 个绿点 凸包 2022 个点、2013个绿点 凸包的顶点 2022个点、\"恰有2013个绿点\" 凸包、滚球法、alpha shape。"
 date:       2021-05-18
 update:     2021-05-18
 author:     "elmagnifico"

@@ -2,6 +2,7 @@
 layout:     post
 title:      "RouterOS的一些基础配置指南"
 subtitle:   "CAPsMAN,NStream,Bridge,Mikrotik,Roaming"
+description: "RouterOS的一些基础配置指南，CAPsMAN、NStream、Bridge、Mikrotik。"
 date:       2023-08-30
 update:     2024-05-07
 author:     "elmagnifico"

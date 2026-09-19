@@ -2,6 +2,7 @@
 layout:     post
 title:      "技术？管理？"
 subtitle:   "选择、全栈、转型、产品"
+description: "技术？管理，选择、全栈、转型、产品。"
 date:       2025-10-28
 update:     2025-10-28
 author:     "elmagnifico"

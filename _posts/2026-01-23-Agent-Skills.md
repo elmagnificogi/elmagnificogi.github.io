@@ -2,6 +2,7 @@
 layout:     post
 title:      "Agent Skills实践"
 subtitle:   "Cursor、MCP、AI"
+description: "最近Skills稍微有点火，哪哪都是在讨论，Cursor、MCP、AI、使用时机。"
 date:       2026-01-23
 update:     2026-01-23
 author:     "elmagnifico"
