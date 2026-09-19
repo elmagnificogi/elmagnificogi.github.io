@@ -547,11 +547,12 @@ pre code {
 
 .post-container .related-posts {
   clear: both;
-  margin: 36px 0 8px
+  margin: 36px 0 24px
 }
 
 .post-container .related-posts h5 {
-  margin: 0 0 12px
+  margin: 0 0 12px;
+  scroll-margin-top: 80px
 }
 
 .post-container .related-posts ul {

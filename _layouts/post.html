@@ -81,6 +81,8 @@ layout: default
 
                 <hr style="visibility: hidden;">
 
+                {% include related-posts.html %}
+
                 <ul class="pager">
                     {% if page.previous.url %}
                     <li class="previous">
@@ -99,8 +101,6 @@ layout: default
                     </li>
                     {% endif %}
                 </ul>
-
-                {% include related-posts.html %}
 
                 {% if site.disqus_username %}
                 <!-- disqus 评论框 start -->
@@ -229,7 +229,7 @@ layout: default
           placement: 'right',
           icon: '#'
         };
-        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5').remove('.related-posts h5');
     })
 </script>
 <style>
