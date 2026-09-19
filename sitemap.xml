@@ -3,19 +3,37 @@ layout: null
 sitemap: false
 ---
 <?xml version="1.0" encoding="UTF-8"?>
+{% assign today = site.time | date: "%Y-%m-%d" %}
+{% assign homepage_lastmod = "" %}
+{% for post in site.posts %}
+  {% assign post_day = post.date | date: "%Y-%m-%d" %}
+  {% if homepage_lastmod == "" and post_day <= today %}
+    {% if post.update %}
+      {% assign homepage_lastmod = post.update | date: "%Y-%m-%d" %}
+    {% else %}
+      {% assign homepage_lastmod = post_day %}
+    {% endif %}
+  {% endif %}
+{% endfor %}
+{% if homepage_lastmod == "" %}
+  {% assign homepage_lastmod = today %}
+{% endif %}
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>{{ site.url }}{{ site.baseurl }}/</loc>
-    <lastmod>{{ site.posts.first.date | date: "%Y-%m-%d" }}</lastmod>
+    <lastmod>{{ homepage_lastmod }}</lastmod>
   </url>
 {% for page in site.pages %}{% if page.sitemap != false and page.layout %}{% assign loc = page.url | replace: "index.html", "" %}{% if loc != "/" and loc != "/404.html" and loc != "/offline.html" %}{% unless loc contains ".xml" or loc contains ".txt" %}
   <url>
     <loc>{{ loc | prepend: site.baseurl | prepend: site.url | xml_escape }}</loc>
   </url>{% endunless %}{% endif %}{% endif %}{% endfor %}
 {% for post in site.posts %}
+{% assign post_day = post.date | date: "%Y-%m-%d" %}
+{% if post_day <= today %}
   <url>
     <loc>{{ post.url | prepend: site.baseurl | prepend: site.url | xml_escape }}</loc>
     <lastmod>{% if post.update %}{{ post.update | date: "%Y-%m-%d" }}{% else %}{{ post.date | date: "%Y-%m-%d" }}{% endif %}</lastmod>
   </url>
+{% endif %}
 {% endfor %}
 </urlset>
