@@ -6,7 +6,7 @@ description: "VSC/Cursor插件上架，openvsx cursor、VS Code、Open VSX。"
 date:       2026-07-21
 update:     2026-07-30
 author:     "elmagnifico"
-header-img: "img/cap-head-bg.jpg"
+header-img: "img/head-2026-07-21.jpg"
 catalog:    true
 mermaid:    false
 tobecontinued: false

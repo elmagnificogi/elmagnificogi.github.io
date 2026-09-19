@@ -6,7 +6,7 @@ description: "CodeBind Docs插件，AI、Agent、CBD、为什么要做。"
 date:       2026-07-20
 update:     2026-07-20
 author:     "elmagnifico"
-header-img: "img/blackboard.jpg"
+header-img: "img/head-2026-07-20.jpg"
 catalog:    true
 mermaid:    false
 tobecontinued: false

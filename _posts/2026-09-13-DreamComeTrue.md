@@ -6,7 +6,7 @@ description: "有点无语，Dream、dreamcometrue。"
 date:       2026-09-13
 update:     2026-09-13
 author:     "elmagnifico"
-header-img: "img/Embedded-head-bg.jpg"
+header-img: "img/head-2026-09-13.jpg"
 catalog:    true
 mermaid:    false
 tobecontinued: false

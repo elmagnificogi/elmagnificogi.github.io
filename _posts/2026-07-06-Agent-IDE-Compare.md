@@ -6,7 +6,7 @@ description: "Cursor、Claude、CodeX深度体验、对比，cursor和codex、co
 date:       2026-07-30
 update:     2026-09-14
 author:     "elmagnifico"
-header-img: "img/cap-head-bg2.jpg"
+header-img: "img/head-2026-07-06.jpg"
 catalog:    true
 mermaid:    false
 tobecontinued: false

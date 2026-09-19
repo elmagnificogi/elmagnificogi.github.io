@@ -6,7 +6,7 @@ description: "天津自驾游，V1国际赛车场、张园、演出、相声。"
 date:       2026-05-19
 update:     2026-05-19
 author:     "elmagnifico"
-header-img: "img/balance.jpg"
+header-img: "img/head-2026-05-18.jpg"
 catalog:    true
 tobecontinued: false
 travel_route: tianjin

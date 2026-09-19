@@ -6,7 +6,7 @@ description: "西双版纳/海南自驾游-计划版，趣兜风、景洪、春�
 date:       2026-02-05
 update:     2026-02-05
 author:     "elmagnifico"
-header-img: "img/z3.jpg"
+header-img: "img/head-2026-02-05.jpg"
 catalog:    true
 tobecontinued: false
 tags:

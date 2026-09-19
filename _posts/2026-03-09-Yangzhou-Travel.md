@@ -6,7 +6,7 @@ description: "烟花三月下扬州，扬州烟花三月的天气、瘦西湖、
 date:       2026-03-09
 update:     2026-03-09
 author:     "elmagnifico"
-header-img: "img/z6.jpg"
+header-img: "img/head-2026-03-09.jpg"
 catalog:    true
 tobecontinued: false
 travel_route: yangzhou

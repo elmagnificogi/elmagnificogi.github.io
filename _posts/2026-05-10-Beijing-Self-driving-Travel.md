@@ -6,7 +6,7 @@ description: "北京自驾游，鸟巢、长城、西二旗、秦皇岛。"
 date:       2026-05-11
 update:     2026-05-11
 author:     "elmagnifico"
-header-img: "img/api-bg.jpg"
+header-img: "img/head-2026-05-10.jpg"
 catalog:    true
 tobecontinued: false
 travel_route: beijing

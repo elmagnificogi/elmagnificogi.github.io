@@ -6,7 +6,7 @@ description: "奥美品牌定位有感，Ogilvy、营销。"
 date:       2026-05-21
 update:     2026-05-21
 author:     "elmagnifico"
-header-img: "img/z9.jpg"
+header-img: "img/head-2026-04-08.jpg"
 catalog:    true
 tobecontinued: false
 tags:

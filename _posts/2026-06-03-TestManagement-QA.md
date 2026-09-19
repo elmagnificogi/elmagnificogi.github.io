@@ -6,7 +6,7 @@ description: "测试管理工具，test、management。"
 date:       2026-06-03
 update:     2026-06-04
 author:     "elmagnifico"
-header-img: "img/bg2.jpg"
+header-img: "img/head-2026-06-03.jpg"
 catalog:    true
 mermaid:    false
 tobecontinued: false

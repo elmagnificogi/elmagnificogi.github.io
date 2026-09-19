@@ -6,7 +6,7 @@ description: "玩车日志，小米Su7 Ultra、懂车帝、珠海赛道、灿哥
 date:       2026-08-27
 update:     2026-08-27
 author:     "elmagnifico"
-header-img: "img/desk-head-bg.jpg"
+header-img: "img/head-2026-08-27.jpg"
 catalog:    true
 mermaid:    false
 tobecontinued: false

@@ -6,7 +6,7 @@ description: "深圳-拉萨自驾-在路上，成都、桂林、云南、大理�
 date:       2026-09-16
 update:     2026-09-19
 author:     "elmagnifico"
-header-img: "img/g1.jpg"
+header-img: "img/head-2026-09-15.jpg"
 catalog:    true
 mermaid:    false
 tobecontinued: true

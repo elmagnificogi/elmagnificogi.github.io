@@ -6,7 +6,7 @@ description: "最近Skills稍微有点火，哪哪都是在讨论，Cursor、MCP
 date:       2026-01-23
 update:     2026-01-23
 author:     "elmagnifico"
-header-img: "img/z2.jpg"
+header-img: "img/head-2026-01-23.jpg"
 catalog:    true
 tobecontinued: false
 tags:

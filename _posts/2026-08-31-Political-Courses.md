@@ -6,7 +6,7 @@ description: "人类高质量思政课，沈辛成、中国马克思主义与当
 date:       2026-09-01
 update:     2026-09-01
 author:     "elmagnifico"
-header-img: "img/docker-head-bg.jpg"
+header-img: "img/head-2026-08-31.jpg"
 catalog:    true
 mermaid:    false
 tobecontinued: false

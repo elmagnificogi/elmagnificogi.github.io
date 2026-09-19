@@ -6,7 +6,7 @@ description: "深圳-拉萨/云南自驾-计划版，成都、桂林、大理、
 date:       2026-09-15
 update:     2026-09-15
 author:     "elmagnifico"
-header-img: "img/freertos.jpg"
+header-img: "img/head-2026-09-14.jpg"
 catalog:    true
 mermaid:    false
 tobecontinued: false

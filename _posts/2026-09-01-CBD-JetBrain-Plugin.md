@@ -6,7 +6,7 @@ description: "CodeBind Docs插件-JetBrains版本，intellij restore deleted fil
 date:       2026-09-01
 update:     2026-09-01
 author:     "elmagnifico"
-header-img: "img/drone.jpg"
+header-img: "img/head-2026-09-01.jpg"
 catalog:    true
 mermaid:    false
 tobecontinued: false

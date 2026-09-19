@@ -6,7 +6,7 @@ description: "Origin、Grok Bot体验与Gantry（Courier），跑腿送信工具
 date:       2026-09-19
 update:     2026-09-19
 author:     "elmagnifico"
-header-img: "img/g2.jpg"
+header-img: "img/head-2026-09-17.jpg"
 catalog:    true
 mermaid:    false
 tobecontinued: false

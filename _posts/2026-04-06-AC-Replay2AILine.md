@@ -6,7 +6,7 @@ description: "AC录像转行车线与轨迹分析，神力科莎、AILine、acre
 date:       2026-04-06
 update:     2026-04-07
 author:     "elmagnifico"
-header-img: "img/z8.jpg"
+header-img: "img/head-2026-04-06.jpg"
 catalog:    true
 tobecontinued: false
 tags:

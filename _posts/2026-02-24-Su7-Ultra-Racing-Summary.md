@@ -6,7 +6,7 @@ description: "Su7 Ultra 赛道总结，\"su7 ultra\" 两个相同字母、小米
 date:       2026-02-24
 update:     2026-02-24
 author:     "elmagnifico"
-header-img: "img/z4.jpg"
+header-img: "img/head-2026-02-24.jpg"
 catalog:    true
 tobecontinued: false
 tags:

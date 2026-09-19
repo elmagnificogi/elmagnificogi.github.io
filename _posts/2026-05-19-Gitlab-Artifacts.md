@@ -6,7 +6,7 @@ description: "Gitlab制品库实践记录，gitlab duo、生产、Release。"
 date:       2026-05-20
 update:     2026-05-20
 author:     "elmagnifico"
-header-img: "img/bg1.jpg"
+header-img: "img/head-2026-05-19.jpg"
 catalog:    true
 mermaid:    true
 tobecontinued: false

@@ -6,7 +6,7 @@ description: "艺术与审美，第三阶段学习，Art、唯伟、独立游戏
 date:       2026-03-27
 update:     2026-03-27
 author:     "elmagnifico"
-header-img: "img/z0.jpg"
+header-img: "img/head-2026-01-13.jpg"
 catalog:    true
 tobecontinued: false
 tags:
