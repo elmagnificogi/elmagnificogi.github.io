@@ -1,0 +1,26 @@
+{% assign related_count = 0 %}
+{% assign related_urls = "|" %}
+{% capture related_items %}
+{% for tag in page.tags %}
+  {% for post in site.tags[tag] %}
+    {% if related_count < 3 %}
+      {% if post.url != page.url %}
+        {% assign marker = "|" | append: post.url | append: "|" %}
+        {% unless related_urls contains marker %}
+          {% assign related_urls = related_urls | append: post.url | append: "|" %}
+          {% assign related_count = related_count | plus: 1 %}
+          <li><a href="{{ post.url | prepend: site.baseurl }}">{{ post.title | escape }}</a></li>
+        {% endunless %}
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+{% endfor %}
+{% endcapture %}
+{% if related_count > 0 %}
+<section class="related-posts" data-pagefind-ignore>
+    <h5>相关文章</h5>
+    <ul>
+        {{ related_items }}
+    </ul>
+</section>
+{% endif %}
