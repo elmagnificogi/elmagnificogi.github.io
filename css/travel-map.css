@@ -71,10 +71,18 @@
   stroke-linecap: round;
 }
 
+.travel-route-halo {
+  fill: none;
+  stroke: #f3f1ec;
+  stroke-width: 5.2;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
 .travel-route {
   fill: none;
   stroke: #0085a1;
-  stroke-width: 2.4;
+  stroke-width: 2.8;
   stroke-linejoin: round;
   stroke-linecap: round;
 }

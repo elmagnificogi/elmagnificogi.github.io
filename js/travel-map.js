@@ -22,19 +22,28 @@
     }
     var dLng = Math.max(maxLng - minLng, 0.08);
     var dLat = Math.max(maxLat - minLat, 0.05);
-    var lngSpan = Math.max(dLng * 1.28, dLng + 0.18);
-    var latSpan = Math.max(dLat * 1.4, dLat + 0.12);
-    if (lngSpan < 0.45) lngSpan = 0.45;
-    if (latSpan < 0.32) latSpan = 0.32;
-    if (lngSpan > latSpan * 1.85) latSpan = lngSpan / 1.85;
-    if (latSpan > lngSpan * 1.2) lngSpan = latSpan * 1.2;
+    var strip = dLng > dLat * 2.2;
+    var lngSpan;
+    var latSpan;
+    if (strip) {
+      lngSpan = Math.max(dLng * 1.08, dLng + 0.4);
+      latSpan = Math.max(dLat * 1.28, dLat + 0.5);
+    } else {
+      lngSpan = Math.max(dLng * 1.28, dLng + 0.18);
+      latSpan = Math.max(dLat * 1.4, dLat + 0.12);
+      if (lngSpan < 0.45) lngSpan = 0.45;
+      if (latSpan < 0.32) latSpan = 0.32;
+      if (lngSpan > latSpan * 1.85) latSpan = lngSpan / 1.85;
+      if (latSpan > lngSpan * 1.2) lngSpan = latSpan * 1.2;
+    }
     var lngMid = (minLng + maxLng) / 2;
-    var latMid = (minLat + maxLat) / 2 - latSpan * 0.04;
+    var latMid = (minLat + maxLat) / 2 - (strip ? 0 : latSpan * 0.04);
     return {
       west: lngMid - lngSpan / 2,
       east: lngMid + lngSpan / 2,
       south: latMid - latSpan / 2,
-      north: latMid + latSpan / 2
+      north: latMid + latSpan / 2,
+      strip: strip
     };
   }
 
@@ -45,6 +54,9 @@
   function sizeFor(view) {
     var width = 800;
     var pad = 0.07;
+    if (view.strip) {
+      return { width: width, height: 380 };
+    }
     var k = lonScale(view);
     var geoW = Math.max(view.east - view.west, 0.001) * k;
     var geoH = Math.max(view.north - view.south, 0.001);
@@ -63,6 +75,16 @@
     var k = lonScale(view);
     var geoW = Math.max(view.east - view.west, 0.001) * k;
     var geoH = Math.max(view.north - view.south, 0.001);
+    if (view.strip) {
+      var sx = innerW / geoW;
+      var sy = innerH / geoH;
+      return function (lat, lng) {
+        return {
+          x: padX + (lng - view.west) * k * sx,
+          y: padY + (view.north - lat) * sy
+        };
+      };
+    }
     var scale = Math.min(innerW / geoW, innerH / geoH);
     var ox = padX + (innerW - geoW * scale) / 2;
     var oy = padY + (innerH - geoH * scale) / 2;
@@ -253,6 +275,7 @@
       }
       if (line) {
         var routeClass = 'travel-route' + (pathInfo && pathInfo.kind === 'flight' ? ' travel-route--flight' : '');
+        svg += '<polyline class="travel-route-halo" points="' + line + '"></polyline>';
         svg += '<polyline class="' + routeClass + '" points="' + line + '"></polyline>';
       }
       for (var j = 0; j < stops.length; j++) {
