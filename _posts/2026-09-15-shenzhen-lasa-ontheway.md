@@ -10,7 +10,7 @@ header-img: "img/head-2026-09-15.jpg"
 catalog:    true
 mermaid:    false
 tobecontinued: true
-travel_route: g318
+travel_route: g318-plan
 tags:
     - 旅游
     - Car
