@@ -6,7 +6,7 @@ description: "纽博格林，小米Su7 Ultra、小米纽北活动、申根签证
 date:       2025-09-05
 update:     2025-09-05
 author:     "elmagnifico"
-header-img: "img/x6.jpg"
+header-img: "img/head-2025-09-05.jpg"
 catalog:    true
 tobecontinued: false
 tags:

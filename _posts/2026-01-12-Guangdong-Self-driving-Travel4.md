@@ -6,7 +6,7 @@ description: "广东自驾游之粤北篇-环南昆山，开车上南昆山收�
 date:       2026-01-19
 update:     2026-01-19
 author:     "elmagnifico"
-header-img: "img/y9.jpg"
+header-img: "img/head-2026-01-12.jpg"
 catalog:    true
 tobecontinued: false
 travel_route: yuebei

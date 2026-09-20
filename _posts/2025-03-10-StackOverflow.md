@@ -6,7 +6,7 @@ description: "嵌入式内存溢出检测，Stack Overflow、踩内存、笨方�
 date:       2025-04-10
 update:     2025-04-10
 author:     "elmagnifico"
-header-img: "img/git-head-bg.jpg"
+header-img: "img/head-2025-03-10.jpg"
 catalog:    true
 tobecontinued: false
 tags:

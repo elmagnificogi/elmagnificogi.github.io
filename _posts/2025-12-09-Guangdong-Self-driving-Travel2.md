@@ -6,7 +6,7 @@ description: "广东自驾游之南澳篇，潮汕、小米su7 Ultra、MOC深圳
 date:       2025-12-10
 update:     2025-12-10
 author:     "elmagnifico"
-header-img: "img/y6.jpg"
+header-img: "img/head-2025-12-09.jpg"
 catalog:    true
 tobecontinued: false
 travel_route: nanao

@@ -6,7 +6,7 @@ description: "点阵字体合集，丁卯点阵体、凤凰点阵体、寒蝉点
 date:       2025-03-19
 update:     2025-03-19
 author:     "elmagnifico"
-header-img: "img/led.jpg"
+header-img: "img/head-2025-03-18.jpg"
 catalog:    true
 tobecontinued: false
 tags:

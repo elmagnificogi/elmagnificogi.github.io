@@ -6,7 +6,7 @@ description: "VSCode CMake工作流，CPack、CTest、launch、workflow。"
 date:       2025-02-27
 update:     2025-02-27
 author:     "elmagnifico"
-header-img: "img/Embedded-head-bg.jpg"
+header-img: "img/head-2025-02-26.jpg"
 catalog:    true
 tobecontinued: false
 tags:

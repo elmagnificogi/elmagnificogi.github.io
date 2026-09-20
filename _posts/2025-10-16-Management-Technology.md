@@ -6,7 +6,7 @@ description: "技术？管理，选择、全栈、转型、产品。"
 date:       2025-10-28
 update:     2025-10-28
 author:     "elmagnifico"
-header-img: "img/x12.jpg"
+header-img: "img/head-2025-10-16.jpg"
 catalog:    true
 tobecontinued: false
 tags:

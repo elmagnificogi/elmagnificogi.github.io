@@ -6,7 +6,7 @@ description: "重庆游记，我在重庆很想你、chongqing。"
 date:       2025-06-27
 update:     2025-06-27
 author:     "elmagnifico"
-header-img: "img/x1.jpg"
+header-img: "img/head-2025-06-27.jpg"
 catalog:    true
 tobecontinued: false
 travel_route: chongqing

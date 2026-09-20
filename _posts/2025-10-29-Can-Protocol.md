@@ -6,7 +6,7 @@ description: "CAN协议层对比，dmx512 protocol、uavCAN、CANopen。"
 date:       2025-10-29
 update:     2025-10-29
 author:     "elmagnifico"
-header-img: "img/x13.jpg"
+header-img: "img/head-2025-10-29.jpg"
 catalog:    true
 tobecontinued: false
 tags:

@@ -6,7 +6,7 @@ description: "AI大模型笔记，LLM、RAG、LoRA、Transform。"
 date:       2025-04-14
 update:     2025-04-14
 author:     "elmagnifico"
-header-img: "img/pcb-head-bg.jpg"
+header-img: "img/head-2025-04-09.jpg"
 catalog:    true
 tobecontinued: false
 tags:

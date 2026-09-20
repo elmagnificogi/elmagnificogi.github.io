@@ -6,7 +6,7 @@ description: "Plane最佳实践，makeplane、plane是什么、项目管理、�
 date:       2025-09-18
 update:     2025-09-18
 author:     "elmagnifico"
-header-img: "img/x9.jpg"
+header-img: "img/head-2025-09-17.jpg"
 catalog:    true
 tobecontinued: false
 tags:

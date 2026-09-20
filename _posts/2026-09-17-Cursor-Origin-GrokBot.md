@@ -6,7 +6,7 @@ description: "Origin、Grok Bot体验与Gantry（Courier），跑腿送信工具
 date:       2026-09-19
 update:     2026-09-19
 author:     "elmagnifico"
-header-img: "img/g2.jpg"
+header-img: "img/head-2026-09-17.jpg"
 catalog:    true
 mermaid:    false
 tobecontinued: false
@@ -77,11 +77,9 @@ Grok Bot相当于是给了你一个独立的VPS，就是让他干活得要翻墙
 
 > https://github.com/uhaop/Gantry
 
-Gantry开源，MIT协议，跑在你自己的机器上。前面Origin、Grok Bot都是云端Agent那套，它直接去控家里PC上已经打开的Cursor，也支持Windsurf、VS Code。给IDE开远程调试端口，走Chrome DevTools Protocol去点聊天框、输入命令、把回复再拿回来。Cursor还有一条API后端，可以不走CDP。全程本地，不用VNC，也不用把仓库同步到云端。
+Gantry开源，MIT协议，跑在本机。前面Origin、Grok Bot都是云端Agent，它直接去控家里已经打开的Cursor，也支持Windsurf、VS Code。给IDE开远程调试端口，走Chrome DevTools Protocol去点聊天框、把命令输入进去、再把回复拿回来。Cursor另外有条API后端，可以不走CDP。不用VNC，也不用把仓库同步到云端。
 
-官方主推Telegram，功能也最全：发文字、带图、带文件、切Ask/Code/Plan、新建会话、看上下文占用、重启服务。Discord、飞书、邮件、HTTP API也能接，但基本只是把文字转过去，按钮、附件那些都没有。HTTP API做了个OpenAI兼容的接口，给脚本调用。一个IDE对应一个实例，多开就能同时控几套，各用各的Bot。谁能发指令可以配白名单，Telegram ID对不上就进不去。
-
-IDE改版以后，页面选择器可能对不上。它启动时会扫一遍DOM，试着找替代，再从Telegram把诊断发回来。官方自己标的是v0.x预览，匹配是best-effort，提问弹窗、Plan不一定总能抓到。
+官方主推Telegram，文字、图、文件都能进，也能切Ask/Code/Plan、开新会话、看上下文占用。Discord、飞书、邮件、HTTP API也能接，但基本只转文字。HTTP API做了个OpenAI兼容的接口，给脚本调用。一个IDE对应一个实例，多开就能同时控几套，各用各的Bot。谁能发指令可以配白名单，Telegram ID对不上就进不去。
 
 但是Gantry本身不支持QQ、微信、企业微信等国内的IM软件，我这里二次开发了一下，把体验弄到了和他原本的telegram一个级别，甚至更符合国人体质。
 
@@ -144,6 +142,8 @@ npm run dev
 ![image-20260919012146556](https://img.elmagnifico.tech/static/upload/elmagnifico/202609190121587.png)
 
 #### 指令
+
+常用就这些，免得回头翻仓库。
 
 | 命令 | 说明 | 示例 |
 |---|---|---|

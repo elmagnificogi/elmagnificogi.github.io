@@ -6,7 +6,7 @@ description: "使用CMkae+Kconfig最小化的创建一个可以模块化的工�
 date:       2025-02-22
 update:     2025-02-23
 author:     "elmagnifico"
-header-img: "img/docker-head-bg.jpg"
+header-img: "img/head-2025-02-22.jpg"
 catalog:    true
 tobecontinued: false
 tags:

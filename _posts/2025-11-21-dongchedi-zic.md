@@ -6,7 +6,7 @@ description: "懂车帝珠海赛道日与小米深圳总部参观，金卡纳、
 date:       2025-11-23
 update:     2025-12-03
 author:     "elmagnifico"
-header-img: "img/y4.jpg"
+header-img: "img/head-2025-11-21.jpg"
 catalog:    true
 tobecontinued: false
 tags:

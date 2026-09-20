@@ -6,7 +6,7 @@ description: "Finale 3D与FWsim 烟花设计软件，3d圖片、fwsim crack、3d
 date:       2025-12-04
 update:     2025-12-04
 author:     "elmagnifico"
-header-img: "img/y5.jpg"
+header-img: "img/head-2025-12-03.jpg"
 catalog:    true
 tobecontinued: false
 tags:

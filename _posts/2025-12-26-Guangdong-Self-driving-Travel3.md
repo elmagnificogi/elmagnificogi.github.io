@@ -6,7 +6,7 @@ description: "广东自驾游之粤西篇，肇庆、风车、鼎湖山、茂名
 date:       2026-01-05
 update:     2026-01-05
 author:     "elmagnifico"
-header-img: "img/y8.jpg"
+header-img: "img/head-2025-12-26.jpg"
 catalog:    true
 tobecontinued: false
 travel_route: yuexi

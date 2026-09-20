@@ -6,7 +6,7 @@ description: "小米模拟器冠军挑战赛，Assetto Corsa、速魔、SIMAGIC�
 date:       2025-11-17
 update:     2025-11-17
 author:     "elmagnifico"
-header-img: "img/y2.jpg"
+header-img: "img/head-2025-11-16-sim.jpg"
 catalog:    true
 tobecontinued: false
 tags:

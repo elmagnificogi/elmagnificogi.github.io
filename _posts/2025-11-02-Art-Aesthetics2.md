@@ -6,7 +6,7 @@ description: "艺术与审美，第二阶段学习，唯伟老师聊绘画、唯
 date:       2026-01-13
 update:     2026-01-13
 author:     "elmagnifico"
-header-img: "img/x15.jpg"
+header-img: "img/head-2025-11-02.jpg"
 catalog:    true
 tobecontinued: false
 tags:

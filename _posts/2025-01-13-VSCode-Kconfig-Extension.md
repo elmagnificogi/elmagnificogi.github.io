@@ -6,7 +6,7 @@ description: "VSCode Kconfig插件，Extension、KconfigLib、测试、kconfig-f
 date:       2025-01-23
 update:     2025-02-23
 author:     "elmagnifico"
-header-img: "img/bg9.jpg"
+header-img: "img/head-2025-01-13.jpg"
 catalog:    true
 tobecontinued: false
 tags:

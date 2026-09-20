@@ -6,7 +6,7 @@ description: "nRF-Kconfig插件解析，VScode、Extension、尝试build。"
 date:       2025-01-02
 update:     2025-01-09
 author:     "elmagnifico"
-header-img: "img/bg8.jpg"
+header-img: "img/head-2025-01-02.jpg"
 catalog:    true
 tobecontinued: false
 tags:

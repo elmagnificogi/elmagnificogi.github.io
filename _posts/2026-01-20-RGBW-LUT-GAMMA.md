@@ -6,7 +6,7 @@ description: "RGB灯光修正，Gamma、LUT、RGB光源、感官层。"
 date:       2026-01-20
 update:     2026-01-20
 author:     "elmagnifico"
-header-img: "img/z1.jpg"
+header-img: "img/head-2026-01-20.jpg"
 catalog:    true
 tobecontinued: false
 tags:

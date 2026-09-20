@@ -6,7 +6,7 @@ description: "AI工作流，ai agent 工作流 重构 案例、Skill、workflow�
 date:       2026-06-26
 update:     2026-07-06
 author:     "elmagnifico"
-header-img: "img/bg8.jpg"
+header-img: "img/head-2026-06-24.jpg"
 catalog:    true
 mermaid:    true
 tobecontinued: false

@@ -6,7 +6,7 @@ description: "19年买的PeakDesign Everyday Backpack，去年就已经出现涂
 date:       2026-09-12
 update:     2026-09-12
 author:     "elmagnifico"
-header-img: "img/drone-head-bg.jpg"
+header-img: "img/head-2026-09-12.jpg"
 catalog:    true
 mermaid:    false
 tobecontinued: false

@@ -6,7 +6,7 @@ description: "博客十年-百万访问，PV、UV、Blog、百万PV。"
 date:       2025-09-25
 update:     2025-11-07
 author:     "elmagnifico"
-header-img: "img/x10.jpg"
+header-img: "img/head-2025-09-25.jpg"
 catalog:    true
 tobecontinued: false
 tags:

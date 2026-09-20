@@ -6,7 +6,7 @@ description: "2025游戏短评，梦之形、恶意不息、鸭科夫、腐朽�
 date:       2026-01-28
 update:     2026-01-28
 author:     "elmagnifico"
-header-img: "img/play.jpg"
+header-img: "img/head-2026-01-27.jpg"
 catalog:    true
 tobecontinued: false
 tags:

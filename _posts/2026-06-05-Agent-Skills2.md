@@ -6,7 +6,7 @@ description: "Skills进阶，状态机、规则分级、模拟调用、接口定
 date:       2026-06-05
 update:     2026-06-05
 author:     "elmagnifico"
-header-img: "img/bg4.jpg"
+header-img: "img/head-2026-06-05.jpg"
 catalog:    true
 mermaid:    false
 tobecontinued: false

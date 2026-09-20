@@ -6,7 +6,7 @@ description: "记一次小米Su7 Ultra提车，保险、临牌、补贴、限制
 date:       2025-03-10
 update:     2025-11-07
 author:     "elmagnifico"
-header-img: "img/g2.jpg"
+header-img: "img/head-2025-03-08.jpg"
 catalog:    true
 tobecontinued: false
 tags:

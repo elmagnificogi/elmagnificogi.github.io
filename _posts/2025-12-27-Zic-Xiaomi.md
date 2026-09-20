@@ -6,7 +6,7 @@ description: "小米珠海官方赛道日与Ultra年度之夜，小米su7 Ultra�
 date:       2025-12-29
 update:     2026-01-05
 author:     "elmagnifico"
-header-img: "img/y7.jpg"
+header-img: "img/head-2025-12-27.jpg"
 catalog:    true
 tobecontinued: false
 tags:
