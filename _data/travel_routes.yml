@@ -71,6 +71,93 @@ g318:
     label: true
     labelDy: -11
 
+g318-plan:
+  - name: 成都
+    lat: 30.6570
+    lng: 104.0660
+    label: true
+    labelDy: -11
+  - name: 雅安
+    lat: 29.9804
+    lng: 103.0133
+  - name: 泸定
+    lat: 29.9142
+    lng: 102.2346
+  - name: 康定
+    lat: 30.0507
+    lng: 101.9643
+    label: true
+    labelDy: 14
+  - name: 新都桥
+    lat: 30.0410
+    lng: 101.4870
+  - name: 雅江
+    lat: 30.0316
+    lng: 101.0145
+    label: true
+    labelDy: -11
+  - name: 桑堆
+    lat: 29.1902
+    lng: 100.0967
+  - name: 稻城
+    lat: 29.0370
+    lng: 100.2980
+    label: true
+    labelDx: 10
+    labelAnchor: start
+  - name: 日瓦
+    lat: 28.5625
+    lng: 100.3470
+    label: true
+    labelDy: 14
+  - name: 理塘
+    lat: 29.9980
+    lng: 100.2694
+  - name: 巴塘
+    lat: 29.8887
+    lng: 99.1134
+    label: true
+    labelDy: -11
+  - name: 芒康
+    lat: 29.6798
+    lng: 98.5935
+    label: true
+    labelDy: 14
+  - name: 左贡
+    lat: 29.6713
+    lng: 97.8410
+  - name: 邦达
+    lat: 30.6180
+    lng: 97.1080
+  - name: 八宿
+    lat: 30.0534
+    lng: 96.9178
+    label: true
+    labelDx: 10
+    labelDy: 4
+    labelAnchor: start
+  - name: 然乌
+    lat: 29.2730
+    lng: 96.7480
+  - name: 波密
+    lat: 29.8590
+    lng: 95.7680
+    label: true
+    labelDy: 14
+  - name: 通麦
+    lat: 30.1000
+    lng: 95.0610
+  - name: 林芝
+    lat: 29.6490
+    lng: 94.3620
+    label: true
+    labelDy: -11
+  - name: 拉萨
+    lat: 29.6525
+    lng: 91.1721
+    label: true
+    labelDy: -11
+
 xiamen:
   - name: 中华街
     lat: 24.4455

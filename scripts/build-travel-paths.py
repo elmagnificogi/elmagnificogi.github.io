@@ -231,9 +231,32 @@ def kind_of(route_id):
     return "drive"
 
 
+def load_existing_paths():
+    if not OUT.exists():
+        return {}
+    raw = OUT.read_text(encoding="utf-8").strip()
+    prefix = "window.TRAVEL_PATHS="
+    if not raw.startswith(prefix):
+        return {}
+    raw = raw[len(prefix):]
+    if raw.endswith(";"):
+        raw = raw[:-1]
+    try:
+        data = json.loads(raw)
+        return data if isinstance(data, dict) else {}
+    except json.JSONDecodeError:
+        return {}
+
+
 def main():
     routes = load_yaml(ROUTES)
-    paths = {}
+    only = set(sys.argv[1:])
+    if only:
+        missing = sorted(only - set(routes))
+        if missing:
+            raise SystemExit("unknown route: " + ", ".join(missing))
+        routes = {k: v for k, v in routes.items() if k in only}
+    paths = load_existing_paths() if only else {}
     for route_id, stops in routes.items():
         if not isinstance(stops, list) or len(stops) < 2:
             continue
