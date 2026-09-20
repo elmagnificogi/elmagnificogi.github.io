@@ -47,6 +47,10 @@ tags:
 
 - 这拖车都是这样，迟迟不出发，一出发没多会就要到了
 
+![image-20260920222938276](https://img.elmagnifico.tech/static/upload/elmagnifico/202609202229394.png)
+
+20号早上6点就到成都了，真的快，我甚至拖车钱都没付呢。
+
 
 
 #### 机票
@@ -100,8 +104,6 @@ tags:
 <div class="travel-map-slot">
 {% include travel-map.html mode="route" %}
 </div>
-
-
 
 
 ### 成都
