@@ -4,7 +4,7 @@ title:      "深圳-拉萨自驾-在路上"
 subtitle:   "成都，拉萨，桂林、云南、大理，滇藏，川藏，318，Su7 Ultra，边防证"
 description: "深圳-拉萨自驾-在路上，成都、桂林、云南、大理。"
 date:       2026-09-16
-update:     2026-09-20
+update:     2026-09-21
 author:     "elmagnifico"
 header-img: "img/head-2026-09-15.jpg"
 catalog:    true
@@ -114,6 +114,18 @@ tags:
 ![image-20260920235531598](https://img.elmagnifico.tech/static/upload/elmagnifico/202609202357981.png)
 
 20号找到了一个老哥一起，还少一个人，但是流量还行，确实人都在这边，也加上了最近去的群，组车队也不是不可能。
+
+
+
+#### 门票
+
+![image-20260921165613603](C:\Users\elmag\AppData\Roaming\Typora\typora-user-images\image-20260921165613603.png)
+
+稻城亚丁，免费门票可以提前10天左右预约，除了一个保费，其他都是免费的
+
+
+
+布达拉宫是人真的多，1号没抢到，抢2号的
 
 
 
