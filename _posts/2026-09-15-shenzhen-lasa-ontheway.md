@@ -119,7 +119,7 @@ tags:
 
 #### 门票
 
-![image-20260921165613603](C:\Users\elmag\AppData\Roaming\Typora\typora-user-images\image-20260921165613603.png)
+![image-20260921165613603](https://img.elmagnifico.tech/static/upload/elmagnifico/20260921223022117.png)
 
 稻城亚丁，免费门票可以提前10天左右预约，除了一个保费，其他都是免费的
 
