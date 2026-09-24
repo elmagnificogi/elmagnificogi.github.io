@@ -4,7 +4,7 @@ title:      "深圳-拉萨自驾-在路上"
 subtitle:   "成都，拉萨，桂林、云南、大理，滇藏，川藏，318，Su7 Ultra，边防证"
 description: "深圳-拉萨自驾-在路上，成都、桂林、云南、大理。"
 date:       2026-09-16
-update:     2026-09-21
+update:     2026-09-24
 author:     "elmagnifico"
 header-img: "img/head-2026-09-15.jpg"
 catalog:    true
@@ -86,6 +86,10 @@ tags:
 
 
 防晒一定要带，高原上很快就晒红了
+
+
+
+无人机带了neo2，可以简单跟随，受法规限制比较轻
 
 
 
