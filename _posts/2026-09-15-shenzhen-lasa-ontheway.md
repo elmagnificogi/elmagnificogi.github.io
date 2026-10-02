@@ -1,5 +1,4 @@
 ---
-
 layout:     post
 title:      "深圳-拉萨自驾-在路上"
 subtitle:   "成都，拉萨，川藏，318，Su7 Ultra，边防证"
@@ -15,8 +14,7 @@ travel_route: g318-plan
 tags:
     - 旅游
     - Car
-- Su7 Ultra
-
+    - Su7 Ultra
 ---
 
 ## Foreword
