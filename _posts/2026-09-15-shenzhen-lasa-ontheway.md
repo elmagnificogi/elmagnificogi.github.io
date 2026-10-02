@@ -1,10 +1,11 @@
 ---
+
 layout:     post
 title:      "深圳-拉萨自驾-在路上"
 subtitle:   "成都，拉萨，川藏，318，Su7 Ultra，边防证"
 description: "深圳-拉萨自驾-在路上，成都，拉萨，川藏，318"
 date:       2026-09-16
-update:     2026-09-30
+update:     2026-10-03
 author:     "elmagnifico"
 header-img: "img/head-2026-09-15.jpg"
 catalog:    true
@@ -14,7 +15,8 @@ travel_route: g318-plan
 tags:
     - 旅游
     - Car
-    - Su7 Ultra
+- Su7 Ultra
+
 ---
 
 ## Foreword
@@ -132,6 +134,7 @@ tags:
 好家伙，最后还是没抢到了，只好在携程上买个带讲解的绑定票，最后下来448多，正常的话感觉只要二百多就能搞定两个门票了。
 
 #### 兜底
+
 ![](https://img.elmagnifico.tech/static/upload/elmagnifico/20260929234451.png)
 如果出了意外小米兜底
 
@@ -279,6 +282,7 @@ tags:
 
 ![](https://img.elmagnifico.tech/static/upload/elmagnifico/20260928002242.png)
 价格似乎也还可以
+
 - 实际上面说的上百个点根本不存在，这个东西只有稻城有，其他归还或者借用点完全找不到
 
 ![](https://img.elmagnifico.tech/static/upload/elmagnifico/20260928001310.png)
@@ -356,6 +360,7 @@ tags:
 318途经的最高海拔，5130，稍微有一点点反应，很弱，完全可以自由活动。基本适应高原了，基本从第四天开始就没怎么吸过氧了，全靠身体自然适应。
 
 #### 安久拉山
+
 ![](https://img.elmagnifico.tech/static/upload/elmagnifico/20260930001643.png)
 就是一个打卡点，也没看到有啥特殊的
 
@@ -365,6 +370,7 @@ tags:
 晚上开的，还是烂路，根本看不清，群里偷了个图，基本一个意思
 
 ### 八宿
+
 ![](https://img.elmagnifico.tech/static/upload/elmagnifico/20260930001030.png)
 巴塘赶到八宿，烂路太多了，大哥帮我开了四五个小时左右，我开了六七个小时吧，总算在晚上10点40赶到了八宿，我们是早上9.25出发的。
 
@@ -387,7 +393,6 @@ tags:
 这个露营地点好多人走错，就去了然乌湖旁边，然后风景贼拉胯
 
 ###### 仁龙巴冰川
-
 
 后续去仁龙巴冰川，约了一个开越野车的老哥，我进不去的话，他带我们进去。没想到，他被追尾了，衣角微脏，就是处理了快2个小时，我们刚好露营结束才又重新聚到一起。
 
@@ -419,35 +424,86 @@ tags:
 
 #### 古乡
 
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/20261003004114.png)
 
+古乡，没啥内容，只有一个大草场，但是没有随便骑的马，也没有景区维护，所以不值得来，车也不能到草地上。
+
+#### 鲁朗
+
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/20261003012659.png)
+倒霉的一天，从鲁朗开始。刚进鲁朗小镇，胎压就报警了，还好停车区就在边上，立马停了，找了个补胎的，200块，师傅十来分钟就到了，差不多半个小时就补好了。
+
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/20261003012759.png)
+但这只是个开始，自动泊车又蹭了车底盘，还好这个有智驾险。
+
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/20261003013542.png)
+鲁朗小镇挺一般的，就是个湖，然后没啥人气，高档酒店，基本没啥游客。
+
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/20261003013240.png)
+接着去高山牧场，有个逃票的方式，就是导航到`扎塘鲁措吊桥`，它本质上和高山牧场是同一个地方的不同入口，但是由于下雨了，所以实际去不去没区别，马也不好骑，就射箭玩了一下，2块钱一根箭，凑活吧。
+
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/20261003013449.png)
+然后出来的时候就出问题了，我倒车的时候没注意后面还有一个车，直接怼上去了，-800，我自己凹个坑，生气。
+
+然后这个问题也赖小米，倒车的预警没有、碰撞停止没有，直接能撞到也是很奇怪的事情。这两个都算智驾的问题，后续要回深圳他们去处理。
 
 #### 通麦
 
-
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/20261003004739.png)
+通麦主要是那个特大桥，旁边2个老桥，只有第二个桥还在，第一个似乎已经塌没了。
 
 ### 林芝
 
-
+林芝没咋待，基本上就停留了一下，立马就走了
 
 #### 色季拉山
 
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/20261003004955.png)
+色季拉山这几天运气太差了，下大雨，还是连续几天，直接看不到南迦巴瓦。
+
+色季拉山多等了一会，我睡了一觉，起来发现看不到，走的时候已经晚了，堵爆了，中间有车超车护撞了。光是从山上下来到林芝就弄了2个小时，平常一个小时就能够走完的。
+
+##### 索松村
+
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/20261003011502.png)
+明知道下雨的情况下，还听了大哥的话，去了索松村，索松村必须先买雅鲁藏布大峡谷的票才给进，等到达都凌晨了，然后第二天，多云+下雨，啥也看不到。
+
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/20261003011216.png)
+
+住了个666的酒店，垃圾的一批，空调是假的，估计制氧也是，酒店180°山景实际是个窗户叫180°，花洒立不住，房间有苍蝇，我真的见了鬼，纯浪费钱了。到索松村算是第六天结束。
 
 
-##### 南迦巴瓦
+#### 雅鲁藏布大峡谷
+
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/20261003011602.png)
+这里买了门票，但是没坐浏览车，我们走了野路直接下到了峡谷底部，峡谷景色一般。
+
+> https://b23.tv/VHGPnDH
+
+具体野路怎么走，看这个视频即可。
+- 只有越野车能下去，其他车很容易卡
+
+走路下去大概要15分钟，上来就累一些，要20分钟吧。或者也可以找个当地的村民什么的，带你下去，再上来。其实没啥可看的，这个最好是日落时，还是晴天，能看到南迦巴瓦的时候下去，其他时间下去都是白费
 
 
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/20261003010756.png)
+看不到南迦巴瓦，所以我自己立了一个，那你就是我的南迦巴瓦了
 
 #### 丹娘佛掌沙丘
 
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/20261003005339.png)
+半夜赶路经过没看到，从索松村出来才发现。
 
+门票很便宜，30，景色很特殊，在山、云、湖，绿草地之中出现了沙丘，有点违和。
 
-#### 米拉山口
+#### 318 4000公里处
 
-
+![](https://img.elmagnifico.tech/static/upload/elmagnifico/20261003005247.png)
+途径了318 4000公里处的纪念点，基本318也快走完了
 
 ### 拉萨
 
-
+从索松村出来就一路赶往拉萨了，从林芝附近上了雅叶高速
 
 #### 布达拉宫
 
@@ -496,7 +552,10 @@ tags:
 ##### 珠峰大本营
 
 
+
 #### 亚东
+
+
 
 ## 费用总计
 
