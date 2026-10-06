@@ -278,6 +278,9 @@ g318-trip:
     lng: 86.8282
     label: true
     labelDy: 14
+  - name: 日喀则
+    lat: 29.3029
+    lng: 89.0101
   - name: 拉萨
     lat: 29.6525
     lng: 91.1721
