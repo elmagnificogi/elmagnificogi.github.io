@@ -4,7 +4,7 @@ title:      "Origin、Grok Bot体验与Gantry（Courier）"
 subtitle:   "Courier，跑腿送信工具，Cursor，PC，IDE，远程，机器人"
 description: "Origin、Grok Bot体验与Gantry（Courier），跑腿送信工具、Cursor、PC、IDE。"
 date:       2026-09-19
-update:     2026-09-19
+update:     2026-10-06
 author:     "elmagnifico"
 header-img: "img/head-2026-09-17.jpg"
 catalog:    true
@@ -169,6 +169,10 @@ npm run dev
 | `/cancel [all]` | 停止后续轮询 |
 
 **附件**
+
+QQ 私聊现在也能发图了。机器人把图下到本机，再塞进 Cursor 输入框。先发图再打字，或者图和说明一条一起发。`/queue`、`/clearqueue` QQ 也能用。
+
+QQ 聊天里当「图片」发出去，机器人拿到的多半是压缩图，EXIF 定位会被剥掉。当「文件」发，才能接近相机原图。`/attach`、`/photomode` 还是 Telegram 那套。
 
 | 命令 | 说明 |
 |---|---|
