@@ -3,7 +3,7 @@ layout:     post
 title:      "深圳-拉萨自驾-游记"
 subtitle:   "成都，拉萨，川藏，318，Su7 Ultra，边防证"
 description: "深圳-拉萨自驾-游记，成都，拉萨，川藏，318"
-date:       2026-09-16
+date:       2026-10-06
 update:     2026-10-06
 author:     "elmagnifico"
 header-img: "img/head-2026-09-15.jpg"
