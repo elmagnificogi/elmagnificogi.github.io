@@ -158,6 +158,130 @@ g318-plan:
     label: true
     labelDy: -11
 
+g318-trip:
+  - name: 成都
+    lat: 30.6570
+    lng: 104.0660
+    label: true
+    labelDy: -11
+  - name: 雅安
+    lat: 29.9804
+    lng: 103.0133
+  - name: 康定
+    lat: 30.0507
+    lng: 101.9643
+    label: true
+    labelDy: 14
+  - name: 塔公
+    lat: 30.3193
+    lng: 101.5230
+  - name: 新都桥
+    lat: 30.0410
+    lng: 101.4870
+  - name: 雅江
+    lat: 30.0316
+    lng: 101.0145
+    label: true
+    labelDy: -11
+  - name: 理塘
+    lat: 29.9980
+    lng: 100.2694
+    label: true
+    labelDy: 14
+  - name: 稻城
+    lat: 29.0370
+    lng: 100.2980
+    label: true
+    labelDx: 10
+    labelAnchor: start
+  - name: 亚丁
+    lat: 28.5625
+    lng: 100.3470
+    label: true
+    labelDy: 14
+  - name: 巴塘
+    lat: 29.8887
+    lng: 99.1134
+    label: true
+    labelDy: -11
+  - name: 芒康
+    lat: 29.6798
+    lng: 98.5935
+    label: true
+    labelDy: 14
+  - name: 左贡
+    lat: 29.6713
+    lng: 97.8410
+  - name: 邦达
+    lat: 30.6180
+    lng: 97.1080
+  - name: 八宿
+    lat: 30.0534
+    lng: 96.9178
+    label: true
+    labelDx: 10
+    labelDy: 4
+    labelAnchor: start
+  - name: 然乌
+    lat: 29.2730
+    lng: 96.7480
+  - name: 波密
+    lat: 29.8590
+    lng: 95.7680
+    label: true
+    labelDy: 14
+  - name: 通麦
+    lat: 30.1000
+    lng: 95.0610
+  - name: 鲁朗
+    lat: 29.7337
+    lng: 94.7264
+  - name: 林芝
+    lat: 29.6490
+    lng: 94.3620
+    label: true
+    labelDy: -11
+  - name: 索松
+    lat: 29.5766
+    lng: 94.8917
+  - name: 丹娘
+    lat: 29.4584
+    lng: 94.7495
+  - name: 巴松措
+    lat: 30.0324
+    lng: 94.0099
+  - name: 拉萨
+    lat: 29.6525
+    lng: 91.1721
+    label: true
+    labelDy: -11
+  - name: 纳木措
+    lat: 30.7591
+    lng: 90.8886
+    label: true
+    labelDy: -11
+  - name: 拉萨
+    lat: 29.6525
+    lng: 91.1721
+  - name: 羊湖
+    lat: 29.2780
+    lng: 90.6910
+    label: true
+    labelDy: 14
+  - name: 日喀则
+    lat: 29.3029
+    lng: 89.0101
+    label: true
+    labelDy: -11
+  - name: 珠峰
+    lat: 28.1952
+    lng: 86.8282
+    label: true
+    labelDy: 14
+  - name: 拉萨
+    lat: 29.6525
+    lng: 91.1721
+
 xiamen:
   - name: 中华街
     lat: 24.4455
