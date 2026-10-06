@@ -1,0 +1,21 @@
+---
+description: Git 连不上 GitHub 时走本机 v2rayN 代理再拉/推
+alwaysApply: true
+---
+
+# Git 拉代码走代理
+
+直连 `github.com:443` 失败（超时、`schannel: server closed abruptly`、Could not connect）时，**不要只报失败**。本机 v2rayN/xray 在听：
+
+- HTTP：`http://127.0.0.1:1081`
+- SOCKS：`127.0.0.1:1080`
+
+先在当前 shell 带代理重试（不要改 git config）：
+
+```powershell
+$env:HTTP_PROXY='http://127.0.0.1:1081'
+$env:HTTPS_PROXY='http://127.0.0.1:1081'
+git -c http.proxy=http://127.0.0.1:1081 -c https.proxy=http://127.0.0.1:1081 pull origin master
+```
+
+推送同样加这两项。代理端口没在听再告诉用户。
