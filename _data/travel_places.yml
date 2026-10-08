@@ -118,6 +118,11 @@
   url: /2024/08/19/Dongbei/
   labelDx: 10
   labelAnchor: start
+- name: 图们
+  lat: 42.9680
+  lng: 129.8440
+  url: /2024/08/19/Dongbei/
+  labelDy: -12
 - name: 长白山
   lat: 42.0060
   lng: 128.0550
