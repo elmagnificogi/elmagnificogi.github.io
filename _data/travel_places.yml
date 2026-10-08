@@ -1,9 +1,20 @@
 # About 页图钉。url 留空则只显示地名。
 # labelDx / labelDy 是相对图钉的位移，避免字叠在一起。
+- name: 芳草湖
+  lat: 44.5378
+  lng: 86.6845
+  labelDy: -12
+- name: 昌吉
+  lat: 44.0142
+  lng: 87.3080
+  labelDx: -10
+  labelDy: 12
+  labelAnchor: end
 - name: 乌鲁木齐
   lat: 43.8256
   lng: 87.6168
-  labelDy: -10
+  labelDx: 8
+  labelAnchor: start
 - name: 珠峰
   lat: 28.1952
   lng: 86.8282
@@ -91,6 +102,10 @@
   lng: 121.6147
   labelDx: 8
   labelAnchor: start
+- name: 丹东
+  lat: 40.0006
+  lng: 124.3544
+  labelDy: 14
 - name: 长春
   lat: 43.8171
   lng: 125.3235
@@ -150,6 +165,12 @@
   labelDx: 8
   labelDy: 24
   labelAnchor: start
+- name: 澳门
+  lat: 22.1987
+  lng: 113.5439
+  labelDx: -12
+  labelDy: 28
+  labelAnchor: end
 - name: 惠州
   lat: 23.1120
   lng: 114.4160
