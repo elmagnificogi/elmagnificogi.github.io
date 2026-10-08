@@ -24,7 +24,8 @@ steam_username:      elmagnificost
 # Build settings
 # from 2016, 'pygments' is unsupported on GitHub Pages. Use 'rouge' for highlighting instead.
 highlighter: rouge
-permalink: pretty
+# 不用 pretty：pretty 含 :categories，按年份分子目录后目录名会进 URL
+permalink: /:year/:month/:day/:title/
 paginate: 10
 exclude: ["less","node_modules","vendor","Gruntfile.js","package.json","package-lock.json","README.md","pagefind-stub","pagefind.yml","build.sh","deploy.sh","Gemfile","Gemfile.lock"]
 anchorjs: true                          # if you want to customize anchor. check out line:181 of `post.html`
