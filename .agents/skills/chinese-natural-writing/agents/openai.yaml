@@ -1,0 +1,4 @@
+interface:
+  display_name: "中文自然写作"
+  short_description: "减少中文文章和文档中的 AI 腔、黑话、套话和空泛表达"
+  default_prompt: "使用 $chinese-natural-writing 起草或改写这段中文，让表达具体、自然并保留必要术语。"
