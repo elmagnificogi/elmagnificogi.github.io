@@ -6,7 +6,7 @@ description: "2026翻墙协议对比，vless reality、hysteria2 hy2、翻墙协
 date:       2026-10-27
 update:     2026-10-27
 author:     "elmagnifico"
-header-img: "img/y1.jpg"
+header-img: "img/head-2026-10-27.jpg"
 catalog:    true
 mermaid:    false
 tobecontinued: false

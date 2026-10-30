@@ -6,7 +6,7 @@ description: "龙窟破坏者 Demo 资料页提取：从安装目录判断资源
 date:       2026-10-22
 update:     2026-10-27
 author:     "elmagnifico"
-header-img: "img/z0.jpg"
+header-img: "img/head-2026-10-22.jpg"
 catalog:    true
 mermaid:    false
 tobecontinued: false

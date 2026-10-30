@@ -6,7 +6,7 @@ description: "BepInEx-Mod，UnityDoorstop、IL2CPP、CoreCLR、Harmony、Config.
 date:       2026-10-29
 update:     2026-10-29
 author:     "elmagnifico"
-header-img: "img/z1.jpg"
+header-img: "img/head-2026-10-23.jpg"
 catalog:    true
 mermaid:    false
 tobecontinued: false
