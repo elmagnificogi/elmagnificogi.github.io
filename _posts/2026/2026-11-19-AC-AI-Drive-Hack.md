@@ -3,8 +3,8 @@ layout:     post
 title:      ""
 subtitle:   ""
 description: ""
-date:       2026-11-19
-update:     2026-11-19
+date:       2026-11-20
+update:     2026-11-20
 author:     "elmagnifico"
 header-img: "img/head-2026-11-05-web-safe.jpg"
 catalog:    true

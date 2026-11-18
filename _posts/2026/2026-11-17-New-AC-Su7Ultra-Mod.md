@@ -6,7 +6,7 @@ description: "Assetto Corsa Su7 Ultra Mod制作，车辆物理、轮胎、动力
 date:       2026-11-17
 update:     2026-11-17
 author:     "elmagnifico"
-header-img: "img/head-2026-11-05-web-safe.jpg"
+header-img: "img/head-2026-11-17-su7-mod.jpg"
 catalog:    true
 mermaid:    false
 tobecontinued: false

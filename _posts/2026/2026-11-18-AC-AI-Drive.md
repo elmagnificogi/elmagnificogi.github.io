@@ -6,7 +6,7 @@ description: "Assetto Corsa里的黑盒、CSP能控制什么，以及如何实�
 date:       2026-11-18
 update:     2026-11-18
 author:     "elmagnifico"
-header-img: "img/head-2026-11-05-web-safe.jpg"
+header-img: "img/head-2026-11-18-ai-drive.jpg"
 catalog:    true
 mermaid:    false
 tobecontinued: false
